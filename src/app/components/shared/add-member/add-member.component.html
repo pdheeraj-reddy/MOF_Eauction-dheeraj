@@ -1,0 +1,157 @@
+<!-- <div class="modal-header">
+  <h4 class="modal-title" id="exampleModalLabel">
+    {{ title }}
+  </h4>
+  <button
+    (click)="closeDialog()"
+    type="button"
+    class="modal-close btn-close btn-sm"
+    data-dismiss="modal"
+    aria-label="Close"
+  >
+    <span class="icon-close"></span>
+  </button>
+</div>
+<div class="container">
+  <div class="">
+    <div>
+      <div class="col-md-12 mb-3">
+        <label class="d-flex" for="validationCustom02"
+          >Search by employee number or email</label
+        >
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Member</mat-label>
+              <input matInput
+              type="search"
+                     aria-label="Member"
+                     [matAutocomplete]="auto"
+                     [formControl]="stateCtrl">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                (click) = "memberSelected(state)"
+                 *ngFor="let state of filteredStates | async" [value]="state.EmployeeName">
+                  <span
+                  >{{state.EmployeeName}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <br>
+          </form>
+      </div>
+    </div>
+    <div class="form-row pt-2">
+      <div class="col-12 col-md-12">
+        <table>
+          <thead>
+            <tr>
+              <td class="pr-3">
+                <h5 class="text-info">Employee Name</h5>
+              </td>
+              <td class="pr-3">
+                <h5 class="text-info">Employee Id</h5>
+              </td>
+              <td class="pr-3">
+                <h5 class="text-info">Email</h5>
+              </td>
+              <td class="pr-3">
+                <h5 class="text-info">Agency Id</h5>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pr-3">{{ selectedEmployee?.EmployeeName || '-' }}</td>
+              <td class="pr-3">{{ selectedEmployee?.EmployeeId || '-' }}</td>
+              <td class="pr-3">{{ selectedEmployee?.EmpMailid || '-' }}</td>
+              <td class="pr-3">{{ selectedEmployee?.AgencyId || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div
+  class="modal fade"
+  id="auctionMemberModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+> -->
+  <!-- <div class="modal-dialog modal-lg modal-dialog-centered" role="document"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">
+          {{ title }}
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+              <label class="d-flex" for="validationCustom02"
+                >{{ "auctionModerator.am-detail.add-member.heading" | translate }}</label
+              >
+              <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                  <mat-label>{{ "auctionModerator.am-detail.add-member.phold" | translate }}</mat-label>
+                  <input matInput
+                  type="search"
+                         aria-label="Enter employee number or email"
+                         [matAutocomplete]="auto"
+                         [formControl]="stateCtrl">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option
+                    (click) = "memberSelected(state)"
+                     *ngFor="let state of filteredStates | async" [value]="state.EmployeeName">
+                      <span
+                      >{{state.EmployeeName}}</span>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <br>
+              </form>
+            </div>
+          </div>
+          <div class="form-row pt-2">
+            <div class="col-12 col-md-12">
+              <table>
+                <thead>
+                  <tr>
+                    <td class="pr-3">
+                      <h5 class="text-info">{{ "auctionModerator.am-detail.add-member.ename" | translate }}</h5>
+                    </td>
+                    <td class="pr-3">
+                      <h5 class="text-info">{{ "auctionModerator.am-detail.add-member.eid" | translate }}</h5>
+                    </td>
+                    <td class="pr-3">
+                      <h5 class="text-info">{{ "auctionModerator.am-detail.add-member.email" | translate }}</h5>
+                    </td>
+                    <td class="pr-3">
+                      <h5 class="text-info">{{ "auctionModerator.am-detail.add-member.aId" | translate }}</h5>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="data-table">
+                    <td class="pr-3">{{ selectedEmployee?.EmployeeName || '-' }}</td>
+                    <td class="pr-3 table-data-bg">{{ selectedEmployee?.EmployeeId || '-' }}</td>
+                    <td class="pr-3 table-data-bg">{{ selectedEmployee?.EmpMailid || '-' }}</td>
+                    <td class="pr-3 table-data-bg">{{ selectedEmployee?.AgencyId || '-' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: end">
+        <button type="button" class="btn btn-primary-light btn-md" (click)="closeDialog()">
+          <span class="icon-add"></span> {{ "auctionModerator.am-detail.add-member.add" | translate }}
+        </button>
+      </div>
+    </div>
+  <!-- </div> -->
+<!-- </div> -->

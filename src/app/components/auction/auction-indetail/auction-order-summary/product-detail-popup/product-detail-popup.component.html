@@ -1,0 +1,183 @@
+<div
+  class="d-flex m-2"
+  style="justify-content: space-between"
+  [ngStyle]="{ direction: textDir }"
+>
+  <p class="text-success text-24 font-weight-bold mt-3">
+    &nbsp;&nbsp;&nbsp;{{
+      "auctioncreate.auctionproduct.section1_Title" | translate
+    }}
+  </p>
+  <button
+    style="outline: none"
+    (click)="closeDialog()"
+    type="button"
+    class="close"
+    data-dismiss="dropdown"
+    aria-label="Close"
+  >
+    <a class="btn btn-ghost btn-md fill-primary-green">
+      <span class="icon-close"></span>
+    </a>
+  </button>
+</div>
+<div class="row m-2" [ngStyle]="{ direction: textDir }">
+  <div class="col-md-6">
+    <div>
+      <img [src]="fullImage" class="img-fluid" alt="Image" />
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let slide of slidesStore" carouselSlide>
+          <ng-template carouselSlide [id]="slide.id" class="col-md-4 p-2">
+            <img
+              class="img-fluid rounded"
+              [src]="slide.src"
+              [alt]="slide.alt"
+              [title]="slide.title"
+              (click)="viewItem(slide)"
+            />
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="product-full-summary-form">
+      <div class="form-field">
+        <form class="needs-validation" novalidate>
+          <div class="p-2">
+            <div class="border-bottom">
+              <div class="py-3 mb-3">
+                <h4>{{ viewproduct.productName }}</h4>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">{{
+                    "auctioncreate.auctionproduct.auctionpopup.popup_formGrp1"
+                      | translate
+                  }}</label>
+                  <div class="text-success">
+                    {{ viewproduct.productName }}
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">{{
+                    "auctioncreate.auctionproduct.auctionpopup.popup_formGrp2"
+                      | translate
+                  }}</label>
+                  <div class="text-success">
+                    {{ viewproduct.productCondition | translate }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">{{
+                    "auctioncreate.auctionproduct.auctionpopup.popup_formGrp5"
+                      | translate
+                  }}</label>
+                  <div class="text-success">
+                    {{ viewproduct.productValue }}
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">{{
+                    "auctioncreate.auctionproduct.auctionpopup.popup_formGrp4"
+                      | translate
+                  }}</label>
+                  <div class="text-success">
+                    {{ viewproduct.productSerialNumber }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-group">
+                    <label>{{
+                      "auctioncreate.auctionproduct.section1_formGrp2"
+                        | translate
+                    }}</label>
+                    <div class="text-success">
+                      <span>{{ viewproduct.location.deliveryDate }}</span>
+                      <ul
+                        *ngIf="viewproduct.location.deliveryTime"
+                        class="list list-primary-bullets d-inline-block"
+                      >
+                        <li class="text-muted">
+                          {{ viewproduct.location.deliveryTime }}
+                          {{
+                            viewproduct.location.deliveryTimeSufix | translate
+                          }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">{{
+                    "auctioncreate.auctionproduct.auctionpopup.popup_formGrp3"
+                      | translate
+                  }}</label>
+                  <div class="text-success">
+                    {{ viewproduct.productSKUNumber }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-bottom py-4">
+              <div class="form-row">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <label for="goverusermessage">{{
+                      "auctioncreate.auctionproduct.auctionpopup.popup_formGrp6"
+                        | translate
+                    }}</label>
+                    <div class="text-success">
+                      {{ viewproduct.productSpec }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="py-5">
+              <label for="goverusermessage">{{
+                "auctioncreate.auctionproduct.section1_orderSum22" | translate
+              }}</label>
+              <div class="row">
+                <ng-container *ngIf="viewproduct.productFiles">
+                  <div
+                    class="col-6 col-md-6"
+                    *ngFor="
+                      let file of viewproduct.productFiles;
+                      let index = index
+                    "
+                  >
+                    <div
+                      class="file-download mb-3 p-1 px-2"
+                      style="width: fit-content"
+                    >
+                      <div>
+                        <h3 class="text-truncate">{{ file.name }}</h3>
+                      </div>
+                      <a
+                        (click)="viewAttachment(file)"
+                        class="btn btn-ghost btn-sm fill-primary-light-green"
+                      >
+                        <span class="icon-eye-open"></span>
+                      </a>
+                      <a
+                        (click)="viewAttachment(file)"
+                        class="btn btn-ghost btn-sm fill-primary-light-green mx-2"
+                      >
+                        <span class="icon-download"></span>
+                      </a>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

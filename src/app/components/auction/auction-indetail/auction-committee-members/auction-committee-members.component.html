@@ -1,0 +1,171 @@
+<div class="auction-members-form">
+    <div class="py-3 mb-3">
+        <h4>Determine the members of the Auction committee</h4>
+    </div>
+    <div class="form-field">
+        <form [formGroup]="membersFormGroup" class="needs-validation" method="post" novalidate>
+            <div class="card p-5 shadow-lg">
+                <div class="form-row">
+                    <div class="col-3 col-md-4 mb-4">
+                        <div class="etimad-option etimad-option-hover">
+                            <label class="input-target d-inline-block p-3" for="customCheckbox01">
+                                  <span class="input-label"> <span class="usericon icon-user"></span>Chairman of the committee<span class="memberedit pl-4 icon-edit"></span> </span> 
+                                  <div class="pt-4">
+                                     <h5 class="text-center">Mohammed Saleh Al-shathri</h5>
+                                     <div class="list list-primary-bullets text-primary mt-3">
+                                        <table>
+                                           <tbody>
+                                              <tr>
+                                                 <td>Job Number</td>
+                                                 <td>906532</td>
+                                              </tr>
+                                              <tr>
+                                                 <td>E-mail</td>
+                                                 <td>mhshthri@gov.sa</td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                  </div>
+                               </label>
+                        </div>
+                    </div>
+                    <div class="col-3 col-md-4 mb-4">
+                        <div class="etimad-option etimad-option-hover">
+                            <label class="input-target d-inline-block p-3" for="customCheckbox01">
+                                  <span class="input-label"><span class="usericon icon-user"></span>Committee member<span class="memberedit pl-4 icon-edit"></span></span> 
+                                  <div class="pt-4">
+                                     <h5 class="text-center">Mohammed Saleh Al-shathri</h5>
+                                     <div class="list list-primary-bullets text-primary mt-3">
+                                        <table>
+                                           <tbody>
+                                              <tr>
+                                                 <td>Job Number</td>
+                                                 <td>906532</td>
+                                              </tr>
+                                              <tr>
+                                                 <td>E-mail</td>
+                                                 <td>mhshthri@gov.sa</td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                  </div>
+                               </label>
+                        </div>
+                    </div>
+                    <div class="col-3 col-md-4 mb-4">
+                        <div class="etimad-option etimad-option-hover">
+                            <label class="input-target d-inline-block p-3" for="customCheckbox01">
+                                  <span class="input-label"><span class="usericon icon-user"></span>Committee member<span class="memberedit pl-4 icon-edit"></span></span> 
+                                  <div class="pt-4">
+                                     <h5 class="text-center">Mohammed Saleh Al-shathri</h5>
+                                     <div class="list list-primary-bullets text-primary mt-3">
+                                        <table>
+                                           <tbody>
+                                              <tr>
+                                                 <td>Job Number</td>
+                                                 <td>906532</td>
+                                              </tr>
+                                              <tr>
+                                                 <td>E-mail</td>
+                                                 <td>mhshthri@gov.sa</td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                  </div>
+                               </label>
+                        </div>
+                    </div>
+                    <div class="col-3 col-md-4 mb-4">
+                        <div class="etimad-option etimad-option-hover">
+                            <label class="input-target d-inline-block p-3" for="customCheckbox01">
+                                  <span class="input-label"><span class="usericon icon-user"></span>Committee member</span> 
+                                  <div class="text-center py-5"> <button type="button" class="btn btn-primary-light btn-sm" data-toggle="modal" data-target="#auctionMemberModal" aria-expanded="false"> <span class="icon-add"></span>Add </button> </div>
+                               </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-5">
+                <div class="form-row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
+                            <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+                                <button (click)="back()" type="button" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> 
+                                    <span class="btn-text">back</span> <span class="v-divider"></span> 
+                                    <span class="icon icon-arrow-left"></span> 
+                                </button>
+                            </div>
+                            <div class="d-flex flex-column flex-md-row mb-5">
+                                <button class="btn btn-danger btn-lg mx-0 mx-md-2" routerLink="/">Cancel</button>
+                                <button type="button" (click)="onSubmit('saveasdraft')" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> Save as draft </button>
+                                <button type="button" (click)="onSubmit('save')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> 
+                                    <span class="btn-text">Save and continue</span> <span class="v-divider"></span> 
+                                    <span class="icon icon-arrow-left"></span> 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="auctionMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Add Committee Secretary</h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"> <span class="icon-close"></span> </button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label class="d-flex" for="validationCustom02">Search by employee number or email</label>
+                            <div class="search-group search-custom">
+                                <input type="text" class=" search-input px-2" id="validationCustom02" placeholder="Enter employee number or email" required/>
+                                <div class="text-light d-flex align-items-center mr-3"> <span class="icon-filled-search"></span> </div>
+                                <div class="valid-feedback">Your input is valid</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row pt-2">
+                        <div class="col-12 col-md-12">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="pr-3">
+                                            <h5 class="text-info">Validity</h5>
+                                        </td>
+                                        <td class="pr-3">
+                                            <h5 class="text-info">The name</h5>
+                                        </td>
+                                        <td class="pr-3">
+                                            <h5 class="text-info">Job Number</h5>
+                                        </td>
+                                        <td class="pr-3">
+                                            <h5 class="text-info">Email</h5>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="pr-3">Committee Secretary</td>
+                                        <td class="pr-3">There are no data</td>
+                                        <td class="pr-3">There are no data</td>
+                                        <td class="pr-3">There are no data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: end;"> <button type="button" class="btn btn-primary-light btn-md"> <span class="icon-add"></span> Add </button> </div>
+        </div>
+    </div>
+</div>

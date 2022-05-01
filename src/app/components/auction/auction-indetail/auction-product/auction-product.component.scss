@@ -1,0 +1,43 @@
+/* css style of file upload*/
+
+.attach-icon {
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+.file-container {
+    position: relative;
+}
+
+.uploader-button-caption input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+}
+
+
+/* google map css style */
+
+agm-map {
+    height: 250px;
+}
+
+.ng-invalid.was-validated .invalid-feedback {
+    display: block;
+}
+
+.oneventinvalid-feedback {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #f66f5b;
+}
+
+.modal-backdrop.show {
+    opacity: .3;
+    display: none !important;
+}

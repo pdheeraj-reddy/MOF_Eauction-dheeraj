@@ -1,0 +1,90 @@
+<div class="col-12 mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="https://10.14.8.61:8055/">{{ 'auctioncreate.bcrumb1' | translate }}</a></li>
+            <li class="breadcrumb-item" aria-current="page">
+                <a (click)="openSuccessfulModal()">{{ 'auctioncreate.bcrumb2' | translate }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ 'auctioncreate.bcrumb3' | translate }}</li>
+        </ol>
+    </nav>
+</div>
+<div class="col-12 mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="pl-3 text-20 text-primary font-weight-medium">{{ 'auctioncreate.pageTitle' | translate }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-20">
+            <div class="auctioncreate steps-wrapper">
+                <ul class="steps-group steps-two steps2-vertical">
+                    <li class="step-item" [ngClass]="[activeStep === 1 ? 'is-active' : activeStep > 1 ? 'is-done' : '']">
+                        <a (click)="navAuctionDetails()">
+                            <span class="step-number" *ngIf="activeStep === 1">1</span>
+                            <span class="step-number" *ngIf="activeStep > 1"><span class="icon-check"></span></span>
+                            <span class="step-label">{{ 'auctioncreate.pageSection1Nav1' | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="step-item" [ngClass]="[activeStep === 2 ? 'is-active' : activeStep > 2 ? 'is-done' : '']">
+                        <a (click)="navAuctionProducts()">
+                            <span class="step-number" *ngIf="activeStep <= 2">2</span>
+                            <span class="step-number" *ngIf="activeStep > 2"><span class="icon-check"></span></span>
+                            <span class="step-label">{{ 'auctioncreate.pageSection1Nav2' | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="step-item" [ngClass]="[activeStep === 3 ? 'is-active' : activeStep > 3 ? 'is-done' : '']">
+                        <a (click)="navAuctionSummary()">
+                            <span class="step-number" *ngIf="activeStep <= 3">3</span>
+                            <span class="step-number" *ngIf="activeStep > 3"><span class="icon-check"></span></span>
+                            <span class="step-label">{{ 'auctioncreate.pageSection1Nav4' | translate }}</span>
+                        </a>
+                    </li>
+                    <!-- <li class="step-item" [ngClass]="[activeStep === 4 ? 'is-active' : activeStep > 4 ? 'is-done' : '']">
+                        <a h ref="">
+                            <span class="step-number" *ngIf="activeStep <= 4">4</span>
+                            <span class="step-number" *ngIf="activeStep > 4"><span class="icon-check"></span></span>
+                            <span class="step-label">{{ 'auctioncreate.pageSection1Nav4' | translate }}</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="col-80 mt-3">
+            <app-auction-detail [activeStep]="activeStep" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" (auctionCreateResp)="onAuctionCreateResp($event)" (changeauctiontype)="onChangeauctiontype($event)" (changeSteps)="onChangeSteps($event)"
+                *ngIf="activeStep === 1"></app-auction-detail>
+            <app-auction-product [activeStep]="activeStep" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" (productCreateResp)="onProductCreateResp($event)" (changeauctiontype)="onChangeauctiontype($event)" (changeSteps)="onChangeSteps($event)"
+                *ngIf="activeStep === 2"></app-auction-product>
+            <!-- <app-auction-committee-members [activeStep]="activeStep" (changeSteps)="onChangeSteps($event)" *ngIf="activeStep === 3"></app-auction-committee-members> -->
+            <app-auction-order-summary [activeStep]="activeStep" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" (changeSteps)="onChangeSteps($event)" *ngIf="activeStep === 3"></app-auction-order-summary>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{'modal-show': showSuccessfulModal}">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+            <button type="button" (click)="closeModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <span class="icon-close"></span>
+            </button>
+            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <div class="modal-header justify-content-center">
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_draft_title' | translate }} </h4>
+            </div>
+            <div class="modal-body">
+                <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{ 'message.success_draft_para' | translate }} </label>
+            </div>
+            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button> </div>
+        </div>
+    </div>
+</div>
+
+<!-- vue js -->
+<script src="https://cdn.etimad.sa/v2/js/libs/vue/vue.min.js" type="text/javascript"></script>
+<script src="https://cdn.etimad.sa/v2/js/pagination.min.js" type="text/javascript"></script>
+<script src="https://cdn.etimad.sa/v2/js/datatable.min.js" type="text/javascript"></script>
+<script src="https://cdn.etimad.sa/v2/js/editable-datatable.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.etimad.sa/v2/js/libs/bootstrap-select/bootstrap-select.min.min.js"></script>
+<!-- <script src="https://cdn.etimad.sa/v2/js/libs/fine-uploader/fine-uploader.min.min.js "></script> -->

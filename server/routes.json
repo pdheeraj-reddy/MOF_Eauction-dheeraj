@@ -1,0 +1,5 @@
+{
+    "/mock-internal/auctions/1/final-invoice": "/auctionFinalInvoice",
+    "/mock-internal/auctions/1": "/auctionDetails",
+    "/mock-internal/*": "/$1"
+}

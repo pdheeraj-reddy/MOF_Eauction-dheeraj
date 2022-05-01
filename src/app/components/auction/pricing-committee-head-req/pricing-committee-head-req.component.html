@@ -1,0 +1,247 @@
+<div class="col-12 mt-1">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb px-0">
+        <li class="breadcrumb-item"><a href="#">Accreditation services</a></li>
+        <!-- <li class="breadcrumb-item">
+            <a href="#">E-auction applications</a>
+          </li> -->
+        <li class="breadcrumb-item active" aria-current="page">
+          E-auction applications
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="col-12">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="heading">
+                  <h1 class="text-20 text-primary font-weight-medium">E-auction applications</h1>
+              </div>
+          </div>
+          <div class="col-md-12" style="margin-bottom: 20px; display: flex;justify-content: space-between;
+          width: 100%;">
+              <div class="btn-group" role="group"  aria-label="Basic example" >
+                  <button type="radio" id="all" class="btn btn-outline-primary-light" (click)="catChange('all')" [ngClass]="selectedCat=='all'? 'active':''">
+                    All (48)
+                    </button>
+                  <button type="button" id="await" class="btn btn-outline-primary-light" (click)="catChange('await')" [ngClass]="selectedCat=='await'? 'active':''">
+                    Awaiting approval (15)
+                  </button>
+                  <button type="button" id="re-ad" class="btn btn-outline-primary-light" (click)="catChange('re-ad')" [ngClass]="selectedCat=='re-ad'? 'active':''">
+                    Re-adjusted pricing (15)
+                  </button>
+                  <button type="button" id="wait" class="btn btn-outline-primary-light" (click)="catChange('wait')" [ngClass]="selectedCat=='wait'? 'active':''">
+                    Waiting  for the announcement (3)
+                  </button>
+                </div>
+                <div class="dropdown dropdown-filters-container d-inline">
+                  <button class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="text-14 icon-filters"></span>
+                  <!-- <span class="badge badge-danger"><small>4</small></span> -->
+                  </button>
+                  <div class="dropdown-menu dropdown-filter" aria-labelledby="dropdownMenuButton">
+                      <div class="card filter shadow-lg-5" id="collapseExample">
+                          <div class="card-header text-center">
+                              <button type="button" class="close" data-dismiss="dropdown" aria-label="Close">
+                           <span class="icon-close"></span>
+                           </button>
+                              <span class="text-primary d-block text-uppercase"><b>Filters</b>
+                           <!-- <b class="text-secondary-blue d-block mt-1"
+                              >Active Filters (0)</b
+                              > -->
+                           </span>
+                          </div>
+                          <div class="filter-item">
+                              <div class="filter-category-body">
+                                  <div class="p-3">
+                                      <div class="filter-content">
+                                          <div class="mb-2">
+                                              <label for="validationCustom04">Status</label>
+                                              <select class="form-control" id="validationCustom04">
+                                                  <option selected disabled value="">Select</option>
+                                                  <option>...</option>
+                                              </select>
+                                          </div>
+                                          <div class="mb-2">
+                                              <label for="validationCustom04">Type</label>
+                                              <select class="form-control" id="validationCustom04">
+                                                  <option selected disabled value="">Select</option>
+                                                  <option>...</option>
+                                              </select>
+                                          </div>
+                                          <!-- <div class="mb-2">
+                                              <label>Creation Date</label>
+                                              <input type="text" class="form-control calendar-control calendar-both-control" />
+                                          </div> -->
+                                          <div class="mt-3 mb-2">
+                                              <div class="custom-control custom-checkbox">
+                                                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                  <label class="custom-control-label" for="customCheck1">My Auctions</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <div class="row">
+                                  <div class="col-6 p-1">
+                                      <button type="button" class="btn btn-outline-light btn-block">
+                                 Reset
+                                 </button>
+                                  </div>
+                                  <div class="col-6 p-1">
+                                      <button type="button" class="btn btn-primary-light btn-block">
+                                 Apply
+                                 </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <!-- <div class="card px-3"> -->
+              <div class="">
+                  <table id="applicationsList" class="table table-bordered table-expanded">
+                      <thead class="thead-dark">
+                          <tr class="">
+                              <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                                  <div class="table-header-cell">
+                                      <span> Reference number</span>
+                                      <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                  </div>
+                              </th>
+                              <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                                  <div class="table-header-cell">
+                                      <span>Auction name</span>
+                                      <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                  </div>
+                              </th>
+                              <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                                  <div class="table-header-cell">
+                                      <span>Auction type</span>
+                                      <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                  </div>
+                              </th>
+                              <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(4, 'string')">
+                                  <div class="table-header-cell">
+                                      <span>Start date of auction</span>
+                                      <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                  </div>
+                              </th>
+                              <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'string')">
+                                  <div class="table-header-cell">
+                                      <span>End date of auction</span>
+                                      <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                  </div>
+                              </th>
+                              <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(6, 'string')">
+                                  <div class="table-header-cell">
+                                      <span>Status of request</span>
+                                      <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                  </div>
+                              </th>
+                              <th class="btn-primary-light" scope="col"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td colspan="10" class="p-3 bg-white">
+                                  <div class="alert-body text-center"><i class="alert-icon"><svg width="48" height="48" xmlns="http://www.w3.org/2000/svg"><g fill="#CCC" fill-rule="nonzero"><path d="M46.884 15.272L24.513 8.087a1.545 1.545 0 00-1.005-.006L1.113 15.273A1.606 1.606 0 000 16.802v21.35a2.4 2.4 0 001.618 2.268l21.592 7.445a2.365 2.365 0 001.57 0l21.6-7.447A2.4 2.4 0 0048 38.153V16.802c0-.698-.451-1.316-1.116-1.53zM23.2 9.862v10.94a.8.8 0 001.6 0V9.86l21.6 6.935V16.808h-.005L24 24.001 1.605 16.795 23.2 9.861zM1.6 38.151V18.488l21.6 6.938v20.744l-21.058-7.26a.8.8 0 01-.542-.756zm44.26.757l-21.06 7.26V25.426l21.6-6.938v19.666a.8.8 0 01-.54.756z"></path><path d="M20.246 26.289l-14.87-4.88a1.538 1.538 0 00-1.399.231c-.404.3-.643.78-.644 1.291v13.563c0 .682.424 1.289 1.055 1.511l14.87 5.24c.478.17 1.007.091 1.42-.21.411-.3.656-.785.655-1.302V27.816a1.592 1.592 0 00-1.087-1.527zM4.9 28.353l14.87 4.88v3.74l-14.87-4.878v-3.742zm14.87-.537v3.742l-14.87-4.879v-3.748l14.87 4.885zm-14.87 8.678v-2.72l14.87 4.88v3.079l-14.87-5.24zM44.023 21.64a1.546 1.546 0 00-1.4-.231l-14.87 4.879a1.592 1.592 0 00-1.086 1.53v13.916c0 .517.245 1.002.657 1.302.412.3.94.378 1.418.21l14.87-5.24a1.598 1.598 0 001.055-1.51V22.932a1.62 1.62 0 00-.644-1.294zm-.922 1.293v5.565l-3.932 1.288a2.326 2.326 0 00-1.546 2.27 1.595 1.595 0 01-1.122 1.53c-.664.2-1.378-.07-1.755-.663a2.166 2.166 0 00-2.53-.867l-3.984 1.305v-5.544l14.87-4.884zm-14.87 18.801V35.04l4.462-1.458a.645.645 0 01.738.207 3.098 3.098 0 003.519 1.327c1.33-.404 2.242-1.656 2.238-3.076a.728.728 0 01.458-.73l3.455-1.133v6.32l-14.87 5.237zM24 6.667c.368 0 .667-.373.667-.834v-5C24.667.373 24.368 0 24 0c-.368 0-.667.373-.667.833v5c0 .46.299.834.667.834zM12.484 7.539a.786.786 0 001.073.373.85.85 0 00.359-1.118l-2.4-5a.786.786 0 00-1.073-.373.85.85 0 00-.359 1.119l2.4 4.999zM34.44 7.911c.192.1.413.116.615.046a.81.81 0 00.463-.423l2.398-4.995a.85.85 0 00-.359-1.118.785.785 0 00-1.072.373L34.087 6.79a.864.864 0 00-.047.637c.066.21.21.385.4.484z"></path></g></svg></i>
+                                      <div class="alert-content">
+                                          <h5 class="text-black-50">No data available</h5>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr>
+                          <!-- <tr *ngIf="!arrayofobject.length">
+                              <td colspan="10" class="p-3 bg-white">
+                                  <div class="alert-body text-center"><i class="alert-icon"><svg width="48" height="48" xmlns="http://www.w3.org/2000/svg"><g fill="#CCC" fill-rule="nonzero"><path d="M46.884 15.272L24.513 8.087a1.545 1.545 0 00-1.005-.006L1.113 15.273A1.606 1.606 0 000 16.802v21.35a2.4 2.4 0 001.618 2.268l21.592 7.445a2.365 2.365 0 001.57 0l21.6-7.447A2.4 2.4 0 0048 38.153V16.802c0-.698-.451-1.316-1.116-1.53zM23.2 9.862v10.94a.8.8 0 001.6 0V9.86l21.6 6.935V16.808h-.005L24 24.001 1.605 16.795 23.2 9.861zM1.6 38.151V18.488l21.6 6.938v20.744l-21.058-7.26a.8.8 0 01-.542-.756zm44.26.757l-21.06 7.26V25.426l21.6-6.938v19.666a.8.8 0 01-.54.756z"></path><path d="M20.246 26.289l-14.87-4.88a1.538 1.538 0 00-1.399.231c-.404.3-.643.78-.644 1.291v13.563c0 .682.424 1.289 1.055 1.511l14.87 5.24c.478.17 1.007.091 1.42-.21.411-.3.656-.785.655-1.302V27.816a1.592 1.592 0 00-1.087-1.527zM4.9 28.353l14.87 4.88v3.74l-14.87-4.878v-3.742zm14.87-.537v3.742l-14.87-4.879v-3.748l14.87 4.885zm-14.87 8.678v-2.72l14.87 4.88v3.079l-14.87-5.24zM44.023 21.64a1.546 1.546 0 00-1.4-.231l-14.87 4.879a1.592 1.592 0 00-1.086 1.53v13.916c0 .517.245 1.002.657 1.302.412.3.94.378 1.418.21l14.87-5.24a1.598 1.598 0 001.055-1.51V22.932a1.62 1.62 0 00-.644-1.294zm-.922 1.293v5.565l-3.932 1.288a2.326 2.326 0 00-1.546 2.27 1.595 1.595 0 01-1.122 1.53c-.664.2-1.378-.07-1.755-.663a2.166 2.166 0 00-2.53-.867l-3.984 1.305v-5.544l14.87-4.884zm-14.87 18.801V35.04l4.462-1.458a.645.645 0 01.738.207 3.098 3.098 0 003.519 1.327c1.33-.404 2.242-1.656 2.238-3.076a.728.728 0 01.458-.73l3.455-1.133v6.32l-14.87 5.237zM24 6.667c.368 0 .667-.373.667-.834v-5C24.667.373 24.368 0 24 0c-.368 0-.667.373-.667.833v5c0 .46.299.834.667.834zM12.484 7.539a.786.786 0 001.073.373.85.85 0 00.359-1.118l-2.4-5a.786.786 0 00-1.073-.373.85.85 0 00-.359 1.119l2.4 4.999zM34.44 7.911c.192.1.413.116.615.046a.81.81 0 00.463-.423l2.398-4.995a.85.85 0 00-.359-1.118.785.785 0 00-1.072.373L34.087 6.79a.864.864 0 00-.047.637c.066.21.21.385.4.484z"></path></g></svg></i>
+                                      <div class="alert-content">
+                                          <h5 class="text-black-50">No data available</h5>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr> -->
+                          <!-- <tr *ngFor="let code of arrayofobject">
+                              <td scope="row">{{code.referenceno}}</td>
+                              <td>{{ code.auctionName }}</td>
+                              <td>{{ code.auctionType }}</td>
+                              <td>
+                                  <div class="pl-0">
+                                      <br>
+                                  </div>
+                                  {{ code.auctionStatus }}
+                              </td>
+                              <td>
+                                  {{ code.bgaValues }}
+                                  <div class="pt-1 text-muted">{{ code.autionStarttime }}</div>
+                              </td>
+                              <td>
+                                  {{ code.agencyName }}
+                                  <div class="pt-1 text-muted">{{ code.autionEndtime }}</div>
+                              </td>
+                              <td>
+                                  <a class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <span class="icon-more_vert"></span>
+                                  </a>
+                                  <div class="dropdown-menu">
+                                      <a class="dropdown-item">hello</a>
+                                      <a class="dropdown-item text-danger">]hello</a>
+                                  </div>
+                                  <a href="" class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-eye-open"></span> </a>
+                              </td>
+                          </tr> -->
+                          <tr>
+                              <td scope="row">21</td>
+                              <td>Resort Land</td>
+                              <td>Public auction</td>
+                              <td>
+                                  2021-12-01
+                                  <div class="pt-1 text-muted">10:50am</div>
+                              </td>
+                              <td>
+                                  2022-01-01
+                                  <div class="pt-1 text-muted">10:50am</div>
+                              </td>
+                              <td>
+                                  <div class="pl-0 status status-o status-o-success-2">
+                                      <br>
+                                  </div>
+                                  Awaiting approval
+                              </td>
+                              <td>
+                                  <a href="/vieweditprice" class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-eye-open"></span> </a>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="mt-4 row margin-auto">
+                  <div class="mb-5">
+                      <nav aria-label="..." class="nav-pagination">
+                          <ul class="pagination">
+                              <li class="page-item disabled">
+                                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                              </li>
+                              <li class="page-item active">
+                                  <a class="page-link" href="#">1</a>
+                              </li>
+                              <li class="page-item" aria-current="page">
+                                  <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                              </li>
+                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item"><a class="page-link dot-link">...</a></li>
+                              <li class="page-item"><a class="page-link" href="#">15</a></li>
+                              <li class="page-item">
+                                  <a class="page-link" href="#">Next</a>
+                              </li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

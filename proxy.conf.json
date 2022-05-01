@@ -1,0 +1,14 @@
+{
+    "/internal": {
+        "target": "https://10.13.85.56:9443/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/mock-internal": {
+        "target": "http://localhost:3000/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,23 @@
+<div class="card">
+    <img src="{{auction.imgsrc}}" class="card-img-top" alt="...">
+    <div class="status-code-un" [ngClass]="[auction.statuscode === 'Under Gear' ? 'status-code-un' : auction.statuscode == 'Running Now' ? 'status-code-rn' : auction.statuscode == 'Upcoming auction' ? 'status-code-up' : auction.statuscode == 'Awarded' ? 'status-code-ad' : auction.statuscode == 'Canceled' ? 'status-code-can' : '']">
+        {{auction.statuscount}}<span class="icon-eye-open" *ngIf="auction.statuscode=='Running Now'"></span> {{auction.statuscode}}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{auction.title}}</h5>
+        <p class="card-text">{{auction.description}} </p>
+        <div style="color: #4F5457; font-size: 18px;">
+            <img src="/src/assets/icons/layers.png" alt="" width="20px"> {{auction.product}} {{ 'Product' | translate }}
+        </div>
+        <div style="color: #4F5457; font-size: 18px;">
+            <!-- <img src="assets\icon\Calender.png" alt="" width="20px"> -->
+            <span class="icon-date_range" style="color: #005B4F;"></span> <span>{{auction.auctiondate}} </span>. <span *ngIf="auction.auctiontimeSufix" >{{auction.auctiontime}} {{ auction.auctiontimeSufix | translate }}</span>
+        </div>
+        <div style="display: flex;justify-content: space-between;align-items: flex-end;">
+            <app-auction-countdown-timer [timestamp]="auction.auctionenddate" style="width: 55%;"></app-auction-countdown-timer>
+            <div>
+                <a href="#" class="btn" [ngClass]="[(auction.statuscode === 'Under Gear' || auction.statuscode === 'Awarded' || auction.statuscode === 'Canceled' ) ? 'notact-btn' : (auction.statuscode == 'Running Now' || auction.statuscode == 'Upcoming auction') ? 'act-btn' :'']">{{ 'AuctionDetails' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</div>

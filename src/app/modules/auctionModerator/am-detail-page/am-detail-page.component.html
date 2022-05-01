@@ -1,0 +1,300 @@
+<div class="col-12 mt-1">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item">
+                <a href="#">{{ "auctionModerator.am-detail.bcrumb1" | translate }}</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="#">{{ "auctionModerator.am-detail.bcrumb2" | translate }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ "auctionModerator.am-detail.bcrumb3" | translate }}
+            </li>
+        </ol>
+    </nav>
+</div>
+<br />
+<div class="col-12">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-20 text-primary font-weight-500">
+                {{ "auctionModerator.am-detail.pageTitle" | translate }}
+            </h1>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="rounded" style="background-color: #eff8f3">
+    <div class="row p-4 mx-auto" style="height: 96px">
+        <div class="col">
+            <label class="text-12">{{
+        "auctionModerator.am-detail.section1-head1" | translate
+      }}</label>
+            <div class="text-14 font-weight-bold color-darkgreen">
+                {{ preAuctionData?.Description }}
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+            <label class="text-12">{{
+        "auctionModerator.am-detail.section1-head2" | translate
+      }}</label>
+            <br>
+            <div [ngClass]="[
+      preAuctionData?.Status === 'Draft'
+        ? 'status status-o status-o-neutral-2'
+        : preAuctionData?.Status === 'Pending Review'
+        ? 'status status-o status-o-warning-2'
+        : preAuctionData?.Status === 'Published'
+        ? 'status status-o status-o-info-4'
+        : preAuctionData?.Status === 'Rejected'
+        ? 'status status-o status-o-important-2'
+        : 'status status-o status-o-neutral-4'
+    ]">
+                <span class="text-12" style="color: #414042;">&nbsp;&nbsp; {{ preAuctionData?.Status | translate}}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<mat-horizontal-stepper #stepper [linear]="true">
+  <mat-step [completed]="tabTwo">
+    <ng-template matStepLabel>{{
+      "auctionModerator.am-detail.stepper1" | translate
+    }}</ng-template>
+    <ul
+      class="nav et-tabs et-tabs-filled nav-pills"
+      id="pills-tab"
+      role="tablist"
+    >
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          id="pills-home-tab"
+          data-toggle="pill"
+          role="tab"
+          aria-controls="pills-home"
+          aria-selected="true"
+          (click)="nowchangetoAuction()"
+          >{{ "auctionModerator.am-detail.tab1-head" | translate }}</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="pills-profile-tab"
+          data-toggle="pill"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="false"
+          (click)="nowchangetoProduct()"
+          >{{ "auctionModerator.am-detail.tab2-head" | translate }}</a
+        >
+      </li>
+    </ul>
+    <div *ngIf="showAuction">
+      <app-auction-req-details [preAuctionData]="preAuctionData">
+      </app-auction-req-details>
+    </div>
+    <div *ngIf="showProduct">
+      <app-prodct-details
+        [preAuctionData]="preAuctionData"
+      ></app-prodct-details>
+    </div>
+
+    <div *ngIf="preAuctionData?.ActionTaken == 'P'">
+      <div
+        *ngIf="preAuctionData?.Status == 'Pending Review'"
+        class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5"
+      >
+        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+          <button
+            (click)="goBack()"
+            type="submit"
+            class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"
+          >
+            <span class="btn-text">{{
+              "auctionModerator.am-detail.showProduct-back_btn" | translate
+            }}</span>
+                <span class="v-divider"></span>
+                <span class="icon icon-arrow-left"></span>
+                </button>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row mb-5">
+                <button (click)="openRejectPopup()" class="btn btn-danger btn-lg mx-0 mx-md-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{
+              "auctionModerator.am-detail.showProduct-reject_btn" | translate
+            }}
+          </button>
+
+                <button (click)="approveOrRejectAuction('A')" class="btn btn-primary-light btn-lg">
+            {{
+              "auctionModerator.am-detail.showProduct-accept_btn" | translate
+            }}
+          </button>
+            </div>
+        </div>
+    </div>
+    </mat-step>
+    <mat-step *ngIf="!tabTwo" [completed]="tabThreeFour">
+        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper2" | translate }}
+        </ng-template>
+    </mat-step>
+    <mat-step *ngIf="tabTwo" [completed]="tabThreeFour">
+        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper2" | translate }}
+        </ng-template>
+        <app-auction-pricing-committe [preAuctionData]="preAuctionData">
+        </app-auction-pricing-committe>
+    </mat-step>
+    <mat-step [completed]="tabThreeFour">
+        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper3" | translate }}
+        </ng-template>
+        <app-auction-committe></app-auction-committe>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper4" | translate }}
+        </ng-template>
+        <app-auction-committe [isPublishTab]="isPublishTab"></app-auction-committe>
+
+        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
+            <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+                <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+          <span class="btn-text">{{
+            "auctionModerator.am-detail.auction-publish.back_btn" | translate
+          }}</span>
+          <span class="v-divider"></span>
+          <span class="icon icon-arrow-left"></span>
+        </button>
+            </div>
+            <div class="d-flex flex-column flex-md-row mb-5">
+                <button (click)="publishAuction()" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+          <span class="btn-text">{{
+            "auctionModerator.am-detail.auction-publish.accept_btn" | translate
+          }}</span>
+        </button>
+            </div>
+        </div>
+    </mat-step>
+    </mat-horizontal-stepper>
+
+    <div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 800px" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title text-24" style="color: #f66f5b">
+                        {{ "auctionModerator.am-detail.reject-popup.title" | translate }}
+                    </p>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+          <span class="icon-close"></span>
+        </button>
+                </div>
+
+                <div class="modal-body text-20" style="color: #414042">
+                    {{ "auctionModerator.am-detail.reject-popup.subTitle" | translate }}
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label class="text-12">{{
+            "auctionModerator.am-detail.reject-popup.section1-head1" | translate
+          }}</label>
+                        <div class="text-14 color-darkgreen">
+                            {{ preAuctionData.ObjectId || "-" }}
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="text-12">{{
+            "auctionModerator.am-detail.reject-popup.section1-head2" | translate
+          }}</label>
+                        <div class="text-14 color-darkgreen">
+                            {{ preAuctionData.BidType || "-" }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row mt-4">
+                    <div class="col-md-4 mb-3">
+                        <label class="text-12">{{
+            "auctionModerator.am-detail.reject-popup.section2-head1" | translate
+          }}</label>
+                        <select class="color-darkgreen border-bottom" style="width: 700px; border: none">
+            <option style="color: #005b4e" selected>
+              {{
+                "auctionModerator.am-detail.reject-popup.section2-opt1"
+                  | translate
+              }}
+            </option>
+            <option style="color: #005b4e" value="XXXXXXXXXX">
+              XXXXXXXXXX
+            </option>
+            <option style="color: #005b4e" value="YYYYYYYYYY">
+              YYYYYYYYYY
+            </option>
+          </select>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col w-100">
+                        <div class="border-bottom color-grey">
+                            <label for="goverusermessage">{{
+                "auctionModerator.am-detail.reject-popup.section3-head1"
+                  | translate
+              }}
+            </label>
+                            <span class="float-left text-muted">{{
+                "auctionModerator.am-detail.reject-popup.section3-letter"
+                  | translate
+              }}
+              &nbsp;<small id="charNum">{{
+                "auctionModerator.am-detail.reject-popup.section3-cnt"
+                  | translate
+              }}</small></span
+            >
+          </div>
+          <textarea
+            [(ngModel)]="rejectionNotes"
+            class="form-control"
+            onkeyup="countChar(this)"
+            placeholder="{{
+              'auctionModerator.am-detail.reject-popup.section3-phold'
+                | translate
+            }}"
+            rows="5"
+          ></textarea>
+        </div>
+      </div>
+
+      <div
+        class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5"
+      >
+        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+          <!-- <button
+                            type="submit"
+                            class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+                        <span class="btn-text">Reference</span>
+                            <span class="v-divider"></span>
+                            <span class="icon icon-arrow-left"></span>
+                            </button> -->
+                        </div>
+                        <div class="d-flex flex-column flex-md-row mb-5">
+                            <button class="btn btn-outline-light btn-lg mx-0 mx-md-2" type="button">
+            {{ "auctionModerator.am-detail.reject-popup.back_btn" | translate }}
+          </button>
+
+                            <button (click)="approveOrRejectAuction('R')" class="btn arrow-btn btn-danger btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+            <span class="btn-text">{{
+              "auctionModerator.am-detail.reject-popup.reject_btn" | translate
+            }}</span>
+          </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <br />

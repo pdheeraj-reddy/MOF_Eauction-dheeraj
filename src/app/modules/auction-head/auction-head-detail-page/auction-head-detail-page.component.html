@@ -1,0 +1,139 @@
+<div class="col-12 mt-1">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb px-0">
+      <li class="breadcrumb-item">
+        <a href="#">{{ "auctionHead.head-detail.bcrumb1" | translate }}</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="#">{{ "auctionHead.head-detail.bcrumb2" | translate }}</a>
+      </li>
+      <li
+        class="breadcrumb-item active"
+        aria-current="page"
+      >
+      {{ "auctionHead.head-detail.bcrumb3" | translate }}
+      </li>
+    </ol>
+  </nav>
+</div>
+<br />
+
+<div class="col-12">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-20 text-primary font-weight-500">
+        {{ "auctionHead.head-detail.pageTitle" | translate }}
+      </h1>
+    </div>
+  </div>
+</div>
+<br>
+<br />
+<ul
+    class="nav et-tabs et-tabs-filled nav-pills"
+    id="pills-tab"
+    role="tablist"
+  >
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="pills-home-tab"
+        data-toggle="pill"
+        role="tab"
+        aria-controls="pills-home"
+        aria-selected="true"
+        (click)="changeToAuction()"
+        >{{ "auctionHead.head-detail.tab1" | translate }}</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        id="pills-profile-tab"
+        data-toggle="pill"
+        role="tab"
+        aria-controls="pills-profile"
+        aria-selected="false"
+        (click)="changeToProduct()"
+        >{{ "auctionHead.head-detail.tab2" | translate }}</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="pills-profile-tab"
+        data-toggle="pill"
+        role="tab"
+        aria-controls="pills-profile"
+        aria-selected="false"
+        (click)="changeToPricing()"
+        >{{ "auctionHead.head-detail.tab3" | translate }}</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="pills-profile-tab"
+        data-toggle="pill"
+        role="tab"
+        aria-controls="pills-profile"
+        aria-selected="false"
+        >{{ "auctionHead.head-detail.tab4" | translate }}</a
+      >
+    </li>
+  </ul>
+  <div *ngIf="showAuction">
+    <app-auction-req-details [preAuctionData]="preAuctionData">
+    </app-auction-req-details>
+  </div>
+  <div *ngIf="showProduct">
+    <app-prodct-details
+      *ngIf="!priceAdjustment"
+      [isBidUpdate]="isBidUpdate"
+      [preAuctionData]="preAuctionData"
+      [isAuctionHead]="false"
+    >
+    </app-prodct-details>
+    <app-bid-value-update *ngIf="priceAdjustment"></app-bid-value-update>
+  </div>
+  <div *ngIf="showPricing">
+    <app-assign-pricing-committe></app-assign-pricing-committe>
+  </div>
+  <div *ngIf="showAuctionCommittee">
+    <app-assign-auction-committe> </app-assign-auction-committe>
+  </div>
+
+<!-- <mat-tab-group [selectedIndex]="1">
+  <mat-tab label="Auction Details">
+    <app-auction-req-details [preAuctionData]="preAuctionData">
+    </app-auction-req-details>
+  </mat-tab>
+  <mat-tab label="Product Details">
+    <button
+    (click) = "adjustPrice()"
+    class="btn btn-primary-light btn-lg mt-1 font-weight-bold rounded"
+      
+    >
+      Price Adjustment
+    </button>
+    <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
+    <app-bid-value-update></app-bid-value-update>
+    <app-prodct-details
+      *ngIf="!priceAdjustment"
+      [isBidUpdate]="isBidUpdate"
+      [preAuctionData]="preAuctionData"
+      [isAuctionHead]="false"
+    >
+    </app-prodct-details>
+
+    <app-bid-value-update *ngIf="priceAdjustment"></app-bid-value-update>
+  </mat-tab>
+  <mat-tab label="Pricing Committee Member">
+    <app-assign-pricing-committe></app-assign-pricing-committe>
+    <app-auction-committe></app-auction-committe>
+  </mat-tab>
+  <mat-tab label="Auction Commitee Members">
+    <app-assign-auction-committe> </app-assign-auction-committe>
+    <app-auction-pricing-committe> </app-auction-pricing-committe>
+  </mat-tab>
+</mat-tab-group> -->

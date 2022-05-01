@@ -1,0 +1,61 @@
+.auction-form {
+    background-color: #f4f4f4;
+}
+
+.search-group.search-custom {
+    width: 100%;
+    height: calc(1.5em + 1.5rem + 1px);
+    padding: 0.75rem 1rem;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #08594d;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 0;
+    border-bottom: 1px solid #ced4da;
+    outline: 0;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    border-radius: 0px;
+}
+
+.custom-control {
+    display: inline-block;
+}
+
+.custom-switch .custom-control-label::before {
+    left: 1.875rem;
+}
+
+.custom-switch .custom-control-label::after {
+    left: calc(1.875rem + 2px);
+}
+
+div.heading,
+div.heading-without-border {
+    margin-bottom: 15px;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-right-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+
+.usericon {
+    border: 1px solid #32ad71;
+    color: #32ad71 !important;
+    padding: 4px 4px 0px 4px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.memberedit {
+    color: #32ad71 !important;
+}
+
+.etimad-option-hover .input-target .input-label {
+    background: #ffffff;
+}

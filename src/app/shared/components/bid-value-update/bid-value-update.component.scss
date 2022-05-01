@@ -1,0 +1,47 @@
+.example-radio-group {
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+  
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+	// opacity: 0.5 !important;     /*click effect color change*/
+	background-color: #eaf6ef !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+	background-color: #32AD71 !important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+	border-color:#32AD71 !important; /*outer ring color change*/
+}
+
+  .btn-submit-grp {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  // .btn-primary-light {
+  //   margin-left: 10px;
+  // }
+  .status-success-icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .circle {
+    width: 96px;
+    height: 96px;
+    background: #f9fcfa;
+    border-radius: 50%;
+  }
+  .denial-model{
+    color: #F66F5B;
+  }

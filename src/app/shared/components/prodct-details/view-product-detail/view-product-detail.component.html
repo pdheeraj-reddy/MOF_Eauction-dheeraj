@@ -1,0 +1,116 @@
+<div aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div>
+        <div>
+            <div class="rounded mt-5" style="background-color: #eaf6ef">
+                <button type="button" (click)="closeDialog()">
+          <span class="icon-close"></span>
+        </button>
+                <div *ngIf="isBidUpdate">
+                    <label class="m-3">Estimated value of the product</label>
+                    <div class="row mb-0">
+                        <div class="col m-2">
+                            <input [(ngModel)]="price" class="form-control border-bottom w-50" type="text" placeholder="1 Enter the estimated value of the product" style="border: none; outline: none; background-color: #eaf6ef" />
+                        </div>
+                        <div class="col-auto justify-content-end m-3">
+                            <button (click)="closeDialog()" class="btn btn-primary-light btn-md">
+                Save value
+              </button>
+                        </div>
+                    </div>
+
+                    <br />
+                </div>
+            </div>
+            <div class="py-3 mb-3 text-24">
+                <h4>Product Details</h4>
+            </div>
+
+            <div class="d-flex pb-4">
+                <div class="w-50 border rounded">
+                    <img class="w-100" src="" alt="product image" style="height: 500px" />
+                </div>
+                <div class="px-4 w-50">
+                    <div class="py-3 mb-3">
+                        <h4>{{ product.ZzProdDesc }} No.{{ product.ZzProductNo }}</h4>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Product Name</label>
+                            <div class="text-14 color-darkgreen">
+                                {{ product.ZzProdDesc }}
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Product Condition</label>
+                            <div class="text-14 color-darkgreen">
+                                {{ product.ZzProductCond }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Product Value</label>
+                            <div class="text-14 color-darkgreen">
+                                {{ product.ZzProductCond }}
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Product Number</label>
+                            <div class="text-14 color-darkgreen">
+                                {{ product.ZzProductNo }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex border-bottom pb-3 mb-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Product Date and Time</label>
+                            <div class="text-14 color-darkgreen">
+                                <span>{{ product.DelivDate }}</span>
+                                <span class="text-muted status status-o status-o-success-4">{{
+                  product.DelivTime
+                }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">SKU Number</label>
+                            <div class="text-14 color-darkgreen">
+                                {{ product.ZzProductSku }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex border-bottom pb-3">
+                        <div class="col mb-3">
+                            <label for="validationCustom01">Product Specifications</label>
+                            <div class="text-14 color-darkgreen">
+                                {{ product.ZzProdDesc }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-50 border rounded">
+                <owl-carousel-o class="col-9x p-0" [options]="customOptions">
+                    <ng-container *ngFor="let slide of slidesStore" carouselSlide>
+                        <ng-template carouselSlide [id]="slide.id">
+                            <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title" />
+                        </ng-template>
+                    </ng-container>
+                </owl-carousel-o>
+            </div>
+
+            <div class="mb-3">
+                <div>
+                    <label for="">Delivery Address</label>
+                </div>
+                <div class="rounded w-100 border" style="height: 100px">
+                    <img src="" alt="delivery address map" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

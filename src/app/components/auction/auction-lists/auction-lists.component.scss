@@ -1,0 +1,28 @@
+.add_newauction .icon-add {
+    font-size: 14px;
+    padding-top: 1px;
+}
+
+.margin-auto {
+    margin-left: auto;
+}
+
+.table td,
+.table th {
+    padding: 0.85rem 0.5rem;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+}
+
+.status {
+    padding: 0.4em 1.45em 0.4em;
+}
+
+.filter-active {
+    color: #fff;
+    background-color: #32ad71 !important;
+    border-color: #32ad71 !important;
+    span {
+        color: #fff !important;
+    }
+}

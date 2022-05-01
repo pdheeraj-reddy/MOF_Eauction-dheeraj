@@ -1,0 +1,716 @@
+<div class="col-12 mt-1">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">Trust services</a></li>
+            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">Auction</a></li>
+            <li class="breadcrumb-item active" aria-current="page" style="font-size: 14px;">Auction details</li>
+        </ol>
+    </nav>
+</div>
+
+
+<div class="col-12">
+    <h2 style="font-weight: bold; color: #08594D;">Auction Details</h2>
+</div>
+<hr>
+
+<div style="display: flex; border: #cac1c1 solid 1px; border-radius: 8px; margin-top: 30px;">
+    <div style="background-color: #eaf6ef; color: #117ABE; padding-top: 20px; padding-bottom: 15px; padding-left: 25px; width: 32%; border-right: rgb(88, 88, 233)1px solid;">
+        <p style="font-weight: bold; font-size: 20px;">This auction is coming</p>
+        <p>You can register your entry until it's auction time.</p>
+    </div>
+
+    <div style="color: #117ABE; padding-bottom: 15px; padding-top: 20px; padding-left: 35px; width: 35%;">
+        <p>Auction start date</p>
+        <div style="display: flex;">
+            <p style="color: #08594D;">{{upcomingAuction.auction_start_date}}</p>&nbsp; &nbsp; <span style="font-size: 6px; margin-top: 7px; color: #32AD71;" class="icon-fiber_manual_record"></span> &nbsp; &nbsp;
+            <p style="color: #cac1c1;">{{upcomingAuction.auction_start_time}}</p>
+        </div>
+    </div>
+    <div class="dropdown dropdown-filters-container d-inline">
+        <button class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm" type="button" (click)="participation();" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 50px; width: 200px; margin-top: 35px; margin-left:140px; border: none; outline: none; background-color: #32AD71; color: white; border-radius: 5px;">Participate in the auction
+        </button>
+
+        <div style="width: 600px; margin-left: 100px;" class="dropdown-menu dropdown-filter" aria-labelledby="dropdownMenuButton">
+            <div class="card filter shadow-lg-5" id="collapseExample">
+
+                <div class="" style="display: flex; margin-top: 80px;">
+                    <div style="margin-left: 30px; width: 500px;">
+                        <p style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px;">Confirmation of participation in the auction?</p>
+                    </div>
+
+                    <div style="margin-left: 10px;">
+                        <button type="button" class="close" data-dismiss="dropdown" aria-label="Close">
+                            <a class="btn btn-ghost btn-sm fill-primary-green"> <span class="icon-close"></span> </a>
+                        </button>
+                    </div>
+                </div>
+                <br><br>
+
+                <div style="width: 490px;">
+                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px; margin-left: 30px;">Upon confirmation your information will be registered as an auction participant.</p>
+                </div>
+
+                <br><br><br>
+
+                <div style="margin-left: 200px;">
+                    <button style="height:50px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
+
+
+
+                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#showSuccessfulModal" style="height:50px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                        Subscription confirmation</button>
+                </div>
+
+                <br><br>
+
+            </div>
+        </div>
+
+        <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+                <div class="card shadow-lg result result-success" style="align-items: center;">
+                    <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                        <span class="icon-close"></span>
+                    </button>
+                    <div class="alert-body">
+                        <i class="alert-icon">
+                          <span class="icon-alert-success"></span>
+                        </i>
+                        <div class="alert-content">
+                            <h4>Subscription has been confirmed successfully</h4>
+                            <p style="color: #414042;">
+                                You will receive an email when the auction starts
+                            </p>
+                        </div>
+                    </div>
+                    <div class="alert-action">
+                        <button type="button" class="btn btn-primary-light">
+                            Back to auctions
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div style="display: flex; margin-top: 35px;">
+
+    <div style="border: #cac1c1 1px solid; width: 30%; padding-left: 30px; border-radius: 8px; height: 600px;">
+        <br>
+        <p style="color: #08594D; font-weight: bold; font-size: 25px;">Auction settings</p>
+        <p style="color: #08594D;">You can manage the auction from this menu.</p>
+
+        <div style="display: flex; margin-left: -20px; margin-top: 25px;">
+            <div class="etimad-option ml-0">
+                <input (click)="auctionSettings('auctionDetail')" type="radio" id="checkbox07" name="details" value="detail" checked="checked" />
+                <label class="input-target" for="checkbox07" style="width: 118.8px; height: 118.8px;"> <span><span class="icon-pin"></span><br>Auction Details</span> </label>
+            </div>
+            <div class="etimad-option mr-0" style="margin-left: -50px;">
+                <input (click)="auctionSettings('auctionInstruction')" type="radio" id="checkbox08" name="details" value="instructions" />
+                <label class="input-target" for="checkbox08" style="width: 118.8px; height: 118.8px;"><span><span class="icon-pin"></span><br>Auction Instructions</span> </label>
+            </div>
+        </div>
+        <br><br><br><br><br>
+
+        <p style="color: #202842; font-size: 16px;">For help or support in managing auctions</p>
+        <a href="" style="text-decoration: underline; color: #117ABE;">Press here</a>
+        <hr style="margin-right: 30px;">
+
+
+        <div style="display: flex; margin-left: -20px; margin-top: 25px; color: #08594D;">
+            <div style="width: 50%;">
+                <span class="icon-add-user1" style="margin-left: 50px; font-size: 35px;"></span><br>
+                <p style="margin-left: 20px;">{{upcomingAuction.auctionSetting?.participants}} Participants</p>
+            </div>
+            <div>
+                <span class="icon-playlist_add_check" style="margin-left: 40px; font-size: 35px;"></span><br>
+                <p style="margin-left: 10px;">{{upcomingAuction?.auctionSetting?.bitsNo}} Number of bids</p>
+            </div>
+        </div>
+        <br><br>
+
+    </div>
+
+    <!-- Auction Details start -->
+
+    <div *ngIf="editmode1" style="width: 75%;">
+
+        <div style="margin-left: 25px; border: #cac1c1 1px solid; border-radius: 7px; padding-left: 30px;">
+
+            <div style="display: flex; margin-top: 40px;">
+
+                <div style="width: 75%;">
+                    <p style="color: #202842;">Starts during:</p>
+                    <div style="display: flex; margin-top: -10px;">
+                        <div style="text-align: center;">
+                            <p style="color: #32AD71;">{{days}}</p>
+                            <p style="color: #08594D; font-weight: bold; margin-top: -20px;">day</p>
+                        </div>
+                        <div style="text-align: center; margin-left: 15px;">
+                            <p style="color: #32AD71;">{{hours}}</p>
+                            <p style="color: #08594D; font-weight: bold; margin-top: -20px;">hour</p>
+                        </div>
+                        <div style="text-align: center; margin-left: 15px;">
+                            <p style="color: #32AD71;">{{minutes}}</p>
+                            <p style="color: #08594D; font-weight: bold; margin-top: -20px;">accurate</p>
+                        </div>
+                        <div style="text-align: center; margin-left: 15px;">
+                            <p style="color: #32AD71;">{{second}}</p>
+                            <p style="color: #08594D; font-weight: bold; margin-top: -20px;">second</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="width: 25%;">
+                    <button *ngIf="(upcomingAuction?.auctionStatus)" style="color: #117ABE; background-color: #E7F1F8; border: none; outline: none; width: 160px; height: 30px; margin-top: 30px;">{{upcomingAuction?.auctionStatus}}</button>
+                </div>
+
+            </div>
+
+            <div style="position: relative; margin-top: 5px;">
+
+                <div id="">
+
+                    <ng-container *ngIf="upcomingAuction.auctionImage">
+                        <div id="slideshow">
+                            <div style="width: 100%; height: 380px;position: relative;">
+                                <ng-container *ngFor="let item of upcomingAuction.auctionImage; index as i">
+                                    <div id="{{'img-' + i}}" attr.data-img-id="{{ i }}" class="img-wrapper" [ngClass]="{ active: i === 0 }" style="background-image: url({{item.imgsrc}})"></div>
+                                </ng-container>
+                            </div>
+                            <div class="thumbs-container bottom">
+                                <div id="prev-btn" class="prev">
+                                    <i class="icon-keyboard_arrow_left"></i>
+                                </div>
+
+                                <ul class="thumbs">
+                                    <ng-container *ngFor="let item of upcomingAuction.auctionImage; index as i">
+                                        <li attr.data-thumb-id="{{i}}" class="thumb" [ngClass]="{ active: i === 0 }" style="background-image: url({{item.imgsrc}})"></li>
+                                    </ng-container>
+                                </ul>
+
+                                <div id="next-btn" class="next">
+                                    <i class="icon-keyboard_arrow_right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- <img src="https://cdn.cwsplatform.com/abitruckscom/vp2937192_1_large.jpg" alt="" style="width: 100%; height: 380px;"> -->
+
+                <button style="border: none; outline: none; background-color: #32AD71; color: white; border-radius: 5px; position: absolute;
+            top: 20px;
+            right: 20px; width: 150px; height: 30px;z-index: 10;" data-toggle="modal" data-target="#viewDetails"><span class="icon-eye-open"></span> Product Details</button>
+
+            </div>
+            <p class="count_of_image" style="color: #414042; text-align: center; width: 100%;">10 of 23</p>
+
+            <p style="color: #08594D; font-size: 16px;  font-weight: bold;">{{upcomingAuction?.auctionnote1}}</p>
+
+            <p style="color: #414042; font-size: 14px; ">{{upcomingAuction?.auctionnote2}}</p>
+
+            <p style="color: #414042; font-size: 14px; "><span class="icon-all-tenders" style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;{{upcomingAuction?.productCount}} products</p>
+
+            <p style="color: #414042; font-size: 14px; "><span class="icon-calendar" style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;Auction starts {{upcomingAuction?.auctionStartsdate}} ∙ {{upcomingAuction?.auctionStartstime}}</p>
+
+            <p style="color: #414042; font-size: 14px; "><span class="icon-pin" style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;Bidding is {{upcomingAuction?.bidding_status}}</p>
+
+            <button class="btn collapse-card-inside" type="button" data-toggle="collapse" data-target="#importantInformation" aria-expanded="false" aria-controls="collapseExample" style="width: 98%;">
+            <p style=" color: #414042; font-size: 14px;">Important Information</p>
+            <span class="icon-expand_more" style="color: #08594D;"></span>
+            </button>
+
+            <div class="collapse" id="importantInformation">
+                <div style="display: flex; margin-top: 30px;">
+                    <div>
+                        <p style="color: #117ABE;">Auction start price</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.important_info?.auctionstartprice}}</p>
+                    </div>
+                    <div style="margin-left: 90px;">
+                        <p style="color: #117ABE;">Initial guarantee percentage</p>
+                        <p *ngIf="upcomingAuction.important_info?.guarantee_per" style="color: #08594D; margin-top: -10px;">{{upcomingAuction.important_info?.guarantee_per}}%</p>
+                    </div>
+                    <div style="margin-left: 80px;">
+                        <p style="color: #117ABE;">Bidding method</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.important_info?.bidding_method}}</p>
+                    </div>
+                </div>
+
+                <div style="display: flex;">
+                    <div>
+                        <p style="color: #117ABE;">End of bidding</p>
+                        <p *ngIf="upcomingAuction.important_info?.end_biddingdate" style="color: #08594D; margin-top: -10px;">{{upcomingAuction.important_info?.end_biddingdate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;{{upcomingAuction.important_info?.end_biddingtime}}</p>
+                    </div>
+                    <div style="margin-left: 52px;">
+                        <p style="color: #117ABE;">Bid opening date</p>
+                        <p *ngIf="upcomingAuction.important_info?.open_biddingdate" style="color: #08594D; margin-top: -10px;">{{upcomingAuction.important_info?.open_biddingdate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;{{upcomingAuction.important_info?.open_biddingtime}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+        </div>
+        <br>
+
+        <div style="margin-left: 25px; border: #cac1c1 1px solid; border-radius: 7px;">
+            <button class="btn collapse-card-inside" type="button" data-toggle="collapse" data-target="#auctionDetails" aria-expanded="false" aria-controls="collapseExample">
+            <p style=" color: #414042; font-size: 18px; padding-left: 30px; font-weight: bold;">Auction Details</p>
+            <span class="icon-expand_more" style="color: #08594D;"></span>
+            </button>
+
+            <div class="collapse" id="auctionDetails">
+                <br>
+                <div style="display: flex; margin: 30px;">
+                    <div style="width: 36%;">
+                        <p style="color: #117ABE;">Auction reference number</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionId}}</p>
+                    </div>
+                    <div style="width: 33%;">
+                        <p style="color: #117ABE;">Auction type</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionType}}</p>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <p style="color: #117ABE;">Bidding method</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionSubType}}</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; margin: 30px;">
+                    <div style="width: 36%;">
+                        <p style="color: #117ABE;">Auction name</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionName}}</p>
+                    </div>
+                    <div style="width: 33%;">
+                        <p style="color: #117ABE;">Auction product</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionProduct}}</p>
+                    </div>
+
+                </div>
+
+                <div style="display: flex; margin: 30px;">
+                    <div style="width: 36%;">
+                        <p style="color: #117ABE;">Entity no.</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.entityNo}}</p>
+                    </div>
+                    <div style="width: 33%;">
+                        <p style="color: #117ABE;">Entity name</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.entityName}}</p>
+                    </div>
+
+                </div>
+
+                <div style="margin: 30px;">
+                    <p style="color: #117ABE;">Auction Description</p>
+                    <p style="color: #08594D; margin-top: -10px; text-align: justify;">{{upcomingAuction.auction_detail?.auctionDesc}}</p>
+                    <hr>
+                </div>
+
+                <h3 style="margin: 30px; font-weight: bold;">Auction date and time</h3>
+
+                <div style="display: flex; margin: 30px;">
+                    <div style="width: 36%;">
+                        <p style="color: #117ABE;">Bidding begins</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionStartDate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;{{upcomingAuction.auction_detail?.auctionStartTime}}</p>
+                    </div>
+                    <div style="width: 33%;">
+                        <p style="color: #117ABE;">End of bidding</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionEndDate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;{{upcomingAuction.auction_detail?.auctionEndTime}}</p>
+
+                    </div>
+                    <div style="margin-left: 15px">
+                        <p style="color: #117ABE;">How to start the auction</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.startAuction}}</p>
+                    </div>
+                </div>
+                <div style="margin: 30px;">
+                    <div>
+                        <p style="color: #117ABE;">Bid opening date</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.auctionAnncStartDate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;{{upcomingAuction.auction_detail?.auctionAnncStartTime}}</p>
+                    </div>
+                    <hr>
+                </div>
+
+                <h3 style="margin: 30px; font-weight: bold;">Financial auction items</h3>
+
+                <div style="display: flex; margin: 30px;">
+                    <div>
+                        <p style="color: #117ABE;">Auction start price</p>
+                        <p style="color: #08594D; margin-top: -10px;"> {{upcomingAuction.auction_detail?.startPrice}}</p>
+                    </div>
+                    <div style="margin-left: 135px;">
+                        <p style="color: #117ABE;">Warranty percentage</p>
+                        <p *ngIf="upcomingAuction.auction_detail?.gnteePercentage" style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.gnteePercentage}}</p>
+                    </div>
+
+                </div>
+
+                <div style="display: flex; margin: 30px;">
+                    <div style="width: 36%;">
+                        <p style="color: #117ABE;">Commission type</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.commissionType}}</p>
+                    </div>
+                    <div style="width: 33%;">
+                        <p style="color: #117ABE;">Pursuit percentage - commission %</p>
+                        <p style="color: #08594D; margin-top: -10px;" *ngIf="upcomingAuction.auction_detail?.pursuitPerCommission">{{upcomingAuction.auction_detail?.pursuitPerCommission}}</p>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <p style="color: #117ABE;">Final guarantee payment date</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{upcomingAuction.auction_detail?.finalgnteePaymentDays}} days</p>
+                    </div>
+
+                </div>
+                <hr style="margin-left: 30px; margin-right: 30px;">
+
+                <h3 style="margin: 30px; font-weight: bold;">Attachments</h3>
+
+                <div style="margin: 30px;">
+                    <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
+                        <thead class="thead-dark">
+                            <tr class="">
+                                <th style="width: 12%;" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                                    <div style=" padding-left: 10px;" class="table-header-cell">
+                                        <span>Attached</span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    </div>
+                                </th>
+                                <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                                    <div style=" padding-left: 10px;" class="table-header-cell">
+                                        <span>Attachment Name</span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    </div>
+                                </th>
+                                <th style="width: 18%;" class="btn-primary-light" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <ng-container *ngIf="upcomingAuction.auction_detail?.auctionAttachement">
+                                <tr *ngFor="let item of upcomingAuction.auction_detail?.auctionAttachement; index as i">
+                                    <td scope="row" style="text-align: center;">{{item.referenceNo}}</td>
+                                    <td>
+                                        <a (click)="downloadReport(item.fileurl)" class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-Group-3319"></span> </a>
+                                        {{item.fileName}}</td>
+                                    <td>
+                                        <a (click)="downloadReport(item.fileurl)" class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="icon-download"></span>
+                                        </a>
+
+                                        <a (click)="downloadReport(item.fileurl)" class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-eye-open"></span> </a>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4 row margin-auto">
+                        <div class="mb-5">
+                            <nav aria-label="..." class="nav-pagination">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link">1</a>
+                                    </li>
+                                    <li class="page-item" aria-current="page">
+                                        <a class="page-link">2 <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link">3</a></li>
+                                    <li class="page-item"><a class="page-link dot-link">...</a></li>
+                                    <li class="page-item"><a class="page-link">15</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link">Next one</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Auction Details end -->
+
+
+    <!-- Auction Instruction strats here -->
+
+    <div *ngIf="editmode2" style="width: 69%; margin-left: 25px; border: #cac1c1 1px solid; border-radius: 7px;">
+
+        <div style="margin-top: 50px; margin-left: 30px;">
+            <p style="font-size: 20px; line-height: 26px; color: #005B4E; font-weight: bold;"><span style="color: #005B4E; font-weight: bold;" class="icon-alert-information"></span>&nbsp;Auction Instructions</p>
+
+            <p style="font-size: 14px; line-height: 26px; color: #005B4E; font-weight: bold;">Auction Participation Instructions</p>
+
+            <p style="font-size: 14px; line-height: 27px; color: #414042;">1. Before participating in the auction, the commercial registration status must be “Participant” in the Etimad platform.</p>
+
+            <p style="font-size: 14px; line-height: 27px; color: #414042;">2. When the auction starts, you will be required to issue and attach the bid bond, submit your bid, and attach the final bond in case the auction is awarded to you. And you can issue guarantees through the adoption platform -
+                <a href="" style="text-decoration: underline; color: #117ABE;">the bank guarantee service</a>
+            </p>
+
+            <p style="font-size: 14px; line-height: 27px; color: #414042;">3. At the start of the auction, the initial guarantee amount will be reserved, after which the bidding can be started, and in the event that the auction is not awarded to the bidder, the bank guarantee will be immediately released.</p>
+
+            <p style="font-size: 14px; line-height: 27px; color: #414042;">4. If the minimum estimated price of the products is not met, the auction will not be awarded.</p>
+
+            <br>
+            <hr style="margin-right: 30px;">
+
+            <p style="font-size: 14px; line-height: 26px; color: #005B4E; font-weight: bold;">Auction workflow</p>
+
+            <div class="steps-wrapper">
+                <ul class="steps-group steps-two" style="margin-left:-75px;">
+                    <li class="step-item" style="height: 92px; width: 168px;">
+                        <a href="">
+                        </a>
+                        <a href="">
+                            <span class="step-number" style="font-size: 18px; color: #414042;">1</span>
+                            <span class="step-label" style="font-size: 13px; color: #414042;">Participate in the auction</span>
+                        </a>
+                    </li>
+                    <li class="step-item" style="height: 92px; width: 168px;">
+                        <a href="">
+                        </a>
+                        <a href="">
+                            <span class="step-number" style="font-size: 18px; color: #414042;">2</span>
+                            <span class="step-label" style="font-size: 13px; color: #414042;">Warranty Lift Primary</span>
+                        </a>
+                    </li>
+                    <li class="step-item" style="height: 92px; width: 168px;">
+                        <a href="">
+                        </a>
+                        <a href="">
+                            <span class="step-number" style="font-size: 18px; color: #414042;">3</span>
+                            <span class="step-label" style="font-size: 13px; color: #414042;">Auction start Submit bids</span>
+                        </a>
+                    </li>
+                    <li class="step-item" style="height: 92px; width: 168px;">
+                        <a href="">
+                        </a>
+                        <a href="">
+                            <span class="step-number" style="font-size: 18px; color: #414042;">4</span>
+                            <span class="step-label" style="font-size: 13px; color: #414042;">(initial award) Auction Award on top view</span>
+                        </a>
+                    </li>
+                    <li class="step-item" style="height: 92px; width: 168px;">
+                        <a href="">
+                        </a>
+                        <a href="">
+                            <span class="step-number" style="font-size: 18px; color: #414042;">5</span>
+                            <span class="step-label" style="font-size: 13px; color: #414042;">(final award) Warranty Lift Final</span>
+                        </a>
+                    </li>
+                    <li class="step-item" style="height: 92px; width: 168px;">
+                        <a href="">
+                        </a>
+                        <a href="">
+                            <span class="step-number" style="font-size: 18px; color: #414042;">6</span>
+                            <span class="step-label" style="font-size: 13px; color: #414042;">Pay the bill</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <br><br><br>
+
+        </div>
+    </div>
+
+    <!-- Auction instruction ends here -->
+
+</div>
+
+
+<div class="modal fade" id="viewDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl modal-scrollable" role="document" style="width: 80%; margin-left: 10%; margin-top: 10%;">
+
+        <div class="modal-content">
+
+            <button style="position: absolute; left: 90%; outline: none;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <span class="icon-close"></span>
+            </button>
+            <br>
+
+            <p style="color: #32AD71; margin-left: 0px; font-size: 28px; font-weight: bold;">Product Details</p>
+            <br>
+
+            <div style="display: flex; margin-left: 0px;">
+
+                <div style="width: 450px; height: 550px;">
+                    <ng-container *ngIf="upcomingAuction.productDetails?.auctionAttachement">
+                        <div id="slideshow">
+                            <div style="width: 100%; height: 380px;position: relative;">
+                                <ng-container *ngFor="let item of upcomingAuction.productDetails?.productimg; index as i">
+                                    <div id="{{'img-' + i}}" attr.data-img-id="{{ i }}" class="img-wrapper" [ngClass]="{ active: i === 0 }" style="background-image: url({{item.src}})"></div>
+                                </ng-container>
+                            </div>
+                            <div class="thumbs-container bottom">
+                                <div id="prev-btn" class="prev">
+                                    <i class="icon-keyboard_arrow_left"></i>
+                                </div>
+
+                                <ul class="thumbs">
+                                    <ng-container *ngFor="let item of upcomingAuction.productDetails?.productimg; index as i">
+                                        <li attr.data-thumb-id="{{i}}" class="thumb" [ngClass]="{ active: i === 0 }" style="background-image: url({{item.src}})"></li>
+                                    </ng-container>
+                                </ul>
+
+                                <div id="next-btn" class="next">
+                                    <i class="icon-keyboard_arrow_right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <!-- <img src="https://cdn.cwsplatform.com/abitruckscom/vp2937192_1_large.jpg" alt="" style="height: 550px; width: 450px; border-radius: 8px;"> -->
+                </div>
+
+                <div style="margin-top: 25px; margin-left: 35px;">
+                    <h3>{{upcomingAuction.productDetails?.productTitle}}</h3>
+                    <br>
+
+                    <div style="display: flex;">
+                        <div>
+                            <p style="color: #117ABE">Product Name</p>
+                            <p style="color: #005B4E; font-size: 16px;">{{upcomingAuction.productDetails?.productName}}</p>
+                        </div>
+                        <div style="margin-left: 200px;">
+                            <p style="color: #117ABE;">Product Condition</p>
+                            <p style="color: #005B4E; font-size: 16px;">{{upcomingAuction.productDetails?.productCondition}}</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex;">
+                        <div>
+                            <p style="color: #117ABE;">Delivery date and time</p>
+                            <p style="color: #005B4E; font-size: 16px;">{{upcomingAuction.productDetails?.deliveryDate}} &nbsp; <span style="font-size: 6px;" class="icon-fiber_manual_record"></span> &nbsp; {{upcomingAuction.productDetails?.deliveryTime}}</p>
+                            <!-- <p style="color: #005B4E; font-size: 16px;">2020-11-12 &nbsp; <span style="font-size: 6px;" class="icon-fiber_manual_record"></span> &nbsp; 10:50 am</p> -->
+                        </div>
+                        <div style="margin-left: 125px;">
+                            <p style="color: #117ABE;">Product Number</p>
+                            <p style="color: #005B4E; font-size: 16px;">{{upcomingAuction.productDetails?.productNo}}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <p style="color: #117ABE;">Product Specifications</p>
+                        <p style="color: #08594D; font-size: 16px;">{{upcomingAuction.productDetails?.productSpecification}}</p>
+                        <!-- <p style="color: #08594D; font-size: 16px;">Model: 2013, date of registration: 6/4/1443, plate number: NB 8434, working on diesel. <br> Model: 2013, date of registration: 6/4/1443, plate number: NB 8434, working on diesel. <br> Model: 2013, date of registration: 6/4/1443,
+                            plate number: NB 8434, working on diesel.</p> -->
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p style="color: #117ABE; margin-left: 0px;">Delivery Address</p>
+            <div *ngIf="upcomingAuction.productDetails?.locLatitude">
+                <agm-map [latitude]="upcomingAuction.productDetails!.locLatitude" [longitude]="upcomingAuction?.productDetails!.locLongitude">
+                    <agm-marker [latitude]="upcomingAuction.productDetails!.locLatitude" [longitude]="upcomingAuction.productDetails!.locLongitude">
+
+                    </agm-marker>
+                </agm-map>
+            </div>
+            <!-- <img style="margin-left: 0px; height: 100px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPb4bmGe7-0bbNFPMG7X884MrOKYH-l58zDT7wmKtIejcR02SrW3Qviu4Tjczwd9NbSIg&usqp=CAU" alt=""> -->
+
+            <br>
+            <p style="color: #117ABE; margin-left: 10px;">Other Attachments</p>
+
+            <table id="inventoryAllocationTable" class="table table-bordered table-expanded" style="margin-left: 0px; margin-right: 30px;">
+                <thead class="thead-dark">
+                    <tr class="">
+                        <th style="width: 12%;" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                            <div style=" padding-left: 10px;" class="table-header-cell">
+                                <span>Attached</span>
+                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            </div>
+                        </th>
+                        <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                            <div style=" padding-left: 10px;" class="table-header-cell">
+                                <span>Attachment Name</span>
+                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            </div>
+                        </th>
+                        <th style="width:15%" class="btn-primary-light" scope="col"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <ng-container *ngIf="upcomingAuction.productDetails?.auctionAttachement">
+                        <tr *ngFor="let item of upcomingAuction.productDetails?.auctionAttachement; index as i">
+                            <td scope="row" style="text-align: center;">{{item.id}}</td>
+                            <td>
+                                <a (click)="downloadReport(item.source)" class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-Group-3319"></span> </a>
+                                {{item.filename}}</td>
+                            <td>
+                                <a (click)="downloadReport(item.source)" class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="icon-download"></span>
+                                </a>
+
+                                <a (click)="downloadReport(item.source)" class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-eye-open"></span> </a>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <br>
+            <ng-container *ngIf="upcomingAuction.productDetails?.auctionAttachement">
+                <div class="mt-4 row margin-auto" style="margin-left: 10px;" *ngIf="upcomingAuction.productDetails!.auctionAttachement.length > 0">
+                    <div class="mb-5">
+
+                        <nav aria-label="..." class="nav-pagination">
+
+                            <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
+                                <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
+                                <a (click)="getServerData(1)" class="page-link" href="#">Last</a>
+                            </li> -->
+                                <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
+                                    <a (click)="getServerData(PaginationServc.currentPage)" class="page-link" tabindex="-1" aria-disabled="true">{{ 'auctionlist.grid-previous' | translate }}</a>
+                                </li>
+                                <li *ngFor="let page of PaginationServc.pages" class="page-item" [ngClass]="{ active: PaginationServc.currentPage === page }">
+                                    <a (click)="getServerData(page + 1)" class="page-link">
+                                    {{ page }}
+                                </a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
+                                    <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                </li>
+                                <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
+                                <a (click)="getServerData(PaginationServc.currentPage + 1)" class="page-link" href="#">Last</a>
+                            </li> -->
+                            </ul>
+                        </nav>
+                        <!-- <nav aria-label="..." class="nav-pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link">1</a>
+                                </li>
+                                <li class="page-item" aria-current="page">
+                                    <a class="page-link">2 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link">3</a></li>
+                                <li class="page-item"><a class="page-link dot-link">...</a></li>
+                                <li class="page-item"><a class="page-link">15</a></li>
+                                <li class="page-item">
+                                    <a class="page-link">Next</a>
+                                </li>
+                            </ul>
+                        </nav> -->
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+
+    </div>

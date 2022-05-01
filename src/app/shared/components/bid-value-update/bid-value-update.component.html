@@ -1,0 +1,42 @@
+<div class="card p-5 shadow-lg">
+    <div class="py-3">
+        <h4>{{ "auctionMember.bid-value.head" | translate }}</h4>
+    </div>
+
+    <div class="rounded p-4" style="background-color: #eaf6ef">
+        <label class="text-12">{{
+      "auctionMember.bid-value.subHead" | translate
+    }}</label>
+
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="inputMode">
+            <mat-radio-button class="example-radio-button" style="width: 40%" *ngFor="let type of types" [value]="type.value" (click)="selection(type.value)">
+                <label class="lbl1 text-14 mt-1" style="color: #414042" for="all">{{ type.name | translate }}
+        </label>
+            </mat-radio-button>
+        </mat-radio-group>
+
+        <div class="container" *ngIf="inputMode">
+            <label class="text-12">{{
+        "auctionMember.bid-value.phold" | translate
+      }}</label>
+            <div style="display: flex">
+                <input [(ngModel)]="totalBidValue" type="text" placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
+            width: 300px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid grey;
+            background-color: #eaf6ef;
+          " />&nbsp; &nbsp; &nbsp;
+                <button class="btn btn-primary-light btn-md" (click)="approveOrRejectAuction('A')">
+          {{ "auctionMember.bid-value.save" | translate }}
+        </button>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div *ngIf="preAuctionData">
+        <app-prodct-details [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="isAuctionHead">
+        </app-prodct-details>
+    </div>
+</div>

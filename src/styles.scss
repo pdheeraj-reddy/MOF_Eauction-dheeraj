@@ -1,0 +1,352 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$eauction-app-primary: mat.define-palette(mat.$indigo-palette);
+$eauction-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$eauction-app-warn: mat.define-palette(mat.$red-palette);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$eauction-app-theme: mat.define-light-theme(( color: ( primary: $eauction-app-primary, accent: $eauction-app-accent, warn: $eauction-app-warn, )));
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($eauction-app-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: DINNextLTArabic-Black;
+    src: url("/assets/font/DINNextLTArabic-Black.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DINNextLTArabic-Bold;
+    src: url("/assets/font/DINNextLTArabic-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DINNextLTArabic-Heavy;
+    src: url("/assets/font/DINNextLTArabic-Heavy.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DINNextLTArabic-Light;
+    src: url("/assets/font/DINNextLTArabic-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DINNextLTArabic-Medium;
+    src: url("/assets/font/DINNextLTArabic-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DINNextLTArabic-Regular;
+    src: url("/assets/font/DINNextLTArabic-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: DINNextLTArabic-UltraLight;
+    src: url("/assets/font/DINNextLTArabic-UltraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'DINNextLTArabicRegular';
+    src: url('/assets/fonts/roboto.eot');
+    /* IE9 Compat Modes */
+    src: url('/assets/fonts/roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/roboto.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/DINNextLTArabic/DINNextLTArabic-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/assets/fonts/roboto.svg#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'DINNextLTArabicMedium';
+    src: url('/assets/fonts/roboto.eot');
+    /* IE9 Compat Modes */
+    src: url('/assets/fonts/roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/roboto.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/DINNextLTArabic/DINNextLTArabic-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/assets/fonts/roboto.svg#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'DINNextLTArabicBold';
+    src: url('/assets/fonts/roboto.eot');
+    /* IE9 Compat Modes */
+    src: url('/assets/fonts/roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/roboto.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/DINNextLTArabic/DINNextLTArabic-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/assets/fonts/roboto.svg#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+a,
+.cursor-pointer {
+    cursor: pointer;
+}
+
+* {
+    font-family: 'DINNextLTArabicRegular';
+    font-size: 16px;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'DINNextLTArabicMedium' !important;
+}
+
+.col-20 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.col-80 {
+    flex: 0 0 80%;
+    max-width: 80%;
+}
+
+.font-regular {
+    font-family: 'DINNextLTArabicRegular';
+    font-size: 16px;
+}
+
+.font-medium {
+    font-family: 'DINNextLTArabicMedium';
+    font-size: 16px;
+}
+
+.font-bold {
+    font-family: 'DINNextLTArabicBold';
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 32px !important;
+}
+
+.breadcrumb li {
+    font-size: 13px !important;
+    a {
+        font-size: 13px !important;
+    }
+}
+
+.table tbody tr td {
+    color: #414042;
+    font-size: 14px;
+}
+
+.ul.nav.nav-fill {
+    color: #414042;
+    opacity: .5;
+}
+
+label {
+    span {
+        font-size: 12px;
+    }
+}
+
+.text-20 {
+    font-size: 20px;
+}
+
+.text-24 {
+    font-size: 24px !important;
+}
+
+.text-16 {
+    font-size: 16px !important;
+}
+
+.text-14 {
+    font-size: 14px;
+}
+
+.text-12 {
+    font-size: 12px;
+}
+
+.text-40 {
+    font-size: 40px !important;
+}
+
+h4 {
+    font-size: 24px !important;
+    font-family: 'DINNextLTArabicMedium';
+}
+
+.breadcrumb-item.active,
+.color-darkgreen {
+    color: #005B4E !important;
+}
+
+.color-lightgreen {
+    color: #32AD71 !important;
+}
+
+.color-lightGrey {
+    color: #9D9D9D
+}
+
+ul.nav.nav-fill li a {
+    color: #414042;
+    opacity: .5;
+    &.active {
+        font-family: 'DINNextLTArabicMedium';
+        background: rgb(50, 173, 113);
+        color: rgb(255, 255, 255);
+        opacity: 1;
+    }
+}
+
+.modal-xlg {
+    max-width: 80% !important;
+}
+
+.modal-show {
+    display: block !important;
+    background: rgba(50, 173, 113, .2) !important;
+}
+
+.th-action {
+    width: 92px;
+}
+
+.th-serials {
+    width: 100px;
+}
+
+.browsers-support img {
+    width: 20px !important;
+}
+
+.amauction-fade .nav-item {
+    border: 1px solid #32ad71 !important;
+}
+
+.amauction-fade .nav-link {
+    opacity: 1 !important;
+    color: #32ad71 !important;
+    border-color: #32ad71;
+}
+
+.amauction-fade .nav-link.active {
+    opacity: 1 !important;
+    color: white !important;
+    // border-color: #32ad71;
+}
+
+.form-control-haserror {
+    background-image: none;
+    background-color: rgba(246, 111, 91, .1);
+    padding-right: 0!important;
+}
+
+.invalid-feedback div {
+    font-size: 14px !important;
+}
+
+.steps-group.steps-two.steps2-vertical li.step-item:after {
+    left: 22px !important;
+}
+
+.tooltip-inner {
+    text-align: left !important;
+    max-width: 100% !important;
+}
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    background-image: none !important;
+}
+
+.invalid-cust-feedback {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #f66f5b;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.spinner-border-light {
+    border-color: #fff !important;
+    border-right-color: transparent !important;
+}
+
+.main-nav ul li.active a:before {
+    width: 40px !important;
+    bottom: 20px !important;
+    right: 10px !important;
+}
+
+.nav-link-tabs {
+    display: block;
+    padding: 0.9rem 1rem !important;
+}
+
+.nav-tabs-btn {
+    display: block;
+    padding: 0.9rem 1rem !important;
+}
+
+.status {
+    padding: 0.4em 0.75em 0.4em !important;
+}
+
+.qq-upload-button {
+    border: none !important;
+}
+
+.icon-attachment {
+    transform: rotate(130deg) scaleX(-1);
+    display: inline-block;
+}
+
+.file-uploader-zone {
+    border: 2px dashed #3a8ec4!important;
+}
+
+.file-download h3 {
+    width: 130px !important;
+}
