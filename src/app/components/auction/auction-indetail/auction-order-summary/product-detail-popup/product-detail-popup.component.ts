@@ -10,9 +10,6 @@ import { AuctionService } from 'src/app/service/auction.service';
 export interface DialogData {
   data: any;
   viewproduct: any;
-
-  
-
 }
 
 @Component({
@@ -31,7 +28,7 @@ export class ProductDetailPopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog,
     public auctionServc: AuctionService,
-  ) {}
+  ) { }
 
   customOptions: OwlOptions = {
     items: 4,
@@ -46,7 +43,7 @@ export class ProductDetailPopupComponent implements OnInit {
     nav: false,
   };
 
-  sortByTableHeaderId(a: number, b: string) {}
+  sortByTableHeaderId(a: number, b: string) { }
   closeDialog() {
     this.dialogRef.close();
   }
@@ -57,25 +54,26 @@ export class ProductDetailPopupComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(localStorage.getItem('lang_pref'))
-    if(localStorage.getItem('lang_pref') == 'ar'){
+    if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
     }
-    else{
+    else {
       // this.textDir= 'ltr'
     }
 
     this.slidesStore = this.dialogData.data;
-    if(this.slidesStore.length > 0) {
+    if (this.slidesStore.length > 0) {
       this.fullImage = this.slidesStore[0].src;
     }
     this.viewproduct = this.dialogData.viewproduct;
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
   }
-  
+  activeDownloadFileIndex = -1;
   // This fuction is used to view and download the attachment files
-  viewAttachment(file: any) {
+  viewAttachment(file: any, index:number) {
     if (file.FilenetId) {
+      this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
@@ -91,10 +89,16 @@ export class ProductDetailPopupComponent implements OnInit {
           console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
           console.log('fileURL', fileURL);
-          window.open(fileURL, '_blank');
+          var newWin = window.open(fileURL, '_blank');
+          if(!newWin || newWin.closed || typeof newWin.closed=='undefined')
+          {
+              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          }
+          this.activeDownloadFileIndex = -1;
           // window.open(fileContent, "_blank");
         },
         (error) => {
+          this.activeDownloadFileIndex = -1;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );

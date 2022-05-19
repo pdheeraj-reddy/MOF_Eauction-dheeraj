@@ -8,9 +8,9 @@ describe('DisableParticipationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DisableParticipationComponent ]
+      declarations: [DisableParticipationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

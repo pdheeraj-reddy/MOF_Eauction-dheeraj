@@ -8,9 +8,9 @@ describe('AuctionModeratorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuctionModeratorComponent ]
+      declarations: [AuctionModeratorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

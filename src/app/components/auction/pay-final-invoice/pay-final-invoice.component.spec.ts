@@ -8,9 +8,9 @@ describe('PayFinalInvoiceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PayFinalInvoiceComponent ]
+      declarations: [PayFinalInvoiceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

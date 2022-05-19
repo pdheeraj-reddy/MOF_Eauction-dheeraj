@@ -8,9 +8,9 @@ describe('PendingAwardingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PendingAwardingComponent ]
+      declarations: [PendingAwardingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

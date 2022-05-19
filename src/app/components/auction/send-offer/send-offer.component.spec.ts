@@ -8,9 +8,9 @@ describe('SendOfferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SendOfferComponent ]
+      declarations: [SendOfferComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

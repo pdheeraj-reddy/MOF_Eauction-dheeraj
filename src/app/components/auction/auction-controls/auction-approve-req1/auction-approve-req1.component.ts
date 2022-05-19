@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
-import { AuctionService } from 'src/app/service/auction.service-2';
+import { AuctionApprovalService } from 'src/app/service/auction-approval.service';
 @Component({
   selector: 'app-auction-approve-req1',
   templateUrl: './auction-approve-req1.component.html',
@@ -12,8 +12,8 @@ export class AuctionApproveReq1Component implements OnInit {
   rejectionNotes: any;
   constructor(
     public PaginationServc: PaginationSortingService,
-    private _AuctionService: AuctionService
-  ) {}
+    private _AuctionService: AuctionApprovalService
+  ) { }
 
   ngOnInit(): void {
     this.getPreAuctionData();

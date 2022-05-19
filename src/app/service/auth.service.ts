@@ -26,7 +26,7 @@ export class AuthService {
         userid: jwtTokenInfo.name,
         roles: jwtTokenInfo.role
       }
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      this.auctionServc.loggedUser = userInfo;
       return true;
     } else {
       return false;

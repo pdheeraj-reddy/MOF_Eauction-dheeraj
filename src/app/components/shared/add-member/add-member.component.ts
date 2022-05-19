@@ -41,7 +41,6 @@ export class AddMemberComponent implements OnInit {
     this.selectedEmployee = member;
     console.log(member);
   }
-
   states: State[] = [
     {
       name: 'Arkansas',
@@ -85,31 +84,54 @@ export class AddMemberComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.committeeMemberList.filter((state) =>
-      state.EmployeeName.toLowerCase().includes(filterValue)
+      state.EmpMailid.toLowerCase().includes(filterValue) ||
+      state.EmployeeId.toLowerCase().includes(filterValue)
     );
   }
 
-  closeDialog() {
+  closeDialog(type: any) {
     // this.close.emit('close')
-    if (this.selectedEmployee)
-      this.selectedEmployee['EmployeeRole'] = this.role;
-    this.dialogRef.close({
-      EmpMailid: this.selectedEmployee.EmpMailid,
-      EmployeeId: this.selectedEmployee.EmployeeId,
-      EmployeeName: this.selectedEmployee.EmployeeName,
-      EmployeeRole: this.selectedEmployee.EmployeeRole,
-    });
+    if (type == "close") {
+      this.dialogRef.close();
+      console.log("this.test");
+      console.log(this.committeeMemberList);
+    } else {
+      if (this.selectedEmployee)
+        this.selectedEmployee['EmployeeRole'] = this.role;
+        console.log(this.committeeMemberList);
+      this.dialogRef.close({
+        EmpMailid: this.selectedEmployee.EmpMailid,
+        EmployeeId: this.selectedEmployee.EmployeeId,
+        EmployeeName: this.selectedEmployee.EmployeeName,
+        EmployeeRole: this.selectedEmployee.EmployeeRole,
+      });
+    }
   }
 
   ngOnInit(): void {
+    // console.log(this.committeeMemberList);
     this.title = this.dialogData.title;
     this.role = this.dialogData.role;
     this.committeeMemberList = this.dialogData.committeeMemberList;
+    console.log(this.committeeMemberList);
+    this.stateCtrl.setValue(((this.dialogData.committeeEditData != undefined) ? this.dialogData.committeeEditData.EmployeeId : ''));
+
+
+    if (this.dialogData.committeeEditData != undefined) {
+      var committeeEditData = this.getDimensionsByFilter(this.dialogData.committeeEditData.EmployeeId);
+      // console.log("this.test");
+      // console.log(committeeEditData);
+      this.selectedEmployee = committeeEditData;
+    }
+  }
+
+  getDimensionsByFilter(EmployeeId: any) {
+    return this.committeeMemberList.find(x => x.EmployeeId === EmployeeId);
   }
 }
-
 export interface DialogData {
   title: any;
   role: any;
   committeeMemberList: any;
+  committeeEditData: any;
 }

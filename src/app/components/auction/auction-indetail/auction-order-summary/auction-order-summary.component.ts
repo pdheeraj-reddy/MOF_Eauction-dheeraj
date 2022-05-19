@@ -81,8 +81,8 @@ export class AuctionOrderSummaryComponent implements OnInit {
 
   showViewAttachmentsModal: boolean = false;
   showLoader: boolean = false;
-  forEdit:boolean= false;
-  forProduct:boolean = false;
+  forEdit: boolean = false;
+  forProduct: boolean = false;
   showSuccessfulModal: boolean = false;
   pageRangeForProductAttach: any;
   selectedFileFormat: any;
@@ -99,6 +99,9 @@ export class AuctionOrderSummaryComponent implements OnInit {
   slidesStore: any = [];
   globalProductData: any = [];
   temp: any = [];
+  temp1: any = [];
+  imageCount = 0;
+  receivedCount = 0;
 
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -107,7 +110,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
     public auctionServc: AuctionService,
     public router: Router,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.ObjectId || this.DraftId) {
@@ -117,17 +120,17 @@ export class AuctionOrderSummaryComponent implements OnInit {
       console.log('new');
     }
   }
-   getAuctionDetails(ObjectId: string, DraftId: string) {
+  getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionDetailsSubscription$ = this.auctionServc
       .getAuctionDetails(ObjectId, DraftId)
       .subscribe(
-        (auctionDetailsResp: any) => {
+        async (auctionDetailsResp: any) => {
           console.log('getAuctionDetails Resp ', auctionDetailsResp);
           this.auctionDetailsResp = auctionDetailsResp.d.results[0];
-          this.auctionItem = this.mappingObjForEdit(auctionDetailsResp);
+          this.auctionItem = await this.mappingObjForEdit(auctionDetailsResp);
           this.auctionDetails = auctionDetailsResp.d.results[0];
-          this.mappingObjForProducts(auctionDetailsResp.d.results[0]);
+          await this.mappingObjForProducts(auctionDetailsResp.d.results[0]);
           console.log('YY', this.auctionItem);
           // Load until data loads then slowly load images
           this.showLoader = false;
@@ -185,7 +188,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
     );
   }
 
-  public mappingObjForEdit(serverObj: any) {
+  public async mappingObjForEdit(serverObj: any) {
     this.auctionItem.auctionId = serverObj.d.results[0].ObjectId;
     this.auctionItem.auctionType = this.getAuctionTypeDesc(
       serverObj.d.results[0].BidType
@@ -204,49 +207,49 @@ export class AuctionOrderSummaryComponent implements OnInit {
     this.auctionItem.auctionStartDate = serverObj.d.results[0].ZzAucSrtDt
       ? serverObj.d.results[0].ZzAucSrtDt !== 0
         ? moment(
-            serverObj.d.results[0].ZzAucSrtDt.split(' ')[0],
-            'DD.MM.YYYY'
-          ).format('YYYY-MM-DD')
+          serverObj.d.results[0].ZzAucSrtDt.split(' ')[0],
+          'DD.MM.YYYY'
+        ).format('YYYY-MM-DD')
         : ''
       : '';
     this.auctionItem.auctionStartTime = serverObj.d.results[0].ZzAucSrtDt
       ? serverObj.d.results[0].ZzAucSrtDt !== 0
         ? moment(
-            serverObj.d.results[0].ZzAucSrtDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('hh:mm')
+          serverObj.d.results[0].ZzAucSrtDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('hh:mm')
         : ''
       : '';
     this.auctionItem.auctionStartTimeSufix = serverObj.d.results[0].ZzAucSrtDt
       ? serverObj.d.results[0].ZzAucSrtDt !== 0
         ? moment(
-            serverObj.d.results[0].ZzAucSrtDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('A')
+          serverObj.d.results[0].ZzAucSrtDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('A')
         : ''
       : '';
     this.auctionItem.auctionEndDate = serverObj.d.results[0].ZzAucEndDt
       ? serverObj.d.results[0].ZzAucEndDt !== 0
         ? moment(
-            serverObj.d.results[0].ZzAucEndDt.split(' ')[0],
-            'DD.MM.YYYY'
-          ).format('YYYY-MM-DD')
+          serverObj.d.results[0].ZzAucEndDt.split(' ')[0],
+          'DD.MM.YYYY'
+        ).format('YYYY-MM-DD')
         : ''
       : '';
     this.auctionItem.auctionEndTime = serverObj.d.results[0].ZzAucEndDt
       ? serverObj.d.results[0].ZzAucEndDt !== 0
         ? moment(
-            serverObj.d.results[0].ZzAucEndDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('hh:mm')
+          serverObj.d.results[0].ZzAucEndDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('hh:mm')
         : ''
       : '';
     this.auctionItem.auctionEndTimeSufix = serverObj.d.results[0].ZzAucEndDt
       ? serverObj.d.results[0].ZzAucEndDt !== 0
         ? moment(
-            serverObj.d.results[0].ZzAucEndDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('A')
+          serverObj.d.results[0].ZzAucEndDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('A')
         : ''
       : '';
 
@@ -255,13 +258,13 @@ export class AuctionOrderSummaryComponent implements OnInit {
     );
     this.auctionItem.auctionAnncStartDate = serverObj.d.results[0].ZzAnncSrtD
       ? moment(serverObj.d.results[0].ZzAnncSrtD, 'DD.MM.YYYY').format(
-          'YYYY-MM-DD'
-        )
+        'YYYY-MM-DD'
+      )
       : '';
     this.auctionItem.auctionAnncEndDate = serverObj.d.results[0].ZzAnncEndD
       ? moment(serverObj.d.results[0].ZzAnncEndD, 'DD.MM.YYYY').format(
-          'YYYY-MM-DD'
-        )
+        'YYYY-MM-DD'
+      )
       : '';
     this.auctionItem.startPrice = serverObj.d.results[0].ZzBidSrtPrice;
     this.auctionItem.lowBidValue = serverObj.d.results[0].ZzLowBidVl;
@@ -271,7 +274,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
     this.auctionItem.commissionType = serverObj.d.results[0].ZzCommisionTyp;
     this.auctionItem.pursuitPerCommission =
       serverObj.d.results[0].ZzCommPercent;
-    
+
     // if(serverObj.d.results[0].listtoattachnav['results']){
     //   this.temp = [];
     //   console.log("att data form API" ,  serverObj.d.results[0].listtoattachnav['results']);
@@ -312,7 +315,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
     //                 // var a = window.URL.createObjectURL(blob);
     //                 var base64String = await this.convertBlobToBase64(blob);
     //                 console.log("base64String in mapping for edit",base64String);
-  
+
     //                 this.temp.push({
     //                   id: index + 1,
     //                   src: base64String,
@@ -320,7 +323,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
     //                   title: 'hello world',
     //                 });
     //                 this.showLoader=false;
-  
+
     //                 if (
     //                   index + 1 ==
     //                   serverObj.d.results[0].listtoattachnav['results'].length
@@ -337,7 +340,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
     //                 console.log('downloadAuctionImages RespError : ', error);
     //               }
     //             );
-            
+
     //       }
     //     );
     //   }else{
@@ -362,12 +365,16 @@ export class AuctionOrderSummaryComponent implements OnInit {
     //     this.showLoader = false;
     //   }
     // }
-      
+    const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
     if (serverObj.d.results[0].listtoattachnav['results']) {
       this.temp = [];
-      console.log("att data form API" ,  serverObj.d.results[0].listtoattachnav['results']);
-      serverObj.d.results[0].listtoattachnav['results'].forEach(
-        (value: any, index: any, array: any) => {
+      console.log("att data form API", serverObj.d.results[0].listtoattachnav['results']);
+      let attachments = serverObj.d.results[0].listtoattachnav['results'];
+      // forEach(
+        for (let index = 0; index < attachments.length; index++)
+        // async (value: any, index: any, array: any) => 
+        {
+          let value = attachments[index];
           if (value.ObjectType == '/AuctionDocuments') {
             var fileupload = {
               name: value.FileName + '.' + value.FileExt,
@@ -381,7 +388,8 @@ export class AuctionOrderSummaryComponent implements OnInit {
           }
           if (value.ObjectType == '/AuctionProductImages') {
             console.log(index, 'attachment index');
-            var fileupload = {
+            this.imageCount++;
+            let fileupload = {
               name: value.FileName + '.' + value.FileExt,
               size: '',
               type: '',
@@ -393,7 +401,12 @@ export class AuctionOrderSummaryComponent implements OnInit {
               .downloadAuctionImages(fileupload.FilenetId)
               .subscribe(
                 async (downloadAuctionImagesResp: any) => {
+                  
+                  let filenetId = fileupload.FilenetId;
+                  console.log(filenetId, "FILENETID")
                   const fileResp = downloadAuctionImagesResp.d;
+                  // console.log(fileResp.FileContent);
+                  this.receivedCount++;
                   var byteString = atob(
                     atob(fileResp.FileContent).split(',')[1]
                   );
@@ -405,17 +418,23 @@ export class AuctionOrderSummaryComponent implements OnInit {
                   const blob = new Blob([ab], { type: fileupload.MIMEType });
                   // var a = window.URL.createObjectURL(blob);
                   var base64String = await this.convertBlobToBase64(blob);
-                  console.log("base64String in mapping for edit",base64String);
+                  console.log("base64String in mapping for edit");
+                  console.log(this.imageCount)
+                  console.log(this.receivedCount)
+                  if(this.imageCount == this.receivedCount){
+                    // this.showLoader=false;
+                  }
 
                   this.temp.push({
                     id: index + 1,
                     src: base64String,
                     alt: 'test',
                     title: 'hello world',
+                    filenetId: filenetId
                   });
                   // To load until the images load
                   // this.showLoader=false;
-                  
+
                   // var reader = new FileReader();
                   // reader.readAsDataURL(blob);
                   // var base64String = (reader.onloadend = function () {
@@ -440,10 +459,14 @@ export class AuctionOrderSummaryComponent implements OnInit {
                   console.log('downloadAuctionImages RespError : ', error);
                 }
               );
+            await timer(3000);
           }
+          
+          
         }
-      );
+      // );
     }
+    
     // console.log('hari', this.auctionItem.productAttachment);
 
     // serverObj.d.results[0].listtoattachnav['results'].forEach((value:any,index:any,array:any) => {
@@ -479,7 +502,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
       reader.readAsDataURL(blob);
     });
 
-  public mappingObjForProducts(data:any) {
+  public mappingObjForProducts(data: any) {
     console.log('mappingObjForProduct');
     // this.auctionProducts.value.forEach((pItem : any , index : number) => {
     //   this.removeProduct(index-1);
@@ -491,50 +514,57 @@ export class AuctionOrderSummaryComponent implements OnInit {
     console.log('productsArray ', productsArray);
     productsArray.forEach((pItem: any) => {
       let productImages: any = [], productFiles: any = [];
-      if (pItem.ZzProductNo){
-        if(this.ViewMode == 'view' || this.ViewMode == 'edit' ){
-          if(data.listtoattachnav['results']){
+      if (pItem.ZzProductNo) {
+        // if (this.ViewMode == 'view' || this.ViewMode == 'edit' || this.ObjectId) {
+        if (this.ViewMode == 'view' || this.ViewMode == 'edit' || this.ViewMode == '') {
+          console.log("KAAR")
+          if (data.listtoattachnav['results']) {
             var productImagesArray = data.listtoattachnav['results'].filter(function (el: any) {
               return el.ObjectType == "/AuctionProductImages" &&
-              el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+                el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
             });
             var productFilesArray = data.listtoattachnav['results'].filter(function (el: any) {
               return el.ObjectType == "/AuctionProductDocuments" &&
-              el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+                el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
             });
-            if(productImagesArray.length > 0){
+            console.log(productFilesArray, "PRODUCT FILES");
+            console.log(productImagesArray, "PRODUCT IMAGES");
+            if (productImagesArray.length > 0) {
               productImagesArray.forEach((value: any) => {
                 var imageupload = {
-                  "name"    : value.FileName + '.' + value.FileExt,
-                  "size"    : '',
-                  "type"    : '',
-                  "filesrc" : '',
-                  "FilenetId" : value.FilenetId,
-                  "MIMEType" : value.MIMEType,
-                  "no" : pItem.ZzProductNo
+                  "name": value.FileName + '.' + value.FileExt,
+                  "size": '',
+                  "type": '',
+                  "filesrc": '',
+                  "FilenetId": value.FilenetId,
+                  "MIMEType": value.MIMEType,
+                  "no": pItem.ZzProductNo
                 };
                 productImages.push(imageupload);
+                
               });
+              console.log(productImages, "Product images")
             }
-            if(productFilesArray.length > 0){
+            if (productFilesArray.length > 0) {
               productFilesArray.forEach((value: any) => {
                 var fileupload = {
-                  "name"    : value.FileName + '.' + value.FileExt,
-                  "size"    : '',
-                  "type"    : '',
-                  "filesrc" : '',
-                  "FilenetId" : value.FilenetId,
-                  "MIMEType" : value.MIMEType,
-                  "no" : pItem.ZzProductNo
+                  "name": value.FileName + '.' + value.FileExt,
+                  "size": '',
+                  "type": '',
+                  "filesrc": '',
+                  "FilenetId": value.FilenetId,
+                  "MIMEType": value.MIMEType,
+                  "no": pItem.ZzProductNo
                 };
                 productFiles.push(fileupload);
               });
+              console.log(productFiles, "Product files")
             }
           }
         }
       }
       let item = {
-        productNo : pItem.ZzProductNo,
+        productNo: pItem.ZzProductNo,
         productName: pItem.Description,
         productCondition: pItem.ZzProductCond,
         productSKUNumber: pItem.ZzProductSku,
@@ -543,8 +573,8 @@ export class AuctionOrderSummaryComponent implements OnInit {
           ? pItem.ProductValue.split('.')[0]
           : '',
         productSpec: pItem.ZzProdDesc,
-        productImages : productImages,
-        productFiles : productFiles,
+        productImages: productImages,
+        productFiles: productFiles,
         location: {
           deliveryDate: pItem.DelivDate
             ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD')
@@ -569,6 +599,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
         },
       };
       this.auctionProducts.push(item);
+      console.log(this.auctionProducts)
     });
     this.totalValue = 0;
     this.totalQty = 0;
@@ -600,19 +631,37 @@ export class AuctionOrderSummaryComponent implements OnInit {
     // productSpec: String;
     // productImages: [];
     // return this.productItem;
-    this.forProduct=true;
+    this.forProduct = true;
   }
 
   public viewProduct(code: any) {
+    this.temp1 = [];
     this.viewproduct = code;
+    console.log(code);
+    console.log(this.temp)
+
+    this.temp.forEach(
+      (index: any) => {
+        code.productImages.forEach(
+          (index0 : any) => {
+            if(index.filenetId == index0.FilenetId){
+              this.temp1.push(index);
+            }
+          }
+        )
+      }
+    )
+    console.log(this.temp1)
+
     const dialogRef = this.dialog.open(ProductDetailPopupComponent, {
+      disableClose: true,
       height: '90%',
       width: '90%',
       position: {
         left: '10%',
       },
       data: {
-        data: this.temp,
+        data: this.temp1,
         viewproduct: code,
       },
     });
@@ -704,8 +753,11 @@ export class AuctionOrderSummaryComponent implements OnInit {
     );
   }
 
-  viewAttachment(file: any) {
+  activeDownloadFileIndex = -1
+
+  viewAttachment(file: any, index:number) {
     if (file.FilenetId) {
+      this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
@@ -722,11 +774,17 @@ export class AuctionOrderSummaryComponent implements OnInit {
           let fileURL = window.URL.createObjectURL(blob);
           console.log('fileURL', fileURL);
           this.showViewAttachmentsModal = false;
-          window.open(fileURL, '_blank');
+          var newWin = window.open(fileURL, '_blank');
+          if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
+          {
+              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          }
+          this.activeDownloadFileIndex = -1;
           // window.open(fileContent, "_blank");
         },
         (error) => {
           this.showLoader = false;
+          this.activeDownloadFileIndex = -1;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );

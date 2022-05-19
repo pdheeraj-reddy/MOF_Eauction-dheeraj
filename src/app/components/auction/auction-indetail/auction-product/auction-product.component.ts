@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter ,ViewChild} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { PaginationSortingService } from "src/app/service/pagination.service";
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuctionBasicMaster, AuctionProductMaster, AuctionProduct } from "src/app/model/auction.model";
@@ -9,7 +9,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { AuctionService } from "src/app/service/auction.service";
 import { Moment } from 'moment-mini';
 import * as moment from 'moment-mini';
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-auction-product',
@@ -28,12 +28,12 @@ export class AuctionProductComponent implements OnInit {
   @Output() changeauctiontype = new EventEmitter<string>();
   // AUCTION edit end
   //variables
-  title   = 'Auction Product';
+  title = 'Auction Product';
   sCount = 1;
   maxChars = 250;
   submitted = false;
   onAddProductSubmitted = false;
-  isSameaddress:boolean = true;
+  isSameaddress: boolean = true;
   // Dropdown Values
   dropValBeneCategories: any = ['New', 'Refurbished', 'Good Usage', 'Bad Usage', 'Average Usage'];
   // Form controls
@@ -42,18 +42,20 @@ export class AuctionProductComponent implements OnInit {
   order: string = '';
   totalQty: number = 0;
   totalValue: number = 0;
+  activePictureIndex = -1;
+  activeFileIndex = -1;
 
   // ------- product file attachment --------
   // ------- file validation         --------
   maxFileCount: Number = 30;
   acceptedExtensions = "mp4,mov,png,jpg,JPG,docx,doc,pdf";
-  @ViewChild('myModalClose') modalClose:any;
+  @ViewChild('myModalClose') modalClose: any;
   msg: String = '';
-  selectedFiles:File[];
+  selectedFiles: File[];
   files: any[] = [];
   selectedFileFormat: any;
   selectedFileURL: any;
-  selectedDocs:File[];
+  selectedDocs: File[];
   docs: any[] = [];
   selectedDocFormat: any;
   selectedDocURL: any;
@@ -69,15 +71,15 @@ export class AuctionProductComponent implements OnInit {
   // -------------
 
   //--------------- google map loc ---------
-  lat : number;
-  lng : number;
+  lat: number;
+  lng: number;
   locationChoose = false;
   pageRangeForProductAttach: any;
   pageRangeForProductFileAttach: any;
   pageRangeForProductPictureAttach: any;
 
   // Objects
-  auctionDetails: any;  
+  auctionDetails: any;
   productItem: AuctionProductMaster = new AuctionProductMaster();
   productlist: AuctionProduct = new AuctionProduct();
   dropValCategory: any = ['New', 'Refurbished', 'Good Usage', 'Bad Usage', 'Average Usage'];
@@ -99,46 +101,46 @@ export class AuctionProductComponent implements OnInit {
     public auctionServc: AuctionService,
     public translate: TranslateService,
     public router: Router
-    ) {}
+  ) { }
 
   ngOnInit(): void {
-    
+
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.refreshCalendarCntrl();
     });
     this.pageRefresh();
   }
 
-  pageRefresh(){
+  pageRefresh() {
     this.closeProductModal('close');
     this.createForm();
     this.addProductForm();
-    if(this.ViewMode == 'edit' || this.ViewMode == 'view'){
+    if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
     } else {
-      if(this.ObjectId || this.DraftId ){
+      if (this.ObjectId || this.DraftId) {
         this.getAuctionDetails(this.ObjectId, this.DraftId);
       }
     }
-    if(this.ViewMode == 'view'){
+    if (this.ViewMode == 'view') {
       this.productsFormGroup.disable();
     }
   }
 
-  addDaysWRONG(date: any, days:number) {
+  addDaysWRONG(date: any, days: number) {
     var result = new Date();
     result.setDate(date.getDate() + days);
     return result;
   }
 
-  populateSome(){
+  populateSome() {
     // this.refreshCalendarCntrl();
     const deliveryDate = this.addDaysWRONG(new Date(), 10);
-    this.auctionProducts.value.forEach((pItem : any , index : number) => {
-      this.removeProduct(index-1, 1, pItem);
+    this.auctionProducts.value.forEach((pItem: any, index: number) => {
+      this.removeProduct(index - 1, 1, pItem);
     });
     this.productsFormGroup.get('sameLocNDate')?.setValue(true);
-    let sameLocNDateVal = { target : { checked : true } };
+    let sameLocNDateVal = { target: { checked: true } };
     this.setValidation(sameLocNDateVal);
     this.productsFormGroup.get('location')?.get('deliveryDate')?.setValue(moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
     this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue('01:00 AM');
@@ -169,44 +171,84 @@ export class AuctionProductComponent implements OnInit {
       this.totalValue = this.totalValue + (+product.productValue * +product.productSerialNumber);
       this.totalQty = this.totalQty + (+product.productSerialNumber);
     });
-    if(this.auctionProducts['controls'].length > 0){
+    if (this.auctionProducts['controls'].length > 0) {
       this.productsFormGroup.controls['sameLocNDate'].disable();
     }
   }
 
-  populateSomePL(){
+  populateSomePL() {
+    this.showLoader = true;
     // this.refreshCalendarCntrl();
     const deliveryDate = this.addDaysWRONG(new Date(), 10);
-    this.auctionProducts.value.forEach((pItem : any , index : number) => {
-      this.removeProduct(index-1, 1, pItem);
-    });
+    // this.auctionProducts.value.forEach((pItem: any, index: number) => {
+    //   this.removeProduct(index - 1, 1, pItem);
+    // });
     this.productsFormGroup.get('sameLocNDate')?.setValue(false);
-    let sameLocNDateVal = { target : { checked : false } };
+    let sameLocNDateVal = { target: { checked: false } };
     this.setValidation(sameLocNDateVal);
     let productsArray = [
       {
-        productName : "ISUZU NPR 85H STANDARD CARGO",
-        productCondition : "New",
-        productSKUNumber : "UGG-BB-PNN-001",
-        productSerialNumber : "2",
-        productValue : "125800",
-        // productSpec : "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE CAB WITH A/C 4X2 LIGHT DUTY MY2022 Light Duty Code Diesel. Car code: NPR85B1 - 85H STANDARD CARGO (4.2 Ton approx payload). Year: 2022. ENGINE: 4JJ1-TC, DIESEL, 4 CYL.",
-        productSpec : "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE.",
-        location : {
-          deliveryDate : moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-          deliveryTime : "05:00 PM",
-          locLatitude : "21.501589481841094",
-          locLongitude : "39.187752100966684",
-          locRegion : "P.O.Box : 147, Jeddah",
-          locCity : "Jeddah Nozhah City",
-          locNeighborhood : "Jeddah",
-          locStreet : "Nozhah City,",
-          notes : "'We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries.",
+        productName: "ISUZU NPR 85H STANDARD CARGO",
+        productCondition: "New",
+        productSKUNumber: "UGG-BB-PNN-001",
+        productSerialNumber: "15",
+        productValue: "225000",
+        productSpec : "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE CAB WITH A/C 4X2 LIGHT DUTY MY2022 Light Duty Code Diesel. Car code: NPR85B1 - 85H STANDARD CARGO (4.2 Ton approx payload). Year: 2022. ENGINE: 4JJ1-TC, DIESEL, 4 CYL.",
+        location: {
+          deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
+          deliveryTime: "05:00 PM",
+          locLatitude: "21.501589481841094",
+          locLongitude: "39.187752100966684",
+          locRegion: "P.O.Box : 147, Jeddah",
+          locCity: "Jeddah Nozhah City",
+          locNeighborhood: "Jeddah",
+          locStreet: "Nozhah City,",
+          notes: "'We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries.",
+        }
+      },
+      {
+        productName: "The Isuzu MU-X",
+        productCondition: "Good Usage",
+        productSKUNumber: "UGG-BB-PNN-002",
+        productSerialNumber: "30",
+        productValue: "240000",
+        productSpec : "Model description: The Isuzu MU-X has 1 Diesel Engine on offer. The Diesel engine is 1898 cc . It is available with Automatic transmission.Depending upon the variant and fuel type the MU-X has a mileage of 12.31 to 13.0 kmpl & Ground clearance of MU-X is 230.",
+        location: {
+          deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
+          deliveryTime: "05:00 PM",
+          locLatitude: "21.501589481841094",
+          locLongitude: "39.187752100966684",
+          locRegion: "Al Dabab Street, Al Ma'azer Dist.",
+          locCity: "Al Ma'azer Dist.",
+          locNeighborhood: "Al Ma'azer Dist.",
+          locStreet: "Al Dabab Street",
+          notes: "We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries.",
+        }
+      },
+      {
+        productName: "The Isuzu NPR EarthCruiser",
+        productCondition: "Refurbished",
+        productSKUNumber: "UGG-BB-PNN-003",
+        productSerialNumber: "20",
+        productValue: "300000",
+        productSpec : "Model description: The Isuzu NPR HD platform also benefits from an American-sourced power plant, a 6.6L, 350 horsepower, 425 pound-feet, V8, produced by General Motors for use in Heavy Duty pickup trucks.",
+        location: {
+          deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
+          deliveryTime: "05:00 PM",
+          locLatitude: "21.501589481841094",
+          locLongitude: "39.187752100966684",
+          locRegion: "P.O.Box : 18, Rouwais Dist.",
+          locCity: "Jeddah Rouwais Dist",
+          locNeighborhood: "Jeddah Rouwais Dist",
+          locStreet: "Jeddah",
+          notes: "EarthCruiser, one of America’s largest overland vehicle manufacturers, moves to a new platform for some of its models. The company switches to the Isuzu NPR Series Class 4 platform, which replaces the previous Fuso platform. This move covers the next-generation EXP and FX EarthCruiser models, as well as the CORE model.",
         }
       }
     ];
-    productsArray.forEach(pItem => {
+    productsArray.forEach((pItem: any, index: number) => {
       this.addProducts(pItem);
+      this.editProduct(index);
+      this.onAddProduct('save');
     });
     this.totalValue = 0;
     this.totalQty = 0;
@@ -214,19 +256,21 @@ export class AuctionProductComponent implements OnInit {
       this.totalValue = this.totalValue + (+product.productValue * +product.productSerialNumber);
       this.totalQty = this.totalQty + (+product.productSerialNumber);
     });
-    if(this.auctionProducts['controls'].length > 0){
+    if (this.auctionProducts['controls'].length > 0) {
       this.productsFormGroup.controls['sameLocNDate'].disable();
     }
+    this.showLoader = false;
+    this.pageRefresh();
   }
 
-  onQuantityChange = (inc:boolean) => {
+  onQuantityChange = (inc: boolean) => {
     let quantity = this.addFormGroup.get('productSerialNumber')?.value || 0
-    if(inc) {
+    if (inc) {
       quantity++;
     } else {
       quantity--;
     }
-    if(quantity < 2) {
+    if (quantity < 2) {
       quantity = 1;
     }
     this.addFormGroup.get('productSerialNumber')?.setValue(quantity);
@@ -234,7 +278,7 @@ export class AuctionProductComponent implements OnInit {
   }
 
   onChangeQuantity() {
-    if(this.addFormGroup.get('productSerialNumber')?.value < 1){
+    if (this.addFormGroup.get('productSerialNumber')?.value < 1) {
       this.invalidQty = true;
     } else {
       this.invalidQty = false;
@@ -324,19 +368,18 @@ export class AuctionProductComponent implements OnInit {
   //   }, 100);
   // }
 
-  getAuctionDetails(ObjectId : string, DraftId : string){
+  getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     // let auctionDetailsResp = {"d":{"results":[{"__metadata":{"id":"http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_ADMIN_BID_SRV/PreAuctionListSet(ObjectId='9700000283',UserId='')","uri":"http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_ADMIN_BID_SRV/PreAuctionListSet(ObjectId='9700000283',UserId='')","type":"ZSRM_PREAUCTION_ADMIN_BID_SRV.PreAuctionList"},"Message":"","Msgty":"","DraftId":"","SameAddress":"","SaveAsDraft":"","ZzStartMethod":"","Description":"SRMLAUSR 11.10.2021 12:31","ZzPrevAucId1":"","ZzAgencyId":"","ZzPrevAucId2":"","QuotDead":"24.02.2022","ZzPrevAucId3":"","ZzAucDesc":"","ZzPrevAucId4":"","ProcessType":"ZFWD","ZzPrevAucId5":"","ZzAucSrtDt":"0 ","ZzIbgaPercent":"0.0000 ","BidType":"O","ZzFbgaDeadline":"0 ","ZzAucEndDt":"0 ","Currency":"SAR","ZzPrtReason":"","ObjectId":"9700000283","ZzOtherNote":"","UserId":"","ZzCloseInd":"","PsEmdReq":"X","ZzCommisionTyp":"","PsEmdAmnt":"200.00 ","ZzCommPercent":"0.0000 ","Status":"","ZzAgencyName":"","CreateDate":"","ZzPbEstPrice":"0.00 ","AgencyName":"","ZzEmrktPubsPrd":"00000000","listtoattachnav":{"results":[{"Description":"Trip Form","DispUrl":"http://ry1drvemksr1.mof.gov.sa:8000/sap/ebp/docserver/2200%20%2D%20T0000000005.pdf?phioget&KpId=0050569725271EEC8F8EF7DD5352AE47&KpClass=BBP_P_DOC&sap-client=100","PhioExt":"pdf","PhioMime":"application/pdf","SL_NO":"1 ","ObjectId":"","PhioFname":"2200 - T0000000005.pdf","UserId":"SRMLAUSR","ProductId":""}]},"listtobiddernav":{"__deferred":{"uri":"http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_ADMIN_BID_SRV/PreAuctionListSet(ObjectId='9700000283',UserId='')/listtobiddernav"}},"listtoproductnav":{"results":[{"__metadata":{"id":"http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_ADMIN_BID_SRV/ProductItemSet(ProductId='1',ObjectId='9700000283',UserId='SRMLAUSR')","uri":"http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_ADMIN_BID_SRV/ProductItemSet(ProductId='1',ObjectId='9700000283',UserId='SRMLAUSR')","type":"ZSRM_PREAUCTION_ADMIN_BID_SRV.ProductItem"},"ZzProdDesc":"","DelivTime":"000000","ProductValue":"0.00 ","ZzProductCond":"","Currency":"SAR","Description":"MS Office 365-cloud based(Pro-Plus)","ZzProductSku":"","ZzLocationCord":"","ProductId":"1","ZzRegion":"","CategoryId":"01001","ZzCity":"","Quantity":"100.000 ","ZzNeighbourhood":"","ObjectId":"9700000283","Unit":"EA","ZzStreet":"","Price":"0.00 ","UserId":"SRMLAUSR","ZzPdOthrNts":"","DelivDate":"30.10.2021"}]},"listtocomiteememnav":{"__deferred":{"uri":"http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_ADMIN_BID_SRV/PreAuctionListSet(ObjectId='9700000283',UserId='')/listtocomiteememnav"}}}]}};
     this.auctionServc.getAuctionDetails(ObjectId, DraftId).subscribe((auctionDetailsResp: any) => {
       console.log('getAuctionDetails Resp ', auctionDetailsResp);
       this.auctionDetails = auctionDetailsResp.d.results[0];
-      if(this.ViewMode == 'edit'|| this.ViewMode == 'view' || (this.ObjectId || this.DraftId )){
+      if (this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId)) {
         this.mappingObjForEdit();
       }
       // this.refreshCalendarCntrl();
       this.showLoader = false;
       // this.createForm();
-      // this.editForm();
     }, (error) => {
       this.showLoader = false;
       console.log('getAuctionDetails RespError : ', error);
@@ -379,42 +422,42 @@ export class AuctionProductComponent implements OnInit {
     let productsArray = this.auctionDetails.listtoproductnav.results;
     let productImages: any = [], productFiles: any = [];
     productsArray.forEach((pItem: any, index: number) => {
-       productImages = [], productFiles = [];
-      if (pItem.ZzProductNo){
-        if(this.ViewMode == 'view' || this.ViewMode == 'edit' || (this.ObjectId || this.DraftId) ){
-          if(this.auctionDetails.listtoattachnav['results']){
+      productImages = [], productFiles = [];
+      if (pItem.ZzProductNo) {
+        if (this.ViewMode == 'view' || this.ViewMode == 'edit' || (this.ObjectId || this.DraftId)) {
+          if (this.auctionDetails.listtoattachnav['results']) {
             var productImagesArray = this.auctionDetails.listtoattachnav['results'].filter(function (el: any) {
               return el.ObjectType == "/AuctionProductImages" &&
-              el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+                el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
             });
             var productFilesArray = this.auctionDetails.listtoattachnav['results'].filter(function (el: any) {
               return el.ObjectType == "/AuctionProductDocuments" &&
-              el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+                el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
             });
-            if(productImagesArray.length > 0){
+            if (productImagesArray.length > 0) {
               productImagesArray.forEach((value: any) => {
                 value.name = value.FileName + value.FileExt;
                 var imageupload = {
-                  "name"    : value.FileName + '.' + value.FileExt,
-                  "size"    : '',
-                  "type"    : '',
-                  "filesrc" : '',
-                  "FilenetId" : value.FilenetId,
-                  "MIMEType" : value.MIMEType
+                  "name": value.FileName + '.' + value.FileExt,
+                  "size": '',
+                  "type": '',
+                  "filesrc": '',
+                  "FilenetId": value.FilenetId,
+                  "MIMEType": value.MIMEType
                 };
                 productImages.push(new FormControl(imageupload));
               });
             }
-            if(productFilesArray.length > 0){
+            if (productFilesArray.length > 0) {
               productFilesArray.forEach((value: any) => {
                 value.name = value.FileName + value.FileExt;
                 var fileupload = {
-                  "name"    : value.FileName + '.' + value.FileExt,
-                  "size"    : '',
-                  "type"    : '',
-                  "filesrc" : '',
-                  "FilenetId" : value.FilenetId,
-                  "MIMEType" : value.MIMEType
+                  "name": value.FileName + '.' + value.FileExt,
+                  "size": '',
+                  "type": '',
+                  "filesrc": '',
+                  "FilenetId": value.FilenetId,
+                  "MIMEType": value.MIMEType
                 };
                 productFiles.push(new FormControl(fileupload));
               });
@@ -423,31 +466,31 @@ export class AuctionProductComponent implements OnInit {
         }
       }
       let item = {
-        productNo : pItem.ZzProductNo,
-        productName : pItem.Description,
-        productCondition : pItem.ZzProductCond,
-        productSKUNumber : pItem.ZzProductSku,
-        productSerialNumber : pItem.Quantity.split(".")[0],
-        productValue : pItem.ProductValue,
-        productSpec : pItem.ZzProdDesc,
-        productImages : productImages,
-        productFiles : productFiles,
-        location : {
-          deliveryDate : pItem.DelivDate ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD') : '',
-          deliveryTime : pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '',
-          locLatitude : pItem.ZzLocationCord.split(",")[0],
-          locLongitude : pItem.ZzLocationCord.split(",")[1],
-          locRegion : pItem.ZzRegion,
-          locCity : pItem.ZzCity,
-          locNeighborhood : pItem.ZzNeighbourhood,
-          locStreet : pItem.ZzStreet,
-          notes : pItem.ZzPdOthrNts
+        productNo: pItem.ZzProductNo,
+        productName: pItem.Description,
+        productCondition: pItem.ZzProductCond,
+        productSKUNumber: pItem.ZzProductSku,
+        productSerialNumber: pItem.Quantity.split(".")[0],
+        productValue: pItem.ProductValue,
+        productSpec: pItem.ZzProdDesc,
+        productImages: productImages,
+        productFiles: productFiles,
+        location: {
+          deliveryDate: pItem.DelivDate ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD') : '',
+          deliveryTime: pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '',
+          locLatitude: pItem.ZzLocationCord.split(",")[0],
+          locLongitude: pItem.ZzLocationCord.split(",")[1],
+          locRegion: pItem.ZzRegion,
+          locCity: pItem.ZzCity,
+          locNeighborhood: pItem.ZzNeighbourhood,
+          locStreet: pItem.ZzStreet,
+          notes: pItem.ZzPdOthrNts
         }
       }
       this.addProducts(item);
-      if(this.auctionDetails.SameAddress == 'Y'){
+      if (this.auctionDetails.SameAddress == 'Y') {
         this.productsFormGroup.get('sameLocNDate')?.setValue(true);
-        let sameLocNDateVal = { target : { checked : true } };
+        let sameLocNDateVal = { target: { checked: true } };
         this.setValidation(sameLocNDateVal);
         this.productsFormGroup.get('location')?.get('deliveryDate')?.setValue(pItem.DelivDate ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD') : '');
         this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue(pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '');
@@ -461,7 +504,7 @@ export class AuctionProductComponent implements OnInit {
         this.productsFormGroup.get('location')?.get('notes')?.setValue(pItem.ZzPdOthrNts);
       } else {
         this.productsFormGroup.get('sameLocNDate')?.setValue(false);
-        let sameLocNDateVal = { target : { checked : false } };
+        let sameLocNDateVal = { target: { checked: false } };
         this.setValidation(sameLocNDateVal);
       }
     });
@@ -471,7 +514,7 @@ export class AuctionProductComponent implements OnInit {
       this.totalValue = this.totalValue + (+product.productValue * +product.productSerialNumber);
       this.totalQty = this.totalQty + (+product.productSerialNumber);
     });
-    if(this.auctionProducts['controls'].length > 0){
+    if (this.auctionProducts['controls'].length > 0) {
       this.productsFormGroup.controls['sameLocNDate'].disable();
     }
 
@@ -505,26 +548,26 @@ export class AuctionProductComponent implements OnInit {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
       });
-      
+
     }
   }
   // Beneficiary category onchange select
   changeSelect(e: any, dd: string) {
-    if(e.target.value!=''){
+    if (e.target.value != '') {
       this.addFormGroup.controls[dd].setValue(e.target.value, {
         onlySelf: true
       })
     }
   }
 
-  //time on click event 
-  changedatetime(e:any,dd:string){
+  //time on click event
+  changedatetime(e: any, dd: string) {
     this.locationForm[dd].setValue(e.target.value);
-    if(dd == 'deliveryDate' ){
+    if (dd == 'deliveryDate') {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
-      if(startDate && deliveryDate) {
-        if((moment(startDate).isAfter(deliveryDate, 'day'))) {
+      if (startDate && deliveryDate) {
+        if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
           this.isValidDeliveryDate = true;
         } else {
           this.isValidDeliveryDate = false;
@@ -533,13 +576,13 @@ export class AuctionProductComponent implements OnInit {
     }
   }
 
-  productchangedatetime(e:any,dd:string){
+  productchangedatetime(e: any, dd: string) {
     this.addproductlocationForm[dd].setValue(e.target.value);
-    if(dd == 'deliveryDate' ){
+    if (dd == 'deliveryDate') {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
       let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
-      if(startDate && deliveryDate) {
-        if((moment(startDate).isAfter(deliveryDate, 'day'))) {
+      if (startDate && deliveryDate) {
+        if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
           this.isValidPDeliveryDate = true;
         } else {
           this.isValidPDeliveryDate = false;
@@ -548,7 +591,7 @@ export class AuctionProductComponent implements OnInit {
     }
   }
   //google map location
-  onChooseLocation(event:any){
+  onChooseLocation(event: any) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChoose = true;
@@ -557,9 +600,9 @@ export class AuctionProductComponent implements OnInit {
   }
 
   // <!----------add product event function------------------------>
-  
+
   //google map location
-  onaddProductChooseLocation(event:any){
+  onaddProductChooseLocation(event: any) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChoose = true;
@@ -567,7 +610,7 @@ export class AuctionProductComponent implements OnInit {
     this.addproductlocationForm['locLongitude'].setValue(this.lat);
   }
 
-  createForm(){
+  createForm() {
     this.productsFormGroup = this.formBuilder.group({
       sameLocNDate: new FormControl(this.productItem.sameLocNDate ? this.productItem.sameLocNDate : true, Validators.required),
       location: this.formBuilder.group({
@@ -587,17 +630,17 @@ export class AuctionProductComponent implements OnInit {
     });
 
     var deliveryTime = $("#deliveryTime");
-    if(this.productItem.location?.deliveryTime){
+    if (this.productItem.location?.deliveryTime) {
       console.log(this.productItem.location?.deliveryTime);
       deliveryTime.val(this.productItem.location?.deliveryTime);
     }
     this.productItem.products = [];
-    if(this.productItem.products.length > 0){
+    if (this.productItem.products.length > 0) {
       this.productItem.products.forEach(item => {
         this.addProducts(item);
       });
     }
-    if(this.ViewMode == 'view'){
+    if (this.ViewMode == 'view') {
       this.productsFormGroup.get('location')?.get('deliveryDate')?.disable();
       this.productsFormGroup.get('location')?.get('deliveryTime')?.disable();
       this.productsFormGroup.get('location')?.get('locLatitude')?.disable();
@@ -610,7 +653,7 @@ export class AuctionProductComponent implements OnInit {
     }
   }
 
-  addProducts(pItem?: any){
+  addProducts(pItem?: any) {
     const item = this.formBuilder.group({
       productNo: new FormControl(pItem.productNo ? pItem.productNo : ''),
       productName: new FormControl(pItem.productName ? pItem.productName : '', Validators.required),
@@ -637,7 +680,7 @@ export class AuctionProductComponent implements OnInit {
     this.navigateToPage(1, 'productAttach');
   }
 
-  addProductForm(){
+  addProductForm() {
     this.addFormGroup = this.formBuilder.group({
       editIndex: new FormControl(),
       productNo: new FormControl(this.productlist.productNo ? this.productlist.productNo : ''),
@@ -661,8 +704,8 @@ export class AuctionProductComponent implements OnInit {
         notes: new FormControl(this.productlist.location?.notes ? this.productlist.location.notes : ''),
       }),
     });
-    
-    if(this.ViewMode == 'view'){
+
+    if (this.ViewMode == 'view') {
       this.addFormGroup.get('productName')?.disable();
       this.addFormGroup.get('productCondition')?.disable();
       this.addFormGroup.get('productSKUNumber')?.disable();
@@ -690,10 +733,10 @@ export class AuctionProductComponent implements OnInit {
     // const addProdcutFormGroup = this.addFormGroup.controls['location'] as FormGroup;
     if (e.target.checked) {
       this.isSameaddress = true;
-      
+
       this.setRequireValidator(locFormGroup);
       this.removeValidator(addProdcutFormGroup);
-    } else{
+    } else {
       this.isSameaddress = false;
       this.setRequireValidator(addProdcutFormGroup);
       this.removeValidator(locFormGroup);
@@ -704,7 +747,7 @@ export class AuctionProductComponent implements OnInit {
   setRequireValidator(form: any) {
     for (const field in form.controls) {
       // 'field' is a string
-      if(field !== 'notes'){
+      if (field !== 'notes') {
         let con = form.get(field); // 'control' is a FormControl
         con.setValidators([Validators.required]);
         con.updateValueAndValidity();
@@ -743,13 +786,13 @@ export class AuctionProductComponent implements OnInit {
   }
 
   // add product
-  addproduct(){
+  addproduct() {
     // alert("Add +");
     this.invalidQty = false;
     this.submitted = true;
     this.showPopupLoader = false;
     this.validateFormControls("addProduct");
-    if(this.productsFormGroup.status === 'VALID'){
+    if (this.productsFormGroup.status === 'VALID') {
       this.showProductModal = true;
     }
     // this.refreshCalendarCntrl();
@@ -772,7 +815,7 @@ export class AuctionProductComponent implements OnInit {
   get productFiles(): FormArray {
     return this.addFormGroup.get('productFiles') as FormArray;
   }
-  
+
   get addproductlocationForm(): { [key: string]: AbstractControl } {
     const addlocFormGroup = this.addFormGroup.controls['location'] as FormGroup;
     return addlocFormGroup.controls;
@@ -812,25 +855,25 @@ export class AuctionProductComponent implements OnInit {
   //       this.msg="Invalid file count";
   //     }
   // }
-  selectImages(e: any, dd:string): void {
+  selectImages(e: any, dd: string): void {
     this.invalidImageSize = false;
     let filecount = e.target.files.length;
-    if(e.target.files && filecount<=this.maxFileCount){
+    if (e.target.files && filecount <= this.maxFileCount) {
       this.customLoopforImages(0, filecount, e.target.files);
     } else {
     }
   }
   customLoopforImages(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
-    if(filesize <= 2097152){
-      if(this.productImages['controls'].length<this.maxFileCount){
+    if (filesize <= 2097152) {
+      if (this.productImages['controls'].length < this.maxFileCount) {
         // var fileupload: {[k: string]: any} = {};
         this.FilePushTOArray(file[index], (filesrc: any) => {
           var fileupload = {
-            "name"    : file[index]['name'],
-            "size"    : file[index]['size'],
-            "type"    : file[index]['type'],
-            "filesrc" : [ filesrc ]
+            "name": file[index]['name'],
+            "size": file[index]['size'],
+            "type": file[index]['type'],
+            "filesrc": [filesrc]
           };
           if (index < limit - 1) {
             this.customLoopforImages(++index, limit, file);
@@ -844,7 +887,7 @@ export class AuctionProductComponent implements OnInit {
       this.invalidImageSize = true;
     }
   }
-  FilePushTOArray(file:any,callback: (filesrc: any) => any){
+  FilePushTOArray(file: any, callback: (filesrc: any) => any) {
     const reader = new FileReader();
     reader.onload = (function (f) {
       return function () {
@@ -854,25 +897,25 @@ export class AuctionProductComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  selectFiles(e: any, dd:string): void {
+  selectFiles(e: any, dd: string): void {
     this.invalidFileSize = false;
     let filecount = e.target.files.length;
-    if(e.target.files && filecount<=this.maxFileCount){
+    if (e.target.files && filecount <= this.maxFileCount) {
       this.customLoopforFiles(0, filecount, e.target.files);
     } else {
     }
   }
   customLoopforFiles(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
-    if(filesize <= 2097152){
-      if(this.productFiles['controls'].length<this.maxFileCount){
+    if (filesize <= 2097152) {
+      if (this.productFiles['controls'].length < this.maxFileCount) {
         // var fileupload: {[k: string]: any} = {};
         this.FilePushTOArray(file[index], (filesrc: any) => {
           var fileupload = {
-            "name"    : file[index]['name'],
-            "size"    : file[index]['size'],
-            "type"    : file[index]['type'],
-            "filesrc" : [ filesrc ]
+            "name": file[index]['name'],
+            "size": file[index]['size'],
+            "type": file[index]['type'],
+            "filesrc": [filesrc]
           };
           if (index < limit - 1) {
             this.customLoopforFiles(++index, limit, file);
@@ -888,22 +931,42 @@ export class AuctionProductComponent implements OnInit {
   }
 
   // attachemnt view
-  viewAttachment(file:any){    
+  viewAttachment(file: any, index :any, category: any) {
+    if(category == "File"){
+      this.activeFileIndex = index;
+    }
+    else{
+      this.activePictureIndex = index;
+    }
     console.log('viewAttachment');
-    if(file.FilenetId){
+    if (file.FilenetId) {
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
+          ia[i] = byteString.charCodeAt(i);
         }
         const blob = new Blob([ab], { type: file.MIMEType });
+        console.log(blob);
         let fileURL = window.URL.createObjectURL(blob);
         window.open(fileURL, '_blank');
+        if(category == "File"){
+          this.activeFileIndex = -1;
+        }
+        else{
+          this.activePictureIndex = -1;
+          // console.log("We got the picture");
+        }
         // window.open(fileContent, "_blank");
       }, (error) => {
+        if(category == "File"){
+          this.activeFileIndex = -1;
+        }
+        else{
+          this.activePictureIndex = -1;
+        }
         this.showLoader = false;
         console.log('downloadAuctionImages RespError : ', error);
       });
@@ -915,22 +978,22 @@ export class AuctionProductComponent implements OnInit {
       var ab = new ArrayBuffer(byteString.length);
       var ia = new Uint8Array(ab);
       for (var i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
+        ia[i] = byteString.charCodeAt(i);
       }
       const blob = new Blob([ab], { type: file.type });
-      
+
       let fileURL = window.URL.createObjectURL(blob);
-      if((file.type.indexOf('image')> -1) || (file.type.indexOf('video')> -1) || fileType === 'docx' || fileType === 'doc'|| fileType === 'pdf'){
+      if ((file.type.indexOf('image') > -1) || (file.type.indexOf('video') > -1) || fileType === 'docx' || fileType === 'doc' || fileType === 'pdf') {
         this.showViewAttachmentsModal = false;
         window.open(fileURL, '_blank');
       } else {
-        if(file.type.indexOf('image')> -1){
+        if (file.type.indexOf('image') > -1) {
           this.selectedFileFormat = 'image';
-        } else if(file.type.indexOf('video')> -1){
+        } else if (file.type.indexOf('video') > -1) {
           this.selectedFileFormat = 'video';
         }
-          this.selectedFileURL =file.filesrc['0'].split(',')[1];;
-        // reader.onload = (_event) => { 
+        this.selectedFileURL = file.filesrc['0'].split(',')[1];;
+        // reader.onload = (_event) => {
         //   this.selectedFileURL = reader.result;
         // }
         this.showViewAttachmentsModal = true;
@@ -946,15 +1009,15 @@ export class AuctionProductComponent implements OnInit {
   //   // this.navigateToPage(currentPage, 'productFileAttach');
   // }
 
-  removeFile(file:any, index:number, currentPage: number){
+  removeFile(file: any, index: number, currentPage: number) {
     this.invalidFileSize = false;
-    if(file.FilenetId){      
+    if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
       this.auctionServc.deleteAuctionImages(file.FilenetId).subscribe((deleteAuctionImagesResp: any) => {
         console.log(deleteAuctionImagesResp);
         this.showPopupLoader = false;
-        this.files.splice(index,1);
+        this.files.splice(index, 1);
         this.productImages.removeAt(index);
         this.navigateToPage(currentPage, 'auctionAttach');
       }, (error) => {
@@ -962,21 +1025,21 @@ export class AuctionProductComponent implements OnInit {
         console.log('deleteAuctionImagesResp RespError : ', error);
       });
     } else {
-      this.files.splice(index,1);
+      this.files.splice(index, 1);
       this.productImages.removeAt(index);
       this.navigateToPage(currentPage, 'productFileAttach');
     }
   }
 
-  removeDoc(file:any, index:number, currentPage: number){
+  removeDoc(file: any, index: number, currentPage: number) {
     this.invalidFileSize = false;
-    if(file.FilenetId){      
+    if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
       this.auctionServc.deleteAuctionImages(file.FilenetId).subscribe((deleteAuctionImagesResp: any) => {
         console.log(deleteAuctionImagesResp);
         this.showPopupLoader = false;
-        this.files.splice(index,1);
+        this.files.splice(index, 1);
         this.productFiles.removeAt(index);
         this.navigateToPage(currentPage, 'auctionAttach');
       }, (error) => {
@@ -984,7 +1047,7 @@ export class AuctionProductComponent implements OnInit {
         console.log('deleteAuctionImagesResp RespError : ', error);
       });
     } else {
-      this.files.splice(index,1);
+      this.files.splice(index, 1);
       this.productFiles.removeAt(index);
       this.navigateToPage(currentPage, 'productFileAttach');
     }
@@ -992,47 +1055,46 @@ export class AuctionProductComponent implements OnInit {
 
   //<!----------------------- product add,edit delete--------------------->
 
-  public onAddProduct(submitSrc: string,event:any){
+  public onAddProduct(submitSrc: string) {
     this.onAddProductSubmitted = true;
-    if(this.addFormGroup.get('productSerialNumber')?.value < 1){
+    if (this.addFormGroup.get('productSerialNumber')?.value < 1) {
       this.invalidQty = true;
       return;
     }
     let startDate = this.auctionDetails?.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
     let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
-    if(startDate && deliveryDate) {
-      if((moment(startDate).isAfter(deliveryDate, 'day'))) {
+    if (startDate && deliveryDate) {
+      if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
         this.isValidPDeliveryDate = true;
         return;
       }
     }
-    if(submitSrc === 'save'){
-      if(this.addFormGroup.status === 'VALID'){
+    if (submitSrc === 'save') {
+      if (this.addFormGroup.status === 'VALID') {
         this.showLoader = true;
         this.showProductModal = false;
         // Edit Mode -Product
-        if(this.addFormGroup.value['editIndex']!=null){
+        if (this.addFormGroup.value['editIndex'] != null) {
           this.auctionProducts.at(this.addFormGroup.value['editIndex']).patchValue(this.addFormGroup.value);
           (this.auctionProducts.at(this.addFormGroup.value['editIndex']).value).productImages = this.addFormGroup.value.productImages;
           (this.auctionProducts.at(this.addFormGroup.value['editIndex']).value).productFiles = this.addFormGroup.value.productFiles;
-          if(true){
+          if (true) {
             const auctiondetail = this.generateProductFormat(this.productsFormGroup.getRawValue(), this.addFormGroup.value, 'edit');
-            localStorage.setItem('productDetails', JSON.stringify(this.productsFormGroup.getRawValue()));
             this.auctionServc.createAuction(auctiondetail).subscribe(async (productDetailsResp: any) => {
               console.log('createAuction Resp ', productDetailsResp);
               // alert('Auction is Saved Successfully. Please Continue...');
               let productCreateResp = {
-                DraftId : productDetailsResp.d.DraftId,
-                ObjectId : productDetailsResp.d.ObjectId,
+                DraftId: productDetailsResp.d.DraftId,
+                ObjectId: productDetailsResp.d.ObjectId,
               }
               const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
 
               this.productCreateResp.emit(productCreateResp);
-              if(this.addFormGroup.value.productImages.length > 0 || this.addFormGroup.value.productFiles.length > 0 ){
+              if (this.addFormGroup.value.productImages.length > 0 || this.addFormGroup.value.productFiles.length > 0) {
                 // fileNet Services
-                if(this.addFormGroup.value.productImages.length > 0 ){
+                if (this.addFormGroup.value.productImages.length > 0) {
                   let fileNetAuctionDetail: any;
-                  for(let i=0; i<this.addFormGroup.value.productImages.length ; i++){
+                  for (let i = 0; i < this.addFormGroup.value.productImages.length; i++) {
                     let file = this.addFormGroup.value.productImages[i];
                     fileNetAuctionDetail = {
                       "FileName": file.name.split('.')[0],
@@ -1040,64 +1102,64 @@ export class AuctionProductComponent implements OnInit {
                       "FileContent": btoa(file.filesrc),
                       "MIMEType": file.type,
                       "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
                       "Version": "1.0",
                       "ObjectType": "/AuctionProductImages",
-                      "ObjectId" : this.ObjectId,
-                      "ZzProductNo" : productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
+                      "ObjectId": this.ObjectId,
+                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
                     };
                     await timer(3000);
                     this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
                       (data) => {
                         console.log(i + "-success");
-                        if(i+1 == this.addFormGroup.value.productImages.length){
+                        if (i + 1 == this.addFormGroup.value.productImages.length && this.addFormGroup.value.productFiles.length == 0) {
                           this.showLoader = false;
                           this.pageRefresh();
                         }
-              
-                      }, (error) => {
-                        console.log(i + "-fail");
-                      }
-                    )
-                  }
-            
-                }
-                // fileNet Services for Product files
-                if(this.addFormGroup.value.productFiles.length > 0 ){
-               //   alert(this.addFormGroup.value.productFiles.length);
-                  let fileNetAuctionDetail: any;
-                  for(let i=0; i<this.addFormGroup.value.productFiles.length ; i++){
-                    let file = this.addFormGroup.value.productFiles[i];
-              //      alert(file.name);
-                    fileNetAuctionDetail = {
-                      "FileName": file.name.split('.')[0],
-                      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-                      "FileContent": btoa(file.filesrc),
-                      "MIMEType": file.type,
-                      "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-                      "Version": "1.0",
-                      "ObjectType": "/AuctionProductDocuments",
-                      "ObjectId" : this.ObjectId,
-                      "ZzProductNo" : productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
-                    };
-                    await timer(3000);
-                    this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-                      (data) => {
-                        console.log(i + "-success");
-                        if(i+1 == this.addFormGroup.value.productFiles.length){
-                          console.log("uplod done");
-                          this.showLoader = false;
-                          this.pageRefresh();
-                        }
-              
+
                       }, (error) => {
                         console.log(i + "-fail");
                       }
                     )
                   }
 
-            
+                }
+                // fileNet Services for Product files
+                if (this.addFormGroup.value.productFiles.length > 0) {
+                  //   alert(this.addFormGroup.value.productFiles.length);
+                  let fileNetAuctionDetail: any;
+                  for (let i = 0; i < this.addFormGroup.value.productFiles.length; i++) {
+                    let file = this.addFormGroup.value.productFiles[i];
+                    //      alert(file.name);
+                    fileNetAuctionDetail = {
+                      "FileName": file.name.split('.')[0],
+                      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+                      "FileContent": btoa(file.filesrc),
+                      "MIMEType": file.type,
+                      "FileLength": '' + file.size,
+                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+                      "Version": "1.0",
+                      "ObjectType": "/AuctionProductDocuments",
+                      "ObjectId": this.ObjectId,
+                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
+                    };
+                    await timer(3000);
+                    this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
+                      (data) => {
+                        console.log(i + "-success");
+                        if (i + 1 == this.addFormGroup.value.productFiles.length) {
+                          console.log("uplod done");
+                          this.showLoader = false;
+                          this.pageRefresh();
+                        }
+
+                      }, (error) => {
+                        console.log(i + "-fail");
+                      }
+                    )
+                  }
+
+
                 }
               } else {
                 this.showLoader = false;
@@ -1114,31 +1176,30 @@ export class AuctionProductComponent implements OnInit {
           // this.productFiles.clear();
         }
         // Create Mode - Product
-        else{
+        else {
           console.log(this.auctionProducts);
           this.auctionProducts.push(new FormControl(this.addFormGroup.value));
-          (this.auctionProducts.value.at(this.auctionProducts.length-1)).productImages = this.addFormGroup.value.productImages;
-          (this.auctionProducts.value.at(this.auctionProducts.length-1)).productFiles = this.addFormGroup.value.productFiles;
-          if(this.auctionProducts['controls'].length > 0){
+          (this.auctionProducts.value.at(this.auctionProducts.length - 1)).productImages = this.addFormGroup.value.productImages;
+          (this.auctionProducts.value.at(this.auctionProducts.length - 1)).productFiles = this.addFormGroup.value.productFiles;
+          if (this.auctionProducts['controls'].length > 0) {
             this.productsFormGroup.controls['sameLocNDate'].disable();
           }
-          if(true){
+          if (true) {
             const auctiondetail = this.generateProductFormat(this.productsFormGroup.getRawValue(), this.addFormGroup.value, 'create');
-            localStorage.setItem('productDetails', JSON.stringify(this.productsFormGroup.getRawValue()));
             this.auctionServc.createAuction(auctiondetail).subscribe(async (productDetailsResp: any) => {
               console.log('createAuction Resp ', productDetailsResp);
               // alert('Auction is Saved Successfully. Please Continue...');
               let productCreateResp = {
-                DraftId : productDetailsResp.d.DraftId,
-                ObjectId : productDetailsResp.d.ObjectId,
+                DraftId: productDetailsResp.d.DraftId,
+                ObjectId: productDetailsResp.d.ObjectId,
               }
               this.productCreateResp.emit(productCreateResp);
               const timer = (ms: number) => new Promise(res => setTimeout(res, ms));
-              if(this.addFormGroup.value.productImages.length > 0 || this.addFormGroup.value.productFiles.length > 0 ){
+              if (this.addFormGroup.value.productImages.length > 0 || this.addFormGroup.value.productFiles.length > 0) {
                 // fileNet Services
-                if(this.addFormGroup.value.productImages.length > 0 ){
-                  let fileNetAuctionDetail: any;                  
-                  for(let i=0; i<this.addFormGroup.value.productImages.length ; i++){
+                if (this.addFormGroup.value.productImages.length > 0) {
+                  let fileNetAuctionDetail: any;
+                  for (let i = 0; i < this.addFormGroup.value.productImages.length; i++) {
                     let file = this.addFormGroup.value.productImages[i];
                     fileNetAuctionDetail = {
                       "FileName": file.name.split('.')[0],
@@ -1146,22 +1207,22 @@ export class AuctionProductComponent implements OnInit {
                       "FileContent": btoa(file.filesrc),
                       "MIMEType": file.type,
                       "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
                       "Version": "1.0",
                       "ObjectType": "/AuctionProductImages",
-                      "ObjectId" : this.ObjectId,
-                      "ZzProductNo" : productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
+                      "ObjectId": this.ObjectId,
+                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
                     };
                     await timer(3000);
                     this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
                       (data) => {
                         console.log(i + "-success");
-                        if(i+1 == this.addFormGroup.value.productImages.length){
-                            console.log("uplod done");
-                            this.showLoader = false;
-                            this.pageRefresh();
+                        if (i + 1 == this.addFormGroup.value.productImages.length) {
+                          console.log("uplod done");
+                          this.showLoader = false;
+                          this.pageRefresh();
                         }
-              
+
                       }, (error) => {
                         console.log(i + "-fail");
                       }
@@ -1169,9 +1230,9 @@ export class AuctionProductComponent implements OnInit {
                   }
                 }
                 // fileNet Services
-                if(this.addFormGroup.value.productFiles.length > 0 ){
+                if (this.addFormGroup.value.productFiles.length > 0) {
                   let fileNetAuctionDetail: any;
-                  for(let i=0; i<this.addFormGroup.value.productFiles.length ; i++){
+                  for (let i = 0; i < this.addFormGroup.value.productFiles.length; i++) {
                     let file = this.addFormGroup.value.productFiles[i];
                     fileNetAuctionDetail = {
                       "FileName": file.name.split('.')[0],
@@ -1179,22 +1240,22 @@ export class AuctionProductComponent implements OnInit {
                       "FileContent": btoa(file.filesrc),
                       "MIMEType": file.type,
                       "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
                       "Version": "1.0",
                       "ObjectType": "/AuctionProductDocuments",
-                      "ObjectId" : this.ObjectId,
-                      "ZzProductNo" : productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
+                      "ObjectId": this.ObjectId,
+                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
                     };
                     await timer(3000);
                     this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
                       (data) => {
                         console.log(i + "-success");
-                        if(i+1 == this.addFormGroup.value.productFiles.length){
+                        if (i + 1 == this.addFormGroup.value.productFiles.length) {
                           console.log("uplod done");
                           this.showLoader = false;
                           this.pageRefresh();
                         }
-              
+
                       }, (error) => {
                         console.log(i + "-fail");
                       }
@@ -1212,43 +1273,43 @@ export class AuctionProductComponent implements OnInit {
             });
           }
         }
-      }else{
+      } else {
       }
-    } else if(submitSrc === 'saveasdraft'){
+    } else if (submitSrc === 'saveasdraft') {
     }
     console.log('this.auctionProducts ', this.auctionProducts);
   }
 
   // edit Product
-  
-  editProduct(index:number){
+
+  editProduct(index: number) {
     this.invalidQty = false;
     this.showProductModal = true;
     const editdata = this.auctionProducts.controls[index].value;
-    this.files =[];
-    this.docs =[];
+    this.files = [];
+    this.docs = [];
     this.productImages.clear();
     this.productFiles.clear();
     Object.keys(editdata).forEach(key => {
-      if(key!="productImages" && key!="location" && key!="productFiles"){
+      if (key != "productImages" && key != "location" && key != "productFiles") {
         this.addFormGroup.controls[key].setValue(editdata[key]);
         this.addFormGroup.controls[key].updateValueAndValidity();
       } else {
-        if(key=="productImages"){
-          editdata[key].forEach((value:any,index:any,array:any) => {
+        if (key == "productImages") {
+          editdata[key].forEach((value: any, index: any, array: any) => {
             this.files.push(value);
             this.productImages.push(new FormControl(value));
             this.navigateToPage(1, 'productPictureAttach');
             this.productImages.updateValueAndValidity();
           });
-        } else if(key=="productFiles"){      
-          editdata[key].forEach((value:any,index:any,array:any) => {
+        } else if (key == "productFiles") {
+          editdata[key].forEach((value: any, index: any, array: any) => {
             this.docs.push(value);
             this.productFiles.push(new FormControl(value));
             this.navigateToPage(1, 'productFileAttach');
             this.productFiles.updateValueAndValidity();
           });
-        } else if(key=="location"){
+        } else if (key == "location") {
           Object.keys(editdata[key]).forEach(key1 => {
             this.addproductlocationForm[key1].setValue(editdata[key][key1]);
             this.addproductlocationForm[key1].updateValueAndValidity();
@@ -1257,7 +1318,7 @@ export class AuctionProductComponent implements OnInit {
       }
     });
     this.addFormGroup.controls["editIndex"].setValue(index);
-    
+
     this.totalValue = 0;
     this.totalQty = 0;
     this.auctionProducts.value.forEach((product: any) => {
@@ -1267,49 +1328,47 @@ export class AuctionProductComponent implements OnInit {
     this.addFormGroup.updateValueAndValidity();
   }
 
-  removeProduct(index:number, currentPage: number, Product: any){
+  removeProduct(index: number, currentPage: number, Product: any) {
     console.log(this.addFormGroup.controls["editIndex"]);
     const editdata = this.auctionProducts.controls[index].value;
-    this.files =[];
-    this.docs =[];
+    this.files = [];
+    this.docs = [];
     this.productImages.clear();
     this.productFiles.clear();
     Object.keys(editdata).forEach(key => {
-      if(key!="productImages" && key!="location" && key!="productFiles"){
+      if (key != "productImages" && key != "location" && key != "productFiles") {
         this.addFormGroup.controls[key].setValue(editdata[key]);
         this.addFormGroup.controls[key].updateValueAndValidity();
-      } else if(key=="productImages"){
-        editdata[key].forEach((value:any,index:any,array:any) => {         
+      } else if (key == "productImages") {
+        editdata[key].forEach((value: any, index: any, array: any) => {
           this.files.push(value);
           this.productImages.push(new FormControl(value));
           this.navigateToPage(1, 'productPictureAttach');
           this.productImages.updateValueAndValidity();
         });
-      } else if(key=="productFiles"){      
-        editdata[key].forEach((value:any,index:any,array:any) => {         
+      } else if (key == "productFiles") {
+        editdata[key].forEach((value: any, index: any, array: any) => {
           this.docs.push(value);
           this.productFiles.push(new FormControl(value));
           this.navigateToPage(1, 'productFileAttach');
           this.productFiles.updateValueAndValidity();
         });
-      } else if(key=="location"){
+      } else if (key == "location") {
         Object.keys(editdata[key]).forEach(key1 => {
           this.addproductlocationForm[key1].setValue(editdata[key][key1]);
           this.addproductlocationForm[key1].updateValueAndValidity();
-          })
+        })
       }
     });
     this.addFormGroup.controls["editIndex"].setValue(index);
-    if(true){
+    if (true) {
       const auctiondetail = this.generateProductFormat(this.productsFormGroup.getRawValue(), this.addFormGroup.value, 'delete');
-      localStorage.setItem('productDetails', JSON.stringify(auctiondetail));
-
       this.auctionServc.createAuction(auctiondetail).subscribe((productDetailsResp: any) => {
         console.log('createAuction Resp ', productDetailsResp);
         // alert('Auction is Saved Successfully. Please Continue...');
         let productCreateResp = {
-          DraftId : productDetailsResp.d.DraftId,
-          ObjectId : productDetailsResp.d.ObjectId,
+          DraftId: productDetailsResp.d.DraftId,
+          ObjectId: productDetailsResp.d.ObjectId,
         }
         this.productCreateResp.emit(productCreateResp);
         this.pageRefresh();
@@ -1318,27 +1377,16 @@ export class AuctionProductComponent implements OnInit {
         this.pageRefresh();
       });
     }
-    // this.auctionProducts.removeAt(index);
-    // this.totalValue = 0;
-    // this.totalQty = 0;
-    // this.auctionProducts.value.forEach((product: any) => {
-    //   this.totalValue = this.totalValue + (+product.productValue * +product.productSerialNumber);
-    //   this.totalQty = this.totalQty + (+product.productSerialNumber);
-    // });
-    // if(this.auctionProducts['controls'].length == 0){
-    //   this.productsFormGroup.controls['sameLocNDate'].enable();
-    // }
-    // this.navigateToPage(currentPage, 'productPictureAttach');
   }
   //<!----------------------- product add,edit delete end--------------------->
 
-  public onSubmit(submitSrc: string){
+  public onSubmit(submitSrc: string) {
     // this.showLoader = true;
-    if(this.productsFormGroup.controls['sameLocNDate']){
+    if (this.productsFormGroup.controls['sameLocNDate']) {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
-      if(startDate && deliveryDate) {
-        if((moment(startDate).isAfter(deliveryDate, 'day'))) {
+      if (startDate && deliveryDate) {
+        if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
           this.isValidDeliveryDate = true;
         } else {
           this.isValidDeliveryDate = false;
@@ -1346,200 +1394,29 @@ export class AuctionProductComponent implements OnInit {
       }
     }
     this.submitted = true;
-    if(submitSrc === 'save'){
+    if (submitSrc === 'save') {
       this.validateFormControls(submitSrc);
-      if(this.productsFormGroup.status === 'VALID'){
+      if (this.productsFormGroup.status === 'VALID') {
         let productCreateResp = {
-          DraftId :this.DraftId,
-          ObjectId : this.ObjectId,
+          DraftId: this.DraftId,
+          ObjectId: this.ObjectId,
         }
         this.productCreateResp.emit(productCreateResp);
-        this.activeStep ++;
+        this.activeStep++;
         this.changeSteps.emit(this.activeStep);
-      
-        // this.showSaveBtnLoader = true;
-        // const auctiondetail = this.generateProductDetailFormat(this.productsFormGroup.getRawValue());
-        // localStorage.setItem('productDetails', JSON.stringify(this.productsFormGroup.getRawValue()));
-        // this.auctionServc.createAuction(auctiondetail).subscribe((productDetailsResp: any) => {
-        //   console.log('createAuction Resp ', productDetailsResp);
-        //   // alert('Auction is Saved Successfully. Please Continue...');
-        //   let productCreateResp = {
-        //     DraftId : productDetailsResp.d.DraftId,
-        //     ObjectId : productDetailsResp.d.ObjectId,
-        //   }
-        //   this.productCreateResp.emit(productCreateResp);
-        //   if(this.files.length > 0 && this.docs.length > 0){
-        //     let fileNetAuctionDetail: any;
-        //     if(this.files.length > 0){
-        //       this.files.forEach((file: any, index: number) => {
-        //         if(file.filesrc['0']){
-        //           var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId ;
-        //           fileNetAuctionDetail = {
-        //             "FileName": file.name.split('.')[0],
-        //             // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-        //             "FileContent": btoa(file.filesrc),
-        //             "MIMEType": file.type,
-        //             "FileLength": '' + file.size,
-        //             "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-        //             "Version": "1.0",
-        //             "ObjectType": "/AuctionProductImages",
-        //             "ObjectId" : this.ObjectId,
-        //           };
-        //         } 
-        //         console.log('fileNetAuctionDetail ', fileNetAuctionDetail);
-        //         this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe((fileNetResp: any) => {
-        //           console.log('fileNetResp', fileNetResp);
-        //           if(index == this.files.length -1 ){
-        //             if(this.docs.length > 0){
-        //               this.docs.forEach((file: any, index: number) => {
-        //                 if(file.filesrc['0']){
-        //                   var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId ;
-        //                   fileNetAuctionDetail = {
-        //                     "FileName": file.name.split('.')[0],
-        //                     // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-        //                     "FileContent": btoa(file.filesrc),
-        //                     "MIMEType": file.type,
-        //                     "FileLength": '' + file.size,
-        //                     "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-        //                     "Version": "1.0",
-        //                     "ObjectType": "/AuctionProductDocuments",
-        //                     "ObjectId" : this.ObjectId,
-        //                   };
-        //                 } 
-        //                 console.log('fileNetAuctionDetail ', fileNetAuctionDetail);
-        //                 this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe((fileNetResp: any) => {
-        //                   console.log('fileNetResp', fileNetResp);
-        //                   if(index == this.docs.length -1 ){
-        //                     this.showSaveBtnLoader = false;
-        //                     this.activeStep ++;
-        //                     this.changeSteps.emit(this.activeStep);
-        //                   }
-        //                 }, (error) => {
-        //                   this.showSaveBtnLoader = false;
-        //                   console.log('fileNetPDocs RespError : ', error);
-        //                 });
-        //               });
-        //             }
-        //           }
-        //         }, (error) => {
-        //           this.showSaveBtnLoader = false;
-        //           console.log('fileNetPImages RespError : ', error);
-        //         });
-        //       });
-        //     }
-        //   } else {
-        //     let fileNetAuctionDetail: any;
-        //     if(this.files.length > 0){
-        //       this.files.forEach((file: any, index: number) => {
-        //         if(file.filesrc['0']){
-        //           var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId ;
-        //           fileNetAuctionDetail = {
-        //             "FileName": file.name.split('.')[0],
-        //             // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-        //             "FileContent": btoa(file.filesrc),
-        //             "MIMEType": file.type,
-        //             "FileLength": '' + file.size,
-        //             "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-        //             "Version": "1.0",
-        //             "ObjectType": "/AuctionProductImages",
-        //             "ObjectId" : this.ObjectId,
-        //           };
-        //         } 
-        //         console.log('fileNetAuctionDetail ', fileNetAuctionDetail);
-        //         this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe((fileNetResp: any) => {
-        //           console.log('fileNetResp', fileNetResp);
-        //           if(index == this.files.length -1 ){
-        //             this.showSaveBtnLoader = false;
-        //             this.activeStep ++;
-        //             this.changeSteps.emit(this.activeStep);
-        //           }
-        //         }, (error) => {
-        //           this.showSaveBtnLoader = false;
-        //           console.log('fileNetPImages RespError : ', error);
-        //         });
-        //       });
-        //     }
-        //     if(this.docs.length > 0){
-        //       this.docs.forEach((file: any, index: number) => {
-        //         if(file.filesrc['0']){
-        //           var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId ;
-        //           fileNetAuctionDetail = {
-        //             "FileName": file.name.split('.')[0],
-        //             // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-        //             "FileContent": btoa(file.filesrc),
-        //             "MIMEType": file.type,
-        //             "FileLength": '' + file.size,
-        //             "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-        //             "Version": "1.0",
-        //             "ObjectType": "/AuctionProductDocuments",
-        //             "ObjectId" : this.ObjectId,
-        //           };
-        //         } 
-        //         console.log('fileNetAuctionDetail ', fileNetAuctionDetail);
-        //         this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe((fileNetResp: any) => {
-        //           console.log('fileNetResp', fileNetResp);
-        //           if(index == this.docs.length -1 ){
-        //             this.showSaveBtnLoader = false;
-        //             this.activeStep ++;
-        //             this.changeSteps.emit(this.activeStep);
-        //           }
-        //         }, (error) => {
-        //           this.showSaveBtnLoader = false;
-        //           console.log('fileNetPDocs RespError : ', error);
-        //         });
-        //       });
-        //     }
-        //   }
-        //   this.showSaveBtnLoader = false;
-        //   this.activeStep ++;
-        //   this.changeSteps.emit(this.activeStep);
-        // }, (error) => {
-        //   this.showSaveBtnLoader = false;
-        //   console.log('createAuction RespError : ', error);
-        // });
       }
-      // this.showSaveBtnLoader = false;
-      // this.activeStep ++;
-      // this.changeSteps.emit(this.activeStep);
-    } else if(submitSrc === 'saveasdraft'){
-      // console.log(submitSrc);
-      // this.showSaveasdraftBtnLoader = false;
-      // this.showSuccessfulModal = true;
+    } else if (submitSrc === 'saveasdraft') {
       this.validateFormControls(submitSrc);
       console.log(this.productsFormGroup);
-      if(this.isSaveasdraftValid()){
-        if(this.productsFormGroup.status === 'VALID') {
-                      let productCreateResp = {
-              DraftId :this.DraftId,
-              ObjectId : this.ObjectId,
-            }
+      if (this.isSaveasdraftValid()) {
+        if (this.productsFormGroup.status === 'VALID') {
+          let productCreateResp = {
+            DraftId: this.DraftId,
+            ObjectId: this.ObjectId,
+          }
           this.productCreateResp.emit(productCreateResp);
           this.showSaveasdraftBtnLoader = false;
           this.showSuccessfulModal = true;
-          // this.showSaveasdraftBtnLoader = true;
-          // const auctiondetail = this.generateProductDetailFormat(this.productsFormGroup.getRawValue());
-          // console.log("generateProductDetailFormat final format ", auctiondetail);
-          // for testing
-          // let productCreateResp = { DraftId : '12345', ObjectId : '12345', }
-          // this.productCreateResp.emit(productCreateResp);
-          // console.log("auctiondetail final format ", auctiondetail);
-          // this.activeStep ++;
-          // this.changeSteps.emit(this.activeStep);
-          // // -----------------------
-          // this.auctionServc.createAuction(auctiondetail).subscribe((productDetailsResp: any) => {
-          //   console.log('createAuction Resp ', productDetailsResp);
-          //   // alert('Auction is Saved as Draft Successfully');
-          //   let productCreateResp = {
-          //     DraftId : productDetailsResp.d.DraftId,
-          //     ObjectId : productDetailsResp.d.ObjectId,
-          //   }
-          //   this.productCreateResp.emit(productCreateResp);
-          //   this.showSaveasdraftBtnLoader = false;
-          //   this.showSuccessfulModal = true;
-          // }, (error) => {
-          //   this.showSaveasdraftBtnLoader = false;
-          //   console.log('createAuction RespError : ', error);
-          // });
         }
       }
     }
@@ -1549,7 +1426,7 @@ export class AuctionProductComponent implements OnInit {
    * isSaveasdraftValid
    */
   public isSaveasdraftValid() {
-    if(this.auctionProducts['controls'].length > 0){
+    if (this.auctionProducts['controls'].length > 0) {
       this.atLeastOneRequired = false;
       return true;
     } else {
@@ -1559,9 +1436,9 @@ export class AuctionProductComponent implements OnInit {
   }
 
 
-  public validateFormControls(submitType: string){
-    if(submitType === 'save'){
-      if(this.productsFormGroup.controls['sameLocNDate'].value){
+  public validateFormControls(submitType: string) {
+    if (submitType === 'save') {
+      if (this.productsFormGroup.controls['sameLocNDate'].value) {
         this.location.controls['deliveryDate'].setValidators([Validators.required]);
         this.location.controls['deliveryTime'].setValidators([Validators.required]);
         this.location.controls['locLatitude'].setValidators([Validators.required]);
@@ -1585,7 +1462,7 @@ export class AuctionProductComponent implements OnInit {
         this.location.clearValidators();
         this.auctionProducts.setValidators([Validators.required]);
       }
-    } else if(submitType === 'saveasdraft'){
+    } else if (submitType === 'saveasdraft') {
       this.productsFormGroup.controls['sameLocNDate'].clearValidators();
       this.location.controls['deliveryDate'].clearValidators();
       this.location.controls['deliveryTime'].clearValidators();
@@ -1597,8 +1474,8 @@ export class AuctionProductComponent implements OnInit {
       this.location.controls['locStreet'].clearValidators();
       this.location.controls['notes'].clearValidators();
       this.auctionProducts.clearValidators();
-    } else if(submitType == 'addProduct') {
-      if(this.productsFormGroup.controls['sameLocNDate'].value){
+    } else if (submitType == 'addProduct') {
+      if (this.productsFormGroup.controls['sameLocNDate'].value) {
         this.location.controls['deliveryDate'].setValidators([Validators.required]);
         this.location.controls['deliveryTime'].setValidators([Validators.required]);
         this.location.controls['locLatitude'].setValidators([Validators.required]);
@@ -1609,7 +1486,7 @@ export class AuctionProductComponent implements OnInit {
         this.location.controls['locStreet'].setValidators([Validators.required]);
         this.location.controls['notes'].clearValidators();
         this.auctionProducts.clearValidators();
-      }else{
+      } else {
         this.location.controls['deliveryDate'].clearValidators();
         this.location.controls['deliveryTime'].clearValidators();
         this.location.controls['locLatitude'].clearValidators();
@@ -1637,216 +1514,216 @@ export class AuctionProductComponent implements OnInit {
     this.productsFormGroup.updateValueAndValidity();
   }
 
-  
 
-  public getAuctionType(code: string){
-    if(code === 'Public'){
+
+  public getAuctionType(code: string) {
+    if (code === 'Public') {
       return 'O';
-    } else if(code === 'Private'){
+    } else if (code === 'Private') {
       return 'C';
     } else {
       return '';
     }
   }
 
-  public generateProductFormat(obj :any, product: any, action:string){
+  public generateProductFormat(obj: any, product: any, action: string) {
     let productList: any = [];
     let auctionList = {};
     let pObj = product;
     const sameLocNDate = this.productsFormGroup.controls['sameLocNDate'].value;
-    if(sameLocNDate){
-      let product = { };
+    if (sameLocNDate) {
+      let product = {};
       product = {
-        DelInd : action == 'delete' ? 'X': '',
-        ZzProductNo : pObj.productNo ? pObj.productNo : '',
-        Description : pObj.productName,
-        ZzProductCond : pObj.productCondition,
-        ProductValue : pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
-        ZzProductSku : pObj.productSKUNumber,
-        Quantity : (pObj.productSerialNumber).toString(),
-        ZzProdDesc : pObj.productSpec,
-        DelivDate : obj.location.deliveryDate ? moment(obj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-        DelivTime : obj.location.deliveryTime ? moment(obj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-        ZzLocationCord : (obj.location.locLatitude ? obj.location.locLatitude : '' ) + (obj.location.locLongitude ? " , " + obj.location.locLongitude : '' ),
-        ZzRegion : obj.location.locRegion,
-        ZzCity : obj.location.locCity,
-        ZzNeighbourhood : obj.location.locNeighborhood,
-        ZzStreet : obj.location.locStreet,
-        ZzPdOthrNts :  obj.location.notes,
+        DelInd: action == 'delete' ? 'X' : '',
+        ZzProductNo: pObj.productNo ? pObj.productNo : '',
+        Description: pObj.productName,
+        ZzProductCond: pObj.productCondition,
+        ProductValue: pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
+        ZzProductSku: pObj.productSKUNumber,
+        Quantity: (pObj.productSerialNumber).toString(),
+        ZzProdDesc: pObj.productSpec,
+        DelivDate: obj.location.deliveryDate ? moment(obj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
+        DelivTime: obj.location.deliveryTime ? moment(obj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
+        ZzLocationCord: (obj.location.locLatitude ? obj.location.locLatitude : '') + (obj.location.locLongitude ? " , " + obj.location.locLongitude : ''),
+        ZzRegion: obj.location.locRegion,
+        ZzCity: obj.location.locCity,
+        ZzNeighbourhood: obj.location.locNeighborhood,
+        ZzStreet: obj.location.locStreet,
+        ZzPdOthrNts: obj.location.notes,
       }
       productList.push(product);
     } else {
-      let product = { };
+      let product = {};
       product = {
-        DelInd : action == 'delete' ? 'X': '',
-        ZzProductNo : pObj.productNo ? pObj.productNo : '',
-        Description : pObj.productName,
-        ZzProductCond : pObj.productCondition,
-        ProductValue : pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
-        ZzProductSku : pObj.productSKUNumber,
-        Quantity : (pObj.productSerialNumber).toString(),
-        ZzProdDesc : pObj.productSpec,
-        DelivDate : pObj.location.deliveryDate ? moment(pObj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-        DelivTime : pObj.location.deliveryTime ? moment(pObj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-        ZzLocationCord : (pObj.location.locLatitude ? pObj.location.locLatitude : '' ) + (pObj.location.locLongitude ? " , " + pObj.location.locLongitude : '' ),
-        ZzRegion : pObj.location.locRegion,
-        ZzCity : pObj.location.locCity,
-        ZzNeighbourhood : pObj.location.locNeighborhood,
-        ZzStreet : pObj.location.locStreet,
-        ZzPdOthrNts :  pObj.location.notes,
+        DelInd: action == 'delete' ? 'X' : '',
+        ZzProductNo: pObj.productNo ? pObj.productNo : '',
+        Description: pObj.productName,
+        ZzProductCond: pObj.productCondition,
+        ProductValue: pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
+        ZzProductSku: pObj.productSKUNumber,
+        Quantity: (pObj.productSerialNumber).toString(),
+        ZzProdDesc: pObj.productSpec,
+        DelivDate: pObj.location.deliveryDate ? moment(pObj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
+        DelivTime: pObj.location.deliveryTime ? moment(pObj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
+        ZzLocationCord: (pObj.location.locLatitude ? pObj.location.locLatitude : '') + (pObj.location.locLongitude ? " , " + pObj.location.locLongitude : ''),
+        ZzRegion: pObj.location.locRegion,
+        ZzCity: pObj.location.locCity,
+        ZzNeighbourhood: pObj.location.locNeighborhood,
+        ZzStreet: pObj.location.locStreet,
+        ZzPdOthrNts: pObj.location.notes,
       }
       productList.push(product);
     }
     auctionList = {
-      SaveAsDraft : "X",
-      DraftId : this.DraftId ? this.DraftId : '',
-      ObjectId : this.ObjectId ? this.ObjectId : '',
-      SameAddress : sameLocNDate ? 'Y' : 'N',
+      SaveAsDraft: "X",
+      DraftId: this.DraftId ? this.DraftId : '',
+      ObjectId: this.ObjectId ? this.ObjectId : '',
+      SameAddress: sameLocNDate ? 'Y' : 'N',
       //Auction Details
-      BidType : this.auctionDetails.BidType,
-      ZzCloseInd : this.auctionDetails.ZzCloseInd,
-      ZzPrevAucId1 : this.auctionDetails.ZzPrevAucId1, // for Private
-      Description : this.auctionDetails.Description,
+      BidType: this.auctionDetails.BidType,
+      ZzCloseInd: this.auctionDetails.ZzCloseInd,
+      ZzPrevAucId1: this.auctionDetails.ZzPrevAucId1, // for Private
+      Description: this.auctionDetails.Description,
       ZzAucProduct: this.auctionDetails.ZzAucProduct,
-      ZzAucDesc : this.auctionDetails.ZzAucDesc,
-      ZzPrtReason : this.auctionDetails.ZzPrtReason,
-      ZzOtherNote : this.auctionDetails.ZzOtherNote,
-      ZzAucSrtDt : this.auctionDetails.ZzAucSrtDt,
-      ZzAucEndDt : this.auctionDetails.ZzAucEndDt,
-      ZzStartMethod : this.auctionDetails.ZzStartMethod,
-      ZzAnncSrtD : this.auctionDetails.ZzAnncSrtD,
-      ZzAnncEndD : this.auctionDetails.ZzAnncSrtD,
-      ZzBidSrtPrice : this.auctionDetails.ZzBidSrtPrice,
-      ZzLowBidVl : this.auctionDetails.ZzLowBidVl,
-      ZzIbgaPercent : this.auctionDetails.ZzIbgaPercent,
-      ZzFbgaDeadline : this.auctionDetails.ZzFbgaDeadline,
-      ZzCommisionTyp : this.auctionDetails.ZzCommisionTyp,
-      ZzCommPercent : this.auctionDetails.ZzCommPercent,
+      ZzAucDesc: this.auctionDetails.ZzAucDesc,
+      ZzPrtReason: this.auctionDetails.ZzPrtReason,
+      ZzOtherNote: this.auctionDetails.ZzOtherNote,
+      ZzAucSrtDt: this.auctionDetails.ZzAucSrtDt,
+      ZzAucEndDt: this.auctionDetails.ZzAucEndDt,
+      ZzStartMethod: this.auctionDetails.ZzStartMethod,
+      ZzAnncSrtD: this.auctionDetails.ZzAnncSrtD,
+      ZzAnncEndD: this.auctionDetails.ZzAnncSrtD,
+      ZzBidSrtPrice: this.auctionDetails.ZzBidSrtPrice,
+      ZzLowBidVl: this.auctionDetails.ZzLowBidVl,
+      ZzIbgaPercent: this.auctionDetails.ZzIbgaPercent,
+      ZzFbgaDeadline: this.auctionDetails.ZzFbgaDeadline,
+      ZzCommisionTyp: this.auctionDetails.ZzCommisionTyp,
+      ZzCommPercent: this.auctionDetails.ZzCommPercent,
       // -------------------------------------
-      listtoproductnav : productList
+      listtoproductnav: productList
     }
     return auctionList;
   }
 
-  public generateProductDetailFormat(obj :any){
+  public generateProductDetailFormat(obj: any) {
     let productList: any = [];
     let auctionList = {};
-    if(obj.sameLocNDate){
-      obj.productFormGroup.products.forEach((pObj : any) => {
-        let product = { };
+    if (obj.sameLocNDate) {
+      obj.productFormGroup.products.forEach((pObj: any) => {
+        let product = {};
         product = {
-          Description : pObj.productName,
-          ZzProductCond : pObj.productCondition,
-          ProductValue : pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
-          ZzProductSku : pObj.productSKUNumber,
-          Quantity : (pObj.productSerialNumber).toString(),
-          ZzProdDesc : pObj.productSpec,
-          DelivDate : obj.location.deliveryDate ? moment(obj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-          DelivTime : obj.location.deliveryTime ? moment(obj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-          ZzLocationCord : (obj.location.locLatitude ? obj.location.locLatitude : '' ) + (obj.location.locLongitude ? " , " + obj.location.locLongitude : '' ),
-          ZzRegion : obj.location.locRegion,
-          ZzCity : obj.location.locCity,
-          ZzNeighbourhood : obj.location.locNeighborhood,
-          ZzStreet : obj.location.locStreet,
-          ZzPdOthrNts :  obj.location.notes,
+          Description: pObj.productName,
+          ZzProductCond: pObj.productCondition,
+          ProductValue: pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
+          ZzProductSku: pObj.productSKUNumber,
+          Quantity: (pObj.productSerialNumber).toString(),
+          ZzProdDesc: pObj.productSpec,
+          DelivDate: obj.location.deliveryDate ? moment(obj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
+          DelivTime: obj.location.deliveryTime ? moment(obj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
+          ZzLocationCord: (obj.location.locLatitude ? obj.location.locLatitude : '') + (obj.location.locLongitude ? " , " + obj.location.locLongitude : ''),
+          ZzRegion: obj.location.locRegion,
+          ZzCity: obj.location.locCity,
+          ZzNeighbourhood: obj.location.locNeighborhood,
+          ZzStreet: obj.location.locStreet,
+          ZzPdOthrNts: obj.location.notes,
         }
         productList.push(product);
       });
     } else {
-      obj.productFormGroup.products.forEach((pObj : any) => {
-        let product = { };
+      obj.productFormGroup.products.forEach((pObj: any) => {
+        let product = {};
         product = {
-          Description : pObj.productName,
-          ZzProductCond : pObj.productCondition,
-          ProductValue : pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
-          ZzProductSku : pObj.productSKUNumber,
-          Quantity : (pObj.productSerialNumber).toString(),
-          ZzProdDesc : pObj.productSpec,
-          DelivDate : pObj.location.deliveryDate ? moment(pObj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-          DelivTime : pObj.location.deliveryTime ? moment(pObj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-          ZzLocationCord : (pObj.location.locLatitude ? pObj.location.locLatitude : '' ) + (pObj.location.locLongitude ? " , " + pObj.location.locLongitude : '' ),
-          ZzRegion : pObj.location.locRegion,
-          ZzCity : pObj.location.locCity,
-          ZzNeighbourhood : pObj.location.locNeighborhood,
-          ZzStreet : pObj.location.locStreet,
-          ZzPdOthrNts :  pObj.location.notes,
+          Description: pObj.productName,
+          ZzProductCond: pObj.productCondition,
+          ProductValue: pObj.productValue ? parseFloat(pObj.productValue).toFixed(2) : '',
+          ZzProductSku: pObj.productSKUNumber,
+          Quantity: (pObj.productSerialNumber).toString(),
+          ZzProdDesc: pObj.productSpec,
+          DelivDate: pObj.location.deliveryDate ? moment(pObj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
+          DelivTime: pObj.location.deliveryTime ? moment(pObj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
+          ZzLocationCord: (pObj.location.locLatitude ? pObj.location.locLatitude : '') + (pObj.location.locLongitude ? " , " + pObj.location.locLongitude : ''),
+          ZzRegion: pObj.location.locRegion,
+          ZzCity: pObj.location.locCity,
+          ZzNeighbourhood: pObj.location.locNeighborhood,
+          ZzStreet: pObj.location.locStreet,
+          ZzPdOthrNts: pObj.location.notes,
         }
         productList.push(product);
       });
     }
     auctionList = {
-      SaveAsDraft : "X",
-      DraftId : this.DraftId ? this.DraftId : '',
-      ObjectId : this.ObjectId ? this.ObjectId : '',
-      SameAddress : obj.sameLocNDate ? 'Y' : 'N',
+      SaveAsDraft: "X",
+      DraftId: this.DraftId ? this.DraftId : '',
+      ObjectId: this.ObjectId ? this.ObjectId : '',
+      SameAddress: obj.sameLocNDate ? 'Y' : 'N',
       //Auction Details
-      BidType : this.auctionDetails.BidType,
-      ZzCloseInd : this.auctionDetails.ZzCloseInd,
-      ZzPrevAucId1 : this.auctionDetails.ZzPrevAucId1, // for Private
-      Description : this.auctionDetails.Description,
+      BidType: this.auctionDetails.BidType,
+      ZzCloseInd: this.auctionDetails.ZzCloseInd,
+      ZzPrevAucId1: this.auctionDetails.ZzPrevAucId1, // for Private
+      Description: this.auctionDetails.Description,
       ZzAucProduct: this.auctionDetails.ZzAucProduct,
-      ZzAucDesc : this.auctionDetails.ZzAucDesc,
-      ZzPrtReason : this.auctionDetails.ZzPrtReason,
-      ZzOtherNote : this.auctionDetails.ZzOtherNote,
-      ZzAucSrtDt : this.auctionDetails.ZzAucSrtDt,
-      ZzAucEndDt : this.auctionDetails.ZzAucEndDt,
-      ZzStartMethod : this.auctionDetails.ZzStartMethod,
-      ZzAnncSrtD : this.auctionDetails.ZzAnncSrtD,
-      ZzAnncEndD : this.auctionDetails.ZzAnncSrtD,
-      ZzBidSrtPrice : this.auctionDetails.ZzBidSrtPrice,
-      ZzLowBidVl : this.auctionDetails.ZzLowBidVl,
-      ZzIbgaPercent : this.auctionDetails.ZzIbgaPercent,
-      ZzFbgaDeadline : this.auctionDetails.ZzFbgaDeadline,
-      ZzCommisionTyp : this.auctionDetails.ZzCommisionTyp,
-      ZzCommPercent : this.auctionDetails.ZzCommPercent,
+      ZzAucDesc: this.auctionDetails.ZzAucDesc,
+      ZzPrtReason: this.auctionDetails.ZzPrtReason,
+      ZzOtherNote: this.auctionDetails.ZzOtherNote,
+      ZzAucSrtDt: this.auctionDetails.ZzAucSrtDt,
+      ZzAucEndDt: this.auctionDetails.ZzAucEndDt,
+      ZzStartMethod: this.auctionDetails.ZzStartMethod,
+      ZzAnncSrtD: this.auctionDetails.ZzAnncSrtD,
+      ZzAnncEndD: this.auctionDetails.ZzAnncSrtD,
+      ZzBidSrtPrice: this.auctionDetails.ZzBidSrtPrice,
+      ZzLowBidVl: this.auctionDetails.ZzLowBidVl,
+      ZzIbgaPercent: this.auctionDetails.ZzIbgaPercent,
+      ZzFbgaDeadline: this.auctionDetails.ZzFbgaDeadline,
+      ZzCommisionTyp: this.auctionDetails.ZzCommisionTyp,
+      ZzCommPercent: this.auctionDetails.ZzCommPercent,
       // -------------------------------------
-      listtoproductnav : productList,
+      listtoproductnav: productList,
     }
     return auctionList;
   }
 
-  public back(){
-    this.activeStep --;
+  public back() {
+    this.activeStep--;
     this.changeSteps.emit(this.activeStep);
     this.changeauctiontype.emit("auctionedit");
   }
 
-  navigateToPage(pageNoVal: number, section: string){
-    if(section == 'productAttach'){
+  navigateToPage(pageNoVal: number, section: string) {
+    if (section == 'productAttach') {
       this.PaginationServc.setPagerValues(
         this.auctionProducts.length,
         10,
         pageNoVal
       );
       this.pageRangeForProductAttach = {
-        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal-1) * 10),
-        rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal-1) * 10) + 9,
+        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 10),
+        rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal - 1) * 10) + 9,
         pages: this.PaginationServc.pages,
         currentPage: this.PaginationServc.currentPage,
         totalPages: this.PaginationServc.totalPages,
       }
-    } else if(section == 'productFileAttach'){
+    } else if (section == 'productFileAttach') {
       this.PaginationServc.setPagerValues(
         this.docs.length,
         10,
         pageNoVal
       );
       this.pageRangeForProductFileAttach = {
-        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal-1) * 10),
-        rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal-1) * 10) + 9,
+        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 10),
+        rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal - 1) * 10) + 9,
         pages: this.PaginationServc.pages,
         currentPage: this.PaginationServc.currentPage,
         totalPages: this.PaginationServc.totalPages,
       }
-    } else if(section == 'productPictureAttach'){
+    } else if (section == 'productPictureAttach') {
       this.PaginationServc.setPagerValues(
         this.files.length,
         10,
         pageNoVal
       );
       this.pageRangeForProductPictureAttach = {
-        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal-1) * 10),
-        rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal-1) * 10) + 9,
+        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 10),
+        rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal - 1) * 10) + 9,
         pages: this.PaginationServc.pages,
         currentPage: this.PaginationServc.currentPage,
         totalPages: this.PaginationServc.totalPages,
@@ -1859,59 +1736,7 @@ export class AuctionProductComponent implements OnInit {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
 
-  // edit form
-  
-  editForm(){
-    const iterate = localStorage.getItem('productDetails');
-     var autiondatelabel = ["deliveryDate"];
-     if(iterate!=null){
-       var editdata = JSON.parse(iterate);
-       Object.keys(editdata).forEach(key => {
-         if(key=="sameLocNDate"){
-             this.productsFormGroup.controls[key].setValue(editdata[key]);           
-         }else if(key=="location"){
-
-          Object.keys(editdata[key]).forEach(key1 => {
-            if(editdata[key][key1] && autiondatelabel.includes(key1)){
-              this.locationForm[key1].setValue(this.formatDate(editdata[key][key1]),{
-                   onlySelf: true
-                 });
-                 this.locationForm[key1].updateValueAndValidity();
-            }else{
-              this.productsFormGroup.get(key)?.get(key1)?.setValue(editdata[key][key1]);
-              this.productsFormGroup.updateValueAndValidity();
-            }
-            })
-         }else if(key=="productFormGroup"){
-          Object.keys(editdata[key]).forEach(key1 => {
-            
-            editdata[key][key1].forEach((value:any,index:any,array:any) => {
-              this.auctionProducts.push(new FormControl(value));
-              this.auctionProducts.updateValueAndValidity();
-            })
-          })
-         }
-        //  if (editdata[key] && autiondatelabel.includes(key)){
-        //    this.productsFormGroup.controls[key].setValue(this.formatDate(editdata[key]),{
-        //      onlySelf: true
-        //    });
-        //  }
-        //  else if(key!="auctionAttachement"){
-        //    this.productsFormGroup.controls[key].setValue(editdata[key]);
-        //  }
-        //  else if(key=="auctionAttachement"){
-        //    editdata[key].forEach((value:any,index:any,array:any) => {
-            
-        //      this.files.push(value);
-        //      this.productsFormGroup.push(new FormControl(value));
-        //      })
-        //  }
-       });
-     }
-     this.productsFormGroup.updateValueAndValidity();
-   }
-   
-  formatDate(date:any) {
+  formatDate(date: any) {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
@@ -1921,63 +1746,65 @@ export class AuctionProductComponent implements OnInit {
     return [month, day, year].join('/');
   }
 
-  public closeModal(confirmType: string){
-    if(confirmType == 'success'){
-      this.showSuccessfulModal = false;      
+  public closeModal(confirmType: string) {
+    if (confirmType == 'success') {
+      this.showSuccessfulModal = false;
       this.router.navigate(['/auctionlist']);
-    } else if(confirmType == 'close'){ 
+    } else if (confirmType == 'close') {
       this.showSuccessfulModal = false;
     }
   }
 
-  public closeProductModal(confirmType: string){
-    if(confirmType == 'success'){
-      this.showSuccessfulModal = false;      
+  public closeProductModal(confirmType: string) {
+    this.activeFileIndex = -1;
+    this.activePictureIndex = -1;
+    if (confirmType == 'success') {
+      this.showSuccessfulModal = false;
       this.router.navigate(['/auctionlist']);
-    } else if(confirmType == 'close'){ 
+    } else if (confirmType == 'close') {
       $('body').removeClass('modal-open');
       $('.modal-backdrop').remove();
       this.showProductModal = false;
     }
   }
-  
-  public openConfirmCancelModal(){
+
+  public openConfirmCancelModal() {
     this.showConfirmCancelModal = true;
   }
 
-  public closeConfirmCancelModal(confirmType: string){
-    if(confirmType == 'success'){
-      this.showConfirmCancelModal = false;    
+  public closeConfirmCancelModal(confirmType: string) {
+    if (confirmType == 'success') {
+      this.showConfirmCancelModal = false;
       this.showCancelSuccessfulModal = true;
-    } else if(confirmType == 'close'){ 
-      this.showConfirmCancelModal = false;   
+    } else if (confirmType == 'close') {
+      this.showConfirmCancelModal = false;
     }
   }
 
-  public closeCancelSuccessfulModal(confirmType: string){
-    if(confirmType == 'success'){
+  public closeCancelSuccessfulModal(confirmType: string) {
+    if (confirmType == 'success') {
       this.showCancelSuccessfulModal = false;
       this.router.navigate(['/auctionlist']);
-    } else if(confirmType == 'close'){ 
+    } else if (confirmType == 'close') {
       this.showCancelSuccessfulModal = false;
     }
   }
 
-  public closeAlertModal(confirmType: string){
-    if(confirmType == 'success'){
+  public closeAlertModal(confirmType: string) {
+    if (confirmType == 'success') {
       this.showAlertModal = false;
       this.router.navigate(['/auctionlist']);
-    } else if(confirmType == 'close'){ 
+    } else if (confirmType == 'close') {
       this.showAlertModal = false;
     }
   }
 
-  public closeDeleteSuccessfulModal(confirmType: string){
-    if(confirmType == 'success'){
+  public closeDeleteSuccessfulModal(confirmType: string) {
+    if (confirmType == 'success') {
       this.showDeleteSuccessfulModal = true;
       this.router.navigate(['/auctionlist']);
-    } else if(confirmType == 'close'){ 
-      this.showDeleteSuccessfulModal = false;   
+    } else if (confirmType == 'close') {
+      this.showDeleteSuccessfulModal = false;
     }
   }
 }

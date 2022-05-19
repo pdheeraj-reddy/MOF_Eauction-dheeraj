@@ -15,7 +15,7 @@ export class PricingCommitteeHeadReqComponent implements OnInit {
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     this.PaginationServc.sortByTableHeaderId('applicationsList', columnId, sortType, dateFormat);
   }
-  catChange(value:string){
-    this.selectedCat=value;
+  catChange(value: string) {
+    this.selectedCat = value;
   }
 }

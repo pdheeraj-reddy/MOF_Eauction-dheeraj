@@ -2,13 +2,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
             <li class="breadcrumb-item"><a href="#">{{ 'bidderAuctions.TrustServices' | translate }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ 'bidderAuctions.Auctions' | translate }}
-            </li>
+            <li class="breadcrumb-item active" aria-current="page"> {{ 'bidderAuctions.Auctions' | translate }} </li>
         </ol>
     </nav>
 </div>
-
 <div class="col-12">
     <div class="row">
         <div class="col-md-12">
@@ -20,29 +17,33 @@
     <div class="row">
         <div class="col-md-12" style="margin-bottom: 20px; display: flex;justify-content: space-between; width: 100%;">
             <div class="btn-group" role="group" aria-label="Basic example">
-
                 <ul class="nav nav-fill p-0 btn-group amauction-fade">
                     <li class="nav-item border-left btn btn-outline-primary-light p-0">
-                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Ended Auction' }" (click)="onTabSelection('Ended Auction')">{{ 'bidderAuctions.ClosedAuctions' | translate }} ({{totcntforendedauction}})</a>
+                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Ended Auction' }" (click)="onTabSelection('Ended Auction')">{{ 'bidderAuctions.ClosedAuctions' | translate }}
+                            ({{totcntforendedauction}})</a>
                     </li>
                     <li class="nav-item border-left btn btn-outline-primary-light p-0">
-                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Under Gear' }" (click)="onTabSelection('Under Gear')">{{ 'bidderAuctions.UnderGear' | translate }} ({{totcntforundergear}})</a>
+                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Under Gear' }" (click)="onTabSelection('Under Gear')">{{ 'bidderAuctions.UnderGear' | translate }}
+                            ({{totcntforundergear}})</a>
                     </li>
                     <li class="nav-item border-left btn btn-outline-primary-light  p-0">
-                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Upcoming Auction' }" (click)="onTabSelection('Upcoming Auction')">{{ 'bidderAuctions.UpcomingAuctions' | translate }} ({{totcntforupcommingauction}})</a>
+                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Upcoming Auction' }" (click)="onTabSelection('Upcoming Auction')">{{ 'bidderAuctions.UpcomingAuctions' |
+                            translate }} ({{totcntforupcommingauction}})</a>
                     </li>
                     <li class="nav-item border-left p-0 btn btn-outline-primary-light">
-                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Ongoing Auction' }" (click)="onTabSelection('Ongoing Auction')">{{ 'bidderAuctions.OngoingAuctions' | translate }} ({{totcntforongoingauction}})</a>
+                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'Ongoing Auction' }" (click)="onTabSelection('Ongoing Auction')">{{ 'bidderAuctions.OngoingAuctions' | translate
+                            }} ({{totcntforongoingauction}})</a>
                     </li>
                     <li class="nav-item p-0 btn btn-outline-primary-light">
-                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'All' }" (click)="onTabSelection('All')">{{ 'bidderAuctions.All' | translate }} ({{totcntforall}})</a>
+                        <a class="nav-link" [ngClass]="{ active: selectedTab === 'All' }" (click)="onTabSelection('All')">{{ 'bidderAuctions.All' | translate }}
+                            ({{totcntforall}})</a>
                     </li>
                 </ul>
             </div>
             <div class="dropdown dropdown-filters-container d-inline">
                 <button (click)="toggleFilter()" class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm" type="button">
                     <span class="text-14 icon-filters"></span>
-                <!-- <span class="badge badge-danger"><small>4</small></span> -->
+                    <!-- <span class="badge badge-danger"><small>4</small></span> -->
                 </button>
                 <!-- <div class="dropdown-menu dropdown-filter" aria-labelledby="dropdownMenuButton">
                     <div class="card filter shadow-lg-5" id="collapseExample">
@@ -103,7 +104,6 @@
             </div>
         </div>
     </div>
-
     <div>
         <!-- Card group  -->
         <div class="card-grp">
@@ -114,7 +114,6 @@
         <div class="mt-4 row margin-auto" *ngIf="auctionListData?.length > 0">
             <div class="mb-5">
                 <nav aria-label="..." class="nav-pagination">
-
                     <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
                         <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
                             <a (click)="getServerData(1)" class="page-link" href="#">Last</a>
@@ -123,12 +122,11 @@
                             <a (click)="getServerData(PaginationServc.currentPage)" class="page-link" tabindex="-1" aria-disabled="true">{{ 'auctionlist.grid-previous' | translate }}</a>
                         </li>
                         <li *ngFor="let page of PaginationServc.pages" class="page-item" [ngClass]="{ active: PaginationServc.currentPage === page }">
-                            <a (click)="getServerData(page + 1)" class="page-link">
-                                {{ page }}
-                            </a>
+                            <a (click)="getServerData(page + 1)" class="page-link"> {{ page }} </a>
                         </li>
                         <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                            <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                            <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
+                                'auctionlist.grid-next' | translate }}</a>
                         </li>
                         <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
                             <a (click)="getServerData(PaginationServc.currentPage + 1)" class="page-link" href="#">Last</a>

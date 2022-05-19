@@ -1,88 +1,46 @@
 <div class="col-12">
-  <ul
-    class="nav et-tabs et-tabs-filled nav-pills"
-    id="pills-tab"
-    role="tablist"
-  >
-    <li class="nav-item">
-      <a
-        class="nav-link"
-        id="pills-home-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-home"
-        aria-selected="true"
-        (click)="changeToAuction()"
-        >{{ "auctionModerator.am-detail.auction-committee.tab1" | translate }}</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link"
-        id="pills-profile-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-profile"
-        aria-selected="false"
-        (click)="changeToProduct()"
-        >{{ "auctionModerator.am-detail.auction-committee.tab2" | translate }}</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link"
-        id="pills-profile-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-profile"
-        aria-selected="false"
-        (click)="changeToPricing()"
-        >{{ "auctionModerator.am-detail.auction-committee.tab3" | translate }}</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link active"
-        id="pills-profile-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-profile"
-        aria-selected="false"
-        >{{ "auctionModerator.am-detail.auction-committee.tab4" | translate }}</a
-      >
-    </li>
-  </ul>
-  <div *ngIf="showAuction">
-    <app-auction-req-details [preAuctionData]="preAuctionData">
-    </app-auction-req-details>
-  </div>
-  <div *ngIf="showProduct">
-    <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
-  </div>
-  <div *ngIf="showPricing">
-    <app-assign-pricing-committe> </app-assign-pricing-committe>
-  </div>
-  <div *ngIf="showAuctionCommittee">
-    <app-assign-auction-committe [isPublishTab]="isPublishTab">
-    </app-assign-auction-committe>
-  </div>
-  <!-- <mat-tab-group headerPosition="above" [selectedIndex]="3">
-    
-    <mat-tab label="Auction Details">
-      
-      <app-auction-req-details [preAuctionData]="preAuctionData">
-      </app-auction-req-details>
-    </mat-tab>
-    <mat-tab label="Product Details">
-      <app-prodct-details
-        [preAuctionData]="preAuctionData"
-      ></app-prodct-details>
-    </mat-tab>
-    <mat-tab label="Pricing Committee">
-      <app-assign-pricing-committe> </app-assign-pricing-committe>
-    </mat-tab>
-    <mat-tab label="Auction Committee">
-      <app-assign-auction-committe> </app-assign-auction-committe>
-    </mat-tab>
-  </mat-tab-group> -->
+    <!-- <div *ngIf="_3MembersErrorMsg" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert-wrapper">
+            <div class="alert-body">
+                <div class="alert-content">
+                    <p>{{"auctionModerator.am-detail.pricing-committee.alert" | translate}}</p>
+                </div>
+            </div>
+            <div class="alert-action"> <button type="button" class="close pt-0" data-dismiss="alert" aria-label="Close"> <span
+          class="icon-clearclose"></span> </button> </div>
+        </div>
+    </div> -->
+    <div *ngIf="_3MembersErrorMsg" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert-wrapper">
+            <div class="alert-body">
+                <i class="alert-icon">
+              <span class="icon-filled-wrong"></span>
+            </i>
+                <div class="alert-content">
+                    <p>{{"auctionModerator.am-detail.pricing-committee.alert" | translate}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <ul class="nav et-tabs et-tabs-filled nav-pills mt-5" id="pills-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true" (click)="changeToAuction()">{{"auctionModerator.am-detail.auction-committee.tab1" | translate}}</a> </li>
+        <li class="nav-item"> <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToProduct()">{{"auctionModerator.am-detail.auction-committee.tab2" | translate}}</a> </li>
+        <li class="nav-item"> <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToPricing()">{{"auctionModerator.am-detail.auction-committee.tab3" | translate}}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToAuctionCommittee()">{{"auctionModerator.am-detail.auction-committee.tab4" |
+            translate}}</a> </li>
+    </ul>
+    <div *ngIf="showAuction">
+        <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode"> </app-auction-req-details>
+    </div>
+    <div *ngIf="showProduct">
+        <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
+    </div>
+    <div *ngIf="showPricing">
+        <app-assign-pricing-committe> </app-assign-pricing-committe>
+    </div>
+    <div [ngClass]="{'hide': !showAuctionCommittee}">
+        <app-assign-auction-committe [isPublishTab]="isPublishTab" (_3MembersErrorMsg)="showErrorMsg($event)" (callstepper)="callstepper()"> </app-assign-auction-committe>
+    </div>
+    <!-- <mat-tab-group headerPosition="above" [selectedIndex]="3"> <mat-tab label="Auction Details"> <app-auction-req-details [preAuctionData]="preAuctionData"> </app-auction-req-details> </mat-tab> <mat-tab label="Product Details"> <app-prodct-details [preAuctionData]="preAuctionData" ></app-prodct-details> </mat-tab> <mat-tab label="Pricing Committee"> <app-assign-pricing-committe> </app-assign-pricing-committe> </mat-tab> <mat-tab label="Auction Committee"> <app-assign-auction-committe> </app-assign-auction-committe> </mat-tab> </mat-tab-group> -->
 </div>

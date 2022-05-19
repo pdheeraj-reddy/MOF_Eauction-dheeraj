@@ -1,3 +1,10 @@
 ul.nav.et-tabs.et-tabs-filled li a {
-    max-width: inherit;
+    max-width: max-content;
+}
+
+.nav-link {
+    padding: 15px 24px !important;
+}
+.hide{
+  display: none;
 }

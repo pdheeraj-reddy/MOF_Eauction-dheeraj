@@ -1,7 +1,8 @@
 <div class="col-12 mt-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="https://10.14.8.61:8055/">{{ 'auctioncreate.bcrumb1' | translate }}</a></li>
+            <li class="breadcrumb-item"><a href="https://10.14.8.61:8055/">{{ 'auctioncreate.bcrumb1' | translate }}</a>
+            </li>
             <li class="breadcrumb-item" aria-current="page">
                 <a (click)="openSuccessfulModal()">{{ 'auctioncreate.bcrumb2' | translate }}</a>
             </li>
@@ -60,8 +61,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{'modal-show': showSuccessfulModal}">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
@@ -73,18 +72,18 @@
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_draft_title' | translate }} </h4>
             </div>
             <div class="modal-body">
-                <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{ 'message.success_draft_para' | translate }} </label>
+                <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{
+                    'message.success_draft_para' | translate }} </label>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button> </div>
+            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{
+                    'message.back_auctionRequest' | translate }} </button> </div>
         </div>
     </div>
 </div>
-
 <!-- vue js -->
 <script src="https://cdn.etimad.sa/v2/js/libs/vue/vue.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/datatable.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/editable-datatable.min.js" type="text/javascript"></script>
-
 <script src="https://cdn.etimad.sa/v2/js/libs/bootstrap-select/bootstrap-select.min.min.js"></script>
 <!-- <script src="https://cdn.etimad.sa/v2/js/libs/fine-uploader/fine-uploader.min.min.js "></script> -->

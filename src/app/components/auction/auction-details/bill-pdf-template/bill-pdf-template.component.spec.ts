@@ -8,9 +8,9 @@ describe('BillPdfTemplateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BillPdfTemplateComponent ]
+      declarations: [BillPdfTemplateComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

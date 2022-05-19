@@ -1,13 +1,15 @@
 .nav-btn {
-  display: flex;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
+
 .btn-submit-grp {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
+
 ul.nav.et-tabs.et-tabs-filled li a {
-  max-width: 200px;
+    max-width: 200px;
 }

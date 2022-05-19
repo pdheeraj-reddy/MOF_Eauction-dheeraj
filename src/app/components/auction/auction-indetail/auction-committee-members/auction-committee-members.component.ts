@@ -12,7 +12,7 @@ export class AuctionCommitteeMembersComponent implements OnInit {
   @Output() changeSteps = new EventEmitter<number>();
   @Output() changeauctiontype = new EventEmitter<string>();
   //variables
-  title   = 'Auction Details';
+  title = 'Auction Details';
   maxChars = 250;
   submitted = false;
   // Dropdown Values
@@ -21,28 +21,28 @@ export class AuctionCommitteeMembersComponent implements OnInit {
   membersFormGroup: FormGroup;
   // Objects
   auctionItem: AuctionBasicMaster = new AuctionBasicMaster();
-  
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public onSubmit(submitSrc: string){
+  public onSubmit(submitSrc: string) {
     this.submitted = true;
     console.log(submitSrc);
-    if(submitSrc === 'save'){
-      if(this.membersFormGroup.status === 'VALID'){
-        this.activeStep ++;
+    if (submitSrc === 'save') {
+      if (this.membersFormGroup.status === 'VALID') {
+        this.activeStep++;
         this.changeSteps.emit(this.activeStep);
       }
-    } else if(submitSrc === 'saveasdraft'){
-      this.activeStep ++;
+    } else if (submitSrc === 'saveasdraft') {
+      this.activeStep++;
       this.changeSteps.emit(this.activeStep);
     }
   }
 
-  public back(){
-    this.activeStep --;
+  public back() {
+    this.activeStep--;
     this.changeSteps.emit(this.activeStep);
     this.changeauctiontype.emit("productedit");
   }

@@ -2,13 +2,7 @@
     <div class="row">
         <p style="color: rgb(88, 88, 233)">{{ name }}</p>
         <div style="margin-left: 200px">
-          <button
-            (click)="closeDialog()"
-            type="button"
-            class="close"
-            data-dismiss="dropdown"
-            aria-label="Close"
-          >
+            <button (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown" aria-label="Close">
             <a class="btn btn-ghost btn-sm fill-primary-green">
               <span class="icon-close"></span>
             </a>
@@ -16,22 +10,15 @@
         </div>
     </div>
 
-  <div style="display: flex">
-    <input
-      [(ngModel)]="price"
-      type="text"
-      placeholder="Enter the estimated value of the product"
-      style="
+    <div style="display: flex">
+        <input [(ngModel)]="price" type="text" placeholder="Enter the estimated value of the product" style="
         width: 380px;
         outline: none;
         border: none;
         border-bottom: 1px solid grey;
         background-color: #eaf6ef;
-      "
-    />
-    <button
-        (click)="closeDialog()"
-      style="
+      " />
+        <button (click)="closeDialog()" style="
         margin-left: 20px;
         height: 40px;
         width: 110px;
@@ -40,9 +27,8 @@
         background-color: #32ad71;
         color: white;
         font-weight: bold;
-      "
-    >
+      ">
       Preservation
     </button>
-  </div>
+    </div>
 </div>

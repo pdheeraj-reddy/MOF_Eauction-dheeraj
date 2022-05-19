@@ -8,9 +8,9 @@ describe('AucMemDetailPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AucMemDetailPageComponent ]
+      declarations: [AucMemDetailPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

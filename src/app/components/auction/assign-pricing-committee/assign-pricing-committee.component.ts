@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuctionService } from 'src/app/service/auction.service-2';
+import { AuctionApprovalService } from 'src/app/service/auction-approval.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -29,24 +29,24 @@ export class AssignPricingCommitteeComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
   constructor(
-    private _AuctionService: AuctionService,
+    private _AuctionService: AuctionApprovalService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   memberSelected(data: any) {
     console.log(data);
   }
 
   openAddMemberDialog(title: any, role: string) {
-    switch(role) {
-      case "ZEAUCTION_SALCOMM_CHAIRMAN" :
-        if(this.committeeChairSelected) return;
+    switch (role) {
+      case "ZEAUCTION_SALCOMM_CHAIRMAN":
+        if (this.committeeChairSelected) return;
         break;
-      case "ZEAUCTION_SALCOMM_SECRETARY" :
-        if(this.committeeChairSelected) return;
+      case "ZEAUCTION_SALCOMM_SECRETARY":
+        if (this.committeeChairSelected) return;
         break;
     }
-        this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+    this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
       (res: any) => {
         this.committeeMemberList = res.d.results;
         console.log(res);
@@ -89,11 +89,11 @@ export class AssignPricingCommitteeComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe((result) => {
           this.committeeMemberData = result;
-          switch(result?.EmployeeRole){
-            case "ZEAUCTION_SALCOMM_CHAIRMAN" :
+          switch (result?.EmployeeRole) {
+            case "ZEAUCTION_SALCOMM_CHAIRMAN":
               this.committeeChairSelected = true;
               break;
-            case "ZEAUCTION_SALCOMM_SECRETARY" :
+            case "ZEAUCTION_SALCOMM_SECRETARY":
               this.committeeSecSelected = true;
           }
           console.log(result);
@@ -103,12 +103,12 @@ export class AssignPricingCommitteeComponent implements OnInit {
   }
 
   editMember(role: any) {
-    switch(role) {
+    switch (role) {
       case "ZEAUCTION_SALCOMM_CHAIRMAN":
         this.committeeChairSelected = false;
-      break;
+        break;
     }
-  //  this.openAddMemberDialog(title, role);
+    //  this.openAddMemberDialog(title, role);
   }
 
   setPopUpTitle(title: any, role: string) {

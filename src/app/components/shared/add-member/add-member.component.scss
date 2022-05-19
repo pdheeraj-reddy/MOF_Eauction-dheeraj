@@ -8,8 +8,12 @@
     letter-spacing: 0;
     line-height: 35px;
     text-align: left;
-  }
-  .stepper-card {
+}
+.table-data-bg{
+  background-color: #F9FCFA;
+}
+
+.stepper-card {
     background-color: #eff8f3;
     display: flex;
     flex-direction: column;
@@ -17,13 +21,15 @@
     height: 200px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-  }
-  .show-status {
+}
+
+.show-status {
     margin-top: 3%;
     display: flex;
     align-items: center;
-  }
-  .status-color {
+}
+
+.status-color {
     height: 8px;
     width: 8px;
     transform: scaleX(-1);
@@ -31,16 +37,19 @@
     background-color: #f89819;
     margin-bottom: 8px;
     margin-left: 5px;
-  }
-  .status-icon {
+}
+
+.status-icon {
     display: flex;
     align-items: center;
     // flex-direction: row-reverse;
-  }
-  label {
+}
+
+label {
     font-size: 12px;
-  }
-  .steps-group {
+}
+
+.steps-group {
     border-radius: 6px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
     height: 100px;
@@ -59,36 +68,49 @@
     -webkit-box-pack: center;
     justify-content: center;
     font-weight: 400;
-  }
-  .steps-group a {
+}
+
+.steps-group a {
     display: flex;
     align-items: center;
     // flex-direction: row-reverse;
+}
+::ng-deep .mat-dialog-container{
+  padding: 0 !important;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline,
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: transparent !important;
+    border-bottom: 2px solid #32AD71 !important;
   }
-  .alert {
+.alert {
     width: 100%;
     margin-top: 10px;
-  }
-  
-  .alert-icon {
+}
+
+.alert-icon {
     transform: rotate(45deg);
-  }
-  .alert .alert-wrapper,
-  .alert .alert-wrapper .alert-body {
+}
+
+.alert .alert-wrapper,
+.alert .alert-wrapper .alert-body {
     display: flex;
     justify-content: flex-end;
-  }
-  .nav-btn {
+}
+
+.nav-btn {
     display: flex;
-  }
-  .flex-card {
+}
+
+.flex-card {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 30px;
-  }
-  .flex-card-item {
+}
+
+.flex-card-item {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -99,8 +121,9 @@
     border-radius: 4px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px 0 rgba(65, 64, 66, 0.08);
-  }
-  .card-body p {
+}
+
+.card-body p {
     padding-right: 5px;
     margin-bottom: 0 !important;
     color: #32ad71;
@@ -108,62 +131,77 @@
     font-size: 14px;
     letter-spacing: 0;
     line-height: 16px;
-  }
-  .card-body {
+}
+
+.card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .last-card {
+}
+
+.last-card {
     // cursor: not-allowed;
     opacity: 35%;
-  }
-  .btn-submit-grp {
+}
+
+.btn-submit-grp {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-  }
-  .btn-primary-light {
+}
+
+.btn-primary-light {
     margin-left: 10px;
-  }
-  .add-btn {
+}
+
+.add-btn {
     border: none;
     background-color: #ffff;
     margin: 20px;
     padding: 0;
-  }
-  .search {
+}
+
+.search {
     display: flex;
     align-items: center;
     border-bottom: 3px solid #32ad71;
-  }
-  .status-success-icon {
+}
+ ::ng-deep .mat-form-field-flex {
+  border-bottom: 2px solid #32AD71 !important;
+  background-color: transparent !important;
+ }
+//  ::ng-deep .mat-form-field-flex:hover:active:focus {
+//   border-bottom: 2px solid #32AD71 !important;
+//  }
+.status-success-icon {
     display: flex;
     align-items: center;
     flex-direction: column;
-  }
-  .circle {
+}
+
+.circle {
     width: 96px;
     height: 96px;
     background: #f9fcfa;
     border-radius: 50%;
-  }
-  .example-form {
+}
+
+.example-form {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
-  }
-  
-  .example-full-width {
+}
+
+.example-full-width {
     width: 100%;
-  }
-  
-  .example-option-img {
+}
+
+.example-option-img {
     vertical-align: middle;
     margin-right: 8px;
-  }
-  
-  [dir='rtl'] .example-option-img {
+}
+
+[dir='rtl'] .example-option-img {
     margin-right: 0;
     margin-left: 8px;
-  }
+}

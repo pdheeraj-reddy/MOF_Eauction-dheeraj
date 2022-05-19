@@ -13,8 +13,8 @@ export class AuctionPricingRequestComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  id:any = 'all';
-  tabChange(ids:any){
+  id: any = 'all';
+  tabChange(ids: any) {
     this.id = ids;
     console.log(this.id);
   }

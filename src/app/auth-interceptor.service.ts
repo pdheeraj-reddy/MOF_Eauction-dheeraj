@@ -25,11 +25,16 @@ export class AuthInterceptorService implements HttpInterceptor {
     if(this._authService.loggedIn()){
       const AuthRequest = request.clone( {
       setHeaders: {
-          'Authorization': 'Bearer ' + accessToken,
-          // 'IDM_Token': accessToken,
-          // 'X_User_Role': 'InteriorMarketer',
+          // ------- For Development
+          // 'X_MOF_ClientID': '1QIwuXglQ0xImRhjTUbJ7k6x7AR6MibG',
+          // 'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
+          // ------- For Pre-Prod
           'X_MOF_ClientID': '1QIwuXglQ0xImRhjTUbJ7k6x7AR6MibG',
           'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
+          // ------- Common
+          // 'IDM_Token': accessToken,
+          // 'X_User_Role': 'InteriorMarketer',
+          'Authorization': 'Bearer ' + accessToken,
           'withCredentials': 'true',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin':'*',

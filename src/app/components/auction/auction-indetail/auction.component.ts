@@ -11,10 +11,10 @@ import { AuctionService } from "src/app/service/auction.service";
 })
 export class AuctionComponent implements OnInit {
 
-  title   = 'Auction Details';
+  title = 'Auction Details';
   public charNum = '0/250';
-  activeStep : number = 1;
-  auctionStatus : string;
+  activeStep: number = 1;
+  auctionStatus: string;
 
   showLoader: boolean = false;
   ObjectId: any = '';
@@ -22,7 +22,7 @@ export class AuctionComponent implements OnInit {
   ViewMode: any = '';
   auctionDetails: any;
   auctionDetailsSubscription$: Subscription;
-  
+
   showSuccessfulModal: boolean = false;
   showConfirmCancelModal: boolean = false;
   showCancelSuccessfulModal: boolean = false;
@@ -34,7 +34,7 @@ export class AuctionComponent implements OnInit {
     public router: Router
   ) { }
 
-  countChar(val:string) {
+  countChar(val: string) {
     console.log(val);
     var len = val.length;
     if (len >= 250) {
@@ -44,34 +44,34 @@ export class AuctionComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    if(this.activatedRoute.snapshot.paramMap.get('ObjectId')){
+    if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
       this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
     }
-    if(this.ViewMode == 'edit' || this.ViewMode == 'view'){
+    if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
     } else {
-      if(this.ObjectId || this.DraftId ){
+      if (this.ObjectId || this.DraftId) {
         this.getAuctionDetails(this.ObjectId, this.DraftId);
       }
     }
-  } 
-  
-  
-  getAuctionDetails(ObjectId : string, DraftId : string){
+  }
+
+
+  getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionDetailsSubscription$ = this.auctionServc.getAuctionDetails(ObjectId, DraftId).subscribe((auctionDetailsResp: any) => {
       this.auctionDetails = auctionDetailsResp.d.results[0];
       this.showLoader = false;
-      if(this.ViewMode == 'view'){
-        if(this.auctionDetails.listtoproductnav?.results.length > 0){
+      if (this.ViewMode == 'view') {
+        if (this.auctionDetails.listtoproductnav?.results.length > 0) {
           this.activeStep = 3;
         } else {
           this.activeStep = 1;
         }
-      } else if(this.ViewMode == 'edit'){
-        if(this.auctionDetails.listtoproductnav?.results.length > 0){
+      } else if (this.ViewMode == 'edit') {
+        if (this.auctionDetails.listtoproductnav?.results.length > 0) {
           this.activeStep = 2;
         } else {
           this.activeStep = 1;
@@ -118,42 +118,42 @@ export class AuctionComponent implements OnInit {
     this.DraftId = value.DraftId;
   }
 
-  navAuctionDetails(){
-    if(this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId )){
+  navAuctionDetails() {
+    if (this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId)) {
       this.activeStep = 1;
     }
   }
 
-  navAuctionProducts(){
-    console.log("navAuctionProducts" , this.auctionDetails)
-    if(this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId )){
-      if(this.auctionDetails.listtoproductnav?.results.length > 0 || this.ViewMode == 'edit'){
+  navAuctionProducts() {
+    console.log("navAuctionProducts", this.auctionDetails)
+    if (this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId)) {
+      if (this.auctionDetails?.listtoproductnav?.results.length > 0 || this.ObjectId || this.ViewMode == 'edit' ) {
         this.activeStep = 2;
       }
     }
-    
+
   }
 
-  navAuctionSummary(){
-    console.log("navAuctionSummary" , this.auctionDetails);
+  navAuctionSummary() {
+    console.log("navAuctionSummary", this.auctionDetails);
     // console.log(this.auctionDetails);
     // console.log(this.auctionDetails.listtoproductnav?.results.length);
-    if(this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId )){
-      if(this.auctionDetails.listtoproductnav?.results.length > 0){
+    if (this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId)) {
+      if (this.auctionDetails?.listtoproductnav?.results.length > 0 || this.ObjectId) {
         this.activeStep = 3;
       }
     }
-    
+
   }
 
-  public openSuccessfulModal(){
-    if(this.ViewMode == 'edit'){
+  public openSuccessfulModal() {
+    if (this.ViewMode == 'edit') {
       this.showSuccessfulModal = true;
     } else {
-      if(this.ViewMode == 'view'){
+      if (this.ViewMode == 'view') {
         this.router.navigate(['/auctionlist']);
       } else {
-        if(this.ObjectId || this.DraftId ){
+        if (this.ObjectId || this.DraftId) {
           this.showSuccessfulModal = true;
         } else {
           this.router.navigate(['/auctionlist']);
@@ -162,11 +162,11 @@ export class AuctionComponent implements OnInit {
     }
   }
 
-  public closeModal(confirmType: string){
-    if(confirmType == 'success'){
+  public closeModal(confirmType: string) {
+    if (confirmType == 'success') {
       this.showSuccessfulModal = false;
       this.router.navigate(['/auctionlist']);
-    } else if(confirmType == 'close'){ 
+    } else if (confirmType == 'close') {
       this.showSuccessfulModal = false;
     }
   }

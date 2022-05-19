@@ -12,9 +12,12 @@ export class AuctionHeadDetailPageComponent implements OnInit {
   preAuctionData: any;
   editmode1: boolean = false;
   ObjectId: any = '';
+  DraftId: any = '';
+  ViewMode: any = '';
   isAuctionHead: boolean = false;
   isBidUpdate: boolean = false;
   priceAdjustment: boolean = false;
+  showPageLoader: boolean = false;
   showAuction = false;
   showProduct = true;
   showPricing = false;
@@ -23,11 +26,13 @@ export class AuctionHeadDetailPageComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     private _AuctionService: AuctionModeratorService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
+      this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
+      this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
     }
     this.getPreAuctionData();
   }
@@ -55,27 +60,19 @@ export class AuctionHeadDetailPageComponent implements OnInit {
   }
 
   getPreAuctionData() {
+    this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         console.log(res);
         this.preAuctionData = res['d']['results'][0];
         if (this.preAuctionData.ZzEstOpt == 'A') this.isBidUpdate = false;
         else this.isBidUpdate = true;
+        this.showPageLoader = false;
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);
       }
     );
-    // this._AuctionService.getPreAuctionApproval('9700000300').subscribe(
-    //   (res: any) => {
-    //     console.log(res);
-    //   },
-    //   (error) => {
-    //     console.log('getAuctionList RespError : ', error);
-    //   }
-    // );
-    // let temp = this._AuctionService.getPreAuctionApproval('9700000300');
-    // this.preAuctionData = temp['d']['results'][0];
   }
   changeToAuction() {
     this.showAuction = true;

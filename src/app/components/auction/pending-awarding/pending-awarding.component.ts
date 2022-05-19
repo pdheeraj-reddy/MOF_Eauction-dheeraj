@@ -11,5 +11,5 @@ export class PendingAwardingComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
 }

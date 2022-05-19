@@ -1,139 +1,107 @@
-<div class="col-12 mt-1">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb px-0">
-      <li class="breadcrumb-item">
-        <a href="#">{{ "auctionHead.head-detail.bcrumb1" | translate }}</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a href="#">{{ "auctionHead.head-detail.bcrumb2" | translate }}</a>
-      </li>
-      <li
-        class="breadcrumb-item active"
-        aria-current="page"
-      >
-      {{ "auctionHead.head-detail.bcrumb3" | translate }}
-      </li>
-    </ol>
-  </nav>
-</div>
-<br />
-
-<div class="col-12">
-  <div class="row">
-    <div class="col-md-12">
-      <h1 class="text-20 text-primary font-weight-500">
-        {{ "auctionHead.head-detail.pageTitle" | translate }}
-      </h1>
+<div class="card p-5 shadow-lg" *ngIf="showPageLoader">
+    <div class="form-row">
+        <div class="col-12">
+            <table id="inventoryAllocationTable" class="table">
+                <td colspan="10" class="p-3 bg-white">
+                    <div class="alert-body text-center">
+                        <i class="alert-icon">
+              <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                <g fill-rule="nonzero" fill="#32AD71">
+                  <path
+                    d="M32 11.871c-1.755 0-3.097-1.342-3.097-3.097V3.097C28.903 1.342 30.245 0 32 0s3.097 1.342 3.097 3.097v5.677c0 1.652-1.342 3.097-3.097 3.097z" />
+                  <path
+                    d="M32 64c-1.755 0-3.097-1.342-3.097-3.097v-5.677c0-1.755 1.342-3.097 3.097-3.097s3.097 1.342 3.097 3.097v5.677C35.097 62.658 33.755 64 32 64z"
+                    opacity=".4" />
+                  <path
+                    d="M46.452 60.077c-1.033 0-2.065-.516-2.684-1.548l-2.787-4.852c-.826-1.445-.31-3.406 1.135-4.232 1.445-.826 3.407-.31 4.232 1.136l2.787 4.851c.826 1.445.31 3.407-1.135 4.233a2.913 2.913 0 01-1.548.412z"
+                    opacity=".5" />
+                  <path
+                    d="M11.871 23.432a2.913 2.913 0 01-1.548-.413L5.47 20.232C4.026 19.406 3.51 17.445 4.335 16c.826-1.445 2.788-1.961 4.233-1.135l4.851 2.787c1.446.825 1.962 2.787 1.136 4.232-.62 1.032-1.652 1.548-2.684 1.548z"
+                    opacity=".05" />
+                  <path
+                    d="M57.084 49.548a2.913 2.913 0 01-1.549-.413l-4.954-2.787c-1.446-.825-1.962-2.787-1.136-4.232.826-1.445 2.787-1.961 4.232-1.135l4.852 2.787c1.445.826 1.961 2.787 1.136 4.232-.517 1.032-1.549 1.548-2.581 1.548z"
+                    opacity=".6" />
+                  <path
+                    d="M8.774 35.097H3.097C1.342 35.097 0 33.755 0 32s1.342-3.097 3.097-3.097h5.677c1.755 0 3.097 1.342 3.097 3.097s-1.445 3.097-3.097 3.097z"
+                    opacity=".1" />
+                  <path
+                    d="M60.903 35.097h-5.677c-1.755 0-3.097-1.342-3.097-3.097s1.342-3.097 3.097-3.097h5.677C62.658 28.903 64 30.245 64 32s-1.342 3.097-3.097 3.097z"
+                    opacity=".7" />
+                  <path
+                    d="M6.916 49.548c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.406 1.136-4.232l4.851-2.787c1.446-.826 3.407-.31 4.233 1.135.825 1.445.31 3.407-1.136 4.232l-4.851 2.787c-.413.31-.93.413-1.549.413z"
+                    opacity=".2" />
+                  <path
+                    d="M52.129 23.432c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.407 1.136-4.232l4.851-2.787c1.445-.826 3.407-.31 4.233 1.135.825 1.445.31 3.406-1.136 4.232l-4.852 2.787a2.913 2.913 0 01-1.548.413z"
+                    opacity=".8" />
+                  <path
+                    d="M17.548 60.077A2.913 2.913 0 0116 59.665c-1.445-.826-1.961-2.788-1.135-4.233l2.787-4.851c.825-1.446 2.787-1.962 4.232-1.136 1.445.826 1.961 2.787 1.135 4.232l-2.787 4.852c-.62 1.032-1.651 1.548-2.684 1.548z"
+                    opacity=".3" />
+                  <path
+                    d="M43.665 14.968a2.913 2.913 0 01-1.549-.413c-1.445-.826-1.961-2.787-1.135-4.232l2.787-4.852C44.594 4.026 46.555 3.51 48 4.335c1.445.826 1.961 2.788 1.135 4.233l-2.787 4.851c-.619.93-1.651 1.549-2.683 1.549z"
+                    opacity=".9" />
+                </g>
+              </svg>
+            </i>
+                        <div class="alert-content">
+                            <h5 class="text-black-50">Loading</h5>
+                        </div>
+                    </div>
+                </td>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
-<br>
-<br />
-<ul
-    class="nav et-tabs et-tabs-filled nav-pills"
-    id="pills-tab"
-    role="tablist"
-  >
-    <li class="nav-item">
-      <a
-        class="nav-link"
-        id="pills-home-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-home"
-        aria-selected="true"
-        (click)="changeToAuction()"
-        >{{ "auctionHead.head-detail.tab1" | translate }}</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link active"
-        id="pills-profile-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-profile"
-        aria-selected="false"
-        (click)="changeToProduct()"
-        >{{ "auctionHead.head-detail.tab2" | translate }}</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link"
-        id="pills-profile-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-profile"
-        aria-selected="false"
-        (click)="changeToPricing()"
-        >{{ "auctionHead.head-detail.tab3" | translate }}</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link"
-        id="pills-profile-tab"
-        data-toggle="pill"
-        role="tab"
-        aria-controls="pills-profile"
-        aria-selected="false"
-        >{{ "auctionHead.head-detail.tab4" | translate }}</a
-      >
-    </li>
-  </ul>
-  <div *ngIf="showAuction">
-    <app-auction-req-details [preAuctionData]="preAuctionData">
-    </app-auction-req-details>
-  </div>
-  <div *ngIf="showProduct">
-    <app-prodct-details
-      *ngIf="!priceAdjustment"
-      [isBidUpdate]="isBidUpdate"
-      [preAuctionData]="preAuctionData"
-      [isAuctionHead]="false"
-    >
-    </app-prodct-details>
-    <app-bid-value-update *ngIf="priceAdjustment"></app-bid-value-update>
-  </div>
-  <div *ngIf="showPricing">
-    <app-assign-pricing-committe></app-assign-pricing-committe>
-  </div>
-  <div *ngIf="showAuctionCommittee">
-    <app-assign-auction-committe> </app-assign-auction-committe>
-  </div>
-
-<!-- <mat-tab-group [selectedIndex]="1">
-  <mat-tab label="Auction Details">
-    <app-auction-req-details [preAuctionData]="preAuctionData">
-    </app-auction-req-details>
-  </mat-tab>
-  <mat-tab label="Product Details">
-    <button
-    (click) = "adjustPrice()"
-    class="btn btn-primary-light btn-lg mt-1 font-weight-bold rounded"
-      
-    >
-      Price Adjustment
-    </button>
-    <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
-    <app-bid-value-update></app-bid-value-update>
-    <app-prodct-details
-      *ngIf="!priceAdjustment"
-      [isBidUpdate]="isBidUpdate"
-      [preAuctionData]="preAuctionData"
-      [isAuctionHead]="false"
-    >
-    </app-prodct-details>
-
-    <app-bid-value-update *ngIf="priceAdjustment"></app-bid-value-update>
-  </mat-tab>
-  <mat-tab label="Pricing Committee Member">
-    <app-assign-pricing-committe></app-assign-pricing-committe>
-    <app-auction-committe></app-auction-committe>
-  </mat-tab>
-  <mat-tab label="Auction Commitee Members">
-    <app-assign-auction-committe> </app-assign-auction-committe>
-    <app-auction-pricing-committe> </app-auction-pricing-committe>
-  </mat-tab>
-</mat-tab-group> -->
+<div *ngIf="!showPageLoader">
+    <div class="col-12 mt-1">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb px-0">
+                <li class="breadcrumb-item">
+                    <a href="https://10.14.8.61:8055/">{{ "auctionHead.head-detail.bcrumb1" | translate }}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/auctionlist">{{ "auctionHead.head-detail.bcrumb2" | translate }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"> {{ "auctionHead.head-detail.bcrumb3" | translate }} </li>
+            </ol>
+        </nav>
+    </div>
+    <br />
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-20 text-primary font-weight-500"> {{ "auctionHead.head-detail.pageTitle" | translate }} </h1>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br />
+    <ul class="nav et-tabs et-tabs-filled nav-pills" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true" (click)="changeToAuction()">{{ "auctionHead.head-detail.tab1" | translate }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToProduct()">{{ "auctionHead.head-detail.tab2" | translate }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToPricing()">{{ "auctionHead.head-detail.tab3" | translate }}</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false">{{ "auctionHead.head-detail.tab4" | translate }}</a>
+        </li> -->
+    </ul>
+    <div *ngIf="showAuction">
+        <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode">
+        </app-auction-req-details>
+    </div>
+    <div [ngClass]="{'hide':!showProduct}">
+        <app-prodct-details [ngClass]="{'hide':priceAdjustment}" [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="true">
+        </app-prodct-details>
+        <app-bid-value-update [ngClass]="{'hide':!priceAdjustment}"></app-bid-value-update>
+    </div>
+    <div *ngIf="showPricing">
+        <app-assign-pricing-committe></app-assign-pricing-committe>
+    </div>
+    <div *ngIf="showAuctionCommittee">
+        <app-assign-auction-committe> </app-assign-auction-committe>
+    </div>
+</div>

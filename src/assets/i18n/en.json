@@ -32,6 +32,14 @@
     "15": "15 days",
     "Manual": "Manual",
     "anchorlink": "Press here",
+    "EAuction_SalesCommitteeChairman": "Auction Committee Head",
+    "EAuction_SalesCommitteSecretary": "Auction Committee Secretary",
+    "EAuction_InteriorMarketer": "Internal Marketer",
+    "EAuction_AuctionManager": "Auction Moderator",
+    "EAuction_SalesCommitteeMember": "Auction Committee Member",
+    "EAuction_PricingCommitteeMember": "Pricing Committee Member",
+    "EAuction_PricingCommitteSecretary": "Pricing Commitee Secretary",
+    "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "header": {
@@ -46,7 +54,8 @@
         "ftrlink-needhelp": "Need Help?",
         "ftrtext-certi": "The certification platform supports the following browsers",
         "msg-nodata": "No data available",
-        "msg-loading": "Loading"
+        "msg-loading": "Loading",
+        "SAR": "SAR"
     },
     "auctionlist": {
         "bcrumb1": "Etimad Services",
@@ -61,6 +70,10 @@
         "tab1-item3": "Rejected",
         "tab1-item4": "Published",
         "tab1-item5": "Pending Review",
+        "tab1-item6": "Pending Pricing",
+        "tab1-item7": "Pending to Publish",
+        "tab1-item8": "Pending Pricing Approval",
+        "tab1-item9": "Rejected Prices",
         "grid1-col1": "Auction Reference Number",
         "grid1-col2": "Auction Name",
         "grid1-col3": "Auction Type",
@@ -265,6 +278,7 @@
         "failure_atleastOne_auction": "At least one of the Mandatory fields need to be filled",
         "failure_atleastOne_product": "At least one Product is required",
         "failure_invalid_mindate": "Invalid Data",
+        "failure_nonZero": "Value should be greater than 0",
         "failure_invalid_minnumber": "At least enter 1 product",
         "alert_maxfilesize": "The file size is more than 2MB"
     },
@@ -277,8 +291,8 @@
 
     "auctionModerator": {
         "bcrumb1": "Etimad Services",
-        "bcrumb2": "Online auction requests",
-        "pageTitle": "Online auction requests",
+        "bcrumb2": "Online Auction Requests",
+        "pageTitle": "Online Auction Requests",
         "navdropdown1": "Create a new auction",
         "navdropdown1_opt1": "Auction",
         "navdropdown1_opt2": "Tender",
@@ -319,12 +333,12 @@
         },
 
         "am-detail": {
-            "bcrumb1": "Auction Moderator",
-            "bcrumb2": "Detail Page",
-            "bcrumb3": "Order Details",
-            "pageTitle": "Order Details",
+            "bcrumb1": "Etimad Services",
+            "bcrumb2": "Online Auction Request",
+            "bcrumb3": "Auction Details",
+            "pageTitle": "Auction Details",
             "section1-head1": "Request Name",
-            "section1-head2": "Order Status",
+            "section1-head2": "Auction Status",
             "stepper1": "Request Accept",
             "stepper2": "Appointment of Pricing Committee",
             "stepper3": "Appointment of Auction Committee",
@@ -351,13 +365,14 @@
                 "section1-head1": "Auction Reference Number",
                 "section1-head2": "Auction Type",
                 "section2-head1": "Please enter the reason for rejection",
-                "section2-opt1": "It was announced twice",
+                "section2-opt1": "It's been announced twice.",
                 "section3-head1": "Notes",
                 "section3-letter": "Letters",
                 "section3-cnt": "0/250",
                 "section3-phold": "Write your notes",
                 "back_btn": "Back",
-                "reject_btn": "Rejection of the Application"
+                "reject_btn": "Rejection of the Application",
+                "cancel_btn": "Cancellation"
             },
 
             "auction-details": {
@@ -376,13 +391,13 @@
                 "sec4-head1": "Auction Description",
 
                 "title2": "Auction Date and Time",
-                "sec5-head1": "Auction Start Date",
-                "sec5-head2": "Auction End Date",
-                "sec5-head3": "How to start the Auction",
+                "sec5-head1": "Beginning Of Bidding",
+                "sec5-head2": "End Of Bidding",
+                "sec5-head3": "Auction Start Method",
                 "sec5-opt1": "Manual",
                 "sec5-opt2": "Automatic",
-                "sec6-head1": "Auction Announcement Date",
-                "sec6-head2": "Last Date to subscribe",
+                "sec6-head1": "Bid Opening Date",
+                "sec6-head2": "Bid Opening Time",
 
                 "title3": "Financial Auction Items",
                 "sec7-head1": "Auction Start Price",
@@ -397,6 +412,19 @@
                 "th2": "Attachment Name",
                 "table-result": "No Attachments"
             },
+
+            "auction-details-confirmation": {
+                "title1": "Confirmation of Request accept?",
+                "sec1-head1": "Upon confirmation, the auction will be sent for assigning pricing committee.",
+                "Reference": "Back",
+                "Postconfirmation": "Confirmation of Acceptance"
+            },
+            "auction-details-success": {
+                "title1": "The request has been successfully accepted",
+                "sec1-head1": "After assigning the pricing committee, the request will be sent for product pricing update",
+                "BackToAuction": "Back to Auction Requests"
+            },
+
             "product-details": {
                 "title": "Product Details",
                 "th1": "Product Name",
@@ -435,8 +463,8 @@
                 "reject": "Cancel",
                 "accept": "Submit",
 
-                "popup1-title": "Confirmation of sending a quote request?",
-                "popup1-subtitle": "Upon confirmation, the auction request will be approved and published in the online auction.",
+                "popup1-title": "Confirmation of assignment of Pricing Committee?",
+                "popup1-subtitle": "Upon confirmation, the auction will be sent to Pricing Committee member for pricing.",
                 "popup1-accept": "Post Confirmation",
 
                 "popup2-title": "The request has been successfully sent to the pricing committee",
@@ -459,7 +487,12 @@
                 "email": "E-mail",
                 "back_btn": "Back",
                 "accept": "Submit",
-                "reject": "Cancel"
+                "reject": "Cancel",
+
+                "popup1-title": "Confirmation of assignment of auction committee?",
+                "popup1-subtitle": "Upon confirmation, the auction committee members will be assigned and notified.",
+                "popup2-title": "The request has been successfully sent to the auction committee",
+                "popup2-subtitle": "You can now pulish the acution."
             },
 
             "add-member": {
@@ -513,7 +546,7 @@
         "filter-refno-pholder": "Enter the Reference number",
 
         "head-detail": {
-            "bcrumb1": "Trust Services",
+            "bcrumb1": "Etimad Services",
             "bcrumb2": "Online Auction Requests",
             "bcrumb3": "Auction Details",
             "pageTitle": "Auction Details",
@@ -524,7 +557,7 @@
         }
     },
     "auctionMember": {
-        "bcrumb1": "Trust Services",
+        "bcrumb1": "Etimad Services",
         "bcrumb2": "Online Auction Requests",
         "pageTitle": "Online Auction Requests",
         "navdropdown1": "Create a new auction",
@@ -561,7 +594,7 @@
         "filter-refno-pholder": "Enter the Reference number",
 
         "mem-detail": {
-            "bcrumb1": "Trust Services",
+            "bcrumb1": "Etimad Services",
             "bcrumb2": "Online Auction Requests",
             "bcrumb3": "Auction Details",
             "pageTitle": "Auction Details",
@@ -575,7 +608,20 @@
             "head": "General information about the order",
             "subHead": "Product Pricing",
             "phold": "Total estimated value of products",
-            "save": "Save"
+            "save": "Save",
+            "failure_mssg": "Enter value greater than zero"
+        },
+
+        "confirmation-popup": {
+            "title": "Confirm sending product pricing?",
+            "subtitle": "Upon confirmation, the auction application will be approved and sent for approval.",
+            "accept": "Confirmation of Publication",
+            "back": "Back"
+        },
+        "successful-popup": {
+            "title": "Pricing was sent successfully",
+            "subtitle": "The request was successfully sent, and you'll receive an email. To follow up on your request",
+            "accept": "Back to Auction Requests"
         }
     },
 

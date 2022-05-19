@@ -13,11 +13,13 @@
                                 <div class="d-flex flex-wrap flex-md-nowrap mb-5">
                                     <div class="etimad-option ml-0">
                                         <input type="radio" id="checkbox07" formControlName="auctionType" name="auctionType" value="public" [required]="true" (change)="setValidation($event)" />
-                                        <label class="input-target" for="checkbox07"> <span>Public Auction</span> </label>
+                                        <label class="input-target" for="checkbox07"> <span>Public Auction</span>
+                                        </label>
                                     </div>
                                     <div class="etimad-option mr-0">
                                         <input type="radio" id="checkbox08" formControlName="auctionType" name="auctionType" value="private" [required]="true" (change)="setValidation($event)" />
-                                        <label class="input-target" for="checkbox08"> <span>Private Auction</span> </label>
+                                        <label class="input-target" for="checkbox08"> <span>Private Auction</span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -27,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="validationCustom01"> <span>Bidding method </span> 
+                        <label for="validationCustom01"> <span>Bidding method </span>
                             <!-- <span class="icon-filled-information mx-2 text-secondary-aqua" data-toggle="tooltip" data-placement="right" title="" data-original-title="Open Auction: Bidding is public and visible to all Closed Auction: Bids submitted in closed envelopes"></span>  -->
                         </label>
                         <div class="py-2">
@@ -45,7 +47,8 @@
                             <div class="text-light d-flex align-items-center mr-3"> <span class="icon-filled-search"></span> </div>
                         </div>
                         <div *ngIf="submitted && form['prevRefNo'].errors" class="invalid-feedback">
-                            <div *ngIf="form['prevRefNo'].errors['required']">Previous Reference number is required</div>
+                            <div *ngIf="form['prevRefNo'].errors['required']">Previous Reference number is required
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,7 +74,8 @@
                 <div class="form-row">
                     <div class="col-12 col-md-12">
                         <div class="form-group">
-                            <div class="border-bottom"> <label for="goverusermessage">Auction Description </label> <span class="float-left text-muted">character <small>{{descVal.value.length}} /{{maxChars}}</small> </span> </div>
+                            <div class="border-bottom"> <label for="goverusermessage">Auction Description </label> <span class="float-left text-muted">character <small>{{descVal.value.length}}
+                                        /{{maxChars}}</small> </span> </div>
                             <textarea class="form-control" #descVal [attr.maxlength]="maxChars" formControlName="auctionDesc" placeholder="Enter a brief description of the auction" rows="5" [required]="true"></textarea>
                         </div>
                         <div *ngIf="submitted && form['auctionDesc'].errors" class="invalid-feedback">
@@ -95,7 +99,8 @@
                     <div class="col-12 col-md-12">
                         <div class="form-group">
                             <div class="border-bottom">
-                                <label for="goverusermessage">Reason </label> <span class="float-left text-muted">character <small>{{reasonVal.value.length}} /{{maxChars}}</small> </span>
+                                <label for="goverusermessage">Reason </label> <span class="float-left text-muted">character <small>{{reasonVal.value.length}}
+                                        /{{maxChars}}</small> </span>
                             </div>
                             <textarea class="form-control" #reasonVal [attr.maxlength]="maxChars" formControlName="reason" placeholder="Please specify the reason for running your auction" rows="5" [required]="true"></textarea>
                         </div>
@@ -109,8 +114,9 @@
                         <div class="form-group">
                             <label>General Beneficiary Category - First Level</label>
                             <select class="form-control" formControlName="beneficiaryCategory1" id="validationCustom05" (change)="changeSelect($event, 'beneficiaryCategory')" [required]="true">
-                            <option value="">Select</option>
-                            <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}</option>
+                                <option value="">Select</option>
+                                <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}
+                                </option>
                             </select>
                             <div *ngIf="submitted && form['beneficiaryCategory1'].errors" class="invalid-feedback">
                                 <div *ngIf="form['beneficiaryCategory1'].errors['required']">Beneficiary Category - First Level is required</div>
@@ -121,8 +127,9 @@
                         <div class="form-group">
                             <label>Beneficiary Subcategory - Level Two</label>
                             <select class="form-control" formControlName="beneficiaryCategory2" id="validationCustom05" (change)="changeSelect($event, 'beneficiaryCategory')" [required]="true">
-                            <option value="">Select</option>
-                            <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}</option>
+                                <option value="">Select</option>
+                                <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}
+                                </option>
                             </select>
                             <div *ngIf="submitted && form['beneficiaryCategory2'].errors" class="invalid-feedback">
                                 <div *ngIf="form['beneficiaryCategory2'].errors['required']">Beneficiary Subcategory - Level Two is required</div>
@@ -135,8 +142,9 @@
                         <div class="form-group">
                             <label>Beneficiary Subcategory - Level Three</label>
                             <select class="form-control" formControlName="beneficiaryCategory3" id="validationCustom05" (change)="changeSelect($event, 'beneficiaryCategory')" [required]="true">
-                            <option value="">Select</option>
-                            <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}</option>
+                                <option value="">Select</option>
+                                <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}
+                                </option>
                             </select>
                             <div *ngIf="submitted && form['beneficiaryCategory3'].errors" class="invalid-feedback">
                                 <div *ngIf="form['beneficiaryCategory3'].errors['required']">Beneficiary Subcategory - Level Three is required</div>
@@ -148,7 +156,8 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label>The period of displaying products in the online market</label>
-                            <input type="text" formControlName="auctionPeriod" class="form-control" placeholder="Enter the period in number of days" [required]="form['auctionType'].value === 'private'" /> </div>
+                            <input type="text" formControlName="auctionPeriod" class="form-control" placeholder="Enter the period in number of days" [required]="form['auctionType'].value === 'private'" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,7 +169,8 @@
                             <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker (click)="makeConsole('enter')" (keydown.esc)="makeConsole('esc')" (keydown.alt)="makeConsole('alt')" (keydown.tab)="makeConsole('tab')" -->
                             <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'public'">
                             <div *ngIf="submitted && form['auctionStartDate'].errors" class="invalid-feedback">
-                                <div *ngIf="form['auctionStartDate'].errors['required']">Bidding begin date is required</div>
+                                <div *ngIf="form['auctionStartDate'].errors['required']">Bidding begin date is required
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,7 +188,8 @@
                             <input type="text" formControlName="auctionStartTime" class="time-control form-control" placeholder="Auction start time" [required]="form['auctionType'].value === 'public'" (click)="changetime($event,'auctionStartTime');" />
                         </div>
                         <div *ngIf="submitted && form['auctionStartTime'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionStartTime'].errors['required']">Bidding start time is required</div>
+                            <div *ngIf="form['auctionStartTime'].errors['required']">Bidding start time is required
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -195,7 +206,8 @@
                         <label for="validationCustom01">How to start the auction</label>
                         <div class="py-2">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="startauction1" name="startAuction" formControlName="startAuction" value="to me" class="custom-control-input" [required]="true" /> <label class="custom-control-label" for="startauction1">to me</label>
+                                <input type="radio" id="startauction1" name="startAuction" formControlName="startAuction" value="to me" class="custom-control-input" [required]="true" /> <label class="custom-control-label" for="startauction1">to
+                                    me</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="startauction2" name="startAuction" formControlName="startAuction" value="manual" class="custom-control-input" [required]="true" /> <label class="custom-control-label" for="startauction2">manual</label>
@@ -217,19 +229,23 @@
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label>Auction start price(in Saudi riyals)</label> <input type="number" formControlName="startPrice" min="1" step="any" class="form-control" placeholder="150,000" [required]="true" /> </div>
+                            <label>Auction start price(in Saudi riyals)</label> <input type="number" formControlName="startPrice" min="1" step="any" class="form-control" placeholder="150,000" [required]="true" />
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label>Lowest Bid Value(in Saudi Riyals)</label> <input type="text" formControlName="lowBidValue" class="form-control" placeholder="150,000" [required]="true" /> </div>
+                            <label>Lowest Bid Value(in Saudi Riyals)</label> <input type="text" formControlName="lowBidValue" class="form-control" placeholder="150,000" [required]="true" />
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label>Initial guarantee percentage</label> <input type="text" formControlName="gnteePercentage" class="form-control" placeholder="Enter the initial guarantee percentage" [required]="true" /> </div>
+                            <label>Initial guarantee percentage</label> <input type="text" formControlName="gnteePercentage" class="form-control" placeholder="Enter the initial guarantee percentage" [required]="true" />
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label>Last date to pay the final guarantee</label> <input type="text" formControlName="gnteePercentage" class="form-control" placeholder="Enter the number of days" [required]="true" /> </div>
+                            <label>Last date to pay the final guarantee</label> <input type="text" formControlName="gnteePercentage" class="form-control" placeholder="Enter the number of days" [required]="true" />
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -245,7 +261,8 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label>Enter Pursuit Percentage-Commission %</label>
-                            <input type="text" formControlName="pursuitPerCommission" class="form-control" placeholder="Enter Pursuit Percentage-Commission %" [required]="true" /> </div>
+                            <input type="text" formControlName="pursuitPerCommission" class="form-control" placeholder="Enter Pursuit Percentage-Commission %" [required]="true" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,9 +282,11 @@
                                             <input type="file" class="" accept="video/mp4,.mov,.docx,.doc,application/pdf,image/jpg,image/png" multiple (change)="selectFiles($event,'auctionAttachement')" />
                                             <div>
                                                 <span class="icon-attachment mx-2"></span> Drop files here to upload or
-                                                <span class="qq-upload-button-selector qq-upload-button"><span>choose a file</span></span>
+                                                <span class="qq-upload-button-selector qq-upload-button"><span>choose a
+                                                        file</span></span>
                                             </div>
-                                            <p>Allowed files formats (maximum - 2MB): MP4, MOV, PNG, JPG, DOCX, DOC, PDF</p>
+                                            <p>Allowed files formats (maximum - 2MB): MP4, MOV, PNG, JPG, DOCX, DOC, PDF
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +294,8 @@
                                     <div *ngIf="msg">{{msg}}</div>
                                 </div>
                                 <div *ngIf="submitted && form['auctionAttachement'].errors" class="invalid-feedback">
-                                    <div *ngIf="form['auctionAttachement'].errors['required']">Upload Product Pictures</div>
+                                    <div *ngIf="form['auctionAttachement'].errors['required']">Upload Product Pictures
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -291,15 +311,16 @@
                                 <tr *ngFor="let file of files;let index=index">
                                     <td>{{index+1}}</td>
                                     <td>
-                                        <div class="text-capitalize text-success"><span class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span></div>
+                                        <div class="text-capitalize text-success"><span class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="qq-btn-group text-right">
-                                            <button type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(file)" data-toggle="modal" data-target="#viewAttachmentModal"> 
-                                                <span class="icon-eye-open1"></span> 
+                                            <button type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(file)" data-toggle="modal" data-target="#viewAttachmentModal">
+                                                <span class="icon-eye-open1"></span>
                                             </button>
-                                            <button type="button" (click)="removeFile(index)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete"> 
-                                                <span class="icon-delete"></span> 
+                                            <button type="button" (click)="removeFile(index)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
+                                                <span class="icon-delete"></span>
                                             </button>
                                         </div>
                                     </td>
@@ -309,24 +330,24 @@
                     </div>
                 </div>
             </div>
-
             <div class="pt-5">
                 <div class="form-row">
                     <div class="col-12">
                         <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
                             <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-                                <button (click)="back()" type="button" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> 
-                                    <span class="btn-text">back</span> <span class="v-divider"></span> 
-                                    <span class="icon icon-arrow-left"></span> 
+                                <button (click)="back()" type="button" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+                                    <span class="btn-text">back</span> <span class="v-divider"></span>
+                                    <span class="icon icon-arrow-left"></span>
                                 </button>
                             </div>
                             <div class="d-flex flex-column flex-md-row mb-5">
                                 <button class="btn btn-danger btn-lg mx-0 mx-md-2" routerLink="/">Cancel</button>
-                                <button type="button" (click)="onSubmit('saveasdraft')" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> Save as draft </button>
-                                <button type="button" (click)="onSubmit('save')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> 
-                            <span class="btn-text">Save and continue</span> <span class="v-divider"></span> 
-                            <span class="icon icon-arrow-left"></span> 
-                        </button>
+                                <button type="button" (click)="onSubmit('saveasdraft')" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> Save as
+                                    draft </button>
+                                <button type="button" (click)="onSubmit('save')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                    <span class="btn-text">Save and continue</span> <span class="v-divider"></span>
+                                    <span class="icon icon-arrow-left"></span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -340,7 +361,8 @@
         <div class="modal-content ">
             <div class="modal-header ">
                 <h4 class="modal-title " id="viewAttachmentModalLabel ">View Attachment</h4>
-                <button type="button " class="modal-close btn-close btn-sm " data-dismiss="modal " aria-label="Close "> <span class="icon-close "></span> </button>
+                <button type="button " class="modal-close btn-close btn-sm " data-dismiss="modal " aria-label="Close ">
+                    <span class="icon-close "></span> </button>
             </div>
             <div class="modal-body m-0 ">
                 <img *ngIf="selectedFileFormat=='image' " [src]="selectedFileURL" class="img-fluid " alt=" " srcset=" ">
@@ -351,7 +373,6 @@
 </div>
 <p>Form Value: {{ basicFormGroup.value | json }}</p>
 <p>Form Submit Status: {{ basicFormGroup.status }}</p>
-
 <script src="https://cdn.etimad.sa/v2/js/libs/jquery/jquery-3.4.1.min.min.js" type="text/javascript"></script>
 <!-- vue js -->
 <script src="https://cdn.etimad.sa/v2/js/libs/vue/vue.min.js" type="text/javascript"></script>
@@ -359,9 +380,7 @@
 <script src="https://cdn.etimad.sa/v2/js/datatable.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/editable-datatable.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/libs/calendar/bootstrap-hijri-datepicker.min.min.js" type="text/javascript"></script>
-
 <script src="https://cdn.etimad.sa/v2/js/libs/calendar/moment.min.min.js"></script>
-
 <script>
     (function() {
         $('[data-toggle="tooltip "]').tooltip();

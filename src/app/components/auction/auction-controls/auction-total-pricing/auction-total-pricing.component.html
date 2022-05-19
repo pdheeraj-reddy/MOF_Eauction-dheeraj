@@ -8,7 +8,6 @@
     </nav>
 </div>
 <br>
-
 <div class="col-12">
     <div class="row">
         <div class="col-md-12">
@@ -17,32 +16,27 @@
     </div>
 </div>
 <br>
-
 <div>
     <ul class="nav et-tabs et-tabs-filled nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item"> <a class="nav-link" id="pills-auction-tab" data-toggle="pill" href="#pills-auction" role="tab" aria-controls="pills-auction" aria-selected="false">Auction Details</a> </li>
         <li class="nav-item"> <a class="nav-link active" id="pills-product-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product" aria-selected="true">Product Details</a> </li>
-        <li class="nav-item"> <a class="nav-link" id="pills-auctionComm-tab" data-toggle="pill" href="#pills-auctionComm" role="tab" aria-controls="pills-auctionComm" aria-selected="false">Auction Committee Members</a> </li>
-        <li class="nav-item"> <a class="nav-link" id="pills-pricingComm-tab" data-toggle="pill" href="#pills-pricingComm" role="tab" aria-controls="pills-pricingComm" aria-selected="false">Pricing Committee Members</a> </li>
+        <li class="nav-item"> <a class="nav-link" id="pills-auctionComm-tab" data-toggle="pill" href="#pills-auctionComm" role="tab" aria-controls="pills-auctionComm" aria-selected="false">Auction
+                Committee Members</a> </li>
+        <li class="nav-item"> <a class="nav-link" id="pills-pricingComm-tab" data-toggle="pill" href="#pills-pricingComm" role="tab" aria-controls="pills-pricingComm" aria-selected="false">Pricing
+                Committee Members</a> </li>
     </ul>
-
     <div class="tab-content bg-white" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-product" role="tabpanel" aria-labelledby="pills-product-tab">
-
             <div class="card p-5 shadow-lg">
                 <div class="py-3 mb-2">
                     <h4>General information about the order</h4>
                 </div>
-
-
                 <div class="rounded p-4" style="background-color: #eaf6ef;">
-
                     <label class="text-12">Products Pricing</label>
-
                     <div class="mytabs1">
                         <input class="inp1 mt-1" type="radio" id="all" name="product" checked="checked">&nbsp;&nbsp;
-                        <label class="lbl1 text-14" style="color: #414042;" for="all">Enter the total estimated value of the products  </label>
-
+                        <label class="lbl1 text-14" style="color: #414042;" for="all">Enter the total estimated value of
+                            the products </label>
                         <div class="tab1">
                             <br>
                             <label class="text-12">Total estimated value of products</label>
@@ -51,18 +45,12 @@
                                 <button class="btn btn-primary-light btn-md">Preservation</button>
                             </div>
                         </div>
-
-                        <input class="inp1 mt-1" type="radio" id="each" name="product">&nbsp;&nbsp;
-                        <label class="lbl1 text-14" style="color: #414042;" for="each">Enter the estimated value for each product separately</label>
-
+                        <input class="inp1 mt-1" type="radio" id="each" name="product">&nbsp;&nbsp; <label class="lbl1 text-14" style="color: #414042;" for="each">Enter the estimated value for each
+                            product separately</label>
                         <div class="tab1">
-
                         </div>
                     </div>
-
                 </div>
-
-
                 <div class="mt-5">
                     <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
                         <thead class="thead-dark">
@@ -73,35 +61,30 @@
                                         <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
-
                                 <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
                                     <div class="table-header-cell">
                                         <span>Product Number</span>
                                         <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
-
                                 <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
                                     <div class="table-header-cell">
                                         <span>Book value of the product</span>
                                         <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
-
                                 <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(4, 'string')">
                                     <div class="table-header-cell">
                                         <span>Estimated value of the product</span>
                                         <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
-
                                 <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'string')">
                                     <div class="table-header-cell">
                                         <span>Product Condition</span>
                                         <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
-
                                 <th class="btn-primary-light" scope="col"></th>
                             </tr>
                         </thead>
@@ -111,23 +94,18 @@
                                 <td>5</td>
                                 <td>1,000,022 SAR</td>
                                 <td><input class="border-0" style="width: 65px; outline: none;" type="text" value="1,000,022" [disabled]="!editmode1"> SAR
-
                                     <a class="btn btn-ghost btn-sm fill-primary-light-green" (click)="edit()"> <span class="icon-Group-3286"></span> </a>
                                     <br>
                                     <button class="btn btn-danger btn-sm rounded border-0" *ngIf="editmode1" (click)="discard()">Cancellation</button>
                                     <button class="btn btn-primary-light btn-sm rounded border-0 mx-0 mx-md-4" *ngIf="editmode1">Preservation</button>
                                 </td>
                                 <td>new</td>
-
                                 <td>
-
                                     <button class="btn btn-ghost btn-sm fill-primary-light-green" data-toggle="modal" data-target="#viewDetails">
-                                            <span class="icon-eye-open"></span> 
-                                        </button>
+                                        <span class="icon-eye-open"></span>
+                                    </button>
                                 </td>
-
                             </tr>
-
                             <tr>
                                 <td scope="row">2. transport truck</td>
                                 <td>3</td>
@@ -136,17 +114,12 @@
                                     <a class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-Group-3286"></span> </a>
                                 </td>
                                 <td>good use</td>
-
                                 <td>
-
                                     <button class="btn btn-ghost btn-sm fill-primary-light-green" data-toggle="modal" data-target="#viewDetails">
-                                            <span class="icon-eye-open"></span> 
-                                        </button>
+                                        <span class="icon-eye-open"></span>
+                                    </button>
                                 </td>
                             </tr>
-
-
-
                             <tr>
                                 <td class="font-medium color-lightgreen" colspan="2">234 Products</td>
                                 <td class="font-weight-bold color-darkgreen">Total book value of products:<br> 10,030,000 SAR</td>
@@ -155,7 +128,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                     <div class="mt-4 row margin-auto justify-content-end">
                         <div class="mb-5">
                             <nav aria-label="..." class="nav-pagination">
@@ -180,13 +152,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
-
 <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
     <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
         <button type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
@@ -196,80 +165,57 @@
         </button>
     </div>
     <div class="d-flex flex-column flex-md-row mb-5">
-
         <button class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0" data-toggle="modal" data-target="#sendQuote">
             <span class="btn-text">Send Price Quote</span>
         </button>
     </div>
 </div>
-
 <!-- Send Quote pop-up   -->
-
 <div class="modal fade" id="sendQuote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-24" id="exampleModalLabel">Confirm sending product pricing?</h3>
                 <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-                <span class="icon-close"></span>
-              </button>
+                    <span class="icon-close"></span>
+                </button>
             </div>
-            <div class="modal-body text-16">
-                Upon confirmation, the auction request will be approved and sent for approval.
-            </div>
+            <div class="modal-body text-16"> Upon confirmation, the auction request will be approved and sent for approval. </div>
             <div class="modal-footer mt-4">
                 <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-light btn-md">
-                Reference
-              </button>
-                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" data-toggle="modal" data-target="#confirmation">
-                Post Confirmation
-              </button>
+                    Reference </button>
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" data-toggle="modal" data-target="#confirmation"> Post Confirmation </button>
             </div>
         </div>
     </div>
 </div>
-
-
 <div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-
         <div class="card shadow-lg result result-success" style="align-items: center;">
             <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-                    <span class="icon-close"></span>
-                </button>
+                <span class="icon-close"></span>
+            </button>
             <div class="alert-body">
                 <i class="alert-icon">
-                        <span class="icon-alert-success"></span>
-                    </i>
+                    <span class="icon-alert-success"></span>
+                </i>
                 <div class="alert-content">
                     <h4>Quote sent successfully</h4>
-                    <p>
-                        Your request has been submitted successfully, and you will receive an email To follow up on your order
-                    </p>
+                    <p> Your request has been submitted successfully, and you will receive an email To follow up on your order </p>
                 </div>
             </div>
             <div class="alert-action">
-                <button type="button" class="btn btn-primary-light">
-                        Back to Auction Requests
-                    </button>
+                <button type="button" class="btn btn-primary-light"> Back to Auction Requests </button>
             </div>
         </div>
     </div>
-
 </div>
 <div class="modal fade" id="viewDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
     <div class="modal-dialog modal-dialog-centered modal-xl modal-scrollable w-75" role="document">
-
         <div class="modal-content">
-
             <button type="button" class="modal-close btn-close btn-sm m-2" data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-
             <div class="rounded mt-5" style="background-color: #eaf6ef;">
                 <label class="m-3">Estimated value of the product</label>
                 <div class="row mb-0">
@@ -280,24 +226,19 @@
                         <button class="btn btn-primary-light btn-md">Save value</button>
                     </div>
                 </div>
-
                 <br>
             </div>
-
             <div class="py-3 mb-3 text-24">
                 <h4>Product Details</h4>
             </div>
-
             <div class="d-flex pb-4">
                 <div class="w-50 border rounded">
                     <img class="w-100" src="" alt="product image" style="height: 500px;">
                 </div>
-
                 <div class="px-4 w-50">
                     <div class="py-3 mb-3">
                         <h4>Isuzu Truck No. 23</h4>
                     </div>
-
                     <div class="d-flex">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Product Name</label>
@@ -307,9 +248,7 @@
                             <label for="validationCustom01">Product Condition</label>
                             <div class="text-14 color-darkgreen">New</div>
                         </div>
-
                     </div>
-
                     <div class="d-flex">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Product Value</label>
@@ -319,9 +258,7 @@
                             <label for="validationCustom01">Product Number</label>
                             <div class="text-14 color-darkgreen">25</div>
                         </div>
-
                     </div>
-
                     <div class="d-flex border-bottom pb-3 mb-3">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Product Date and Time</label>
@@ -334,9 +271,7 @@
                             <label for="validationCustom01">SKU Number</label>
                             <div class="text-14 color-darkgreen">UGG-BB-PUR-06</div>
                         </div>
-
                     </div>
-
                     <div class="d-flex border-bottom pb-3">
                         <div class="col mb-3">
                             <label for="validationCustom01">Product Specifications</label>
@@ -344,10 +279,8 @@
                                 number: NB 8434, working on diesel.</div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <div class="mb-3">
                 <div>
                     <label for="">Delivery Address</label>
@@ -356,7 +289,6 @@
                     <img src="" alt="delivery address map">
                 </div>
             </div>
-
             <div>
                 <div>
                     <label for="">Other attachments</label>
@@ -368,15 +300,13 @@
                                 <th style="width: 10%;" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
                                     <div class="table-header-cell">
                                         <span>Attached</span>
-                                        <span class="arrow asc"><span class="icon-unfold_more"></span
-                                ></span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
                                 <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
                                     <div class="table-header-cell">
                                         <span>Attachment Name</span>
-                                        <span class="arrow asc"><span class="icon-unfold_more"></span
-                                ></span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                     </div>
                                 </th>
                                 <th style="width: 14%;" class="btn-primary-light" scope="col"></th>
@@ -386,8 +316,8 @@
                             <tr>
                                 <td scope="row" style="text-align: center;">1</td>
                                 <td>
-                                    <a class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-Group-3319"></span> </a>
-                                    attached file</td>
+                                    <a class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-Group-3319"></span> </a> attached file
+                                </td>
                                 <td>
                                     <a class="btn btn-ghost btn-sm fill-primary-light-green"> <span class="icon-eye-open"></span> </a>
                                     <a class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -397,7 +327,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                     <div class="mt-4 row margin-auto justify-content-end">
                         <div class="mb-5">
                             <nav aria-label="..." class="nav-pagination">
@@ -423,8 +352,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

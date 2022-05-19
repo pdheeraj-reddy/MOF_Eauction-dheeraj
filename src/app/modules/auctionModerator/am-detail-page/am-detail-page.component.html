@@ -1,14 +1,11 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item">
-                <a href="#">{{ "auctionModerator.am-detail.bcrumb1" | translate }}</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="#">{{ "auctionModerator.am-detail.bcrumb2" | translate }}</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ "auctionModerator.am-detail.bcrumb3" | translate }}
+            <li class="breadcrumb-item"> <a href="https://10.14.8.61:8055/">{{"auctionModerator.am-detail.bcrumb1" |
+                    translate}}</a> </li>
+            <li class="breadcrumb-item"> <a href="/auctionlist">{{"auctionModerator.am-detail.bcrumb2" |
+                    translate}}</a> </li>
+            <li class="breadcrumb-item active" aria-current="page">{{"auctionModerator.am-detail.bcrumb3" | translate}}
             </li>
         </ol>
     </nav>
@@ -17,284 +14,359 @@
 <div class="col-12">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-20 text-primary font-weight-500">
-                {{ "auctionModerator.am-detail.pageTitle" | translate }}
-            </h1>
+            <h1 class="text-20 text-primary font-weight-500">{{"auctionModerator.am-detail.pageTitle" | translate}}</h1>
         </div>
     </div>
 </div>
 <br />
-
-<div class="rounded" style="background-color: #eff8f3">
-    <div class="row p-4 mx-auto" style="height: 96px">
-        <div class="col">
-            <label class="text-12">{{
-        "auctionModerator.am-detail.section1-head1" | translate
-      }}</label>
-            <div class="text-14 font-weight-bold color-darkgreen">
-                {{ preAuctionData?.Description }}
-            </div>
+<div class="card p-5 shadow-lg" *ngIf="showLoader">
+    <div class="form-row">
+        <div class="col-12">
+            <table id="inventoryAllocationTable" class="table">
+                <td colspan="10" class="p-3 bg-white">
+                    <div class="alert-body text-center">
+                        <i class="alert-icon">
+              <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                <g fill-rule="nonzero" fill="#32AD71">
+                  <path
+                    d="M32 11.871c-1.755 0-3.097-1.342-3.097-3.097V3.097C28.903 1.342 30.245 0 32 0s3.097 1.342 3.097 3.097v5.677c0 1.652-1.342 3.097-3.097 3.097z" />
+                  <path
+                    d="M32 64c-1.755 0-3.097-1.342-3.097-3.097v-5.677c0-1.755 1.342-3.097 3.097-3.097s3.097 1.342 3.097 3.097v5.677C35.097 62.658 33.755 64 32 64z"
+                    opacity=".4" />
+                  <path
+                    d="M46.452 60.077c-1.033 0-2.065-.516-2.684-1.548l-2.787-4.852c-.826-1.445-.31-3.406 1.135-4.232 1.445-.826 3.407-.31 4.232 1.136l2.787 4.851c.826 1.445.31 3.407-1.135 4.233a2.913 2.913 0 01-1.548.412z"
+                    opacity=".5" />
+                  <path
+                    d="M11.871 23.432a2.913 2.913 0 01-1.548-.413L5.47 20.232C4.026 19.406 3.51 17.445 4.335 16c.826-1.445 2.788-1.961 4.233-1.135l4.851 2.787c1.446.825 1.962 2.787 1.136 4.232-.62 1.032-1.652 1.548-2.684 1.548z"
+                    opacity=".05" />
+                  <path
+                    d="M57.084 49.548a2.913 2.913 0 01-1.549-.413l-4.954-2.787c-1.446-.825-1.962-2.787-1.136-4.232.826-1.445 2.787-1.961 4.232-1.135l4.852 2.787c1.445.826 1.961 2.787 1.136 4.232-.517 1.032-1.549 1.548-2.581 1.548z"
+                    opacity=".6" />
+                  <path
+                    d="M8.774 35.097H3.097C1.342 35.097 0 33.755 0 32s1.342-3.097 3.097-3.097h5.677c1.755 0 3.097 1.342 3.097 3.097s-1.445 3.097-3.097 3.097z"
+                    opacity=".1" />
+                  <path
+                    d="M60.903 35.097h-5.677c-1.755 0-3.097-1.342-3.097-3.097s1.342-3.097 3.097-3.097h5.677C62.658 28.903 64 30.245 64 32s-1.342 3.097-3.097 3.097z"
+                    opacity=".7" />
+                  <path
+                    d="M6.916 49.548c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.406 1.136-4.232l4.851-2.787c1.446-.826 3.407-.31 4.233 1.135.825 1.445.31 3.407-1.136 4.232l-4.851 2.787c-.413.31-.93.413-1.549.413z"
+                    opacity=".2" />
+                  <path
+                    d="M52.129 23.432c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.407 1.136-4.232l4.851-2.787c1.445-.826 3.407-.31 4.233 1.135.825 1.445.31 3.406-1.136 4.232l-4.852 2.787a2.913 2.913 0 01-1.548.413z"
+                    opacity=".8" />
+                  <path
+                    d="M17.548 60.077A2.913 2.913 0 0116 59.665c-1.445-.826-1.961-2.788-1.135-4.233l2.787-4.851c.825-1.446 2.787-1.962 4.232-1.136 1.445.826 1.961 2.787 1.135 4.232l-2.787 4.852c-.62 1.032-1.651 1.548-2.684 1.548z"
+                    opacity=".3" />
+                  <path
+                    d="M43.665 14.968a2.913 2.913 0 01-1.549-.413c-1.445-.826-1.961-2.787-1.135-4.232l2.787-4.852C44.594 4.026 46.555 3.51 48 4.335c1.445.826 1.961 2.788 1.135 4.233l-2.787 4.851c-.619.93-1.651 1.549-2.683 1.549z"
+                    opacity=".9" />
+                </g>
+              </svg>
+            </i>
+                        <div class="alert-content">
+                            <h5 class="text-black-50">Loading</h5>
+                        </div>
+                    </div>
+                </td>
+            </table>
         </div>
-        <div class="col"></div>
-        <div class="col">
-            <label class="text-12">{{
-        "auctionModerator.am-detail.section1-head2" | translate
-      }}</label>
-            <br>
-            <div [ngClass]="[
-      preAuctionData?.Status === 'Draft'
-        ? 'status status-o status-o-neutral-2'
-        : preAuctionData?.Status === 'Pending Review'
-        ? 'status status-o status-o-warning-2'
-        : preAuctionData?.Status === 'Published'
-        ? 'status status-o status-o-info-4'
-        : preAuctionData?.Status === 'Rejected'
-        ? 'status status-o status-o-important-2'
-        : 'status status-o status-o-neutral-4'
-    ]">
-                <span class="text-12" style="color: #414042;">&nbsp;&nbsp; {{ preAuctionData?.Status | translate}}</span
-        >
-      </div>
     </div>
-  </div>
 </div>
-
-<mat-horizontal-stepper #stepper [linear]="true">
-  <mat-step [completed]="tabTwo">
-    <ng-template matStepLabel>{{
-      "auctionModerator.am-detail.stepper1" | translate
-    }}</ng-template>
-    <ul
-      class="nav et-tabs et-tabs-filled nav-pills"
-      id="pills-tab"
-      role="tablist"
-    >
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          id="pills-home-tab"
-          data-toggle="pill"
-          role="tab"
-          aria-controls="pills-home"
-          aria-selected="true"
-          (click)="nowchangetoAuction()"
-          >{{ "auctionModerator.am-detail.tab1-head" | translate }}</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="pills-profile-tab"
-          data-toggle="pill"
-          role="tab"
-          aria-controls="pills-profile"
-          aria-selected="false"
-          (click)="nowchangetoProduct()"
-          >{{ "auctionModerator.am-detail.tab2-head" | translate }}</a
-        >
-      </li>
-    </ul>
-    <div *ngIf="showAuction">
-      <app-auction-req-details [preAuctionData]="preAuctionData">
-      </app-auction-req-details>
-    </div>
-    <div *ngIf="showProduct">
-      <app-prodct-details
-        [preAuctionData]="preAuctionData"
-      ></app-prodct-details>
-    </div>
-
-    <div *ngIf="preAuctionData?.ActionTaken == 'P'">
-      <div
-        *ngIf="preAuctionData?.Status == 'Pending Review'"
-        class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5"
-      >
-        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-          <button
-            (click)="goBack()"
-            type="submit"
-            class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"
-          >
-            <span class="btn-text">{{
-              "auctionModerator.am-detail.showProduct-back_btn" | translate
-            }}</span>
-                <span class="v-divider"></span>
-                <span class="icon icon-arrow-left"></span>
-                </button>
+<div *ngIf="!showLoader">
+    <div class="rounded" style="background-color: #eff8f3">
+        <div class="row p-4 mx-auto" style="height: 106px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col">
+                <label class="text-12">{{"auctionModerator.am-detail.section1-head1" | translate}}</label>
+                <div class="text-14 font-weight-bold color-darkgreen">{{preAuctionData?.Description}}</div>
             </div>
-
-            <div class="d-flex flex-column flex-md-row mb-5">
-                <button (click)="openRejectPopup()" class="btn btn-danger btn-lg mx-0 mx-md-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{
-              "auctionModerator.am-detail.showProduct-reject_btn" | translate
-            }}
-          </button>
-
-                <button (click)="approveOrRejectAuction('A')" class="btn btn-primary-light btn-lg">
-            {{
-              "auctionModerator.am-detail.showProduct-accept_btn" | translate
-            }}
-          </button>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+                <label class="text-12">{{"auctionModerator.am-detail.section1-head2" | translate}}</label> <br>
+                <div [ngClass]="[ preAuctionData?.Status==='Draft' ? 'status status-o status-o-neutral-2' : preAuctionData?.Status==='Pending Review' ? 'status status-o status-o-warning-2' : preAuctionData?.Status==='Pending Pricing' ? 'status status-o status-o-success-3' : preAuctionData?.Status==='Pending to Publish' ? 'status status-o status-o-info-4' : preAuctionData?.Status==='Published' ? 'status status-o status-o-info-4' : preAuctionData?.Status==='Rejected' ? 'status status-o status-o-important-2' : 'status status-o status-o-neutral-4']">
+                    <span class="text-12" style="color: #414042;">&nbsp;&nbsp;{{preAuctionData?.Status | translate}}</span>
+                </div>
             </div>
         </div>
     </div>
-    </mat-step>
-    <mat-step *ngIf="!tabTwo" [completed]="tabThreeFour">
-        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper2" | translate }}
-        </ng-template>
-    </mat-step>
-    <mat-step *ngIf="tabTwo" [completed]="tabThreeFour">
-        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper2" | translate }}
-        </ng-template>
-        <app-auction-pricing-committe [preAuctionData]="preAuctionData">
-        </app-auction-pricing-committe>
-    </mat-step>
-    <mat-step [completed]="tabThreeFour">
-        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper3" | translate }}
-        </ng-template>
-        <app-auction-committe></app-auction-committe>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>{{ "auctionModerator.am-detail.stepper4" | translate }}
-        </ng-template>
-        <app-auction-committe [isPublishTab]="isPublishTab"></app-auction-committe>
 
-        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
-            <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-                <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
-          <span class="btn-text">{{
-            "auctionModerator.am-detail.auction-publish.back_btn" | translate
-          }}</span>
-          <span class="v-divider"></span>
-          <span class="icon icon-arrow-left"></span>
-        </button>
-            </div>
-            <div class="d-flex flex-column flex-md-row mb-5">
-                <button (click)="publishAuction()" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
-          <span class="btn-text">{{
-            "auctionModerator.am-detail.auction-publish.accept_btn" | translate
-          }}</span>
-        </button>
-            </div>
-        </div>
-    </mat-step>
-    </mat-horizontal-stepper>
-
-    <div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 800px" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p class="modal-title text-24" style="color: #f66f5b">
-                        {{ "auctionModerator.am-detail.reject-popup.title" | translate }}
-                    </p>
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-          <span class="icon-close"></span>
-        </button>
+    <div class="basic-container">
+        <mat-horizontal-stepper #stepper [linear]="true" [selectedIndex]="selectedIndex">
+            <mat-step [completed]="tabTwo">
+                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper1" | translate}}</ng-template>
+                <ul class="nav et-tabs et-tabs-filled nav-pills mt-5" id="pills-tab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link" [ngClass]="preAuctionData?.ActionTaken == 'P' ? 'active' : ''" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true" (click)="nowchangetoAuction()">{{"auctionModerator.am-detail.tab1-head" | translate}}</a>                        </li>
+                    <li class="nav-item"> <a class="nav-link" [ngClass]="preAuctionData?.ActionTaken != 'P' ? 'active' : ''" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="nowchangetoProduct()">{{"auctionModerator.am-detail.tab2-head" | translate}}</a>                        </li>
+                </ul>
+                <div *ngIf="showAuction">
+                    <!-- <app-auction-req-details [preAuctionData]="preAuctionData"> </app-auction-req-details> -->
+                    <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode"></app-auction-req-details>
                 </div>
-
-                <div class="modal-body text-20" style="color: #414042">
-                    {{ "auctionModerator.am-detail.reject-popup.subTitle" | translate }}
+                <div *ngIf="showProduct">
+                    <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label class="text-12">{{
-            "auctionModerator.am-detail.reject-popup.section1-head1" | translate
-          }}</label>
-                        <div class="text-14 color-darkgreen">
-                            {{ preAuctionData.ObjectId || "-" }}
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="text-12">{{
-            "auctionModerator.am-detail.reject-popup.section1-head2" | translate
-          }}</label>
-                        <div class="text-14 color-darkgreen">
-                            {{ preAuctionData.BidType || "-" }}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row mt-4">
-                    <div class="col-md-4 mb-3">
-                        <label class="text-12">{{
-            "auctionModerator.am-detail.reject-popup.section2-head1" | translate
-          }}</label>
-                        <select class="color-darkgreen border-bottom" style="width: 700px; border: none">
-            <option style="color: #005b4e" selected>
-              {{
-                "auctionModerator.am-detail.reject-popup.section2-opt1"
-                  | translate
-              }}
-            </option>
-            <option style="color: #005b4e" value="XXXXXXXXXX">
-              XXXXXXXXXX
-            </option>
-            <option style="color: #005b4e" value="YYYYYYYYYY">
-              YYYYYYYYYY
-            </option>
-          </select>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="form-group col w-100">
-                        <div class="border-bottom color-grey">
-                            <label for="goverusermessage">{{
-                "auctionModerator.am-detail.reject-popup.section3-head1"
-                  | translate
-              }}
-            </label>
-                            <span class="float-left text-muted">{{
-                "auctionModerator.am-detail.reject-popup.section3-letter"
-                  | translate
-              }}
-              &nbsp;<small id="charNum">{{
-                "auctionModerator.am-detail.reject-popup.section3-cnt"
-                  | translate
-              }}</small></span
-            >
-          </div>
-          <textarea
-            [(ngModel)]="rejectionNotes"
-            class="form-control"
-            onkeyup="countChar(this)"
-            placeholder="{{
-              'auctionModerator.am-detail.reject-popup.section3-phold'
-                | translate
-            }}"
-            rows="5"
-          ></textarea>
-        </div>
-      </div>
-
-      <div
-        class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5"
-      >
-        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-          <!-- <button
-                            type="submit"
-                            class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
-                        <span class="btn-text">Reference</span>
-                            <span class="v-divider"></span>
-                            <span class="icon icon-arrow-left"></span>
-                            </button> -->
+                <div *ngIf="preAuctionData?.ActionTaken=='P'">
+                    <div *ngIf="preAuctionData?.Status=='Pending Review'" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5">
+                        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+                            <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+                                <span class="btn-text">{{"auctionModerator.am-detail.showProduct-back_btn" |
+                                    translate}}</span>
+                                <span class="v-divider"></span> <span class="icon icon-arrow-left"></span>
+                            </button>
                         </div>
                         <div class="d-flex flex-column flex-md-row mb-5">
-                            <button class="btn btn-outline-light btn-lg mx-0 mx-md-2" type="button">
-            {{ "auctionModerator.am-detail.reject-popup.back_btn" | translate }}
-          </button>
-
-                            <button (click)="approveOrRejectAuction('R')" class="btn arrow-btn btn-danger btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
-            <span class="btn-text">{{
-              "auctionModerator.am-detail.reject-popup.reject_btn" | translate
-            }}</span>
-          </button>
+                            <button (click)="openRejectPopup()" class="btn btn-danger btn-lg mx-0 mx-md-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{"auctionModerator.am-detail.showProduct-reject_btn" |
+                                translate}}</button>
+                            <button data-toggle="modal" data-target="#confirmMemberModal" data-backdrop="static" class="btn btn-primary-light btn-lg">
+                                    {{
+                                      "auctionModerator.am-detail.showProduct-accept_btn" | translate
+                                    }}
+                                  </button>
                         </div>
+                    </div>
+                </div>
+                <!-- <button mat-button matStepperNext>Next</button> -->
+            </mat-step>
+            <mat-step *ngIf="!tabTwo" [completed]="tabThreeFour">
+                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper2" | translate}}</ng-template>
+            </mat-step>
+            <mat-step *ngIf="tabTwo" [completed]="tabThreeFour">
+                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper2" | translate}}</ng-template>
+                <app-auction-pricing-committe [preAuctionData]="preAuctionData"> </app-auction-pricing-committe>
+            </mat-step>
+            <mat-step [completed]="tabThreeFour">
+                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper3" | translate}}</ng-template>
+                <app-auction-committe [preAuctionData]="preAuctionData" (steppernext)="hideSuccessfulModel()"></app-auction-committe>
+            </mat-step>
+
+            <!-- <mat-step class="stepper4" *ngIf="!tabFourFive" [completed]="tabFourFive">
+                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper4" | translate}}</ng-template>
+            </mat-step> -->
+            <mat-step [completed]="tabFourFive">
+                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper4" | translate}}</ng-template>
+                <app-auction-committe [preAuctionData]="preAuctionData" [isPublishTab]="isPublishTab"></app-auction-committe>
+                <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
+                    <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0"> <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> <span
+                                class="btn-text">{{"auctionModerator.am-detail.auction-publish.back_btn" |
+                                translate}}</span> <span class="v-divider"></span> <span
+                                class="icon icon-arrow-left"></span> </button> </div>
+                    <div class="d-flex flex-column flex-md-row mb-5" *ngIf="auctionAnnouncement">
+                        <button data-toggle="modal" data-target="#confirmMemberModalPub" data-backdrop="static" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> <span
+                                class="btn-text">{{"auctionModerator.am-detail.auction-publish.accept_btn" |
+                                translate}}</span> </button> </div>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+        <!-- <button matStepperNext>Move</button> -->
+        <!-- <div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 800px" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title text-24" style="color: #f66f5b"> {{ "auctionModerator.am-detail.reject-popup.title" | translate }} </p>
+                        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                            <span class="icon-close"></span>
+                        </button> =======
+                    </div>
+                    <div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 800px" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <p class="modal-title text-24" style="color: #f66f5b">
+                                        {{"auctionModerator.am-detail.reject-popup.title" | translate}}</p>
+                                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"> <span class="icon-close"></span> </button>
+                                </div>
+                                <div class="modal-body text-20" style="color: #414042">
+                                    {{"auctionModerator.am-detail.reject-popup.subTitle" | translate}}</div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="text-12">{{"auctionModerator.am-detail.reject-popup.section1-head1" |
+                                            translate}}</label>
+                                        <div class="text-14 color-darkgreen">{{preAuctionData.ObjectId || "-"}}</div>
+                                        >>>>>>> 37d2a401e2c83033ff64ffc58fdf8530724a2240
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="text-12">{{"auctionModerator.am-detail.reject-popup.section1-head2" |
+                                            translate}}</label>
+                                        <div class="text-14 color-darkgreen">{{preAuctionData.BidType || "-"}}</div>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-4">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="text-12">{{"auctionModerator.am-detail.reject-popup.section2-head1" |
+                                            translate}}</label>
+                                        <select class="color-darkgreen border-bottom" style="width: 700px; border: none">
+                                            <option style="color: #005b4e" selected>
+                                                {{"auctionModerator.am-detail.reject-popup.section2-opt1" | translate}}
+                                            </option>
+                                            <option style="color: #005b4e" value="XXXXXXXXXX"> XXXXXXXXXX </option>
+                                            <option style="color: #005b4e" value="YYYYYYYYYY"> YYYYYYYYYY </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="form-group col w-100">
+                                        <div class="border-bottom color-grey"> <label for="goverusermessage">{{"auctionModerator.am-detail.reject-popup.section3-head1"
+                                                | translate}}</label> <span class="float-left text-muted">{{"auctionModerator.am-detail.reject-popup.section3-letter"
+                                                | translate}}&nbsp;<small
+                                                    id="charNum">{{"auctionModerator.am-detail.reject-popup.section3-cnt" |
+                                                    translate}}</small></span>
+                                        </div>
+                                        <textarea [(ngModel)]="rejectionNotes" class="form-control" onkeyup="countChar(this)" placeholder="{{'auctionModerator.am-detail.reject-popup.section3-phold' | translate}}" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5">
+                                    <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+                                        <button type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> <span class="btn-text">Reference</span> <span class="v-divider"></span> <span class="icon icon-arrow-left"></span> </button>
+                                    </div>
+                                    <div class="d-flex flex-column flex-md-row mb-5">
+                                        <button class="btn btn-outline-light btn-lg mx-0 mx-md-2" type="button">{{"auctionModerator.am-detail.reject-popup.back_btn" |
+                                            translate}}</button>
+                                        <button (click)="approveOrRejectAuction('R')" class="btn arrow-btn btn-danger btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> <span
+                                                class="btn-text">{{"auctionModerator.am-detail.reject-popup.reject_btn" |
+                                                translate}}</span> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        <!-- Successful popup -->
+        <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content" style="align-items: center;">
+                    <button (click)="hideSuccessfulModel()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                                        <span class="icon-close"></span>
+                                        </button>
+                    <span class="icon-check"></span>
+                    <div class="modal-header">
+                        <div class="status-success-icon">
+                            <div style="display: flex;">
+                                <div class="circle"></div>
+
+                            </div>
+                            <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                                {{"auctionModerator.am-detail.auction-details-success.title1" | translate}}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{"auctionModerator.am-detail.auction-details-success.sec1-head1" | translate}}
+                                </label>
+                    </div>
+                    <div class="modal-footer" style="justify-content: end">
+                        <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+                            {{"auctionModerator.am-detail.auction-details-success.BackToAuction" | translate}}
+                              </button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Confirmation popup -->
+        <div class="modal fade" id="confirmMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">
+                            {{"auctionModerator.am-detail.auction-details-confirmation.title1" | translate}}
+                        </h4>
+                        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                                <span class="icon-close"></span>
+                              </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="confirmation" style="color: #414042; font-size: 16px">{{"auctionModerator.am-detail.auction-details-confirmation.sec1-head1" | translate}}</label
+                              >
+                            </div>
+                            <div class="modal-footer" style="justify-content: end">
+                              <button
+                                type="button"
+                                class="btn btn-primary-light btn-md"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                data-toggle="modal"
+                                data-target="#showSuccessfulModal"
+                                (click)="approveOrRejectAuction('A')"
+                              >
+                              {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+            <!-- Successful popup publish -->
+        <div class="modal show" *ngIf="showSuccessfulModalPub" [ngClass]="{ 'modal-show': showSuccessfulModalPub }">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content" style="align-items: center;">
+                    <button (click)="hideSuccessfulModelPub()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                        <span class="icon-close"></span>
+                        </button>
+                    <span class="icon-check"></span>
+                    <div class="modal-header">
+                        <div class="status-success-icon">
+                            <div style="display: flex;">
+                                <div class="circle"></div>
+    
+                            </div>
+                            <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                                The auction was successfully accepted.
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">You can follow the auction status from the auction page.
+                                </label>
+                    </div>
+                    <div class="modal-footer" style="justify-content: end">
+                        <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+                              Back to Auction Requests
+                              </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Confirmation popup publish -->
+        <div class="modal fade" id="confirmMemberModalPub" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">
+                            Are you sure want to accept the Auction?
+                        </h4>
+                        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                                <span class="icon-close"></span>
+                              </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, you have to assign the Pricing committee member for declearing pricing for the Auction.</label
+                              >
+                            </div>
+                            <div class="modal-footer" style="justify-content: end">
+                              <button
+                                type="button"
+                                class="btn btn-primary-light btn-md"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                (click)="publishAuction()"
+                              >
+                              Confirmation of Acceptation
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-md"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                style="border: 1px solid #cccccc; border-radius: 5px"
+                              >
+                                Back
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+        </div>
+        <br />
+        <br />
+        </div>
 
-        <br />
-        <br />
+</div>

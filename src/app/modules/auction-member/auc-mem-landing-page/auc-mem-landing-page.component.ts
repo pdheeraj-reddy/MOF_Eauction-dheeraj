@@ -27,7 +27,7 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
   selectedPageNumber: number;
   pagelimit: number = 10;
   totcntforall: number;
-  totcntfordraft: number;
+  totcntforPricingPend: number;
   totcntforreadjust: number;
   totcntforupcomming: number;
   totcntforawaiting: number;
@@ -61,16 +61,16 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
     private cookieService: CookieService,
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     public translate: TranslateService
-  ) {}
+  ) { }
 
   public mapping(serverObj: any) {
     console.log(serverObj);
     let resultSet: any = [];
     this.totcntforall = serverObj.d.results[0].TotAll;
-    this.totcntfordraft = serverObj.d.results[0].TotPrcApprPend;
+    this.totcntforPricingPend = serverObj.d.results[0].TotPrcApprPend;
     this.totcntforreadjust = serverObj.d.results[0].TotPricingPend;
     this.totcntforupcomming = serverObj.d.results[0].TotPublishPend;
-    this.totcntforawaiting = serverObj.d.results[0].TotRejected;
+    this.totcntforawaiting = serverObj.d.results[0].TotPrcRejected;
     let temp = serverObj['d']['results'][0]['page1tolistnav']['results'];
     console.log(temp);
     temp.forEach((result: any) => {
@@ -87,15 +87,15 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
         auctionStartDate: result['ZzAucSrtDt']
           ? result['ZzAucSrtDt'] !== 0
             ? moment(result['ZzAucSrtDt'].split(' ')[0], 'DD.MM.YYYY').format(
-                'YYYY-MM-DD'
-              )
+              'YYYY-MM-DD'
+            )
             : ''
           : '',
         auctionStartTime: result['ZzAucSrtDt']
           ? result['ZzAucSrtDt'] !== 0
             ? moment(result['ZzAucSrtDt'].split(' ')[1], 'HH:mm:ss').format(
-                'hh:mm'
-              )
+              'hh:mm'
+            )
             : ''
           : '',
         auctionStartTimeSufix: result['ZzAucSrtDt']
@@ -107,15 +107,15 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
         autionEndDate: result['ZzAucEndDt']
           ? result['ZzAucEndDt'] !== 0
             ? moment(result['ZzAucEndDt'].split(' ')[0], 'DD.MM.YYYY').format(
-                'YYYY-MM-DD'
-              )
+              'YYYY-MM-DD'
+            )
             : ''
           : '',
         auctionEndTime: result['ZzAucEndDt']
           ? result['ZzAucEndDt'] !== 0
             ? moment(result['ZzAucEndDt'].split(' ')[1], 'HH:mm:ss').format(
-                'hh:mm'
-              )
+              'hh:mm'
+            )
             : ''
           : '',
         auctionEndTimeSufix: result['ZzAucEndDt']
@@ -148,7 +148,7 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
     this.getAuctionList(1);
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnChanges() {
     console.log('currentLang ', this.translate.currentLang);
@@ -239,15 +239,15 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
         : '',
       StartDate: this.filterFormGroup.controls['auctionStartDate'].value
         ? moment(
-            this.filterFormGroup.controls['auctionStartDate'].value,
-            'YYYY-MM-DD'
-          ).format('DD.MM.YYYY')
+          this.filterFormGroup.controls['auctionStartDate'].value,
+          'YYYY-MM-DD'
+        ).format('DD.MM.YYYY')
         : '',
       EndDate: this.filterFormGroup.controls['auctionEndDate'].value
         ? moment(
-            this.filterFormGroup.controls['auctionEndDate'].value,
-            'YYYY-MM-DD'
-          ).format('DD.MM.YYYY')
+          this.filterFormGroup.controls['auctionEndDate'].value,
+          'YYYY-MM-DD'
+        ).format('DD.MM.YYYY')
         : '',
       Message: '',
       Msgty: '',
@@ -329,7 +329,7 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
     this.refreshCalendarCntrl();
   }
 
-  setFilter() {}
+  setFilter() { }
 
   /** Populating the table */
   public getServerData(selectedPageNumber: number) {

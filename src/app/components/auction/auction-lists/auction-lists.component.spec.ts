@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuctionListsComponent } from './auction-lists.component';
-import { DatePipe } from '@angular/common'; 
+import { DatePipe } from '@angular/common';
 
 describe('AuctionListsComponent', () => {
   let component: AuctionListsComponent;
@@ -9,9 +9,9 @@ describe('AuctionListsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuctionListsComponent ]
+      declarations: [AuctionListsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

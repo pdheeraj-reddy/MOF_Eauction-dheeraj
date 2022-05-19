@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { RejectAuctionPopupComponent } from './reject-auction-popup/reject-auction-popup.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
+import { InterconversionService } from 'src/app/service/interconversion.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-am-detail-page',
   templateUrl: './am-detail-page.component.html',
   styleUrls: ['./am-detail-page.component.scss'],
 })
+
 export class AmDetailPageComponent implements OnInit {
   preAuctionData: any = {};
   productValue: any;
@@ -19,17 +22,26 @@ export class AmDetailPageComponent implements OnInit {
   ViewMode: any = '';
   selectedIndex = 0;
   tabThreeFour = true;
+  tabFourFive = false;
   tabTwo = false;
   showAuction = true;
   showProduct = false;
   isPublishTab = true;
+  showSuccessfulModal = false;
+  showSuccessfulModalPub = false;
+  showLoader: boolean = false;
+  editable: boolean = false;
+  auctionAnnouncement = true;
+  @ViewChild('stepper') stepper: MatStepper;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public PaginationServc: PaginationSortingService,
     public _AuctionService: AuctionModeratorService,
+    private interconversionService: InterconversionService,
     public dialog: MatDialog,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
@@ -40,7 +52,7 @@ export class AmDetailPageComponent implements OnInit {
     this.getPreAuctionData();
   }
 
-  selectToggle(type: any) {}
+  selectToggle(type: any) { }
 
   attachmentDownload(attchment: any) {
     console.log(attchment);
@@ -49,6 +61,7 @@ export class AmDetailPageComponent implements OnInit {
 
   openRejectPopup() {
     const dialogRef = this.dialog.open(RejectAuctionPopupComponent, {
+      disableClose: true,
       height: 'auto',
       width: '55%',
       position: {
@@ -87,7 +100,8 @@ export class AmDetailPageComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
-          alert('Updated Successfully');
+          this.showSuccessfulModal = true;
+          // alert('Updated Successfully');
           this.getPreAuctionData();
           console.log(res);
         },
@@ -97,7 +111,22 @@ export class AmDetailPageComponent implements OnInit {
         }
       );
   }
-
+  hideSuccessfulModel() {
+    this.showSuccessfulModal = false;
+    this.stepper.next();
+    this.getPreAuctionData();
+  }
+  hideSuccessfulModelPub(){
+    this.showSuccessfulModalPub = false;
+    this.getPreAuctionData();
+  }
+  public closeModal(confirmType: string) {
+    if (confirmType == 'success') {
+      this.showSuccessfulModal = false;
+      this.showSuccessfulModalPub = false;
+      this.router.navigate(['/auctionlist']);
+    }
+  }
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     this.PaginationServc.sortByTableHeaderId(
       'inventoryAllocationTable',
@@ -120,7 +149,12 @@ export class AmDetailPageComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
+          this.showSuccessfulModalPub = true;
           console.log(res);
+          console.log(res.d.Msgty);
+          if(res.d.Msgty=='S'){
+            this.auctionAnnouncement = false;
+          }
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -133,9 +167,12 @@ export class AmDetailPageComponent implements OnInit {
   }
 
   getPreAuctionData() {
+    this.showLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
+        this.showLoader = false;
         console.log(res);
+        console.log("res");
         this.preAuctionData = res['d']['results'][0];
         if (this.preAuctionData.ActionTaken == 'A') {
           this.tabTwo = true;
@@ -147,6 +184,37 @@ export class AmDetailPageComponent implements OnInit {
           this.preAuctionData.Status == 'Pending Pricing'
         ) {
           this.tabThreeFour = false;
+        }
+        if(this.preAuctionData.Status == 'Pending to Publish'){
+          this.tabFourFive = false;
+          
+          let data = this.preAuctionData.listtocomiteememnav.results;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
+              this.tabFourFive = true;
+            }
+          }
+        }
+        if ( this.preAuctionData.Status == 'Pending Review' ) {
+          if(this.preAuctionData?.ActionTaken == 'P'){
+            this.selectedIndex = 0;
+          } else {
+            this.selectedIndex = 1;
+          }
+        } else if ( this.preAuctionData.Status == 'Pending Pricing' ) {
+          this.selectedIndex = 1;
+        } else if ( this.preAuctionData.Status == 'Pending to Publish' ) {
+          this.selectedIndex = 2;
+          let data = this.preAuctionData.listtocomiteememnav.results;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
+              this.selectedIndex = 3;
+            }
+          }
+        }else if ( this.preAuctionData.Status == 'Published' ) {
+          this.tabFourFive = true;
+          this.selectedIndex = 3;
+          this.auctionAnnouncement = false;
         }
         for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {
           this.productValue =

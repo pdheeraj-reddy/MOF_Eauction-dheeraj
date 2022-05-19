@@ -208,6 +208,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     DatePipe,
     CookieService,
     AuthService,
+    AuctionHeadDetailPageComponent,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

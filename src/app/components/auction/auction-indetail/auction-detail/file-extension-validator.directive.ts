@@ -13,7 +13,7 @@ export function fileExtensionValidator(validExt: string): ValidatorFn {
           forbidden = false;
         }
       });
-      
+
     }
     return forbidden ? { 'inValidExt': true } : null;
   };

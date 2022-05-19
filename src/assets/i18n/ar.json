@@ -20,10 +20,6 @@
     "Closed": "مغلقه",
     "Direct": "مباشر",
     "To me": "آلي",
-    "Manual": "يدوي",
-    "anchorlink": "اضغط هنا",
-    "Enter the total estimated value of the products": "أدخل القيمة الإجمالية المقدرة للمنتجات",
-    "Enter the estimated value for each product separately": "أدخل القيمة المقدرة لكل منتج على حدة",
     "AM": "ص",
     "PM": "م",
     "New": "جديد",
@@ -34,6 +30,18 @@
     "Choose Auction Manager": "اختر مدير المزاد ",
     "Next Financial": "المقبل المالي",
     "15": "١٥ يوم",
+    "Manual": "يدوي",
+    "anchorlink": "اضغط هنا",
+    "EAuction_SalesCommitteeChairman": "رئيس لجنة المزاد",
+    "EAuction_SalesCommitteSecretary": "أمين لجنة المزاد",
+    "EAuction_InteriorMarketer": "المسوق الداخلي",
+    "EAuction_AuctionManager": "مشرف المزاد",
+    "EAuction_SalesCommitteeMember": "عضو لجنة المزاد",
+    "EAuction_PricingCommitteeMember": "عضو لجنة التسعير",
+    "EAuction_PricingCommitteSecretary": "سكرتير لجنة التسعير",
+    "EAuction_PricingCommitteeChairman": "رئيس لجنة التسعير",
+    "Enter the total estimated value of the products": "أدخل القيمة الإجمالية المقدرة للمنتجات",
+    "Enter the estimated value for each product separately": "أدخل القيمة المقدرة لكل منتج على حدة",
     "header": {
         "main-menu1": "المزادات",
         "main-menu2": "طلبات المزاد الالكتروني"
@@ -46,7 +54,8 @@
         "ftrlink-needhelp": "بحاجة لمساعدة؟",
         "ftrtext-certi": "تدعم منصة اعتماد المتصفحات التالية",
         "msg-nodata": "لا تتوافر بيانات",
-        "msg-loading": "جار التحميل"
+        "msg-loading": "جار التحميل",
+        "SAR": "ريال"
     },
     "auctionlist": {
         "bcrumb1": "خدمات اعتماد",
@@ -61,6 +70,10 @@
         "tab1-item3": "معادة للتعديل",
         "tab1-item4": "مزاد قادم",
         "tab1-item5": "بإنتظار المراجعة",
+        "tab1-item6": "في انتظار النشر",
+        "tab1-item7": "مرفوض",
+        "tab1-item8": "الموافقة على الأسعار المعلقة",
+        "tab1-item9": "الأسعار المرفوضة",
         "grid1-col1": "الرقم المرجعي للمزاد",
         "grid1-col2": "اسم المزاد",
         "grid1-col3": "نوع المزاد",
@@ -129,7 +142,7 @@
             "section1_formGrp14": "بنود المزاد المالية",
             "section1_formGrp15": "سعر بدء المزاد (بالريال السعودي)",
             "section1_formGrp16": "أقل قيمة للمزايدة (بالريال السعودي)",
-            "section1_formGrp17": "نسبه الضمان المبدئي",
+            "section1_formGrp17": "نسبه الضمان %",
             "section1_formGrp18": "أخر موعد لدفع الضمان النهائي",
             "section1_formGrp19": "نوع العمولة",
             "section1_formGrp20": "أدخل نسبة السعي - العمولة ٪",
@@ -264,6 +277,7 @@
         "failure_atleastOne_auction": "يجب ملء حقل واحد على الأقل من الحقول الإلزامية",
         "failure_atleastOne_product": "مطلوب منتج واحد على الأقل",
         "failure_invalid_mindate": "تاريخ غير صحيح",
+        "failure_nonZero": "يجب أن تكون القيمة أكبر من 0",
         "failure_invalid_minnumber": "ادخل منتج واحد علي الاقل",
         "alert_maxfilesize": "حجم الملف اكبر من 2 ميجا بايت"
     },
@@ -318,10 +332,10 @@
         },
 
         "am-detail": {
-            "bcrumb1": "مشرف المزاد",
-            "bcrumb2": "صفحة التفاصيل",
-            "bcrumb3": "تفاصيل الطلب",
-            "pageTitle": "تفاصيل الطلب",
+            "bcrumb1": "خدمات الثقة",
+            "bcrumb2": "طلبات المزاد عبر الإنترنت",
+            "bcrumb3": "تفاصيل المزاد",
+            "pageTitle": "تفاصيل المزاد",
             "section1-head1": "اسم الطلب",
             "section1-head2": "حالة الطلب",
             "stepper1": "طلب قبول",
@@ -350,13 +364,14 @@
                 "section1-head1": "الرقم المرجعي للمزاد",
                 "section1-head2": "نوع المزاد",
                 "section2-head1": "الرجاء إدخال سبب الرفض",
-                "section2-opt1": "أعلن مرتين",
+                "section2-opt1": "تم الإعلان عنه مرتين",
                 "section3-head1": "ملاحظات",
                 "section3-letter": "حروف",
                 "section3-cnt": "0/250",
                 "section3-phold": "اكتب ملاحظاتك",
                 "back_btn": "خلف",
-                "reject_btn": "رفض الطلب"
+                "reject_btn": "رفض الطلب",
+                "cancel_btn": "إلغاء"
             },
 
             "auction-details": {
@@ -375,13 +390,13 @@
                 "sec4-head1": "وصف المزاد",
 
                 "title2": "تاريخ ووقت المزاد",
-                "sec5-head1": "تاريخ بدء المزاد",
-                "sec5-head2": "تاريخ انتهاء المزاد",
-                "sec5-head3": "كيف تبدأ المزاد",
+                "sec5-head1": "بداية المزايدة",
+                "sec5-head2": "نهاية المزايدة",
+                "sec5-head3": "طريقة بدء المزاد",
                 "sec5-opt1": "كتيب",
                 "sec5-opt2": "تلقائي",
-                "sec6-head1": "تاريخ اعلان المزاد",
-                "sec6-head2": "آخر موعد للتسجيل",
+                "sec6-head1": "تاريخ فتح العطاء",
+                "sec6-head2": "وقت فتح العطاءات",
 
                 "title3": "بنود المزاد المالي",
                 "sec7-head1": "سعر بدء المزاد",
@@ -395,6 +410,19 @@
                 "th1": "مُرفَق",
                 "th2": "اسم المرفق",
                 "table-result": "لا ملفات مرفقة"
+            },
+
+            "auction-details-confirmation": {
+                "title1": "تأكيد قبول الطلب؟",
+                "sec1-head1": "عند التأكيد ، سيتم إرسال المزاد لتعيين لجنة التسعير.",
+                "Reference": "رجوع",
+                "Postconfirmation": "تأكيد القبول"
+            },
+
+            "auction-details-success": {
+                "title1": "تم قبول الطلب بنجاح",
+                "sec1-head1": "بعد تعيين لجنة التسعير ، سيتم إرسال الطلب لتحديث أسعار المنتجات",
+                "BackToAuction": "العودة إلى طلبات المزاد"
             },
 
             "product-details": {
@@ -435,8 +463,8 @@
                 "reject": "يلغي",
                 "accept": "إرسال",
 
-                "popup1-title": "تأكيد إرسال طلب عرض أسعار؟",
-                "popup1-subtitle": "عند التأكيد ، تتم الموافقة على طلب المزاد ونشره في المزاد الإلكتروني.",
+                "popup1-title": "تأكيد تكليف لجنة التسعير؟",
+                "popup1-subtitle": "عند التأكيد، سيتم إرسال المزاد إلى عضو لجنة التسعير للتسعير.",
                 "popup1-accept": "بعد التأكيد",
 
                 "popup2-title": "تم إرسال الطلب بنجاح إلى لجنة التسعير",
@@ -459,7 +487,12 @@
                 "email": "بريد الالكتروني",
                 "back_btn": "خلف",
                 "accept": "إرسال",
-                "reject": "يلغي"
+                "reject": "يلغي",
+
+                "popup1-title": "تأكيد تكليف لجنة المزادات؟",
+                "popup1-subtitle": "عند التأكيد، سيتم تعيين أعضاء لجنة المزاد وإخطارهم.",
+                "popup2-title": "تم إرسال الطلب بنجاح إلى لجنة المزاد",
+                "popup2-subtitle": "يمكنك الآن أن تنبض بالفطنة."
             },
 
             "add-member": {
@@ -573,7 +606,20 @@
             "head": "معلومات عامة عن الطلب",
             "subHead": "تسعير المنتجات",
             "phold": "إجمالي القيمة المقدرة للمنتجات",
-            "save": "يحفظ"
+            "save": "يحفظ",
+            "failure_mssg": "أدخل قيمة أكبر من الصفر"
+        },
+
+        "confirmation-popup": {
+            "title": "تأكيد إرسال تسعير المنتجات؟",
+            "subtitle": "عند التأكيد سيتم اعتماد الطلب المزاد وإرساله للموافقة.",
+            "accept": "تأكيد النشر",
+            "back": "ظهر"
+        },
+        "successful-popup": {
+            "title": "تم إرسال التسعير بنجاح",
+            "subtitle": "تم إرسال الطلب بنجاح، وستصلك رسالة بالبريد الإلكتروني لمتابعة طلبك ",
+            "accept": "العودة إلى طلبات المزاد"
         }
     },
 

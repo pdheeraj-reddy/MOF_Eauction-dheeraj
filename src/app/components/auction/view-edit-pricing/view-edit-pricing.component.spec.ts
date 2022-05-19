@@ -8,9 +8,9 @@ describe('ViewEditPricingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewEditPricingComponent ]
+      declarations: [ViewEditPricingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

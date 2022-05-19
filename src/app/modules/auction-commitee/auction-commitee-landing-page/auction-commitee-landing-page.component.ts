@@ -86,7 +86,7 @@ export class AuctionCommiteeLandingPageComponent implements OnInit {
         title: result['Description'] ? result['Description'] : '',
         description: result['ZzAucDesc'] ? result['ZzAucDesc'] : '',
         product: result['ZzTotPdt'] ? parseInt(result['ZzTotPdt']) : '',
-        objectId: result['ObjectId'] ,
+        objectId: result['ObjectId'],
         auctiondate:
           result['Status'] == 'Published'
             ? result['ZzAucSrtDt'].split(' ')[0]
@@ -154,9 +154,9 @@ export class AuctionCommiteeLandingPageComponent implements OnInit {
     //   // console.log(moment(currentDate).diff(moment('09-04-2022 01:00:04')));
     // }
     return {
-      format: '\xa0'+'D' + '\xa0\xa0\xa0\xa0\xa0' + 'H' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 'm' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 's',
+      format: '\xa0' + 'D' + '\xa0\xa0\xa0\xa0\xa0' + 'H' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 'm' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 's',
       // format: `D    :    H :    m :    s`,
-      
+
       leftTime:
         parseInt(day) * parseInt(hours) * parseInt(mts) * parseInt(seconds),
       formatDate: ({ date, formatStr }) => {
@@ -179,7 +179,7 @@ export class AuctionCommiteeLandingPageComponent implements OnInit {
     };
   }
   ngOnInit(): void {
-    
+
     this.filterForm();
     this.getAuctionList(1);
   }

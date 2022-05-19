@@ -8,9 +8,9 @@ describe('AssignPricingCommitteeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AssignPricingCommitteeComponent ]
+      declarations: [AssignPricingCommitteeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

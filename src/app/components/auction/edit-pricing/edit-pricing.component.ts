@@ -7,7 +7,7 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
   styleUrls: ['./edit-pricing.component.scss']
 })
 export class EditPricingComponent implements OnInit {
-  editmode1:boolean = false;
+  editmode1: boolean = false;
   constructor(public PaginationServc: PaginationSortingService) { }
 
   ngOnInit(): void {
@@ -15,10 +15,10 @@ export class EditPricingComponent implements OnInit {
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     this.PaginationServc.sortByTableHeaderId('applicationsList', columnId, sortType, dateFormat);
   }
-  edit(){
+  edit() {
     this.editmode1 = true;
   }
-  discard(){
+  discard() {
     this.editmode1 = false;
   }
 }

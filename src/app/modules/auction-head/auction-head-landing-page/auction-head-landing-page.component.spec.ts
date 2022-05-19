@@ -8,9 +8,9 @@ describe('AuctionHeadLandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuctionHeadLandingPageComponent ]
+      declarations: [AuctionHeadLandingPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

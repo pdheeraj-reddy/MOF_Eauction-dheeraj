@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder,FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 
 @Component({
@@ -8,26 +8,26 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
   styleUrls: ['./open-offers.component.scss']
 })
 export class OpenOffersComponent implements OnInit {
-  
-  openofferListData   : any;
-  pagelimit           : number = 10;
-  
-  offervalue:string;
-  facilityname:string;
-  commercialNo:string
+
+  openofferListData: any;
+  pagelimit: number = 10;
+
+  offervalue: string;
+  facilityname: string;
+  commercialNo: string
   //filter Form controls
-  showFilterForm      : boolean = false;
-  dropValStatus       : any = [];
-  dropValType         : any = [];
-  
+  showFilterForm: boolean = false;
+  dropValStatus: any = [];
+  dropValType: any = [];
+
   // form group
-  
+
   filterFormGroup: FormGroup;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService
-    ) { }
+  ) { }
 
   public arrayofobject = [
     {
@@ -86,14 +86,14 @@ export class OpenOffersComponent implements OnInit {
     // this.totcntforupcomming = serverObj.d.results[0].TotPublish;
     // this.totcntforawaiting = serverObj.d.results[0].TotPendingRw;
     results.forEach((result: any) => {
-      const items ={
-        serialNo                  : result['serialNo'] ? result['serialNo'] : '',
-        offerValue                : result['offerValue'] ? result['offerValue'] : '',
-        primaryWarranty           : result['primaryWarranty'] ? result['primaryWarranty'] : '',
-        submissionDate            : result['submissionDate'] ? result['submissionDate'] === 0 ? result['submissionDate'] : '' : '',
-        submissionTime            : result['submissionTime'] ? result['submissionTime'] : '',
-        facilityName              : result['facilityName'] ? result['facilityName'] : '',
-        commercialRegistrationNo  : result['commercialRegistrationNo'] ? result['commercialRegistrationNo'] : '',
+      const items = {
+        serialNo: result['serialNo'] ? result['serialNo'] : '',
+        offerValue: result['offerValue'] ? result['offerValue'] : '',
+        primaryWarranty: result['primaryWarranty'] ? result['primaryWarranty'] : '',
+        submissionDate: result['submissionDate'] ? result['submissionDate'] === 0 ? result['submissionDate'] : '' : '',
+        submissionTime: result['submissionTime'] ? result['submissionTime'] : '',
+        facilityName: result['facilityName'] ? result['facilityName'] : '',
+        commercialRegistrationNo: result['commercialRegistrationNo'] ? result['commercialRegistrationNo'] : '',
         // auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : '',
       }
       resultSet.push(items);
@@ -101,7 +101,7 @@ export class OpenOffersComponent implements OnInit {
     return resultSet;
   }
 
-  
+
   // getAuctionList(pageNumber?: number){
   //   const pageNoVal = '' + pageNumber;
   //   const page = {
@@ -114,9 +114,9 @@ export class OpenOffersComponent implements OnInit {
   //   };
 
   // }
-  
+
   // view attachement
-  viewAttachment(){
+  viewAttachment() {
     // console.log(file);
     // console.log(file.type);
     // const fileType = file.name.split(".").pop()?.toLowerCase();
@@ -127,7 +127,7 @@ export class OpenOffersComponent implements OnInit {
     //     ia[i] = byteString.charCodeAt(i);
     // }
     // const blob = new Blob([ab], { type: file.type });
-    
+
     // let fileURL = window.URL.createObjectURL(blob);
     // if((file.type.indexOf('image')> -1) || (file.type.indexOf('video')> -1) || fileType === 'docx' || fileType === 'doc'|| fileType === 'pdf'){
     //   console.log();
@@ -135,7 +135,7 @@ export class OpenOffersComponent implements OnInit {
     //   window.open(fileURL, '_blank');
     // }
   }
-  acceptOffer(data:any){
+  acceptOffer(data: any) {
     this.offervalue = data.offerValue;
     this.facilityname = data.facilityName;
     this.commercialNo = data.commercialRegistrationNo;
@@ -145,26 +145,26 @@ export class OpenOffersComponent implements OnInit {
   }
 
   // -------------------------------------- filter code -------------------------------- 
-  
-  filterForm(){
+
+  filterForm() {
     this.filterFormGroup = this.formBuilder.group({
       status: new FormControl(''),
       type: new FormControl(''),
     });
     console.log("filterFormGroup");
   }
-  public toggleFilter(){
+  public toggleFilter() {
     console.log("toggleFilter");
     this.showFilterForm = !this.showFilterForm;
   }
 
-  resetFilter(){
+  resetFilter() {
     this.filterFormGroup.controls['status'].setValue('');
     this.filterFormGroup.controls['type'].setValue('');
     // this.getAuctionList(1);
   }
 
-  applyFilter(){
+  applyFilter() {
     this.filterFormGroup.controls['status'].setValue('');
     this.filterFormGroup.controls['type'].setValue('');
     // this.getAuctionList(1);

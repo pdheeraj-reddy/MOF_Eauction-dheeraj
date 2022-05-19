@@ -8,9 +8,9 @@ describe('OfferReportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OfferReportComponent ]
+      declarations: [OfferReportComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

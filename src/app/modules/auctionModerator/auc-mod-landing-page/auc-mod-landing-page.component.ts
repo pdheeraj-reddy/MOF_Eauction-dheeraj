@@ -34,7 +34,7 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
   selectedTab: string = 'All';
   showLoader: boolean = false;
   dropValProducts: any = ['Public', 'Private'];
-  dropValStatus: any = ['Pending Review','Pending Pricing','Pending to Publish','Rejected'];
+  dropValStatus: any = ['Pending Review', 'Pending Pricing', 'Pending to Publish', 'Rejected'];
   // Form controls
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
@@ -56,7 +56,7 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
     private cookieService: CookieService,
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     public translate: TranslateService
-  ) {}
+  ) { }
 
   public mapping(serverObj: any) {
     console.log(serverObj);
@@ -82,15 +82,15 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
         auctionStartDate: result['ZzAucSrtDt']
           ? result['ZzAucSrtDt'] !== 0
             ? moment(result['ZzAucSrtDt'].split(' ')[0], 'DD.MM.YYYY').format(
-                'YYYY-MM-DD'
-              )
+              'YYYY-MM-DD'
+            )
             : ''
           : '',
         auctionStartTime: result['ZzAucSrtDt']
           ? result['ZzAucSrtDt'] !== 0
             ? moment(result['ZzAucSrtDt'].split(' ')[1], 'HH:mm:ss').format(
-                'hh:mm'
-              )
+              'hh:mm'
+            )
             : ''
           : '',
         auctionStartTimeSufix: result['ZzAucSrtDt']
@@ -102,15 +102,15 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
         autionEndDate: result['ZzAucEndDt']
           ? result['ZzAucEndDt'] !== 0
             ? moment(result['ZzAucEndDt'].split(' ')[0], 'DD.MM.YYYY').format(
-                'YYYY-MM-DD'
-              )
+              'YYYY-MM-DD'
+            )
             : ''
           : '',
         auctionEndTime: result['ZzAucEndDt']
           ? result['ZzAucEndDt'] !== 0
             ? moment(result['ZzAucEndDt'].split(' ')[1], 'HH:mm:ss').format(
-                'hh:mm'
-              )
+              'hh:mm'
+            )
             : ''
           : '',
         auctionEndTimeSufix: result['ZzAucEndDt']
@@ -143,7 +143,7 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
     this.getAuctionList(1);
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnChanges() {
     console.log('currentLang ', this.translate.currentLang);
@@ -234,15 +234,15 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
         : '',
       StartDate: this.filterFormGroup.controls['auctionStartDate'].value
         ? moment(
-            this.filterFormGroup.controls['auctionStartDate'].value,
-            'YYYY-MM-DD'
-          ).format('DD.MM.YYYY')
+          this.filterFormGroup.controls['auctionStartDate'].value,
+          'YYYY-MM-DD'
+        ).format('DD.MM.YYYY')
         : '',
       EndDate: this.filterFormGroup.controls['auctionEndDate'].value
         ? moment(
-            this.filterFormGroup.controls['auctionEndDate'].value,
-            'YYYY-MM-DD'
-          ).format('DD.MM.YYYY')
+          this.filterFormGroup.controls['auctionEndDate'].value,
+          'YYYY-MM-DD'
+        ).format('DD.MM.YYYY')
         : '',
       Message: '',
       Msgty: '',
@@ -324,7 +324,7 @@ export class AucModLandingPageComponent implements OnInit, AfterViewInit {
     this.refreshCalendarCntrl();
   }
 
-  setFilter() {}
+  setFilter() { }
 
   /** Populating the table */
   public getServerData(selectedPageNumber: number) {

@@ -1,574 +1,436 @@
 <div class="col-12 mt-1">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb px-0">
-      <li class="breadcrumb-item"><a href="#">Trust services</a></li>
-      <li class="breadcrumb-item"><a href="#">Online auction requests</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Order details</li>
-    </ol>
-  </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a href="#">Trust services</a></li>
+            <li class="breadcrumb-item"><a href="#">Online auction requests</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Order details</li>
+        </ol>
+    </nav>
 </div>
 <br />
 <div class="col-12">
-  <div class="row">
-    <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
             <h1 class="text-20 text-primary font-weight-500">Order Details</h1>
+        </div>
     </div>
 </div>
-</div>
 <br />
-
 <div class="rounded" style="background-color: #EFF8F3;">
-<div class="row p-4 mx-auto" style="height: 96px;">
-  <div class="col">
-      <label class="text-12">Request Name</label>
-      <div class="text-14 font-weight-bold color-darkgreen">Auction of vehicles, equipment and trucks</div>
-  </div>
-  <div class="col"></div>
-  <div class="col">
-      <label class="text-12">Order Status</label>
-      <div>
-        <span class="status status-o status-o-warning-2" style="color: #414042;">&nbsp;&nbsp; Waiting for acceptance</span>
-        
-      </div>
-  </div>
-  
+    <div class="row p-4 mx-auto" style="height: 96px;">
+        <div class="col">
+            <label class="text-12">Request Name</label>
+            <div class="text-14 font-weight-bold color-darkgreen">Auction of vehicles, equipment and trucks</div>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+            <label class="text-12">Order Status</label>
+            <div>
+                <span class="status status-o status-o-warning-2" style="color: #414042;">&nbsp;&nbsp; Waiting for
+          acceptance</span>
+            </div>
+        </div>
+    </div>
+    <div class="steps-wrapper">
+        <ul class="steps-group shadow-sm p-2 mb-5 bg-white rounded">
+            <li class="step-item is-done w-25 mt-2 mb-1">
+                <a href="/approve-req1" class="d-flex">
+                    <span class="step-number">1</span>
+                    <span class="step-label mt-2 text-16">Request Accept</span>
+                </a>
+            </li>
+            <li class="step-item w-25 mt-2">
+                <a href=""> </a>
+                <a href="/assignpricingcommittee" class="d-flex">
+                    <span class="step-number">2</span>
+                    <span class="step-label text-16">Appointment of Pricing Committee</span>
+                </a>
+            </li>
+            <li class="step-item w-25">
+                <a href=""> </a>
+                <a href="" class="d-flex">
+                    <span class="step-number">3</span>
+                    <span class="step-label text-16">Appointment of Auction Committee</span>
+                </a>
+            </li>
+            <li class="step-item w-25">
+                <a href=""> </a>
+                <a href="" class="d-flex">
+                    <span class="step-number">4</span>
+                    <span class="step-label text-16">Waiting for the announcement</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
-
-<div class="steps-wrapper">
-  <ul class="steps-group shadow-sm p-2 mb-5 bg-white rounded">
-    <li class="step-item is-done w-25 mt-2 mb-1">
-      <a href="/approve-req1" class="d-flex">
-        <span class="step-number">1</span>
-        <span class="step-label mt-2 text-16">Request Accept</span>
-      </a>
-    </li>
-    <li class="step-item w-25 mt-2">
-      <a href=""> </a
-      ><a href="/assignpricingcommittee" class="d-flex">
-        <span class="step-number">2</span>
-        <span class="step-label text-16">Appointment of Pricing Committee</span>
-      </a>
-    </li>
-    <li class="step-item w-25">
-      <a href=""> </a
-      ><a href="" class="d-flex">
-        <span class="step-number">3</span>
-        <span class="step-label text-16">Appointment of Auction Committee</span>
-      </a>
-    </li>
-    <li class="step-item w-25">
-      <a href=""> </a
-      ><a href="" class="d-flex">
-        <span class="step-number">4</span>
-        <span class="step-label text-16">Waiting for the announcement</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-</div>
-
 <div>
-  <ul class="nav et-tabs et-tabs-filled nav-pills" id="pills-tab" role="tablist">
-    <li class="nav-item"> <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Auction Details</a> </li>
-    <li class="nav-item"> <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Product Details</a> </li>
-  </ul>
-
-  <div class="tab-content bg-white" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-      <div class="auction-summary-form">
-          <div class="form-field">
-              <form class="needs-validation" novalidate>
-                  <div class="card p-5 shadow-lg">
-                      <div class="border-bottom">
-                          <div class="py-3 mb-3">
-                              <h4>General information about the order</h4>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Auction Reference Number</label>
-                                  <div class="text-14 color-darkgreen">{{ preAuctionData.ObjectId || "-" }}</div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Auction Type</label>
-                                  <div class="text-14 color-darkgreen">{{ preAuctionData.BidType || "-" }}</div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Bidding Method</label>
-                                  <div class="text-14 color-darkgreen">{{ preAuctionData.ZzStartMethod || "-" }}</div>
-                              </div>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Auction Name</label>
-                                  <div class="text-14 color-darkgreen">{{ preAuctionData.Description || "-" }}</div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Auction Products</label>
-                                  <div class="text-14 color-darkgreen">{{ preAuctionData.cars || "-" }}</div>
-                              </div>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Entity No.</label>
-                                  <div class="text-14 color-darkgreen">203</div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <label for="validationCustom01">Entity Name</label>
-                                  <div class="text-14 color-darkgreen">Ministry of Health</div>
-                              </div>
-                              
-                          </div>
-                          <div class="form-row">
-                              <div class="col-12 col-md-12">
-                                  <div class="form-group">
-                                      <label for="goverusermessage">Auction Description</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzAucDesc || "-" }}</div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="border-bottom">
-                          <div class="pt-5 pb-3">
-                              <h4>Auction Date and Time</h4>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Auction Start Date</label>
-                                      <div class="text-14 color-darkgreen">
-                                          <span>{{ preAuctionData.ZzAucSrtDt || "-" }}</span>
-                                          
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Auction End Date</label>
-                                      <div class="text-14 color-darkgreen">
-                                          <span>{{ preAuctionData.ZzAucEndDt || "-" }}</span>
-                                          
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>How to start the auction</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzStartMethod || "-" }}</div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Auction Announcement Date</label>
-                                      <div class="text-14 color-darkgreen">
-                                          <span>12-11-2020 * 10:50 am</span>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Last Date to Sign up</label>
-                                      <div class="text-14 color-darkgreen">
-                                          <span>11/12/2020</span>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="border-bottom">
-                          <div class="pt-5 pb-3">
-                              <h4>Financial Auction Items</h4>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Auction Start Price</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzBidSrtPrice || "-" }}</div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Lowest Bid Price</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzLowBidVl || "-" }}</div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Warranty Percentage</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzIbgaPercent || "-" }}</div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-row">
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>commission Type</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzCommisionTyp || "-" }}</div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Pursuit percentage-commission %</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzCommPercent || "-" }}</div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="form-group">
-                                      <label>Last date to pay the final guarantee</label>
-                                      <div class="text-14 color-darkgreen">{{ preAuctionData.ZzFbgaDeadline || "-" }}</div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="">
-                          <div class=" pt-5 pb-3">
-                              <h4>Attachments</h4>
-                          </div>
-
-                          <div class="row">
-                            <table
-                              id="inventoryAllocationTable"
-                              class="table table-bordered table-expanded"
-                            >
-                              <thead class="thead-dark">
-                                <tr class="">
-                                  <th
-                                    style="width: 12%;"
-                                    class="btn-primary-light"
-                                    scope="col"
-                                    (click)="sortByTableHeaderId(1, 'string')"
-                                  >
-                                    <div class="table-header-cell">
-                                      <span>Attached</span>
-                                      <span class="arrow asc"
-                                        ><span class="icon-unfold_more"></span
-                                      ></span>
+    <ul class="nav et-tabs et-tabs-filled nav-pills" id="pills-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Auction Details</a> </li>
+        <li class="nav-item"> <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Product Details</a> </li>
+    </ul>
+    <div class="tab-content bg-white" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="auction-summary-form">
+                <div class="form-field">
+                    <form class="needs-validation" novalidate>
+                        <div class="card p-5 shadow-lg">
+                            <div class="border-bottom">
+                                <div class="py-3 mb-3">
+                                    <h4>General information about the order</h4>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Auction Reference Number</label>
+                                        <div class="text-14 color-darkgreen">{{ preAuctionData.ObjectId || "-" }}</div>
                                     </div>
-                                  </th>
-                                  <th
-                                    class="btn-primary-light"
-                                    scope="col"
-                                    (click)="sortByTableHeaderId(2, 'string')"
-                                  >
-                                    <div class="table-header-cell">
-                                      <span>Attachment Name</span>
-                                      <span class="arrow asc"
-                                        ><span class="icon-unfold_more"></span
-                                      ></span>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Auction Type</label>
+                                        <div class="text-14 color-darkgreen">{{ preAuctionData.BidType || "-" }}</div>
                                     </div>
-                                  </th>
-                                  <th style="width: 12%;" class="btn-primary-light" scope="col"></th>
-                                </tr>
-                              </thead>
-                              <tbody
-                                *ngFor="
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Bidding Method</label>
+                                        <div class="text-14 color-darkgreen">{{ preAuctionData.ZzStartMethod || "-" }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Auction Name</label>
+                                        <div class="text-14 color-darkgreen">{{ preAuctionData.Description || "-" }}</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Auction Products</label>
+                                        <div class="text-14 color-darkgreen">{{ preAuctionData.cars || "-" }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Entity No.</label>
+                                        <div class="text-14 color-darkgreen">203</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01">Entity Name</label>
+                                        <div class="text-14 color-darkgreen">Ministry of Health</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="goverusermessage">Auction Description</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzAucDesc || "-" }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom">
+                                <div class="pt-5 pb-3">
+                                    <h4>Auction Date and Time</h4>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Auction Start Date</label>
+                                            <div class="text-14 color-darkgreen">
+                                                <span>{{ preAuctionData.ZzAucSrtDt || "-" }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Auction End Date</label>
+                                            <div class="text-14 color-darkgreen">
+                                                <span>{{ preAuctionData.ZzAucEndDt || "-" }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>How to start the auction</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzStartMethod || "-" }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Auction Announcement Date</label>
+                                            <div class="text-14 color-darkgreen">
+                                                <span>12-11-2020 * 10:50 am</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Last Date to Sign up</label>
+                                            <div class="text-14 color-darkgreen">
+                                                <span>11/12/2020</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom">
+                                <div class="pt-5 pb-3">
+                                    <h4>Financial Auction Items</h4>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Auction Start Price</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzBidSrtPrice || "-" }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Lowest Bid Price</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzLowBidVl || "-" }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Warranty Percentage</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzIbgaPercent || "-" }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>commission Type</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzCommisionTyp || "-" }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Pursuit percentage-commission %</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzCommPercent || "-" }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>Last date to pay the final guarantee</label>
+                                            <div class="text-14 color-darkgreen">{{ preAuctionData.ZzFbgaDeadline || "-" }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class=" pt-5 pb-3">
+                                    <h4>Attachments</h4>
+                                </div>
+                                <div class="row">
+                                    <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
+                                        <thead class="thead-dark">
+                                            <tr class="">
+                                                <th style="width: 12%;" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                                                    <div class="table-header-cell">
+                                                        <span>Attached</span>
+                                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                                    </div>
+                                                </th>
+                                                <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                                                    <div class="table-header-cell">
+                                                        <span>Attachment Name</span>
+                                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                                    </div>
+                                                </th>
+                                                <th style="width: 12%;" class="btn-primary-light" scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="
                                   let attachment of preAuctionData.listtoattachnav.results;
                                   let i = index
-                                "
-                              >
-                                <tr>
-                                  <td scope="row" style="text-align: center">{{ i + 1 }}</td>
-                                  <td>
-                                    <a class="btn btn-ghost btn-sm fill-primary-light-green">
-                                      <span class="icon-Group-3319"></span>
-                                    </a>
-                                    {{ attachment.PhioFname }}
-                                  </td>
-                                  <td>
-                                    
-
-                                    <a
-                                      (click)="attachmentDownload(attachment)"
-                                      class="btn btn-ghost btn-sm fill-primary-light-green"
-                                    >
-                                      <span class="icon-eye-open"></span>
-                                    </a>
-
-                                    <a
-                                      (click)="attachmentDownload(attachment)"
-                                      class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                      data-toggle="dropdown"
-                                      aria-haspopup="true"
-                                      aria-expanded="false"
-                                    >
-                                      <span class="icon-download"></span>
-                                    </a>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-
-                          <div class="mt-4 row margin-auto justify-content-end">
-                            <div class="mb-5">
-                              <nav aria-label="..." class="nav-pagination">
-                                <ul class="pagination">
-                                  <li class="page-item disabled">
-                                    <a class="page-link" tabindex="-1" aria-disabled="true"
-                                      >Previous</a
-                                    >
-                                  </li>
-                                  <li class="page-item active">
-                                    <a class="page-link">1</a>
-                                  </li>
-                                  <li class="page-item" aria-current="page">
-                                    <a class="page-link">2 <span class="sr-only">(current)</span></a>
-                                  </li>
-                                  <li class="page-item"><a class="page-link">3</a></li>
-                                  <li class="page-item"><a class="page-link dot-link">...</a></li>
-                                  <li class="page-item"><a class="page-link">15</a></li>
-                                  <li class="page-item">
-                                    <a class="page-link">Next</a>
-                                  </li>
-                                </ul>
-                              </nav>
+                                ">
+                                            <tr>
+                                                <td scope="row" style="text-align: center">{{ i + 1 }}</td>
+                                                <td>
+                                                    <a class="btn btn-ghost btn-sm fill-primary-light-green">
+                                                        <span class="icon-Group-3319"></span>
+                                                    </a> {{ attachment.PhioFname }}
+                                                </td>
+                                                <td>
+                                                    <a (click)="attachmentDownload(attachment)" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                                        <span class="icon-eye-open"></span>
+                                                    </a>
+                                                    <a (click)="attachmentDownload(attachment)" class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="icon-download"></span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-4 row margin-auto justify-content-end">
+                                    <div class="mb-5">
+                                        <nav aria-label="..." class="nav-pagination">
+                                            <ul class="pagination">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a class="page-link">1</a>
+                                                </li>
+                                                <li class="page-item" aria-current="page">
+                                                    <a class="page-link">2 <span class="sr-only">(current)</span></a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link">3</a></li>
+                                                <li class="page-item"><a class="page-link dot-link">...</a></li>
+                                                <li class="page-item"><a class="page-link">15</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-
-                        
-                      </div>
-                  </div>
-              </form>
-          </div>
-      </div>
-      
-  </div>
-  <!-- next here -->
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-    <div class="product-summary-form">
-
-      
-
-        <div class="card p-5 shadow-lg">
-          <div class=" pt-2 pb-3">
-            <h4>Product Details</h4>
-          </div>
-          <table
-          id="inventoryAllocationTable"
-          class="table table-bordered table-expanded"
-        >
-          <thead class="thead-dark">
-            <tr class="">
-              <th
-                class="btn-primary-light"
-                scope="col"
-                (click)="sortByTableHeaderId(1, 'string')"
-              >
-                <div class="table-header-cell">
-                  <span>Product Name</span>
-                  <span class="arrow asc"
-                    ><span class="icon-unfold_more"></span
-                  ></span>
+                        </div>
+                    </form>
                 </div>
-              </th>
-              <th
-                class="btn-primary-light"
-                scope="col"
-                (click)="sortByTableHeaderId(2, 'string')"
-              >
-                <div class="table-header-cell">
-                  <span>Product Number</span>
-                  <span class="arrow asc"
-                    ><span class="icon-unfold_more"></span
-                  ></span>
-                </div>
-              </th>
-              <th
-                class="btn-primary-light"
-                scope="col"
-                (click)="sortByTableHeaderId(3, 'string')"
-              >
-                <div class="table-header-cell">
-                  <span>Book value of the product</span>
-                  <span class="arrow asc"
-                    ><span class="icon-unfold_more"></span
-                  ></span>
-                </div>
-              </th>
-              <th
-                class="btn-primary-light"
-                scope="col"
-                (click)="sortByTableHeaderId(4, 'string')"
-              >
-                <div class="table-header-cell">
-                  <span>Product Condition</span>
-                  <span class="arrow asc"
-                    ><span class="icon-unfold_more"></span
-                  ></span>
-                </div>
-              </th>
-              <th class="btn-primary-light" scope="col"></th>
-            </tr>
-          </thead>
-  
-          <tbody
-            *ngFor="
+            </div>
+        </div>
+        <!-- next here -->
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="product-summary-form">
+                <div class="card p-5 shadow-lg">
+                    <div class=" pt-2 pb-3">
+                        <h4>Product Details</h4>
+                    </div>
+                    <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
+                        <thead class="thead-dark">
+                            <tr class="">
+                                <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                                    <div class="table-header-cell">
+                                        <span>Product Name</span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    </div>
+                                </th>
+                                <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                                    <div class="table-header-cell">
+                                        <span>Product Number</span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    </div>
+                                </th>
+                                <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                                    <div class="table-header-cell">
+                                        <span>Book value of the product</span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    </div>
+                                </th>
+                                <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(4, 'string')">
+                                    <div class="table-header-cell">
+                                        <span>Product Condition</span>
+                                        <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    </div>
+                                </th>
+                                <th class="btn-primary-light" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="
               let product of preAuctionData['listtoproductnav']['results'];
               let i = index
-            "
-          >
-            <tr>
-              <td scope="row">{{ i + 1 }}{{ product.Description }}</td>
-              <td>2</td>
-              <td>{{ product.ProductValue }}</td>
-              <td>{{ product.ZzProductCond }}</td>
-              <td>
-                <a class="btn btn-ghost btn-sm fill-primary-light-green">
-                  <span class="icon-eye-open"></span>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <td
-              class="font-medium color-lightgreen"
-                colspan="2"
-              >
-                {{ preAuctionData["listtoproductnav"]["results"].length }}
-                Products
-              </td>
-              <td class="font-weight-bold color-darkgreen" colspan="3">
-                Total book value of products:<br />
-                {{ productValue || "0.00" }} SAR
-              </td>
-            </tr>
-          </tbody>
-        </table>
-            
-        <div class="mt-4 row margin-auto justify-content-end">
-          <div class="mb-5">
-            <nav aria-label="..." class="nav-pagination">
-              <ul class="pagination">
-                <li class="page-item disabled">
-                  <a class="page-link" tabindex="-1" aria-disabled="true"
-                    >Previous</a
-                  >
-                </li>
-                <li class="page-item active">
-                  <a class="page-link">1</a>
-                </li>
-                <li class="page-item" aria-current="page">
-                  <a class="page-link">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link">3</a></li>
-                <li class="page-item"><a class="page-link dot-link">...</a></li>
-                <li class="page-item"><a class="page-link">15</a></li>
-                <li class="page-item">
-                  <a class="page-link">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        </div>
-        
-
-        
-    
-</div>
-</div>
-</div>
-</div>
-  <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5">
-              <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-                  <button
-                          type="submit"
-                          class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
-                      <span class="btn-text">Reference</span>
-                      <span class="v-divider"></span>
-                      <span class="icon icon-arrow-left"></span>
-                  </button>
-              </div>
-              <div class="d-flex flex-column flex-md-row mb-5">
-                  <button class="btn btn-danger btn-lg mx-0 mx-md-2"
-                    type="button"
-                    data-toggle="modal"
-                    data-target="#rejectionModal"
-                  >Rejection of the application</button>
-                  
-                  <button (click)="approveOrRejectAuction('A')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
-                      <span class="btn-text">Request Accept</span>
-                  </button>
-              </div>
-        </div>
-
-        <div class="modal fade"
-            id="rejectionModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-
-            <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 800px;"
-              role="document">
-
-              <div class="modal-content">
-
-                <div class="modal-header">
-                  <p class="modal-title text-24" style="color: #f66f5b;">Confirmation of rejection of the auction request</p>
-                  <button
-                    type="button"
-                    class="modal-close btn-close btn-sm"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span class="icon-close"></span>
-                  </button>
+            ">
+                            <tr>
+                                <td scope="row">{{ i + 1 }}{{ product.Description }}</td>
+                                <td>2</td>
+                                <td>{{ product.ProductValue }}</td>
+                                <td>{{ product.ZzProductCond }}</td>
+                                <td>
+                                    <a class="btn btn-ghost btn-sm fill-primary-light-green">
+                                        <span class="icon-eye-open"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td class="font-medium color-lightgreen" colspan="2"> {{ preAuctionData["listtoproductnav"]["results"].length }} Products </td>
+                                <td class="font-weight-bold color-darkgreen" colspan="3"> Total book value of products:<br /> {{ productValue || "0.00" }} SAR </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-4 row margin-auto justify-content-end">
+                        <div class="mb-5">
+                            <nav aria-label="..." class="nav-pagination">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link">1</a>
+                                    </li>
+                                    <li class="page-item" aria-current="page">
+                                        <a class="page-link">2 <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link">3</a></li>
+                                    <li class="page-item"><a class="page-link dot-link">...</a></li>
+                                    <li class="page-item"><a class="page-link">15</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="modal-body text-20" style="color: #414042;">
-                  Are you sure to send a rejection request?
-                </div>
-
-                <div class="form-row">
-                  <div class="col-md-4 mb-3">
-                      <label class="text-12">Order Reference Number</label>
-                      <div class="text-14 color-darkgreen">{{ preAuctionData.ObjectId || "-" }}</div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                      <label class="text-12">Auction Type</label>
-                      <div class="text-14 color-darkgreen">{{ preAuctionData.BidType || "-" }}</div>
-                  </div>
-                  
-              </div>
-
-              <div class="form-row mt-4">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5">
+    <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+        <button type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+      <span class="btn-text">Reference</span>
+      <span class="v-divider"></span>
+      <span class="icon icon-arrow-left"></span>
+    </button>
+    </div>
+    <div class="d-flex flex-column flex-md-row mb-5">
+        <button class="btn btn-danger btn-lg mx-0 mx-md-2" type="button" data-toggle="modal" data-target="#rejectionModal">Rejection of the application</button>
+        <button (click)="approveOrRejectAuction('A')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+      <span class="btn-text">Request Accept</span>
+    </button>
+    </div>
+</div>
+<div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" style="width: 800px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title text-24" style="color: #f66f5b;">Confirmation of rejection of the auction request</p>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+          <span class="icon-close"></span>
+        </button>
+            </div>
+            <div class="modal-body text-20" style="color: #414042;"> Are you sure to send a rejection request? </div>
+            <div class="form-row">
                 <div class="col-md-4 mb-3">
-                  <label class="text-12">Please enter the reason for rejection</label>
-                  <select class="color-darkgreen border-bottom"
-                      style="width: 700px; border: none;">
-                      <option
-                        style="color: #005b4e"
-                        value="It was announced twice"
-                        selected>It was announced twice</option>
-                      <option style="color: #005b4e" value="XXXXXXXXXX">XXXXXXXXXX</option>
-                      <option style="color: #005b4e" value="YYYYYYYYYY">YYYYYYYYYY</option>
-                  </select>
+                    <label class="text-12">Order Reference Number</label>
+                    <div class="text-14 color-darkgreen">{{ preAuctionData.ObjectId || "-" }}</div>
                 </div>
-              </div>
-
-              <div class="row mt-4">
+                <div class="col-md-4 mb-3">
+                    <label class="text-12">Auction Type</label>
+                    <div class="text-14 color-darkgreen">{{ preAuctionData.BidType || "-" }}</div>
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div class="col-md-4 mb-3">
+                    <label class="text-12">Please enter the reason for rejection</label>
+                    <select class="color-darkgreen border-bottom" style="width: 700px; border: none;">
+            <option style="color: #005b4e" value="It was announced twice" selected>It was announced twice</option>
+            <option style="color: #005b4e" value="XXXXXXXXXX">XXXXXXXXXX</option>
+            <option style="color: #005b4e" value="YYYYYYYYYY">YYYYYYYYYY</option>
+          </select>
+                </div>
+            </div>
+            <div class="row mt-4">
                 <div class="form-group col w-100">
-                  <div class="border-bottom color-grey">
-                    <label for="goverusermessage">Notes </label>
-                    <span class="float-left text-muted"
-                      >Letters &nbsp;<small id="charNum">0/250</small></span
-                    >
-                  </div>
-                  <textarea
-                  [(ngModel)]="rejectionNotes"
-                    class="form-control"
-                    onkeyup="countChar(this)"
-                    placeholder="Write your notes"
-                    rows="5"
-                  ></textarea>
+                    <div class="border-bottom color-grey">
+                        <label for="goverusermessage">Notes </label>
+                        <span class="float-left text-muted">Letters &nbsp;<small id="charNum">0/250</small></span>
+                    </div>
+                    <textarea [(ngModel)]="rejectionNotes" class="form-control" onkeyup="countChar(this)" placeholder="Write your notes" rows="5"></textarea>
                 </div>
-              </div>
-
-              <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5">
+            </div>
+            <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5">
                 <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
                     <!-- <button
                             type="submit"
@@ -579,32 +441,22 @@
                     </button> -->
                 </div>
                 <div class="d-flex flex-column flex-md-row mb-5">
-                    <button class="btn btn-outline-light btn-lg mx-0 mx-md-2"
-                      type="button">Reference</button>
-                    
+                    <button class="btn btn-outline-light btn-lg mx-0 mx-md-2" type="button">Reference</button>
                     <button (click)="approveOrRejectAuction('R')" class="btn arrow-btn btn-danger btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
-                        <span class="btn-text">Rejection of the application</span>
-                    </button>
+            <span class="btn-text">Rejection of the application</span>
+          </button>
                 </div>
-          </div>
-  
-
-              </div>
-
-          </div>
-
-      </div>
-
-
-
-
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-  function countChar(val) {
-    var len = val.value.length;
-    if (len >= 250) {
-      val.value = val.value.substring(0, 250);
-    } else {
-      $("#charNum").text(len + "/250");
+    function countChar(val) {
+        var len = val.value.length;
+        if (len >= 250) {
+            val.value = val.value.substring(0, 250);
+        } else {
+            $("#charNum").text(len + "/250");
+        }
     }
-  }
 </script>

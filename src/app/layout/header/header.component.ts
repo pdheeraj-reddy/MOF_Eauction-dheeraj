@@ -3,6 +3,7 @@ import { RouterModule, Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { AuctionService } from "../../service/auction.service";
 
 @Component({
   selector: 'app-header',
@@ -11,15 +12,17 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HeaderComponent implements OnInit {
   public applang: string = 'ar';
-  userInfo : any;
+  loggedUser: any;
+  loggedUserRole: any;
   isAuction: boolean = false;
-  title   = 'Header';
-  
+  title = 'Header';
+
   constructor(
     public translate: TranslateService,
     public router: Router,
-    private cookieService:CookieService
-    ) { 
+    public auctionServc: AuctionService,
+    private cookieService: CookieService
+  ) {
     translate.addLangs(['ar', 'en']);
     translate.setDefaultLang('ar');
 
@@ -28,22 +31,18 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userInfo = this.getUserInfo();
-    console.log('userInfoasdas', this.userInfo);
-    console.log(this.userInfo.fullname);
+    this.loggedUser = this.auctionServc.loggedUser;
+    this.loggedUserRole = this.auctionServc.getLoggedUserRole();
+    console.log('this.loggedUserRole ➼ ', this.loggedUserRole);
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.applang = event.lang
     });
   }
 
-  public onLangChange(){
+  public onLangChange() {
     this.applang = this.applang == 'en' ? 'ar' : 'en';
     localStorage.setItem('lang_pref', this.applang);
     this.translate.use(this.applang);
-  }
-
-  public getUserInfo(){
-    return localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo") as string) : '';
   }
 
   /**

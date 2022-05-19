@@ -8,9 +8,9 @@ describe('PrimaryAwardingBidderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrimaryAwardingBidderComponent ]
+      declarations: [PrimaryAwardingBidderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

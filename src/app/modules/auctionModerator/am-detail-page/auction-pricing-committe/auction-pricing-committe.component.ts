@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuctionService } from 'src/app/service/auction.service-2';
+import { AuctionApprovalService } from 'src/app/service/auction-approval.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -13,9 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./auction-pricing-committe.component.scss'],
 })
 export class AuctionPricingCommitteComponent implements OnInit {
-  @Input()
-  preAuctionData: any;
+  @Input() preAuctionData: any;
+  _3MembersErrorMsg = false;
   rejectionNotes: any;
+  ObjectId: any = '';
+  DraftId: any = '';
+  ViewMode: any = '';
 
   popupTitle: any = '';
   committeeMemberList: any = [];
@@ -33,10 +36,11 @@ export class AuctionPricingCommitteComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
   constructor(
-    private _AuctionService: AuctionService,
+    private activatedRoute: ActivatedRoute,
+    private _AuctionService: AuctionApprovalService,
     public dialog: MatDialog,
     public router: Router
-  ) {}
+  ) { }
 
   memberSelected(data: any) {
     console.log(this.preAuctionData);
@@ -44,10 +48,12 @@ export class AuctionPricingCommitteComponent implements OnInit {
   }
 
   goBack() {
-    alert("hi");
     this.router.navigateByUrl('/');
   }
-
+  showErrorMsg(error :any){
+    this._3MembersErrorMsg = error;
+    console.log(error);
+  }
   openAddMemberDialog(title: any, role: string) {
     switch (role) {
       case 'ZEAUCTION_SALCOMM_CHAIRMAN':
@@ -124,6 +130,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
     //  this.openAddMemberDialog(title, role);
   }
   nowchangetoAuction() {
+    // add dynamic style cc, display: none
     this.showAuction = true;
     this.showProduct = false;
     this.showAssignPricing = false;
@@ -202,6 +209,11 @@ export class AuctionPricingCommitteComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
+    if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
+      this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
+      this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
+      this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
+    }
     this.committeeChairSelected = false;
     this.committeeSecSelected = false;
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -217,16 +229,18 @@ export class AuctionPricingCommitteComponent implements OnInit {
       option.toLowerCase().includes(filterValue)
     );
   }
+  
   getPreAuctionData() {
-    // this._AuctionService.getPreAuctionApproval('9700000300').subscribe(
-    //   (res: any) => {
-    //     console.log(res);
-    //   },
-    //   (error) => {
-    //     console.log('getAuctionList RespError : ', error);
-    //   }
-    // );
-    let temp = this._AuctionService.getPreAuctionApproval('9700000300');
-    this.preAuctionData = temp['d']['results'][0];
+    this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.preAuctionData = res['d']['results'][0];
+      },
+      (error) => {
+        console.log('getAuctionList RespError : ', error);
+      }
+    );
+    // let temp = this._AuctionService.getPreAuctionApproval('9700000300');
+    // this.preAuctionData = temp['d']['results'][0];
   }
 }

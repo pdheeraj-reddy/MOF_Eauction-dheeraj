@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter ,ViewChild} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { PaginationSortingService } from "src/app/service/pagination.service";
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuctionProductMaster, AuctionProduct } from "src/app/model/auction.model";
@@ -17,11 +17,11 @@ export class AuctionProductComponent implements OnInit {
   @Output() changeauctiontype = new EventEmitter<string>();
   // AUCTION edit end
   //variables
-  title   = 'Auction Product';
+  title = 'Auction Product';
   maxChars = 250;
   submitted = false;
   onAddProductSubmitted = false;
-  isSameaddress:boolean = true;
+  isSameaddress: boolean = true;
   // Dropdown Values
   dropValBeneCategories: any = ['category 1', 'category 2', 'category 3', 'category 4'];
   // Form controls
@@ -33,9 +33,9 @@ export class AuctionProductComponent implements OnInit {
   // ------- file validation         --------
   maxFileCount: Number = 6;
   acceptedExtensions = "mp4,mov,png,jpg,docx,doc,pdf";
-  @ViewChild('myModalClose') modalClose:any;
+  @ViewChild('myModalClose') modalClose: any;
   msg: String = '';
-  selectedFiles:File[];
+  selectedFiles: File[];
   files: any[] = [];
   selectedFileFormat: any;
   selectedFileURL: any;
@@ -43,21 +43,21 @@ export class AuctionProductComponent implements OnInit {
   // -------------
 
   //--------------- google map loc ---------
-  lat : number;
-  lng : number;
+  lat: number;
+  lng: number;
   locationChoose = false;
 
   // Objects
   productItem: AuctionProductMaster = new AuctionProductMaster();
   productlist: AuctionProduct = new AuctionProduct();
   dropValCategory: any = ['category 1', 'category 2', 'category 3', 'category 4'];
-  public arrayofobject:any = [];  
+  public arrayofobject: any = [];
 
   constructor(
     public PaginationServc: PaginationSortingService,
     private formBuilder: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
-    ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -72,13 +72,13 @@ export class AuctionProductComponent implements OnInit {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
       });
-      
+
     }
   }
   // Beneficiary category onchange select
   changeSelect(e: any, dd: string) {
     console.log(e.target.value)
-    if(e.target.value!=''){
+    if (e.target.value != '') {
       this.addFormGroup.controls[dd].setValue(e.target.value, {
         onlySelf: true
       })
@@ -86,12 +86,12 @@ export class AuctionProductComponent implements OnInit {
   }
 
   //time on click event 
-  changetime(e:any,dd:string){
+  changetime(e: any, dd: string) {
     this.locationForm[dd].setValue(e.target.value);
   }
 
   //google map location
-  onChooseLocation(event:any){
+  onChooseLocation(event: any) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChoose = true;
@@ -100,9 +100,9 @@ export class AuctionProductComponent implements OnInit {
   }
 
   // <!----------add product event function------------------------>
-  
+
   //google map location
-  onaddProductChooseLocation(event:any){
+  onaddProductChooseLocation(event: any) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChoose = true;
@@ -110,7 +110,7 @@ export class AuctionProductComponent implements OnInit {
     this.addproductlocationForm['locLongitude'].setValue(this.lat);
   }
 
-  createForm(){
+  createForm() {
     console.log(this.productItem);
     this.productsFormGroup = this.formBuilder.group({
       sameLocNDate: new FormControl(this.productItem.sameLocNDate ? this.productItem.sameLocNDate : true, Validators.required),
@@ -126,19 +126,19 @@ export class AuctionProductComponent implements OnInit {
         notes: new FormControl(this.productItem.location?.notes ? this.productItem.location.notes : '')
       }),
       productFormGroup: this.formBuilder.group({
-        products: new FormArray([],(Validators.required)),
+        products: new FormArray([], (Validators.required)),
       })
     });
 
     this.productItem.products = [];
-    if(this.productItem.products.length > 0){
+    if (this.productItem.products.length > 0) {
       this.productItem.products.forEach(item => {
         this.addProducts(item);
       });
     }
   }
 
-  addProducts(pItem?: any){
+  addProducts(pItem?: any) {
     const item = this.formBuilder.group({
       productName: new FormControl(pItem.productName ? pItem.productName : '', Validators.required),
       productCategory: new FormControl(pItem.productCategory ? pItem.productCategory : '', Validators.required),
@@ -162,7 +162,7 @@ export class AuctionProductComponent implements OnInit {
     this.auctionProducts.push(item);
   }
 
-  addProductForm(){
+  addProductForm() {
     this.addFormGroup = this.formBuilder.group({
       editIndex: new FormControl(),
       productName: new FormControl(this.productlist.productName ? this.productlist.productName : '', Validators.required),
@@ -171,7 +171,7 @@ export class AuctionProductComponent implements OnInit {
       productSerialNumber: new FormControl(this.productlist.productSerialNumber ? this.productlist.productSerialNumber : '', Validators.required),
       productValue: new FormControl(this.productlist.productValue ? this.productlist.productValue : '', Validators.required),
       productSpec: new FormControl(this.productlist.productSpec ? this.productlist.productSpec : '', Validators.required),
-      productImages: new FormArray([],(this.productlist.productImages ? this.productlist.productImages : '',Validators.required)),
+      productImages: new FormArray([], (this.productlist.productImages ? this.productlist.productImages : '', Validators.required)),
       location: this.formBuilder.group({
         deliveryDate: new FormControl(this.productlist.location?.deliveryDate ? this.productlist.location.deliveryDate : ''),
         deliveryTime: new FormControl(this.productlist.location?.deliveryTime ? this.productlist.location.deliveryTime : ''),
@@ -183,7 +183,7 @@ export class AuctionProductComponent implements OnInit {
         locStreet: new FormControl(this.productlist.location?.locStreet ? this.productlist.location.locStreet : ''),
         notes: new FormControl(this.productlist.location?.notes ? this.productlist.location.notes : ''),
       }),
-    });   
+    });
   }
 
   public setValidation(e: any) {
@@ -194,10 +194,10 @@ export class AuctionProductComponent implements OnInit {
     // const addProdcutFormGroup = this.addFormGroup.controls['location'] as FormGroup;
     if (e.target.checked) {
       this.isSameaddress = true;
-      
+
       this.setRequireValidator(locFormGroup);
       this.removeValidator(addProdcutFormGroup);
-    } else{
+    } else {
       this.isSameaddress = false;
       this.setRequireValidator(addProdcutFormGroup);
       this.removeValidator(locFormGroup);
@@ -254,7 +254,7 @@ export class AuctionProductComponent implements OnInit {
   get addproductImage(): FormArray {
     return this.addFormGroup.get('productImages') as FormArray;
   }
-  
+
   get addproductlocationForm(): { [key: string]: AbstractControl } {
     // console.log("add product location");
     // console.log(this.addFormGroup.controls['location']);
@@ -262,42 +262,42 @@ export class AuctionProductComponent implements OnInit {
     return addlocFormGroup.controls;
   }
   // file attachment
-  selectFiles(e: any,dd:string): void {
+  selectFiles(e: any, dd: string): void {
     this.selectedFiles = e.target.files;
     let filecount = this.selectedFiles.length;
-      if(this.selectedFiles && filecount<=this.maxFileCount){
-        this.msg="";
-        for(let i=0;i<filecount;i++){
-          let filesize = this.selectedFiles[i]['size'];
-          if(filesize <= 2097152){
-            if(this.files.length<this.maxFileCount){
+    if (this.selectedFiles && filecount <= this.maxFileCount) {
+      this.msg = "";
+      for (let i = 0; i < filecount; i++) {
+        let filesize = this.selectedFiles[i]['size'];
+        if (filesize <= 2097152) {
+          if (this.files.length < this.maxFileCount) {
 
-              const reader = new FileReader();
-              reader.readAsDataURL(e.target.files[i]);
-                var fileupload = {
-                  "name"    : e.target.files[i]['name'],
-                  "size"    : e.target.files[i]['size'],
-                  "type"    : e.target.files[i]['type'],
-                  "filesrc" : new Array()
-                };
-                reader.onload = () => {
-                  fileupload.filesrc[0] = reader.result;
-                };
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[i]);
+            var fileupload = {
+              "name": e.target.files[i]['name'],
+              "size": e.target.files[i]['size'],
+              "type": e.target.files[i]['type'],
+              "filesrc": new Array()
+            };
+            reader.onload = () => {
+              fileupload.filesrc[0] = reader.result;
+            };
 
-                this.files.push(fileupload);
-                this.addproductImage.push(new FormControl(fileupload));
-            }
-          }else if(this.files.length==0 || this.files.length==1){
-            this.msg="Invalid file Size";
+            this.files.push(fileupload);
+            this.addproductImage.push(new FormControl(fileupload));
           }
+        } else if (this.files.length == 0 || this.files.length == 1) {
+          this.msg = "Invalid file Size";
         }
-      }else{
-        this.msg="Invalid file count";
       }
+    } else {
+      this.msg = "Invalid file count";
+    }
   }
 
   // attachemnt view
-  viewAttachment(file:any){
+  viewAttachment(file: any) {
     console.log(file);
     console.log(file.type);
     const fileType = file.name.split(".").pop()?.toLowerCase();
@@ -307,18 +307,18 @@ export class AuctionProductComponent implements OnInit {
     var ab = new ArrayBuffer(byteString.length);
     var ia = new Uint8Array(ab);
     for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
+      ia[i] = byteString.charCodeAt(i);
     }
     const blob = new Blob([ab], { type: file.type });
-    
+
     let fileURL = window.URL.createObjectURL(blob);
-    if(fileType === 'docx' || fileType === 'doc'|| fileType === 'pdf'){
+    if (fileType === 'docx' || fileType === 'doc' || fileType === 'pdf') {
       this.showViewAttachmentsModal = false;
       window.open(fileURL, '_blank');
     } else {
-      if(file.type.indexOf('image')> -1){
+      if (file.type.indexOf('image') > -1) {
         this.selectedFileFormat = 'image';
-      } else if(file.type.indexOf('video')> -1){
+      } else if (file.type.indexOf('video') > -1) {
         this.selectedFileFormat = 'video';
       }
       // reader.onload = (_event) => { 
@@ -328,30 +328,30 @@ export class AuctionProductComponent implements OnInit {
     }
   }
 
-  removeFile(index:number){
+  removeFile(index: number) {
     console.log(index);
-    this.files.splice(index,1);
+    this.files.splice(index, 1);
     this.addproductImage.removeAt(index);
   }
 
   //<!----------------------- product add,edit delete--------------------->
 
-  public onAddProduct(submitSrc: string,event:any){
+  public onAddProduct(submitSrc: string, event: any) {
     console.log(event);
     this.onAddProductSubmitted = true;
     console.log("product");
     console.log(this.addFormGroup);
-    if(submitSrc === 'save'){
-      if(this.addFormGroup.status === 'VALID'){
-        if(this.addFormGroup.value['editIndex']!=null){
+    if (submitSrc === 'save') {
+      if (this.addFormGroup.status === 'VALID') {
+        if (this.addFormGroup.value['editIndex'] != null) {
           console.log("product2");
           this.arrayofobject[this.addFormGroup.value['editIndex']] = this.addFormGroup.value;
-          this.auctionProducts.at(this.addFormGroup.value['editIndex']).patchValue(this.addFormGroup.value);  
+          this.auctionProducts.at(this.addFormGroup.value['editIndex']).patchValue(this.addFormGroup.value);
           this.modalClose.nativeElement.click();
           this.addFormGroup.reset();
           this.addproductImage.clear();
           console.log(this.arrayofobject);
-        }else{
+        } else {
           console.log("product1");
           this.arrayofobject.push(this.addFormGroup.value);
           this.auctionProducts.push(new FormControl(this.addFormGroup.value));
@@ -360,52 +360,52 @@ export class AuctionProductComponent implements OnInit {
           this.addproductImage.clear();
           this.files = [];
         }
-      }else{
+      } else {
         console.log("invalid add product");
         console.log(this.addFormGroup);
       }
-    } else if(submitSrc === 'saveasdraft'){
+    } else if (submitSrc === 'saveasdraft') {
     }
   }
 
   // edit Product
-  
-  editProduct(index:number){
+
+  editProduct(index: number) {
     const Arraydata = this.arrayofobject[index];
     const editdata = this.auctionProducts.controls[index].value;
     console.log(index);
-    this.files =[];
+    this.files = [];
     Object.keys(editdata).forEach(key => {
-      if(key!="productImages" && key!="location"){
+      if (key != "productImages" && key != "location") {
         this.addFormGroup.controls[key].setValue(editdata[key]);
         this.addFormGroup.controls[key].updateValueAndValidity();
       }
-      else if(key=="productImages"){
-        editdata[key].forEach((value:any,index:any,array:any) => {
-         
+      else if (key == "productImages") {
+        editdata[key].forEach((value: any, index: any, array: any) => {
+
           this.files.push(value);
           this.addproductImage.push(new FormControl(value));
           this.addproductImage.updateValueAndValidity();
-          })
+        })
       }
-      else if(key=="location"){
+      else if (key == "location") {
         Object.keys(editdata[key]).forEach(key1 => {
           console.log(key1);
           console.log(editdata[key][key1]);
           this.addproductlocationForm[key1].setValue(editdata[key][key1]);
           this.addproductlocationForm[key1].updateValueAndValidity();
-          })
+        })
       }
     });
     this.addFormGroup.controls["editIndex"].setValue(index);
-    
+
     console.log(this.addFormGroup);
     this.addFormGroup.updateValueAndValidity();
   }
 
-  removeProduct(index:number){
+  removeProduct(index: number) {
     console.log(index);
-    this.arrayofobject.splice(index,1);
+    this.arrayofobject.splice(index, 1);
     this.auctionProducts.removeAt(index);
     console.log(this.productsFormGroup);
   }
@@ -413,23 +413,23 @@ export class AuctionProductComponent implements OnInit {
 
 
 
-  public onSubmit(submitSrc: string){
+  public onSubmit(submitSrc: string) {
     this.submitted = true;
     console.log(this.productsFormGroup);
-    if(submitSrc === 'save'){
-      if(this.productsFormGroup.status === 'VALID'){
+    if (submitSrc === 'save') {
+      if (this.productsFormGroup.status === 'VALID') {
         localStorage.setItem('productDetails', JSON.stringify(this.productsFormGroup.value));
-        this.activeStep ++;
+        this.activeStep++;
         this.changeSteps.emit(this.activeStep);
       }
-    } else if(submitSrc === 'saveasdraft'){
+    } else if (submitSrc === 'saveasdraft') {
       // this.activeStep ++;
       // this.changeSteps.emit(this.activeStep);
     }
   }
 
-  public back(){
-    this.activeStep --;
+  public back() {
+    this.activeStep--;
     this.changeSteps.emit(this.activeStep);
     this.changeauctiontype.emit("auctionedit");
   }

@@ -33,7 +33,7 @@ export class AuctionCommiteeOpenOffersComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.filterForm();

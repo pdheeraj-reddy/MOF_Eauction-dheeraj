@@ -9,6 +9,8 @@ import jwt_decode from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuctionService {
+  loggedUser : any;
+  loggedUserRole : any;
 
   constructor( 
     private http: HttpClient,
@@ -24,8 +26,47 @@ export class AuctionService {
     }
   }
 
+  hasUserRole(role: string){
+    if(this.loggedUser.roles == role){
+      return true;
+    }
+    return false;
+  }
+
+  getLoggedUserRole(){
+    this.loggedUserRole = {
+      isSalesHead : this.hasUserRole("EAuction_SalesCommitteeChairman"),
+      isSalesSecretary : this.hasUserRole("EAuction_SalesCommitteSecretary"),
+      isInteriorMarketer : this.hasUserRole("EAuction_InteriorMarketer"),
+      isAuctionModerator : this.hasUserRole("EAuction_AuctionManager"),
+      isSalesMember : this.hasUserRole("EAuction_SalesCommitteeMember"),
+      isPricingMember : this.hasUserRole("EAuction_PricingCommitteeMember"),
+      isPricingSecretary : this.hasUserRole("EAuction_PricingCommitteSecretary"),
+      isPricingHead : this.hasUserRole("EAuction_PricingCommitteeChairman")
+    }
+    return this.loggedUserRole
+  }
+
   //for getting Auction List with Filters
   getAuctionList(page: any, filters: any): Observable<any> {
+    let role = '', config1 = '', config2 = '';
+    if (this.loggedUserRole.isInteriorMarketer) {
+      role = "InteriorMarketer";
+      config1 = "?$expand=pagetolistnav";
+      config2 = "";
+    } else if(this.loggedUserRole.isAuctionModerator) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    } else if(this.loggedUserRole.isPricingMember) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    } else if(this.loggedUserRole.isPricingHead){
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    }
     console.log('page ', page, ' filters ', filters);
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     const pageNumber = page.pageNumber;
@@ -36,7 +77,7 @@ export class AuctionService {
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
-        'X_User_Role': 'InteriorMarketer',
+        'X_User_Role': role,
       },
       params: {
       },
@@ -45,20 +86,38 @@ export class AuctionService {
     return this.http.get<any>( 
       // 'http://10.13.85.57:9001' + 
       environment.apiAuctionURL + 
-      "?$expand=pagetolistnav" + 
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + ")&$format=json" 
+      config1 + 
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json" 
       , httpOptions);
     
   }
 
   // for getting Auction details for ObjectId
-  getAuctionDetails(ObjectId: string, DraftId?: string): Observable<any> {    
+  getAuctionDetails(ObjectId: string, DraftId?: string): Observable<any> {
+    let role = '', config1 = '', config2 = '';
+    if (this.loggedUserRole.isInteriorMarketer) {
+      role = "InteriorMarketer";
+      config1 = "?$expand=pagetolistnav";
+      config2 = "";
+    } else if(this.loggedUserRole.isAuctionModerator) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    } else if(this.loggedUserRole.isPricingMember) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    } else if(this.loggedUserRole.isPricingHead){
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    }
     let $filters = (ObjectId !== '' ? " and ObjectId eq '" + ObjectId + "'" : '') + (DraftId !== '' ? " and DraftId eq '" + DraftId + "'" : '');
     console.log('$filters ', $filters);
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
-        'X_User_Role': 'InteriorMarketer',
+        'X_User_Role': role,
       },
       params: {
       }
@@ -138,8 +197,7 @@ export class AuctionService {
   public logout() {
     this.cookieService.deleteAll('/', '.mof.gov.sa');
     localStorage.clear();
-    // const redirectUrl = 'https://ry1drvemksr1.mof.gov.sa:50301/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fmof.gov.sa.f_mof_base!2fmof.gov.sa.f_iviews!2fmof.gov.sa.i_auction';
-    const redirectUrl = 'https://ry1drvemksr1.mof.gov.sa/sap/public/bc/icf/logoff?sap-client=100';
+    const redirectUrl = environment.idmLogoutUrl;
     window.location.href = redirectUrl;
     // this.router.navigate(['/']);
   }

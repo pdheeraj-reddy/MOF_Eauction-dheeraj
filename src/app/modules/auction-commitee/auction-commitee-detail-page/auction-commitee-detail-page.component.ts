@@ -20,7 +20,7 @@ export class AuctionCommiteeDetailPageComponent implements OnInit {
   preAUctionData: any;
   participantsData: any;
 
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 
   openOffers() {
     this.router.navigateByUrl(
@@ -334,7 +334,7 @@ export class AuctionCommiteeDetailPageComponent implements OnInit {
     //   // console.log(moment(currentDate).diff(moment('09-04-2022 01:00:04')));
     // }
     return {
-      format: '\xa0'+'D' + '\xa0\xa0\xa0\xa0\xa0' + 'H' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 'm' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 's',
+      format: '\xa0' + 'D' + '\xa0\xa0\xa0\xa0\xa0' + 'H' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 'm' + '\xa0\xa0\xa0\xa0\xa0\xa0' + 's',
       leftTime:
         parseInt(day) * parseInt(hours) * parseInt(mts) * parseInt(seconds),
       formatDate: ({ date, formatStr }) => {

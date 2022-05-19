@@ -8,9 +8,9 @@ describe('AucMemLandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AucMemLandingPageComponent ]
+      declarations: [AucMemLandingPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

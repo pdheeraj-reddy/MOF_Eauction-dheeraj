@@ -16,6 +16,7 @@ export class BidValueUpdateComponent implements OnInit {
   totalBidValue: any;
   isBidUpdate: boolean = false;
   ObjectId: any = '';
+  showPageLoader: boolean = false;
   isAuctionHead: boolean = false;
   estimatedValueOfProducts = 0;
   types: any = [
@@ -72,7 +73,7 @@ export class BidValueUpdateComponent implements OnInit {
   discard() {
     this.editmode1 = false;
   }
-  approveOrRejectAuction(action: any) {
+  adjustTotalPriceAuction(action: any) {
     this.preAuctionData.ActionTaken = action;
     console.log(this.preAuctionData);
     this._AuctionService
@@ -88,6 +89,7 @@ export class BidValueUpdateComponent implements OnInit {
       .subscribe(
         (res: any) => {
           console.log(res);
+          this.getPreAuctionData();
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -95,6 +97,7 @@ export class BidValueUpdateComponent implements OnInit {
       );
   }
   getPreAuctionData() {
+    this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         console.log(res);
@@ -107,6 +110,7 @@ export class BidValueUpdateComponent implements OnInit {
           this.inputMode = true;
           this.isBidUpdate = false;
         }
+        this.showPageLoader = false;
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

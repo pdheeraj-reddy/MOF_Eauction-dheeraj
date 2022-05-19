@@ -8,7 +8,7 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 })
 export class AuctionTotalPricingComponent implements OnInit {
 
-  editmode1:boolean = false;
+  editmode1: boolean = false;
 
   constructor(public PaginationServc: PaginationSortingService) { }
 
@@ -19,11 +19,11 @@ export class AuctionTotalPricingComponent implements OnInit {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
 
-  edit(){
+  edit() {
     this.editmode1 = true;
   }
 
-  discard(){
+  discard() {
     this.editmode1 = false;
   }
 

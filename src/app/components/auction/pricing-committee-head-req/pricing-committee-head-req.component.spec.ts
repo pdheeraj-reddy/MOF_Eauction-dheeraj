@@ -8,9 +8,9 @@ describe('PricingCommitteeHeadReqComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PricingCommitteeHeadReqComponent ]
+      declarations: [PricingCommitteeHeadReqComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

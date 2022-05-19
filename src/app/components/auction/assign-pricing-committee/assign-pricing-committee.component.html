@@ -1,620 +1,384 @@
 <div class="col-12 mt-1">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb px-0">
-      <li class="breadcrumb-item"><a href="#">Accreditation services</a></li>
-      <li class="breadcrumb-item">
-        <a href="#">Electronic auction applications</a>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">Order details</li>
-    </ol>
-  </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a href="#">Accreditation services</a></li>
+            <li class="breadcrumb-item">
+                <a href="#">Electronic auction applications</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Order details</li>
+        </ol>
+    </nav>
 </div>
 <div class="col-12">
-  <div class="row">
-    <div class="col-12">
-      <h1 class="text-32 text-primary font-weight-medium">Order details</h1>
-    </div>
-    <div class="stepper-card">
-      <div class="show-status">
-        <div>
-          <label>Name of application</label><br />
-          <label style="font-size: 14px; color: #08594d; font-weight: bold">
-            Auction of transport cars, equipment and trucks</label
-          >
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-32 text-primary font-weight-medium">Order details</h1>
         </div>
-        <div class="status-req">
-          <label>Status of request</label>
-          <div class="status-icon">
-            <div class="status-color"></div>
-            <label style="color: black">Waiting for the announcement</label>
-          </div>
+        <div class="stepper-card">
+            <div class="show-status">
+                <div>
+                    <label>Name of application</label><br />
+                    <label style="font-size: 14px; color: #08594d; font-weight: bold"> Auction of transport cars, equipment and
+            trucks</label>
+                </div>
+                <div class="status-req">
+                    <label>Status of request</label>
+                    <div class="status-icon">
+                        <div class="status-color"></div>
+                        <label style="color: black">Waiting for the announcement</label>
+                    </div>
+                </div>
+            </div>
+            <div class="stepper-btn">
+                <ul class="steps-group shadow-sm p-3 mb-5 bg-white rounded">
+                    <li class="step-item is-done">
+                        <a href="/approve-req1">
+                            <span class="step-number" _msthash="2776085" _msttexthash="4459">1</span>
+                            <span class="step-label" _msthash="2257021" _msttexthash="169507">Request Accept</span>
+                        </a>
+                    </li>
+                    <li class="step-item is-active">
+                        <a href="/requestdetails"> </a>
+                        <a href="/requestdetails">
+                            <span class="step-number" _msthash="2776566" _msttexthash="4550">2</span>
+                            <span class="step-label" _msthash="2257320" _msttexthash="182780">Pricing committee</span>
+                        </a>
+                    </li>
+                    <li class="step-item">
+                        <a href="/requestdetails"> </a>
+                        <a href="/requestdetails">
+                            <span class="step-number" _msthash="2776839" _msttexthash="4641">3</span>
+                            <span class="step-label" _msthash="2257502" _msttexthash="228722">Auction committee</span>
+                        </a>
+                    </li>
+                    <li class="step-item">
+                        <a href="/requestdetails"> </a>
+                        <a href="/requestdetails">
+                            <span class="step-number" _msthash="2777112" _msttexthash="4732">4</span>
+                            <span class="step-label" _msthash="2257684" _msttexthash="98748">Announcement</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="stepper-btn">
-        <ul class="steps-group shadow-sm p-3 mb-5 bg-white rounded">
-          <li class="step-item is-done">
-            <a href="/approve-req1">
-              <span class="step-number" _msthash="2776085" _msttexthash="4459"
-                >1</span
-              >
-              <span class="step-label" _msthash="2257021" _msttexthash="169507"
-                >Request Accept</span
-              >
-            </a>
-          </li>
-          <li class="step-item is-active">
-            <a href="/requestdetails"> </a
-            ><a href="/requestdetails">
-              <span class="step-number" _msthash="2776566" _msttexthash="4550"
-                >2</span
-              >
-              <span class="step-label" _msthash="2257320" _msttexthash="182780"
-                >Pricing committee</span
-              >
-            </a>
-          </li>
-          <li class="step-item">
-            <a href="/requestdetails"> </a
-            ><a href="/requestdetails">
-              <span class="step-number" _msthash="2776839" _msttexthash="4641"
-                >3</span
-              >
-              <span class="step-label" _msthash="2257502" _msttexthash="228722"
-                >Auction committee</span
-              >
-            </a>
-          </li>
-          <li class="step-item">
-            <a href="/requestdetails"> </a
-            ><a href="/requestdetails">
-              <span class="step-number" _msthash="2777112" _msttexthash="4732"
-                >4</span
-              >
-              <span class="step-label" _msthash="2257684" _msttexthash="98748"
-                >Announcement</span
-              >
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div
-      class="alert alert-outline alert-danger alert-dismissible fade show"
-      role="alert"
-    >
-      <div class="alert-wrapper">
-        <div class="alert-body">
-          <div class="alert-content">
-            <p>Please select at least 3 members for the committee</p>
-          </div>
-        </div>
-        <div class="alert-action">
-          <button
-            type="button"
-            class="close pt-0"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
+        <div class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <div class="alert-content">
+                        <p>Please select at least 3 members for the committee</p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button type="button" class="close pt-0" data-dismiss="alert" aria-label="Close">
             <span class="icon-close"></span>
           </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="nav-btn">
-    <ul class="nav et-tabs et-tabs-filled">
-      <li class="nav-item">
-        <a class="nav-link active">Pricing Committee Members</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Product details</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Auction details</a>
-      </li>
-    </ul>
-  </div>
-  <div class="card flex-card">
-    <!-- Committee Chairman -->
-    <button
-      class="add-btn"
-      (click)="
+    <div class="nav-btn">
+        <ul class="nav et-tabs et-tabs-filled">
+            <li class="nav-item">
+                <a class="nav-link active">Pricing Committee Members</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Product details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Auction details</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card flex-card">
+        <!-- Committee Chairman -->
+        <button class="add-btn" (click)="
         openAddMemberDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')
-      "
-    >
+      ">
       <div *ngIf="!committeeChairSelected" class="card flex-card-item">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
-            "
-          >
+            ">
             <p>Add Committee Chair</p>
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
           </div>
-          <img
-            src="assets\icons\plus.svg"
-            style="padding-top: 40px"
-            alt="User icon"
-          />
+          <img src="assets\icons\plus.svg" style="padding-top: 40px" alt="User icon" />
         </div>
       </div>
-
       <div *ngIf="committeeChairSelected" class="card flex-card-item-data">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
               padding-bottom: 15px;
               border-bottom: 1px solid #dfebe8;
-            "
-          >
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            ">
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
             <p>Committee president</p>
-            <button
-              (click)="editMember('ZEAUCTION_SALCOMM_CHAIRMAN')"
-              class="btn btn-ghost btn-sm fill-primary-light-green"
-              style="margin-left: 20px"
-            >
+            <button (click)="editMember('ZEAUCTION_SALCOMM_CHAIRMAN')"
+              class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
               <span class="icon-Group-3286"></span>
             </button>
-          </div>
-          <p style="color: #414042; font-size: 16px; margin-top: 20px">
-            {{ committeeMemberData?.EmployeeName }}
-          </p>
-          <div>
-            <div
-              style="
+    </div>
+    <p style="color: #414042; font-size: 16px; margin-top: 20px"> {{ committeeMemberData?.EmployeeName }} </p>
+    <div>
+        <div style="
                 display: flex;
                 justify-content: space-between;
                 margin-top: 10px;
-              "
-            >
-              <p style="color: #117abe">Job Number</p>
-              <p>{{ committeeMemberData?.AgencyId }}</p>
-            </div>
-            <div
-              style="
+              ">
+            <p style="color: #117abe">Job Number</p>
+            <p>{{ committeeMemberData?.AgencyId }}</p>
+        </div>
+        <div style="
                 display: flex;
                 justify-content: space-between;
                 margin-top: 5px;
-              "
-            >
-              <p style="color: #117abe">E-mail</p>
-              <p>{{ committeeMemberData?.EmpMailid }}</p>
-            </div>
-          </div>
+              ">
+            <p style="color: #117abe">E-mail</p>
+            <p>{{ committeeMemberData?.EmpMailid }}</p>
         </div>
-      </div>
-    </button>
-
-    <button
-      class="add-btn"
-      (click)="
+    </div>
+</div>
+</div>
+</button>
+<button class="add-btn" (click)="
         openAddMemberDialog(
           'Add Committee Secretary',
           'ZEAUCTION_SALCOMM_SECRETARY'
         )
-      "
-    >
+      ">
       <div *ngIf="!committeeSecSelected" class="card flex-card-item">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
-            "
-          >
+            ">
             <p>Add Committee Secretary (Optional)</p>
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
           </div>
-          <img
-            src="assets\icons\plus.svg"
-            style="padding-top: 40px"
-            alt="User icon"
-          />
+          <img src="assets\icons\plus.svg" style="padding-top: 40px" alt="User icon" />
         </div>
       </div>
-
       <div *ngIf="committeeSecSelected" class="card flex-card-item">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
               padding-bottom: 15px;
               border-bottom: 1px solid #dfebe8;
-            "
-          >
+            ">
             <img src="assets\icon\thumbnail.svg" alt="User icon" />
             <p>Committee president</p>
-            <button
-              (click)="editMember('ZEAUCTION_SALCOMM_SECRETARY')"
-              class="btn btn-ghost btn-sm fill-primary-light-green"
-              style="margin-left: 20px"
-            >
+            <button (click)="editMember('ZEAUCTION_SALCOMM_SECRETARY')"
+              class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
               <span class="icon-Group-3286"></span>
             </button>
-          </div>
-          <p style="color: #414042; font-size: 16px; margin-top: 20px">
-            {{ committeeMemberData?.EmployeeName }}
-          </p>
-          <div>
-            <div
-              style="
+</div>
+<p style="color: #414042; font-size: 16px; margin-top: 20px"> {{ committeeMemberData?.EmployeeName }} </p>
+<div>
+    <div style="
                 display: flex;
                 justify-content: space-between;
                 margin-top: 10px;
-              "
-            >
-              <p style="color: #117abe">Job Number</p>
-              <p>{{ committeeMemberData?.AgencyId }}</p>
-            </div>
-            <div
-              style="
+              ">
+        <p style="color: #117abe">Job Number</p>
+        <p>{{ committeeMemberData?.AgencyId }}</p>
+    </div>
+    <div style="
                 display: flex;
                 justify-content: space-between;
                 margin-top: 5px;
-              "
-            >
-              <p style="color: #117abe">E-mail</p>
-              <p>{{ committeeMemberData?.EmpMailid }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </button>
-
-    <button
-      class="add-btn"
-      data-toggle="modal"
-      data-target="#auctionMemberModal"
-    >
+              ">
+        <p style="color: #117abe">E-mail</p>
+        <p>{{ committeeMemberData?.EmpMailid }}</p>
+    </div>
+</div>
+</div>
+</div>
+</button>
+<button class="add-btn" data-toggle="modal" data-target="#auctionMemberModal">
       <div class="card flex-card-item">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
-            "
-          >
+            ">
             <p>Add a committee member</p>
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
           </div>
-          <img
-            src="assets\icons\plus.svg"
-            style="padding-top: 40px"
-            alt="User icon"
-          />
+          <img src="assets\icons\plus.svg" style="padding-top: 40px" alt="User icon" />
         </div>
       </div>
     </button>
-    <button
-      class="add-btn"
-      data-toggle="modal"
-      data-target="#auctionMemberModal"
-    >
+<button class="add-btn" data-toggle="modal" data-target="#auctionMemberModal">
       <div class="card flex-card-item">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
-            "
-          >
+            ">
             <p>Add a committee member</p>
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
           </div>
-          <img
-            src="assets\icons\plus.svg"
-            style="padding-top: 40px"
-            alt="User icon"
-          />
+          <img src="assets\icons\plus.svg" style="padding-top: 40px" alt="User icon" />
         </div>
       </div>
     </button>
-    <button
-      class="add-btn"
-      data-toggle="modal"
-      data-target="#auctionMemberModal"
-    >
+<button class="add-btn" data-toggle="modal" data-target="#auctionMemberModal">
       <div class="card flex-card-item">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
-            "
-          >
+            ">
             <p>Add a committee member</p>
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
           </div>
-          <img
-            src="assets\icons\plus.svg"
-            style="padding-top: 40px"
-            alt="User icon"
-          />
+          <img src="assets\icons\plus.svg" style="padding-top: 40px" alt="User icon" />
         </div>
       </div>
     </button>
-    <button
-      class="add-btn"
-      data-toggle="modal"
-      data-target="#auctionMemberModal"
-    >
+<button class="add-btn" data-toggle="modal" data-target="#auctionMemberModal">
       <div class="card flex-card-item last-card">
         <div class="card-body">
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: space-around;
               align-items: center;
-            "
-          >
+            ">
             <p>Add a committee member</p>
-            <img
-              src="assets\icons\User.svg"
-              style="margin-left: 5px; margin-right: 5px"
-              alt="User icon"
-            />
+            <img src="assets\icons\User.svg" style="margin-left: 5px; margin-right: 5px" alt="User icon" />
           </div>
-          <img
-            src="assets\icons\plus.svg"
-            style="padding-top: 40px"
-            alt="User icon"
-          />
+          <img src="assets\icons\plus.svg" style="padding-top: 40px" alt="User icon" />
         </div>
       </div>
     </button>
-  </div>  
-  <div class="btn-submit-grp">
+</div>
+<div class="btn-submit-grp">
     <button class="btn btn-with-arrow btn-outline-light btn-md">
       <span class="icon-keyboard_arrow_left"></span>
-      <font _mstmutation="1" _msthash="1230112" _msttexthash="94172">
-        Back
-      </font>
+      <font _mstmutation="1" _msthash="1230112" _msttexthash="94172"> Back </font>
     </button>
     <div>
-      <button class="btn btn-danger" _msthash="1893008" _msttexthash="94172">
-        Cancel
-      </button>
-      &nbsp;
-      <button
-        class="btn btn-primary-light"
-        _msthash="1893008"
-        _msttexthash="94172"
-        data-toggle="modal"
-        data-target="#confirmMemberModal"
-      >
-        Submit
-      </button>
+        <button class="btn btn-danger" _msthash="1893008" _msttexthash="94172"> Cancel </button> &nbsp; <button class="btn btn-primary-light" _msthash="1893008" _msttexthash="94172" data-toggle="modal" data-target="#confirmMemberModal"> Submit </button>
     </div>
-  </div>
 </div>
-
+</div>
 <!-- Model to add members -->
-<div
-  class="modal fade"
-  id="auctionMemberModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">
-          Add Committee Secretary
-        </h4>
-        <h4 class="modal-title" id="exampleModalLabel">
-          {{ popupTitle }}
-        </h4>
-      </div>
-      <div class="modal-body">
-        <div class="">
-          <div class="form-row">
-            <div class="col-md-12 mb-3">
-              <label class="d-flex" for="validationCustom02"
-                >Search by employee number or email</label
-              >
-              <div class="search-group search-custom">
-                <input
-                  type="text"
-                  class="search-input px-2"
-                  id="validationCustom02"
-                  placeholder="Enter employee number or email"
-                  required
-                />
-
-                <div class="text-light d-flex align-items-center mr-3">
-                  <span class="icon-filled-search"></span>
-                </div>
-                <div class="valid-feedback">Your input is valid</div>
-              </div>
-          </div>
-          <div class="form-row pt-2">
-            <div class="col-12 col-md-12">
-              <table>
-                <thead>
-                  <tr>
-                    <td class="pr-3">
-                      <h5 class="text-info">Validity:</h5>
-                    </td>
-                    <td class="pr-3">
-                      <h5 class="text-info">The name:</h5>
-                    </td>
-                    <td class="pr-3">
-                      <h5 class="text-info">Job Number:</h5>
-                    </td>
-                    <td class="pr-3">
-                      <h5 class="text-info">Email:</h5>
-                    </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="data-table">
-                    <td class="pr-3">Committee Secretary</td>
-                    <td class="pr-3 table-data-bg">There are no data</td>
-                    <td class="pr-3 table-data-bg">There are no data</td>
-                    <td class="pr-3 table-data-bg">There are no data</td>
-                  </tr>
-                </tbody>
-              </table>
+<div class="modal fade" id="auctionMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"> Add Committee Secretary </h4>
+                <h4 class="modal-title" id="exampleModalLabel"> {{ popupTitle }} </h4>
             </div>
-          </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label class="d-flex" for="validationCustom02">Search by employee number or email</label>
+                            <div class="search-group search-custom">
+                                <input type="text" class="search-input px-2" id="validationCustom02" placeholder="Enter employee number or email" required />
+                                <div class="text-light d-flex align-items-center mr-3">
+                                    <span class="icon-filled-search"></span>
+                                </div>
+                                <div class="valid-feedback">Your input is valid</div>
+                            </div>
+                        </div>
+                        <div class="form-row pt-2">
+                            <div class="col-12 col-md-12">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="pr-3">
+                                                <h5 class="text-info">Validity:</h5>
+                                            </td>
+                                            <td class="pr-3">
+                                                <h5 class="text-info">The name:</h5>
+                                            </td>
+                                            <td class="pr-3">
+                                                <h5 class="text-info">Job Number:</h5>
+                                            </td>
+                                            <td class="pr-3">
+                                                <h5 class="text-info">Email:</h5>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="data-table">
+                                            <td class="pr-3">Committee Secretary</td>
+                                            <td class="pr-3 table-data-bg">There are no data</td>
+                                            <td class="pr-3 table-data-bg">There are no data</td>
+                                            <td class="pr-3 table-data-bg">There are no data</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md">
+            <span class="icon-add"></span> Add </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md">
-          <span class="icon-add"></span> Add
-        </button>
-      </div>
     </div>
-  </div>
-</div>
-
-<!-- Model to confirm -->
-<div
-  class="modal fade"
-  id="confirmMemberModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">
-          Confirmation of sending a quote request?
-        </h4>
-        <button
-          type="button"
-          class="modal-close btn-close btn-sm"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+    <!-- Model to confirm -->
+    <div class="modal fade" id="confirmMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"> Confirmation of sending a quote request? </h4>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <span class="icon-close"></span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, the auction request will
+            be approved and published in the online auction.</label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#showSuccessfulModal"> Post confirmation </button>
+                    <button type="button" class="btn btn-md" data-dismiss="modal" aria-label="Close" style="border: 1px solid #cccccc; border-radius: 5px"> Back </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Model to show confirmed (Successful) -->
+    <div class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content" style="align-items: center">
+                <button style="position: absolute; left: 90%" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
           <span class="icon-close"></span>
         </button>
-      </div>
-      <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px"
-          >Upon confirmation, the auction request will be approved and published
-          in the online auction.</label
-        >
-      </div>
-      <div class="modal-footer" style="justify-content: end">
-        <button
-          type="button"
-          class="btn btn-primary-light btn-md"
-          data-dismiss="modal"
-          aria-label="Close"
-          data-toggle="modal"
-          data-target="#showSuccessfulModal"
-        >
-          Post confirmation
-        </button>
-        <button
-          type="button"
-          class="btn btn-md"
-          data-dismiss="modal"
-          aria-label="Close"
-          style="border: 1px solid #cccccc; border-radius: 5px"
-        >
-          Back
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Model to show confirmed (Successful) -->
-<div
-  class="modal fade"
-  id="showSuccessfulModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content" style="align-items: center">
-      <button
-        style="position: absolute; left: 90%"
-        type="button"
-        class="modal-close btn-close btn-sm"
-        data-dismiss="modal"
-        aria-label="Close"
-      >
-        <span class="icon-close"></span>
-      </button>
-      <span class="icon-check"></span>
-      <div class="modal-header">
-        <div class="status-success-icon">
-          <div style="display: flex">
-            <div class="circle"></div>
-          </div>
-          <h4
-            class="modal-title"
-            id="exampleModalLabel"
-            style="text-align: center"
-          >
-            The request has been successfully sent to the pricing committee
-          </h4>
+                <span class="icon-check"></span>
+                <div class="modal-header">
+                    <div class="status-success-icon">
+                        <div style="display: flex">
+                            <div class="circle"></div>
+                        </div>
+                        <h4 class="modal-title" id="exampleModalLabel" style="text-align: center"> The request has been successfully sent to the pricing committee </h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center">After pricing the
+            products by the committee, the request will be returned to appoint the auction committee and publish the
+            auction. </label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> Back to
+            Auction Requests </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-body">
-        <label
-          for="confirmation"
-          style="color: #414042; font-size: 16px; text-align: center"
-          >After pricing the products by the committee, the request will be
-          returned to appoint the auction committee and publish the auction.
-        </label>
-      </div>
-      <div class="modal-footer" style="justify-content: end">
-        <button
-          type="button"
-          class="btn btn-primary-light btn-md"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          Back to Auction Requests
-        </button>
-      </div>
     </div>
-  </div>
-</div>
