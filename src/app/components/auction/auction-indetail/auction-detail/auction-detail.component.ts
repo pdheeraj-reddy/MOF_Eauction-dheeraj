@@ -461,6 +461,9 @@ export class AuctionDetailComponent implements OnInit {
     }
     this.basicFormGroup.get('gnteePercentage')?.disable();
     if (this.auctionDetails?.listtoattachnav['results']) {
+      while (this.auctionAttachement.length !== 0) {
+        this.auctionAttachement.removeAt(0)
+      }
       this.auctionDetails.listtoattachnav['results'].forEach((value: any, index: any, array: any) => {
         if (value.ObjectType == "/AuctionDocuments") {
           value.name = value.FileName + value.FileExt;
@@ -472,13 +475,9 @@ export class AuctionDetailComponent implements OnInit {
             "FilenetId": value.FilenetId,
             "MIMEType": value.MIMEType
           };
-          // this.files.push(fileupload);
-          // this.auctionAttachement.push(new FormControl(fileupload));
-          // this.navigateToPage(1, 'auctionAttach');
           this.files.push(fileupload);
           this.auctionAttachement.push(new FormControl(fileupload));
           this.navigateToPage(1, 'auctionAttach');
-          // this.auctionItem.auctionAttachement.push(new FormControl(fileupload));
         }
       })
     }
@@ -771,12 +770,6 @@ export class AuctionDetailComponent implements OnInit {
               this.showSaveasdraftBtnLoader = false;
               this.showSuccessfulModal = true;
             }
-            // console.log('auctionCreateResp', auctionCreateResp);
-            // this.auctionCreateResp.emit(auctionCreateResp);
-            // this.showSaveasdraftBtnLoader = false;
-            // this.showSuccessfulModal = true;
-            // this.activeStep ++;
-            // this.changeSteps.emit(this.activeStep);
           }, (error) => {
             this.showSaveasdraftBtnLoader = false;
             console.log('createAuction RespError : ', error);
@@ -816,12 +809,13 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.updateValueAndValidity();
   }
 
-  async auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
+  auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
     let fileNetAuctionDetail: any;
     let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
     console.log('filestoUpload ', filestoUpload);
 
-    // const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
+    let observables = new Array();
+
     if (filestoUpload.length > 0) {
       for (let i = 0; i < filestoUpload.length; i++) {
         let file = filestoUpload[i];
@@ -836,110 +830,157 @@ export class AuctionDetailComponent implements OnInit {
           "ObjectType": "/AuctionDocuments",
           "ObjectId": this.ObjectId,
         };
-        // await timer(3000);
         console.log("File detail");
         console.log(fileNetAuctionDetail);
-        this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-          (data) => {
-            console.log(i + "-success");
-            if (i + 1 == filestoUpload.length) {
-              if (submitSrc == "saveasdraft") {
-                console.log('auctionCreateResp', auctionCreateResp);
-                this.auctionCreateResp.emit(auctionCreateResp);
-                this.showSaveasdraftBtnLoader = false;
-                this.showSuccessfulModal = true;
-              } else {
-                console.log("upload done");
-                this.showSaveBtnLoader = false;
-                this.activeStep++;
-                this.changeSteps.emit(this.activeStep);
-              }
-            }
-          }, (error) => {
-            console.log(i + "-fail");
-            this.showSaveBtnLoader = false;
-            this.activeStep++;
-            this.changeSteps.emit(this.activeStep);
-          }
-        )
+        observables.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail));
       }
-    } else {
-      if (submitSrc == "saveasdraft") {
-        console.log('auctionCreateResp', auctionCreateResp);
-        this.auctionCreateResp.emit(auctionCreateResp);
-        this.showSaveasdraftBtnLoader = false;
-        this.showSuccessfulModal = true;
-      } else {
-        console.log("upload done");
-        this.showSaveBtnLoader = false;
-        this.activeStep++;
-        this.changeSteps.emit(this.activeStep);
-      }
-    }
-  }
 
-  async auctionAttachmentsUploadsTest() {
-    let fileNetAuctionDetail: any;
-    let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
-    console.log('filestoUpload ', filestoUpload);
-    const promises: any = [];
-    filestoUpload.forEach((file: any) => {
-      fileNetAuctionDetail = {
-        "FileName": file.name.split('.')[0],
-        "FileContent": btoa(file.filesrc),
-        "MIMEType": file.type,
-        "FileLength": '' + file.size,
-        "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-        "Version": "1.0",
-        "ObjectType": "/AuctionDocuments",
-        "ObjectId": this.ObjectId,
-      };
-      promises.push(
-        this.makeAPICall(fileNetAuctionDetail)
-      );
-    });
-    await (Promise as any).allSettled(promises).then(
-      (results: any) => results.forEach(
-        (result :any) => {
-          console.log('Status', result.status);
+      forkJoin(observables).subscribe((res: any) => {
+        console.log('forkJoin Res ', res);
+        if (submitSrc == "saveasdraft") {
+          this.showSaveasdraftBtnLoader = false;
+          this.showSuccessfulModal = true;
+
+          this.getAuctionDetails(this.ObjectId, this.DraftId);
+        } else {
           this.showSaveBtnLoader = false;
           this.activeStep++;
           this.changeSteps.emit(this.activeStep);
-        })
-      );
-    
-    // return forkJoin(
-    //   filestoUpload.map(async (file: any, index: number) => {
-    //     var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId;
-    //     fileNetAuctionDetail = {
-    //       "FileName": file.name.split('.')[0],
-    //       // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-    //       "FileContent": btoa(file.filesrc),
-    //       "MIMEType": file.type,
-    //       "FileLength": '' + file.size,
-    //       "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-    //       "Version": "1.0",
-    //       "ObjectType": "/AuctionDocuments",
-    //       "ObjectId": this.ObjectId,
-    //     };
-    //     const uploadDocWithDocIdRes = await this.makeAPICall(fileNetAuctionDetail);
-    //     return uploadDocWithDocIdRes;
-    //   })
-    // );
-    // seqJoin.subscribe((fileNetResp: any) => {
-    //   console.log('fileNetResp', fileNetResp);
-    //   debugger;
-    //   this.showSaveBtnLoader = false;
-    //   this.activeStep++;
-    //   this.changeSteps.emit(this.activeStep);
-    // }, (error: any) => {
-    //   this.showSaveBtnLoader = false;
-    //   console.log('createAuction RespError : ', error);
-    // });
-    // this.showSaveBtnLoader = false;
-    // this.activeStep ++;
-    // this.changeSteps.emit(this.activeStep);
+        }
+      }, (error: any) => {
+        console.log('forkJoin Error ', error);
+        this.showSaveBtnLoader = false;
+        this.getAuctionDetails(this.ObjectId, this.DraftId);
+      });  
+    } else {
+      this.getAuctionDetails(this.ObjectId, this.DraftId);
+    }
   }
+
+  // async auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
+  //   let fileNetAuctionDetail: any;
+  //   let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
+  //   console.log('filestoUpload ', filestoUpload);
+
+  //   const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
+  //   if (filestoUpload.length > 0) {
+  //     for (let i = 0; i < filestoUpload.length; i++) {
+  //       let file = filestoUpload[i];
+  //       fileNetAuctionDetail = {
+  //         "FileName": file.name.split('.')[0],
+  //         // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+  //         "FileContent": btoa(file.filesrc),
+  //         "MIMEType": file.type,
+  //         "FileLength": '' + file.size,
+  //         "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+  //         "Version": "1.0",
+  //         "ObjectType": "/AuctionDocuments",
+  //         "ObjectId": this.ObjectId,
+  //       };
+  //       await timer(3000);
+  //       console.log("File detail");
+  //       console.log(fileNetAuctionDetail);
+  //       this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
+  //         (data) => {
+  //           console.log(i + "-success");
+  //           if (i + 1 == filestoUpload.length) {
+  //             if (submitSrc == "saveasdraft") {
+  //               console.log('auctionCreateResp', auctionCreateResp);
+  //               this.auctionCreateResp.emit(auctionCreateResp);
+  //               this.showSaveasdraftBtnLoader = false;
+  //               this.showSuccessfulModal = true;
+  //             } else {
+  //               console.log("upload done");
+  //               this.showSaveBtnLoader = false;
+  //               this.activeStep++;
+  //               this.changeSteps.emit(this.activeStep);
+  //             }
+  //           }
+  //         }, (error) => {
+  //           console.log(i + "-fail");
+  //           this.showSaveBtnLoader = false;
+  //           this.activeStep++;
+  //           this.changeSteps.emit(this.activeStep);
+  //         }
+  //       )
+  //     }
+  //   } else {
+  //     if (submitSrc == "saveasdraft") {
+  //       console.log('auctionCreateResp', auctionCreateResp);
+  //       this.auctionCreateResp.emit(auctionCreateResp);
+  //       this.showSaveasdraftBtnLoader = false;
+  //       this.showSuccessfulModal = true;
+  //     } else {
+  //       console.log("upload done");
+  //       this.showSaveBtnLoader = false;
+  //       this.activeStep++;
+  //       this.changeSteps.emit(this.activeStep);
+  //     }
+  //   }
+  // }
+
+  // async auctionAttachmentsUploadsTest() {
+  //   let fileNetAuctionDetail: any;
+  //   let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
+  //   console.log('filestoUpload ', filestoUpload);
+  //   const promises: any = [];
+  //   filestoUpload.forEach((file: any) => {
+  //     fileNetAuctionDetail = {
+  //       "FileName": file.name.split('.')[0],
+  //       "FileContent": btoa(file.filesrc),
+  //       "MIMEType": file.type,
+  //       "FileLength": '' + file.size,
+  //       "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+  //       "Version": "1.0",
+  //       "ObjectType": "/AuctionDocuments",
+  //       "ObjectId": this.ObjectId,
+  //     };
+  //     promises.push(
+  //       this.makeAPICall(fileNetAuctionDetail)
+  //     );
+  //   });
+  //   await (Promise as any).allSettled(promises).then(
+  //     (results: any) => results.forEach(
+  //       (result :any) => {
+  //         console.log('Status', result.status);
+  //         this.showSaveBtnLoader = false;
+  //         this.activeStep++;
+  //         this.changeSteps.emit(this.activeStep);
+  //       })
+  //     );
+    
+  //   // return forkJoin(
+  //   //   filestoUpload.map(async (file: any, index: number) => {
+  //   //     var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId;
+  //   //     fileNetAuctionDetail = {
+  //   //       "FileName": file.name.split('.')[0],
+  //   //       // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+  //   //       "FileContent": btoa(file.filesrc),
+  //   //       "MIMEType": file.type,
+  //   //       "FileLength": '' + file.size,
+  //   //       "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+  //   //       "Version": "1.0",
+  //   //       "ObjectType": "/AuctionDocuments",
+  //   //       "ObjectId": this.ObjectId,
+  //   //     };
+  //   //     const uploadDocWithDocIdRes = await this.makeAPICall(fileNetAuctionDetail);
+  //   //     return uploadDocWithDocIdRes;
+  //   //   })
+  //   // );
+  //   // seqJoin.subscribe((fileNetResp: any) => {
+  //   //   console.log('fileNetResp', fileNetResp);
+  //   //   debugger;
+  //   //   this.showSaveBtnLoader = false;
+  //   //   this.activeStep++;
+  //   //   this.changeSteps.emit(this.activeStep);
+  //   // }, (error: any) => {
+  //   //   this.showSaveBtnLoader = false;
+  //   //   console.log('createAuction RespError : ', error);
+  //   // });
+  //   // this.showSaveBtnLoader = false;
+  //   // this.activeStep ++;
+  //   // this.changeSteps.emit(this.activeStep);
+  // }
 
   makeAPICall(fileNetAuctionDetail: any) {
     console.log('makeAPICall');
@@ -1074,9 +1115,6 @@ export class AuctionDetailComponent implements OnInit {
       listtoproductnav: [{}],
       // listtoattachnav : {}
     }
-    // if(obj.auctionAttachement){
-    //   auctionList['listtoattachnav'] = { "result" : obj.auctionAttachement };
-    // }
     return auctionList;
   }
 
