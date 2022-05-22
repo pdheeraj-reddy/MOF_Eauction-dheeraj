@@ -161,8 +161,8 @@ export class AssignPricingCommitteComponent implements OnInit {
     }
   }
   openAddChairDialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
+    if (this.preAuctionData.Status == 'Pending Review'){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -210,11 +210,13 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
+
   }
 
   openAddSecDialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -285,11 +287,12 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem1Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -334,11 +337,12 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem2Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -382,11 +386,12 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem3Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -431,6 +436,7 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   hideErrorMsg(){
@@ -478,8 +484,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   //     );
   // }
   openAddMem4Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -528,11 +534,12 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openEditMem4Dialog(title: any, role: string, index: any) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -571,6 +578,7 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
   filteredOptions: Observable<string[]>;
 

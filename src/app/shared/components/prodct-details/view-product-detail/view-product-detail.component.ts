@@ -13,6 +13,7 @@ export interface DialogData {
   productDetails: any;
   index: any;
   isBidUpdate: any;
+  status:any
 }
 
 @Component({
@@ -92,7 +93,7 @@ export class ViewProductDetailComponent implements OnInit {
     this.index = this.dialogData.index;
     this.isBidUpdate = this.dialogData.isBidUpdate;
     this.price = this.product?.['ZzPdtEstPricePc'];
-    console.log('haro', this.product);
+    console.log('haro', this.dialogData.status);
   }
 
   viewItem(a: any) {

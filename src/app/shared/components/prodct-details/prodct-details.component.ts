@@ -113,6 +113,7 @@ export class ProdctDetailsComponent implements OnInit {
         index: index,
         productDetails: product,
         isBidUpdate: this.isBidUpdate,
+        status: this.preAuctionData.Status,
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -393,7 +394,7 @@ export class ProdctDetailsComponent implements OnInit {
     }
     else{
       this.invalidQty = false;
-      
+
       this.productValue = parseFloat(this.pdtEstPricePc as string);
     }
     // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;

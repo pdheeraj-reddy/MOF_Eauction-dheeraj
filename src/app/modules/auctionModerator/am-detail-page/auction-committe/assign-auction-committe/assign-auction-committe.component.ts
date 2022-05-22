@@ -182,8 +182,8 @@ export class AssignAuctionCommitteComponent implements OnInit {
     }
   }
   openAddChairDialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -226,11 +226,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
+
   }
 
   openAddSecDialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -302,11 +304,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem1Dialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
+
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -350,11 +354,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem2Dialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
+
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -396,11 +402,12 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem3Dialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -443,6 +450,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   // openAddMem4Dialog(title: any, role: string) {
@@ -486,8 +494,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
   // }
 
   openAddMem4Dialog(title: any, role: string) {
+
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -537,11 +546,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openEditMem4Dialog(title: any, role: string, index: any) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true)
+
+    if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData!=true){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -580,6 +591,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
   hideErrorMsg(){
     if(this.committeeMem1Data!=undefined && this.committeeMem2Data!=undefined && this.committeeMem3Data!=undefined){
