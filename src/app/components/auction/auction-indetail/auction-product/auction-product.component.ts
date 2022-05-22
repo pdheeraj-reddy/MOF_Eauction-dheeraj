@@ -3,7 +3,7 @@ import { PaginationSortingService } from "src/app/service/pagination.service";
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuctionBasicMaster, AuctionProductMaster, AuctionProduct } from "src/app/model/auction.model";
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { MapsAPILoader } from '@agm/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { AuctionService } from "src/app/service/auction.service";
@@ -1087,80 +1087,36 @@ export class AuctionProductComponent implements OnInit {
                 DraftId: productDetailsResp.d.DraftId,
                 ObjectId: productDetailsResp.d.ObjectId,
               }
-              const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
+              // commented by salick
+          //    const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
 
               this.productCreateResp.emit(productCreateResp);
               if (this.addFormGroup.value.productImages.length > 0 || this.addFormGroup.value.productFiles.length > 0) {
                 // fileNet Services
-                if (this.addFormGroup.value.productImages.length > 0) {
-                  let fileNetAuctionDetail: any;
-                  for (let i = 0; i < this.addFormGroup.value.productImages.length; i++) {
-                    let file = this.addFormGroup.value.productImages[i];
-                    fileNetAuctionDetail = {
-                      "FileName": file.name.split('.')[0],
-                      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-                      "FileContent": btoa(file.filesrc),
-                      "MIMEType": file.type,
-                      "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-                      "Version": "1.0",
-                      "ObjectType": "/AuctionProductImages",
-                      "ObjectId": this.ObjectId,
-                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
-                    };
-                    await timer(3000);
-                    this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-                      (data) => {
-                        console.log(i + "-success");
-                        if (i + 1 == this.addFormGroup.value.productImages.length && this.addFormGroup.value.productFiles.length == 0) {
-                          this.showLoader = false;
-                          this.pageRefresh();
-                        }
 
-                      }, (error) => {
-                        console.log(i + "-fail");
-                      }
-                    )
-                  }
-
-                }
+  // added by salick
+                 let FilesArray = new Array();
+               await this.imagesFinalArray(productDetailsResp, FilesArray);
                 // fileNet Services for Product files
-                if (this.addFormGroup.value.productFiles.length > 0) {
-                  //   alert(this.addFormGroup.value.productFiles.length);
-                  let fileNetAuctionDetail: any;
-                  for (let i = 0; i < this.addFormGroup.value.productFiles.length; i++) {
-                    let file = this.addFormGroup.value.productFiles[i];
-                    //      alert(file.name);
-                    fileNetAuctionDetail = {
-                      "FileName": file.name.split('.')[0],
-                      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-                      "FileContent": btoa(file.filesrc),
-                      "MIMEType": file.type,
-                      "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-                      "Version": "1.0",
-                      "ObjectType": "/AuctionProductDocuments",
-                      "ObjectId": this.ObjectId,
-                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
-                    };
-                    await timer(3000);
-                    this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-                      (data) => {
-                        console.log(i + "-success");
-                        if (i + 1 == this.addFormGroup.value.productFiles.length) {
-                          console.log("uplod done");
-                          this.showLoader = false;
-                          this.pageRefresh();
-                        }
+               await this.filesFinalArray(productDetailsResp, FilesArray);
+              
+              forkJoin(this.filesFinalArray).subscribe((res: any) => {
+                    if (res) {
+                      // res.forEach(element => {
+                        
+                      // });
+                      this.showLoader = false;
+                      this.pageRefresh();
+                    //  this.changeSteps.emit(this.activeStep)
+             
+                    } 
+                  }, (error: any) => {
+                    this.showLoader = false;
+                  this.pageRefresh();
+                  }); 
+                // })
+               
 
-                      }, (error) => {
-                        console.log(i + "-fail");
-                      }
-                    )
-                  }
-
-
-                }
               } else {
                 this.showLoader = false;
                 this.pageRefresh();
@@ -1197,71 +1153,25 @@ export class AuctionProductComponent implements OnInit {
               const timer = (ms: number) => new Promise(res => setTimeout(res, ms));
               if (this.addFormGroup.value.productImages.length > 0 || this.addFormGroup.value.productFiles.length > 0) {
                 // fileNet Services
-                if (this.addFormGroup.value.productImages.length > 0) {
-                  let fileNetAuctionDetail: any;
-                  for (let i = 0; i < this.addFormGroup.value.productImages.length; i++) {
-                    let file = this.addFormGroup.value.productImages[i];
-                    fileNetAuctionDetail = {
-                      "FileName": file.name.split('.')[0],
-                      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-                      "FileContent": btoa(file.filesrc),
-                      "MIMEType": file.type,
-                      "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-                      "Version": "1.0",
-                      "ObjectType": "/AuctionProductImages",
-                      "ObjectId": this.ObjectId,
-                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
-                    };
-                    await timer(3000);
-                    this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-                      (data) => {
-                        console.log(i + "-success");
-                        if (i + 1 == this.addFormGroup.value.productImages.length) {
-                          console.log("uplod done");
-                          this.showLoader = false;
-                          this.pageRefresh();
-                        }
+                 let FilesArray = new Array();
+                await this.imagesFinalArray(productDetailsResp, FilesArray);
+                 // fileNet Services for Product files
+                await this.filesFinalArray(productDetailsResp, FilesArray);
 
-                      }, (error) => {
-                        console.log(i + "-fail");
-                      }
-                    )
-                  }
-                }
-                // fileNet Services
-                if (this.addFormGroup.value.productFiles.length > 0) {
-                  let fileNetAuctionDetail: any;
-                  for (let i = 0; i < this.addFormGroup.value.productFiles.length; i++) {
-                    let file = this.addFormGroup.value.productFiles[i];
-                    fileNetAuctionDetail = {
-                      "FileName": file.name.split('.')[0],
-                      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-                      "FileContent": btoa(file.filesrc),
-                      "MIMEType": file.type,
-                      "FileLength": '' + file.size,
-                      "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-                      "Version": "1.0",
-                      "ObjectType": "/AuctionProductDocuments",
-                      "ObjectId": this.ObjectId,
-                      "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
-                    };
-                    await timer(3000);
-                    this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-                      (data) => {
-                        console.log(i + "-success");
-                        if (i + 1 == this.addFormGroup.value.productFiles.length) {
-                          console.log("uplod done");
-                          this.showLoader = false;
-                          this.pageRefresh();
-                        }
-
-                      }, (error) => {
-                        console.log(i + "-fail");
-                      }
-                    )
-                  }
-                }
+                forkJoin(this.filesFinalArray).subscribe((res: any) => {
+                  if (res) {
+                    // res.forEach(element => {
+                      
+                    // });
+                    this.showLoader = false;
+                    this.pageRefresh();
+                  //  this.changeSteps.emit(this.activeStep)
+           
+                  } 
+                }, (error: any) => {
+                  this.showLoader = false;
+                this.pageRefresh();
+                }); 
               } else {
                 this.showLoader = false;
                 this.pageRefresh();
@@ -1278,6 +1188,52 @@ export class AuctionProductComponent implements OnInit {
     } else if (submitSrc === 'saveasdraft') {
     }
     console.log('this.auctionProducts ', this.auctionProducts);
+  }
+
+  private filesFinalArray(productDetailsResp: any, FilesArray: any[]) {
+    if (this.addFormGroup.value.productFiles.length > 0) {
+      let fileNetAuctionDetail: any;
+      for (let i = 0; i < this.addFormGroup.value.productFiles.length; i++) {
+        let file = this.addFormGroup.value.productFiles[i];
+        fileNetAuctionDetail = {
+          "FileName": file.name.split('.')[0],
+          "FileContent": btoa(file.filesrc),
+          "MIMEType": file.type,
+          "FileLength": '' + file.size,
+          "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+          "Version": "1.0",
+          "ObjectType": "/AuctionProductDocuments",
+          "ObjectId": this.ObjectId,
+          "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
+        };
+
+        FilesArray.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail));
+      }
+
+    }
+  }
+
+  private imagesFinalArray(productDetailsResp: any, FilesArray: any[]) {
+    if (this.addFormGroup.value.productImages.length > 0) {
+      let fileNetAuctionDetail: any;
+      for (let i = 0; i < this.addFormGroup.value.productImages.length; i++) {
+        let file = this.addFormGroup.value.productImages[i];
+        fileNetAuctionDetail = {
+          "FileName": file.name.split('.')[0],
+          // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+          "FileContent": btoa(file.filesrc),
+          "MIMEType": file.type,
+          "FileLength": '' + file.size,
+          "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+          "Version": "1.0",
+          "ObjectType": "/AuctionProductImages",
+          "ObjectId": this.ObjectId,
+          "ZzProductNo": productDetailsResp.d.listtoproductnav.results[0].ZzProductNo,
+        };
+        FilesArray.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail));
+      }
+
+    }
   }
 
   // edit Product
