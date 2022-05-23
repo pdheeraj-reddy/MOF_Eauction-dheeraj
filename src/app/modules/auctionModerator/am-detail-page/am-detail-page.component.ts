@@ -187,7 +187,7 @@ export class AmDetailPageComponent implements OnInit {
         }
         if(this.preAuctionData.Status == 'Pending to Publish'){
           this.tabFourFive = false;
-          
+
           let data = this.preAuctionData.listtocomiteememnav.results;
           for (let i = 0; i < data.length; i++) {
             if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
@@ -223,6 +223,10 @@ export class AmDetailPageComponent implements OnInit {
               this.preAuctionData.listtoproductnav.results[i].ProductValue
             );
         }
+        const csrfToken = localStorage.getItem('x-csrf-token');
+        console.log(csrfToken);
+        localStorage.setItem('x-csrf-token', res.headers.get('x-csrf-token'));
+
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);
