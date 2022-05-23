@@ -3,7 +3,7 @@
         <h4>
             {{ "auctionModerator.am-detail.product-details.title" | translate }}
         </h4>
-        <div style="display: flex" *ngIf="loggedUserRole.isPricingHead">
+        <div style="display: flex" *ngIf="loggedUserRole.isPricingHead && preAuctionData.Status != 'Rejected Prices'">
             <h1 class="text-14 text-primary font-weight-medium" style="padding-right: 10px; margin: 0; font-size: 14px !important">
                 Price adjustment
             </h1>
