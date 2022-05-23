@@ -505,6 +505,16 @@
                 "add": "Add"
             }
 
+        },
+
+        "publish-popup": {
+            "title1": "Confirmation of Auction Announcement?",
+            "subtitle1": "Upon confirmation, the auction announcement will be approved and published in the Electronic Auction. ",
+            "confirm": "Confirmation of Publication",
+            "back": "Back",
+            "title2": "The auction was successfully announced.",
+            "subtitle2": "You can follow the auction status from the auction page",
+            "accept": "Back to Auction Requests"
         }
     },
     "auctionHead": {

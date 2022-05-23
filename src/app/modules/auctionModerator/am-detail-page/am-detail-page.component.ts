@@ -6,6 +6,7 @@ import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/a
 import { InterconversionService } from 'src/app/service/interconversion.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-am-detail-page',
@@ -181,7 +182,8 @@ export class AmDetailPageComponent implements OnInit {
         }
         if (
           this.preAuctionData.Status == 'Pending Review' ||
-          this.preAuctionData.Status == 'Pending Pricing'
+          this.preAuctionData.Status == 'Pending Pricing' ||
+          this.preAuctionData.Status == 'Rejected'
         ) {
           this.tabThreeFour = false;
         }
