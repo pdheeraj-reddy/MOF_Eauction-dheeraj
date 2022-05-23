@@ -32,6 +32,7 @@ export class ViewProductDetailComponent implements OnInit {
   isBidUpdate: boolean = false;
   invalid: boolean = false;
   activeIndex = -1;
+  loggedUserRole: any;
 
 
   constructor(
@@ -74,6 +75,7 @@ export class ViewProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     console.log(localStorage.getItem('lang_pref'))
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'

@@ -124,7 +124,7 @@
 </div>
 <div class="row m-2" [ngStyle]="{ direction: textDir }">
 
-    <div *ngIf="dialogData.status != 'Pending Pricing Approval'" class="col-md-12 rounded mt-4" style="background-color: #eaf6ef">
+    <div *ngIf="(loggedUserRole.isPricingHead && dialogData.status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (dialogData.status == 'Pending Pricing' || dialogData.status == 'Rejected Prices'))" class="col-md-12 rounded mt-4" style="background-color: #eaf6ef">
         <div *ngIf="isBidUpdate">
             <label class="m-3">Estimated value of the product</label>
             <div class="row mb-0">
