@@ -13,6 +13,7 @@ export interface DialogData {
   productDetails: any;
   index: any;
   isBidUpdate: any;
+  status:any
 }
 
 @Component({
@@ -31,6 +32,7 @@ export class ViewProductDetailComponent implements OnInit {
   isBidUpdate: boolean = false;
   invalid: boolean = false;
   activeIndex = -1;
+  loggedUserRole: any;
 
 
   constructor(
@@ -73,6 +75,7 @@ export class ViewProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     console.log(localStorage.getItem('lang_pref'))
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
@@ -92,7 +95,7 @@ export class ViewProductDetailComponent implements OnInit {
     this.index = this.dialogData.index;
     this.isBidUpdate = this.dialogData.isBidUpdate;
     this.price = this.product?.['ZzPdtEstPricePc'];
-    console.log('haro', this.product);
+    console.log('haro', this.dialogData.status);
   }
 
   viewItem(a: any) {

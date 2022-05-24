@@ -161,8 +161,8 @@ export class AssignPricingCommitteComponent implements OnInit {
     }
   }
   openAddChairDialog(title: any, role: string) {
-    this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
+    if (this.preAuctionData.Status == 'Pending Review'){
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -205,16 +205,19 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeChairSelected = true;
             console.log(result);
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
+
   }
 
   openAddSecDialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -280,16 +283,18 @@ export class AssignPricingCommitteComponent implements OnInit {
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_SECRETARY')
               this.committeeSecSelected = true;
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem1Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -329,16 +334,18 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem1Selected = true;
               this.hideErrorMsg();
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem2Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -377,16 +384,18 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem2Selected = true;
               this.hideErrorMsg();
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openAddMem3Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -426,11 +435,13 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem3Selected = true;
               this.hideErrorMsg();
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   hideErrorMsg(){
@@ -478,8 +489,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   //     );
   // }
   openAddMem4Dialog(title: any, role: string) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -523,16 +534,18 @@ export class AssignPricingCommitteComponent implements OnInit {
             }
             console.log(result?.EmployeeRole);
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
 
   openEditMem4Dialog(title: any, role: string, index: any) {
+    if (this.preAuctionData.Status == 'Pending Review'){
     this.showPageLoader = true;
-    if (this.preAuctionData.Status == 'Pending Review')
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -566,11 +579,13 @@ export class AssignPricingCommitteComponent implements OnInit {
               }
             }
           });
+          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
+    }
   }
   filteredOptions: Observable<string[]>;
 
@@ -624,6 +639,7 @@ export class AssignPricingCommitteComponent implements OnInit {
             }
           }
         }
+        localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

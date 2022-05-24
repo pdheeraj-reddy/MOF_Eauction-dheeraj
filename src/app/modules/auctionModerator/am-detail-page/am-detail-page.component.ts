@@ -6,6 +6,7 @@ import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/a
 import { InterconversionService } from 'src/app/service/interconversion.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-am-detail-page',
@@ -181,13 +182,14 @@ export class AmDetailPageComponent implements OnInit {
         }
         if (
           this.preAuctionData.Status == 'Pending Review' ||
-          this.preAuctionData.Status == 'Pending Pricing'
+          this.preAuctionData.Status == 'Pending Pricing' ||
+          this.preAuctionData.Status == 'Rejected'
         ) {
           this.tabThreeFour = false;
         }
         if(this.preAuctionData.Status == 'Pending to Publish'){
           this.tabFourFive = false;
-          
+
           let data = this.preAuctionData.listtocomiteememnav.results;
           for (let i = 0; i < data.length; i++) {
             if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
@@ -223,6 +225,10 @@ export class AmDetailPageComponent implements OnInit {
               this.preAuctionData.listtoproductnav.results[i].ProductValue
             );
         }
+        const csrfToken = localStorage.getItem('x-csrf-token');
+        console.log(csrfToken);
+        localStorage.setItem('x-csrf-token', res.headers.get('x-csrf-token'));
+
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

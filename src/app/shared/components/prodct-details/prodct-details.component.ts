@@ -113,6 +113,7 @@ export class ProdctDetailsComponent implements OnInit {
         index: index,
         productDetails: product,
         isBidUpdate: this.isBidUpdate,
+        status: this.preAuctionData.Status,
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -361,6 +362,7 @@ export class ProdctDetailsComponent implements OnInit {
         this.showError = true;
         break;
       }else{
+        // product[i].ZzPdtEstPricePc = parseFloat(product[i].ZzPdtEstPricePc as string);
         this.indexError = -1;
         this.showError = false;
       }
@@ -393,7 +395,7 @@ export class ProdctDetailsComponent implements OnInit {
     }
     else{
       this.invalidQty = false;
-      
+
       this.productValue = parseFloat(this.pdtEstPricePc as string);
     }
     // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
@@ -411,6 +413,8 @@ export class ProdctDetailsComponent implements OnInit {
     console.log(this.preAuctionData);
     adjustedPriceData = this.preAuctionData;
     adjustedPriceData?.listtoproductnav?.results.forEach((product: any)=>{
+      product.ZzPdtEstPricePc = product.ZzPdtEstPricePc.toString();
+      console.log(product.ZzPdtEstPricePc);
       delete product.show;
     });
     this._AuctionService.approveOrRejectAuction(adjustedPriceData).subscribe(

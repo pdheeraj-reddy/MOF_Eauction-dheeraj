@@ -92,6 +92,8 @@
 
     <div class="basic-container">
         <mat-horizontal-stepper #stepper [linear]="true" [selectedIndex]="selectedIndex">
+            <ng-template matStepperIcon="edit" let-index="index"> {{ index+1 }}</ng-template>
+            <ng-template matStepperIcon="number" let-index="index"> {{ index+1 }}</ng-template>
             <mat-step [completed]="tabTwo">
                 <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper1" | translate}}</ng-template>
                 <ul class="nav et-tabs et-tabs-filled nav-pills mt-5" id="pills-tab" role="tablist">
@@ -310,17 +312,17 @@
     
                             </div>
                             <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                                The auction was successfully accepted.
+                                {{"auctionModerator.publish-popup.title2" | translate}}
                             </h4>
                         </div>
                     </div>
                     <div class="modal-body">
-                        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">You can follow the auction status from the auction page.
+                        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{"auctionModerator.publish-popup.subtitle2" | translate}}
                                 </label>
                     </div>
                     <div class="modal-footer" style="justify-content: end">
                         <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
-                              Back to Auction Requests
+                            {{"auctionModerator.publish-popup.accept" | translate}}
                               </button>
                     </div>
                 </div>
@@ -332,14 +334,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel">
-                            Are you sure want to accept the Auction?
+                            {{"auctionModerator.publish-popup.title1" | translate}}
                         </h4>
                         <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                                 <span class="icon-close"></span>
                               </button>
                     </div>
                     <div class="modal-body">
-                        <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, you have to assign the Pricing committee member for declearing pricing for the Auction.</label
+                        <label for="confirmation" style="color: #414042; font-size: 16px">{{"auctionModerator.publish-popup.subtitle1" | translate}}</label
                               >
                             </div>
                             <div class="modal-footer" style="justify-content: end">
@@ -350,7 +352,7 @@
                                 aria-label="Close"
                                 (click)="publishAuction()"
                               >
-                              Confirmation of Acceptation
+                              {{"auctionModerator.publish-popup.confirm" | translate}}
                               </button>
                               <button
                                 type="button"
@@ -359,7 +361,7 @@
                                 aria-label="Close"
                                 style="border: 1px solid #cccccc; border-radius: 5px"
                               >
-                                Back
+                              {{"auctionModerator.publish-popup.back" | translate}}
                               </button>
                             </div>
                           </div>
