@@ -139,8 +139,8 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.get('auctionType')?.setValue('Public');
     this.basicFormGroup.get('auctionSubType')?.setValue('C');
     this.basicFormGroup.get('prevRefNo')?.setValue('');
-    this.basicFormGroup.get('auctionName')?.setValue('UAT Trucks Auction 00' + this.sCount);
-    this.basicFormGroup.get('auctionProduct')?.setValue('UAT Service & Utility Trucks 00' + this.sCount);
+    this.basicFormGroup.get('auctionName')?.setValue('UAT ISUZU Trucks Auction 00' + this.sCount);
+    this.basicFormGroup.get('auctionProduct')?.setValue('UAT Trucks 00' + this.sCount);
     this.basicFormGroup.get('auctionManager')?.setValue('1827879980');
     this.basicFormGroup.get('auctionDesc')?.setValue('We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries');
     this.basicFormGroup.get('reasonPrivateAuction')?.setValue('');
@@ -840,7 +840,6 @@ export class AuctionDetailComponent implements OnInit {
         if (submitSrc == "saveasdraft") {
           this.showSaveasdraftBtnLoader = false;
           this.showSuccessfulModal = true;
-
           this.getAuctionDetails(this.ObjectId, this.DraftId);
         } else {
           this.showSaveBtnLoader = false;
@@ -853,7 +852,15 @@ export class AuctionDetailComponent implements OnInit {
         this.getAuctionDetails(this.ObjectId, this.DraftId);
       });  
     } else {
-      this.getAuctionDetails(this.ObjectId, this.DraftId);
+      if (submitSrc == "saveasdraft") {
+        this.showSaveasdraftBtnLoader = false;
+        this.showSuccessfulModal = true;
+        this.getAuctionDetails(this.ObjectId, this.DraftId);
+      } else {
+        this.showSaveBtnLoader = false;
+        this.activeStep++;
+        this.changeSteps.emit(this.activeStep);
+      }
     }
   }
 
