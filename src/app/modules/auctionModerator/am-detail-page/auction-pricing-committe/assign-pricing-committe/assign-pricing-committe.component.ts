@@ -69,6 +69,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
   checkMember() {
+    this.getPreAuctionData();
     if (
       this.committeeChairData == undefined ||
       this.committeeMem1Data == undefined ||
@@ -609,6 +610,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
+        // console.log(res);
+        // console.log(res.headers.entries());
         let temp = res['d']['results'][0];
         this.preAuctionData = temp;
         console.log(temp);
@@ -639,7 +642,12 @@ export class AssignPricingCommitteComponent implements OnInit {
             }
           }
         }
-        localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
+        console.log(res.headers);
+        console.log(res.headers.get('x-csrf-token'));
+        const csrfToken = localStorage.getItem('x-csrf-token');
+        localStorage.setItem('x-csrf-token', res.headers.get('x-csrf-token'));
+        // this.auctionListData = this.mapping(res.body);
+        // console.log(localStorage.getItem('x-csrf-token') as string);
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

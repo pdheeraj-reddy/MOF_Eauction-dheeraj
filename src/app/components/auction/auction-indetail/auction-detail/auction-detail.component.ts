@@ -313,33 +313,53 @@ export class AuctionDetailComponent implements OnInit {
       }
     }
     if (formControlName == 'auctionStartDate' || formControlName == 'auctionAnncStartDate') {
-      let anncStartDate1 = this.basicFormGroup.controls['auctionStartDate'].value;
-      let anncEndDate1 = this.basicFormGroup.controls['auctionAnncStartDate'].value;
-      if (anncStartDate1 && anncEndDate1) {
-        if ((moment(anncStartDate1).isAfter(anncEndDate1, 'day'))) {
+      let anncStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
+      let anncEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
+      let StartDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
+      // This is for Bid Opening Date validation
+      if (anncStartDate && anncEndDate && StartDate) {
+        if ((moment(StartDate).isAfter(anncEndDate, 'day')) || (moment(StartDate).isBefore(anncStartDate, 'day'))) {
           this.isValidAnncSDate = true;
         } else {
           this.isValidAnncSDate = false;
         }
       }
+      // if (anncStartDate1 && anncEndDate1) {
+      //   if ((moment(anncStartDate1).isAfter(anncEndDate1, 'day'))) {
+      //     this.isValidAnncSDate = true;
+      //   } else {
+      //     this.isValidAnncSDate = false;
+      //   }
+      // }
     }
     if (formControlName == 'auctionEndDate' || formControlName == 'auctionAnncEndDate') {
-      let anncStartDate2 = this.basicFormGroup.controls['auctionEndDate'].value;
-      let anncEndDate2 = this.basicFormGroup.controls['auctionAnncEndDate'].value;
-      if (anncStartDate2 && anncEndDate2) {
-        if ((moment(anncEndDate2).isAfter(anncStartDate2, 'day'))) {
+      let anncStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
+      let anncEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
+      let EndDate = this.basicFormGroup.controls['auctionAnncEndDate'].value;
+
+      // This is for Bid Opening Time validation
+      if (anncStartDate && anncEndDate && EndDate) {
+        if ((moment(EndDate).isAfter(anncEndDate, 'day')) || (moment(EndDate).isBefore(anncStartDate, 'day'))) {
           this.isValidAnncEDate = true;
         } else {
           this.isValidAnncEDate = false;
         }
       }
+      // This is for start date validation
+      // if (anncStartDate1 && anncEndDate2) {
+      //   if ((moment(anncEndDate2).isBefore(anncStartDate1, 'day'))) {
+      //     this.isValidAnncEDate = true;
+      //   } else {
+      //     this.isValidAnncEDate = false;
+      //   }
+      // }
     }
   }
 
   onChangeEndDate($event: any) {
     this.basicFormGroup.controls['auctionEndDate'].setValue($event.target.value);
   }
-  
+
   async getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionDetailsSubscription$ = await this.auctionServc.getAuctionDetails(ObjectId, DraftId).subscribe((auctionDetailsResp: any) => {
@@ -533,6 +553,9 @@ export class AuctionDetailComponent implements OnInit {
           this.navigateToPage(1, 'auctionAttach');
         });
       }
+      else{
+        this.invalidFileSize = true;
+      }
       console.log('auctionAttachement ', this.auctionAttachement);
     // } else {
     //   this.invalidFileSize = true;
@@ -700,18 +723,42 @@ export class AuctionDetailComponent implements OnInit {
         return;
       }
     }
-    if (startDate && anncStartDate) {
-      if ((moment(startDate).isAfter(anncStartDate, 'day'))) {
+    if (startDate && endDate && anncStartDate) {
+      if ((moment(anncStartDate).isAfter(endDate, 'day')) || (moment(anncStartDate).isBefore(startDate, 'day'))) {
         this.isValidAnncSDate = true;
         return;
       }
     }
-    if (endDate && anncEndDate) {
-      if ((moment(anncEndDate).isAfter(endDate, 'day'))) {
+    // Bidding anncStartDate < endDate
+    // if (startDate && anncStartDate) {
+    //   if ((moment(startDate).isAfter(anncStartDate, 'day'))) {
+    //     this.isValidAnncSDate = true;
+    //     return;
+    //   }
+    // }
+    // console.log(startDate,endDate,anncStartDate);
+    // if(startDate && endDate && anncStartDate){
+    //   console.log(startDate,endDate,anncStartDate);
+    //   if ((moment(anncStartDate).isBetween(moment(startDate),moment(endDate)))) {
+    //     console.log("Inside If")
+    //     this.isValidAnncSDate = true;
+    //     return;
+    //   }
+    // }
+
+    // anncEndDate > startDate
+    if (startDate && endDate && anncEndDate) {
+      if ((moment(anncEndDate).isAfter(endDate, 'day')) || (moment(anncEndDate).isBefore(startDate, 'day'))) {
         this.isValidAnncEDate = true;
         return;
       }
     }
+    // if (endDate && anncEndDate) {
+    //   if ((moment(anncEndDate).isAfter(endDate, 'day'))) {
+    //     this.isValidAnncEDate = true;
+    //     return;
+    //   }
+    // }
 
     this.submitted = true;
 
@@ -850,7 +897,7 @@ export class AuctionDetailComponent implements OnInit {
         console.log('forkJoin Error ', error);
         this.showSaveBtnLoader = false;
         this.getAuctionDetails(this.ObjectId, this.DraftId);
-      });  
+      });
     } else {
       if (submitSrc == "saveasdraft") {
         this.showSaveasdraftBtnLoader = false;
@@ -955,7 +1002,7 @@ export class AuctionDetailComponent implements OnInit {
   //         this.changeSteps.emit(this.activeStep);
   //       })
   //     );
-    
+
   //   // return forkJoin(
   //   //   filestoUpload.map(async (file: any, index: number) => {
   //   //     var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId;
