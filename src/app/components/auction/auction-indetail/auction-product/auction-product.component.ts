@@ -305,7 +305,7 @@ export class AuctionProductComponent implements OnInit {
 
   public mappingObjForEdit() {
     console.log('mappingObjForEdit ', this.auctionDetails);
-    
+
     let productsArray = this.auctionDetails.listtoproductnav.results;
     let productImages: any = [], productFiles: any = [];
     productsArray.forEach((pItem: any, index: number) => {
@@ -920,6 +920,7 @@ export class AuctionProductComponent implements OnInit {
   //<!----------------------- product add,edit delete--------------------->
 
   public onAddProduct(submitSrc: string) {
+    this.invalidFileSize = false;
     this.onAddProductSubmitted = true;
     if (this.addFormGroup.get('productSerialNumber')?.value < 1) {
       this.invalidQty = true;
@@ -942,7 +943,7 @@ export class AuctionProductComponent implements OnInit {
           this.auctionProducts.at(this.addFormGroup.value['editIndex']).patchValue(this.addFormGroup.value);
           (this.auctionProducts.at(this.addFormGroup.value['editIndex']).value).productImages = this.addFormGroup.value.productImages;
           (this.auctionProducts.at(this.addFormGroup.value['editIndex']).value).productFiles = this.addFormGroup.value.productFiles;
-          
+
           const auctiondetail = this.generateProductFormat(this.productsFormGroup.getRawValue(), this.addFormGroup.value, 'edit');
           this.auctionServc.createAuction(auctiondetail).subscribe(async (productDetailsResp: any) => {
             console.log('createAuction Resp ', productDetailsResp);
@@ -957,7 +958,7 @@ export class AuctionProductComponent implements OnInit {
               let productAttachments = [];
               if (this.addFormGroup.value.productImages.length > 0) {
                 let fileNetProductImages: any;
-                
+
                 let productImages = this.addFormGroup.value.productImages.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) });
                 for (let i = 0; i < productImages.length; i++) {
                   let file = productImages[i];
@@ -1059,7 +1060,7 @@ export class AuctionProductComponent implements OnInit {
                     };
                     productAttachments.push(fileNetAuctionDetail);
                   }
-  
+
                 }
                 // fileNet Services for Product files
                 if (this.addFormGroup.value.productFiles.length > 0) {
@@ -1130,7 +1131,7 @@ export class AuctionProductComponent implements OnInit {
         console.log('forkJoin Error ', error);
         this.showSaveBtnLoader = false;
         this.getAuctionDetails(this.ObjectId, this.DraftId);
-      });  
+      });
     } else {
       this.showLoader = false;
       this.pageRefresh();
