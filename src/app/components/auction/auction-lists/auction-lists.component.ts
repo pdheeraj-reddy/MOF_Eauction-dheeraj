@@ -21,7 +21,22 @@ export class AuctionListsComponent implements OnInit {
   auctionListData: any;
   selectedPageNumber: number;
   pagelimit: number = 10;
-  totalCounts: any;
+  totalCounts: any = {
+    totAll: 0,
+    totDraft: 0,
+    totCompleted: 0,
+    totEle: 0,
+    totPendSelect: 0,
+    totPgs: 0,
+    totPrcApprPend: 0,
+    totPrcRejected: 0,
+    totPricingPend: 0,
+    totPublishPend: 0,
+    totPublished: 0,
+    totPublishedOngoing: 0,
+    totRejected: 0,
+    totReviewPend: 0
+  }
   totcntforall: number;
   totcntfordraft: number;
   totcntforreadjust: number;
@@ -65,53 +80,53 @@ export class AuctionListsComponent implements OnInit {
     // this.totcntforreadjust = serverObj.d.results[0].TotRejected;
     // this.totcntforupcomming = serverObj.d.results[0].TotPublish;
     // this.totcntforawaiting = serverObj.d.results[0].TotPendingRw;
-    this.totalCounts = {
-      totAll: serverObj.d.results[0].TotAll,
-      totDraft: serverObj.d.results[0].TotDraft,
-
-      totCompleted: serverObj.d.results[0].TotCompleted,
-      totEle: serverObj.d.results[0].TotEle,
-      totPendSelect: serverObj.d.results[0].TotPendSelect,
-      totPgs: serverObj.d.results[0].TotPgs,
-
-      totPrcApprPend: serverObj.d.results[0].TotPrcApprPend,
-      totPrcRejected: serverObj.d.results[0].TotPrcRejected,
-      totPricingPend: serverObj.d.results[0].TotPricingPend,
-      totPublishPend: serverObj.d.results[0].TotPublishPend,
-      totPublished: serverObj.d.results[0].TotPublish,
-      totPublishedOngoing: serverObj.d.results[0].TotPublishedOngoing,
-      totRejected: serverObj.d.results[0].TotRejected,
-      totReviewPend: serverObj.d.results[0].TotReviewPend
-    }
-
-    if (this.loggedUserRole.isInteriorMarketer) {
-      pagetolistnav = serverObj.d.results[0].pagetolistnav.results;
-    } else if (this.loggedUserRole.isAuctionModerator) {
-      pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
-    } else if (this.loggedUserRole.isPricingMember) {
-      pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
-    } else if (this.loggedUserRole.isPricingHead) {
-      pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
-    }
-    pagetolistnav.forEach((result: any) => {
-      const items = {
-        ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
-        DraftId: result['DraftId'] ? result['DraftId'] : '0',
-        referenceno: result['ObjectId'] ? result['ObjectId'] : '',
-        auctionName: result['Description'] ? result['Description'] : '',
-        auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : this.getAuctionTypeDesc('C'), // Hardcoded due to DB inconsist
-        auctionStatus: result['Status'] ? result['Status'] : '',
-        bgaValues: result['Description'] ? result['Description'] : '',
-        auctionStartDate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        auctionStartTime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-        auctionStartTimeSufix: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
-        agencyName: result['Description'] ? result['Description'] : '',
-        autionEndDate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        auctionEndTime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-        auctionEndTimeSufix: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+      this.totalCounts = {
+        totAll: serverObj.d.results[0].TotAll ? serverObj.d.results[0].TotAll : 0,
+        totDraft: serverObj.d.results[0].TotDraft ? serverObj.d.results[0].TotDraft : 0,
+  
+        totCompleted: serverObj.d.results[0].TotCompleted ? serverObj.d.results[0].TotCompleted : 0,
+        totEle: serverObj.d.results[0].TotEle ? serverObj.d.results[0].TotEle : 0,
+        totPendSelect: serverObj.d.results[0].TotPendSelect ? serverObj.d.results[0].TotPendSelect : 0,
+        totPgs: serverObj.d.results[0].TotPgs ? serverObj.d.results[0].TotPgs : 0,
+  
+        totPrcApprPend: serverObj.d.results[0].TotPrcApprPend ? serverObj.d.results[0].TotPrcApprPend : 0,
+        totPrcRejected: serverObj.d.results[0].TotPrcRejected ? serverObj.d.results[0].TotPrcRejected : 0,
+        totPricingPend: serverObj.d.results[0].TotPricingPend ? serverObj.d.results[0].TotPricingPend : 0,
+        totPublishPend: serverObj.d.results[0].TotPublishPend ? serverObj.d.results[0].TotPublishPend : 0,
+        totPublished: serverObj.d.results[0].TotPublish ? serverObj.d.results[0].TotPublish : 0,
+        totPublishedOngoing: serverObj.d.results[0].TotPublishedOngoing ? serverObj.d.results[0].TotPublishedOngoing : 0,
+        totRejected: serverObj.d.results[0].TotRejected ? serverObj.d.results[0].TotRejected : 0,
+        totReviewPend: serverObj.d.results[0].TotReviewPend ? serverObj.d.results[0].TotReviewPend : 0
       }
-      resultSet.push(items);
-    });
+
+      if (this.loggedUserRole.isInteriorMarketer) {
+        pagetolistnav = serverObj.d.results[0].pagetolistnav.results;
+      } else if (this.loggedUserRole.isAuctionModerator) {
+        pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
+      } else if (this.loggedUserRole.isPricingMember) {
+        pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
+      } else if (this.loggedUserRole.isPricingHead) {
+        pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
+      }
+        pagetolistnav.forEach((result: any) => {
+          const items = {
+            ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
+            DraftId: result['DraftId'] ? result['DraftId'] : '0',
+            referenceno: result['ObjectId'] ? result['ObjectId'] : '',
+            auctionName: result['Description'] ? result['Description'] : '',
+            auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : this.getAuctionTypeDesc('C'), // Hardcoded due to DB inconsist
+            auctionStatus: result['Status'] ? result['Status'] : '',
+            bgaValues: result['Description'] ? result['Description'] : '',
+            auctionStartDate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+            auctionStartTime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+            auctionStartTimeSufix: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+            agencyName: result['Description'] ? result['Description'] : '',
+            autionEndDate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+            auctionEndTime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+            auctionEndTimeSufix: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+          }
+          resultSet.push(items);
+        });
     return resultSet;
   }
 
@@ -261,13 +276,16 @@ export class AuctionListsComponent implements OnInit {
     this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
-      this.PaginationServc.setPagerValues(
-        +res.body.d.results[0].TotEle,
-        10,
-        +pageNoVal
-      );
+      if(res.body.d.results.length > 1){
+        this.PaginationServc.setPagerValues(
+          +res.body.d.results[0].TotEle,
+          10,
+          +pageNoVal
+        );
+      }
 
       const csrfToken = localStorage.getItem("x-csrf-token");
+      console.log("x-csrf-token", res.headers.get('x-csrf-token'))
       localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
       this.auctionListData = this.mapping(res.body);
 

@@ -1,0 +1,20 @@
+{
+    "/internal": {
+        "target": "https://testpartnerapi.etimad.sa/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/mock-internal": {
+        "target": "http://localhost:3000/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/sap": {
+        "target": "http://10.13.85.22:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

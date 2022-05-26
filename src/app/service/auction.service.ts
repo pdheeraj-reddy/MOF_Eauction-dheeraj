@@ -202,4 +202,8 @@ export class AuctionService {
     // this.router.navigate(['/']);
   }
 
+  public getHomeUrl() {
+    return environment.idmHomeUrl;
+  }
+
 }
