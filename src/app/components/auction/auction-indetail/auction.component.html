@@ -35,11 +35,16 @@
                         </a>
                     </li>
                     <li class="step-item" [ngClass]="[activeStep === 3 ? 'is-active' : activeStep > 3 ? 'is-done' : '']">
-                        <a (click)="navAuctionSummary()">
+                        <a (click)="navAuctionSummary()" *ngIf="activeStep!=3"  class="disabled">
                             <span class="step-number" *ngIf="activeStep <= 3">3</span>
                             <span class="step-number" *ngIf="activeStep > 3"><span class="icon-check"></span></span>
                             <span class="step-label">{{ 'auctioncreate.pageSection1Nav4' | translate }}</span>
                         </a>
+                        <a (click)="navAuctionSummary()" *ngIf="activeStep==3">
+                          <span class="step-number" *ngIf="activeStep <= 3">3</span>
+                          <span class="step-number" *ngIf="activeStep > 3"><span class="icon-check"></span></span>
+                          <span class="step-label">{{ 'auctioncreate.pageSection1Nav4' | translate }}</span>
+                      </a>
                     </li>
                     <!-- <li class="step-item" [ngClass]="[activeStep === 4 ? 'is-active' : activeStep > 4 ? 'is-done' : '']">
                         <a h ref="">

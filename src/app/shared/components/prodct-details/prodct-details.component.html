@@ -85,7 +85,7 @@
                                 <div *ngIf="indexError == i" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
                                 </div>
                             </td>
-                            <td *ngIf=" !isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' ||preAuctionData?.Status  == 'Rejected Prices'|| showAdjustPriceOption) && preAuctionData?.Status!='Pending to Publish' ">
+                            <td *ngIf=" !isBidUpdate && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')">
                                 -
                                 <a *ngIf="isBidUpdate" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 60px;" (click)="editPrice(i, product)"> <span class="icon-Group-3286"></span> </a>
                             </td>

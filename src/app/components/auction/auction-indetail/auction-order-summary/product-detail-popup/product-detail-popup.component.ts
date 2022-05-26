@@ -22,6 +22,8 @@ export class ProductDetailPopupComponent implements OnInit {
   viewproduct: any;
   fullImage: any;
   textDir = 'ltr';
+  showLoader: boolean = true;
+
 
   constructor(
     public dialogRef: MatDialogRef<ProductDetailPopupComponent>,
@@ -61,14 +63,94 @@ export class ProductDetailPopupComponent implements OnInit {
       // this.textDir= 'ltr'
     }
 
-    this.slidesStore = this.dialogData.data;
-    if (this.slidesStore.length > 0) {
-      this.fullImage = this.slidesStore[0].src;
-    }
+    // this.slidesStore = this.dialogData.data;
+    
     this.viewproduct = this.dialogData.viewproduct;
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
+
+    this.viewproduct.productImages.forEach(
+      (index: any) => {
+        this.downloadImages(index);
+      }
+    )
+    
+    
+    if (this.slidesStore.length > 0) {
+      this.fullImage = this.slidesStore[0].src;
+    }
   }
+
+  convertBlobToBase64 = (blob: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
+
+  downloadImages(index: any) {
+    this.auctionServc
+      .downloadAuctionImages(index.FilenetId)
+      .subscribe(
+        async (downloadAuctionImagesResp: any) => {
+  
+          let filenetId = index.FilenetId;
+          console.log(index.FilenetId, "FILENETID");
+          const fileResp = downloadAuctionImagesResp.d;
+          // console.log(fileResp.FileContent);
+          var byteString = atob(
+            atob(fileResp.FileContent).split(',')[1]
+          );
+          var ab = new ArrayBuffer(byteString.length);
+          var ia = new Uint8Array(ab);
+          for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          const blob = new Blob([ab], { type: index.MIMEType });
+          // var a = window.URL.createObjectURL(blob);
+          var base64String = await this.convertBlobToBase64(blob);
+          console.log("base64String in mapping for edit");
+          console.log(base64String)
+          
+  
+          this.slidesStore.push({
+            id: index + 1,
+            src: base64String,
+            alt: 'test',
+            title: 'hello world'
+          });
+
+          this.fullImage = this.slidesStore[0].src;
+          this.showLoader = false;
+          // To load until the images load
+          // this.showLoader=false;
+          // var reader = new FileReader();
+          // reader.readAsDataURL(blob);
+          // var base64String = (reader.onloadend = function () {
+          //   var base64String = reader.result;
+          //   return base64String;
+          // });
+          // if (index + 1 ==
+          //   serverObj.d.results[0].listtoattachnav['results'].length) {
+          //   this.globalProductData = this.temp;
+            // this.addData(this.temp);
+          // }
+          // console.log('Base64 String - ', base64String);
+          // this.auctionItem.productAttachment.push(fileupload);
+          //  window.open(fileURL, '_blank');
+          // window.open(fileContent, "_blank");
+        },
+        (error) => {
+          // this.showLoader = false;
+          console.log('downloadAuctionImages RespError : ', error);
+        }
+      );
+  }
+
+
   activeDownloadFileIndex = -1;
   // This fuction is used to view and download the attachment files
   viewAttachment(file: any, index:number) {
@@ -129,3 +211,5 @@ export class ProductDetailPopupComponent implements OnInit {
     }
   }
 }
+
+
