@@ -148,6 +148,12 @@
                 <ng-container *ngFor="let slide of slidesStore" carouselSlide>
                     <ng-template carouselSlide [id]="slide.id" class="col-md-4 p-2">
                         <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
+                        <!-- <img *ngIf="slide.type!='video/mp4' &&  slide.type!='.mov'" class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
+
+                        <!-- <video *ngIf="slide.type!='video/mp4' || slide.type=='.mov'" id="video1" width="420" (click)="viewItem(slide)">
+                            <source [src]="slide.src" type="video/mp4">
+                            Your browser does not support HTML video.
+                        </video> -->
                     </ng-template>
                 </ng-container>
             </owl-carousel-o>
@@ -225,7 +231,7 @@
                                             <div>
                                                 <h3 class="text-truncate">{{ file.name }}</h3>
                                             </div>
-                                            <div *ngIf="activeIndex != index">
+                                            <div class="flex-view" *ngIf="activeIndex != index">
                                               <a (click)="viewAttachment(file,index)" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                 <span class="icon-eye-open"></span>
                                               </a>

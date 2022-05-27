@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -36,6 +36,8 @@ export class ProdctDetailsComponent implements OnInit {
   selectedPageNumber: number;
   p: number = 1;
   pageRangeForProductAttach: any;
+
+  @ViewChild('autoFocus') inputFieldElementFocus: ElementRef;
 
   @Input('estimatedValueOfProducts')
   set _estimatedValueOfProducts(data: any) {
@@ -229,6 +231,7 @@ export class ProdctDetailsComponent implements OnInit {
                       src: base64String,
                       alt: 'test',
                       title: 'hello world',
+                      type: value.MIMEType,
                     });
                     if (
                       index + 1 ==
@@ -333,6 +336,10 @@ export class ProdctDetailsComponent implements OnInit {
   openAdjustPriceOption(index: number){
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any, pindex: number) => {
       if(pindex == index){
+        setTimeout(()=>{ // this will make the execution after the above boolean has changed
+          this.inputFieldElementFocus.nativeElement.focus();
+        },0);
+        this.preAuctionData.listtoproductnav.results[pindex].ZzPdtEstPricePc = Number(product.ZzPdtEstPricePc);
         product.show = true;
       } else {
         product.show = false;

@@ -75,7 +75,7 @@
                             <td class="position-relative" [ngClass]="{'border-lightgreen' : product.show}" *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'">
                                 <div class="row align-items-center no-gutters" [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
                                     <span *ngIf="!product.show">{{product.ZzPdtEstPricePc}}</span>
-                                    <input *ngIf="product.show" class="col-9 h-100 p-0 form-control" onClick="this.select();" type="number" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />
+                                    <input *ngIf="product.show" #autoFocus class="col-9 h-100 p-0 form-control" onClick="this.select();" type="number" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />
                                     <span class="ml-2">{{"common.SAR" | translate}}</span>
                                     <a *ngIf="!product.show && showAdjustPriceOption && (preAuctionData.Status == 'Pending Pricing Approval' || preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')" class="btn btn-ghost btn-sm fill-primary-light-green" (click)="openAdjustPriceOption(i)"> <span class="icon-Group-3286"></span> </a>
                                 </div>

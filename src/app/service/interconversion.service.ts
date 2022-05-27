@@ -170,10 +170,12 @@ export class InterconversionService {
           var productImagesArray = serverObj.listtoattachnav['results'].filter(function (el: any) {
             return el.ObjectType == "/AuctionProductImages" &&
               el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+              Number(el.ZzProductNo.trim()) == pItem.ZzProductNo.trim();
           });
           var productFilesArray = serverObj.listtoattachnav['results'].filter(function (el: any) {
             return el.ObjectType == "/AuctionProductDocuments" &&
               el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+              Number(el.ZzProductNo.trim()) == pItem.ZzProductNo.trim();
           });
           if (productImagesArray.length > 0) {
             productImagesArray.forEach((value: any) => {
