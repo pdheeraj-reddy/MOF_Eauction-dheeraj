@@ -60,16 +60,22 @@
 
     <div class="col-md-6" *ngIf="!showLoader">
         <div>
-            <img [src]="fullImage" class="img-fluid" alt="No Images to show" />
+            <!-- <img [src]="fullImage" class="img-fluid" alt="No Images to show" /> -->
+            <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark" [src]="fullImage.src" />
+            <video *ngIf="fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime'" autoplay controls class="img-fluid bg-dark" width="420">
+                <source [src]="fullImage.src" type="video/mp4">
+                <!-- <source [src]="sanitizer.bypassSecurityTrustResourceUrl(fullImage.src)" type="video/mp4"> -->
+                Your browser does not support HTML video.
+            </video>
             <owl-carousel-o [options]="customOptions">
                 <ng-container *ngFor="let slide of slidesStore" carouselSlide>
                     <ng-template carouselSlide [id]="slide.id" class="col-md-4 p-2">
-                        <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
-                        <!-- <img *ngIf="slide.type!='video/mp4' &&  slide.type!='mov'" class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
-                        <video *ngIf="slide.type!='video/mp4' || slide.type=='mov'" id="video1" width="420" (click)="viewItem(slide)">
+                        <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
+                        <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'" class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
+                        <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'" id="video1" width="420" (click)="viewItem(slide)">
                             <source [src]="slide.src" type="video/mp4">
                             Your browser does not support HTML video.
-                        </video> -->
+                        </video>
                     </ng-template>
                 </ng-container>
             </owl-carousel-o>
@@ -150,10 +156,10 @@
                                             <div>
                                                 <h3 class="text-truncate">{{ file.name }}</h3>
                                             </div>
-                                            <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file,index)" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                            <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file,index, 'view')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                 <span class="icon-eye-open"></span>
                                             </a>
-                                            <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file,index)" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                            <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file,index, 'download')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                 <span class="icon-download"></span>
                                             </a>
                                             <button *ngIf="activeDownloadFileIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0" style="height: 12px;">

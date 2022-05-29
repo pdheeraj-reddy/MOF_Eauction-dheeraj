@@ -256,10 +256,10 @@
                                                     <div>
                                                         <h3 class="text-truncate">{{ file.name }}</h3>
                                                     </div>
-                                                    <a *ngIf="activeDownloadFileIndex!=index" (click)="viewAttachment(file, index)" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                                    <a *ngIf="activeDownloadFileIndex!=index" (click)="viewAttachment(file, index, 'view')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                         <span class="icon-eye-open"></span>
                                                     </a>
-                                                    <a *ngIf="activeDownloadFileIndex!=index" (click)="viewAttachment(file, index)" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                                    <a *ngIf="activeDownloadFileIndex!=index" (click)="viewAttachment(file, index, 'download')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                         <span class="icon-download"></span>
                                                     </a>
                                                     <button *ngIf="activeDownloadFileIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0" style="height: 12px;">

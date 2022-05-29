@@ -756,7 +756,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
 
   activeDownloadFileIndex = -1
 
-  viewAttachment(file: any, index:number) {
+  viewAttachment(file: any, index:number, option: string) {
     if (file.FilenetId) {
       this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
@@ -773,9 +773,13 @@ export class AuctionOrderSummaryComponent implements OnInit {
           const blob = new Blob([ab], { type: file.MIMEType });
           console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
-          console.log('fileURL', fileURL);
           this.showViewAttachmentsModal = false;
-          var newWin = window.open(fileURL, '_blank');
+          var newWin: any;
+          if(option == 'view'){
+            newWin = window.open(fileURL, '_blank');
+          } else {
+            newWin = window.open(fileURL, '_blank');
+          }
           if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
           {
               alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")

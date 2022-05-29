@@ -14,13 +14,20 @@ ul.nav.et-tabs.et-tabs-filled li a {
     border-radius: 8px;
 }
 
-::ng-deep .owl-carousel .owl-item img {
+::ng-deep .owl-carousel .owl-item img,
+ ::ng-deep .owl-carousel .owl-item video {
     min-height: 105px !important;
     max-height: 105px !important;
+    height: 105px !important;
     margin: 10px !important;
     max-width: 110px !important;
-    background-color: #414042;
+    background-color: #000;
     opacity: .5;
+}
+
+video.bg-dark,
+img.bg-dark {
+    opacity: 1;
 }
 
 ::ng-deep .owl-carousel.owl-drag .owl-item {

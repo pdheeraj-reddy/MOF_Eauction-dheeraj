@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {
   MatDialog,
   MatDialogRef,
@@ -30,6 +31,7 @@ export class ProductDetailPopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog,
     public auctionServc: AuctionService,
+    private sanitizer: DomSanitizer
   ) { }
 
   customOptions: OwlOptions = {
@@ -51,7 +53,10 @@ export class ProductDetailPopupComponent implements OnInit {
   }
 
   viewItem(a: any) {
-    this.fullImage = a.src;
+    this.fullImage = {
+      src : a.src,
+      type: a.type
+    }
   }
 
   ngOnInit(): void {
@@ -118,9 +123,10 @@ export class ProductDetailPopupComponent implements OnInit {
   
           this.slidesStore.push({
             id: index + 1,
-            src: base64String,
+            src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
             alt: 'test',
-            title: 'hello world'
+            title: 'hello world',
+            type: index.MIMEType
           });
 
           this.fullImage = this.slidesStore[0].src;
@@ -153,7 +159,7 @@ export class ProductDetailPopupComponent implements OnInit {
 
   activeDownloadFileIndex = -1;
   // This fuction is used to view and download the attachment files
-  viewAttachment(file: any, index:number) {
+  viewAttachment(file: any, index:number, option: string) {
     if (file.FilenetId) {
       this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
@@ -171,7 +177,12 @@ export class ProductDetailPopupComponent implements OnInit {
           console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
           console.log('fileURL', fileURL);
-          var newWin = window.open(fileURL, '_blank');
+          var newWin: any;          
+          if(option == 'view'){
+            newWin = window.open(fileURL, '_blank');
+          } else {
+            newWin = window.open(fileURL, '_blank');
+          }
           if(!newWin || newWin.closed || typeof newWin.closed=='undefined')
           {
               alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")

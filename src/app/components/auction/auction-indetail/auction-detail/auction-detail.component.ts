@@ -6,11 +6,11 @@ import { formatDate, DatePipe } from '@angular/common';
 import { fileExtensionValidator } from '../auction-detail/file-extension-validator.directive';
 import { fileSizeValidator } from '../auction-detail/file-size-validator.directive';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription, forkJoin, Observable, timer } from 'rxjs';
 import { CustomService } from "src/app/service/custom.service";
 import { AuctionService } from "src/app/service/auction.service";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { subscribeOn } from 'rxjs/operators';
+import { map, mergeMap, subscribeOn } from 'rxjs/operators';
 import { Moment } from 'moment-mini';
 import * as moment from 'moment-mini';
 declare var $: any;
@@ -110,6 +110,8 @@ export class AuctionDetailComponent implements OnInit {
       this.refreshCalendarCntrl();
     });
     this.userId = this.getUserInfo().userid;
+    
+    // this.prePopulatesFormValues(); 
 
     if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
@@ -358,6 +360,15 @@ export class AuctionDetailComponent implements OnInit {
 
   onChangeEndDate($event: any) {
     this.basicFormGroup.controls['auctionEndDate'].setValue($event.target.value);
+  }
+
+  async prePopulatesFormValues() {
+    this.showLoader = true;
+    await this.auctionServc.getAuctionModeratorsList().subscribe((auctionDetailsResp: any) => {
+        console.log('getAuctionModeratorsList', auctionDetailsResp);
+    }, (error) => {
+      console.log('getAuctionModeratorsList RespError : ', error);
+    });
   }
 
   async getAuctionDetails(ObjectId: string, DraftId: string) {
@@ -856,7 +867,7 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.updateValueAndValidity();
   }
 
-  auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
+  async auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
     let fileNetAuctionDetail: any;
     let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
     console.log('filestoUpload ', filestoUpload);
@@ -882,7 +893,28 @@ export class AuctionDetailComponent implements OnInit {
         observables.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail));
       }
 
-      forkJoin(observables).subscribe((res: any) => {
+      // Promise.all(observables).then((res: any) => {
+      //   console.log('forkJoin Res ', res);
+      //   if (submitSrc == "saveasdraft") {
+      //     this.showSaveasdraftBtnLoader = false;
+      //     this.showSuccessfulModal = true;
+      //     this.getAuctionDetails(this.ObjectId, this.DraftId);
+      //   } else {
+      //     this.showSaveBtnLoader = false;
+      //     this.activeStep++;
+      //     this.changeSteps.emit(this.activeStep);
+      //   }
+      // }, (error: any) => {
+      //   console.log('forkJoin Error ', error);
+      //   this.showSaveBtnLoader = false;
+      //   this.getAuctionDetails(this.ObjectId, this.DraftId);
+      // });
+
+      forkJoin(observables).pipe(
+        mergeMap(res => timer(0, 1000 * 60 * 3).pipe(
+          map(_ => res)
+        ))
+      ).subscribe((res: any) => {
         console.log('forkJoin Res ', res);
         if (submitSrc == "saveasdraft") {
           this.showSaveasdraftBtnLoader = false;

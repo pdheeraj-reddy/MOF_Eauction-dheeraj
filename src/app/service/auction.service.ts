@@ -131,6 +131,33 @@ export class AuctionService {
     
   }
 
+  //for getting Auction Moderators List with Filters
+  getAuctionModeratorsList(): Observable<any> {
+    let role = '';
+    if (this.loggedUserRole.isInteriorMarketer) {
+      role = "InteriorMarketer";
+    } else if(this.loggedUserRole.isAuctionModerator) {
+      role = "AuctionManager";
+    } else if(this.loggedUserRole.isPricingMember) {
+      role = "AuctionManager";
+    } else if(this.loggedUserRole.isPricingHead){
+      role = "AuctionManager";
+    }
+
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': role,
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>( 
+      environment.apiAuctionURL + '/moderators', httpOptions);
+    
+  }
+
   //for creating Auction as Draft
   createAuction(createAuctionRequest: any): Observable<any> {
     const httpOptions = {
