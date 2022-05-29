@@ -69,18 +69,20 @@ export class ProductDetailPopupComponent implements OnInit {
     }
 
     // this.slidesStore = this.dialogData.data;
-    
+
     this.viewproduct = this.dialogData.viewproduct;
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
-
+    if(this.viewproduct.productImages.length == 0){
+      this.showLoader = false;
+      }
     this.viewproduct.productImages.forEach(
       (index: any) => {
         this.downloadImages(index);
       }
     )
-    
-    
+
+
     if (this.slidesStore.length > 0) {
       this.fullImage = this.slidesStore[0].src;
     }
@@ -101,7 +103,7 @@ export class ProductDetailPopupComponent implements OnInit {
       .downloadAuctionImages(index.FilenetId)
       .subscribe(
         async (downloadAuctionImagesResp: any) => {
-  
+
           let filenetId = index.FilenetId;
           console.log(index.FilenetId, "FILENETID");
           const fileResp = downloadAuctionImagesResp.d;
@@ -119,8 +121,8 @@ export class ProductDetailPopupComponent implements OnInit {
           var base64String = await this.convertBlobToBase64(blob);
           console.log("base64String in mapping for edit");
           console.log(base64String)
-          
-  
+
+
           this.slidesStore.push({
             id: index + 1,
             src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
