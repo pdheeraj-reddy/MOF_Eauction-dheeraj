@@ -36,7 +36,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           // ------- For Pre-Prod
           // 'X_MOF_ClientID': '7iKt89yh9aSb47xpBHrbxF3tRf3BliFY',
           // 'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
-          // ------- For Pre-Prod
+          // ------- For Prod
           // 'X_MOF_ClientID': '7iKt89yh9aSb47xpBHrbxF3tRf3BliFY',
           // 'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
           // ------- Common
