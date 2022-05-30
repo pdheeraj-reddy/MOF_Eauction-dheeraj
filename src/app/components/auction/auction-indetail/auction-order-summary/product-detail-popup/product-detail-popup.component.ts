@@ -23,7 +23,7 @@ export class ProductDetailPopupComponent implements OnInit {
   viewproduct: any;
   fullImage: any;
   textDir = 'ltr';
-  showLoader: boolean = true;
+  showLoader: boolean = false;
 
 
   constructor(
@@ -73,14 +73,16 @@ export class ProductDetailPopupComponent implements OnInit {
     this.viewproduct = this.dialogData.viewproduct;
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
-    if(this.viewproduct.productImages.length == 0){
+    if(this.viewproduct.productImages && this.viewproduct.productImages.length < 1){
       this.showLoader = false;
-      }
-    this.viewproduct.productImages.forEach(
-      (index: any) => {
-        this.downloadImages(index);
-      }
-    )
+    } else {
+      this.showLoader = true;
+      this.viewproduct.productImages.forEach(
+        (index: any) => {
+          this.downloadImages(index);
+        }
+      )
+    }
 
 
     if (this.slidesStore.length > 0) {

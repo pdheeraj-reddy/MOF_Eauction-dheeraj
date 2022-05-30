@@ -59,7 +59,7 @@
     </div>
 
     <div class="col-md-6" *ngIf="!showLoader">
-        <div>
+        <div *ngIf="slidesStore.length > 1">
             <!-- <img [src]="fullImage" class="img-fluid" alt="No Images to show" /> -->
             <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark" [src]="fullImage.src" />
             <video *ngIf="fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime'" autoplay controls class="img-fluid bg-dark" width="420">
@@ -148,10 +148,8 @@
                             <label for="goverusermessage">{{ "auctioncreate.auctionproduct.section1_orderSum22" | translate }}</label>
                             <div class="row">
                                 <ng-container *ngIf="viewproduct.productFiles">
-                                    <div class="col-6 col-md-6" *ngFor="
-                      let file of viewproduct.productFiles;
-                      let index = index
-                    ">
+                                    <div class="col-6 col-md-6" *ngFor=" let file of viewproduct.productFiles;
+                                        let index = index ">
                                         <div class="file-download mb-3 p-1 px-2" style="width: fit-content">
                                             <div>
                                                 <h3 class="text-truncate">{{ file.name }}</h3>

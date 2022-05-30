@@ -6,7 +6,7 @@ import { formatDate, DatePipe } from '@angular/common';
 import { fileExtensionValidator } from '../auction-detail/file-extension-validator.directive';
 import { fileSizeValidator } from '../auction-detail/file-size-validator.directive';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, forkJoin, Observable, timer } from 'rxjs';
+import { Subscription, forkJoin, Observable, timer, interval } from 'rxjs';
 import { CustomService } from "src/app/service/custom.service";
 import { AuctionService } from "src/app/service/auction.service";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -111,7 +111,7 @@ export class AuctionDetailComponent implements OnInit {
     });
     this.userId = this.getUserInfo().userid;
     
-    // this.prePopulatesFormValues(); 
+    this.prePopulatesFormValues(); 
 
     if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
@@ -890,8 +890,27 @@ export class AuctionDetailComponent implements OnInit {
         };
         console.log("File detail");
         console.log(fileNetAuctionDetail);
-        observables.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail));
+        observables.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).toPromise());
       }
+
+      Promise.all(observables).then((res: any) => {
+        console.log('forkJoin Res ', res);
+        if (submitSrc == "saveasdraft") {
+          this.showSaveasdraftBtnLoader = false;
+          this.showSuccessfulModal = true;
+          this.getAuctionDetails(this.ObjectId, this.DraftId);
+        } else {
+          this.showSaveBtnLoader = false;
+          this.activeStep++;
+          this.changeSteps.emit(this.activeStep);
+        }
+      }, (error: any) => {
+        console.log('forkJoin Error ', error);
+        this.showSaveBtnLoader = false;
+        this.getAuctionDetails(this.ObjectId, this.DraftId);
+      });
+
+      
 
       // Promise.all(observables).then((res: any) => {
       //   console.log('forkJoin Res ', res);
@@ -909,27 +928,11 @@ export class AuctionDetailComponent implements OnInit {
       //   this.showSaveBtnLoader = false;
       //   this.getAuctionDetails(this.ObjectId, this.DraftId);
       // });
-
-      forkJoin(observables).pipe(
-        mergeMap(res => timer(0, 1000 * 60 * 3).pipe(
-          map(_ => res)
-        ))
-      ).subscribe((res: any) => {
-        console.log('forkJoin Res ', res);
-        if (submitSrc == "saveasdraft") {
-          this.showSaveasdraftBtnLoader = false;
-          this.showSuccessfulModal = true;
-          this.getAuctionDetails(this.ObjectId, this.DraftId);
-        } else {
-          this.showSaveBtnLoader = false;
-          this.activeStep++;
-          this.changeSteps.emit(this.activeStep);
-        }
-      }, (error: any) => {
-        console.log('forkJoin Error ', error);
-        this.showSaveBtnLoader = false;
-        this.getAuctionDetails(this.ObjectId, this.DraftId);
-      });
+      // forkJoin(observables).pipe(
+      //   mergeMap(res => timer(0, 1000 * 60 * 3).pipe(
+      //     map(_ => res)
+      //   ))
+      // )
     } else {
       if (submitSrc == "saveasdraft") {
         this.showSaveasdraftBtnLoader = false;
