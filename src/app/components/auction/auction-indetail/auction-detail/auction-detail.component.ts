@@ -110,8 +110,8 @@ export class AuctionDetailComponent implements OnInit {
       this.refreshCalendarCntrl();
     });
     this.userId = this.getUserInfo().userid;
-    
-    this.prePopulatesFormValues(); 
+
+    this.prePopulatesFormValues();
 
     if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
@@ -127,6 +127,30 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup?.valueChanges.subscribe(x => {
       this.isSaveasdraftValid();
     });
+
+    window.addEventListener("drop", (e: any) => {
+      if (e && e.target.id !== "dropzone") {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "none";
+        e.dataTransfer.effectAllowed = "none";
+      }
+    }, false)
+
+    window.addEventListener("dragenter", (e: any) => {
+      if (e && e.target.id !== "dropzone") {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "none";
+        e.dataTransfer.effectAllowed = "none";
+      }
+    }, false)
+
+    window.addEventListener("dragover", (e: any) => {
+      if (e && e.target.id !== "dropzone") {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "none";
+        e.dataTransfer.effectAllowed = "none";
+      }
+    }, false)
   }
 
   public getUserInfo() {
@@ -365,7 +389,7 @@ export class AuctionDetailComponent implements OnInit {
   async prePopulatesFormValues() {
     this.showLoader = true;
     await this.auctionServc.getAuctionModeratorsList().subscribe((auctionDetailsResp: any) => {
-        console.log('getAuctionModeratorsList', auctionDetailsResp);
+      console.log('getAuctionModeratorsList', auctionDetailsResp);
     }, (error) => {
       console.log('getAuctionModeratorsList RespError : ', error);
     });
@@ -539,7 +563,7 @@ export class AuctionDetailComponent implements OnInit {
     this.invalidFileSize = false;
     let filecount = e.target.files.length;
     // if (e.target.files && filecount <= this.maxFileCount) {
-      this.customLoop(0, filecount, e.target.files);
+    this.customLoop(0, filecount, e.target.files);
     // } else {
     // }
   }
@@ -548,26 +572,26 @@ export class AuctionDetailComponent implements OnInit {
 
     if (filesize <= 2097152) {
       // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
-        // var fileupload: {[k: string]: any} = {};
-        this.FilePushTOArray(file[index], (filesrc: any) => {
-          var fileupload = {
-            "name": file[index]['name'],
-            "size": file[index]['size'],
-            "type": file[index]['type'],
-            "filesrc": [filesrc]
-          };
-          if (index < limit - 1) {
-            this.customLoop(++index, limit, file);
-          }
-          this.files.push(fileupload);
-          this.auctionAttachement.push(new FormControl(fileupload));
-          this.navigateToPage(1, 'auctionAttach');
-        });
-      }
-      else{
-        this.invalidFileSize = true;
-      }
-      console.log('auctionAttachement ', this.auctionAttachement);
+      // var fileupload: {[k: string]: any} = {};
+      this.FilePushTOArray(file[index], (filesrc: any) => {
+        var fileupload = {
+          "name": file[index]['name'],
+          "size": file[index]['size'],
+          "type": file[index]['type'],
+          "filesrc": [filesrc]
+        };
+        if (index < limit - 1) {
+          this.customLoop(++index, limit, file);
+        }
+        this.files.push(fileupload);
+        this.auctionAttachement.push(new FormControl(fileupload));
+        this.navigateToPage(1, 'auctionAttach');
+      });
+    }
+    else {
+      this.invalidFileSize = true;
+    }
+    console.log('auctionAttachement ', this.auctionAttachement);
     // } else {
     //   this.invalidFileSize = true;
     // }
@@ -654,7 +678,7 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.updateValueAndValidity();
   }
 
-  viewAttachment(file: any, index:any) {
+  viewAttachment(file: any, index: any) {
     if (file.FilenetId) {
       this.activeFileDownloadIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
@@ -910,7 +934,7 @@ export class AuctionDetailComponent implements OnInit {
         this.getAuctionDetails(this.ObjectId, this.DraftId);
       });
 
-      
+
 
       // Promise.all(observables).then((res: any) => {
       //   console.log('forkJoin Res ', res);

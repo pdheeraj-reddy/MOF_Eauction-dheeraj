@@ -536,7 +536,7 @@
                                                 <div class="file-uploader-zone">
                                                     <div class="buttons">
                                                         <div class="uploader-button-caption">
-                                                            <input type="file" style="top: 0; left:0;" class="" accept="video/mp4,.mov,image/jpg,image/jpeg,image/png" formArrayName="productImages" multiple (change)="selectImages($event, 'productImages')" />
+                                                            <input type="file" style="top: 0; left:0;" id="dropzone" class="" accept="video/mp4,.mov,image/jpg,image/jpeg,image/png" formArrayName="productImages" multiple (change)="selectImages($event, 'productImages')" />
                                                             <span class="icon-attachment mx-2"></span>
                                                             <span>{{
                                                                 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-fleplch1'
@@ -642,7 +642,7 @@
                                                 <div class="file-uploader-zone">
                                                     <div class="buttons">
                                                         <div class="uploader-button-caption">
-                                                            <input type="file" style="top: 0; left: 0;" class="" accept=".docx,.doc,application/pdf" formArrayName="productFiles" multiple (change)="selectFiles($event, 'productFiles')" />
+                                                            <input type="file" style="top: 0; left: 0;" class="" id="dropzone" accept=".docx,.doc,application/pdf" formArrayName="productFiles" multiple (change)="selectFiles($event, 'productFiles')" />
                                                             <span class="icon-attachment mx-2"></span>
                                                             <span>{{
                                                                 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-fleplch1'
