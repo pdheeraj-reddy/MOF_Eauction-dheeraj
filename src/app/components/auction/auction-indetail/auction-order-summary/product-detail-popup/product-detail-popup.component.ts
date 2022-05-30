@@ -57,6 +57,7 @@ export class ProductDetailPopupComponent implements OnInit {
       src : a.src,
       type: a.type
     }
+    console.log(this.fullImage)
   }
 
   ngOnInit(): void {
@@ -83,9 +84,9 @@ export class ProductDetailPopupComponent implements OnInit {
     )
 
 
-    if (this.slidesStore.length > 0) {
-      this.fullImage = this.slidesStore[0].src;
-    }
+    // if (this.slidesStore.length > 0) {
+    //   this.fullImage = this.slidesStore[0].src;
+    // }
   }
 
   convertBlobToBase64 = (blob: any) =>
@@ -131,7 +132,10 @@ export class ProductDetailPopupComponent implements OnInit {
             type: index.MIMEType
           });
 
-          this.fullImage = this.slidesStore[0].src;
+          this.fullImage = {
+            src : this.slidesStore[0].src,
+            type: this.slidesStore[0].type
+          }
           this.showLoader = false;
           // To load until the images load
           // this.showLoader=false;

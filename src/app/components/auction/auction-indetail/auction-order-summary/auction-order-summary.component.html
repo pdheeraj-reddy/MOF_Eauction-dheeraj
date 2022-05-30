@@ -256,7 +256,8 @@
                                                     <div>
                                                         <h3 class="text-truncate">{{ file.name }}</h3>
                                                     </div>
-                                                    <a *ngIf="activeDownloadFileIndex!=index" (click)="viewAttachment(file, index, 'view')" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                                    <a *ngIf="activeDownloadFileIndex!=index && (file.MIMEType != 'application/pdf') && (file.MIMEType != 'application/msword') && (file.MIMEType != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')" (click)="viewAttachment(file, index, 'view')"
+                                                        class="btn btn-ghost btn-sm fill-primary-light-green">
                                                         <span class="icon-eye-open"></span>
                                                     </a>
                                                     <a *ngIf="activeDownloadFileIndex!=index" (click)="viewAttachment(file, index, 'download')" class="btn btn-ghost btn-sm fill-primary-light-green">
