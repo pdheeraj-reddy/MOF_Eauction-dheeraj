@@ -120,6 +120,15 @@ export class AuctionOrderSummaryComponent implements OnInit {
       console.log('new');
     }
   }
+
+  download(filePath : any) {
+    var link=document.createElement('a');
+    link.href = filePath;
+    link.download = filePath.substr(filePath.lastIndexOf('/') + 1);
+    link.click();
+  }
+
+
   getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionDetailsSubscription$ = this.auctionServc
@@ -778,9 +787,10 @@ export class AuctionOrderSummaryComponent implements OnInit {
           if(option == 'view'){
             newWin = window.open(fileURL, '_blank');
           } else {
-            newWin = window.open(fileURL, '_blank');
+            // newWin = window.open(fileURL, '_blank');
+            newWin = this.download(fileURL)
           }
-          if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
+          if((!newWin || newWin.closed || typeof newWin.closed=='undefined') && option == 'view') 
           {
               alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
           }
