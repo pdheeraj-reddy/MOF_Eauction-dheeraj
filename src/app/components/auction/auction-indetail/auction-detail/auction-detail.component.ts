@@ -61,10 +61,10 @@ export class AuctionDetailComponent implements OnInit {
     '15'];
   dropValCommTypes: any = [
     'Next Financial'];
-
+  dropValmoderatorsList: any = [ ];
   // file validation
   maxFileCount: Number = 30;
-  acceptedExtensions = "mp4,mov,png,jpg,JPG,docx,doc,pdf";
+  acceptedExtensions = ['mp4','mov','png','jpg','jpeg','docx','doc','pdf'];
 
   lang: string;
   userId: string;
@@ -388,8 +388,11 @@ export class AuctionDetailComponent implements OnInit {
 
   async prePopulatesFormValues() {
     this.showLoader = true;
-    await this.auctionServc.getAuctionModeratorsList().subscribe((auctionDetailsResp: any) => {
-      console.log('getAuctionModeratorsList', auctionDetailsResp);
+    await this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
+      console.log('getAuctionModeratorsList', moderatorsListResp);
+      this.dropValmoderatorsList = [];
+      this.showLoader = false;
+      this.dropValmoderatorsList = moderatorsListResp.body.d.results;
     }, (error) => {
       console.log('getAuctionModeratorsList RespError : ', error);
     });
@@ -569,27 +572,28 @@ export class AuctionDetailComponent implements OnInit {
   }
   customLoop(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
-
-    if (filesize <= 2097152) {
-      // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
-      // var fileupload: {[k: string]: any} = {};
-      this.FilePushTOArray(file[index], (filesrc: any) => {
-        var fileupload = {
-          "name": file[index]['name'],
-          "size": file[index]['size'],
-          "type": file[index]['type'],
-          "filesrc": [filesrc]
-        };
-        if (index < limit - 1) {
-          this.customLoop(++index, limit, file);
-        }
-        this.files.push(fileupload);
-        this.auctionAttachement.push(new FormControl(fileupload));
-        this.navigateToPage(1, 'auctionAttach');
-      });
-    }
-    else {
-      this.invalidFileSize = true;
+    const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
+    if(!!this.acceptedExtensions.find(x => x === fileType)){
+      if (filesize <= 2097152) {
+        // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
+        // var fileupload: {[k: string]: any} = {};
+        this.FilePushTOArray(file[index], (filesrc: any) => {
+          var fileupload = {
+            "name": file[index]['name'],
+            "size": file[index]['size'],
+            "type": file[index]['type'],
+            "filesrc": [filesrc]
+          };
+          if (index < limit - 1) {
+            this.customLoop(++index, limit, file);
+          }
+          this.files.push(fileupload);
+          this.auctionAttachement.push(new FormControl(fileupload));
+          this.navigateToPage(1, 'auctionAttach');
+        });
+      } else {
+        this.invalidFileSize = true;
+      }
     }
     console.log('auctionAttachement ', this.auctionAttachement);
     // } else {

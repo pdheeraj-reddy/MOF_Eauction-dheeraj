@@ -147,14 +147,14 @@ export class AuctionService {
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
-        'X_User_Role': role,
+        // 'X_User_Role': role,
       },
       params: {
       },
       observe: 'response' as 'body'
     };
     return this.http.get<any>( 
-      environment.apiAuctionURL + '/moderators', httpOptions);
+      environment.apiAuctionURL + '/moderators'+"?&$format=json" , httpOptions);
     
   }
 

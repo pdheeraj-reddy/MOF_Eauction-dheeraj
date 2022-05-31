@@ -48,7 +48,8 @@ export class AuctionProductComponent implements OnInit {
   // ------- product file attachment --------
   // ------- file validation         --------
   maxFileCount: Number = 30;
-  acceptedExtensions = "mp4,mov,png,jpg,JPG,docx,doc,pdf";
+  acceptedImagesExtensions = ['mp4','mov','png','jpg','jpeg'];
+  acceptedFilesExtensions = ['docx','doc','pdf'];
   @ViewChild('myModalClose') modalClose: any;
   msg: String = '';
   selectedFiles: File[];
@@ -729,26 +730,29 @@ export class AuctionProductComponent implements OnInit {
   }
   customLoopforImages(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
-    if (filesize <= 2097152) {
-      if (this.productImages['controls'].length < this.maxFileCount) {
-        // var fileupload: {[k: string]: any} = {};
-        this.FilePushTOArray(file[index], (filesrc: any) => {
-          var fileupload = {
-            "name": file[index]['name'],
-            "size": file[index]['size'],
-            "type": file[index]['type'],
-            "filesrc": [filesrc]
-          };
-          if (index < limit - 1) {
-            this.customLoopforImages(++index, limit, file);
-          }
-          this.files.push(fileupload);
-          this.productImages.push(new FormControl(fileupload));
-          this.navigateToPage(1, 'productPictureAttach');
-        });
+    const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
+    if(!!this.acceptedImagesExtensions.find(x => x === fileType)){
+      if (filesize <= 2097152) {
+        if (this.productImages['controls'].length < this.maxFileCount) {
+          // var fileupload: {[k: string]: any} = {};
+          this.FilePushTOArray(file[index], (filesrc: any) => {
+            var fileupload = {
+              "name": file[index]['name'],
+              "size": file[index]['size'],
+              "type": file[index]['type'],
+              "filesrc": [filesrc]
+            };
+            if (index < limit - 1) {
+              this.customLoopforImages(++index, limit, file);
+            }
+            this.files.push(fileupload);
+            this.productImages.push(new FormControl(fileupload));
+            this.navigateToPage(1, 'productPictureAttach');
+          });
+        }
+      } else {
+        this.invalidImageSize = true;
       }
-    } else {
-      this.invalidImageSize = true;
     }
   }
   FilePushTOArray(file: any, callback: (filesrc: any) => any) {
@@ -771,26 +775,29 @@ export class AuctionProductComponent implements OnInit {
   }
   customLoopforFiles(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
-    if (filesize <= 2097152) {
-      if (this.productFiles['controls'].length < this.maxFileCount) {
-        // var fileupload: {[k: string]: any} = {};
-        this.FilePushTOArray(file[index], (filesrc: any) => {
-          var fileupload = {
-            "name": file[index]['name'],
-            "size": file[index]['size'],
-            "type": file[index]['type'],
-            "filesrc": [filesrc]
-          };
-          if (index < limit - 1) {
-            this.customLoopforFiles(++index, limit, file);
-          }
-          this.docs.push(fileupload);
-          this.productFiles.push(new FormControl(fileupload));
-          this.navigateToPage(1, 'productFileAttach');
-        });
+    const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
+    if(!!this.acceptedFilesExtensions.find(x => x === fileType)){
+      if (filesize <= 2097152) {
+        if (this.productFiles['controls'].length < this.maxFileCount) {
+          // var fileupload: {[k: string]: any} = {};
+          this.FilePushTOArray(file[index], (filesrc: any) => {
+            var fileupload = {
+              "name": file[index]['name'],
+              "size": file[index]['size'],
+              "type": file[index]['type'],
+              "filesrc": [filesrc]
+            };
+            if (index < limit - 1) {
+              this.customLoopforFiles(++index, limit, file);
+            }
+            this.docs.push(fileupload);
+            this.productFiles.push(new FormControl(fileupload));
+            this.navigateToPage(1, 'productFileAttach');
+          });
+        }
+      } else {
+        this.invalidFileSize = true;
       }
-    } else {
-      this.invalidFileSize = true;
     }
   }
 
