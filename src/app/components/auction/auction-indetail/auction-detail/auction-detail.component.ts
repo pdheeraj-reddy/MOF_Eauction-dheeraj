@@ -111,7 +111,7 @@ export class AuctionDetailComponent implements OnInit {
     });
     this.userId = this.getUserInfo().userid;
 
-    this.prePopulatesFormValues();
+    // this.prePopulatesFormValues();
 
     if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
@@ -892,71 +892,45 @@ export class AuctionDetailComponent implements OnInit {
   }
 
   async auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
-    let fileNetAuctionDetail: any;
     let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
     console.log('filestoUpload ', filestoUpload);
 
-    let observables = new Array();
-
     if (filestoUpload.length > 0) {
-      for (let i = 0; i < filestoUpload.length; i++) {
-        let file = filestoUpload[i];
-        fileNetAuctionDetail = {
-          "FileName": file.name.split('.')[0],
-          // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-          "FileContent": btoa(file.filesrc),
-          "MIMEType": file.type,
-          "FileLength": '' + file.size,
-          "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-          "Version": "1.0",
-          "ObjectType": "/AuctionDocuments",
-          "ObjectId": this.ObjectId,
-        };
-        console.log("File detail");
-        console.log(fileNetAuctionDetail);
-        observables.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).toPromise());
+
+      const customLoop = (i: number) => {
+        if (i < filestoUpload.length) {
+          const file = filestoUpload[i];
+          const fileNetAuctionDetail = {
+            "FileName": file.name.split('.')[0],
+            "FileContent": btoa(file.filesrc),
+            "MIMEType": file.type,
+            "FileLength": '' + file.size,
+            "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
+            "Version": "1.0",
+            "ObjectType": "/AuctionDocuments",
+            "ObjectId": this.ObjectId,
+          };
+          this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(result => {
+            customLoop(i + 1);
+          }, (error: any) => {
+            console.log('Error ', error);
+            customLoop(i + 1);
+          })
+        } else {
+          if (submitSrc == "saveasdraft") {
+            this.showSaveasdraftBtnLoader = false;
+            this.showSuccessfulModal = true;
+            this.getAuctionDetails(this.ObjectId, this.DraftId);
+          } else {
+            this.showSaveBtnLoader = false;
+            this.activeStep++;
+            this.changeSteps.emit(this.activeStep);
+          }
+        }
       }
 
-      Promise.all(observables).then((res: any) => {
-        console.log('forkJoin Res ', res);
-        if (submitSrc == "saveasdraft") {
-          this.showSaveasdraftBtnLoader = false;
-          this.showSuccessfulModal = true;
-          this.getAuctionDetails(this.ObjectId, this.DraftId);
-        } else {
-          this.showSaveBtnLoader = false;
-          this.activeStep++;
-          this.changeSteps.emit(this.activeStep);
-        }
-      }, (error: any) => {
-        console.log('forkJoin Error ', error);
-        this.showSaveBtnLoader = false;
-        this.getAuctionDetails(this.ObjectId, this.DraftId);
-      });
+      customLoop(0);
 
-
-
-      // Promise.all(observables).then((res: any) => {
-      //   console.log('forkJoin Res ', res);
-      //   if (submitSrc == "saveasdraft") {
-      //     this.showSaveasdraftBtnLoader = false;
-      //     this.showSuccessfulModal = true;
-      //     this.getAuctionDetails(this.ObjectId, this.DraftId);
-      //   } else {
-      //     this.showSaveBtnLoader = false;
-      //     this.activeStep++;
-      //     this.changeSteps.emit(this.activeStep);
-      //   }
-      // }, (error: any) => {
-      //   console.log('forkJoin Error ', error);
-      //   this.showSaveBtnLoader = false;
-      //   this.getAuctionDetails(this.ObjectId, this.DraftId);
-      // });
-      // forkJoin(observables).pipe(
-      //   mergeMap(res => timer(0, 1000 * 60 * 3).pipe(
-      //     map(_ => res)
-      //   ))
-      // )
     } else {
       if (submitSrc == "saveasdraft") {
         this.showSaveasdraftBtnLoader = false;

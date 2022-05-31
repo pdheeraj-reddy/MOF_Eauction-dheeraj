@@ -193,7 +193,7 @@ export class AuctionProductComponent implements OnInit {
         productSKUNumber: "UGG-BB-PNN-001",
         productSerialNumber: "15",
         productValue: "225000",
-        productSpec : "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE CAB WITH A/C 4X2 LIGHT DUTY MY2022 Light Duty Code Diesel. Car code: NPR85B1 - 85H STANDARD CARGO (4.2 Ton approx payload). Year: 2022. ENGINE: 4JJ1-TC, DIESEL, 4 CYL.",
+        productSpec: "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE CAB WITH A/C 4X2 LIGHT DUTY MY2022 Light Duty Code Diesel. Car code: NPR85B1 - 85H STANDARD CARGO (4.2 Ton approx payload). Year: 2022. ENGINE: 4JJ1-TC, DIESEL, 4 CYL.",
         location: {
           deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
           deliveryTime: "05:00 PM",
@@ -212,7 +212,7 @@ export class AuctionProductComponent implements OnInit {
         productSKUNumber: "UGG-BB-PNN-002",
         productSerialNumber: "30",
         productValue: "240000",
-        productSpec : "Model description: The Isuzu MU-X has 1 Diesel Engine on offer. The Diesel engine is 1898 cc . It is available with Automatic transmission.Depending upon the variant and fuel type the MU-X has a mileage of 12.31 to 13.0 kmpl & Ground clearance of MU-X is 230.",
+        productSpec: "Model description: The Isuzu MU-X has 1 Diesel Engine on offer. The Diesel engine is 1898 cc . It is available with Automatic transmission.Depending upon the variant and fuel type the MU-X has a mileage of 12.31 to 13.0 kmpl & Ground clearance of MU-X is 230.",
         location: {
           deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
           deliveryTime: "05:00 PM",
@@ -231,7 +231,7 @@ export class AuctionProductComponent implements OnInit {
         productSKUNumber: "UGG-BB-PNN-003",
         productSerialNumber: "20",
         productValue: "300000",
-        productSpec : "Model description: The Isuzu NPR HD platform also benefits from an American-sourced power plant, a 6.6L, 350 horsepower, 425 pound-feet, V8, produced by General Motors for use in Heavy Duty pickup trucks.",
+        productSpec: "Model description: The Isuzu NPR HD platform also benefits from an American-sourced power plant, a 6.6L, 350 horsepower, 425 pound-feet, V8, produced by General Motors for use in Heavy Duty pickup trucks.",
         location: {
           deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
           deliveryTime: "05:00 PM",
@@ -795,11 +795,11 @@ export class AuctionProductComponent implements OnInit {
   }
 
   // attachemnt view
-  viewAttachment(file: any, index :any, category: any) {
-    if(category == "File"){
+  viewAttachment(file: any, index: any, category: any) {
+    if (category == "File") {
       this.activeFileIndex = index;
     }
-    else{
+    else {
       this.activePictureIndex = index;
     }
     console.log('viewAttachment');
@@ -816,19 +816,19 @@ export class AuctionProductComponent implements OnInit {
         console.log(blob);
         let fileURL = window.URL.createObjectURL(blob);
         window.open(fileURL, '_blank');
-        if(category == "File"){
+        if (category == "File") {
           this.activeFileIndex = -1;
         }
-        else{
+        else {
           this.activePictureIndex = -1;
           // console.log("We got the picture");
         }
         // window.open(fileContent, "_blank");
       }, (error) => {
-        if(category == "File"){
+        if (category == "File") {
           this.activeFileIndex = -1;
         }
-        else{
+        else {
           this.activePictureIndex = -1;
         }
         this.showLoader = false;
@@ -1109,29 +1109,27 @@ export class AuctionProductComponent implements OnInit {
   }
 
   productAttachmentsUploads(productAttachments: any) {
-    let fileNetAuctionDetail: any;
     let filestoUpload = productAttachments;
     console.log('filestoUpload ', filestoUpload);
 
-    let observables = new Array();
-
     if (filestoUpload.length > 0) {
-      for (let i = 0; i < filestoUpload.length; i++) {
-        let fileNetAuctionDetail = filestoUpload[i];
-        console.log("File detail");
-        console.log(fileNetAuctionDetail);
-        observables.push(this.auctionServc.uploadAuctionImages(fileNetAuctionDetail));
-      }
 
-      forkJoin(observables).subscribe((res: any) => {
-        console.log('forkJoin Res ', res);
-        this.showLoader = false;
-        this.pageRefresh();
-      }, (error: any) => {
-        console.log('forkJoin Error ', error);
-        this.showSaveBtnLoader = false;
-        this.getAuctionDetails(this.ObjectId, this.DraftId);
-      });
+      const customLoop = (i: number) => {
+        if (i < filestoUpload.length) {
+          const fileNetAuctionDetail = filestoUpload[i];
+          this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(result => {
+            customLoop(i + 1);
+          }, (error: any) => {
+            console.log('Error ', error);
+            customLoop(i + 1);
+          })
+        } else {
+          this.showLoader = false;
+          this.pageRefresh();
+        }
+      }
+      customLoop(0);
+
     } else {
       this.showLoader = false;
       this.pageRefresh();
