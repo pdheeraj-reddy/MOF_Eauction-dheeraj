@@ -49,3 +49,11 @@ img.bg-dark {
 //     background-image: linear-gradient(120deg, #000, #000);
 //     opacity: .7;
 // }
+::ng-deep .owl-carousel,
+::ng-deep .bx-wrapper {
+    direction: ltr;
+}
+
+::ng-deep .owl-carousel .owl-item {
+    direction: rtl;
+}

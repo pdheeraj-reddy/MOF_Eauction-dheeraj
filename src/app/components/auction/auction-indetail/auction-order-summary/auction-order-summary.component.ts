@@ -121,13 +121,15 @@ export class AuctionOrderSummaryComponent implements OnInit {
     }
   }
 
-  download(filePath : any) {
-    var link=document.createElement('a');
-    link.href = filePath;
-    link.download = filePath.substr(filePath.lastIndexOf('/') + 1);
-    link.click();
+  downloadFile(fileName: string, contentType: string, base64Data: string) {
+    const linkSource = `data:${contentType};base64,${base64Data}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = base64Data;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
   }
-
 
   getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
@@ -780,15 +782,14 @@ export class AuctionOrderSummaryComponent implements OnInit {
             ia[i] = byteString.charCodeAt(i);
           }
           const blob = new Blob([ab], { type: file.MIMEType });
-          console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
+          console.log('fileURL ', fileURL);
           this.showViewAttachmentsModal = false;
           var newWin: any;
           if(option == 'view'){
             newWin = window.open(fileURL, '_blank');
-          } else {
-            // newWin = window.open(fileURL, '_blank');
-            newWin = this.download(fileURL)
+          } else {            
+            newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
           }
           if((!newWin || newWin.closed || typeof newWin.closed=='undefined') && option == 'view') 
           {
