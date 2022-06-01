@@ -71,7 +71,9 @@ export class AuctionListsComponent implements OnInit {
     private cookieService: CookieService,
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     public translate: TranslateService,
-  ) { }
+  ) { 
+    PaginationServc.reset();
+  }
 
   public mapping(serverObj: any) {
     let resultSet: any = [], pagetolistnav: any;
@@ -276,13 +278,11 @@ export class AuctionListsComponent implements OnInit {
     this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
-      if(res.body.d.results.length > 1){
-        this.PaginationServc.setPagerValues(
-          +res.body.d.results[0].TotEle,
-          10,
-          +pageNoVal
-        );
-      }
+      this.PaginationServc.setPagerValues(
+        +res.body.d.results[0].TotEle,
+        10,
+        +pageNoVal
+      );
 
       const csrfToken = localStorage.getItem("x-csrf-token");
       console.log("x-csrf-token", res.headers.get('x-csrf-token'))

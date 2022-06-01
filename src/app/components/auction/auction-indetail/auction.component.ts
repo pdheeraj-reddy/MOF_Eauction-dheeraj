@@ -71,10 +71,14 @@ export class AuctionComponent implements OnInit {
           this.activeStep = 1;
         }
       } else if (this.ViewMode == 'edit') {
-        if (this.auctionDetails.listtoproductnav?.results.length > 0) {
-          this.activeStep = 2;
+        if(this.auctionDetails.Status === 'Draft'){
+          if (this.auctionDetails.listtoproductnav?.results.length > 0) {
+            this.activeStep = 2;
+          } else {
+            this.activeStep = 1;
+          }
         } else {
-          this.activeStep = 1;
+          this.router.navigate(['/auctionlist']);
         }
       }
       // this.createForm();

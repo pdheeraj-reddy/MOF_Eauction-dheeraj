@@ -165,7 +165,7 @@
                         </label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionManager" (change)="changeSelect($event, 'auctionManager')" [required]="true">
                             <option value="">{{ 'Choose Auction Manager' | translate }}</option>                            
-                            <option *ngFor="let moderator of dropValmoderatorsList" [ngValue]="moderator.AucModId">{{ moderator.AucModId }} {{ moderator.AucModName }}
+                            <option *ngFor="let moderator of dropValmoderatorsList" [value]="moderator.AucModId">{{ moderator.AucModId }} {{ moderator.AucModName }}
                             </option>
                             <!-- <option value="1827879980">Sivakumar</option> -->
                         </select>
