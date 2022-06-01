@@ -154,7 +154,7 @@ export class AuctionService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>( 
-      environment.apiAuctionURL + '/moderators'+"?&$format=json" , httpOptions);
+      environment.apiAuctionURL + '/moderators'+"?$format=json" , httpOptions);
     
   }
 

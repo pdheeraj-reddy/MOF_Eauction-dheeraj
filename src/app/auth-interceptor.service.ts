@@ -30,18 +30,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     if(this._authService.loggedIn()){
       const authReq = request.clone( {
       setHeaders: {
-          // ------- For Development
-          'X_MOF_ClientID': '1QIwuXglQ0xImRhjTUbJ7k6x7AR6MibG',
-          'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
-          // ------- For Pre-Prod
-          // 'X_MOF_ClientID': '7iKt89yh9aSb47xpBHrbxF3tRf3BliFY',
-          // 'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
-          // ------- For Prod
-          // 'X_MOF_ClientID': '7iKt89yh9aSb47xpBHrbxF3tRf3BliFY',
-          // 'X_MOF_RqUID': '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
-          // ------- Common
-          // 'IDM_Token': accessToken,
-          // 'X_User_Role': 'InteriorMarketer',
+          'X_MOF_ClientID': environment.clientId,
+          'X_MOF_RqUID': environment.ruId,
           'Authorization': 'Bearer ' + accessToken,
           'withCredentials': 'true',
           'Content-Type': 'application/json',
@@ -50,7 +40,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           'Access-Control-Allow-Headers':'*',
           'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Max-Age' : "1728000",
-          //'X-Requested-With': 'X'
         }
       });
       return next.handle(authReq);

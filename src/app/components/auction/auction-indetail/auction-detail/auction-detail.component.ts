@@ -111,8 +111,6 @@ export class AuctionDetailComponent implements OnInit {
     });
     this.userId = this.getUserInfo().userid;
 
-    // this.prePopulatesFormValues();
-
     if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
       this.getAuctionDetails(this.ObjectId, this.DraftId);
     } else {
@@ -150,7 +148,17 @@ export class AuctionDetailComponent implements OnInit {
         e.dataTransfer.dropEffect = "none";
         e.dataTransfer.effectAllowed = "none";
       }
-    }, false)
+    }, false);
+    
+    // this.prePopulatesFormValues();
+    this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
+      console.log('getAuctionModeratorsList', moderatorsListResp);
+      this.dropValmoderatorsList = [];
+      this.showLoader = false;
+      this.dropValmoderatorsList = moderatorsListResp.body.d.results;
+    }, (error) => {
+      console.log('getAuctionModeratorsList RespError : ', error);
+    });
   }
 
   public getUserInfo() {
@@ -386,9 +394,9 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.controls['auctionEndDate'].setValue($event.target.value);
   }
 
-  async prePopulatesFormValues() {
+  prePopulatesFormValues() {
     this.showLoader = true;
-    await this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
+    this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
       console.log('getAuctionModeratorsList', moderatorsListResp);
       this.dropValmoderatorsList = [];
       this.showLoader = false;
