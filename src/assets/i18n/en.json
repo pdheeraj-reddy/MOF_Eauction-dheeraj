@@ -280,7 +280,8 @@
         "failure_invalid_mindate": "Invalid Data",
         "failure_nonZero": "Value should be greater than 0",
         "failure_invalid_minnumber": "At least enter 1 product",
-        "alert_maxfilesize": "The file size is more than 2MB"
+        "alert_maxfilesize": "The file size is more than 2MB",
+        "alert_validfile": "The file type not allowed"
     },
     "tooltip": {
         "bidding_method": "Direct: Bidding is done publicly and is visible to all bidders and committees <br /> Closed: Bids submitted are kept confidential until they are opened by the auction committee",

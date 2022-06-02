@@ -461,6 +461,7 @@
                                 </div>
                                 <div class="invalid-feedback">
                                     <div *ngIf="invalidFileSize">{{'message.alert_maxfilesize' | translate}}</div>
+                                    <div *ngIf="invalidFileType">{{'message.alert_validfile' | translate}}</div>
                                 </div>
                                 <div *ngIf="submitted && form['auctionAttachement'].errors" class="invalid-feedback">
                                     <div *ngIf="form['auctionAttachement'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formAttachPara' | translate }}</div>

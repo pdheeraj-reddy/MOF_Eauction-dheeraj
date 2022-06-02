@@ -65,6 +65,15 @@ export class AuctionDetailComponent implements OnInit {
   // file validation
   maxFileCount: Number = 30;
   acceptedExtensions = ['mp4','mov','png','jpg','jpeg','docx','doc','pdf'];
+  acceptedFiles = ['audio/mp4',
+  'video/mp4',
+  'application/mp4',
+  'video/quicktime',
+  'image/png',
+  'image/jpeg',
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
   lang: string;
   userId: string;
@@ -80,6 +89,7 @@ export class AuctionDetailComponent implements OnInit {
   atLeastOneRequired: boolean = false;
   minDate: any = '';
   invalidFileSize: boolean = false;
+  invalidFileType: boolean = false;
   isValidAuctionDate: boolean = false;
   isValidAnncSDate: boolean = false;
   isValidAnncEDate: boolean = false;
@@ -105,6 +115,7 @@ export class AuctionDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.invalidFileType = false;
     this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.refreshCalendarCntrl();
@@ -571,9 +582,11 @@ export class AuctionDetailComponent implements OnInit {
   }
 
   selectFiles(e: any, dd: string): void {
+    this.invalidFileType = true;
     this.invalidFileSize = false;
     let filecount = e.target.files.length;
     // if (e.target.files && filecount <= this.maxFileCount) {
+    debugger;
     this.customLoop(0, filecount, e.target.files);
     // } else {
     // }
@@ -581,26 +594,34 @@ export class AuctionDetailComponent implements OnInit {
   customLoop(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
-    if(!!this.acceptedExtensions.find(x => x === fileType)){
-      if (filesize <= 2097152) {
-        // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
-        // var fileupload: {[k: string]: any} = {};
-        this.FilePushTOArray(file[index], (filesrc: any) => {
-          var fileupload = {
-            "name": file[index]['name'],
-            "size": file[index]['size'],
-            "type": file[index]['type'],
-            "filesrc": [filesrc]
-          };
-          if (index < limit - 1) {
-            this.customLoop(++index, limit, file);
+    var ext = file[index]['name'].match(/\.(.+)$/)[1];
+    if (ext.indexOf('.') === -1) {
+      this.invalidFileType = false;
+      if(!!this.acceptedExtensions.find(x => x === fileType)){
+        this.invalidFileType = false;
+        if(!!this.acceptedFiles.find(x => x === file[index]['type'])){
+          this.invalidFileType = false;
+          if (filesize <= 2097152) {
+            // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
+            // var fileupload: {[k: string]: any} = {};
+            this.FilePushTOArray(file[index], (filesrc: any) => {
+              var fileupload = {
+                "name": file[index]['name'],
+                "size": file[index]['size'],
+                "type": file[index]['type'],
+                "filesrc": [filesrc]
+              };
+              if (index < limit - 1) {
+                this.customLoop(++index, limit, file);
+              }
+              this.files.push(fileupload);
+              this.auctionAttachement.push(new FormControl(fileupload));
+              this.navigateToPage(1, 'auctionAttach');
+            });
+          } else {
+            this.invalidFileSize = true;
           }
-          this.files.push(fileupload);
-          this.auctionAttachement.push(new FormControl(fileupload));
-          this.navigateToPage(1, 'auctionAttach');
-        });
-      } else {
-        this.invalidFileSize = true;
+        }
       }
     }
     console.log('auctionAttachement ', this.auctionAttachement);
