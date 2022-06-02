@@ -4,12 +4,13 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
+import { EnvService } from 'src/app/env.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuctionModeratorService {
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService, private envService: EnvService,) { }
 
   // for getting Auction details for ObjectId
   getAuctionDetailsApiGee(ObjectId: string, DraftId?: string): Observable<any> {
@@ -25,11 +26,11 @@ export class AuctionModeratorService {
     };
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL +
-        '/' +
-        ObjectId +
-        '?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav' +
-        '&$format=json',
+      this.envService.environment.apiAuctionURL +
+      '/' +
+      ObjectId +
+      '?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav' +
+      '&$format=json',
       httpOptions
     );
   }
@@ -44,7 +45,7 @@ export class AuctionModeratorService {
     };
     return this.http.post<any>(
       // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL,
+      this.envService.environment.apiAuctionURL,
       JSON.stringify(createAuctionRequest),
       httpOptions
     );
@@ -97,7 +98,7 @@ export class AuctionModeratorService {
     var url;
     if (userRole.roles == 'EAuction_AuctionManager') {
       url =
-        environment.apiAuctionURL +
+        this.envService.environment.apiAuctionURL +
         '?$expand=page1tolistnav' +
         "&$filter=(PageLimit eq '" +
         pageLimit +
@@ -109,7 +110,7 @@ export class AuctionModeratorService {
         ')&$format=json';
     } else {
       url =
-        environment.apiAuctionURL +
+        this.envService.environment.apiAuctionURL +
         '?$expand=page1tolistnav' +
         "&$filter=(PageLimit eq '" +
         pageLimit +
@@ -144,11 +145,11 @@ export class AuctionModeratorService {
     };
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL +
-        '/' +
-        ObjectId +
-        '?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav' +
-        '&$format=json',
+      this.envService.environment.apiAuctionURL +
+      '/' +
+      ObjectId +
+      '?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav' +
+      '&$format=json',
       httpOptions
     );
   }
@@ -163,13 +164,13 @@ export class AuctionModeratorService {
     };
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
-      environment.apiCommiteeURL +
-        '/' +
-        '?$filter=EmployeeRole eq' +
-        "'" +
-        role +
-        "'" +
-        ' &$format=json ',
+      this.envService.environment.apiCommiteeURL +
+      '/' +
+      '?$filter=EmployeeRole eq' +
+      "'" +
+      role +
+      "'" +
+      ' &$format=json ',
       httpOptions
     );
   }
@@ -184,7 +185,7 @@ export class AuctionModeratorService {
     };
     return this.http.post<any>(
       // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL,
+      this.envService.environment.apiAuctionURL,
       JSON.stringify(createAuctionRequest),
       httpOptions
     );
@@ -201,7 +202,7 @@ export class AuctionModeratorService {
     };
     return this.http.post<any>(
       // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL + '/approve',
+      this.envService.environment.apiAuctionURL + '/approve',
       JSON.stringify(payload),
       httpOptions
     );

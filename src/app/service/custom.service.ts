@@ -4,35 +4,37 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
+import { EnvService } from '../env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomService {
 
-  constructor( 
+  constructor(
     private http: HttpClient,
     handler: HttpBackend,
-    private cookieService:CookieService 
+    private cookieService: CookieService,
+    private envService: EnvService,
   ) {
     this.http = new HttpClient(handler);
-   }
+  }
 
   //for creating Auction as Draft
   uploadAuctionImages(fileNetAuctionRequest: any): Observable<any> {
     const httpOptions = {
       headers: {
-        "Authorization" : "Basic RXRpdGU6dHMhIWh2TjJLJEE="
+        "Authorization": "Basic RXRpdGU6dHMhIWh2TjJLJEE="
       },
       params: {
       }
     };
-    return this.http.post<any>( 
+    return this.http.post<any>(
       // 'https://10.13.85.56:9443' + 
-      environment.apiFilenetURL
+      this.envService.environment.apiFilenetURL
       , JSON.stringify(fileNetAuctionRequest)
       , httpOptions);
-    
+
   }
 
 }

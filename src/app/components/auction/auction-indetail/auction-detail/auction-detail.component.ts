@@ -61,10 +61,10 @@ export class AuctionDetailComponent implements OnInit {
     '15'];
   dropValCommTypes: any = [
     'Next Financial'];
-  dropValmoderatorsList: any = [ ];
+  dropValmoderatorsList: any = [];
   // file validation
   maxFileCount: Number = 30;
-  acceptedExtensions = ['mp4','mov','png','jpg','jpeg','docx','doc','pdf'];
+  acceptedExtensions = ['mp4', 'mov', 'png', 'jpg', 'jpeg', 'docx', 'doc', 'pdf'];
 
   lang: string;
   userId: string;
@@ -149,7 +149,7 @@ export class AuctionDetailComponent implements OnInit {
         e.dataTransfer.effectAllowed = "none";
       }
     }, false);
-    
+
     // this.prePopulatesFormValues();
     this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
       console.log('getAuctionModeratorsList', moderatorsListResp);
@@ -581,7 +581,7 @@ export class AuctionDetailComponent implements OnInit {
   customLoop(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
-    if(!!this.acceptedExtensions.find(x => x === fileType)){
+    if (!!this.acceptedExtensions.find(x => x === fileType)) {
       if (filesize <= 2097152) {
         // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
         // var fileupload: {[k: string]: any} = {};

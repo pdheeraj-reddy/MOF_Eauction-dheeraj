@@ -4,6 +4,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionService } from "../../service/auction.service";
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit {
     public translate: TranslateService,
     public router: Router,
     public auctionServc: AuctionService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private envService: EnvService,
   ) {
     translate.addLangs(['ar', 'en']);
     translate.setDefaultLang('ar');
@@ -51,7 +53,7 @@ export class HeaderComponent implements OnInit {
   public logout() {
     this.cookieService.deleteAll('/', '.mof.gov.sa');
     localStorage.clear();
-    const redirectUrl = environment.idmLogoutUrl;
+    const redirectUrl = this.envService.environment.idmLogoutUrl;
     window.location.href = redirectUrl;
   }
 }

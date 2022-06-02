@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment-mini';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-auctions',
@@ -36,6 +37,7 @@ export class AuctionsComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     private http: HttpClient,
     public translate: TranslateService,
+    private envService: EnvService,
   ) { }
 
   public mapping(serverObj: any) {
@@ -90,7 +92,7 @@ export class AuctionsComponent implements OnInit {
       myAuction: this.filterFormGroup.controls['myAuction'].value,
     };
 
-    this.http.get<any>(environment.apiBidderAuctions, { responseType: 'json' }).subscribe(res => {
+    this.http.get<any>(this.envService.environment.apiBidderAuctions, { responseType: 'json' }).subscribe(res => {
       this.showLoader = false;
 
       //   this.PaginationServc.setPagerValues(
