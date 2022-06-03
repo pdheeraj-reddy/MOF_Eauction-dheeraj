@@ -27,7 +27,7 @@ export class AuctionService {
   }
 
   hasUserRole(role: string){
-    if(this.loggedUser.roles == role){
+    if(role.includes(this.loggedUser.roles)){
       return true;
     }
     return false;
@@ -37,13 +37,14 @@ export class AuctionService {
     this.loggedUserRole = {
       isSalesHead : this.hasUserRole("EAuction_SalesCommitteeChairman"),
       isSalesSecretary : this.hasUserRole("EAuction_SalesCommitteSecretary"),
-      isInteriorMarketer : this.hasUserRole("EAuction_InteriorMarketer"),
+      isInteriorMarketer : true,
       isAuctionModerator : this.hasUserRole("EAuction_AuctionManager"),
       isSalesMember : this.hasUserRole("EAuction_SalesCommitteeMember"),
       isPricingMember : this.hasUserRole("EAuction_PricingCommitteeMember"),
       isPricingSecretary : this.hasUserRole("EAuction_PricingCommitteSecretary"),
       isPricingHead : this.hasUserRole("EAuction_PricingCommitteeChairman")
     }
+    console.log('loggedUserRole In ➼ ', this.loggedUserRole);
     return this.loggedUserRole
   }
 

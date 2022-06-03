@@ -31,6 +31,8 @@ export class AuthService {
         roles: jwtTokenInfo.role
       }
       this.auctionServc.loggedUser = userInfo;
+      
+      console.log('userInfo ➼ ', userInfo);
       return true;
     } else {
       return false;

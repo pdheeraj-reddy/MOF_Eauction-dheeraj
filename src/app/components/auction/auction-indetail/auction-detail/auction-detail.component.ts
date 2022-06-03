@@ -836,8 +836,9 @@ export class AuctionDetailComponent implements OnInit {
       if (this.basicFormGroup.status === 'VALID') {
         this.showSaveBtnLoader = true;
         const auctiondetail = this.generateAuctionDetailFormat(this.basicFormGroup.value);
-
+        console.log("auctiondetail final format ", auctiondetail);
         this.auctionServc.createAuction(auctiondetail).subscribe((auctionDetailsResp: any) => {
+          console.log('createAuction Resp ', auctionDetailsResp);
           // alert('Auction is Saved Successfully. Please Continue...');
           this.DraftId = auctionDetailsResp.d.DraftId;
           this.ObjectId = auctionDetailsResp.d.DraftId;

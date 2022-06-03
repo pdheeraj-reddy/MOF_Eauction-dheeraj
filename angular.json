@@ -76,7 +76,7 @@
                             }],
                             "outputHashing": "all"
                         },
-                        "development": {
+                        "testing": {
                             "budgets": [{
                                     "type": "initial",
                                     "maximumWarning": "4mb",
@@ -89,6 +89,14 @@
                                 }
                             ],
                             "outputHashing": "all"
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
                         }
                     },
                     "defaultConfiguration": "production"
@@ -101,6 +109,9 @@
                         },
                         "staging": {
                             "browserTarget": "eauction-app:build:staging"
+                        },
+                        "testing": {
+                            "browserTarget": "eauction-app:build:development"
                         },
                         "development": {
                             "browserTarget": "eauction-app:build:development"
