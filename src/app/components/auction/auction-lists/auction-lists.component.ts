@@ -71,7 +71,7 @@ export class AuctionListsComponent implements OnInit {
     private cookieService: CookieService,
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     public translate: TranslateService,
-  ) { 
+  ) {
     PaginationServc.reset();
   }
 
@@ -82,15 +82,16 @@ export class AuctionListsComponent implements OnInit {
     // this.totcntforreadjust = serverObj.d.results[0].TotRejected;
     // this.totcntforupcomming = serverObj.d.results[0].TotPublish;
     // this.totcntforawaiting = serverObj.d.results[0].TotPendingRw;
+    if (serverObj.d.results?.length > 0) {
       this.totalCounts = {
         totAll: serverObj.d.results[0].TotAll ? serverObj.d.results[0].TotAll : 0,
         totDraft: serverObj.d.results[0].TotDraft ? serverObj.d.results[0].TotDraft : 0,
-  
+
         totCompleted: serverObj.d.results[0].TotCompleted ? serverObj.d.results[0].TotCompleted : 0,
         totEle: serverObj.d.results[0].TotEle ? serverObj.d.results[0].TotEle : 0,
         totPendSelect: serverObj.d.results[0].TotPendSelect ? serverObj.d.results[0].TotPendSelect : 0,
         totPgs: serverObj.d.results[0].TotPgs ? serverObj.d.results[0].TotPgs : 0,
-  
+
         totPrcApprPend: serverObj.d.results[0].TotPrcApprPend ? serverObj.d.results[0].TotPrcApprPend : 0,
         totPrcRejected: serverObj.d.results[0].TotPrcRejected ? serverObj.d.results[0].TotPrcRejected : 0,
         totPricingPend: serverObj.d.results[0].TotPricingPend ? serverObj.d.results[0].TotPricingPend : 0,
@@ -110,25 +111,26 @@ export class AuctionListsComponent implements OnInit {
       } else if (this.loggedUserRole.isPricingHead) {
         pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
       }
-        pagetolistnav.forEach((result: any) => {
-          const items = {
-            ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
-            DraftId: result['DraftId'] ? result['DraftId'] : '0',
-            referenceno: result['ObjectId'] ? result['ObjectId'] : '',
-            auctionName: result['Description'] ? result['Description'] : '',
-            auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : this.getAuctionTypeDesc('C'), // Hardcoded due to DB inconsist
-            auctionStatus: result['Status'] ? result['Status'] : '',
-            bgaValues: result['Description'] ? result['Description'] : '',
-            auctionStartDate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-            auctionStartTime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-            auctionStartTimeSufix: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
-            agencyName: result['Description'] ? result['Description'] : '',
-            autionEndDate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-            auctionEndTime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-            auctionEndTimeSufix: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
-          }
-          resultSet.push(items);
-        });
+    }
+    pagetolistnav?.forEach((result: any) => {
+      const items = {
+        ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
+        DraftId: result['DraftId'] ? result['DraftId'] : '0',
+        referenceno: result['ObjectId'] ? result['ObjectId'] : '',
+        auctionName: result['Description'] ? result['Description'] : '',
+        auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : this.getAuctionTypeDesc('C'), // Hardcoded due to DB inconsist
+        auctionStatus: result['Status'] ? result['Status'] : '',
+        bgaValues: result['Description'] ? result['Description'] : '',
+        auctionStartDate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctionStartTime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+        auctionStartTimeSufix: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+        agencyName: result['Description'] ? result['Description'] : '',
+        autionEndDate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctionEndTime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+        auctionEndTimeSufix: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+      }
+      resultSet.push(items);
+    });
     return resultSet;
   }
 
@@ -278,16 +280,19 @@ export class AuctionListsComponent implements OnInit {
     this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
-      this.PaginationServc.setPagerValues(
-        +res.body.d.results[0].TotEle,
-        10,
-        +pageNoVal
-      );
 
       const csrfToken = localStorage.getItem("x-csrf-token");
       console.log("x-csrf-token", res.headers.get('x-csrf-token'))
       localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
       this.auctionListData = this.mapping(res.body);
+
+      if (res.body.d.results && res.body.d.results.length > 0) {
+        this.PaginationServc.setPagerValues(
+          +res.body.d.results[0].TotEle,
+          10,
+          +pageNoVal
+        );
+      }
 
     }, (error) => {
       this.showLoader = false;
