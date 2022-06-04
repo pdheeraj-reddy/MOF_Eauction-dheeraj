@@ -230,7 +230,7 @@ export class AuctionDetailComponent implements OnInit {
       $("#auctionEndDate").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
-        minDate: this.form['auctionStartDate'].value !== '' ? moment(this.form['auctionStartDate'].value, 'YYYY-MM-DD').format('YYYY-MM-DD') : false,
+        minDate: this.form['auctionStartDate'] ? (this.form['auctionStartDate'].value !== '' ? moment(this.form['auctionStartDate'].value, 'YYYY-MM-DD').format('YYYY-MM-DD') : false) : false,
         format: "YYYY-MM-DD",
         showSwitcher: false,
         icons: {

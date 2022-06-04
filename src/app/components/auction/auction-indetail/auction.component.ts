@@ -77,7 +77,7 @@ export class AuctionComponent implements OnInit {
           } else {
             this.activeStep = 1;
           }
-        } else {
+        } else if (this.auctionDetails.Status === 'Pending Review') {
           this.router.navigate(['/auctionlist']);
         }
       }
