@@ -163,7 +163,8 @@ export class AuctionDetailComponent implements OnInit {
     
     // this.prePopulatesFormValues();
     this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
-      console.log('getAuctionModeratorsList', moderatorsListResp);
+      console.log('getAuctionModeratorsList', moderatorsListResp.body);
+      this.auctionServc.XCSRFToken = moderatorsListResp.headers.get('x-csrf-token');
       this.dropValmoderatorsList = [];
       this.showLoader = false;
       this.dropValmoderatorsList = moderatorsListResp.body.d.results;
@@ -408,7 +409,8 @@ export class AuctionDetailComponent implements OnInit {
   prePopulatesFormValues() {
     this.showLoader = true;
     this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
-      console.log('getAuctionModeratorsList', moderatorsListResp);
+      console.log('getAuctionModeratorsList', moderatorsListResp.body);
+      this.auctionServc.XCSRFToken = moderatorsListResp.headers.get('x-csrf-token');
       this.dropValmoderatorsList = [];
       this.showLoader = false;
       this.dropValmoderatorsList = moderatorsListResp.body.d.results;
@@ -420,7 +422,8 @@ export class AuctionDetailComponent implements OnInit {
   async getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionDetailsSubscription$ = await this.auctionServc.getAuctionDetails(ObjectId, DraftId).subscribe((auctionDetailsResp: any) => {
-      this.auctionDetails = auctionDetailsResp.d.results[0];
+      this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
+      this.auctionDetails = auctionDetailsResp.body.d.results[0];
       if (this.ViewMode == 'edit' || this.ViewMode == 'view' || (this.ObjectId || this.DraftId)) {
         this.refreshCalendarCntrl();
         this.mappingObjForEdit();

@@ -62,7 +62,8 @@ export class AuctionComponent implements OnInit {
   getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionDetailsSubscription$ = this.auctionServc.getAuctionDetails(ObjectId, DraftId).subscribe((auctionDetailsResp: any) => {
-      this.auctionDetails = auctionDetailsResp.d.results[0];
+      this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
+      this.auctionDetails = auctionDetailsResp.body.d.results[0];
       this.showLoader = false;
       if (this.ViewMode == 'view') {
         if (this.auctionDetails.listtoproductnav?.results.length > 0) {

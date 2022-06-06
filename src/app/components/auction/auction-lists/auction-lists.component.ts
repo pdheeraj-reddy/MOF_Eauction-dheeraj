@@ -281,9 +281,7 @@ export class AuctionListsComponent implements OnInit {
       this.showLoader = false;
       this.showPageLoader = false;
 
-      const csrfToken = localStorage.getItem("x-csrf-token");
-      console.log("x-csrf-token", res.headers.get('x-csrf-token'))
-      localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
+      this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
       this.auctionListData = this.mapping(res.body);
 
       if (res.body.d.results && res.body.d.results.length > 0) {

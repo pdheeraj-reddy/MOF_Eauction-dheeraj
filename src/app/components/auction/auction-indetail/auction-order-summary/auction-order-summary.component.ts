@@ -137,11 +137,12 @@ export class AuctionOrderSummaryComponent implements OnInit {
       .getAuctionDetails(ObjectId, DraftId)
       .subscribe(
         async (auctionDetailsResp: any) => {
-          console.log('getAuctionDetails Resp ', auctionDetailsResp);
-          this.auctionDetailsResp = auctionDetailsResp.d.results[0];
-          this.auctionItem = await this.mappingObjForEdit(auctionDetailsResp);
-          this.auctionDetails = auctionDetailsResp.d.results[0];
-          await this.mappingObjForProducts(auctionDetailsResp.d.results[0]);
+          console.log('getAuctionDetails Resp ', auctionDetailsResp.body);
+          this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
+          this.auctionDetailsResp = auctionDetailsResp.body.d.results[0];
+          this.auctionItem = await this.mappingObjForEdit(auctionDetailsResp.body);
+          this.auctionDetails = auctionDetailsResp.body.d.results[0];
+          await this.mappingObjForProducts(auctionDetailsResp.body.d.results[0]);
           console.log('YY', this.auctionItem);
           // Load until data loads then slowly load images
           this.showLoader = false;

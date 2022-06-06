@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
 export class AuctionService {
   loggedUser : any;
   loggedUserRole : any;
+  XCSRFToken : any;
 
   constructor( 
     private http: HttpClient,
@@ -121,7 +122,8 @@ export class AuctionService {
         'X_User_Role': role,
       },
       params: {
-      }
+      },
+      observe: 'response' as 'body'
     };
     return this.http.get<any>( 
       // 'https://10.13.85.56:9443' + 
@@ -163,7 +165,7 @@ export class AuctionService {
   createAuction(createAuctionRequest: any): Observable<any> {
     const httpOptions = {
       headers: {
-        'X-CSRF-TOKEN': localStorage.getItem("x-csrf-token") as string
+        'X-CSRF-TOKEN': this.XCSRFToken as string
       },
       params: {
       }
@@ -180,7 +182,7 @@ export class AuctionService {
   uploadAuctionImages(fileNetAuctionRequest: any): Observable<any> {
     const httpOptions = {
       headers: {
-        'X-CSRF-TOKEN': localStorage.getItem("x-csrf-token") as string
+        'X-CSRF-TOKEN': this.XCSRFToken as string
       },
       params: {
       }
@@ -197,7 +199,7 @@ export class AuctionService {
   downloadAuctionImages(fileId: any): Observable<any> {
     const httpOptions = {
       headers: {
-        'X-CSRF-TOKEN': localStorage.getItem("x-csrf-token") as string
+        'X-CSRF-TOKEN': this.XCSRFToken as string
       },
       params: {
       }
@@ -211,7 +213,7 @@ export class AuctionService {
   deleteAuctionImages(fileId: any): Observable<any> {
     const httpOptions = {
       headers: {
-        'X-CSRF-TOKEN': localStorage.getItem("x-csrf-token") as string
+        'X-CSRF-TOKEN': this.XCSRFToken as string
       },
       params: {
       },

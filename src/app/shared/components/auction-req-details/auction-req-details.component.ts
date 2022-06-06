@@ -50,11 +50,12 @@ export class AuctionReqDetailsComponent implements OnInit {
       .getAuctionDetails(ObjectId, DraftId)
       .subscribe(
         (auctionDetailsResp: any) => {
-          console.log('getAuctionDetails Resp ', auctionDetailsResp);
-          this.auctionDetailsResp = auctionDetailsResp.d.results[0];
-          this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp);
+          console.log('getAuctionDetails Resp ', auctionDetailsResp.body);
+          this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
+          this.auctionDetailsResp = auctionDetailsResp.body.d.results[0];
+          this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp.body);
           this.navigateToPage(1, 'auctionAttach');
-          this.auctionDetails = auctionDetailsResp.d.results[0];
+          this.auctionDetails = auctionDetailsResp.body.d.results[0];
           console.log('YY', this.auctionItem);
           // Load until data loads then slowly load images
           this.showLoader = false;
