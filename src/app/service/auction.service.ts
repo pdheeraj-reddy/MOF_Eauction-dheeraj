@@ -37,7 +37,7 @@ export class AuctionService {
     this.loggedUserRole = {
       isSalesHead : this.hasUserRole("EAuction_SalesCommitteeChairman"),
       isSalesSecretary : this.hasUserRole("EAuction_SalesCommitteSecretary"),
-      isInteriorMarketer : true,
+      isInteriorMarketer : this.hasUserRole("EAuction_InteriorMarketer"),
       isAuctionModerator : this.hasUserRole("EAuction_AuctionManager"),
       isSalesMember : this.hasUserRole("EAuction_SalesCommitteeMember"),
       isPricingMember : this.hasUserRole("EAuction_PricingCommitteeMember"),

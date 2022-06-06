@@ -42,7 +42,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PendingAwardingComponent } from './pending-awarding/pending-awarding.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { AuctionAttachmentsComponent } from './auction-indetail/auction-attachments/auction-attachments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +66,6 @@ import { AuctionAttachmentsComponent } from './auction-indetail/auction-attachme
     PayInvoiceComponent,
     PayFinalInvoiceComponent,
     PendingAwardingComponent,
-    AuctionAttachmentsComponent,
     // DataTablesModule,
   ],
   imports: [

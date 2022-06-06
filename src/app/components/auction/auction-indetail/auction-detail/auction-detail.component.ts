@@ -944,6 +944,7 @@ export class AuctionDetailComponent implements OnInit {
             "ObjectType": "/AuctionDocuments",
             "ObjectId": this.ObjectId,
           };
+          console.log('fileNetAuctionDetail -- ', fileNetAuctionDetail);
           this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(result => {
             customLoop(i + 1);
           }, (error: any) => {
