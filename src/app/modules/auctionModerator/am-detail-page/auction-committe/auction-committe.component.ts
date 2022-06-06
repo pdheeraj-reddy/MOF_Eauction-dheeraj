@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddMemberComponent } from 'src/app/components/shared/add-member/add-member.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-auction-committe',
@@ -29,6 +30,7 @@ export class AuctionCommitteComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    public auctionServc: AuctionService,
     private _AuctionService: AuctionApprovalService,
     public dialog: MatDialog
   ) { }
@@ -52,7 +54,8 @@ export class AuctionCommitteComponent implements OnInit {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         console.log(res);
-        this.preAuctionData = res['d']['results'][0];
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

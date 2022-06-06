@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddMemberComponent } from '../../shared/add-member/add-member.component';
+import { AuctionService } from 'src/app/service/auction.service';
 
 interface Food {
   value: string;
@@ -30,7 +31,8 @@ export class AssignPricingCommitteeComponent implements OnInit {
   ];
   constructor(
     private _AuctionService: AuctionApprovalService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public auctionServc: AuctionService,
   ) { }
 
   memberSelected(data: any) {
@@ -48,33 +50,9 @@ export class AssignPricingCommitteeComponent implements OnInit {
     }
     this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
       (res: any) => {
-        this.committeeMemberList = res.d.results;
-        console.log(res);
-      },
-      (error) => {
-        console.log('approveOrRejectAuction RespError : ', error);
-        let res = {
-          d: {
-            results: [
-              {
-                __metadata: {
-                  id: "http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_APPROVAL_SRV/CommiteeMembersSet('13545097')",
-                  uri: "http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_APPROVAL_SRV/CommiteeMembersSet('13545097')",
-                  type: 'ZSRM_PREAUCTION_APPROVAL_SRV.CommitteeMembers',
-                },
-                EmployeeId: '13545097',
-                Message: 'Success',
-                EmployeeName: 'Saurabh',
-                Msgty: 'S',
-                EmpMailid: 'dummyuser@dummytest.com',
-                AgencyId: '022001000000',
-                EmployeeRole: 'ZEAUCTION_SALCOMM_CHAIRMAN',
-              },
-            ],
-          },
-        };
-        this.committeeMemberList = res.d.results;
-        console.log(this.committeeMemberList);
+        console.log('getCommitteeMembersBasedOnRole ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.committeeMemberList = res.body.d.results;
         const dialogRef = this.dialog.open(AddMemberComponent, {
           height: '50%',
           width: '40%',
@@ -98,6 +76,9 @@ export class AssignPricingCommitteeComponent implements OnInit {
           }
           console.log(result);
         });
+      },
+      (error) => {
+        console.log('approveOrRejectAuction RespError : ', error);
       }
     );
   }
@@ -115,33 +96,12 @@ export class AssignPricingCommitteeComponent implements OnInit {
     this.popupTitle = title;
     this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
       (res: any) => {
-        this.committeeMemberList = res.d.results;
-        console.log(res);
+        console.log('getCommitteeMembersBasedOnRole ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.committeeMemberList = res.body.d.results;
       },
       (error) => {
         console.log('approveOrRejectAuction RespError : ', error);
-        let res = {
-          d: {
-            results: [
-              {
-                __metadata: {
-                  id: "http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_APPROVAL_SRV/CommiteeMembersSet('13545097')",
-                  uri: "http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_PREAUCTION_APPROVAL_SRV/CommiteeMembersSet('13545097')",
-                  type: 'ZSRM_PREAUCTION_APPROVAL_SRV.CommitteeMembers',
-                },
-                EmployeeId: '13545097',
-                Message: 'Success',
-                EmployeeName: 'Saurabh',
-                Msgty: 'S',
-                EmpMailid: 'dummyuser@dummytest.com',
-                AgencyId: '022001000000',
-                EmployeeRole: 'ZEAUCTION_SALCOMM_CHAIRMAN',
-              },
-            ],
-          },
-        };
-        this.committeeMemberList = res.d.results;
-        console.log(this.committeeMemberList);
       }
     );
   }

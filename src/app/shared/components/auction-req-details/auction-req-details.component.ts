@@ -53,7 +53,7 @@ export class AuctionReqDetailsComponent implements OnInit {
           console.log('getAuctionDetails Resp ', auctionDetailsResp.body);
           this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
           this.auctionDetailsResp = auctionDetailsResp.body.d.results[0];
-          this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp.body);
+          this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp);
           this.navigateToPage(1, 'auctionAttach');
           this.auctionDetails = auctionDetailsResp.body.d.results[0];
           console.log('YY', this.auctionItem);
@@ -104,16 +104,17 @@ export class AuctionReqDetailsComponent implements OnInit {
     //     console.log('getAuctionList RespError : ', error);
     //   }
     // );
-    let temp = this.auctionApprovalServc.getPreAuctionApproval('9700000300');
-    this.preAuctionData = temp['d']['results'][0];
-    console.log(this.preAuctionData);
-    for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {
-      this.productValue =
-        this.productValue +
-        parseFloat(
-          this.preAuctionData.listtoproductnav.results[i].ProductValue
-        );
-    }
+    // sathya - comment getPreAuctionApproval
+    // let temp = this.auctionApprovalServc.getPreAuctionApproval('9700000300');
+    // this.preAuctionData = temp['d']['results'][0];
+    // console.log(this.preAuctionData);
+    // for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {
+    //   this.productValue =
+    //     this.productValue +
+    //     parseFloat(
+    //       this.preAuctionData.listtoproductnav.results[i].ProductValue
+    //     );
+    // }
   }
 
   viewAttachment(file: any, index:number) {

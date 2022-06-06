@@ -11,53 +11,6 @@ import jwt_decode from 'jwt-decode';
 export class AuctionModeratorService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  // for getting Auction details for ObjectId
-  getAuctionDetailsApiGee(ObjectId: string, DraftId?: string): Observable<any> {
-    let $filters =
-      (ObjectId !== '' ? " and ObjectId eq '" + ObjectId + "'" : '') +
-      (DraftId !== '' ? " and DraftId eq '" + DraftId + "'" : '');
-    console.log('$filters ', $filters);
-    const httpOptions = {
-      headers: {
-        'x-csrf-token': 'fetch',
-      },
-      params: {},
-    };
-    return this.http.get<any>(
-      // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL +
-        '/' +
-        ObjectId +
-        '?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav' +
-        '&$format=json',
-      httpOptions
-    );
-  }
-
-  //for creating Auction as Draft
-  createAuctionApiGee(createAuctionRequest: any): Observable<any> {
-    const httpOptions = {
-      headers: {
-        'X-CSRF-TOKEN': localStorage.getItem('x-csrf-token') as string,
-      },
-      params: {},
-    };
-    return this.http.post<any>(
-      // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL,
-      JSON.stringify(createAuctionRequest),
-      httpOptions
-    );
-  }
-
-  getDecodedAccessToken(token: string): any {
-    try {
-      return jwt_decode(token);
-    } catch (Error) {
-      return null;
-    }
-  }
-
   //for getting Auction List with Filters
   getAuctionList(page: any, filters: any): Observable<any> {
     console.log('page ', page, ' filters ', filters);
@@ -170,22 +123,6 @@ export class AuctionModeratorService {
         role +
         "'" +
         ' &$format=json ',
-      httpOptions
-    );
-  }
-
-  //for creating Auction as Draft
-  createAuction(createAuctionRequest: any): Observable<any> {
-    const httpOptions = {
-      headers: {
-        'X-CSRF-TOKEN': localStorage.getItem('x-csrf-token') as string,
-      },
-      params: {},
-    };
-    return this.http.post<any>(
-      // 'https://10.13.85.56:9443' +
-      environment.apiAuctionURL,
-      JSON.stringify(createAuctionRequest),
       httpOptions
     );
   }

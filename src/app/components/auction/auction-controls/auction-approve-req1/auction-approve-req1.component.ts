@@ -56,14 +56,15 @@ export class AuctionApproveReq1Component implements OnInit {
     //     console.log('getAuctionList RespError : ', error);
     //   }
     // );
-    let temp = this._AuctionService.getPreAuctionApproval('9700000300');
-    this.preAuctionData = temp['d']['results'][0];
-    for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {
-      this.productValue =
-        this.productValue +
-        parseFloat(
-          this.preAuctionData.listtoproductnav.results[i].ProductValue
-        );
-    }
+    // sathya - comment getPreAuctionApproval
+    // let temp = this._AuctionService.getPreAuctionApproval('9700000300');
+    // this.preAuctionData = temp['d']['results'][0];
+    // for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {
+    //   this.productValue =
+    //     this.productValue +
+    //     parseFloat(
+    //       this.preAuctionData.listtoproductnav.results[i].ProductValue
+    //     );
+    // }
   }
 }
