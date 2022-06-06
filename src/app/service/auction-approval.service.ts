@@ -55,7 +55,6 @@ export class AuctionApprovalService {
   }
 
   approveOrRejectAuction(payload: any): Observable<any> {
-    const csrfToken = localStorage.getItem('x-csrf-token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Headers':
@@ -66,7 +65,7 @@ export class AuctionApprovalService {
         withCredentials: 'true',
         Cookie: 'sap-usercontext=sap-client=100',
         'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken as string,
+        'X-CSRF-Token': this.auctionServc.XCSRFToken as string,
       }),
       params: {},
     };

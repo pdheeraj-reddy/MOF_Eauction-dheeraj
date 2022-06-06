@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-auction-head-detail-page',
@@ -25,6 +26,7 @@ export class AuctionHeadDetailPageComponent implements OnInit {
   constructor(
     public PaginationServc: PaginationSortingService,
     private _AuctionService: AuctionModeratorService,
+    public auctionServc: AuctionService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -63,8 +65,9 @@ export class AuctionHeadDetailPageComponent implements OnInit {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res);
-        this.preAuctionData = res['d']['results'][0];
+        console.log('getAuctionDetails Resp ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
         if (this.preAuctionData.ZzEstOpt == 'A') this.isBidUpdate = false;
         else this.isBidUpdate = true;
         this.showPageLoader = false;

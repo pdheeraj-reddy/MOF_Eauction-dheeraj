@@ -8,6 +8,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddMemberComponent } from 'src/app/components/shared/add-member/add-member.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-assign-auction-committe',
@@ -65,6 +66,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private _AuctionService: AuctionModeratorService,
+    public auctionServc: AuctionService,
     public dialog: MatDialog,
     public router: Router
   ) { }
@@ -187,8 +189,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log(res);
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           console.log(this.committeeChairData);
@@ -236,7 +239,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
@@ -314,7 +319,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
 
@@ -364,7 +371,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
@@ -411,7 +420,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
@@ -500,7 +511,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -556,7 +569,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -627,9 +642,10 @@ export class AssignAuctionCommitteComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res);
-        this.preAuctionData = res['d']['results'][0];
-        let temp = res['d']['results'][0];
+        console.log('getAuctionDetails Resp ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
+        let temp = res.body.d.results[0];
         console.log(temp);
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;

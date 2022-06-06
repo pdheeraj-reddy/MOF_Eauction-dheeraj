@@ -7,6 +7,7 @@ import { InterconversionService } from 'src/app/service/interconversion.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-am-detail-page',
@@ -40,6 +41,7 @@ export class AmDetailPageComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     public _AuctionService: AuctionModeratorService,
     private interconversionService: InterconversionService,
+    public auctionServc: AuctionService,
     public dialog: MatDialog,
     public router: Router
   ) { }
@@ -172,9 +174,9 @@ export class AmDetailPageComponent implements OnInit {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         this.showLoader = false;
-        console.log(res);
-        console.log("res");
-        this.preAuctionData = res['d']['results'][0];
+        console.log('getAuctionDetails Resp ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
         if (this.preAuctionData.ActionTaken == 'A') {
           this.tabTwo = true;
         } else {
@@ -225,9 +227,6 @@ export class AmDetailPageComponent implements OnInit {
               this.preAuctionData.listtoproductnav.results[i].ProductValue
             );
         }
-        const csrfToken = localStorage.getItem('x-csrf-token');
-        console.log(csrfToken);
-        localStorage.setItem('x-csrf-token', res.headers.get('x-csrf-token'));
 
       },
       (error) => {

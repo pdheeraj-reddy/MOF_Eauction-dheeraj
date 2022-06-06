@@ -4,12 +4,17 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuctionModeratorService {
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private http: HttpClient, 
+    private cookieService: CookieService,
+    public auctionServc: AuctionService,
+  ) {}
 
   //for getting Auction List with Filters
   getAuctionList(page: any, filters: any): Observable<any> {
@@ -93,7 +98,9 @@ export class AuctionModeratorService {
         'x-csrf-token': 'fetch',
         X_User_Role: 'AuctionManager',
       },
-      params: {},
+      params: {
+      },
+      observe: 'response' as 'body'
     };
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
@@ -112,7 +119,9 @@ export class AuctionModeratorService {
         'x-csrf-token': 'fetch',
         X_User_Role: 'AuctionManager',
       },
-      params: {},
+      params: {
+      },
+      observe: 'response' as 'body'
     };
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
@@ -130,7 +139,7 @@ export class AuctionModeratorService {
   approveOrRejectAuction(payload: any): Observable<any> {
     const httpOptions = {
       headers: {
-        'X-CSRF-TOKEN': localStorage.getItem('x-csrf-token') as string,
+        'X-CSRF-TOKEN': this.auctionServc.XCSRFToken as string,
         'X-Requested-With': 'X',
         X_User_Role: 'AuctionManager',
       },

@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddMemberComponent } from 'src/app/components/shared/add-member/add-member.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-assign-pricing-committe',
@@ -55,6 +56,7 @@ export class AssignPricingCommitteComponent implements OnInit {
   add4Mem: boolean = false;
   constructor(
     private _AuctionService: AuctionModeratorService,
+    public auctionServc: AuctionService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     public router: Router
@@ -167,8 +169,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log(res);
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.committeeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -206,7 +209,6 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeChairSelected = true;
             console.log(result);
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -222,7 +224,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
@@ -284,7 +288,6 @@ export class AssignPricingCommitteComponent implements OnInit {
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_SECRETARY')
               this.committeeSecSelected = true;
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -299,7 +302,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -335,7 +340,6 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem1Selected = true;
               this.hideErrorMsg();
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -350,7 +354,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -385,7 +391,6 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem2Selected = true;
               this.hideErrorMsg();
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -400,7 +405,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -436,7 +443,6 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem3Selected = true;
               this.hideErrorMsg();
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -495,7 +501,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -535,7 +543,6 @@ export class AssignPricingCommitteComponent implements OnInit {
             }
             console.log(result?.EmployeeRole);
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -550,7 +557,9 @@ export class AssignPricingCommitteComponent implements OnInit {
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          this.committeeMemberList = res.d.results;
+          console.log('getCommitteeMembersBasedOnRole ', res.body);
+          this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+          this.committeeMemberList = res.body.d.results;
           console.log(this.addcommitteeMemberList);
           console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
@@ -580,7 +589,6 @@ export class AssignPricingCommitteComponent implements OnInit {
               }
             }
           });
-          localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
         },
         (error) => {
           console.log('approveOrRejectAuction RespError : ', error);
@@ -610,10 +618,10 @@ export class AssignPricingCommitteComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        // console.log(res);
-        // console.log(res.headers.entries());
-        let temp = res['d']['results'][0];
-        this.preAuctionData = temp;
+        console.log('getAuctionDetails Resp ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
+        let temp = this.preAuctionData;
         console.log(temp);
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;
@@ -642,12 +650,6 @@ export class AssignPricingCommitteComponent implements OnInit {
             }
           }
         }
-        console.log(res.headers);
-        console.log(res.headers.get('x-csrf-token'));
-        const csrfToken = localStorage.getItem('x-csrf-token');
-        localStorage.setItem('x-csrf-token', res.headers.get('x-csrf-token'));
-        // this.auctionListData = this.mapping(res.body);
-        // console.log(localStorage.getItem('x-csrf-token') as string);
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

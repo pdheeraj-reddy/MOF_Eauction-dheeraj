@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-auc-mem-detail-page',
@@ -22,6 +23,7 @@ export class AucMemDetailPageComponent implements OnInit {
   constructor(
     public PaginationServc: PaginationSortingService,
     private _AuctionService: AuctionModeratorService,
+    public auctionServc: AuctionService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -78,8 +80,9 @@ export class AucMemDetailPageComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res);
-        this.preAuctionData = res['d']['results'][0];
+        console.log('getAuctionDetails Resp ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

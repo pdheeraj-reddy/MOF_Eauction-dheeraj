@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-bid-value-update',
@@ -32,7 +33,8 @@ export class BidValueUpdateComponent implements OnInit {
   constructor(
     public PaginationServc: PaginationSortingService,
     private activatedRoute: ActivatedRoute,
-    private _AuctionService: AuctionModeratorService
+    private _AuctionService: AuctionModeratorService,
+    public auctionServc: AuctionService,
   ) {}
 
   saveBidValue() {
@@ -100,8 +102,9 @@ export class BidValueUpdateComponent implements OnInit {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res);
-        this.preAuctionData = res['d']['results'][0];
+        console.log('getAuctionDetails Resp ', res.body);
+        this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
+        this.preAuctionData = res.body.d.results[0];
         this.totalBidValue = parseFloat(this.preAuctionData.ZzPbEstPricePc);
         if (this.preAuctionData.ZzEstOpt == 'I') {
           this.inputMode = false;
