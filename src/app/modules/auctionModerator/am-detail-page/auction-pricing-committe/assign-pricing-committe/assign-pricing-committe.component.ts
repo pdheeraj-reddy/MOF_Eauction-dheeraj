@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -77,14 +77,14 @@ export class AssignPricingCommitteComponent implements OnInit {
       this.committeeMem1Data == undefined ||
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
-    ){
-      if( this.committeeChairData == undefined){
+    ) {
+      if (this.committeeChairData == undefined) {
         console.log(this.committeeChairData);
         alert('Enter Required fields');
-      }else{
+      } else {
         this._3MembersErrorMsg.emit(true);
       }
-    }else{
+    } else {
       this._3MembersAdded = true;
       this.showConfirm = true;
     }
@@ -150,12 +150,12 @@ export class AssignPricingCommitteComponent implements OnInit {
         for (var index2 = 0; index2 < member.length; index2++) {
           console.log(index1);
 
-          if(this.committeeMemberList[index1].EmployeeId == member[index2]){
+          if (this.committeeMemberList[index1].EmployeeId == member[index2]) {
             flag = true;
             break;
           }
         }
-        if(!flag){
+        if (!flag) {
           this.list.push(this.committeeMemberList[index1]);
         }
       }
@@ -164,7 +164,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     }
   }
   openAddChairDialog(title: any, role: string) {
-    if (this.preAuctionData.Status == 'Pending Review'){
+    if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
@@ -200,7 +200,7 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeChairData = result;
               console.log(this.committeeMemberList);
               this.existingCommitteMemberList.push(this.committeeChairData.EmployeeId);
-              if(this.existingCommitteMemberList.length == 4){
+              if (this.existingCommitteMemberList.length == 4) {
                 this.add4Mem = true;
               }
               // console.log(this.committeeMemberList);
@@ -219,8 +219,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
 
   openAddSecDialog(title: any, role: string) {
-    if (this.preAuctionData.Status == 'Pending Review'){
-    this.showPageLoader = true;
+    if (this.preAuctionData.Status == 'Pending Review') {
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -297,18 +297,18 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
 
   openAddMem1Dialog(title: any, role: string) {
-    if (this.preAuctionData.Status == 'Pending Review'){
-    this.showPageLoader = true;
+    if (this.preAuctionData.Status == 'Pending Review') {
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log(this.addcommitteeMemberList);
-          console.log(this.existingCommitteMemberList);
+          console.log("this.addcommitteeMemberList", this.addcommitteeMemberList)
+          console.log("this.existingCommitteMemberList", this.existingCommitteMemberList)
           this.filterMember(this.existingCommitteMemberList);
-          console.log(this.committeeMemberList);
+          console.log("this.committeeMemberList", this.committeeMemberList)
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
             height: 'auto',
@@ -328,17 +328,20 @@ export class AssignPricingCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
               result.SlNo = '01';
+              if (this.committeeMem1Data) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem1Data.EmployeeId)
+              }
               this.committeeMem1Data = result;
               this.existingCommitteMemberList.push(this.committeeMem1Data.EmployeeId);
               console.log(this.existingCommitteMemberList.length);
-              if(this.existingCommitteMemberList.length == 4){
+              if (this.existingCommitteMemberList.length == 4) {
                 this.add4Mem = true;
               }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem1Selected = true;
-              this.hideErrorMsg();
+            this.hideErrorMsg();
           });
         },
         (error) => {
@@ -349,16 +352,16 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
 
   openAddMem2Dialog(title: any, role: string) {
-    if (this.preAuctionData.Status == 'Pending Review'){
-    this.showPageLoader = true;
+    if (this.preAuctionData.Status == 'Pending Review') {
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log(this.addcommitteeMemberList);
-          console.log(this.existingCommitteMemberList);
+          console.log("🚀 ~ openAddMem2Dialog ~ this.addcommitteeMemberList", this.addcommitteeMemberList)
+          console.log("🚀 ~ openAddMem2Dialog ~ this.existingCommitteMemberList", this.existingCommitteMemberList)
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
@@ -380,16 +383,19 @@ export class AssignPricingCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
               result.SlNo = '02';
+              if (this.committeeMem2Data) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem2Data.EmployeeId)
+              }
               this.committeeMem2Data = result;
               this.existingCommitteMemberList.push(this.committeeMem2Data.EmployeeId);
-              if(this.existingCommitteMemberList.length == 4){
+              if (this.existingCommitteMemberList.length == 4) {
                 this.add4Mem = true;
               }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem2Selected = true;
-              this.hideErrorMsg();
+            this.hideErrorMsg();
           });
         },
         (error) => {
@@ -400,8 +406,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
 
   openAddMem3Dialog(title: any, role: string) {
-    if (this.preAuctionData.Status == 'Pending Review'){
-    this.showPageLoader = true;
+    if (this.preAuctionData.Status == 'Pending Review') {
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -431,17 +437,20 @@ export class AssignPricingCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
               result.SlNo = '03';
+              if (this.committeeMem3Data) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem3Data.EmployeeId)
+              }
               this.committeeMem3Data = result;
               this.existingCommitteMemberList.push(this.committeeMem3Data.EmployeeId);
               console.log(this.existingCommitteMemberList.length);
-              if(this.existingCommitteMemberList.length == 4){
+              if (this.existingCommitteMemberList.length == 4) {
                 this.add4Mem = true;
               }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem3Selected = true;
-              this.hideErrorMsg();
+            this.hideErrorMsg();
           });
         },
         (error) => {
@@ -451,11 +460,11 @@ export class AssignPricingCommitteComponent implements OnInit {
     }
   }
 
-  hideErrorMsg(){
-    if(this.committeeMem1Data!=undefined && this.committeeMem2Data!=undefined && this.committeeMem3Data!=undefined){
+  hideErrorMsg() {
+    if (this.committeeMem1Data != undefined && this.committeeMem2Data != undefined && this.committeeMem3Data != undefined) {
       this._3MembersErrorMsg.emit(false);
       console.log("notempty");
-    }else{
+    } else {
       this._3MembersErrorMsg.emit(true);
     }
   }
@@ -496,8 +505,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   //     );
   // }
   openAddMem4Dialog(title: any, role: string) {
-    if (this.preAuctionData.Status == 'Pending Review'){
-    this.showPageLoader = true;
+    if (this.preAuctionData.Status == 'Pending Review') {
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
@@ -552,8 +561,8 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
 
   openEditMem4Dialog(title: any, role: string, index: any) {
-    if (this.preAuctionData.Status == 'Pending Review'){
-    this.showPageLoader = true;
+    if (this.preAuctionData.Status == 'Pending Review') {
+      this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
           this.showPageLoader = false;
