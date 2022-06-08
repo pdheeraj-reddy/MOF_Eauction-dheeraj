@@ -59,49 +59,49 @@ export class InterconversionService {
     auctionDetails.auctionStartDate = serverObj.ZzAucSrtDt
       ? serverObj.ZzAucSrtDt !== 0
         ? moment(
-            serverObj.ZzAucSrtDt.split(' ')[0],
-            'DD.MM.YYYY'
-          ).format('YYYY-MM-DD')
+          serverObj.ZzAucSrtDt.split(' ')[0],
+          'DD.MM.YYYY'
+        ).format('YYYY-MM-DD')
         : ''
       : '';
     auctionDetails.auctionStartTime = serverObj.ZzAucSrtDt
       ? serverObj.ZzAucSrtDt !== 0
         ? moment(
-            serverObj.ZzAucSrtDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('hh:mm')
+          serverObj.ZzAucSrtDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('hh:mm')
         : ''
       : '';
     auctionDetails.auctionStartTimeSufix = serverObj.ZzAucSrtDt
       ? serverObj.ZzAucSrtDt !== 0
         ? moment(
-            serverObj.ZzAucSrtDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('A')
+          serverObj.ZzAucSrtDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('A')
         : ''
       : '';
     auctionDetails.auctionEndDate = serverObj.ZzAucEndDt
       ? serverObj.ZzAucEndDt !== 0
         ? moment(
-            serverObj.ZzAucEndDt.split(' ')[0],
-            'DD.MM.YYYY'
-          ).format('YYYY-MM-DD')
+          serverObj.ZzAucEndDt.split(' ')[0],
+          'DD.MM.YYYY'
+        ).format('YYYY-MM-DD')
         : ''
       : '';
     auctionDetails.auctionEndTime = serverObj.ZzAucEndDt
       ? serverObj.ZzAucEndDt !== 0
         ? moment(
-            serverObj.ZzAucEndDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('hh:mm')
+          serverObj.ZzAucEndDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('hh:mm')
         : ''
       : '';
     auctionDetails.auctionEndTimeSufix = serverObj.ZzAucEndDt
       ? serverObj.ZzAucEndDt !== 0
         ? moment(
-            serverObj.ZzAucEndDt.split(' ')[1],
-            'HH:mm:ss'
-          ).format('A')
+          serverObj.ZzAucEndDt.split(' ')[1],
+          'HH:mm:ss'
+        ).format('A')
         : ''
       : '';
 
@@ -110,13 +110,13 @@ export class InterconversionService {
     );
     auctionDetails.auctionAnncStartDate = serverObj.ZzAnncSrtD
       ? moment(serverObj.ZzAnncSrtD, 'DD.MM.YYYY').format(
-          'YYYY-MM-DD'
-        )
+        'YYYY-MM-DD'
+      )
       : '';
     auctionDetails.auctionAnncEndDate = serverObj.ZzAnncEndD
       ? moment(serverObj.ZzAnncEndD, 'DD.MM.YYYY').format(
-          'YYYY-MM-DD'
-        )
+        'YYYY-MM-DD'
+      )
       : '';
     auctionDetails.startPrice = serverObj.ZzBidSrtPrice;
     auctionDetails.lowBidValue = serverObj.ZzLowBidVl;
@@ -142,7 +142,6 @@ export class InterconversionService {
             auctionDetails.auctionAttachement.push(fileupload);
           }
           if (value.ObjectType == '/AuctionProductImages') {
-            console.log(index, 'attachment index');
             var fileupload = {
               name: value.FileName + '.' + value.FileExt,
               size: '',
@@ -159,7 +158,7 @@ export class InterconversionService {
   }
 
   public mappingObjForProducts(serverObj: any) {
-    console.log('InterconversionService :: mappingObjForProduct');
+    console.log('InterconversionService :: mappingObjForProduct', serverObj);
     let auctionProducts: any = [];
     let productsArray = serverObj.listtoproductnav.results;
     console.log('productsArray ', productsArray);
@@ -169,13 +168,11 @@ export class InterconversionService {
         if (serverObj.listtoattachnav['results']) {
           var productImagesArray = serverObj.listtoattachnav['results'].filter(function (el: any) {
             return el.ObjectType == "/AuctionProductImages" &&
-              el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
-              Number(el.ZzProductNo.trim()) == pItem.ZzProductNo.trim();
+              Number(el.ZzProductNo.trim()) === Number(pItem.ZzProductNo.trim());
           });
           var productFilesArray = serverObj.listtoattachnav['results'].filter(function (el: any) {
             return el.ObjectType == "/AuctionProductDocuments" &&
-              el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
-              Number(el.ZzProductNo.trim()) == pItem.ZzProductNo.trim();
+              Number(el.ZzProductNo.trim()) === Number(pItem.ZzProductNo.trim());
           });
           if (productImagesArray.length > 0) {
             productImagesArray.forEach((value: any) => {
