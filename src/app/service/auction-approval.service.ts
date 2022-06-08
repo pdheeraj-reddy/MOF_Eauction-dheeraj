@@ -56,17 +56,11 @@ export class AuctionApprovalService {
 
   approveOrRejectAuction(payload: any): Observable<any> {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Headers':
-          'X-CSRF-Token, Origin, X-Requested-With, Content-Type, Accept',
-        Authorization: 'Basic QUJBQUJBUEVSOlNhcEAxMjM0NQ==',
-        X_MOF_ClientID: '1QIwuXglQ0xImRhjTUbJ7k6x7AR6MibG',
-        X_MOF_RqUID: '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
-        withCredentials: 'true',
-        Cookie: 'sap-usercontext=sap-client=100',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': this.auctionServc.XCSRFToken as string,
-      }),
+      headers: {
+        'X-CSRF-TOKEN': this.auctionServc.XCSRFToken as string,
+        'X-Requested-With': 'X',
+        X_User_Role: 'AuctionManager',
+      },
       params: {},
     };
     return this.http.post<any>(

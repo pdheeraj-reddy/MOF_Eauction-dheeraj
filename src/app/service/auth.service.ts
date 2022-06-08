@@ -25,7 +25,9 @@ export class AuthService {
     idToken = this.cookieService.get('IDM_IDTOKEN');
     if(!!accessToken && !!idToken){
       const jwtTokenInfo = this.auctionServc.getDecodedAccessToken(idToken);
+      console.log('jwtTokenInfo ➼ ', jwtTokenInfo);
       const userInfo = {
+        idmclientid: jwtTokenInfo.aud,
         fullname: jwtTokenInfo.fullname,
         userid: jwtTokenInfo.name,
         roles: jwtTokenInfo.role
