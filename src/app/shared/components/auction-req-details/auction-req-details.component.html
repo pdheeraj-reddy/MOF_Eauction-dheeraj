@@ -253,21 +253,24 @@
                                                             <img src="assets/icons/eye_open.svg" alt="" srcset="">
                                                         </button>
                                                     </div> -->
-                                                    <div *ngIf="activeIndex != index" class="qq-btn-group d-flex">
-                                                        <a (click)="viewAttachment(file,index)" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                                    <div *ngIf="activeIndex != index" class="qq-btn-group d-flex justify-content-center">
+                                                        <a *ngIf="activeDownloadFileIndex != index && (file.MIMEType != 'application/pdf') && (file.MIMEType != 'application/msword') && (file.MIMEType != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')" (click)="viewAttachment(file, index, 'view')"
+                                                            class="btn btn-ghost btn-sm fill-primary-light-green">
                                                             <span class="icon-eye-open"></span>
                                                         </a>
-                                                        <a (click)="viewAttachment(file,index)" class="btn btn-ghost btn-sm fill-primary-light-green mx-3">
+                                                        <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file, index, 'download')" class="btn btn-ghost btn-sm fill-primary-light-green mx-3">
                                                             <span class="icon-download"></span>
                                                         </a>
+
+                                                        <button *ngIf="activeDownloadFileIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg" style="height: 100%; width: 100%;">
+                                                            <span class="btn-text pr-0">
+                                                                <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status">
+                                                                    <span class="sr-only">Loading...</span>
+                                                                </div>
+                                                            </span>
+                                                        </button>
+
                                                     </div>
-                                                    <button *ngIf="activeIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0" style="height: 30px;">
-                                                      <span class="btn-text pr-0">
-                                                          <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status">
-                                                              <span class="sr-only">Loading...</span>
-                                                          </div>
-                                                      </span>
-                                                  </button>
                                                 </td>
                                             </ng-container>
                                         </tr>
