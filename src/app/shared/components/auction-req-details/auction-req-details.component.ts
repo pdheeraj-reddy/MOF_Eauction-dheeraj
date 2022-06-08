@@ -28,6 +28,10 @@ export class AuctionReqDetailsComponent implements OnInit {
   pageRangeForAttach: any;
   activeIndex = -1;
 
+  showViewAttachmentsModal: boolean = false;
+  selectedFileFormat: any;
+  selectedFileURL: any;
+
   constructor(
     public PaginationServc: PaginationSortingService,
     public auctionServc: AuctionService,
@@ -44,6 +48,19 @@ export class AuctionReqDetailsComponent implements OnInit {
       console.log('new');
     }
   }
+
+  downloadFile(fileName: string, contentType: string, base64Data: string) {
+    const linkSource = `data:${contentType};base64,${base64Data}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = base64Data;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
+
+
   getAuctionDetails(ObjectId: string, DraftId: string) {
     this.showLoader = true;
     this.auctionServc
@@ -117,9 +134,42 @@ export class AuctionReqDetailsComponent implements OnInit {
     // }
   }
 
-  viewAttachment(file: any, index:number) {
-    this.activeIndex = index;
+  // viewAttachment(file: any, index:number) {
+  //   this.activeIndex = index;
+  //   if (file.FilenetId) {
+  //     this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
+  //       (downloadAuctionImagesResp: any) => {
+  //         console.log(downloadAuctionImagesResp);
+  //         const fileResp = downloadAuctionImagesResp.d;
+  //         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
+  //         console.log('asdasd', byteString.split(',')[1]);
+  //         var ab = new ArrayBuffer(byteString.length);
+  //         var ia = new Uint8Array(ab);
+  //         for (var i = 0; i < byteString.length; i++) {
+  //           ia[i] = byteString.charCodeAt(i);
+  //         }
+  //         const blob = new Blob([ab], { type: file.MIMEType });
+  //         console.log(blob);
+  //         this.activeIndex = -1;
+  //         let fileURL = window.URL.createObjectURL(blob);
+  //         console.log('fileURL', fileURL);
+  //         window.open(fileURL, '_blank');
+  //         // window.open(fileContent, "_blank");
+  //       },
+  //       (error) => {
+  //         this.showLoader = false;
+  //         this.activeIndex = -1;
+  //         console.log('downloadAuctionImages RespError : ', error);
+  //       }
+  //     );
+  //   }
+  // }
+
+  activeDownloadFileIndex = -1
+
+  viewAttachment(file: any, index:number, option: string) {
     if (file.FilenetId) {
+      this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
@@ -132,19 +182,64 @@ export class AuctionReqDetailsComponent implements OnInit {
             ia[i] = byteString.charCodeAt(i);
           }
           const blob = new Blob([ab], { type: file.MIMEType });
-          console.log(blob);
-          this.activeIndex = -1;
           let fileURL = window.URL.createObjectURL(blob);
-          console.log('fileURL', fileURL);
-          window.open(fileURL, '_blank');
+          console.log('fileURL ', fileURL);
+          this.showViewAttachmentsModal = false;
+          var newWin: any;
+          if(option == 'view'){
+            newWin = window.open(fileURL, '_blank');
+          } else {            
+            newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
+          }
+          if((!newWin || newWin.closed || typeof newWin.closed=='undefined') && option == 'view') 
+          {
+              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          }
+          this.activeDownloadFileIndex = -1;
           // window.open(fileContent, "_blank");
         },
         (error) => {
           this.showLoader = false;
-          this.activeIndex = -1;
+          this.activeDownloadFileIndex = -1;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );
+    } else {
+      const fileType = file.name.split('.').pop()?.toLowerCase();
+      // var reader = new FileReader();
+      // reader.readAsDataURL(file.filesrc['0']);
+      var byteString = atob(file.filesrc['0'].split(',')[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: file.type });
+
+      console.log('fileURL', blob);
+      let fileURL = window.URL.createObjectURL(blob);
+      if (
+        file.type.indexOf('image') > -1 ||
+        file.type.indexOf('video') > -1 ||
+        fileType === 'docx' ||
+        fileType === 'doc' ||
+        fileType === 'pdf'
+      ) {
+        this.showViewAttachmentsModal = false;
+        console.log('fileURL', fileURL);
+        window.open(fileURL, '_blank');
+      } else {
+        if (file.type.indexOf('image') > -1) {
+          this.selectedFileFormat = 'image';
+        } else if (file.type.indexOf('video') > -1) {
+          this.selectedFileFormat = 'video';
+        }
+        this.selectedFileURL = file.filesrc['0'].split(',')[1];
+        // reader.onload = (_event) => {
+        //   this.selectedFileURL = reader.result;
+        // }
+        this.showViewAttachmentsModal = true;
+      }
     }
   }
 
