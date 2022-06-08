@@ -146,7 +146,6 @@ export class AuctionModeratorService {
       params: {},
     };
     return this.http.post<any>(
-      // 'https://10.13.85.56:9443' +
       environment.apiAuctionURL + '/approve',
       JSON.stringify(payload),
       httpOptions

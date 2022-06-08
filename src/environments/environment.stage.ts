@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  idmClientId: 'ba4604739f674659b3650472cb4a0efe',
   clientId: '7iKt89yh9aSb47xpBHrbxF3tRf3BliFY',
   ruId: '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
   idmLoginURL: "https://ry1srvemkjv1.mof.gov.sa/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fmof.gov.sa.f_mof_base!2fmof.gov.sa.f_iviews!2fmof.gov.sa.i_auction",

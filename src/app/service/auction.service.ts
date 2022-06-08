@@ -28,7 +28,7 @@ export class AuctionService {
   }
 
   hasUserRole(role: string){
-    if(role.includes(this.loggedUser.roles)){
+    if(this.loggedUser.roles.includes(role)){
       return true;
     }
     return false;
