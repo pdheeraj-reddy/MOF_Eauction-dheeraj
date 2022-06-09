@@ -28,13 +28,20 @@ export class AuthGuard implements CanActivate {
     if(this._authService.loggedIn()){
       const currentUserRole = this.auctionServc.loggedUser;
       console.log('currentUserRole ➼ ', currentUserRole);
-      debugger;
       if (currentUserRole) {
-        // check if route is restricted by role
-        if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction"))) && !(currentUserRole.roles == environment.idmClientId)){
+        // check if idToken has EAuction roles and envi clientId
+        if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction"))) && !(currentUserRole.idmclientid == environment.idmClientId)){
+          if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction")))){
+            console.log('inValid Role');
+          }
+          if(!(currentUserRole.idmclientid == environment.idmClientId)){
+            console.log('inValid ClientId', currentUserRole.idmclientid + " -- " + environment.idmClientId);
+          }
           this.cookieService.deleteAll();
           this.redirect2IdmLogin();
           return false;
+        } else {
+          return true;
         }
         return true;
       } else {

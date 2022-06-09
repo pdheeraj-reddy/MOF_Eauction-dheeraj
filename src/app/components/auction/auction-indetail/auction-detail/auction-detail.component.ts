@@ -589,7 +589,6 @@ export class AuctionDetailComponent implements OnInit {
     this.invalidFileSize = false;
     let filecount = e.target.files.length;
     // if (e.target.files && filecount <= this.maxFileCount) {
-    debugger;
     this.customLoop(0, filecount, e.target.files);
     // } else {
     // }
