@@ -8,14 +8,14 @@ import { AuctionService } from "./service/auction.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  userInfo : any;
+  userInfo: any;
 
   constructor(
-    private _authService: AuthService, 
+    private _authService: AuthService,
     private cookieService: CookieService,
     public auctionServc: AuctionService,
     private router: Router
-    ){}
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,17 +24,31 @@ export class AuthGuard implements CanActivate {
     // let accessToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IkE1OUMyOEYxMUUwM0MzMzRFMDkyQjAxOERENEM0NDA3MkRGMzlBQzkiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJwWndvOFI0RHd6VGdrckFZM1V4RUJ5M3ptc2sifQ.eyJuYmYiOjE2NDY4MzQzNTQsImV4cCI6MTY0NjgzNzk1NCwiaXNzIjoiaHR0cHM6Ly8xMC4xNC44LjYxOjgwNTUiLCJjbGllbnRfaWQiOiJlOTAyNWQ3NTg5YTg0OWNhODRiMTI4ZDc5M2Q1OTU4ZSIsInN1YiI6IjY4NjEwIiwiYXV0aF90aW1lIjoxNjQ2ODM0MzUwLCJpZHAiOiJsb2NhbCIsInNjb3BlIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJyb2xlcyJdLCJhbXIiOlsicHdkIl19.SKQun8V5naGXf8IZzVuWe0a03P2Bo1TmMCUtthBk7xxZzlZqeLTLprFWzq5pgH_DbufIN4uhiHxQu7rX3Ga5LjznazdRvNk7R_0h7a0D1lD1UJrYtebsUyAhP9dWHdAiMEEBgqZe5ICzi6wAJp8wFzxReXnyOWKdb_pyigQjzCltVCTmTrPw5GBxbnlcvt6dZiNEdcL5tfrNrDnw4cMtqlSxIZcMXDXW0n4Bu5BZauyCF2-INJUaBsDFtKdMyCLVuYHKsY98hm21Ox7Pdeln9jKd9GbSZFA8SW4Hx6qpuQkQJ-2sODRllLIpe7yGaLd6NCj9bje3fQMTeK3I8U_uBQ';
     // this.cookieService.set('IDM_IDTOKEN', idToken); 
     // this.cookieService.set('IDM_ACCESSTOKEN', accessToken); 
-    
-    if(this._authService.loggedIn()){
+
+    if (this._authService.loggedIn()) {
       const currentUserRole = this.auctionServc.loggedUser;
       console.log('currentUserRole ➼ ', currentUserRole);
       if (currentUserRole) {
+        // check if the currentuserRole is array or string
+        if (typeof currentUserRole.roles === 'string') {
+          if (!(currentUserRole.roles.includes("EAuction")) && !(currentUserRole.idmclientid == environment.idmClientId)) {
+            if (!(currentUserRole.roles.includes("EAuction"))) {
+              console.log('inValid Role');
+            }
+            if (!(currentUserRole.idmclientid == environment.idmClientId)) {
+              console.log('inValid ClientId', currentUserRole.idmclientid + " -- " + environment.idmClientId);
+            }
+            this.cookieService.deleteAll();
+            this.redirect2IdmLogin();
+            return false;
+          }
+        }
         // check if idToken has EAuction roles and envi clientId
-        if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction"))) && !(currentUserRole.idmclientid == environment.idmClientId)){
-          if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction")))){
+        else if (!(currentUserRole.roles.find((role: any) => role.includes("EAuction"))) && !(currentUserRole.idmclientid == environment.idmClientId)) {
+          if (!(currentUserRole.roles.find((role: any) => role.includes("EAuction")))) {
             console.log('inValid Role');
           }
-          if(!(currentUserRole.idmclientid == environment.idmClientId)){
+          if (!(currentUserRole.idmclientid == environment.idmClientId)) {
             console.log('inValid ClientId', currentUserRole.idmclientid + " -- " + environment.idmClientId);
           }
           this.cookieService.deleteAll();
@@ -54,7 +68,7 @@ export class AuthGuard implements CanActivate {
     }
   }
 
-  redirect2IdmLogin(){
+  redirect2IdmLogin() {
     const redirectUrl = environment.idmLoginURL;
     console.log('redirectUrl ➼ ', redirectUrl);
     window.location.href = redirectUrl;
