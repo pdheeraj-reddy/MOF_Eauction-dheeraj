@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
@@ -102,6 +102,7 @@ import { AuctionCommiteeDetailPageComponent } from './modules/auction-commitee/a
 import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/auction-commitee-open-offers/auction-commitee-open-offers.component';
 
 import { ProductDetailPopupComponent } from './components/auction/auction-indetail/auction-order-summary/product-detail-popup/product-detail-popup.component';
+import { EnvService } from './env.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -211,6 +212,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionHeadDetailPageComponent,
     AuthGuard,
     {
+      provide: APP_INITIALIZER,
+      useFactory: initConfig,
+      deps: [EnvService],
+      multi: true
+    },
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true,
@@ -218,4 +225,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
+
+export function initConfig(envService: EnvService) {
+  return () => envService.loadConfig();
+}

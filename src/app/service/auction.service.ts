@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
+import { EnvService } from '../env.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,37 +14,41 @@ export class AuctionService {
   loggedUserRole : any;
   XCSRFToken : any;
 
-  constructor( 
+  constructor(
     private http: HttpClient,
-    private cookieService:CookieService 
+    private cookieService: CookieService,
+    private envService: EnvService,
   ) { }
 
 
   getDecodedAccessToken(token: string): any {
     try {
       return jwt_decode(token);
-    } catch(Error) {
+    } catch (Error) {
       return null;
     }
   }
 
   hasUserRole(role: string){
-    if(this.loggedUser.roles.includes(role)){
-      return true;
+    let isvalidRole;
+    if(typeof this.loggedUser.roles === "string"){
+      isvalidRole = !!(this.loggedUser.roles == role);
+    } else {
+      isvalidRole = !!(this.loggedUser.roles.find((r:any) => r == role));
     }
-    return false;
+    return isvalidRole;
   }
 
-  getLoggedUserRole(){
+  getLoggedUserRole() {
     this.loggedUserRole = {
-      isSalesHead : this.hasUserRole("EAuction_SalesCommitteeChairman"),
-      isSalesSecretary : this.hasUserRole("EAuction_SalesCommitteSecretary"),
-      isInteriorMarketer : this.hasUserRole("EAuction_InteriorMarketer"),
-      isAuctionModerator : this.hasUserRole("EAuction_AuctionManager"),
-      isSalesMember : this.hasUserRole("EAuction_SalesCommitteeMember"),
-      isPricingMember : this.hasUserRole("EAuction_PricingCommitteeMember"),
-      isPricingSecretary : this.hasUserRole("EAuction_PricingCommitteSecretary"),
-      isPricingHead : this.hasUserRole("EAuction_PricingCommitteeChairman")
+      isSalesHead: this.hasUserRole("EAuction_SalesCommitteeChairman"),
+      isSalesSecretary: this.hasUserRole("EAuction_SalesCommitteSecretary"),
+      isInteriorMarketer: this.hasUserRole("EAuction_InteriorMarketer"),
+      isAuctionModerator: this.hasUserRole("EAuction_AuctionManager"),
+      isSalesMember: this.hasUserRole("EAuction_SalesCommitteeMember"),
+      isPricingMember: this.hasUserRole("EAuction_PricingCommitteeMember"),
+      isPricingSecretary: this.hasUserRole("EAuction_PricingCommitteSecretary"),
+      isPricingHead: this.hasUserRole("EAuction_PricingCommitteeChairman")
     }
     console.log('loggedUserRole In ➼ ', this.loggedUserRole);
     return this.loggedUserRole
@@ -56,15 +61,15 @@ export class AuctionService {
       role = "InteriorMarketer";
       config1 = "?$expand=pagetolistnav";
       config2 = "";
-    } else if(this.loggedUserRole.isAuctionModerator) {
+    } else if (this.loggedUserRole.isAuctionModerator) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
-    } else if(this.loggedUserRole.isPricingMember) {
+    } else if (this.loggedUserRole.isPricingMember) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
-    } else if(this.loggedUserRole.isPricingHead){
+    } else if (this.loggedUserRole.isPricingHead) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
@@ -85,13 +90,13 @@ export class AuctionService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>( 
-      // 'http://10.13.85.57:9001' + 
-      environment.apiAuctionURL + 
-      config1 + 
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json" 
+    console.log('apiAuctionURL', this.envService.environment.apiAuctionURL);
+    return this.http.get<any>(
+      this.envService.environment.apiAuctionURL +
+      config1 +
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json"
       , httpOptions);
-    
+
   }
 
   // for getting Auction details for ObjectId
@@ -101,15 +106,15 @@ export class AuctionService {
       role = "InteriorMarketer";
       config1 = "?$expand=pagetolistnav";
       config2 = "";
-    } else if(this.loggedUserRole.isAuctionModerator) {
+    } else if (this.loggedUserRole.isAuctionModerator) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
-    } else if(this.loggedUserRole.isPricingMember) {
+    } else if (this.loggedUserRole.isPricingMember) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
-    } else if(this.loggedUserRole.isPricingHead){
+    } else if (this.loggedUserRole.isPricingHead) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
@@ -125,13 +130,12 @@ export class AuctionService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>( 
-      // 'https://10.13.85.56:9443' + 
-      environment.apiAuctionURL + '/' + ObjectId +
+    return this.http.get<any>(
+      this.envService.environment.apiAuctionURL + '/' + ObjectId +
       "?$expand=listtoproductnav,listtoattachnav" +
-      "&$format=json" 
+      "&$format=json"
       , httpOptions);
-    
+
   }
 
   //for getting Auction Moderators List with Filters
@@ -139,11 +143,11 @@ export class AuctionService {
     let role = '';
     if (this.loggedUserRole.isInteriorMarketer) {
       role = "InteriorMarketer";
-    } else if(this.loggedUserRole.isAuctionModerator) {
+    } else if (this.loggedUserRole.isAuctionModerator) {
       role = "AuctionManager";
-    } else if(this.loggedUserRole.isPricingMember) {
+    } else if (this.loggedUserRole.isPricingMember) {
       role = "AuctionManager";
-    } else if(this.loggedUserRole.isPricingHead){
+    } else if (this.loggedUserRole.isPricingHead) {
       role = "AuctionManager";
     }
 
@@ -156,9 +160,9 @@ export class AuctionService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>( 
-      environment.apiAuctionURL + '/moderators'+"?$format=json" , httpOptions);
-    
+    return this.http.get<any>(
+      this.envService.environment.apiAuctionURL + '/moderators' + "?$format=json", httpOptions);
+
   }
 
   //for creating Auction as Draft
@@ -170,12 +174,11 @@ export class AuctionService {
       params: {
       }
     };
-    return this.http.post<any>( 
-      // 'https://10.13.85.56:9443' + 
-      environment.apiAuctionURL
+    return this.http.post<any>(
+      this.envService.environment.apiAuctionURL
       , JSON.stringify(createAuctionRequest)
       , httpOptions);
-    
+
   }
 
   //for creating Auction as Draft
@@ -187,12 +190,11 @@ export class AuctionService {
       params: {
       }
     };
-    return this.http.post<any>( 
-      // 'http://10.13.85.22:8000/sap/opu/odata/sap/ZSRM_FILENET_SRV/FileAttachmentSet'
-      environment.apiFilenetURL
+    return this.http.post<any>(
+      this.envService.environment.apiFilenetURL
       , JSON.stringify(fileNetAuctionRequest)
       , httpOptions);
-    
+
   }
 
   //for Download
@@ -204,8 +206,8 @@ export class AuctionService {
       params: {
       }
     };
-    return this.http.get<any>( 
-      environment.apiFilenetURL + '/' + fileId 
+    return this.http.get<any>(
+      this.envService.environment.apiFilenetURL + '/' + fileId
       , httpOptions);
   }
 
@@ -219,21 +221,21 @@ export class AuctionService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.delete<any>( 
-      environment.apiFilenetURL + '/' + fileId 
+    return this.http.delete<any>(
+      this.envService.environment.apiFilenetURL + '/' + fileId
       , httpOptions);
   }
-  
+
   public logout() {
     this.cookieService.deleteAll('/', '.mof.gov.sa');
     localStorage.clear();
-    const redirectUrl = environment.idmLogoutUrl;
+    const redirectUrl = this.envService.environment.idmLogoutUrl;
     window.location.href = redirectUrl;
     // this.router.navigate(['/']);
   }
 
   public getHomeUrl() {
-    return environment.idmHomeUrl;
+    return this.envService.environment.idmHomeUrl;
   }
 
 }

@@ -4,6 +4,7 @@ import { InvoiceForSend } from "src/app/model/auction.model";
 import * as moment from 'moment-mini';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-pay-final-invoice',
@@ -17,7 +18,10 @@ export class PayFinalInvoiceComponent implements OnInit {
 
   invoiceForSend: InvoiceForSend = new InvoiceForSend();
   card: boolean;
-  constructor(public PaginationServc: PaginationSortingService, private http: HttpClient) { }
+  constructor(public PaginationServc: PaginationSortingService,
+    private http: HttpClient,
+    private envService: EnvService,
+  ) { }
 
   public mapping(serverObj: any) {
     let resultSet: any = [];
@@ -75,7 +79,7 @@ export class PayFinalInvoiceComponent implements OnInit {
     // let res={
     //   "body" : 
     // }
-    this.http.get<any>(environment.apiBidderFinalInvoiceURL, { responseType: 'json' }).subscribe(res => {
+    this.http.get<any>(this.envService.environment.apiBidderFinalInvoiceURL, { responseType: 'json' }).subscribe(res => {
       console.log(res, "f");
       this.mapping(res);
     })

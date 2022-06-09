@@ -5,17 +5,19 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionService } from "./service/auction.service";
+import { EnvService } from './env.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  userInfo : any;
+  userInfo: any;
 
   constructor(
-    private _authService: AuthService, 
+    private _authService: AuthService,
     private cookieService: CookieService,
     public auctionServc: AuctionService,
-    private router: Router
-    ){}
+    private router: Router,
+    private envService: EnvService,
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -34,28 +36,28 @@ export class AuthGuard implements CanActivate {
         if(currentUserRole.roles && currentUserRole.idmclientid){
           if(currentUserRole.roles){
             if(typeof currentUserRole.roles === "string"){
-              isvalidRole = !(currentUserRole.roles == "EAuction");
+              isvalidRole = !!(currentUserRole.roles.includes("EAuction"));
             } else {
-              isvalidRole = !(currentUserRole.roles.find((role:any) => role.includes("EAuction")));
+              isvalidRole = !!(currentUserRole.roles.find((r:any) => r.includes("EAuction")));
             }
           } 
           if(currentUserRole.idmclientid){
-            isvalidClientID = !(currentUserRole.idmclientid == environment.idmClientId);
+            isvalidClientID = !!(currentUserRole.idmclientid == this.envService.environment.idmClientId);
           }
           console.log('isvalidRole ➼ ', isvalidRole , ' isvalidClientID ➼ ', isvalidClientID);
-          if(isvalidRole && isvalidClientID){
-            this.redirect2IdmLogin();
+          if(!isvalidRole && !isvalidClientID){
+            this.logout();
             return false;
           } else {
             return true;
           }
           return true;
         } else {
-          this.redirect2IdmLogin();
+          this.logout();
           return false;
         }
       } else {
-        this.redirect2IdmLogin();
+        this.logout();
         return false;
       }
     } else {
@@ -64,9 +66,19 @@ export class AuthGuard implements CanActivate {
     }
   }
 
+  /**
+   * logout
+   */
+   public logout() {
+    this.cookieService.deleteAll('/', '.mof.gov.sa');
+    localStorage.clear();
+    const redirectUrl = this.envService.environment.idmLogoutUrl;
+    window.location.href = redirectUrl;
+  }
+
   redirect2IdmLogin(){
     this.cookieService.deleteAll();
-    const redirectUrl = environment.idmLoginURL;
+    const redirectUrl = this.envService.environment.idmLoginURL;
     console.log('redirectUrl ➼ ', redirectUrl);
     window.location.href = redirectUrl;
   }

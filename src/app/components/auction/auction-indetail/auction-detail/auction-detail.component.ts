@@ -61,7 +61,7 @@ export class AuctionDetailComponent implements OnInit {
     '15'];
   dropValCommTypes: any = [
     'Next Financial'];
-  dropValmoderatorsList: any = [ ];
+  dropValmoderatorsList: any = [];
   // file validation
   maxFileCount: Number = 30;
   acceptedExtensions = ['mp4','mov','png','jpg','jpeg','docx','doc','pdf'];
@@ -160,7 +160,7 @@ export class AuctionDetailComponent implements OnInit {
         e.dataTransfer.effectAllowed = "none";
       }
     }, false);
-    
+
     // this.prePopulatesFormValues();
     this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
       console.log('getAuctionModeratorsList', moderatorsListResp.body);

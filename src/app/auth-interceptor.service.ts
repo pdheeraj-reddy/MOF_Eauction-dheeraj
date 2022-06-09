@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpXsrfTokenExtractor, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject,  Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { AuthService } from './service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { EnvService } from './env.service';
 
 @Injectable()
 
@@ -14,32 +15,35 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(
     private _authService: AuthService,
-    private cookieService:CookieService,
-    private tokenExtractor: HttpXsrfTokenExtractor
-  ) {}
+    private cookieService: CookieService,
+    private tokenExtractor: HttpXsrfTokenExtractor,
+    private envService: EnvService,
+  ) {
+
+  }
 
   //for APIGEE API Communication
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     let accessToken = '';
     let idToken = '';
     let refreshToken = '';
     accessToken = this.cookieService.get('IDM_ACCESSTOKEN');
     idToken = this.cookieService.get('IDM_IDTOKEN');
     refreshToken = this.cookieService.get('IDM_REFRESSACCESSTOKEN');
-
-    if(this._authService.loggedIn()){
-      const authReq = request.clone( {
-      setHeaders: {
-          'X_MOF_ClientID': environment.clientId,
-          'X_MOF_RqUID': environment.ruId,
+    if (this._authService.loggedIn() && this.envService.environment) {
+      const authReq = request.clone({
+        setHeaders: {
+          'X_MOF_ClientID': this.envService.environment.clientId,
+          'X_MOF_RqUID': this.envService.environment.ruId,
           'Authorization': 'Bearer ' + accessToken,
           'withCredentials': 'true',
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin':'*',
-          'Access-Control-Allow-Methods':'*',
-          'Access-Control-Allow-Headers':'*',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': '*',
+          'Access-Control-Allow-Headers': '*',
           'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Max-Age' : "1728000",
+          'Access-Control-Max-Age': "1728000",
         }
       });
       return next.handle(authReq);
@@ -54,12 +58,12 @@ export class AuthInterceptorService implements HttpInterceptor {
       //   return throwError(error);
       // }));
     } else {
-      request = request.clone( {
+      request = request.clone({
         setHeaders: ({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': "*"
-          })
-        });
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': "*"
+        })
+      });
       return next.handle(request);
     }
   }
@@ -77,7 +81,7 @@ export class AuthInterceptorService implements HttpInterceptor {
             this.cookieService.set('IDM_ACCESSTOKEN', token);
             this.cookieService.set('IDM_REFRESSACCESSTOKEN', token);
             this.refreshTokenSubject.next(token.accessToken);
-            
+
             return next.handle(this.addTokenHeader(request, token.accessToken));
           }),
           catchError((err) => {
