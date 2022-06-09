@@ -13,7 +13,9 @@ export class EnvService {
     constructor(private http: HttpClient) {
     }
     public get environment() {
-        console.log('get environment', this.config);
+        if (!this.config) {
+            console.log('get environment', this.config);
+        }
         return this.config
     }
 
