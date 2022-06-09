@@ -30,20 +30,30 @@ export class AuthGuard implements CanActivate {
       console.log('currentUserRole ➼ ', currentUserRole);
       if (currentUserRole) {
         // check if idToken has EAuction roles and envi clientId
-        if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction"))) && !(currentUserRole.idmclientid == environment.idmClientId)){
-          if(!(currentUserRole.roles.find((role:any) => role.includes("EAuction")))){
-            console.log('inValid Role');
+        let isvalidRole, isvalidClientID;
+        if(currentUserRole.roles && currentUserRole.idmclientid){
+          if(currentUserRole.roles){
+            if(typeof currentUserRole.roles === "string"){
+              isvalidRole = !(currentUserRole.roles == "EAuction");
+            } else {
+              isvalidRole = !(currentUserRole.roles.find((role:any) => role.includes("EAuction")));
+            }
+          } 
+          if(currentUserRole.idmclientid){
+            isvalidClientID = !(currentUserRole.idmclientid == environment.idmClientId);
           }
-          if(!(currentUserRole.idmclientid == environment.idmClientId)){
-            console.log('inValid ClientId', currentUserRole.idmclientid + " -- " + environment.idmClientId);
+          console.log('isvalidRole ➼ ', isvalidRole , ' isvalidClientID ➼ ', isvalidClientID);
+          if(isvalidRole && isvalidClientID){
+            this.redirect2IdmLogin();
+            return false;
+          } else {
+            return true;
           }
-          this.cookieService.deleteAll();
+          return true;
+        } else {
           this.redirect2IdmLogin();
           return false;
-        } else {
-          return true;
         }
-        return true;
       } else {
         this.redirect2IdmLogin();
         return false;
@@ -55,6 +65,7 @@ export class AuthGuard implements CanActivate {
   }
 
   redirect2IdmLogin(){
+    this.cookieService.deleteAll();
     const redirectUrl = environment.idmLoginURL;
     console.log('redirectUrl ➼ ', redirectUrl);
     window.location.href = redirectUrl;
