@@ -4,6 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuctionService } from 'src/app/service/auction.service';
 
@@ -33,6 +34,7 @@ export class ViewProductDetailComponent implements OnInit {
   invalid: boolean = false;
   activeIndex = -1;
   loggedUserRole: any;
+  showLoader: boolean = false;
 
 
   constructor(
@@ -40,6 +42,7 @@ export class ViewProductDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog,
     public auctionServc: AuctionService,
+    private sanitizer: DomSanitizer
   ) {}
 
   customOptions: OwlOptions = {
@@ -84,11 +87,21 @@ export class ViewProductDetailComponent implements OnInit {
       // this.textDir= 'ltr'
     }
 
-    this.slidesStore = this.dialogData.data;
-    if (this.slidesStore.length > 0) {
-      this.fullImage = this.slidesStore[0].src;
-    }
+    // this.slidesStore = this.dialogData.data;
+    // if (this.slidesStore.length > 0) {
+    //   this.fullImage = this.slidesStore[0].src;
+    // }
     this.viewproduct = this.dialogData.viewproduct;
+    if(this.viewproduct.productImages && this.viewproduct.productImages.length < 1){
+      this.showLoader = false;
+    } else {
+      this.showLoader = true;
+      this.viewproduct.productImages.forEach(
+        (index: any) => {
+          this.downloadImages(index);
+        }
+      )
+    }
 
     this.product = this.dialogData.productDetails;
     console.log('viewproduct ', this.viewproduct);
@@ -98,14 +111,89 @@ export class ViewProductDetailComponent implements OnInit {
     console.log('haro', this.dialogData.status);
   }
 
-  viewItem(a: any) {
-    this.fullImage = a.src;
+  downloadFile(fileName: string, contentType: string, base64Data: string) {
+    const linkSource = `data:${contentType};base64,${base64Data}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = base64Data;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
   }
 
+
+  convertBlobToBase64 = (blob: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
+
+
+  downloadImages(index: any) {
+    this.auctionServc
+      .downloadAuctionImages(index.FilenetId)
+      .subscribe(
+        async (downloadAuctionImagesResp: any) => {
+
+          let filenetId = index.FilenetId;
+          console.log(index.FilenetId, "FILENETID");
+          const fileResp = downloadAuctionImagesResp.d;
+          // console.log(fileResp.FileContent);
+          var byteString = atob(
+            atob(fileResp.FileContent).split(',')[1]
+          );
+          var ab = new ArrayBuffer(byteString.length);
+          var ia = new Uint8Array(ab);
+          for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          const blob = new Blob([ab], { type: index.MIMEType });
+          // var a = window.URL.createObjectURL(blob);
+          var base64String = await this.convertBlobToBase64(blob);
+          console.log("base64String in mapping for edit");
+          console.log(base64String)
+
+
+          this.slidesStore.push({
+            id: index + 1,
+            src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
+            alt: 'test',
+            title: 'hello world',
+            type: index.MIMEType
+          });
+
+          this.fullImage = {
+            src : this.slidesStore[0].src,
+            type: this.slidesStore[0].type
+          }
+          this.showLoader = false;
+        },
+        (error) => {
+          // this.showLoader = false;
+          console.log('downloadAuctionImages RespError : ', error);
+        }
+      );
+  }
+
+  viewItem(a: any) {
+    this.fullImage = {
+      src : a.src,
+      type: a.type
+    }
+    console.log(this.fullImage)
+  }
+
+  
+
+  activeDownloadFileIndex = -1;
   // This fuction is used to view and download the attachment files
-  viewAttachment(file: any,index:number) {
-    this.activeIndex = index;
+  viewAttachment(file: any, index:number, option: string) {
     if (file.FilenetId) {
+      this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
@@ -118,15 +206,24 @@ export class ViewProductDetailComponent implements OnInit {
             ia[i] = byteString.charCodeAt(i);
           }
           const blob = new Blob([ab], { type: file.MIMEType });
-          this.activeIndex = -1;
           console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
           console.log('fileURL', fileURL);
-          window.open(fileURL, '_blank');
+          var newWin: any;          
+          if(option == 'view'){
+            newWin = window.open(fileURL, '_blank');
+          } else {
+            newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
+          }
+          if((!newWin || newWin.closed || typeof newWin.closed=='undefined')  && option == 'view')
+          {
+              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          }
+          this.activeDownloadFileIndex = -1;
           // window.open(fileContent, "_blank");
         },
         (error) => {
-          this.activeIndex = -1;
+          this.activeDownloadFileIndex = -1;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );

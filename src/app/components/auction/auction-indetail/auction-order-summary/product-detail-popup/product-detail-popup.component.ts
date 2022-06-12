@@ -91,6 +91,16 @@ export class ProductDetailPopupComponent implements OnInit {
     // }
   }
 
+  downloadFile(fileName: string, contentType: string, base64Data: string) {
+    const linkSource = `data:${contentType};base64,${base64Data}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = base64Data;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
   convertBlobToBase64 = (blob: any) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -139,23 +149,6 @@ export class ProductDetailPopupComponent implements OnInit {
             type: this.slidesStore[0].type
           }
           this.showLoader = false;
-          // To load until the images load
-          // this.showLoader=false;
-          // var reader = new FileReader();
-          // reader.readAsDataURL(blob);
-          // var base64String = (reader.onloadend = function () {
-          //   var base64String = reader.result;
-          //   return base64String;
-          // });
-          // if (index + 1 ==
-          //   serverObj.d.results[0].listtoattachnav['results'].length) {
-          //   this.globalProductData = this.temp;
-            // this.addData(this.temp);
-          // }
-          // console.log('Base64 String - ', base64String);
-          // this.auctionItem.productAttachment.push(fileupload);
-          //  window.open(fileURL, '_blank');
-          // window.open(fileContent, "_blank");
         },
         (error) => {
           // this.showLoader = false;
@@ -189,9 +182,9 @@ export class ProductDetailPopupComponent implements OnInit {
           if(option == 'view'){
             newWin = window.open(fileURL, '_blank');
           } else {
-            newWin = window.open(fileURL, '_blank');
+            newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
           }
-          if(!newWin || newWin.closed || typeof newWin.closed=='undefined')
+          if((!newWin || newWin.closed || typeof newWin.closed=='undefined')  && option == 'view')
           {
               alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
           }

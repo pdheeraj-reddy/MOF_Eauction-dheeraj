@@ -95,7 +95,8 @@
     border-radius: 8px;
 }
 
-::ng-deep .owl-carousel .owl-item img {
+::ng-deep .owl-carousel .owl-item img,
+::ng-deep .owl-carousel .owl-item video {
     min-height: 105px !important;
     max-height: 105px !important;
     margin: 10px !important;
@@ -113,11 +114,13 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.icon-spinner{
-  width: 18px;
-  height: 18px;
-  font-size: x-small;
+
+.icon-spinner {
+    width: 18px;
+    height: 18px;
+    font-size: x-small;
 }
+
 .flex-view {
-  display: flex;
-} 
+    display: flex;
+}

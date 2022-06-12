@@ -338,6 +338,7 @@ export class ProdctDetailsComponent implements OnInit {
       if(pindex == index){
         setTimeout(()=>{ // this will make the execution after the above boolean has changed
           this.inputFieldElementFocus.nativeElement.focus();
+          this.inputFieldElementFocus.nativeElement.select();
         },0);
         this.preAuctionData.listtoproductnav.results[pindex].ZzPdtEstPricePc = Number(product.ZzPdtEstPricePc);
         product.show = true;
