@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  idmClientId: '1QIwuXglQ0xImRhjTUbJ7k6x7AR6MibG',
-  clientId: 'a923e57545d24804a804973731c38747',
+  idmClientId: 'a923e57545d24804a804973731c38747',
+  clientId: '1QIwuXglQ0xImRhjTUbJ7k6x7AR6MibG',
   ruId: '1d18eecc-6f4e-476f-bec3-f2c2c94521f6',
   idmLoginURL: "https://ry1drvemksr1.mof.gov.sa:50301/irj/servlet/prt/portal/prtroot/pcd!3aportal_content!2fmof.gov.sa.f_mof_base!2fmof.gov.sa.f_iviews!2fmof.gov.sa.i_auction",
   idmLogoutUrl: "https://ry1drvemksr1.mof.gov.sa/sap/public/bc/icf/logoff?sap-client=100",
