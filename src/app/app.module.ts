@@ -37,21 +37,6 @@ import { AuctionDetailComponent } from './components/auction/auction-indetail/au
 import { AgmCoreModule } from '@agm/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { OfferReportComponent } from './components/auction/auction-details/offer-report/offer-report.component';
-import { OpenOffersComponent } from './components/auction/auction-details/open-offers/open-offers.component';
-import { SendInvoiceComponent } from './components/auction/auction-details/send-invoice/send-invoice.component';
-import { BillPdfProductComponent } from './components/auction/auction-details/bill-pdf-product/bill-pdf-product.component';
-import { BillPdfTemplateComponent } from './components/auction/auction-details/bill-pdf-template/bill-pdf-template.component';
-import { UpcomingAuctionComponent } from './components/auction/auction-details/upcoming-auction/upcoming-auction.component';
-import { SendOfferComponent } from './components/auction/send-offer/send-offer.component';
-import { AmAuctionComponent } from './components/auction/am-auction/am-auction.component';
-import { AmAuctionDetailsComponent } from './components/auction/am-auction-details/am-auction-details.component';
-import { DisableParticipationComponent } from './components/auction/disable-participation/disable-participation.component';
-import { PrimaryAwardingBidderComponent } from './components/auction/primary-awarding-bidder/primary-awarding-bidder.component';
-import { PayInvoiceComponent } from './components/auction/pay-invoice/pay-invoice.component';
-import { PayFinalInvoiceComponent } from './components/auction/pay-final-invoice/pay-final-invoice.component';
-import { AuctionApproveReq1Component } from './components/auction/auction-controls/auction-approve-req1/auction-approve-req1.component';
-import { AssignPricingCommitteeComponent } from './components/auction/assign-pricing-committee/assign-pricing-committee.component';
 
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -88,13 +73,10 @@ import { AucMemDetailPageComponent } from './modules/auction-member/auc-mem-deta
 import { BidValueUpdateComponent } from './shared/components/bid-value-update/bid-value-update.component';
 import { EditBidValueComponent } from './shared/components/prodct-details/edit-bid-value/edit-bid-value.component';
 import { ViewProductDetailComponent } from './shared/components/prodct-details/view-product-detail/view-product-detail.component';
-import { PricingCommitteeHeadReqComponent } from './components/auction/pricing-committee-head-req/pricing-committee-head-req.component';
 
 import { AuctionHeadComponent } from './modules/auction-head/auction-head.component';
 import { AuctionHeadLandingPageComponent } from './modules/auction-head/auction-head-landing-page/auction-head-landing-page.component';
 import { AuctionHeadDetailPageComponent } from './modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
-import { AuctionTotalPricingComponent } from './components/auction/auction-controls/auction-total-pricing/auction-total-pricing.component';
-import { AuctionsComponent } from './components/auctions/auctions.component';
 
 import { AuctionCommiteeComponent } from './modules/auction-commitee/auction-commitee.component';
 import { AuctionCommiteeLandingPageComponent } from './modules/auction-commitee/auction-commitee-landing-page/auction-commitee-landing-page.component';
@@ -111,7 +93,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     ProductDetailPopupComponent,
-    AssignPricingCommitteeComponent,
     AppComponent,
     AuctionComponent,
     TenderComponent,
@@ -123,21 +104,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionCommitteeMembersComponent,
     AuctionOrderSummaryComponent,
     AuctionDetailComponent,
-    UpcomingAuctionComponent,
-    OfferReportComponent,
-    SendOfferComponent,
-    DisableParticipationComponent,
-    PrimaryAwardingBidderComponent,
-    PayInvoiceComponent,
-    PayFinalInvoiceComponent,
-    AuctionApproveReq1Component,
-    AuctionTotalPricingComponent,
-    OpenOffersComponent,
-    BillPdfTemplateComponent,
-    BillPdfProductComponent,
-    SendInvoiceComponent,
-    AmAuctionComponent,
-    AmAuctionDetailsComponent,
     AddMemberComponent,
     AmLandingPageComponent,
     AuctionModeratorComponent,
@@ -156,11 +122,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BidValueUpdateComponent,
     EditBidValueComponent,
     ViewProductDetailComponent,
-    PricingCommitteeHeadReqComponent,
     AuctionHeadComponent,
     AuctionHeadLandingPageComponent,
     AuctionHeadDetailPageComponent,
-    AuctionsComponent,
     AuctionCommiteeComponent,
     AuctionCommiteeLandingPageComponent,
     AuctionCommiteeDetailPageComponent,
