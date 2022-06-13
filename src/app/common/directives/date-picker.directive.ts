@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, HostListener, asNativeElements } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-declare var $:any;
+import * as moment from 'moment';
+declare var $: any;
 
 @Directive({
   selector: '[appDatePicker]'
@@ -11,27 +12,29 @@ export class DatePickerDirective {
   constructor(
     private el: ElementRef,
     public translate: TranslateService
-    ) { 
-      this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-        this.ngOnInit();
-      });
-    }
+  ) {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.ngOnInit();
+    });
+  }
 
   ngOnInit() {
     let elVal = this.el.nativeElement.value;
     let lang = this.translate.currentLang;
     $(this.el.nativeElement).unbind().removeData();
+    const todayDate = moment().format('YYYY-MM-DD');
     this.picker = $(this.el.nativeElement).hijriDatePicker({
       hijri: false,
       locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
       format: "YYYY-MM-DD",
       showSwitcher: false,
+      minDate: todayDate,
       icons: {
         previous: '<span class="icon-keyboard_arrow_left"></span>',
         next: '<span class="icon-keyboard_arrow_right"></span>',
       },
     });
-    if(elVal){
+    if (elVal) {
       this.picker.val(elVal);
     }
     $(this.el.nativeElement).on('dp.change', (arg: any) => {
@@ -45,7 +48,7 @@ export class DatePickerDirective {
   }
 
   @HostListener('change') ngOnChanges() {
-    this.picker?.val(this.el.nativeElement.value); 
+    this.picker?.val(this.el.nativeElement.value);
   }
 
 }

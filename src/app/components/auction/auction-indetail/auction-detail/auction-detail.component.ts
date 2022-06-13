@@ -64,16 +64,16 @@ export class AuctionDetailComponent implements OnInit {
   dropValmoderatorsList: any = [];
   // file validation
   maxFileCount: Number = 30;
-  acceptedExtensions = ['mp4','mov','png','jpg','jpeg','docx','doc','pdf'];
+  acceptedExtensions = ['mp4', 'mov', 'png', 'jpg', 'jpeg', 'docx', 'doc', 'pdf'];
   acceptedFiles = ['audio/mp4',
-  'video/mp4',
-  'application/mp4',
-  'video/quicktime',
-  'image/png',
-  'image/jpeg',
-  'application/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    'video/mp4',
+    'application/mp4',
+    'video/quicktime',
+    'image/png',
+    'image/jpeg',
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
   lang: string;
   userId: string;
@@ -209,6 +209,7 @@ export class AuctionDetailComponent implements OnInit {
   refreshCalendarCntrl() {
     let lang = this.translate.currentLang;
     let selectedDate = '';
+    const todayDate = moment().format('YYYY-MM-DD');
     setTimeout(() => {
       $('[data-toggle="tooltip"]').tooltip(({ delay: { hide: 800 } }));
       $("#auctionStartDate").unbind().removeData();
@@ -223,6 +224,7 @@ export class AuctionDetailComponent implements OnInit {
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
         format: "YYYY-MM-DD",
         showSwitcher: false,
+        minDate: todayDate,
         icons: {
           previous: '<span class="icon-keyboard_arrow_left"></span>',
           next: '<span class="icon-keyboard_arrow_right"></span>',
@@ -231,9 +233,10 @@ export class AuctionDetailComponent implements OnInit {
       $("#auctionEndDate").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
-        minDate: this.form['auctionStartDate'] ? (this.form['auctionStartDate'].value !== '' ? moment(this.form['auctionStartDate'].value, 'YYYY-MM-DD').format('YYYY-MM-DD') : false) : false,
+        minDate: this.form['auctionStartDate'] ? (this.form['auctionStartDate'].value !== '' ? moment(this.form['auctionStartDate'].value, 'YYYY-MM-DD').format('YYYY-MM-DD') : todayDate) : todayDate,
         format: "YYYY-MM-DD",
         showSwitcher: false,
+        // minDate: todayDate,
         icons: {
           previous: '<span class="icon-keyboard_arrow_left"></span>',
           next: '<span class="icon-keyboard_arrow_right"></span>',
@@ -273,6 +276,7 @@ export class AuctionDetailComponent implements OnInit {
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
         format: "YYYY-MM-DD",
         showSwitcher: false,
+        minDate: todayDate,
         icons: {
           previous: '<span class="icon-keyboard_arrow_left"></span>',
           next: '<span class="icon-keyboard_arrow_right"></span>',
@@ -282,6 +286,7 @@ export class AuctionDetailComponent implements OnInit {
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
         format: "YYYY-MM-DD",
+        minDate: todayDate,
         showSwitcher: false,
         icons: {
           previous: '<span class="icon-keyboard_arrow_left"></span>',
@@ -599,9 +604,9 @@ export class AuctionDetailComponent implements OnInit {
     var ext = file[index]['name'].match(/\.(.+)$/)[1];
     if (ext.indexOf('.') === -1) {
       this.invalidFileType = false;
-      if(!!this.acceptedExtensions.find(x => x === fileType)){
+      if (!!this.acceptedExtensions.find(x => x === fileType)) {
         this.invalidFileType = false;
-        if(!!this.acceptedFiles.find(x => x === file[index]['type'])){
+        if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
           this.invalidFileType = false;
           if (filesize <= 2097152) {
             // if (this.auctionAttachement['controls'].length < this.maxFileCount) {
