@@ -52,7 +52,8 @@
                             <span>{{"auctionModerator.am-detail.product-details.th3" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
                     </th>
-                    <th width="200px" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                    <th width="200px" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" class="btn-primary-light"
+                        scope="col" (click)="sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
                             <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
@@ -77,10 +78,11 @@
                                     <span *ngIf="!product.show">{{product.ZzPdtEstPricePc}}</span>
                                     <input *ngIf="product.show" #autoFocus class="col-9 h-100 p-0 form-control" onClick="this.select();" type="number" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />
                                     <span class="ml-2">{{"common.SAR" | translate}}</span>
-                                    <a *ngIf="!product.show && showAdjustPriceOption && (preAuctionData.Status == 'Pending Pricing Approval' || preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')" class="btn btn-ghost btn-sm fill-primary-light-green" (click)="openAdjustPriceOption(i)"> <span class="icon-Group-3286"></span> </a>
+                                    <a *ngIf="!product.show && showAdjustPriceOption && ((loggedUserRole.isPricingHead && preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')))"
+                                        class="btn btn-ghost btn-sm fill-primary-light-green" (click)="openAdjustPriceOption(i)"> <span class="icon-Group-3286"></span> </a>
                                 </div>
                                 <div *ngIf="product.show" class="row w-100 bg-white justify-content-between align-items-center no-gutters px-1 btn-edit">
-                                    <button class="btn btn-danger btn-sm rounded border-0 m-2" (click)="product.show = false">Cancel</button> <button (click)="adjustProductPriceInEdit()" class="btn btn-primary-light btn-sm rounded border-0 m-2">Save</button>
+                                    <button class="btn btn-danger btn-sm rounded border-0 m-2" (click)="product.show = false">{{"common.Cancel" | translate}}</button> <button (click)="adjustProductPriceInEdit()" class="btn btn-primary-light btn-sm rounded border-0 m-2">{{"common.Save" | translate}}</button>
                                 </div>
                                 <div *ngIf="indexError == i" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
                                 </div>

@@ -253,7 +253,7 @@
                                                             <img src="assets/icons/eye_open.svg" alt="" srcset="">
                                                         </button>
                                                     </div> -->
-                                                    <div *ngIf="activeIndex != index" class="qq-btn-group d-flex justify-content-center">
+                                                    <div *ngIf="activeIndex != index" class="qq-btn-group d-flex justify-content-end">
                                                         <a *ngIf="activeDownloadFileIndex != index && (file.MIMEType != 'application/pdf') && (file.MIMEType != 'application/msword') && (file.MIMEType != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')" (click)="viewAttachment(file, index, 'view')"
                                                             class="btn btn-ghost btn-sm fill-primary-light-green">
                                                             <span class="icon-eye-open"></span>

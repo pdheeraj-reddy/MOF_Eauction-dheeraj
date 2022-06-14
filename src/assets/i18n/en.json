@@ -55,7 +55,9 @@
         "ftrtext-certi": "The certification platform supports the following browsers",
         "msg-nodata": "No data available",
         "msg-loading": "Loading",
-        "SAR": "SAR"
+        "SAR": "SAR",
+        "Save": "Save",
+        "Cancel": "Cancel"
     },
     "auctionlist": {
         "bcrumb1": "Etimad Services",
@@ -429,9 +431,9 @@
             "product-details": {
                 "title": "Product Details",
                 "th1": "Product Name",
-                "th2": "Product Number",
-                "th3": "Book value of the Product",
-                "th4": "Estimated value of the Product",
+                "th2": "Product Quantity",
+                "th3": "Book Value of the Product",
+                "th4": "Estimated Value of the Product",
                 "th5": "Product Condition",
                 "product": "Products",
                 "bookValue": "Total Book Value of Products:",
