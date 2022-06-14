@@ -115,22 +115,28 @@
 
 <!-- Product details popup like in Sprint 1 -->
 <div class="d-flex mt-4 m-2" style="justify-content: space-between" [ngStyle]="{ direction: textDir }">
-    <p class="text-success text-24 font-weight-bold mt-3"> &nbsp;&nbsp;&nbsp;{{ "auctioncreate.auctionproduct.section1_Title" | translate }} </p>
-    <button style="outline: none" (click)="closeDialogbutton()" type="button" class="close" data-dismiss="dropdown" aria-label="Close">
-    <a class="btn btn-ghost btn-md fill-primary-green">
-      <span class="icon-close"></span>
-    </a>
-  </button>
+    <p class="text-success text-24 font-weight-bold mt-3"> &nbsp;&nbsp;&nbsp;{{
+        "auctioncreate.auctionproduct.section1_Title" | translate }} </p>
+    <button style="outline: none" (click)="closeDialogbutton()" type="button" class="close" data-dismiss="dropdown"
+        aria-label="Close">
+        <a class="btn btn-ghost btn-md fill-primary-green">
+            <span class="icon-close"></span>
+        </a>
+    </button>
 </div>
 <div class="row m-2" [ngStyle]="{ direction: textDir }">
 
-    <div *ngIf="(loggedUserRole.isPricingHead && dialogData.status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (dialogData.status == 'Pending Pricing' || dialogData.status == 'Rejected Prices'))" class="col-md-12 rounded mt-4" style="background-color: #eaf6ef">
+    <div *ngIf="(loggedUserRole.isPricingHead && dialogData.status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (dialogData.status == 'Pending Pricing' || dialogData.status == 'Rejected Prices'))"
+        class="col-md-12 rounded mt-4" style="background-color: #eaf6ef">
         <div *ngIf="isBidUpdate">
             <label class="m-3">Estimated value of the product</label>
             <div class="row mb-0">
                 <div class="col m-2">
-                    <input [(ngModel)]="price" onClick="this.select();" class="form-control border-bottom w-50" type="number" placeholder="1 Enter the estimated value of the product" style="border: none; outline: none; background-color: #eaf6ef" />
-                    <div *ngIf="invalid" class="invalid-feedback d-block mb-3">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
+                    <input [(ngModel)]="price" onClick="this.select();" class="form-control border-bottom w-50" numeric
+                        type="text" placeholder="1 Enter the estimated value of the product"
+                        style="border: none; outline: none; background-color: #eaf6ef" />
+                    <div *ngIf="invalid" class="invalid-feedback d-block mb-3">{{ 'auctionMember.bid-value.failure_mssg'
+                        | translate }}
                     </div>
                 </div>
                 <div class="col-auto justify-content-end m-3">
@@ -147,43 +153,43 @@
             <div class="col-12">
                 <div class="alert-body text-center">
                     <i class="alert-icon">
-                <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-                    <g fill-rule="nonzero" fill="#32AD71">
-                    <path
-                        d="M32 11.871c-1.755 0-3.097-1.342-3.097-3.097V3.097C28.903 1.342 30.245 0 32 0s3.097 1.342 3.097 3.097v5.677c0 1.652-1.342 3.097-3.097 3.097z" />
-                    <path
-                        d="M32 64c-1.755 0-3.097-1.342-3.097-3.097v-5.677c0-1.755 1.342-3.097 3.097-3.097s3.097 1.342 3.097 3.097v5.677C35.097 62.658 33.755 64 32 64z"
-                        opacity=".4" />
-                    <path
-                        d="M46.452 60.077c-1.033 0-2.065-.516-2.684-1.548l-2.787-4.852c-.826-1.445-.31-3.406 1.135-4.232 1.445-.826 3.407-.31 4.232 1.136l2.787 4.851c.826 1.445.31 3.407-1.135 4.233a2.913 2.913 0 01-1.548.412z"
-                        opacity=".5" />
-                    <path
-                        d="M11.871 23.432a2.913 2.913 0 01-1.548-.413L5.47 20.232C4.026 19.406 3.51 17.445 4.335 16c.826-1.445 2.788-1.961 4.233-1.135l4.851 2.787c1.446.825 1.962 2.787 1.136 4.232-.62 1.032-1.652 1.548-2.684 1.548z"
-                        opacity=".05" />
-                    <path
-                        d="M57.084 49.548a2.913 2.913 0 01-1.549-.413l-4.954-2.787c-1.446-.825-1.962-2.787-1.136-4.232.826-1.445 2.787-1.961 4.232-1.135l4.852 2.787c1.445.826 1.961 2.787 1.136 4.232-.517 1.032-1.549 1.548-2.581 1.548z"
-                        opacity=".6" />
-                    <path
-                        d="M8.774 35.097H3.097C1.342 35.097 0 33.755 0 32s1.342-3.097 3.097-3.097h5.677c1.755 0 3.097 1.342 3.097 3.097s-1.445 3.097-3.097 3.097z"
-                        opacity=".1" />
-                    <path
-                        d="M60.903 35.097h-5.677c-1.755 0-3.097-1.342-3.097-3.097s1.342-3.097 3.097-3.097h5.677C62.658 28.903 64 30.245 64 32s-1.342 3.097-3.097 3.097z"
-                        opacity=".7" />
-                    <path
-                        d="M6.916 49.548c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.406 1.136-4.232l4.851-2.787c1.446-.826 3.407-.31 4.233 1.135.825 1.445.31 3.407-1.136 4.232l-4.851 2.787c-.413.31-.93.413-1.549.413z"
-                        opacity=".2" />
-                    <path
-                        d="M52.129 23.432c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.407 1.136-4.232l4.851-2.787c1.445-.826 3.407-.31 4.233 1.135.825 1.445.31 3.406-1.136 4.232l-4.852 2.787a2.913 2.913 0 01-1.548.413z"
-                        opacity=".8" />
-                    <path
-                        d="M17.548 60.077A2.913 2.913 0 0116 59.665c-1.445-.826-1.961-2.788-1.135-4.233l2.787-4.851c.825-1.446 2.787-1.962 4.232-1.136 1.445.826 1.961 2.787 1.135 4.232l-2.787 4.852c-.62 1.032-1.651 1.548-2.684 1.548z"
-                        opacity=".3" />
-                    <path
-                        d="M43.665 14.968a2.913 2.913 0 01-1.549-.413c-1.445-.826-1.961-2.787-1.135-4.232l2.787-4.852C44.594 4.026 46.555 3.51 48 4.335c1.445.826 1.961 2.788 1.135 4.233l-2.787 4.851c-.619.93-1.651 1.549-2.683 1.549z"
-                        opacity=".9" />
-                    </g>
-                </svg>
-                </i>
+                        <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                            <g fill-rule="nonzero" fill="#32AD71">
+                                <path
+                                    d="M32 11.871c-1.755 0-3.097-1.342-3.097-3.097V3.097C28.903 1.342 30.245 0 32 0s3.097 1.342 3.097 3.097v5.677c0 1.652-1.342 3.097-3.097 3.097z" />
+                                <path
+                                    d="M32 64c-1.755 0-3.097-1.342-3.097-3.097v-5.677c0-1.755 1.342-3.097 3.097-3.097s3.097 1.342 3.097 3.097v5.677C35.097 62.658 33.755 64 32 64z"
+                                    opacity=".4" />
+                                <path
+                                    d="M46.452 60.077c-1.033 0-2.065-.516-2.684-1.548l-2.787-4.852c-.826-1.445-.31-3.406 1.135-4.232 1.445-.826 3.407-.31 4.232 1.136l2.787 4.851c.826 1.445.31 3.407-1.135 4.233a2.913 2.913 0 01-1.548.412z"
+                                    opacity=".5" />
+                                <path
+                                    d="M11.871 23.432a2.913 2.913 0 01-1.548-.413L5.47 20.232C4.026 19.406 3.51 17.445 4.335 16c.826-1.445 2.788-1.961 4.233-1.135l4.851 2.787c1.446.825 1.962 2.787 1.136 4.232-.62 1.032-1.652 1.548-2.684 1.548z"
+                                    opacity=".05" />
+                                <path
+                                    d="M57.084 49.548a2.913 2.913 0 01-1.549-.413l-4.954-2.787c-1.446-.825-1.962-2.787-1.136-4.232.826-1.445 2.787-1.961 4.232-1.135l4.852 2.787c1.445.826 1.961 2.787 1.136 4.232-.517 1.032-1.549 1.548-2.581 1.548z"
+                                    opacity=".6" />
+                                <path
+                                    d="M8.774 35.097H3.097C1.342 35.097 0 33.755 0 32s1.342-3.097 3.097-3.097h5.677c1.755 0 3.097 1.342 3.097 3.097s-1.445 3.097-3.097 3.097z"
+                                    opacity=".1" />
+                                <path
+                                    d="M60.903 35.097h-5.677c-1.755 0-3.097-1.342-3.097-3.097s1.342-3.097 3.097-3.097h5.677C62.658 28.903 64 30.245 64 32s-1.342 3.097-3.097 3.097z"
+                                    opacity=".7" />
+                                <path
+                                    d="M6.916 49.548c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.406 1.136-4.232l4.851-2.787c1.446-.826 3.407-.31 4.233 1.135.825 1.445.31 3.407-1.136 4.232l-4.851 2.787c-.413.31-.93.413-1.549.413z"
+                                    opacity=".2" />
+                                <path
+                                    d="M52.129 23.432c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.407 1.136-4.232l4.851-2.787c1.445-.826 3.407-.31 4.233 1.135.825 1.445.31 3.406-1.136 4.232l-4.852 2.787a2.913 2.913 0 01-1.548.413z"
+                                    opacity=".8" />
+                                <path
+                                    d="M17.548 60.077A2.913 2.913 0 0116 59.665c-1.445-.826-1.961-2.788-1.135-4.233l2.787-4.851c.825-1.446 2.787-1.962 4.232-1.136 1.445.826 1.961 2.787 1.135 4.232l-2.787 4.852c-.62 1.032-1.651 1.548-2.684 1.548z"
+                                    opacity=".3" />
+                                <path
+                                    d="M43.665 14.968a2.913 2.913 0 01-1.549-.413c-1.445-.826-1.961-2.787-1.135-4.232l2.787-4.852C44.594 4.026 46.555 3.51 48 4.335c1.445.826 1.961 2.788 1.135 4.233l-2.787 4.851c-.619.93-1.651 1.549-2.683 1.549z"
+                                    opacity=".9" />
+                            </g>
+                        </svg>
+                    </i>
                     <div class="alert-content">
                         <h5 class="text-black-50">Loading</h5>
                     </div>
@@ -195,8 +201,10 @@
     <div class="col-md-6 mt-4" *ngIf="!showLoader">
         <div *ngIf="slidesStore.length >= 1">
             <!-- <img [src]="fullImage" class="img-fluid" alt="No Images to show" /> -->
-            <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark" [src]="fullImage.src" />
-            <video *ngIf="fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime'" autoplay controls class="img-fluid bg-dark" width="420">
+            <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark"
+                [src]="fullImage.src" />
+            <video *ngIf="fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime'" autoplay controls
+                class="img-fluid bg-dark" width="420">
                 <source [src]="fullImage.src" type="video/mp4">
                 <!-- <source [src]="sanitizer.bypassSecurityTrustResourceUrl(fullImage.src)" type="video/mp4"> -->
                 Your browser does not support HTML video.
@@ -205,8 +213,10 @@
                 <ng-container *ngFor="let slide of slidesStore" carouselSlide>
                     <ng-template carouselSlide [id]="slide.id" class="col-md-4 p-2">
                         <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
-                        <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'" class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
-                        <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'" id="video1" width="420" (click)="viewItem(slide)">
+                        <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'" class="img-fluid rounded"
+                            [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
+                        <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'" id="video1"
+                            width="420" (click)="viewItem(slide)">
                             <source [src]="slide.src" type="video/mp4">
                             Your browser does not support HTML video.
                         </video>
@@ -227,43 +237,51 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{ "auctioncreate.auctionproduct.auctionpopup.popup_formGrp1" |
-                    translate }}</label>
+                                    <label for="validationCustom01">{{
+                                        "auctioncreate.auctionproduct.auctionpopup.popup_formGrp1" |
+                                        translate }}</label>
                                     <div class="text-success"> {{ viewproduct.productName }} </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{ "auctioncreate.auctionproduct.auctionpopup.popup_formGrp2" |
-                    translate }}</label>
+                                    <label for="validationCustom01">{{
+                                        "auctioncreate.auctionproduct.auctionpopup.popup_formGrp2" |
+                                        translate }}</label>
                                     <div class="text-success"> {{ product.ZzProductCond | translate }} </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{ "auctioncreate.auctionproduct.auctionpopup.popup_formGrp5" |
-                    translate }}</label>
+                                    <label for="validationCustom01">{{
+                                        "auctioncreate.auctionproduct.auctionpopup.popup_formGrp5" |
+                                        translate }}</label>
                                     <div class="text-success"> {{ viewproduct.productValue }} </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{ "auctioncreate.auctionproduct.auctionpopup.popup_formGrp4" |
-                    translate }}</label>
+                                    <label for="validationCustom01">{{
+                                        "auctioncreate.auctionproduct.auctionpopup.popup_formGrp4" |
+                                        translate }}</label>
                                     <div class="text-success"> {{ viewproduct.productSerialNumber }} </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
-                                        <label>{{ "auctioncreate.auctionproduct.section1_formGrp2" | translate }}</label>
+                                        <label>{{ "auctioncreate.auctionproduct.section1_formGrp2" | translate
+                                            }}</label>
                                         <div class="text-success">
                                             <span>{{ viewproduct.location.deliveryDate }}</span>
-                                            <ul *ngIf="viewproduct.location.deliveryTime" class="list list-primary-bullets d-inline-block">
-                                                <li class="text-muted"> {{ viewproduct.location.deliveryTime }} {{ viewproduct.location.deliveryTimeSufix | translate }} </li>
+                                            <ul *ngIf="viewproduct.location.deliveryTime"
+                                                class="list list-primary-bullets d-inline-block">
+                                                <li class="text-muted"> {{ viewproduct.location.deliveryTime }} {{
+                                                    viewproduct.location.deliveryTimeSufix | translate }} </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{ "auctioncreate.auctionproduct.auctionpopup.popup_formGrp3" |
-                    translate }}</label>
+                                    <label for="validationCustom01">{{
+                                        "auctioncreate.auctionproduct.auctionpopup.popup_formGrp3" |
+                                        translate }}</label>
                                     <div class="text-success"> {{ viewproduct.productSKUNumber }} </div>
                                 </div>
                             </div>
@@ -272,18 +290,21 @@
                             <div class="form-row" style="overflow-wrap: break-word;">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="goverusermessage">{{ "auctioncreate.auctionproduct.auctionpopup.popup_formGrp6" |
-                      translate }}</label>
+                                        <label for="goverusermessage">{{
+                                            "auctioncreate.auctionproduct.auctionpopup.popup_formGrp6" |
+                                            translate }}</label>
                                         <div class="text-success"> {{ viewproduct.productSpec }} </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="py-5">
-                            <label for="goverusermessage">{{ "auctioncreate.auctionproduct.section1_orderSum22" | translate }}</label>
+                            <label for="goverusermessage">{{ "auctioncreate.auctionproduct.section1_orderSum22" |
+                                translate }}</label>
                             <div class="row">
                                 <ng-container *ngIf="viewproduct.productFiles">
-                                    <div class="col-6 col-md-6" *ngFor=" let file of viewproduct.productFiles; let index = index ">
+                                    <div class="col-6 col-md-6"
+                                        *ngFor=" let file of viewproduct.productFiles; let index = index ">
                                         <div class="file-download mb-3 p-1 px-2">
                                             <div>
                                                 <h3 class="text-truncate">{{ file.name }}</h3>
@@ -292,18 +313,23 @@
                                                 <!-- <a (click)="viewAttachment(file,index,'view')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                     <span class="icon-eye-open"></span>
                                                 </a> -->
-                                                <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file,index,'download')" class="btn btn-ghost btn-sm fill-primary-light-green mx-2">
+                                                <a *ngIf="activeDownloadFileIndex != index"
+                                                    (click)="viewAttachment(file,index,'download')"
+                                                    class="btn btn-ghost btn-sm fill-primary-light-green mx-2">
                                                     <span class="icon-download"></span>
                                                 </a>
                                             </div>
 
-                                            <button *ngIf="activeDownloadFileIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0" style="height: 12px;">
-                                            <span class="btn-text pr-0">
-                                                <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                            </span>
-                                        </button>
+                                            <button *ngIf="activeDownloadFileIndex == index" type="button"
+                                                class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0"
+                                                style="height: 12px;">
+                                                <span class="btn-text pr-0">
+                                                    <div class="spinner-border spinner-border-light-green icon-spinner text-light"
+                                                        role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                </span>
+                                            </button>
 
                                         </div>
                                     </div>
