@@ -89,6 +89,18 @@ export class AssignPricingCommitteComponent implements OnInit {
       this.showConfirm = true;
     }
   }
+
+  cancelMember(){
+    this.existingCommitteMemberList = [];
+    this.committeeChairData = [];
+    this.committeeSecData = [];
+    this.committeeMem1Data = [];
+    this.committeeMem2Data = [];
+    this.committeeMem3Data = [];
+    this.committeeMem4Data = [];
+    this.ngOnInit();
+  }
+  
   assignPricingCommittee() {
     this.showConfirm = false;
     console.log(this.preAuctionData);

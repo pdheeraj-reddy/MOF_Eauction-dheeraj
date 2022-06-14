@@ -360,7 +360,7 @@
     </button>
     <div *ngIf="!commiteeMemberData">
         <div>
-            <button class="btn btn-danger" _msthash="1893008" _msttexthash="94172" style="direction: ltr">
+            <button (click)="cancelMember()" class="btn btn-danger" _msthash="1893008" _msttexthash="94172" style="direction: ltr">
               {{"auctionModerator.am-detail.auction-committee.reject" | translate }} </button>&nbsp;
             <button (click)="checkMember()" class="btn btn-primary-light" _msthash="1893008" _msttexthash="94172" style="direction: ltr">
               {{"auctionModerator.am-detail.auction-committee.accept" | translate }} </button>

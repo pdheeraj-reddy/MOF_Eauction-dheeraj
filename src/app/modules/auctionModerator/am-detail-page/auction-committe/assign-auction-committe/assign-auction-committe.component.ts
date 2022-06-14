@@ -103,6 +103,18 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.showSuccessPopup = false;
     this.callstepper.emit();
   }
+
+  cancelMember(){
+    this.existingCommitteMemberList = [];
+    this.committeeChairData = [];
+    this.committeeSecData = [];
+    this.committeeMem1Data = [];
+    this.committeeMem2Data = [];
+    this.committeeMem3Data = [];
+    this.committeeMem4Data = [];
+    this.ngOnInit();
+  }
+  
   checkMember() {
     if (
       this.committeeChairData == undefined ||

@@ -287,7 +287,7 @@
     </div>
     <div>
         <div *ngIf="preAuctionData?.Status=='Pending Review'">
-            <button class="btn btn-danger" _msthash="1893008" _msttexthash="94172" style="direction: ltr;">{{"auctionModerator.am-detail.pricing-committee.reject" | translate}}</button> &nbsp;
+            <button (click)="cancelMember()" class="btn btn-danger" _msthash="1893008" _msttexthash="94172" style="direction: ltr;">{{"auctionModerator.am-detail.pricing-committee.reject" | translate}}</button> &nbsp;
             <button class="btn btn-primary-light" (click)="checkMember()" _msthash="1893008" _msttexthash="94172" style="direction: ltr;">
         {{"auctionModerator.am-detail.pricing-committee.accept" | translate}} </button>
         </div>
