@@ -204,7 +204,7 @@
                                                     <div class="border-bottom">
                                                         <label for="goverusermessage">{{
                                                             'auctioncreate.auctionproduct.section1_formGrp9' | translate
-                                                            }} </label> <span class="float-left text-muted">{{
+                                                            }} </label> <span *ngIf="ViewMode != 'view'" class="float-left text-muted">{{
                                                             'auctioncreate.auctionproduct.section1_formGrp9-hint' |
                                                             translate }} <small>{{otherauction.value.length}}
                                                                 /{{maxChars}}</small> </span>
@@ -475,7 +475,7 @@
                                         }}</label>
                                     <input type="text" numeric class="form-control" formControlName="productSerialNumber" placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }}" id="validationCustom01" [required]="true" aria-label="Recipient's username"
                                         aria-describedby="basic-addon2" (change)="onChangeQuantity()" />
-                                    <div class="IncDec-controls position-absolute " id="incDecControls">
+                                    <div *ngIf="ViewMode != 'view'" class="IncDec-controls position-absolute " id="incDecControls">
                                         <button class="btn btn-sm" (click)="onQuantityChange(false)">-</button><button class="btn btn-sm" (click)="onQuantityChange(true)">+</button>
                                     </div>
                                 </div>
@@ -510,7 +510,7 @@
                                 <div class="form-group">
                                     <div class="border-bottom"> <label for="goverusermessage">{{
                                             'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6' | translate
-                                            }}</label> <span class="float-left text-muted">{{
+                                            }}</label> <span *ngIf="ViewMode != 'view'" class="float-left text-muted">{{
                                             'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6-hint' | translate
                                             }} <small>{{specification.value.length}} /{{maxChars}}</small> </span>
                                     </div>
@@ -846,7 +846,7 @@
                                 <div class="col-12 col-md-12">
                                     <div class="form-group">
                                         <div class="border-bottom"> <label for="goverusermessage">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17'
-                                                | translate}} </label> <span class="float-left text-muted">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-hint'
+                                                | translate}} </label> <span *ngIf="ViewMode != 'view'" class="float-left text-muted">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-hint'
                                                 | translate}} <small>{{notesVal.value.length}} /{{maxChars}}</small>
                                             </span> </div>
                                         <textarea class="form-control" name="notes" formControlName="notes" #notesVal [attr.maxlength]="maxChars" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-plch' | translate}} " rows="5"></textarea>

@@ -179,7 +179,7 @@
                         <div class="form-group">
                             <div class="border-bottom"> <label> <span>{{
                                         'auctioncreate.auctiondetails.section1_formGrp5' | translate }} </span></label>
-                                <span class="float-left text-muted text-12">{{
+                                <span *ngIf="ViewMode != 'view'" class="float-left text-muted text-12">{{
                                     'auctioncreate.auctiondetails.section1_formGrp5-hint' | translate }}
                                     <small>{{descVal.value.length}} /{{maxChars}}</small> </span>
                             </div>

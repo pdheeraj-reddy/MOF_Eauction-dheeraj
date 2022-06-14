@@ -655,6 +655,8 @@ export class AuctionProductComponent implements OnInit {
   addproduct() {
     // alert("Add +");
     this.invalidQty = false;
+    this.invalidImageSize = false;
+    this.invalidFileSize = false;
     this.submitted = true;
     this.showPopupLoader = false;
     this.validateFormControls("addProduct");
