@@ -132,8 +132,8 @@
             <label class="m-3">Estimated value of the product</label>
             <div class="row mb-0">
                 <div class="col m-2">
-                    <input [(ngModel)]="price" onClick="this.select();" class="form-control border-bottom w-50" numeric
-                        type="text" placeholder="1 Enter the estimated value of the product"
+                    <input [(ngModel)]="price" onClick="this.select();" class="form-control border-bottom w-50"
+                        digitOnly [decimal]="true" type="text" placeholder="1 Enter the estimated value of the product"
                         style="border: none; outline: none; background-color: #eaf6ef" />
                     <div *ngIf="invalid" class="invalid-feedback d-block mb-3">{{ 'auctionMember.bid-value.failure_mssg'
                         | translate }}

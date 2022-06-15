@@ -31,7 +31,7 @@
                 *ngIf="inputMode && (loggedUserRole.isPricingHead && (preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')) )">
                 <label class="text-12">{{ "auctionMember.bid-value.phold" | translate }}</label>
                 <div style="display: flex">
-                    <input [(ngModel)]="pdtEstPricePc" onClick="this.select();" numeric type="text"
+                    <input [(ngModel)]="pdtEstPricePc" onClick="this.select();" digitOnly [decimal]="true" type="text"
                         placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
                         width: 300px; outline: none; border: none; border-bottom: 1px solid grey;
                         background-color: #eaf6ef; " />&nbsp; &nbsp; &nbsp;
@@ -96,7 +96,7 @@
                                     [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
                                     <span *ngIf="!product.show">{{product.ZzPdtEstPricePc}}</span>
                                     <input *ngIf="product.show" #autoFocus class="col-9 h-100 p-0 form-control"
-                                        onClick="this.select();" numeric type="text"
+                                        onClick="this.select();" digitOnly [decimal]="true" type="text"
                                         [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />
                                     <span class="ml-2">{{"common.SAR" | translate}}</span>
                                     <a *ngIf="!product.show && showAdjustPriceOption && ((loggedUserRole.isPricingHead && preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')))"

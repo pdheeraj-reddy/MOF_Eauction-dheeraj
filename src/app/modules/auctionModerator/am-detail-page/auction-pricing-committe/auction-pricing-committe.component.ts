@@ -52,7 +52,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('/');
   }
-  showErrorMsg(error :any){
+  showErrorMsg(error: any) {
     this._3MembersErrorMsg = error;
     console.log(error);
   }
@@ -142,12 +142,12 @@ export class AuctionPricingCommitteComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
-          alert('Updated Successfully');
+          // alert('Updated Successfully');
           this.getPreAuctionData();
           console.log(res);
         },
         (error) => {
-          alert('Error Updating');
+          // alert('Error Updating');
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
@@ -189,7 +189,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
       option.toLowerCase().includes(filterValue)
     );
   }
-  
+
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {

@@ -6,6 +6,8 @@ import { AuthService } from './service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { EnvService } from './env.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
 
 @Injectable()
 
@@ -18,6 +20,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     private cookieService: CookieService,
     private tokenExtractor: HttpXsrfTokenExtractor,
     private envService: EnvService,
+    private dialog: MatDialog,
   ) {
 
   }
@@ -46,7 +49,13 @@ export class AuthInterceptorService implements HttpInterceptor {
           'Access-Control-Max-Age': "1728000",
         }
       });
-      return next.handle(authReq);
+      return next.handle(authReq).pipe(catchError((error) => {
+        if (error instanceof HttpErrorResponse && (error.status === 500 || error.status === 501)) {
+          // display error popup message
+          this.handleServerError();
+        }
+        return throwError(error);
+      }));
       // return next.handle(authReq).pipe(catchError(error => {
       //   if (error instanceof HttpErrorResponse && error.status === 401) {
       //     console.log('Token has expired');
@@ -99,6 +108,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
     return request.clone({ headers: request.headers.set('X_MOF_ClientID', token) });
+  }
+
+  private handleServerError() {
+    this.dialog.open(AlertModalComponent);
   }
 
 }

@@ -43,15 +43,21 @@ export class NumericDirective {
 
   constructor(private el: ElementRef) { }
 
-  // @HostListener('keydown', ['$event'])
-  // onKeyDown(event: KeyboardEvent) {
-  //   this.run(this.el.nativeElement.value);
-  // }
+  @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    // console.log("🚀 ~ onKeyDown ~ event", event)
+    // let charCode = (event.which) ? event.which : event.keyCode;
+    // if (charCode != 46 && charCode > 31
+    //   && (charCode < 48 || charCode > 57))
+
+    // this.run(this.el.nativeElement.value);
+  }
 
   @HostListener('input', ['$event'])
-  onInputChange() {
+  onInputChange(event: any) {
     let initalValue: string = this.el.nativeElement.value;
     initalValue = initalValue.replace(/[^\.|0-9]/g, '');
+    this.el.nativeElement.value = initalValue;
     const count = (initalValue.match(/\./g) || []).length;
     for (let i = 1; i < count; i++) {
       initalValue = this.repaceSecondDotOccurrence(initalValue);

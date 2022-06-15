@@ -79,13 +79,17 @@
                             <div class="col-12">
                                 <div class="d-flex flex-wrap flex-md-nowrap pb-3 mb-4">
                                     <div class="etimad-option">
-                                        <input type="radio" id="checkbox07" formControlName="auctionType" name="auctionType" value="Public" [required]="true" (change)="setValidation($event)" checked="checked" />
+                                        <input type="radio" id="checkbox07" formControlName="auctionType"
+                                            name="auctionType" value="Public" [required]="true"
+                                            (change)="setValidation($event)" checked="checked" />
                                         <label class="input-target text-16" for="checkbox07"> <span>{{
                                                 'auctioncreate.auctiondetails.section1_formGrp1_opt1' | translate
                                                 }}</span> </label>
                                     </div>
                                     <div class="etimad-option">
-                                        <input type="radio" id="checkbox08" formControlName="auctionType" name="auctionType" value="Private" [required]="true" (change)="setValidation($event)" [attr.disabled]="true" />
+                                        <input type="radio" id="checkbox08" formControlName="auctionType"
+                                            name="auctionType" value="Private" [required]="true"
+                                            (change)="setValidation($event)" [attr.disabled]="true" />
                                         <label class="input-target text-16" for="checkbox08"> <span>{{
                                                 'auctioncreate.auctiondetails.section1_formGrp1_opt2' | translate
                                                 }}</span> </label>
@@ -106,15 +110,21 @@
                                 [attr.data-original-title]="'tooltip.bidding_method' | translate"></span>
                         </label>
                         <div class="py-2">
-                            <div class="custom-control custom-radio custom-control-inline"> <input type="radio" id="customRadioInline1" formControlName="auctionSubType" name="auctionSubType" value="D" class="custom-control-input" [required]="true" [attr.disabled]="true" />
+                            <div class="custom-control custom-radio custom-control-inline"> <input type="radio"
+                                    id="customRadioInline1" formControlName="auctionSubType" name="auctionSubType"
+                                    value="D" class="custom-control-input" [required]="true" [attr.disabled]="true" />
                                 <label class="custom-control-label" for="customRadioInline1">{{
                                     'auctioncreate.auctiondetails.section1_formGrp2_opt1' | translate }}</label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline"> <input type="radio" id="customRadioInline2" formControlName="auctionSubType" name="auctionSubType" value="C" class="custom-control-input" [required]="true" /> <label class="custom-control-label" for="customRadioInline2">{{
+                            <div class="custom-control custom-radio custom-control-inline"> <input type="radio"
+                                    id="customRadioInline2" formControlName="auctionSubType" name="auctionSubType"
+                                    value="C" class="custom-control-input" [required]="true" /> <label
+                                    class="custom-control-label" for="customRadioInline2">{{
                                     'auctioncreate.auctiondetails.section1_formGrp2_opt2' | translate }}</label> </div>
                         </div>
                         <div *ngIf="submitted && form['auctionSubType'].errors">
-                            <div *ngIf="form['auctionSubType'].errors['required']" class="invalid-feedback">Bidding method is required</div>
+                            <div *ngIf="form['auctionSubType'].errors['required']" class="invalid-feedback">Bidding
+                                method is required</div>
                         </div>
                     </div>
                     <div class="col-md-12 mb-3" *ngIf="atLeastOneRequired">
@@ -135,10 +145,15 @@
                     <div class="col-md-6 mb-3">
                         <label> <span>{{ 'auctioncreate.auctiondetails.section1_formGrp3' | translate }} </span>
                         </label>
-                        <input type="text" formControlName="auctionName" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp3-plch' | translate }}" id="validationCustom01" />
+                        <input type="text" formControlName="auctionName" class="form-control"
+                            placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp3-plch' | translate }}"
+                            id="validationCustom01" />
                         <div *ngIf="submitted && form['auctionName'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionName'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp3' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
-                            <div *ngIf="form['auctionName'].errors['minlength']">{{ 'message.failure_minCharAuctionName' | translate }}</div>
+                            <div *ngIf="form['auctionName'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp3' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionName'].errors['minlength']">{{ 'message.failure_minCharAuctionName'
+                                | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -148,9 +163,13 @@
                             <option value="">Select</option>
                             <option *ngFor="let product of dropValProducts" [ngValue]="product">{{product}}</option>
                         </select> -->
-                        <input type="text" formControlName="auctionProduct" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp4' | translate }}" id="validationCustom01" [required]="true" />
+                        <input type="text" formControlName="auctionProduct" class="form-control"
+                            placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp4' | translate }}"
+                            id="validationCustom01" [required]="true" />
                         <div *ngIf="submitted && form['auctionProduct'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionProduct'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp4' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionProduct'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp4' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -163,14 +182,18 @@
                                 [attr.data-placement]="lang == 'en' ? 'left' : 'left'" title=""
                                 [attr.data-original-title]="'tooltip.auctionManager' | translate"></span>
                         </label>
-                        <select class="form-control" id="validationCustom04" formControlName="auctionManager" (change)="changeSelect($event, 'auctionManager')" [required]="true">
-                            <option value="">{{ 'Choose Auction Manager' | translate }}</option>                            
-                            <option *ngFor="let moderator of dropValmoderatorsList" [value]="moderator.AucModId">{{ moderator.AucModId }} {{ moderator.AucModName }}
+                        <select class="form-control" id="validationCustom04" formControlName="auctionManager"
+                            (change)="changeSelect($event, 'auctionManager')" [required]="true">
+                            <option value="">{{ 'Choose Auction Manager' | translate }}</option>
+                            <option *ngFor="let moderator of dropValmoderatorsList" [value]="moderator.AucModId">{{
+                                moderator.AucModId }} {{ moderator.AucModName }}
                             </option>
                             <!-- <option value="1827879980">Sivakumar</option> -->
                         </select>
                         <div *ngIf="submitted && form['auctionManager'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionManager'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp31' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionManager'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp31' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -183,10 +206,15 @@
                                     'auctioncreate.auctiondetails.section1_formGrp5-hint' | translate }}
                                     <small>{{descVal.value.length}} /{{maxChars}}</small> </span>
                             </div>
-                            <textarea class="form-control" #descVal [attr.maxlength]="maxChars" formControlName="auctionDesc" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp5-plch' | translate }}" rows="5" [required]="true"></textarea>
+                            <textarea class="form-control" #descVal [attr.maxlength]="maxChars"
+                                formControlName="auctionDesc"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp5-plch' | translate }}"
+                                rows="5" [required]="true"></textarea>
                         </div>
                         <div *ngIf="submitted && form['auctionDesc'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionDesc'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp5' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionDesc'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp5' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -271,10 +299,15 @@
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker (click)="makeConsole('enter')" (keydown.esc)="makeConsole('esc')" (keydown.alt)="makeConsole('alt')" (keydown.tab)="makeConsole('tab')" -->
                             <!-- <input type="text" id="auctionStartDate" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'Public'"> -->
-                            <input type="text" id="auctionStartDate" formControlName="auctionStartDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionStartDate')" class="form-control calendar-control calendar-both-control"
+                            <input type="text" id="auctionStartDate" formControlName="auctionStartDate"
+                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                                (change)="onChangeDateTime($event, 'auctionStartDate')"
+                                class="form-control calendar-control calendar-both-control"
                                 [required]="form['auctionType'].value === 'Public'" />
                             <div *ngIf="submitted && form['auctionStartDate'].errors" class="invalid-feedback">
-                                <div *ngIf="form['auctionStartDate'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp7' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                <div *ngIf="form['auctionStartDate'].errors['required']">{{
+                                    'auctioncreate.auctiondetails.section1_formGrp7' | translate }} {{
+                                    'auctioncreate.page-validerror' | translate }}</div>
                             </div>
                         </div>
                     </div>
@@ -282,35 +315,49 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp8' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionEndDate" class="form-control calendar-control calendar-gregorian-control" placeholder="day-month-year" [required]="form['auctionType'].value === 'Public'" /> -->
-                            <input type="text" id="auctionEndDate" formControlName="auctionEndDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionEndDate')" class="form-control calendar-control calendar-both-control"
+                            <input type="text" id="auctionEndDate" formControlName="auctionEndDate"
+                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                                (change)="onChangeDateTime($event, 'auctionEndDate')"
+                                class="form-control calendar-control calendar-both-control"
                                 [required]="form['auctionType'].value === 'Public'" />
                             <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'Public'" /> -->
                         </div>
                         <div *ngIf="submitted && form['auctionEndDate'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionEndDate'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp8' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionEndDate'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp8' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
-                        <div *ngIf="isValidAuctionDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' | translate }}</div>
+                        <div *ngIf="isValidAuctionDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' |
+                            translate }}</div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp9' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionStartTime" class="time-control form-control" placeholder="Auction start time" [required]="form['auctionType'].value === 'Public'" (click)="changetime($event,'auctionStartTime');" /> -->
-                            <input type="text" id="auctionStartTime" formControlName="auctionStartTime" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }}" (change)="onChangeDateTime($event, 'auctionStartTime')" class="form-control time-control" [required]="form['auctionType'].value === 'Public'"
-                            />
+                            <input type="text" id="auctionStartTime" formControlName="auctionStartTime"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }}"
+                                (change)="onChangeDateTime($event, 'auctionStartTime')"
+                                class="form-control time-control" [required]="form['auctionType'].value === 'Public'" />
                         </div>
                         <div *ngIf="submitted && form['auctionStartTime'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionStartTime'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionStartTime'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp9' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp10' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionEndTime" class="time-control form-control" placeholder="Auction end time" [required]="form['auctionType'].value === 'Public'" (click)="changetime($event,'auctionEndTime');" /> -->
-                            <input type="text" id="auctionEndTime" formControlName="auctionEndTime" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }}" (change)="onChangeDateTime($event, 'auctionEndTime')" class="form-control time-control" [required]="form['auctionType'].value === 'Public'"
-                            />
+                            <input type="text" id="auctionEndTime" formControlName="auctionEndTime"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }}"
+                                (change)="onChangeDateTime($event, 'auctionEndTime')" class="form-control time-control"
+                                [required]="form['auctionType'].value === 'Public'" />
                         </div>
                         <div *ngIf="submitted && form['auctionEndTime'].errors" class="invalid-feedback">
-                            <div *ngIf="form['auctionEndTime'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['auctionEndTime'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp10' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -320,11 +367,15 @@
                         </label>
                         <div class="py-2">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="startauction1" name="startAuction" formControlName="startAuction" value="T" class="custom-control-input" [required]="true" /> <label class="custom-control-label" for="startauction1">{{
+                                <input type="radio" id="startauction1" name="startAuction"
+                                    formControlName="startAuction" value="T" class="custom-control-input"
+                                    [required]="true" /> <label class="custom-control-label" for="startauction1">{{
                                     'auctioncreate.auctiondetails.section1_formGrp11_opt1' | translate }}</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="startauction2" name="startAuction" formControlName="startAuction" value="M" class="custom-control-input" [required]="true" /> <label class="custom-control-label" for="startauction2">{{
+                                <input type="radio" id="startauction2" name="startAuction"
+                                    formControlName="startAuction" value="M" class="custom-control-input"
+                                    [required]="true" /> <label class="custom-control-label" for="startauction2">{{
                                     'auctioncreate.auctiondetails.section1_formGrp11_opt2' | translate }}</label>
                             </div>
                         </div>
@@ -334,19 +385,25 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp12' |
                                     translate }}</span></label>
-                            <input type="text" id="auctionAnncStartDate" formControlName="auctionAnncStartDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionAnncStartDate')" class="form-control calendar-control calendar-both-control"
-                                [required]="true" />
+                            <input type="text" id="auctionAnncStartDate" formControlName="auctionAnncStartDate"
+                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                                (change)="onChangeDateTime($event, 'auctionAnncStartDate')"
+                                class="form-control calendar-control calendar-both-control" [required]="true" />
                             <!-- <input type="text" formControlName="auctionAnncStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
-                            <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' | translate }}</div>
+                            <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
+                                | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp13' |
                                     translate }}</span></label>
-                            <input type="text" id="auctionAnncEndDate" formControlName="auctionAnncEndDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionAnncEndDate')" class="form-control calendar-control calendar-both-control"
-                                [required]="true" />
+                            <input type="text" id="auctionAnncEndDate" formControlName="auctionAnncEndDate"
+                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                                (change)="onChangeDateTime($event, 'auctionAnncEndDate')"
+                                class="form-control calendar-control calendar-both-control" [required]="true" />
                             <!-- <input type="text" formControlName="auctionAnncEndDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
-                            <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' | translate }}</div>
+                            <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
+                                | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -363,15 +420,18 @@
                                     [attr.data-placement]="lang == 'en' ? 'left' : 'left'" title=""
                                     [attr.data-original-title]="'tooltip.start_price' | translate"></span>
                             </label>
-                            <input type="text" numeric formControlName="startPrice" min="1" step="any" class="form-control" placeholder="150,000" [required]="true" />
+                            <input type="text" numeric formControlName="startPrice" min="1" step="any"
+                                class="form-control" placeholder="150,000" [required]="true" />
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <div class="form-group" *ngIf="basicFormGroup.controls['auctionType'].value == 'C' && basicFormGroup.controls['auctionSubType'].value == 'D'">
+                        <div class="form-group"
+                            *ngIf="basicFormGroup.controls['auctionType'].value == 'C' && basicFormGroup.controls['auctionSubType'].value == 'D'">
                             <label>
                                 <span>{{ 'auctioncreate.auctiondetails.section1_formGrp16' | translate }}</span>
                             </label>
-                            <input type="text" numeric formControlName="lowBidValue" class="form-control" placeholder="150,000" [required]="true" />
+                            <input type="text" numeric formControlName="lowBidValue" class="form-control"
+                                placeholder="150,000" [required]="true" />
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -383,7 +443,10 @@
                                     [attr.data-placement]="lang == 'en' ? 'left' : 'left'" title=""
                                     [attr.data-original-title]="'tooltip.guree_percentage' | translate"></span>
                             </label>
-                            <input type="text" numeric formControlName="gnteePercentage" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp17' | translate }}" [required]="true" />
+                            <input type="text" digitOnly [decimal]="true" formControlName="gnteePercentage"
+                                class="form-control"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp17' | translate }}"
+                                [required]="true" />
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -393,7 +456,8 @@
                             <!-- <input type="text" formControlName="finalGntee" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp21' | translate }}"
                                 [required]="true" />  -->
                             <!-- <input type="text" formControlName="finalGntee" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp18' | translate }}" [required]="true" /> -->
-                            <select class="form-control" formControlName="finalGntee" id="validationCustom05" (change)="changeSelect($event, 'finalGntee')" [required]="true">
+                            <select class="form-control" formControlName="finalGntee" id="validationCustom05"
+                                (change)="changeSelect($event, 'finalGntee')" [required]="true">
                                 <option value="">{{ 'auctioncreate.auctiondetails.section1_formGrp18' | translate }}
                                 </option>
                                 <option *ngFor="let item of dropValFinalGntee" [ngValue]="item">{{ item | translate}}
@@ -410,7 +474,8 @@
                             <label> <span>{{ 'auctioncreate.auctiondetails.section1_formGrp19' | translate }}
                                 </span></label>
                             <!-- <input type="text" formControlName="commissionType" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp19' | translate }}" id="validationCustom01" [required]="true" /> -->
-                            <select class="form-control" formControlName="commissionType" id="validationCustom05" (change)="changeSelect($event, 'commissionType')" [required]="true">
+                            <select class="form-control" formControlName="commissionType" id="validationCustom05"
+                                (change)="changeSelect($event, 'commissionType')" [required]="true">
                                 <option value="">{{ 'auctioncreate.auctiondetails.section1_formGrp19' | translate }}
                                 </option>
                                 <option *ngFor="let item of dropValCommTypes" [value]="item">{{ item | translate}}
@@ -422,22 +487,29 @@
                             </select> -->
                         </div>
                         <div *ngIf="submitted && form['commissionType'].errors" class="invalid-feedback">
-                            <div *ngIf="form['commissionType'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp19' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['commissionType'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp19' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp20' | translate }}
                                 </span></label>
-                            <input type="text" numeric formControlName="pursuitPerCommission" class="form-control" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp20' | translate }}" [required]="true" />
+                            <input type="text" digitOnly [decimal]="true" formControlName="pursuitPerCommission"
+                                class="form-control"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp20' | translate }}"
+                                [required]="true" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card p-5 shadow-lg mt-4">
                 <h4 class="pb-4 text-20">{{ 'auctioncreate.auctiondetails.section1_formAttachTitle' | translate }}</h4>
-                <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{ 'auctioncreate.auctiondetails.section1_formAttachSubTitle' | translate }}</h5>
-                <p class="text-primary text-12" *ngIf="ViewMode != 'view'">{{ 'auctioncreate.auctiondetails.section1_formAttachPara' | translate }}</p>
+                <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{
+                    'auctioncreate.auctiondetails.section1_formAttachSubTitle' | translate }}</h5>
+                <p class="text-primary text-12" *ngIf="ViewMode != 'view'">{{
+                    'auctioncreate.auctiondetails.section1_formAttachPara' | translate }}</p>
                 <div class="row no-gutters">
                     <div class="col-12" *ngIf="ViewMode != 'view'">
                         <div class="file-container">
@@ -447,9 +519,12 @@
                                 <div class="file-uploader-zone">
                                     <div class="buttons">
                                         <div class="uploader-button-caption" formArrayName="auctionAttachement">
-                                            <input style="top: 0; left: 0;" id="dropzone" type="file" class="" accept="video/mp4,.mov,.docx,.doc,application/pdf,image/jpg,image/jpeg,image/png" multiple (change)="selectFiles($event,'auctionAttachement')" />
+                                            <input style="top: 0; left: 0;" id="dropzone" type="file" class=""
+                                                accept="video/mp4,.mov,.docx,.doc,application/pdf,image/jpg,image/jpeg,image/png"
+                                                multiple (change)="selectFiles($event,'auctionAttachement')" />
                                             <div>
-                                                <span class="icon-attachment mx-2"></span> {{ 'auctioncreate.auctiondetails.section1_formAttachHint' | translate }}
+                                                <span class="icon-attachment mx-2"></span> {{
+                                                'auctioncreate.auctiondetails.section1_formAttachHint' | translate }}
                                                 <span class="qq-upload-button-selector qq-upload-button font-bold">{{
                                                     'auctioncreate.auctiondetails.section1_formAttachBtn' | translate
                                                     }}</span>
@@ -464,7 +539,8 @@
                                     <div *ngIf="invalidFileType">{{'message.alert_validfile' | translate}}</div>
                                 </div>
                                 <div *ngIf="submitted && form['auctionAttachement'].errors" class="invalid-feedback">
-                                    <div *ngIf="form['auctionAttachement'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formAttachPara' | translate }}</div>
+                                    <div *ngIf="form['auctionAttachement'].errors['required']">{{
+                                        'auctioncreate.auctiondetails.section1_formAttachPara' | translate }}</div>
                                 </div>
                             </div>
                         </div>
@@ -473,9 +549,13 @@
                         <table class="table table-bordered table-striped table-expanded table-hover">
                             <thead>
                                 <tr class="btn-primary-light">
-                                    <th class="th-serials" scope="col">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' | translate }}
+                                    <th class="th-serials" scope="col">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' | translate
+                                        }}
                                     </th>
-                                    <th class="" scope="col">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' | translate }}
+                                    <th class="" scope="col">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' | translate
+                                        }}
                                     </th>
                                     <th class="th-action" scope="col"></th>
                                 </tr>
@@ -483,18 +563,24 @@
                             <tbody formArrayName="auctionAttachement">
                                 <ng-container *ngIf="auctionAttachement['controls'].length > 0">
                                     <tr *ngFor="let file of auctionAttachement.value;let index=index">
-                                        <ng-container *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
+                                        <ng-container
+                                            *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
                                             <td>{{index+1}}</td>
                                             <td>
-                                                <div class="text-capitalize text-success"><span class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
+                                                <div class="text-capitalize text-success"><span
+                                                        class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="qq-btn-group text-center">
-                                                    <button *ngIf="activeFileDownloadIndex != index" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(file,index)" data-toggle="modal" data-target="#viewAttachmentModal">
+                                                    <button *ngIf="activeFileDownloadIndex != index" type="button"
+                                                        class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green"
+                                                        (click)="viewAttachment(file,index)" data-toggle="modal"
+                                                        data-target="#viewAttachmentModal">
                                                         <img src="assets/icons/eye_open.svg" alt="" srcset="">
                                                     </button>
-                                                    <button *ngIf="activeFileDownloadIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                                    <button *ngIf="activeFileDownloadIndex == index" type="button"
+                                                        class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                                         <span class="btn-text pr-0">
                                                             <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                                 role="status">
@@ -502,7 +588,12 @@
                                                             </div>
                                                         </span>
                                                     </button>
-                                                    <button *ngIf="ViewMode != 'view' && activeFileDownloadIndex !== index" type="button" (click)="removeFile(file, index, pageRangeForAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
+                                                    <button
+                                                        *ngIf="ViewMode != 'view' && activeFileDownloadIndex !== index"
+                                                        type="button"
+                                                        (click)="removeFile(file, index, pageRangeForAttach.currentPage)"
+                                                        class="qq-upload-cancel-selector btn btn-ghost fill-primary-red"
+                                                        data-dismiss="alert" aria-label="Delete">
                                                         <img src="assets/icons/delete.svg" alt="" srcset="">
                                                     </button>
                                                 </div>
@@ -516,16 +607,21 @@
                             <div class="mb-5">
                                 <nav aria-label="..." class="nav-pagination">
                                     <ul class="pagination">
-                                        <li class="page-item" [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
-                                            <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                        <li class="page-item"
+                                            [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
+                                            <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')"
+                                                class="page-link" tabindex="-1" aria-disabled="true">{{
                                                 'auctionlist.grid-previous' | translate }}</a>
                                         </li>
-                                        <li *ngFor="let page of pageRangeForAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
+                                        <li *ngFor="let page of pageRangeForAttach.pages" class="page-item"
+                                            [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
                                             <a (click)="navigateToPage(page, 'auctionAttach')" class="page-link"> {{
                                                 page }} </a>
                                         </li>
-                                        <li class="page-item" [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
-                                            <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                        <li class="page-item"
+                                            [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
+                                            <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')"
+                                                class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -537,7 +633,8 @@
             <div class="pt-5">
                 <div class="form-row">
                     <div class="col-12">
-                        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
+                        <div
+                            class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
                             <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
                                 <!-- <button (click)="back()" type="button" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
                                     <span class="btn-text">{{ 'auctioncreate.auctiondetails.section1_formBtn1' | translate }}</span> <span class="v-divider"></span>
@@ -546,20 +643,25 @@
                             </div>
                             <div class="d-flex flex-column flex-md-row mb-5" *ngIf="ViewMode != 'view'">
                                 <!-- <button class="btn btn-danger btn-lg mx-0 mx-md-2" (click)="openConfirmCancelModal()">{{ 'auctioncreate.auctiondetails.section1_formBtn1' | translate }}</button> -->
-                                <button *ngIf="!showSaveasdraftBtnLoader" type="button" (click)="onSubmit('saveasdraft')" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> {{
+                                <button *ngIf="!showSaveasdraftBtnLoader" type="button"
+                                    (click)="onSubmit('saveasdraft')"
+                                    class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> {{
                                     'auctioncreate.auctiondetails.section1_formBtn2' | translate }} </button>
-                                <button *ngIf="showSaveasdraftBtnLoader" type="button" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                <button *ngIf="showSaveasdraftBtnLoader" type="button"
+                                    class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                     <span class="btn-text pr-3">
                                         <div class="spinner-border" role="status">
                                             <span class="sr-only">Loading...</span>
                                         </div>
                                     </span> {{ 'auctioncreate.auctiondetails.section1_formBtn2' | translate }} </button>
-                                <button *ngIf="!showSaveBtnLoader" type="button" (click)="onSubmit('save')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                <button *ngIf="!showSaveBtnLoader" type="button" (click)="onSubmit('save')"
+                                    class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                     <span class="btn-text">{{ 'auctioncreate.auctiondetails.section1_formBtn3' |
                                         translate }}</span> <span class="v-divider"></span>
                                     <span class="icon icon-arrow-left"></span>
                                 </button>
-                                <button *ngIf="showSaveBtnLoader" type="button" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                <button *ngIf="showSaveBtnLoader" type="button"
+                                    class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                     <span class="btn-text pr-0">
                                         <div class="spinner-border spinner-border-light text-light" role="status">
                                             <span class="sr-only">Loading...</span>
@@ -577,7 +679,8 @@
         </form>
     </div>
 </div>
-<div class="modal fade " *ngIf="showViewAttachmentsModal" id="viewAttachmentModal" tabindex="-1 " role="dialog " aria-labelledby="viewAttachmentModalLabel" aria-hidden="true ">
+<div class="modal fade " *ngIf="showViewAttachmentsModal" id="viewAttachmentModal" tabindex="-1 " role="dialog "
+    aria-labelledby="viewAttachmentModalLabel" aria-hidden="true ">
     <div class="modal-dialog modal-lg modal-dialog-centered " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -598,10 +701,11 @@
 <script src="https://cdn.etimad.sa/v2/js/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/datatable.min.js" type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/editable-datatable.min.js" type="text/javascript"></script>
-<script src="https://cdn.etimad.sa/v2/js/libs/calendar/bootstrap-hijri-datepicker.min.min.js" type="text/javascript"></script>
+<script src="https://cdn.etimad.sa/v2/js/libs/calendar/bootstrap-hijri-datepicker.min.min.js"
+    type="text/javascript"></script>
 <script src="https://cdn.etimad.sa/v2/js/libs/calendar/moment.min.min.js"></script>
 <script>
-    (function() {
+    (function () {
         $('[data-toggle="tooltip "]').tooltip();
     })();
 </script>
@@ -621,77 +725,96 @@
         </div>
     </div>
 </div> -->
-<div class="modal show" id="showSuccessfulModal" *ngIf="showSuccessfulModal" [ngClass]="{'modal-show': showSuccessfulModal}">
+<div class="modal show" id="showSuccessfulModal" *ngIf="showSuccessfulModal"
+    [ngClass]="{'modal-show': showSuccessfulModal}">
     <!-- showSuccessfulModal -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_draft_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_draft_title' | translate }} </h4>
             </div>
             <div class="modal-body">
                 <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{
                     'message.success_draft_para' | translate }} </label>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{
+            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')"
+                    class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{
                     'message.back_auctionRequest' | translate }} </button> </div>
         </div>
     </div>
 </div>
-<div class="modal show" id="showConfirmCancelModal" *ngIf="showConfirmCancelModal" [ngClass]="{'modal-show': showConfirmCancelModal}">
+<div class="modal show" id="showConfirmCancelModal" *ngIf="showConfirmCancelModal"
+    [ngClass]="{'modal-show': showConfirmCancelModal}">
     <!-- showConfirmCancelModal -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
-            <button type="button" (click)="closeConfirmCancelModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeConfirmCancelModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <div class="modal-header justify-content-left">
-                <h4 class="modal-title text-24 font-regular text-danger" id="exampleModalLabel"> {{ 'message.confirm_cancel_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-danger" id="exampleModalLabel"> {{
+                    'message.confirm_cancel_title' | translate }} </h4>
             </div>
             <div class="modal-body">
                 <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{
                     'message.confirm_cancel_para' | translate }} </label>
             </div>
             <div class="modal-footer justify-content-left">
-                <button type="button" (click)="closeConfirmCancelModal('close')" class="btn btn-outline-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'auctioncreate.auctionproduct.section1_formGrp16' |
+                <button type="button" (click)="closeConfirmCancelModal('close')" class="btn btn-outline-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'auctioncreate.auctionproduct.section1_formGrp16' |
                     translate }} </button>
-                <button type="button" (click)="closeConfirmCancelModal('success')" class="btn btn-danger btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.confirm_auctionRequest' | translate }}
+                <button type="button" (click)="closeConfirmCancelModal('success')" class="btn btn-danger btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.confirm_auctionRequest' | translate }}
                 </button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal show" id="showCancelSuccessfulModal" *ngIf="showCancelSuccessfulModal" [ngClass]="{'modal-show': showCancelSuccessfulModal}">
+<div class="modal show" id="showCancelSuccessfulModal" *ngIf="showCancelSuccessfulModal"
+    [ngClass]="{'modal-show': showCancelSuccessfulModal}">
     <!-- showCancelSuccessfulModal -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeCancelSuccessfulModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeCancelSuccessfulModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_cancel_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_cancel_title' | translate }} </h4>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeCancelSuccessfulModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
+            <div class="modal-footer justify-content-center"> <button type="button"
+                    (click)="closeCancelSuccessfulModal('success')" class="btn btn-primary-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal show" id="showDeleteSuccessfulModal" *ngIf="showDeleteSuccessfulModal" [ngClass]="{'modal-show': showDeleteSuccessfulModal}">
+<div class="modal show" id="showDeleteSuccessfulModal" *ngIf="showDeleteSuccessfulModal"
+    [ngClass]="{'modal-show': showDeleteSuccessfulModal}">
     <!-- showDeleteSuccessfulModal -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeDeleteSuccessfulModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeDeleteSuccessfulModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_attach_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_attach_title' | translate }} </h4>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeDeleteSuccessfulModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
+            <div class="modal-footer justify-content-center"> <button type="button"
+                    (click)="closeDeleteSuccessfulModal('success')" class="btn btn-primary-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
             </div>
         </div>
     </div>
@@ -700,7 +823,8 @@
     <!-- showAlertModal -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeAlertModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeAlertModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-alert-warning text-danger text-40 mb-4"></span>

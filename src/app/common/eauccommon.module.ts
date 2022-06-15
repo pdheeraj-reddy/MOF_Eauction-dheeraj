@@ -13,10 +13,12 @@ import { AuctionCardComponent } from './components/auction-card/auction-card.com
 import { TimePickerDirective } from './directives/time-picker.directive';
 import { DatePickerDirective } from './directives/date-picker.directive';
 import { AuctionSliderComponent } from './components/auction-slider/auction-slider.component';
+import { DigitOnlyDirective } from './directives/digit-only.directive';
 
 @NgModule({
   declarations: [
     NumericDirective,
+    DigitOnlyDirective,
     CurrencyDirective,
     AuctionCountdownTimerComponent,
     AuctionCardComponent,
@@ -31,6 +33,7 @@ import { AuctionSliderComponent } from './components/auction-slider/auction-slid
   providers: [],
   exports: [
     NumericDirective,
+    DigitOnlyDirective,
     CurrencyDirective,
     AuctionCountdownTimerComponent,
     AuctionCardComponent,

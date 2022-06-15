@@ -90,7 +90,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     }
   }
 
-  cancelMember(){
+  cancelMember() {
     this.existingCommitteMemberList = [];
     this.committeeChairData = [];
     this.committeeSecData = [];
@@ -100,7 +100,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.committeeMem4Data = [];
     this.ngOnInit();
   }
-  
+
   assignPricingCommittee() {
     this.showConfirm = false;
     console.log(this.preAuctionData);
@@ -143,7 +143,7 @@ export class AssignPricingCommitteComponent implements OnInit {
             this.getPreAuctionData();
           },
           (error) => {
-            alert('Error Updating');
+            // alert('Error Updating');
             console.log('approveOrRejectAuction RespError : ', error);
           }
         );

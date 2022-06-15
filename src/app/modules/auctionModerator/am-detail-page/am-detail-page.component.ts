@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { RejectAuctionPopupComponent } from './reject-auction-popup/reject-auction-popup.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -109,7 +109,7 @@ export class AmDetailPageComponent implements OnInit {
           console.log(res);
         },
         (error) => {
-          alert('Error Updating');
+          // alert('Error Updating');
           console.log('approveOrRejectAuction RespError : ', error);
         }
       );
@@ -119,7 +119,7 @@ export class AmDetailPageComponent implements OnInit {
     this.stepper.next();
     this.getPreAuctionData();
   }
-  hideSuccessfulModelPub(){
+  hideSuccessfulModelPub() {
     this.showSuccessfulModalPub = false;
     this.getPreAuctionData();
   }
@@ -155,7 +155,7 @@ export class AmDetailPageComponent implements OnInit {
           this.showSuccessfulModalPub = true;
           console.log(res);
           console.log(res.d.Msgty);
-          if(res.d.Msgty=='S'){
+          if (res.d.Msgty == 'S') {
             this.auctionAnnouncement = false;
           }
         },
@@ -189,7 +189,7 @@ export class AmDetailPageComponent implements OnInit {
         ) {
           this.tabThreeFour = false;
         }
-        if(this.preAuctionData.Status == 'Pending to Publish'){
+        if (this.preAuctionData.Status == 'Pending to Publish') {
           this.tabFourFive = false;
 
           let data = this.preAuctionData.listtocomiteememnav.results;
@@ -199,15 +199,15 @@ export class AmDetailPageComponent implements OnInit {
             }
           }
         }
-        if ( this.preAuctionData.Status == 'Pending Review' ) {
-          if(this.preAuctionData?.ActionTaken == 'P'){
+        if (this.preAuctionData.Status == 'Pending Review') {
+          if (this.preAuctionData?.ActionTaken == 'P') {
             this.selectedIndex = 0;
           } else {
             this.selectedIndex = 1;
           }
-        } else if ( this.preAuctionData.Status == 'Pending Pricing' ) {
+        } else if (this.preAuctionData.Status == 'Pending Pricing') {
           this.selectedIndex = 1;
-        } else if ( this.preAuctionData.Status == 'Pending to Publish' ) {
+        } else if (this.preAuctionData.Status == 'Pending to Publish') {
           this.selectedIndex = 2;
           let data = this.preAuctionData.listtocomiteememnav.results;
           for (let i = 0; i < data.length; i++) {
@@ -215,7 +215,7 @@ export class AmDetailPageComponent implements OnInit {
               this.selectedIndex = 3;
             }
           }
-        }else if ( this.preAuctionData.Status == 'Published' ) {
+        } else if (this.preAuctionData.Status == 'Published') {
           this.tabFourFive = true;
           this.selectedIndex = 3;
           this.auctionAnnouncement = false;

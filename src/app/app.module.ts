@@ -85,6 +85,7 @@ import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/a
 
 import { ProductDetailPopupComponent } from './components/auction/auction-indetail/auction-order-summary/product-detail-popup/product-detail-popup.component';
 import { EnvService } from './env.service';
+import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -129,6 +130,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionCommiteeLandingPageComponent,
     AuctionCommiteeDetailPageComponent,
     AuctionCommiteeOpenOffersComponent,
+    AlertModalComponent,
   ],
   imports: [
     NgxPaginationModule,
