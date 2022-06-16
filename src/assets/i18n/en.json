@@ -176,7 +176,6 @@
             "section2_orderSum-col10": "Back ",
             "attach-col1": "Sl. No",
             "attach-col2": "Attachment name"
-
         },
         "auctionproduct": {
             "section1_Title": "Product Details",
@@ -291,7 +290,6 @@
         "start_price": "The minimum bid that will be submitted by the bidder",
         "guree_percentage": "A percentage of the offer value is reserved from the bank to prove the seriousness of the offeror"
     },
-
     "auctionModerator": {
         "bcrumb1": "Etimad Services",
         "bcrumb2": "Online Auction Requests",
@@ -334,7 +332,6 @@
             "status3": "Published",
             "status4": "Rejected"
         },
-
         "am-detail": {
             "bcrumb1": "Etimad Services",
             "bcrumb2": "Online Auction Request",
@@ -356,12 +353,10 @@
             "showProduct-back_btn": "Back",
             "showProduct-reject_btn": "Rejection of the Application",
             "showProduct-accept_btn": "Request Accept",
-
             "auction-publish": {
                 "back_btn": "Back",
                 "accept_btn": "Announcement of the Auction on the Platform"
             },
-
             "reject-popup": {
                 "title": "Confirmation of rejection of the auction request",
                 "subTitle": "Are you sure to send a rejection request?",
@@ -377,7 +372,6 @@
                 "reject_btn": "Rejection of the Application",
                 "cancel_btn": "Cancellation"
             },
-
             "auction-details": {
                 "title1": "General information about the order",
                 "sec1-head1": "Auction Reference Number",
@@ -392,7 +386,6 @@
                 "sec3-head1": "Entity No.",
                 "sec3-head2": "Entity Name",
                 "sec4-head1": "Auction Description",
-
                 "title2": "Auction Date and Time",
                 "sec5-head1": "Beginning Of Bidding",
                 "sec5-head2": "End Of Bidding",
@@ -401,7 +394,6 @@
                 "sec5-opt2": "Automatic",
                 "sec6-head1": "Bid Opening Date",
                 "sec6-head2": "Bid Opening Time",
-
                 "title3": "Financial Auction Items",
                 "sec7-head1": "Auction Start Price",
                 "sec7-head2": "Lowest Bid Price",
@@ -409,13 +401,11 @@
                 "sec8-head1": "Commission Type",
                 "sec8-head2": "Pursuit percentage-commission %",
                 "sec8-head3": "Last date to pay the final guarantee",
-
                 "title4": "Attachments",
                 "th1": "Attached",
                 "th2": "Attachment Name",
                 "table-result": "No Attachments"
             },
-
             "auction-details-confirmation": {
                 "title1": "Confirmation of Request accept?",
                 "sec1-head1": "Upon confirmation, the auction will be sent for assigning pricing committee.",
@@ -427,7 +417,6 @@
                 "sec1-head1": "After assigning the pricing committee, the request will be sent for product pricing update",
                 "BackToAuction": "Back to Auction Requests"
             },
-
             "product-details": {
                 "title": "Product Details",
                 "th1": "Product Name",
@@ -444,7 +433,6 @@
                 "reject_btn": "Denial of Pricing",
                 "accept_btn": "Accept Pricing"
             },
-
             "pricing-committee": {
                 "tab1": "Auction Details",
                 "tab2": "Product Details",
@@ -454,7 +442,6 @@
                 "back_btn": "Back",
                 "reject_btn": "Rejection of the Application",
                 "accept_btn": "Request Accept",
-
                 "card1-head1": "Add Pricing Committee Head",
                 "card1-head2": "Committee Head",
                 "jobNumber": "Job Number",
@@ -465,16 +452,13 @@
                 "card3-head2": "Committee Member",
                 "reject": "Cancel",
                 "accept": "Submit",
-
                 "popup1-title": "Confirmation of assignment of Pricing Committee?",
                 "popup1-subtitle": "Upon confirmation, the auction will be sent to Pricing Committee member for pricing.",
                 "popup1-accept": "Post Confirmation",
-
                 "popup2-title": "The request has been successfully sent to the pricing committee",
                 "popup2-subtitle": "After pricing the products by the committee, the request will be returned to appoint the auction committee and publish the auction.",
                 "popup2-accept": "Back to Auction Requests"
             },
-
             "auction-committee": {
                 "tab1": "Auction Details",
                 "tab2": "Product Details",
@@ -491,13 +475,11 @@
                 "back_btn": "Back",
                 "accept": "Submit",
                 "reject": "Cancel",
-
                 "popup1-title": "Confirmation of assignment of auction committee?",
                 "popup1-subtitle": "Upon confirmation, the auction committee members will be assigned and notified.",
                 "popup2-title": "The request has been successfully sent to the auction committee",
                 "popup2-subtitle": "You can now pulish the acution."
             },
-
             "add-member": {
                 "heading": "Search by employee number or email",
                 "phold": "Enter employee number or email",
@@ -507,9 +489,7 @@
                 "aId": "Agency Id:",
                 "add": "Add"
             }
-
         },
-
         "publish-popup": {
             "title1": "Confirmation of Auction Announcement?",
             "subtitle1": "Upon confirmation, the auction announcement will be approved and published in the Electronic Auction. ",
@@ -557,7 +537,6 @@
         "filter-formDate-pholder": "day - month - year",
         "filter-actionname-pholder": "Enter the Auction Name",
         "filter-refno-pholder": "Enter the Reference number",
-
         "head-detail": {
             "bcrumb1": "Etimad Services",
             "bcrumb2": "Online Auction Requests",
@@ -605,7 +584,6 @@
         "filter-formDate-pholder": "day - month - year",
         "filter-actionname-pholder": "Enter the Auction Name",
         "filter-refno-pholder": "Enter the Reference number",
-
         "mem-detail": {
             "bcrumb1": "Etimad Services",
             "bcrumb2": "Online Auction Requests",
@@ -616,7 +594,6 @@
             "tab3": "Pricing Committee Members",
             "tab4": "Auction Committee Members"
         },
-
         "bid-value": {
             "head": "General information about the order",
             "subHead": "Product Pricing",
@@ -624,7 +601,6 @@
             "save": "Save",
             "failure_mssg": "Enter value greater than zero"
         },
-
         "confirmation-popup": {
             "title": "Confirm sending product pricing?",
             "subtitle": "Upon confirmation, the auction application will be approved and sent for approval.",
@@ -635,9 +611,12 @@
             "title": "Pricing was sent successfully",
             "subtitle": "The request was successfully sent, and you'll receive an email. To follow up on your request",
             "accept": "Back to Auction Requests"
+        },
+        "error-popup": {
+            "subtitle": "Please note that one of the estimated values is equal to 0.Do you want to continue?",
+            "accept": "Proceed for Publication"
         }
     },
-
     "auctionCommittee": {
         "bcrumb1": "Trust Services",
         "bcrumb2": "Auctions",
@@ -661,7 +640,6 @@
         "accurate": "Accurate",
         "second": "Second",
         "detail_btn": "Auction Details",
-
         "ac-detail": {
             "bcrumb1": "Accreditation Services",
             "bcrumb2": "Auctions",
@@ -699,7 +677,6 @@
             "bids": "Number of bids",
             "participant": "Participants"
         },
-
         "ac-openOffers": {
             "bcrumb1": "Accreditation Services",
             "bcrumb2": "Auctions",
@@ -745,7 +722,6 @@
         "content1": "Number of Bids",
         "content2": "participants"
     },
-
     "AuctionDetails": "Auction Details",
     "EndsThrough": "Ends through",
     "Day": "Day",
