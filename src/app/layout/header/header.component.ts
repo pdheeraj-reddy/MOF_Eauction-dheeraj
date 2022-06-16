@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   public applang: string = 'ar';
   loggedUser: any;
   loggedUserRole: any;
+  currentUserRole: string;
   isAuction: boolean = false;
   title = 'Header';
 
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = this.auctionServc.loggedUser;
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
+    this.currentUserRole = this.auctionServc.getLoggedUserEAucRole();
     console.log('this.loggedUserRole ➼ ', this.loggedUserRole);
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.applang = event.lang

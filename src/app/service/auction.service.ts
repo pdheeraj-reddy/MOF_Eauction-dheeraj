@@ -54,6 +54,19 @@ export class AuctionService {
     return this.loggedUserRole
   }
 
+  getLoggedUserEAucRole() {
+    let currentUserRole = this.loggedUser, role = '';
+    if(currentUserRole.roles){
+      if(typeof currentUserRole.roles === "string"){
+        role = currentUserRole.roles;
+      } else {
+        role = currentUserRole.roles.find((r:any) => r.includes("EAuction"));
+      }
+    }
+    console.log('getLoggedUserEAucRole ', role);
+    return role;
+  }
+
   //for getting Auction List with Filters
   getAuctionList(page: any, filters: any): Observable<any> {
     let role = '', config1 = '', config2 = '';
@@ -130,8 +143,9 @@ export class AuctionService {
       },
       observe: 'response' as 'body'
     };
+    let queryId = (DraftId && DraftId != '0') ? DraftId : ObjectId;
     return this.http.get<any>(
-      this.envService.environment.apiAuctionURL + '/' + ObjectId +
+      this.envService.environment.apiAuctionURL + '/' + queryId +
       "?$expand=listtoproductnav,listtoattachnav" +
       "&$format=json"
       , httpOptions);

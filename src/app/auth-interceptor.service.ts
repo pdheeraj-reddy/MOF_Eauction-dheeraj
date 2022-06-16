@@ -14,6 +14,7 @@ import { AlertModalComponent } from './shared/components/alert-modal/alert-modal
 export class AuthInterceptorService implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  dialogObj: any;
 
   constructor(
     private _authService: AuthService,
@@ -52,6 +53,11 @@ export class AuthInterceptorService implements HttpInterceptor {
       return next.handle(authReq).pipe(catchError((error) => {
         if (error instanceof HttpErrorResponse && (error.status === 500 || error.status === 501)) {
           // display error popup message
+          this.dialogObj = {
+            message : 'ServiceUnavailable',
+            mnBtnAction : 'close',
+            mnBtntext: 'OK'
+          }
           this.handleServerError();
         }
         return throwError(error);
@@ -111,7 +117,9 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private handleServerError() {
-    this.dialog.open(AlertModalComponent);
+    this.dialog.open(AlertModalComponent, { 
+      data: this.dialogObj
+    });
   }
 
 }

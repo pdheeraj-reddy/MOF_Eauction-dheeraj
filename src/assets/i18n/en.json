@@ -284,6 +284,10 @@
         "alert_maxfilesize": "The file size is more than 2MB",
         "alert_validfile": "The file type not allowed"
     },
+    "OK": "OK",
+    "ServiceUnavailable": "Service Unavailable",
+    "Back to Home Page": "Back to Home Page",
+    "You are not Authorized. Please contact Etimad Support Team.": "You are not Authorized. Please contact Etimad Support Team.",
     "tooltip": {
         "bidding_method": "Direct: Bidding is done publicly and is visible to all bidders and committees <br /> Closed: Bids submitted are kept confidential until they are opened by the auction committee",
         "auctionManager": "The auction manager in the entity is responsible for the final approval of the <br /> auction publication and the follow-up, management and award of the auction",

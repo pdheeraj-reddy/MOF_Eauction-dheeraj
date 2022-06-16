@@ -6,10 +6,13 @@ import { AuthService } from './service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionService } from "./service/auction.service";
 import { EnvService } from './env.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   userInfo: any;
+  dialogObj: any;
 
   constructor(
     private _authService: AuthService,
@@ -17,6 +20,7 @@ export class AuthGuard implements CanActivate {
     public auctionServc: AuctionService,
     private router: Router,
     private envService: EnvService,
+    private dialog: MatDialog,
   ) { }
 
   canActivate(
@@ -32,19 +36,19 @@ export class AuthGuard implements CanActivate {
       console.log('currentUserRole ➼ ', currentUserRole);
       if (currentUserRole) {
         // check if the currentuserRole is array or string
-        if (typeof currentUserRole.roles === 'string') {
-          if (!(currentUserRole.roles.includes("EAuction")) && !(currentUserRole.idmclientid == environment.idmClientId)) {
-            if (!(currentUserRole.roles.includes("EAuction"))) {
-              console.log('inValid Role');
-            }
-            if (!(currentUserRole.idmclientid == environment.idmClientId)) {
-              console.log('inValid ClientId', currentUserRole.idmclientid + " -- " + environment.idmClientId);
-            }
-            this.cookieService.deleteAll();
-            this.redirect2IdmLogin();
-            return false;
-          }
-        }
+        // if (typeof currentUserRole.roles === 'string') {
+        //   if (!(currentUserRole.roles.includes("EAuction")) && !(currentUserRole.idmclientid == environment.idmClientId)) {
+        //     if (!(currentUserRole.roles.includes("EAuction"))) {
+        //       console.log('inValid Role');
+        //     }
+        //     if (!(currentUserRole.idmclientid == environment.idmClientId)) {
+        //       console.log('inValid ClientId', currentUserRole.idmclientid + " -- " + environment.idmClientId);
+        //     }
+        //     this.cookieService.deleteAll();
+        //     this.redirect2IdmLogin();
+        //     return false;
+        //   }
+        // }
         // check if idToken has EAuction roles and envi clientId
         let isvalidRole, isvalidClientID;
         if(currentUserRole.roles && currentUserRole.idmclientid){
@@ -59,19 +63,21 @@ export class AuthGuard implements CanActivate {
             isvalidClientID = !!(currentUserRole.idmclientid == this.envService.environment.idmClientId);
           }
           console.log('isvalidRole ➼ ', isvalidRole , ' isvalidClientID ➼ ', isvalidClientID);
-          if(!isvalidRole && !isvalidClientID){
-            this.logout();
+          if(!isvalidRole && isvalidClientID){
+            console.log('invalid user');
+            this.redirect2IdmHome();
             return false;
           } else {
+            console.log('valid user');
             return true;
           }
           return true;
         } else {
-          this.logout();
+          this.redirect2IdmHome();
           return false;
         }
       } else {
-        this.logout();
+        this.redirect2IdmHome();
         return false;
       }
     } else {
@@ -95,5 +101,16 @@ export class AuthGuard implements CanActivate {
     const redirectUrl = this.envService.environment.idmLoginURL;
     console.log('redirectUrl ➼ ', redirectUrl);
     window.location.href = redirectUrl;
+  }
+
+  redirect2IdmHome(){
+    this.dialogObj = {
+      message : 'You are not Authorized. Please contact Etimad Support Team.',
+      mnBtnAction : 'logout',
+      mnBtntext: 'Back to Home Page'
+    }
+    this.dialog.open(AlertModalComponent, { 
+      data: this.dialogObj
+    });
   }
 }

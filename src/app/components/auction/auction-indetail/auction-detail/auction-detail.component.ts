@@ -848,7 +848,7 @@ export class AuctionDetailComponent implements OnInit {
           console.log('createAuction Resp ', auctionDetailsResp);
           // alert('Auction is Saved Successfully. Please Continue...');
           this.DraftId = auctionDetailsResp.d.DraftId;
-          this.ObjectId = auctionDetailsResp.d.DraftId;
+          this.ObjectId = auctionDetailsResp.d.ObjectId;
           let auctionCreateResp = {
             DraftId: this.DraftId,
             ObjectId: this.ObjectId,
@@ -879,7 +879,7 @@ export class AuctionDetailComponent implements OnInit {
             console.log('createAuction Resp ', auctionDetailsResp);
             // alert('Auction is Saved as Draft Successfully');
             this.DraftId = auctionDetailsResp.d.DraftId;
-            this.ObjectId = auctionDetailsResp.d.DraftId;
+            this.ObjectId = auctionDetailsResp.d.ObjectId;
             let auctionCreateResp = {
               DraftId: auctionDetailsResp.d.DraftId,
               ObjectId: auctionDetailsResp.d.ObjectId,
