@@ -186,7 +186,7 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-            <button *ngIf="!isAuctionHead" data-toggle="modal" data-target="#confirmQuote"
+            <button *ngIf="!isAuctionHead" (click)="sendPricingValues()"
                 class="btn btn-primary-light btn-lg mt-1 font-weight-bold rounded w-100" data-backdrop="static">
                 {{ "auctionModerator.am-detail.product-details.sendQuotes" | translate }}
             </button>
@@ -239,30 +239,54 @@
     </div>
 
     <!-- confirmation of sending quotes -->
-    <div class="modal fade" id="confirmQuote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal show" *ngIf="isPriceSuccess" [ngClass]="{ 'modal-show': isPriceSuccess }">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">
                         {{ "auctionMember.confirmation-popup.title" | translate }}
                     </h4>
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                         <span class="icon-close"></span>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-body">
                     <label for="confirmation" style="color: #414042; font-size: 16px">{{
                         "auctionMember.confirmation-popup.subtitle" | translate }}</label>
                 </div>
                 <div class="modal-footer" style="justify-content: end">
-                    <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
+                    <button type="button" class="btn btn-primary-light btn-md"
                         (click)="approveOrRejectAuction('A', 'Pending Pricing')">
                         {{ "auctionMember.confirmation-popup.accept" | translate }}
                     </button>
-                    <button type="button" class="btn btn-md" data-dismiss="modal" aria-label="Close"
+                    <button type="button" class="btn btn-md" (click)="closeAllModal();"
                         style="border: 1px solid #cccccc; border-radius: 5px">
-                        {{ "auctionMember.confirmation-popup.back" | translate }}
+                        {{ "common.Cancel" | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal show" *ngIf="isPriceError" [ngClass]="{ 'modal-show': isPriceError }">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content" style="align-items: center;">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">
+                        {{ "auctionMember.confirmation-popup.title" | translate }}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <label for="confirmation" style="color: #414042; font-size: 16px">{{
+                        "auctionMember.error-popup.subtitle" | translate }}</label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md" (click)="sendPricingValuesFinal()">
+                        {{ "auctionMember.error-popup.accept" | translate }}
+                    </button>
+                    <button type="button" class="btn btn-md" (click)="closeAllModal();"
+                        style="border: 1px solid #cccccc; border-radius: 5px">
+                        {{ "common.Cancel" | translate }}
                     </button>
                 </div>
             </div>
