@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuctionService } from 'src/app/service/auction.service';
+import { NONE_TYPE } from '@angular/compiler';
 
 export interface DialogData {
   data: any;
@@ -24,6 +25,7 @@ export class ProductDetailPopupComponent implements OnInit {
   fullImage: any;
   textDir = 'ltr';
   showLoader: boolean = false;
+  fetchPicture: boolean = true;
 
 
   constructor(
@@ -45,6 +47,17 @@ export class ProductDetailPopupComponent implements OnInit {
     dots: false,
     navSpeed: 300,
     nav: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 3
+        },
+        1000: {
+            items: 3
+        }
+    }
   };
 
   sortByTableHeaderId(a: number, b: string) { }
@@ -83,6 +96,9 @@ export class ProductDetailPopupComponent implements OnInit {
           this.downloadImages(index);
         }
       )
+      if(this.slidesStore.length == this.viewproduct.productImages.length){
+        this.fetchPicture = false;
+      }
     }
 
 
@@ -144,10 +160,17 @@ export class ProductDetailPopupComponent implements OnInit {
             type: index.MIMEType
           });
 
-          this.fullImage = {
-            src : this.slidesStore[0].src,
-            type: this.slidesStore[0].type
+          if(this.slidesStore.length == this.viewproduct.productImages.length){
+            this.fetchPicture = false;
           }
+
+          if(this.slidesStore.length == 1){
+            this.fullImage = {
+              src : this.slidesStore[0].src,
+              type: this.slidesStore[0].type
+            }
+          }
+          
           this.showLoader = false;
         },
         (error) => {

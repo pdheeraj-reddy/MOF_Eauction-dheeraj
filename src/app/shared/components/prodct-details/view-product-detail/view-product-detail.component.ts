@@ -35,6 +35,7 @@ export class ViewProductDetailComponent implements OnInit {
   activeIndex = -1;
   loggedUserRole: any;
   showLoader: boolean = false;
+  fetchPicture: boolean = true;
 
 
   constructor(
@@ -56,6 +57,17 @@ export class ViewProductDetailComponent implements OnInit {
     dots: false,
     navSpeed: 300,
     nav: false,
+    responsive: {
+      0: {
+          items: 1
+      },
+      600: {
+          items: 3
+      },
+      1000: {
+          items: 3
+      }
+  }
   };
 
   sortByTableHeaderId(a: number, b: string) {}
@@ -101,6 +113,10 @@ export class ViewProductDetailComponent implements OnInit {
           this.downloadImages(index);
         }
       )
+
+      if(this.slidesStore.length == this.viewproduct.productImages.length){
+        this.fetchPicture = false;
+      }
     }
 
     this.product = this.dialogData.productDetails;
@@ -166,10 +182,17 @@ export class ViewProductDetailComponent implements OnInit {
             type: index.MIMEType
           });
 
+          if(this.slidesStore.length == this.viewproduct.productImages.length){
+            this.fetchPicture = false;
+          }
+
+          if(this.slidesStore.length == 1){
+
           this.fullImage = {
             src : this.slidesStore[0].src,
             type: this.slidesStore[0].type
           }
+        }
           this.showLoader = false;
         },
         (error) => {
