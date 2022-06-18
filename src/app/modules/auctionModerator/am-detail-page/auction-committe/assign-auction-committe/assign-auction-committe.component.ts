@@ -661,6 +661,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   }
 
   getPreAuctionData() {
+    this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         console.log('getAuctionDetails Resp ', res.body);
@@ -672,6 +673,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           let data = temp.listtocomiteememnav.results;
           console.log(data.length);
           for (let i = 0; i < data.length; i++) {
+            this.showPageLoader = false;
             console.log(data[i]);
             if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_CHAIRMAN') {
               this.commiteeMemberData = true;
@@ -713,6 +715,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
             //   this.committeeMem4Data = data[i];
             // }
           }
+        }
+        else{
+          this.showPageLoader = false;
         }
       },
       (error) => {

@@ -637,6 +637,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.getPreAuctionData();
   }
   getPreAuctionData() {
+    this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         console.log('getAuctionDetails Resp ', res.body);
@@ -649,6 +650,7 @@ export class AssignPricingCommitteComponent implements OnInit {
           console.log(data.length);
           for (let i = 0; i < data.length; i++) {
             console.log(data[i]);
+            this.showPageLoader = false;
             if (data[i].EmployeeRole == 'ZEAUCTION_PRICECOMM_HEAD') {
               this.committeeChairSelected = true;
               this.committeeChairData = data[i];
@@ -670,6 +672,9 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem4Data = data[i];
             }
           }
+        }
+        else{
+          this.showPageLoader = false;
         }
       },
       (error) => {

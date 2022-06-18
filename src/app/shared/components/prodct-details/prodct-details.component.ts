@@ -430,7 +430,7 @@ export class ProdctDetailsComponent implements OnInit {
       delete product.show;
     });
     console.log(this.showError, "🚀 ~ adjustedPriceData?.listtoproductnav?.results.forEach ~ adjustedPriceData", adjustedPriceData)
-    return
+    // return
     this._AuctionService.approveOrRejectAuction(adjustedPriceData).subscribe(
       (res: any) => {
         if (status == 'Pending Pricing') {
