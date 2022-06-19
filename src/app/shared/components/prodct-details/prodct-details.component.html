@@ -229,7 +229,7 @@
                 {{ "auctionModerator.am-detail.product-details.reject_btn" | translate }}
             </button>
 
-            <button data-toggle="modal" data-target="#approvePricing" data-backdrop="static"
+            <button (click)="checkPrices()"
                 class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0" _msthash="1893008"
                 _msttexthash="94172">
                 <span class="btn-text">{{
@@ -331,8 +331,7 @@
 
 
     <!-- Confirmation of pricing approval -->
-    <div class="modal fade" id="approvePricing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal show" *ngIf="showConfim" [ngClass]="{ 'modal-show': showConfim }">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -352,7 +351,7 @@
                         (click)="approveOrRejectAuction('A', 'Pending Pricing Approval')">
                         Accepting the Application
                     </button>
-                    <button type="button" class="btn btn-md" data-dismiss="modal" aria-label="Close"
+                    <button type="button" class="btn btn-md" (click)="closeConfirm()"
                         style="border: 1px solid #cccccc; border-radius: 5px">
                         Back
                     </button>

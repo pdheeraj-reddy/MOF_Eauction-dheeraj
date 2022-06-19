@@ -22,11 +22,13 @@ export class ProdctDetailsComponent implements OnInit {
   confirmPublish = false;
   confirmApproval = false;
   confirmRejection = false;
+  confirmationPopup = false;
+  showConfim = false;
   maxLen = 250;
   pdtEstPricePc: any;
   temp: any = [];
   auctionProducts: any[] = [];
-  inputMode: boolean = true;
+  inputMode: boolean = false;
   showAdjustPriceOption: boolean = false;
   invalidQty: boolean = false;
   showError: boolean = false;
@@ -71,7 +73,21 @@ export class ProdctDetailsComponent implements OnInit {
   ) {
 
   }
-
+  checkPrices() {
+    console.log(this.productValue);
+    // this.showConfim = true;
+    if (this.showAdjustPriceOption == true && this.productValue < 1) {
+      this.invalidQty = true;
+      window.scroll({ top: 0, behavior: "smooth" });
+      // this.showConfim = false;
+    }
+    else {
+      this.showConfim = true;
+    }
+  }
+  closeConfirm(){
+    this.showConfim = false;
+  }
   editPrice(index: any, product: any) {
     console.log("Click");
     const dialogRef = this.dialog.open(EditBidValueComponent, {
@@ -261,7 +277,7 @@ export class ProdctDetailsComponent implements OnInit {
 
   selection(value: any) {
     if (!value) this.isBidUpdate = true;
-    else this.isBidUpdate = false; this.pdtEstPricePc = 0;
+    else this.isBidUpdate = false; this.pdtEstPricePc = 0; this.invalidQty = false;
   }
 
   convertBlobToBase64 = (blob: any) =>
@@ -404,6 +420,7 @@ export class ProdctDetailsComponent implements OnInit {
     });
     if (this.pdtEstPricePc < 1) {
       this.invalidQty = true;
+      this.productValue = parseFloat('0');
     }
     else {
       this.invalidQty = false;
@@ -451,22 +468,31 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   sendPricingValues() {
-    if (!this.inputMode) {
-      let product = this.preAuctionData?.listtoproductnav?.results;
-      let flag = false;
-      product.forEach((element: any) => {
-        if (element.ZzPdtEstPricePc < 1) {
-          flag = true;
+    // console.log(this.inputMode);
+    console.log(this.productValue);
+    if (this.productValue < 1) {
+      this.invalidQty = true;
+      window.scroll({ top: 0, behavior: "smooth" });
+    } else {
+      if (!this.inputMode) {
+        let product = this.preAuctionData?.listtoproductnav?.results;
+        let flag = false;
+        console.log(product);
+        product.forEach((element: any) => {
+          if (element.ZzPdtEstPricePc < 1) {
+            flag = true;
+          }
+        });
+        if (flag) {
+          this.isPriceError = true;
+        } else {
+          this.isPriceSuccess = true;
         }
-      });
-      if (flag) {
-        this.isPriceError = true;
       } else {
         this.isPriceSuccess = true;
       }
-    } else {
-      this.isPriceSuccess = true;
     }
+
   }
 
   sendPricingValuesFinal() {
