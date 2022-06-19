@@ -104,17 +104,23 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.callstepper.emit();
   }
 
-  cancelMember(){
+  cancelMember() {
+    this.committeeChairData = undefined;
+    this.committeeMem1Data = undefined;
+    this.committeeMem2Data = undefined;
+    this.committeeMem3Data = undefined;
     this.existingCommitteMemberList = [];
-    this.committeeChairData = [];
-    this.committeeSecData = [];
-    this.committeeMem1Data = [];
-    this.committeeMem2Data = [];
-    this.committeeMem3Data = [];
-    this.committeeMem4Data = [];
-    this.ngOnInit();
+    this._3MembersErrorMsg.emit(false);
+    this.committeeChairSelected = false;
+    this.committeeSecSelected = false;
+    this.committeeMem1Selected = false;
+    this.committeeMem2Selected = false;
+    this.committeeMem3Selected = false;
+    this.committeeMem4Selected = false;
+    this.add4Mem = false;
+    // this.ngOnInit();
   }
-  
+
   checkMember() {
     if (
       this.committeeChairData == undefined ||
@@ -122,15 +128,16 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
     ) {
+      this._3MembersErrorMsg.emit(true);
+      window.scroll({ top: 0, behavior: "smooth" });
+      // if (this.committeeChairData == undefined) {
 
-      if (this.committeeChairData == undefined) {
-
-        this._3MembersErrorMsg.emit(true);
-        // console.log(this.committeeChairData);
-        // alert('Enter Required fields');
-      } else {
-        this._3MembersErrorMsg.emit(true);
-      }
+      //   this._3MembersErrorMsg.emit(true);
+      //   console.log(this.committeeChairData);
+      //   alert('Enter Required fields');
+      // } else {
+      //   this._3MembersErrorMsg.emit(true);
+      // }
     } else {
       this._3MembersAdded = true;
       this.showConfirm = true;
@@ -234,6 +241,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
             }
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_CHAIRMAN')
               this.committeeChairSelected = true;
+            this.hideErrorMsg();
             console.log(result);
           });
         },
@@ -315,6 +323,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_SECRETARY')
               this.committeeSecSelected = true;
+            this.hideErrorMsg();
           });
         },
         (error) => {
@@ -362,13 +371,14 @@ export class AssignAuctionCommitteComponent implements OnInit {
               }
               this.committeeMem1Data = result;
               this.existingCommitteMemberList.push(this.committeeMem1Data.EmployeeId);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
+              
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
               this.committeeMem1Selected = true;
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             this.hideErrorMsg()
           });
         },
@@ -415,13 +425,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
               }
               this.committeeMem2Data = result;
               this.existingCommitteMemberList.push(this.committeeMem2Data.EmployeeId);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
               this.committeeMem2Selected = true;
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             this.hideErrorMsg()
           });
         },
@@ -468,13 +478,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
               }
               this.committeeMem3Data = result;
               this.existingCommitteMemberList.push(this.committeeMem3Data.EmployeeId);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
               this.committeeMem3Selected = true;
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             this.hideErrorMsg()
           });
         },
@@ -633,8 +643,6 @@ export class AssignAuctionCommitteComponent implements OnInit {
     if (this.committeeMem1Data != undefined && this.committeeMem2Data != undefined && this.committeeMem3Data != undefined) {
       this._3MembersErrorMsg.emit(false);
       console.log("notempty");
-    } else {
-      this._3MembersErrorMsg.emit(true);
     }
   }
   filteredOptions: Observable<string[]>;
@@ -716,7 +724,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
             // }
           }
         }
-        else{
+        else {
           this.showPageLoader = false;
         }
       },

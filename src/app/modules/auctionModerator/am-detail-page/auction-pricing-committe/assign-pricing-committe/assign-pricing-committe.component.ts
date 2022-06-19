@@ -79,6 +79,8 @@ export class AssignPricingCommitteComponent implements OnInit {
       this.committeeMem3Data == undefined
     ) {
       this._3MembersErrorMsg.emit(true);
+      window.scroll({ top: 0, behavior: "smooth" });
+      // scroll.scrollTop = scroll?.scrollHeight;
       // if (this.committeeChairData == undefined) {
       //   console.log(this.committeeChairData);
       //   // alert('Enter Required fields');
@@ -111,6 +113,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.committeeMem2Selected = false;
     this.committeeMem3Selected = false;
     this.committeeMem4Selected = false;
+    this.add4Mem = false;
     // this.ngOnInit();
   }
 
@@ -225,13 +228,15 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeChairData = result;
               console.log(this.committeeMemberList);
               this.existingCommitteMemberList.push(this.committeeChairData.EmployeeId);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
+             
               // console.log(this.committeeMemberList);
             }
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_HEAD')
               this.committeeChairSelected = true;
+              this.hideErrorMsg();
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             console.log(result);
           });
         },
@@ -312,6 +317,7 @@ export class AssignPricingCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_SECRETARY')
               this.committeeSecSelected = true;
+              this.hideErrorMsg();
           });
         },
         (error) => {
@@ -359,13 +365,13 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeMem1Data = result;
               this.existingCommitteMemberList.push(this.committeeMem1Data.EmployeeId);
               console.log(this.existingCommitteMemberList.length);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem1Selected = true;
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             this.hideErrorMsg();
           });
         },
@@ -413,13 +419,13 @@ export class AssignPricingCommitteComponent implements OnInit {
               }
               this.committeeMem2Data = result;
               this.existingCommitteMemberList.push(this.committeeMem2Data.EmployeeId);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem2Selected = true;
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             this.hideErrorMsg();
           });
         },
@@ -467,14 +473,14 @@ export class AssignPricingCommitteComponent implements OnInit {
               }
               this.committeeMem3Data = result;
               this.existingCommitteMemberList.push(this.committeeMem3Data.EmployeeId);
-              console.log(this.existingCommitteMemberList.length);
-              if (this.existingCommitteMemberList.length == 4) {
-                this.add4Mem = true;
-              }
+              // console.log(this.);
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem3Selected = true;
+              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+                this.add4Mem = true;
+              }
             this.hideErrorMsg();
           });
         },
