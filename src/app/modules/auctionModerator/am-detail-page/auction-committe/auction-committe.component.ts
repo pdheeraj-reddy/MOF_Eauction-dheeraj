@@ -16,6 +16,10 @@ import { AuctionService } from 'src/app/service/auction.service';
 export class AuctionCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
   @Output() steppernext = new EventEmitter();
+  @Output() stepperACEvent = new EventEmitter();
+  @Output() stepperEventAhead = new EventEmitter();
+  @Output() stepperNextEvent = new EventEmitter();
+
   showAuction = false;
   showProduct = false;
   showPricing = false;
@@ -24,6 +28,7 @@ export class AuctionCommitteComponent implements OnInit {
   DraftId: any = '';
   ViewMode: any = '';
   _3MembersErrorMsg = false;
+  gonext: boolean = true;
 
   @Input()
   isPublishTab: boolean = false;
@@ -53,7 +58,10 @@ export class AuctionCommitteComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res);
+        console.log(res.body.d.results[0].CommitteeAssigned, "SKING");
+        if(res.body.d.results[0].CommitteeAssigned == 'X'){
+          this.gonext = false
+        }
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
       },
@@ -61,6 +69,22 @@ export class AuctionCommitteComponent implements OnInit {
         console.log('getAuctionList RespError : ', error);
       }
     );
+  }
+
+  goBack(){
+    this.stepperACEvent.emit();
+  }
+
+  goBackAgain(){
+    this.stepperACEvent.emit();
+  }
+
+  goAheadAgain(){
+    this.stepperNextEvent.emit();
+  }
+
+  goAhead(){
+    this.stepperEventAhead.emit();
   }
 
   changeToAuction() {

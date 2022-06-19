@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuctionApprovalService } from 'src/app/service/auction-approval.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -15,6 +15,10 @@ import { AuctionService } from 'src/app/service/auction.service';
 })
 export class AuctionPricingCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
+
+  @Output() stepperEvent = new EventEmitter();
+  @Output() stepperEventAhead = new EventEmitter();
+
   _3MembersErrorMsg = false;
   rejectionNotes: any;
   ObjectId: any = '';
@@ -50,8 +54,19 @@ export class AuctionPricingCommitteComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('/');
+    this.stepperEvent.emit();
+    console.log("child")
+    // this.router.navigateByUrl('/');
   }
+
+  goAhead(){
+    this.stepperEventAhead.emit();
+  }
+
+  goBackAgain(){
+    this.stepperEvent.emit();
+  }
+
   showErrorMsg(error: any) {
     this._3MembersErrorMsg = error;
     console.log(error);
@@ -196,6 +211,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
         console.log(res);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
+        console.log(this.preAuctionData, "THara thara")
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

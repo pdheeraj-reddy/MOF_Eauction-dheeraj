@@ -21,6 +21,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
 
   @Output() _3MembersErrorMsg = new EventEmitter();
   @Output() callstepper = new EventEmitter();
+  @Output() stepperEvent1 = new EventEmitter();
+  @Output() stepperEvent2 = new EventEmitter();
+  @Output() 
   _3MembersAdded = false;
   showConfirm = false;
   showSuccessPopup = false;
@@ -103,6 +106,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.showSuccessPopup = false;
     this.callstepper.emit();
   }
+  
 
   cancelMember() {
     this.committeeChairData = undefined;
@@ -665,7 +669,11 @@ export class AssignAuctionCommitteComponent implements OnInit {
     );
   }
   goBack() {
-    this.router.navigateByUrl('/');
+    this.stepperEvent1.emit();
+    // this.router.navigateByUrl('/');
+  }
+  goAhead(){
+    this.stepperEvent2.emit();
   }
 
   getPreAuctionData() {

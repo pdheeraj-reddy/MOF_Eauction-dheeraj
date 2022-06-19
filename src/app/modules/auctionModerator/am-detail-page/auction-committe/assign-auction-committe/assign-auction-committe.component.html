@@ -358,6 +358,12 @@
         <span class="btn-text">{{"auctionModerator.am-detail.auction-committee.back_btn" | translate}}</span>
         <span class="v-divider"></span> <span class="icon icon-arrow-left"></span>
     </button>
+    <button *ngIf="commiteeMemberData" (click)="goAhead()" class="btn arrow-btn btn-outline-light btn-lg justify-content-end">
+      <span class="btn-text">Next</span>
+      <span class="v-divider"></span>
+      <span class="icon icon-arrow-left"></span>
+   </button>
+
     <div *ngIf="!commiteeMemberData">
         <div>
             <button (click)="cancelMember()" class="btn btn-danger" _msthash="1893008" _msttexthash="94172" style="direction: ltr">

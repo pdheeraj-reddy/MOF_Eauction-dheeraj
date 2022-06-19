@@ -167,6 +167,24 @@ export class AmDetailPageComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('/');
+    console.log("parent")
+  }
+
+  goBackPublish(){
+    this.stepper.previous();
+  }
+
+  goBackStepper(){
+    this.stepper.previous();
+  }
+
+  goAheadStepper(){
+    this.stepper.next();
+  }
+
+
+  goAhead(){
+    this.stepper.next();
   }
 
   getPreAuctionData() {

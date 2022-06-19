@@ -105,9 +105,25 @@
                 <div *ngIf="showAuction">
                     <!-- <app-auction-req-details [preAuctionData]="preAuctionData"> </app-auction-req-details> -->
                     <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode"></app-auction-req-details>
+                    <div class="d-flex align-items-md-center align-items-stretch my-5 justify-content-end" style="margin-bottom: 0 !important">
+
+                        <button (click)="goAhead()" class="btn arrow-btn btn-outline-light btn-lg ">
+                          <span class="btn-text">Next</span>
+                          <span class="v-divider"></span>
+                          <span class="icon icon-arrow-left"></span>
+                       </button>
+                    </div>
                 </div>
                 <div *ngIf="showProduct">
                     <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
+                    <div class="d-flex align-items-md-center align-items-stretch my-5 justify-content-end" style="margin-bottom: 0 !important">
+
+                        <button (click)="goAhead()" class="btn arrow-btn btn-outline-light btn-lg">
+                          <span class="btn-text">Next</span>
+                          <span class="v-divider"></span>
+                          <span class="icon icon-arrow-left"></span>
+                       </button>
+                    </div>
                 </div>
                 <div *ngIf="preAuctionData?.ActionTaken=='P'">
                     <div *ngIf="preAuctionData?.Status=='Pending Review'" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5">
@@ -140,13 +156,13 @@
                 <ng-template matStepLabel>
                     <span matTooltip="{{'auctionModerator.am-detail.stepper2' | translate}}">{{"auctionModerator.am-detail.stepper2" | translate}}</span>
                 </ng-template>
-                <app-auction-pricing-committe [preAuctionData]="preAuctionData"> </app-auction-pricing-committe>
+                <app-auction-pricing-committe [preAuctionData]="preAuctionData" (stepperEvent)="goBackStepper()" (stepperEventAhead)="goAheadStepper()"> </app-auction-pricing-committe>
             </mat-step>
             <mat-step [completed]="tabThreeFour">
                 <ng-template matStepLabel>
                     <span matTooltip="{{'auctionModerator.am-detail.stepper3' | translate}}">{{"auctionModerator.am-detail.stepper3" | translate}}</span>
                 </ng-template>
-                <app-auction-committe [preAuctionData]="preAuctionData" (steppernext)="hideSuccessfulModel()"></app-auction-committe>
+                <app-auction-committe [preAuctionData]="preAuctionData" (stepperACEvent)="goBackStepper()" (stepperNextEvent)="goAheadStepper()" (stepperEventAhead)="goAheadStepper()" (steppernext)="hideSuccessfulModel()"></app-auction-committe>
             </mat-step>
 
             <!-- <mat-step class="stepper4" *ngIf="!tabFourFive" [completed]="tabFourFive">
@@ -156,9 +172,9 @@
                 <ng-template matStepLabel>
                     <span matTooltip="{{'auctionModerator.am-detail.stepper4' | translate}}">{{"auctionModerator.am-detail.stepper4" | translate}}</span>
                 </ng-template>
-                <app-auction-committe [preAuctionData]="preAuctionData" [isPublishTab]="isPublishTab"></app-auction-committe>
+                <app-auction-committe [preAuctionData]="preAuctionData" [isPublishTab]="isPublishTab" (stepperACEvent)="goBackStepper()"></app-auction-committe>
                 <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
-                    <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0"> <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> <span
+                    <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0"> <button (click)="goBackPublish()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> <span
                                 class="btn-text">{{"auctionModerator.am-detail.auction-publish.back_btn" |
                                 translate}}</span> <span class="v-divider"></span> <span
                                 class="icon icon-arrow-left"></span> </button> </div>

@@ -281,9 +281,10 @@
 <div class="btn-submit-grp" *ngIf=" preAuctionData?.ActionTaken !='P' && preAuctionData?.ActionTaken !='R' ">
     <div *ngIf="preAuctionData?.Status=='Pending Review'">
         <button class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-md" (click)="goBack()">
-      <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
-        class="v-divider"></span> <span class="icon icon-arrow-left"></span>
-    </button>
+          <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
+            class="v-divider"></span> <span class="icon icon-arrow-left"></span>
+        </button>
+
     </div>
     <div>
         <div *ngIf="preAuctionData?.Status=='Pending Review'">
@@ -332,7 +333,7 @@
             <div class="modal-body"><label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{"auctionModerator.am-detail.pricing-committee.popup2-subtitle"
           | translate}}</label></div>
             <div class="modal-footer" style="justify-content: end;">
-                <button type="button" (click)="goBack()" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.popup2-accept" | translate}}</button>
+                <button type="button" (click)="goBacktoList()" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.popup2-accept" | translate}}</button>
             </div>
         </div>
     </div>

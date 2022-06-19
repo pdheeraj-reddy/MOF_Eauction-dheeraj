@@ -17,6 +17,7 @@ export class AssignPricingCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
 
   @Output() _3MembersErrorMsg = new EventEmitter();
+  @Output() stepperEvent1 = new EventEmitter();
 
   showSuccessPopup = false;
   _3MembersAdded = false;
@@ -68,6 +69,10 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.showSuccessPopup = false;
   }
   goBack() {
+    this.stepperEvent1.emit();
+    // this.router.navigateByUrl('/');
+  }
+  goBacktoList(){
     this.router.navigateByUrl('/');
   }
   checkMember() {
