@@ -86,6 +86,7 @@ import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/a
 import { ProductDetailPopupComponent } from './components/auction/auction-indetail/auction-order-summary/product-detail-popup/product-detail-popup.component';
 import { EnvService } from './env.service';
 import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -133,6 +134,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AlertModalComponent,
   ],
   imports: [
+    MatTooltipModule,
     NgxPaginationModule,
     CountdownModule,
     MatDialogModule,

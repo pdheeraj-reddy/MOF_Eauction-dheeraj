@@ -80,7 +80,8 @@ export class AssignPricingCommitteComponent implements OnInit {
     ) {
       if (this.committeeChairData == undefined) {
         console.log(this.committeeChairData);
-        alert('Enter Required fields');
+        // alert('Enter Required fields');
+        this._3MembersErrorMsg.emit(true);
       } else {
         this._3MembersErrorMsg.emit(true);
       }
@@ -91,13 +92,18 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
 
   cancelMember() {
+    this.committeeChairData = undefined
+      this.committeeMem1Data = undefined
+      this.committeeMem2Data = undefined
+      this.committeeMem3Data = undefined
     this.existingCommitteMemberList = [];
-    this.committeeChairData = [];
-    this.committeeSecData = [];
-    this.committeeMem1Data = [];
-    this.committeeMem2Data = [];
-    this.committeeMem3Data = [];
-    this.committeeMem4Data = [];
+    // this.committeeChairData = [];
+    // this.committeeSecData = [];
+    // this.committeeMem1Data = [];
+    // this.committeeMem2Data = [];
+    // this.committeeMem3Data = [];
+    // this.committeeMem4Data = [];
+    this._3MembersErrorMsg.emit(false);
     this.ngOnInit();
   }
 
@@ -629,6 +635,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.committeeMem2Selected = false;
     this.committeeMem3Selected = false;
     this.committeeMem4Selected = false;
+    this._3MembersAdded = false;
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))

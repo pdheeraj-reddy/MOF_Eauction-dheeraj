@@ -95,7 +95,9 @@
             <ng-template matStepperIcon="edit" let-index="index"> {{ index+1 }}</ng-template>
             <ng-template matStepperIcon="number" let-index="index"> {{ index+1 }}</ng-template>
             <mat-step [completed]="tabTwo">
-                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper1" | translate}}</ng-template>
+                <ng-template matStepLabel>
+                    <span matTooltip="{{'auctionModerator.am-detail.stepper1' | translate}}">{{"auctionModerator.am-detail.stepper1" | translate}}</span>
+                </ng-template>
                 <ul class="nav et-tabs et-tabs-filled nav-pills mt-5" id="pills-tab" role="tablist">
                     <li class="nav-item"> <a class="nav-link" [ngClass]="preAuctionData?.ActionTaken == 'P' ? 'active' : ''" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true" (click)="nowchangetoAuction()">{{"auctionModerator.am-detail.tab1-head" | translate}}</a>                        </li>
                     <li class="nav-item"> <a class="nav-link" [ngClass]="preAuctionData?.ActionTaken != 'P' ? 'active' : ''" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="nowchangetoProduct()">{{"auctionModerator.am-detail.tab2-head" | translate}}</a>                        </li>
@@ -130,14 +132,20 @@
                 <!-- <button mat-button matStepperNext>Next</button> -->
             </mat-step>
             <mat-step *ngIf="!tabTwo" [completed]="tabThreeFour">
-                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper2" | translate}}</ng-template>
+                <ng-template matStepLabel>
+                    <span matTooltip="{{'auctionModerator.am-detail.stepper2' | translate}}">{{"auctionModerator.am-detail.stepper2" | translate}}</span>
+                </ng-template>
             </mat-step>
             <mat-step *ngIf="tabTwo" [completed]="tabThreeFour">
-                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper2" | translate}}</ng-template>
+                <ng-template matStepLabel>
+                    <span matTooltip="{{'auctionModerator.am-detail.stepper2' | translate}}">{{"auctionModerator.am-detail.stepper2" | translate}}</span>
+                </ng-template>
                 <app-auction-pricing-committe [preAuctionData]="preAuctionData"> </app-auction-pricing-committe>
             </mat-step>
             <mat-step [completed]="tabThreeFour">
-                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper3" | translate}}</ng-template>
+                <ng-template matStepLabel>
+                    <span matTooltip="{{'auctionModerator.am-detail.stepper3' | translate}}">{{"auctionModerator.am-detail.stepper3" | translate}}</span>
+                </ng-template>
                 <app-auction-committe [preAuctionData]="preAuctionData" (steppernext)="hideSuccessfulModel()"></app-auction-committe>
             </mat-step>
 
@@ -145,7 +153,9 @@
                 <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper4" | translate}}</ng-template>
             </mat-step> -->
             <mat-step [completed]="tabFourFive">
-                <ng-template matStepLabel>{{"auctionModerator.am-detail.stepper4" | translate}}</ng-template>
+                <ng-template matStepLabel>
+                    <span matTooltip="{{'auctionModerator.am-detail.stepper4' | translate}}">{{"auctionModerator.am-detail.stepper4" | translate}}</span>
+                </ng-template>
                 <app-auction-committe [preAuctionData]="preAuctionData" [isPublishTab]="isPublishTab"></app-auction-committe>
                 <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
                     <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0"> <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block"> <span

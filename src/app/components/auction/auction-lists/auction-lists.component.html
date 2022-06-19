@@ -100,7 +100,7 @@
                                                     'auctionlist.tab1-item9' | translate }}
                                                     ({{totalCounts.totPrcRejected}})</a>
                                             </li>
-                                            <li class="nav-item border-left" *ngIf="loggedUserRole.isAuctionModerator || loggedUserRole.isPricingMember">
+                                            <li class="nav-item border-left" *ngIf="loggedUserRole.isAuctionModerator || loggedUserRole.isPricingMember || loggedUserRole.isPricingHead">
                                                 <a class="nav-link nav-link-tabs" [ngClass]="{ active: selectedTab === 'Pending to Publish' }" (click)="onTabSelection('Pending to Publish')">{{
                                                     'auctionlist.tab1-item7' | translate }}
                                                     ({{totalCounts.totPublishPend}})</a>
@@ -109,7 +109,7 @@
                                                 <a class="nav-link nav-link-tabs" [ngClass]="{ active: selectedTab === 'Rejected' }" (click)="onTabSelection('Rejected')">{{ 'auctionlist.tab1-item3' |
                                                     translate }} ({{totalCounts.totRejected}})</a>
                                             </li>
-                                            <li class="nav-item border-left" *ngIf="loggedUserRole.isInteriorMarketer">
+                                            <li class="nav-item border-left" *ngIf="loggedUserRole.isInteriorMarketer || loggedUserRole.isAuctionModerator">
                                                 <a class="nav-link nav-link-tabs" [ngClass]="{ active: selectedTab === 'Published' }" (click)="onTabSelection('Published')">{{ 'auctionlist.tab1-item4' |
                                                     translate }} ({{totalCounts.totPublished}})</a>
                                             </li>
