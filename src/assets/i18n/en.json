@@ -603,7 +603,8 @@
             "subHead": "Product Pricing",
             "phold": "Total estimated value of products",
             "save": "Save",
-            "failure_mssg": "Enter value greater than zero"
+            "failure_mssg": "Enter value greater than zero",
+            "overall_failure_mssg": "Please enter correct estimated amount"
         },
         "confirmation-popup": {
             "title": "Confirm sending product pricing?",

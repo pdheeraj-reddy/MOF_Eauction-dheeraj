@@ -18,7 +18,6 @@
         <div *ngIf="showAdjustPriceOption && preAuctionData?.Status!='Pending to Publish'"
             class="col-12 rounded p-4 mb-4" style="background-color: #eaf6ef">
             <label class="text-12">{{ "auctionMember.bid-value.subHead" | translate }}</label>
-
             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
                 [(ngModel)]="inputMode">
                 <mat-radio-button class="example-radio-button" style="width: 40%" *ngFor="let type of types"
@@ -31,14 +30,16 @@
                 *ngIf="inputMode && (loggedUserRole.isPricingHead && (preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')) )">
                 <label class="text-12">{{ "auctionMember.bid-value.phold" | translate }}</label>
                 <div style="display: flex">
-                    <input [(ngModel)]="pdtEstPricePc" onClick="this.select();" digitOnly [decimal]="true" type="text"
+                    <input [(ngModel)]="pdtEstPricePc" (ngModelChange)="adjustTotalPrice()" onClick="this.select();"
+                        digitOnly [decimal]="true" type="text"
                         placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
                         width: 300px; outline: none; border: none; border-bottom: 1px solid grey;
                         background-color: #eaf6ef; " />&nbsp; &nbsp; &nbsp;
-                    <button class="btn btn-primary-light btn-md" (click)="adjustTotalPrice()"> {{
-                        "auctionMember.bid-value.save" | translate }}</button>
+                    <!-- <button class="btn btn-primary-light btn-md" (click)="adjustTotalPrice()"> {{
+                        "auctionMember.bid-value.save" | translate }}</button> -->
                 </div>
-                <div *ngIf="invalidQty" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' |
+                <div *ngIf="invalidQty" class="invalid-feedback d-block">{{
+                    'auctionMember.bid-value.overall_failure_mssg' |
                     translate }}
                 </div>
             </div>

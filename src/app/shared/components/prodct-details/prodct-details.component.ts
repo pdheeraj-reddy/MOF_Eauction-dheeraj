@@ -407,7 +407,6 @@ export class ProdctDetailsComponent implements OnInit {
     }
     else {
       this.invalidQty = false;
-
       this.productValue = parseFloat(this.pdtEstPricePc as string);
     }
     // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
@@ -452,15 +451,19 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   sendPricingValues() {
-    let product = this.preAuctionData?.listtoproductnav?.results;
-    let flag = false;
-    product.forEach((element: any) => {
-      if (element.ZzPdtEstPricePc < 1) {
-        flag = true;
+    if (!this.inputMode) {
+      let product = this.preAuctionData?.listtoproductnav?.results;
+      let flag = false;
+      product.forEach((element: any) => {
+        if (element.ZzPdtEstPricePc < 1) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        this.isPriceError = true;
+      } else {
+        this.isPriceSuccess = true;
       }
-    });
-    if (flag) {
-      this.isPriceError = true;
     } else {
       this.isPriceSuccess = true;
     }
