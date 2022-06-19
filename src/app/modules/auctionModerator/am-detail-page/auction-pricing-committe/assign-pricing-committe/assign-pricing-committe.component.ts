@@ -71,20 +71,21 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
   checkMember() {
-    this.getPreAuctionData();
+    // this.getPreAuctionData();
     if (
       this.committeeChairData == undefined ||
       this.committeeMem1Data == undefined ||
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
     ) {
-      if (this.committeeChairData == undefined) {
-        console.log(this.committeeChairData);
-        // alert('Enter Required fields');
-        this._3MembersErrorMsg.emit(true);
-      } else {
-        this._3MembersErrorMsg.emit(true);
-      }
+      this._3MembersErrorMsg.emit(true);
+      // if (this.committeeChairData == undefined) {
+      //   console.log(this.committeeChairData);
+      //   // alert('Enter Required fields');
+      //   this._3MembersErrorMsg.emit(true);
+      // } else {
+      //   this._3MembersErrorMsg.emit(true);
+      // }
     } else {
       this._3MembersAdded = true;
       this.showConfirm = true;
@@ -93,9 +94,9 @@ export class AssignPricingCommitteComponent implements OnInit {
 
   cancelMember() {
     this.committeeChairData = undefined
-      this.committeeMem1Data = undefined
-      this.committeeMem2Data = undefined
-      this.committeeMem3Data = undefined
+    this.committeeMem1Data = undefined
+    this.committeeMem2Data = undefined
+    this.committeeMem3Data = undefined
     this.existingCommitteMemberList = [];
     // this.committeeChairData = [];
     // this.committeeSecData = [];
@@ -104,7 +105,13 @@ export class AssignPricingCommitteComponent implements OnInit {
     // this.committeeMem3Data = [];
     // this.committeeMem4Data = [];
     this._3MembersErrorMsg.emit(false);
-    this.ngOnInit();
+    this.committeeChairSelected = false;
+    this.committeeSecSelected = false;
+    this.committeeMem1Selected = false;
+    this.committeeMem2Selected = false;
+    this.committeeMem3Selected = false;
+    this.committeeMem4Selected = false;
+    // this.ngOnInit();
   }
 
   assignPricingCommittee() {
@@ -482,8 +489,6 @@ export class AssignPricingCommitteComponent implements OnInit {
     if (this.committeeMem1Data != undefined && this.committeeMem2Data != undefined && this.committeeMem3Data != undefined) {
       this._3MembersErrorMsg.emit(false);
       console.log("notempty");
-    } else {
-      this._3MembersErrorMsg.emit(true);
     }
   }
   // openAddMem4Dialog(title: any, role: string) {
@@ -680,7 +685,7 @@ export class AssignPricingCommitteComponent implements OnInit {
             }
           }
         }
-        else{
+        else {
           this.showPageLoader = false;
         }
       },
