@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { AuctionApprovalService } from 'src/app/service/auction-approval.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ import { AuctionService } from 'src/app/service/auction.service';
 })
 export class AuctionCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
+  @Input() step: number;
   @Output() steppernext = new EventEmitter();
   @Output() stepperACEvent = new EventEmitter();
   @Output() stepperEventAhead = new EventEmitter();
@@ -49,19 +50,35 @@ export class AuctionCommitteComponent implements OnInit {
     this.getPreAuctionData();
   }
 
-  showErrorMsg(error :any){
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("🚀 ~ ngOnChanges ~ changes?.['step'].currentValue", changes?.['step'].currentValue)
+    if (changes?.['step'].currentValue) {
+      this.step = changes['step'].currentValue;
+      if (this.step == 3) {
+        console.log("🚀 ~ ngOnInit ~ this.step", this.step)
+        this.gonext = false;
+      } else {
+        this.gonext = true;
+      }
+    }
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+
+  }
+
+  showErrorMsg(error: any) {
     this._3MembersErrorMsg = error;
   }
-  callstepper(){
+  callstepper() {
     this.steppernext.emit(true);
   }
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         console.log(res.body.d.results[0].CommitteeAssigned, "SKING");
-        if(res.body.d.results[0].CommitteeAssigned == 'X'){
-          this.gonext = false
-        }
+        // if (res.body.d.results[0].CommitteeAssigned == 'X') {
+        //   this.gonext = false
+        // }
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
       },
@@ -71,19 +88,19 @@ export class AuctionCommitteComponent implements OnInit {
     );
   }
 
-  goBack(){
+  goBack() {
     this.stepperACEvent.emit();
   }
 
-  goBackAgain(){
+  goBackAgain() {
     this.stepperACEvent.emit();
   }
 
-  goAheadAgain(){
+  goAheadAgain() {
     this.stepperNextEvent.emit();
   }
 
-  goAhead(){
+  goAhead() {
     this.stepperEventAhead.emit();
   }
 

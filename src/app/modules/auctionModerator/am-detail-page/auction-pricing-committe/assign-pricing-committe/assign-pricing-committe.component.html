@@ -312,10 +312,9 @@
         {{"auctionModerator.am-detail.pricing-committee.accept" | translate}} </button>
     </div>
   </div>
-  <div *ngIf="preAuctionData?.Status!=='Pending Review'"
+  <div *ngIf="preAuctionData?.Status!=='Pending Review' && stepIndex !=3"
     class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5"
     style="margin-bottom: 0 !important;width: 100%;">
-
     <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
       <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
         class="v-divider"></span>

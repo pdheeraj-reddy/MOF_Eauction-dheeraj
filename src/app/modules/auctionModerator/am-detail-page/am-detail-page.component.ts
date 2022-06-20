@@ -170,21 +170,28 @@ export class AmDetailPageComponent implements OnInit {
     console.log("parent")
   }
 
-  goBackPublish(){
+  goBackPublish() {
     this.stepper.previous();
   }
 
-  goBackStepper(){
+  goBackStepper() {
     this.stepper.previous();
   }
 
-  goAheadStepper(){
+  goAheadStepper() {
+    console.log(this.stepper._getFocusIndex());
+
     this.stepper.next();
   }
 
 
-  goAhead(){
+  goAhead() {
     this.stepper.next();
+  }
+
+  onStepChange(ev: any) {
+    console.log("🚀 ~ onStepChange ~ ev", ev)
+    this.selectedIndex = ev.selectedIndex;
   }
 
   getPreAuctionData() {

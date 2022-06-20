@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, NgZone, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -13,8 +13,9 @@ import { AuctionService } from 'src/app/service/auction.service';
   templateUrl: './assign-pricing-committe.component.html',
   styleUrls: ['./assign-pricing-committe.component.scss'],
 })
-export class AssignPricingCommitteComponent implements OnInit {
+export class AssignPricingCommitteComponent implements OnInit, OnChanges {
   @Input() preAuctionData: any;
+  @Input() step: number;
 
   @Output() _3MembersErrorMsg = new EventEmitter();
   @Output() stepperEvent1 = new EventEmitter();
@@ -32,7 +33,7 @@ export class AssignPricingCommitteComponent implements OnInit {
   ObjectId: any = '';
   committeeChairSelected: any;
   committeeChairData: any;
-
+  stepIndex: number = 0;
   committeeSecSelected: any;
   committeeSecData: any;
 
@@ -61,7 +62,9 @@ export class AssignPricingCommitteComponent implements OnInit {
     public auctionServc: AuctionService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef
   ) { }
   closeConfirm() {
     this.showConfirm = false;
@@ -642,7 +645,16 @@ export class AssignPricingCommitteComponent implements OnInit {
   }
   filteredOptions: Observable<string[]>;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes?.['step'].currentValue) {
+      this.stepIndex = changes?.['step'].currentValue;
+      this.cdr.detectChanges();
+    }
+
+  }
+
   ngOnInit() {
+    this.stepIndex = this.step;
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
     }

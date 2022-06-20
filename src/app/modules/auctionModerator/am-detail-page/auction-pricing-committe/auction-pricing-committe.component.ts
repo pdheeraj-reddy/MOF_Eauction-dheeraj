@@ -15,7 +15,7 @@ import { AuctionService } from 'src/app/service/auction.service';
 })
 export class AuctionPricingCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
-
+  @Input() step: number;
   @Output() stepperEvent = new EventEmitter();
   @Output() stepperEventAhead = new EventEmitter();
 
@@ -59,11 +59,11 @@ export class AuctionPricingCommitteComponent implements OnInit {
     // this.router.navigateByUrl('/');
   }
 
-  goAhead(){
+  goAhead() {
     this.stepperEventAhead.emit();
   }
 
-  goBackAgain(){
+  goBackAgain() {
     this.stepperEvent.emit();
   }
 

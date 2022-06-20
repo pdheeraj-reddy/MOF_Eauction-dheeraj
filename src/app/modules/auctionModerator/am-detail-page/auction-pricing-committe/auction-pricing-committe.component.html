@@ -78,11 +78,11 @@
     </div>
   </div>
   <div [ngClass]="{'hide': !showAssignPricing }">
-    <app-assign-pricing-committe [preAuctionData]="preAuctionData" (_3MembersErrorMsg)="showErrorMsg($event)"
-      (stepperEvent1)="goBackAgain()">
+    <app-assign-pricing-committe [preAuctionData]="preAuctionData" [step]="step"
+      (_3MembersErrorMsg)="showErrorMsg($event)" (stepperEvent1)="goBackAgain()">
     </app-assign-pricing-committe>
 
-    <div *ngIf="preAuctionData?.Status=='!Pending Review'"
+    <!-- <div *ngIf="preAuctionData?.Status=='!Pending Review'"
       class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5"
       style="margin-bottom: 0 !important">
 
@@ -97,7 +97,7 @@
         <span class="v-divider"></span>
         <span class="icon icon-arrow-left"></span>
       </button>
-    </div>
+    </div> -->
   </div>
   <!-- <mat-tab-group [selectedIndex]="2">
     <mat-tab label="Auction Details">
