@@ -69,7 +69,7 @@
         <app-assign-pricing-committe [preAuctionData]="preAuctionData" (_3MembersErrorMsg)="showErrorMsg($event)" (stepperEvent1)="goBackAgain()">
         </app-assign-pricing-committe>
 
-        <div *ngIf="preAuctionData?.Status=='!(Pending Review)'" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin-bottom: 0 !important">
+        <div *ngIf="preAuctionData?.Status=='!Pending Review'" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin-bottom: 0 !important">
 
             <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
               <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span

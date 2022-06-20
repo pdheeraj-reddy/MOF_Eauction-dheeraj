@@ -25,11 +25,13 @@
     <div class="form-row mt-2">
         <div class="col-md-4 mb-2">
             <label class="text-12" style="width: 320%;">{{ "auctionModerator.am-detail.reject-popup.section2-head1" |
-        translate }}</label>
-            <select class="text-success border-bottom" style="width: 335%; border: none; outline: none;">
+                translate }}</label>
+            <input type="text" formControlName="locRegion" class="form-control" placeholder="{{ 'auctionModerator.am-detail.reject-popup.section2-head1' |
+            translate }}" id="validationCustom01" [required]="true" />
+            <!-- <select class="text-success border-bottom" style="width: 335%; border: none; outline: none;">
                 <option class="text-success" selected> {{ "auctionModerator.am-detail.reject-popup.section2-opt1" | translate }}
                 </option>
-            </select>
+            </select> -->
         </div>
     </div>
     <div class="row mt-2" style="padding: 2%; width: 105%;">

@@ -105,7 +105,7 @@
                 <div *ngIf="showAuction">
                     <!-- <app-auction-req-details [preAuctionData]="preAuctionData"> </app-auction-req-details> -->
                     <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode"></app-auction-req-details>
-                    <div class="d-flex align-items-md-center align-items-stretch my-5 justify-content-end" style="margin-bottom: 0 !important">
+                    <div *ngIf="preAuctionData?.ActionTaken=='A'" class="d-flex align-items-md-center align-items-stretch my-5 justify-content-end" style="margin-bottom: 0 !important">
 
                         <button (click)="goAhead()" class="btn arrow-btn btn-outline-light btn-lg ">
                           <span class="btn-text">Next</span>
@@ -116,7 +116,7 @@
                 </div>
                 <div *ngIf="showProduct">
                     <app-prodct-details [preAuctionData]="preAuctionData"></app-prodct-details>
-                    <div class="d-flex align-items-md-center align-items-stretch my-5 justify-content-end" style="margin-bottom: 0 !important">
+                    <div *ngIf="preAuctionData?.ActionTaken=='A'" class="d-flex align-items-md-center align-items-stretch my-5 justify-content-end" style="margin-bottom: 0 !important">
 
                         <button (click)="goAhead()" class="btn arrow-btn btn-outline-light btn-lg">
                           <span class="btn-text">Next</span>
