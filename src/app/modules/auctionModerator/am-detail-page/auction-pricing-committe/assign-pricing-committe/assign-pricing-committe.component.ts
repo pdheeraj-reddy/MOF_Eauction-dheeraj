@@ -7,6 +7,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddMemberComponent } from 'src/app/components/shared/add-member/add-member.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from 'src/app/service/auction.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-assign-pricing-committe',
@@ -48,7 +49,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
 
   committeeMem4Data: any;
   committeeMem4Selected: any;
-
+  committeeMemTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_member');
+  committeeHeadTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_head');
+  committeeSecTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_secretary');
   addcommitteeMemberList: any = [];
   list: any = [];
   foods: any = [
@@ -64,7 +67,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     private activatedRoute: ActivatedRoute,
     public router: Router,
     private zone: NgZone,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) { }
   closeConfirm() {
     this.showConfirm = false;

@@ -36,7 +36,10 @@ export class AddMemberComponent implements OnInit {
   stateCtrl = new FormControl();
   filteredStates: Observable<Employee[]>;
   selectedEmployee: any;
-
+  get currentLang() {
+    console.log("🚀 ~ getcurrentLang ~ localStorage.getItem('lang_pref')", localStorage.getItem('lang_pref'))
+    return localStorage.getItem('lang_pref') ?? 'en'
+  }
   memberSelected(member: any) {
     this.selectedEmployee = member;
     console.log(member);
@@ -98,7 +101,7 @@ export class AddMemberComponent implements OnInit {
     } else {
       if (this.selectedEmployee)
         this.selectedEmployee['EmployeeRole'] = this.role;
-        console.log(this.committeeMemberList);
+      console.log(this.committeeMemberList);
       this.dialogRef.close({
         EmpMailid: this.selectedEmployee.EmpMailid,
         EmployeeId: this.selectedEmployee.EmployeeId,

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionService } from "../../service/auction.service";
 import { EnvService } from 'src/app/env.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
     public auctionServc: AuctionService,
     private cookieService: CookieService,
     private envService: EnvService,
+    @Inject(DOCUMENT) private document: Document,
   ) {
     translate.addLangs(['ar', 'en']);
     translate.setDefaultLang('ar');
@@ -47,6 +49,13 @@ export class HeaderComponent implements OnInit {
     this.applang = this.applang == 'en' ? 'ar' : 'en';
     localStorage.setItem('lang_pref', this.applang);
     this.translate.use(this.applang);
+    this.changeLangTag();
+  }
+
+  private changeLangTag() {
+    let htmlTag = this.document.getElementsByTagName('html')[0] as HTMLHtmlElement;
+    htmlTag.dir = this.applang == 'ar' ? 'rtl' : 'ltr';
+    htmlTag.lang = this.applang;
   }
 
   /**

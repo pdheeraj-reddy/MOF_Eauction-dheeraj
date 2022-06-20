@@ -52,7 +52,7 @@
 </div>
 <div class="card flex-card" *ngIf="!showPageLoader">
   <button *ngIf="!committeeChairSelected" class="add-btn"
-    (click)=" openAddChairDialog('Add Committee Head', 'ZEAUCTION_PRICECOMM_HEAD') ">
+    (click)=" openAddChairDialog(committeeHeadTitle, 'ZEAUCTION_PRICECOMM_HEAD') ">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -69,7 +69,7 @@
         style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
         <img src="assets\icons\User.svg" alt="User icon" />
         <p>{{"auctionModerator.am-detail.pricing-committee.card1-head2" | translate}}</p>
-        <button (click)=" openAddChairDialog('Add Committee Head', 'ZEAUCTION_PRICECOMM_HEAD') "
+        <button (click)=" openAddChairDialog(committeeHeadTitle, 'ZEAUCTION_PRICECOMM_HEAD') "
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
             class="icon-edit"></span></button>
       </div>
@@ -88,7 +88,7 @@
     </div>
   </div>
   <button *ngIf="!committeeSecSelected" class="add-btn"
-    (click)=" openAddSecDialog( 'Add Committee Secretary', 'ZEAUCTION_PRICECOMM_SECRETARY' ) ">
+    (click)=" openAddSecDialog( committeeSecTitle, 'ZEAUCTION_PRICECOMM_SECRETARY' ) ">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -113,7 +113,7 @@
 
 
   <button *ngIf="!committeeMem1Selected" class="add-btn"
-    (click)=" openAddMem1Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') ">
+    (click)=" openAddMem1Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -130,7 +130,7 @@
         style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
         <img src="assets\icons\User.svg" alt="User icon" />
         <p>{{"auctionModerator.am-detail.pricing-committee.card3-head2" | translate}}</p>
-        <button (click)=" openAddMem1Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') "
+        <button (click)=" openAddMem1Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') "
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
             class="icon-edit"></span></button>
       </div>
@@ -150,7 +150,7 @@
 
 
   <button *ngIf="!committeeMem2Selected" class="add-btn"
-    (click)=" openAddMem2Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') ">
+    (click)=" openAddMem2Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -167,7 +167,7 @@
         style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
         <img src="assets\icons\User.svg" alt="User icon" />
         <p>{{"auctionModerator.am-detail.pricing-committee.card3-head2" | translate}}</p>
-        <button (click)=" openAddMem2Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') "
+        <button (click)=" openAddMem2Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') "
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
             class="icon-edit"></span></button>
       </div>
@@ -187,7 +187,7 @@
 
 
   <button *ngIf="!committeeMem3Selected" class="add-btn"
-    (click)=" openAddMem3Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') ">
+    (click)=" openAddMem3Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -204,7 +204,7 @@
         style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
         <img src="assets\icons\User.svg" alt="User icon" />
         <p>{{"auctionModerator.am-detail.pricing-committee.card3-head2" | translate}}</p>
-        <button (click)=" openAddMem3Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') "
+        <button (click)=" openAddMem3Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') "
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
             class="icon-edit"></span></button>
       </div>
@@ -223,7 +223,7 @@
   </div>
 
 
-  <!-- <button class="add-btn" (click)=" openAddMem4Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') ">
+  <!-- <button class="add-btn" (click)=" openAddMem4Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
       <div *ngIf="!committeeMem4Selected" class="card flex-card-item last-card">
         <div class="card-body">
           <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -263,7 +263,7 @@
         style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
         <img src="assets\icons\User.svg" alt="User icon" />
         <p>{{"auctionModerator.am-detail.pricing-committee.card3-head2" | translate}}</p>
-        <button (click)=" openEditMem4Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER',i) "
+        <button (click)=" openEditMem4Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER',i) "
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
             class="icon-edit"></span>
         </button>
@@ -282,7 +282,7 @@
     </div>
   </div>
   <button class="add-btn" [disabled]="!add4Mem"
-    (click)=" openAddMem4Dialog('Add Committee Member', 'ZEAUCTION_PRICECOMM_MEMBER') ">
+    (click)=" openAddMem4Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
     <div *ngIf="!committeeMem4Selected" [ngClass]="{'last-card' : !add4Mem}" class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center;">

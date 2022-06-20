@@ -494,7 +494,10 @@
                 "eid": "هوية الموظف:",
                 "email": "بريد الالكتروني:",
                 "aId": "معرّف الوكالة:",
-                "add": "يضيف"
+                "add": "يضيف",
+                "add_commitee_member": "Add Committee Member",
+                "add_commitee_head": "Add Committee Head",
+                "add_commitee_secretary": "Add Committee Secretary"
             }
         },
         "publish-popup": {

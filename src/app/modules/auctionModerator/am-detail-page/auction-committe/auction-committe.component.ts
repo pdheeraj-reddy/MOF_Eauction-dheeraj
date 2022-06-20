@@ -51,11 +51,9 @@ export class AuctionCommitteComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("🚀 ~ ngOnChanges ~ changes?.['step'].currentValue", changes?.['step'].currentValue)
     if (changes?.['step'].currentValue) {
       this.step = changes['step'].currentValue;
       if (this.step == 3) {
-        console.log("🚀 ~ ngOnInit ~ this.step", this.step)
         this.gonext = false;
       } else {
         this.gonext = true;

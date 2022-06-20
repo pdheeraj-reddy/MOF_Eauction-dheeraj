@@ -493,7 +493,10 @@
                 "eid": "Employee Id:",
                 "email": "Email:",
                 "aId": "Agency Id:",
-                "add": "Add"
+                "add": "Add",
+                "add_commitee_member": "Add Committee Member",
+                "add_commitee_head": "Add Committee Head",
+                "add_commitee_secretary": "Add Committee Secretary"
             }
         },
         "publish-popup": {

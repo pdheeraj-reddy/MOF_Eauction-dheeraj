@@ -21,12 +21,25 @@
 </head>
 
 <body class="mat-typography">
+    <script>
+        let lang = localStorage.getItem("lang_pref") ?? 'en';
+        var lstlang = ['en', 'ar'];
+        if (lang && lstlang.join(',').includes(lang)) {
+            document.documentElement.setAttribute("lang", lang);
+            if (lang == 'ar') document.documentElement.setAttribute("dir", "rtl");
+            else document.documentElement.setAttribute("dir", "ltr");
+        } else {
+            document.documentElement.setAttribute("lang", "en");
+            document.documentElement.setAttribute("dir", "ltr");
+        }
+    </script>
     <app-root></app-root>
-
     <script src="https://cdn.etimad.sa/v2/js/libs/jquery/jquery-3.4.1.min.min.js" type="text/javascript"></script>
-    <script src="https://cdn.etimad.sa/v2/js/libs/bootstrap/bootstrap.bundle.min.min.js" type="text/javascript"></script>
+    <script src="https://cdn.etimad.sa/v2/js/libs/bootstrap/bootstrap.bundle.min.min.js"
+        type="text/javascript"></script>
     <script src="https://cdn.etimad.sa/v2/js/main.min.js" type="text/javascript"></script>
-    <script src="https://cdn.etimad.sa/v2/js/libs/bootstrap-select/bootstrap-select.min.min.js" type="text/javascript"></script>
+    <script src="https://cdn.etimad.sa/v2/js/libs/bootstrap-select/bootstrap-select.min.min.js"
+        type="text/javascript"></script>
     <script src="https://cdn.etimad.sa/v2/js/libs/calendar/moment.min.min.js" type="text/javascript"></script>
     <script src="https://cdn.etimad.sa/v2/js/libs/calendar/bootstrap-hijri-datepicker.min.min.js"></script>
     <script src="https://cdn.etimad.sa/v2/js/libs/jranger/jquery.range.min.js" type="text/javascript"></script>
