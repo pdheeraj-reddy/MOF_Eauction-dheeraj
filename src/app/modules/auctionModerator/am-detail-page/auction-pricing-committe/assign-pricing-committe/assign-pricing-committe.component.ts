@@ -18,7 +18,8 @@ export class AssignPricingCommitteComponent implements OnInit {
 
   @Output() _3MembersErrorMsg = new EventEmitter();
   @Output() stepperEvent1 = new EventEmitter();
-
+  @Output() stepperEvent = new EventEmitter();
+  @Output() stepperEventAhead = new EventEmitter();
   showSuccessPopup = false;
   _3MembersAdded = false;
   showConfirm = false;
@@ -72,7 +73,7 @@ export class AssignPricingCommitteComponent implements OnInit {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }
-  goBacktoList(){
+  goBacktoList() {
     this.router.navigateByUrl('/');
   }
   checkMember() {
@@ -233,15 +234,15 @@ export class AssignPricingCommitteComponent implements OnInit {
               this.committeeChairData = result;
               console.log(this.committeeMemberList);
               this.existingCommitteMemberList.push(this.committeeChairData.EmployeeId);
-             
+
               // console.log(this.committeeMemberList);
             }
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_HEAD')
               this.committeeChairSelected = true;
-              this.hideErrorMsg();
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            this.hideErrorMsg();
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             console.log(result);
           });
         },
@@ -322,7 +323,7 @@ export class AssignPricingCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_SECRETARY')
               this.committeeSecSelected = true;
-              this.hideErrorMsg();
+            this.hideErrorMsg();
           });
         },
         (error) => {
@@ -374,9 +375,9 @@ export class AssignPricingCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem1Selected = true;
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             this.hideErrorMsg();
           });
         },
@@ -428,9 +429,9 @@ export class AssignPricingCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem2Selected = true;
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             this.hideErrorMsg();
           });
         },
@@ -483,9 +484,9 @@ export class AssignPricingCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem3Selected = true;
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             this.hideErrorMsg();
           });
         },
@@ -704,6 +705,14 @@ export class AssignPricingCommitteComponent implements OnInit {
         console.log('getAuctionList RespError : ', error);
       }
     );
+  }
+
+  goAhead() {
+    this.stepperEventAhead.emit();
+  }
+
+  goBackAgain() {
+    this.stepperEvent.emit();
   }
 
   private _filter(value: string): string[] {
