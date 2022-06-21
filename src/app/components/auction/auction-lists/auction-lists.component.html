@@ -346,7 +346,7 @@
                                         <a *ngIf="rowItem.auctionStatus === 'Pending Review' || rowItem.auctionStatus === 'Published'" [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'view']" class="btn btn-ghost btn-sm fill-primary-light-green">
                                             <span class="icon-eye-open"></span>
                                         </a>
-                                        <a *ngIf="rowItem.auctionStatus === 'Rejected'" [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'edit']" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                        <a *ngIf="rowItem.auctionStatus === 'Rejected'" class="btn btn-ghost btn-sm fill-primary-light-green dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="icon-edit"></span>
                                         </a>
                                         <a *ngIf="rowItem.auctionStatus === 'Draft'" class="btn btn-ghost btn-sm fill-primary-light-green dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
