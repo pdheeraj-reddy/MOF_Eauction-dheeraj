@@ -77,7 +77,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     window.addEventListener('beforeunload', (e) => {
       console.log("� ~ window.addEventListener ~ e", e)
       if (this.unsaved) {
-        e.preventDefault();
+        // e.preventDefault();
         e.returnValue = '';
       }
 
@@ -140,6 +140,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     this.committeeMem3Selected = false;
     this.committeeMem4Selected = false;
     this.add4Mem = false;
+
+    this.unsaved = false;
     // this.ngOnInit();
   }
 
