@@ -48,15 +48,15 @@ export class ProductDetailPopupComponent implements OnInit {
     navSpeed: 300,
     nav: false,
     responsive: {
-        0: {
-            items: 1
-        },
-        600: {
-            items: 3
-        },
-        1000: {
-            items: 3
-        }
+      0: {
+        items: 1
+      },
+      600: {
+        items: 3
+      },
+      1000: {
+        items: 3
+      }
     }
   };
 
@@ -67,7 +67,7 @@ export class ProductDetailPopupComponent implements OnInit {
 
   viewItem(a: any) {
     this.fullImage = {
-      src : a.src,
+      src: a.src,
       type: a.type
     }
     console.log(this.fullImage)
@@ -87,7 +87,7 @@ export class ProductDetailPopupComponent implements OnInit {
     this.viewproduct = this.dialogData.viewproduct;
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
-    if(this.viewproduct.productImages && this.viewproduct.productImages.length < 1){
+    if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;
     } else {
       this.showLoader = true;
@@ -96,7 +96,7 @@ export class ProductDetailPopupComponent implements OnInit {
           this.downloadImages(index);
         }
       )
-      if(this.slidesStore.length == this.viewproduct.productImages.length){
+      if (this.slidesStore.length == this.viewproduct.productImages.length) {
         this.fetchPicture = false;
       }
     }
@@ -160,17 +160,17 @@ export class ProductDetailPopupComponent implements OnInit {
             type: index.MIMEType
           });
 
-          if(this.slidesStore.length == this.viewproduct.productImages.length){
+          if (this.slidesStore.length == this.viewproduct.productImages.length) {
             this.fetchPicture = false;
           }
 
-          if(this.slidesStore.length == 1){
+          if (this.slidesStore.length == 1) {
             this.fullImage = {
-              src : this.slidesStore[0].src,
+              src: this.slidesStore[0].src,
               type: this.slidesStore[0].type
             }
           }
-          
+
           this.showLoader = false;
         },
         (error) => {
@@ -183,9 +183,10 @@ export class ProductDetailPopupComponent implements OnInit {
 
   activeDownloadFileIndex = -1;
   // This fuction is used to view and download the attachment files
-  viewAttachment(file: any, index:number, option: string) {
+  viewAttachment(file: any, index: number, option: string) {
     if (file.FilenetId) {
       this.activeDownloadFileIndex = index;
+      file.downloading = true;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
@@ -201,21 +202,22 @@ export class ProductDetailPopupComponent implements OnInit {
           console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
           console.log('fileURL', fileURL);
-          var newWin: any;          
-          if(option == 'view'){
+          var newWin: any;
+          if (option == 'view') {
             newWin = window.open(fileURL, '_blank');
           } else {
             newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
           }
-          if((!newWin || newWin.closed || typeof newWin.closed=='undefined')  && option == 'view')
-          {
-              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined') && option == 'view') {
+            alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
           }
           this.activeDownloadFileIndex = -1;
+          file.downloading = false;
           // window.open(fileContent, "_blank");
         },
         (error) => {
           this.activeDownloadFileIndex = -1;
+          file.downloading = false;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );
