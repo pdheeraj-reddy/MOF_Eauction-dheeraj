@@ -37,13 +37,13 @@ export class AuctionReqDetailsComponent implements OnInit {
     public auctionServc: AuctionService,
     public auctionApprovalServc: AuctionApprovalService,
     private interconversionService: InterconversionService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log('AuctionReqDetailsComponent getPreAuctionData ', this.preAuctionData);
     if (this.ObjectId || this.DraftId) {
       console.log('edit');
-    this.getAuctionDetails(this.ObjectId, this.DraftId);
+      this.getAuctionDetails(this.ObjectId, this.DraftId);
     } else {
       console.log('new');
     }
@@ -167,8 +167,9 @@ export class AuctionReqDetailsComponent implements OnInit {
 
   activeDownloadFileIndex = -1
 
-  viewAttachment(file: any, index:number, option: string) {
+  viewAttachment(file: any, index: number, option: string) {
     if (file.FilenetId) {
+      file.downloading = true;
       this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
@@ -186,19 +187,20 @@ export class AuctionReqDetailsComponent implements OnInit {
           console.log('fileURL ', fileURL);
           this.showViewAttachmentsModal = false;
           var newWin: any;
-          if(option == 'view'){
+          if (option == 'view') {
             newWin = window.open(fileURL, '_blank');
-          } else {            
+          } else {
             newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
           }
-          if((!newWin || newWin.closed || typeof newWin.closed=='undefined') && option == 'view') 
-          {
-              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined') && option == 'view') {
+            alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
           }
+          file.downloading = false;
           this.activeDownloadFileIndex = -1;
           // window.open(fileContent, "_blank");
         },
         (error) => {
+          file.downloading = false;
           this.showLoader = false;
           this.activeDownloadFileIndex = -1;
           console.log('downloadAuctionImages RespError : ', error);
