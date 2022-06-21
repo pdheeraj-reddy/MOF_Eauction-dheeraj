@@ -558,7 +558,8 @@ export class AuctionDetailComponent implements OnInit {
             "type": '',
             "filesrc": '',
             "FilenetId": value.FilenetId,
-            "MIMEType": value.MIMEType
+            "MIMEType": value.MIMEType,
+            downloading: false,
           };
           this.files.push(fileupload);
           this.auctionAttachement.push(new FormControl(fileupload));
@@ -720,6 +721,7 @@ export class AuctionDetailComponent implements OnInit {
 
   viewAttachment(file: any, index: any) {
     if (file.FilenetId) {
+      file.downloading = true;
       this.activeFileDownloadIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
         console.log(downloadAuctionImagesResp);
@@ -738,10 +740,12 @@ export class AuctionDetailComponent implements OnInit {
         this.showViewAttachmentsModal = false;
         window.open(fileURL, '_blank');
         this.activeFileDownloadIndex = -1;
+        file.downloading = false;
         // window.open(fileContent, "_blank");
       }, (error) => {
         this.showLoader = false;
         this.activeFileDownloadIndex = -1;
+        file.downloading = false;
         console.log('downloadAuctionImages RespError : ', error);
       });
     } else {
@@ -950,6 +954,7 @@ export class AuctionDetailComponent implements OnInit {
             "Version": "1.0",
             "ObjectType": "/AuctionDocuments",
             "ObjectId": this.ObjectId,
+            downloading: false,
           };
           console.log('fileNetAuctionDetail -- ', fileNetAuctionDetail);
           this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(result => {
