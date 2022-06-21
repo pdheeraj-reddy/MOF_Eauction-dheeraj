@@ -16,6 +16,7 @@ import { AuctionService } from 'src/app/service/auction.service';
 export class AuctionPricingCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
   @Input() step: number;
+  @Input() activestep: number;
   @Output() stepperEvent = new EventEmitter();
   @Output() stepperEventAhead = new EventEmitter();
 
@@ -35,6 +36,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
   showAuction = false;
   showProduct = false;
   showAssignPricing = true;
+  showNext: boolean = true;
   foods: any = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
@@ -184,6 +186,10 @@ export class AuctionPricingCommitteComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
+    console.log(this.step, " thara thara thara", this.activestep)
+    if(this.step == this.activestep){
+      this.showNext = false;
+    }
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');

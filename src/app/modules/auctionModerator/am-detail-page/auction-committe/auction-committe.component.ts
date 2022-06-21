@@ -16,6 +16,7 @@ import { AuctionService } from 'src/app/service/auction.service';
 export class AuctionCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
   @Input() step: number;
+  @Input() activestep: number;
   @Output() steppernext = new EventEmitter();
   @Output() stepperACEvent = new EventEmitter();
   @Output() stepperEventAhead = new EventEmitter();
@@ -42,6 +43,7 @@ export class AuctionCommitteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.step, " thara thara thara", this.activestep)
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');

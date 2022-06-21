@@ -17,6 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class AssignPricingCommitteComponent implements OnInit, OnChanges {
   @Input() preAuctionData: any;
   @Input() step: number;
+  @Input() activestep: number;
+  @Input() activestep1: number;
 
   @Output() _3MembersErrorMsg = new EventEmitter();
   @Output() stepperEvent1 = new EventEmitter();
@@ -26,6 +28,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
+  showNext: boolean = true;
   popupTitle: any = '';
   committeeMemberList: any = [];
   existingCommitteMemberList: any = [];
@@ -69,7 +72,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     private zone: NgZone,
     private cdr: ChangeDetectorRef,
     private translate: TranslateService
-  ) { }
+  ) {
+    // window.addEventListener('beforeunload', (e) => {
+    //   console.log("� ~ window.addEventListener ~ e", e)
+    //   e.preventDefault();
+    //   e.returnValue = '';
+    // });
+  }
   closeConfirm() {
     this.showConfirm = false;
   }
@@ -651,14 +660,21 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.['step'].currentValue) {
+      console.log(changes?.['step'], "check for the steps")
       this.stepIndex = changes?.['step'].currentValue;
+
+      console.log(this.step, "current step", this.stepIndex)
       this.cdr.detectChanges();
     }
 
   }
 
   ngOnInit() {
-    this.stepIndex = this.step;
+    // this.stepIndex = this.step;
+    console.log(this.step, "thara", this.activestep)
+    if (this.step == this.activestep1) {
+      this.showNext = false;
+    }
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
     }
