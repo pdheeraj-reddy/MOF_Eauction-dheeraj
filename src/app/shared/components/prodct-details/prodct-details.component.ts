@@ -85,7 +85,7 @@ export class ProdctDetailsComponent implements OnInit {
       this.showConfim = true;
     }
   }
-  closeConfirm(){
+  closeConfirm() {
     this.showConfim = false;
   }
   editPrice(index: any, product: any) {
@@ -213,60 +213,60 @@ export class ProdctDetailsComponent implements OnInit {
         this.productValue = this.pdtEstPricePc;
       }
       this.auctionProducts = this.interconversionService.mappingObjForProducts(this.preAuctionData);
-      if (this.preAuctionData?.listtoattachnav['results']) {
-        this.temp = [];
-        console.log("att data form API", this.preAuctionData?.listtoattachnav['results']);
-        this.preAuctionData?.listtoattachnav['results'].forEach(
-          (value: any, index: any, array: any) => {
-            if (value.ObjectType == '/AuctionProductImages') {
-              console.log(index, 'attachment index');
-              var fileupload = {
-                name: value.FileName + '.' + value.FileExt,
-                size: '',
-                type: '',
-                filesrc: '',
-                FilenetId: value.FilenetId,
-                MIMEType: value.MIMEType,
-              };
-              this.auctionServc
-                .downloadAuctionImages(fileupload.FilenetId)
-                .subscribe(
-                  async (downloadAuctionImagesResp: any) => {
-                    const fileResp = downloadAuctionImagesResp.d;
-                    var byteString = atob(
-                      atob(fileResp.FileContent).split(',')[1]
-                    );
-                    var ab = new ArrayBuffer(byteString.length);
-                    var ia = new Uint8Array(ab);
-                    for (var i = 0; i < byteString.length; i++) {
-                      ia[i] = byteString.charCodeAt(i);
-                    }
-                    const blob = new Blob([ab], { type: fileupload.MIMEType });
-                    // var a = window.URL.createObjectURL(blob);
-                    var base64String = await this.convertBlobToBase64(blob);
-                    console.log("base64String in mapping for edit", base64String);
+      // if (this.preAuctionData?.listtoattachnav['results']) {
+      //   this.temp = [];
+      //   console.log("att data form API", this.preAuctionData?.listtoattachnav['results']);
+      //   this.preAuctionData?.listtoattachnav['results'].forEach(
+      //     (value: any, index: any, array: any) => {
+      //       if (value.ObjectType == '/AuctionProductImages') {
+      //         console.log(index, 'attachment index');
+      //         var fileupload = {
+      //           name: value.FileName + '.' + value.FileExt,
+      //           size: '',
+      //           type: '',
+      //           filesrc: '',
+      //           FilenetId: value.FilenetId,
+      //           MIMEType: value.MIMEType,
+      //         };
+      //         this.auctionServc
+      //           .downloadAuctionImages(fileupload.FilenetId)
+      //           .subscribe(
+      //             async (downloadAuctionImagesResp: any) => {
+      //               const fileResp = downloadAuctionImagesResp.d;
+      //               var byteString = atob(
+      //                 atob(fileResp.FileContent).split(',')[1]
+      //               );
+      //               var ab = new ArrayBuffer(byteString.length);
+      //               var ia = new Uint8Array(ab);
+      //               for (var i = 0; i < byteString.length; i++) {
+      //                 ia[i] = byteString.charCodeAt(i);
+      //               }
+      //               const blob = new Blob([ab], { type: fileupload.MIMEType });
+      //               // var a = window.URL.createObjectURL(blob);
+      //               var base64String = await this.convertBlobToBase64(blob);
+      //               console.log("base64String in mapping for edit", base64String);
 
-                    this.temp.push({
-                      id: index + 1,
-                      src: base64String,
-                      alt: 'test',
-                      title: 'hello world',
-                      type: value.MIMEType,
-                    });
-                    if (
-                      index + 1 ==
-                      this.preAuctionData?.listtoattachnav['results'].length
-                    ) {
-                    }
-                  },
-                  (error) => {
-                    console.log('downloadAuctionImages RespError : ', error);
-                  }
-                );
-            }
-          }
-        );
-      }
+      //               this.temp.push({
+      //                 id: index + 1,
+      //                 src: base64String,
+      //                 alt: 'test',
+      //                 title: 'hello world',
+      //                 type: value.MIMEType,
+      //               });
+      //               if (
+      //                 index + 1 ==
+      //                 this.preAuctionData?.listtoattachnav['results'].length
+      //               ) {
+      //               }
+      //             },
+      //             (error) => {
+      //               console.log('downloadAuctionImages RespError : ', error);
+      //             }
+      //           );
+      //       }
+      //     }
+      //   );
+      // }
     }
     if (this.loggedUserRole.isPricingHead) {
       this.showAdjustPriceOption = false;
