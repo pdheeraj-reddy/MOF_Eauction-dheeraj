@@ -23,6 +23,7 @@ export class AmDetailPageComponent implements OnInit {
   DraftId: any = '';
   ViewMode: any = '';
   selectedIndex = 0;
+  activeIndex: number;
   tabThreeFour = true;
   tabFourFive = false;
   tabTwo = false;
@@ -227,22 +228,28 @@ export class AmDetailPageComponent implements OnInit {
         if (this.preAuctionData.Status == 'Pending Review') {
           if (this.preAuctionData?.ActionTaken == 'P') {
             this.selectedIndex = 0;
+            this.activeIndex = 0;
           } else {
             this.selectedIndex = 1;
+            this.activeIndex = 1;
           }
         } else if (this.preAuctionData.Status == 'Pending Pricing') {
           this.selectedIndex = 1;
+          this.activeIndex = 1;
         } else if (this.preAuctionData.Status == 'Pending to Publish') {
           this.selectedIndex = 2;
+          this.activeIndex = 2;
           let data = this.preAuctionData.listtocomiteememnav.results;
           for (let i = 0; i < data.length; i++) {
             if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
               this.selectedIndex = 3;
+              this.activeIndex = 3;
             }
           }
         } else if (this.preAuctionData.Status == 'Published') {
           this.tabFourFive = true;
           this.selectedIndex = 3;
+          this.activeIndex = 3;
           this.auctionAnnouncement = false;
         }
         for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {

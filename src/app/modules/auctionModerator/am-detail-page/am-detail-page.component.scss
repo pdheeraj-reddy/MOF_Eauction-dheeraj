@@ -134,6 +134,10 @@
             color: rgba(0, 0, 0, 0.87);
         }
         
+         ::ng-deep .mat-horizontal-stepper-header {
+            pointer-events: none !important;
+        }
+        
         .nav-link {
             padding: 15px 24px !important;
         }

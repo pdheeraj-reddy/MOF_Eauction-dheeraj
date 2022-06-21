@@ -14,7 +14,7 @@ export interface DialogData {
   productDetails: any;
   index: any;
   isBidUpdate: any;
-  status:any
+  status: any
 }
 
 @Component({
@@ -44,7 +44,7 @@ export class ViewProductDetailComponent implements OnInit {
     public dialog: MatDialog,
     public auctionServc: AuctionService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   customOptions: OwlOptions = {
     items: 4,
@@ -59,23 +59,23 @@ export class ViewProductDetailComponent implements OnInit {
     nav: false,
     responsive: {
       0: {
-          items: 1
+        items: 1
       },
       600: {
-          items: 3
+        items: 3
       },
       1000: {
-          items: 3
+        items: 3
       }
-  }
+    }
   };
 
-  sortByTableHeaderId(a: number, b: string) {}
+  sortByTableHeaderId(a: number, b: string) { }
   closeDialog() {
-    if(this.price < 1){
+    if (this.price < 1) {
       this.invalid = true;
     }
-    else{
+    else {
       this.invalid = false;
       this.dialogRef.close({
         index: this.index,
@@ -85,7 +85,7 @@ export class ViewProductDetailComponent implements OnInit {
 
   }
 
-  closeDialogbutton(){
+  closeDialogbutton() {
     this.dialogRef.close();
   }
 
@@ -104,7 +104,7 @@ export class ViewProductDetailComponent implements OnInit {
     //   this.fullImage = this.slidesStore[0].src;
     // }
     this.viewproduct = this.dialogData.viewproduct;
-    if(this.viewproduct.productImages && this.viewproduct.productImages.length < 1){
+    if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;
     } else {
       this.showLoader = true;
@@ -114,7 +114,7 @@ export class ViewProductDetailComponent implements OnInit {
         }
       )
 
-      if(this.slidesStore.length == this.viewproduct.productImages.length){
+      if (this.slidesStore.length == this.viewproduct.productImages.length) {
         this.fetchPicture = false;
       }
     }
@@ -182,17 +182,17 @@ export class ViewProductDetailComponent implements OnInit {
             type: index.MIMEType
           });
 
-          if(this.slidesStore.length == this.viewproduct.productImages.length){
+          if (this.slidesStore.length == this.viewproduct.productImages.length) {
             this.fetchPicture = false;
           }
 
-          if(this.slidesStore.length == 1){
+          if (this.slidesStore.length == 1) {
 
-          this.fullImage = {
-            src : this.slidesStore[0].src,
-            type: this.slidesStore[0].type
+            this.fullImage = {
+              src: this.slidesStore[0].src,
+              type: this.slidesStore[0].type
+            }
           }
-        }
           this.showLoader = false;
         },
         (error) => {
@@ -204,19 +204,20 @@ export class ViewProductDetailComponent implements OnInit {
 
   viewItem(a: any) {
     this.fullImage = {
-      src : a.src,
+      src: a.src,
       type: a.type
     }
     console.log(this.fullImage)
   }
 
-  
+
 
   activeDownloadFileIndex = -1;
   // This fuction is used to view and download the attachment files
-  viewAttachment(file: any, index:number, option: string) {
+  viewAttachment(file: any, index: number, option: string) {
     if (file.FilenetId) {
       this.activeDownloadFileIndex = index;
+      file.downloading = true;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
@@ -232,21 +233,22 @@ export class ViewProductDetailComponent implements OnInit {
           console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
           console.log('fileURL', fileURL);
-          var newWin: any;          
-          if(option == 'view'){
+          var newWin: any;
+          if (option == 'view') {
             newWin = window.open(fileURL, '_blank');
           } else {
             newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
           }
-          if((!newWin || newWin.closed || typeof newWin.closed=='undefined')  && option == 'view')
-          {
-              alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined') && option == 'view') {
+            alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
           }
           this.activeDownloadFileIndex = -1;
+          file.downloading = false;
           // window.open(fileContent, "_blank");
         },
         (error) => {
           this.activeDownloadFileIndex = -1;
+          file.downloading = false;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );
