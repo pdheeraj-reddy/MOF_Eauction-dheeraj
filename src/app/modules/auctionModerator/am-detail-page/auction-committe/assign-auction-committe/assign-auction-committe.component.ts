@@ -23,7 +23,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   @Output() callstepper = new EventEmitter();
   @Output() stepperEvent1 = new EventEmitter();
   @Output() stepperEvent2 = new EventEmitter();
-  @Output() 
+  @Output()
   _3MembersAdded = false;
   showConfirm = false;
   showSuccessPopup = false;
@@ -33,6 +33,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
 
   commiteeMemberData = false;
   add4Mem: boolean = false;
+  unsaved: boolean = false;
   list: any = [];
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -72,7 +73,16 @@ export class AssignAuctionCommitteComponent implements OnInit {
     public auctionServc: AuctionService,
     public dialog: MatDialog,
     public router: Router
-  ) { }
+  ) {
+    window.addEventListener('beforeunload', (e) => {
+      console.log("� ~ window.addEventListener ~ e", e)
+      if (this.unsaved) {
+        // e.preventDefault();
+        e.returnValue = '';
+      }
+
+    });
+  }
 
   memberSelected(data: any) {
     console.log(data);
@@ -106,7 +116,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.showSuccessPopup = false;
     this.callstepper.emit();
   }
-  
+
 
   cancelMember() {
     this.committeeChairData = undefined;
@@ -122,6 +132,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.committeeMem3Selected = false;
     this.committeeMem4Selected = false;
     this.add4Mem = false;
+    this.unsaved = false;
     // this.ngOnInit();
   }
 
@@ -211,6 +222,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -262,6 +274,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -343,6 +356,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -375,14 +389,14 @@ export class AssignAuctionCommitteComponent implements OnInit {
               }
               this.committeeMem1Data = result;
               this.existingCommitteMemberList.push(this.committeeMem1Data.EmployeeId);
-              
+
             }
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
               this.committeeMem1Selected = true;
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             this.hideErrorMsg()
           });
         },
@@ -399,6 +413,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -433,9 +448,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
               this.committeeMem2Selected = true;
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             this.hideErrorMsg()
           });
         },
@@ -451,6 +466,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -486,9 +502,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
             console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
               this.committeeMem3Selected = true;
-              if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
-                this.add4Mem = true;
-              }
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
             this.hideErrorMsg()
           });
         },
@@ -545,6 +561,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -603,6 +620,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
+          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -672,7 +690,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }
-  goAhead(){
+  goAhead() {
     this.stepperEvent2.emit();
   }
 

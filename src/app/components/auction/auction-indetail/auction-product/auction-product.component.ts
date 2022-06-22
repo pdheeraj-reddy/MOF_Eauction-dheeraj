@@ -771,6 +771,7 @@ export class AuctionProductComponent implements OnInit {
   }
 
   selectFiles(e: any, dd: string): void {
+    this.invalidImageSize = false;
     this.invalidFileSize = false;
     let filecount = e.target.files.length;
     if (e.target.files && filecount <= this.maxFileCount) {
@@ -889,7 +890,7 @@ export class AuctionProductComponent implements OnInit {
   // }
 
   removeFile(file: any, index: number, currentPage: number) {
-    this.invalidFileSize = false;
+    this.invalidImageSize = false;
     if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
@@ -935,6 +936,7 @@ export class AuctionProductComponent implements OnInit {
   //<!----------------------- product add,edit delete--------------------->
 
   public onAddProduct(submitSrc: string) {
+    this.invalidImageSize = false;
     this.invalidFileSize = false;
     this.onAddProductSubmitted = true;
     if (this.addFormGroup.get('productSerialNumber')?.value < 1) {

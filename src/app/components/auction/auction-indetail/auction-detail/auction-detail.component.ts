@@ -959,7 +959,6 @@ export class AuctionDetailComponent implements OnInit {
             "Version": "1.0",
             "ObjectType": "/AuctionDocuments",
             "ObjectId": this.ObjectId,
-            downloading: false,
           };
           console.log('fileNetAuctionDetail -- ', fileNetAuctionDetail);
           this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(result => {
