@@ -49,8 +49,12 @@ export class AuctionComponent implements OnInit {
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
       this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
     }
-    if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
-      this.getAuctionDetails(this.ObjectId, this.DraftId);
+    if(this.ViewMode){
+      if (this.ViewMode == 'edit' || this.ViewMode == 'view') {
+        this.getAuctionDetails(this.ObjectId, this.DraftId);
+      } else{
+        this.router.navigate(['/auctionlist']);
+      }
     } else {
       if (this.ObjectId || this.DraftId) {
         this.getAuctionDetails(this.ObjectId, this.DraftId);
@@ -88,7 +92,7 @@ export class AuctionComponent implements OnInit {
       } else if (this.ViewMode == 'edit') {
         console.log('auctionDetails ', this.auctionDetails);
         console.log('status ', this.auctionDetails.Status);
-        if (this.auctionDetails.Status === 'Pending Review') {
+        if (this.auctionDetails.Status === 'Pending Review' || this.auctionDetails.Status === 'Published' ) {
           this.router.navigate(['/auctionlist']);
         } else {
           console.log('product length on load', this.auctionDetails?.listtoproductnav?.results.length);
