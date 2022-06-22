@@ -48,8 +48,8 @@ export class AuctionProductComponent implements OnInit {
   // ------- product file attachment --------
   // ------- file validation         --------
   maxFileCount: Number = 30;
-  acceptedImagesExtensions = ['mp4','mov','png','jpg','jpeg'];
-  acceptedFilesExtensions = ['docx','doc','pdf'];
+  acceptedImagesExtensions = ['mp4', 'mov', 'png', 'jpg', 'jpeg'];
+  acceptedFilesExtensions = ['docx', 'doc', 'pdf'];
   @ViewChild('myModalClose') modalClose: any;
   msg: String = '';
   selectedFiles: File[];
@@ -332,7 +332,8 @@ export class AuctionProductComponent implements OnInit {
                   "type": '',
                   "filesrc": '',
                   "FilenetId": value.FilenetId,
-                  "MIMEType": value.MIMEType
+                  "MIMEType": value.MIMEType,
+                  downloading: false,
                 };
                 productImages.push(new FormControl(imageupload));
               });
@@ -346,7 +347,8 @@ export class AuctionProductComponent implements OnInit {
                   "type": '',
                   "filesrc": '',
                   "FilenetId": value.FilenetId,
-                  "MIMEType": value.MIMEType
+                  "MIMEType": value.MIMEType,
+                  downloading: false,
                 };
                 productFiles.push(new FormControl(fileupload));
               });
@@ -734,7 +736,7 @@ export class AuctionProductComponent implements OnInit {
   customLoopforImages(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
-    if(!!this.acceptedImagesExtensions.find(x => x === fileType)){
+    if (!!this.acceptedImagesExtensions.find(x => x === fileType)) {
       if (filesize <= 2097152) {
         if (this.productImages['controls'].length < this.maxFileCount) {
           // var fileupload: {[k: string]: any} = {};
@@ -779,7 +781,7 @@ export class AuctionProductComponent implements OnInit {
   customLoopforFiles(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
-    if(!!this.acceptedFilesExtensions.find(x => x === fileType)){
+    if (!!this.acceptedFilesExtensions.find(x => x === fileType)) {
       if (filesize <= 2097152) {
         if (this.productFiles['controls'].length < this.maxFileCount) {
           // var fileupload: {[k: string]: any} = {};
@@ -814,6 +816,7 @@ export class AuctionProductComponent implements OnInit {
     }
     console.log('viewAttachment');
     if (file.FilenetId) {
+      file.downloading = true;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
@@ -833,8 +836,10 @@ export class AuctionProductComponent implements OnInit {
           this.activePictureIndex = -1;
           // console.log("We got the picture");
         }
+        file.downloading = false;
         // window.open(fileContent, "_blank");
       }, (error) => {
+        file.downloading = false;
         if (category == "File") {
           this.activeFileIndex = -1;
         }
