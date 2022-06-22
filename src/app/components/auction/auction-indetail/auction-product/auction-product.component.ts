@@ -894,7 +894,11 @@ export class AuctionProductComponent implements OnInit {
         this.showPopupLoader = false;
         this.files.splice(index, 1);
         this.productImages.removeAt(index);
-        this.navigateToPage(currentPage, 'auctionAttach');
+        if (this.files.length % 10 === 0) {
+          this.navigateToPage(currentPage-1, 'productPictureAttach');
+        } else {
+          this.navigateToPage(currentPage, 'productPictureAttach');
+        }
       }, (error) => {
         this.showLoader = false;
         console.log('deleteAuctionImagesResp RespError : ', error);
@@ -902,7 +906,11 @@ export class AuctionProductComponent implements OnInit {
     } else {
       this.files.splice(index, 1);
       this.productImages.removeAt(index);
-      this.navigateToPage(currentPage, 'productFileAttach');
+      if (this.files.length % 10 === 0) {
+        this.navigateToPage(currentPage-1, 'productPictureAttach');
+      } else {
+        this.navigateToPage(currentPage, 'productPictureAttach');
+      }
     }
   }
 
@@ -916,7 +924,11 @@ export class AuctionProductComponent implements OnInit {
         this.showPopupLoader = false;
         this.files.splice(index, 1);
         this.productFiles.removeAt(index);
-        this.navigateToPage(currentPage, 'auctionAttach');
+        if (this.files.length % 10 === 0) {
+          this.navigateToPage(currentPage-1, 'productFileAttach');
+        } else {
+          this.navigateToPage(currentPage, 'productFileAttach');
+        }
       }, (error) => {
         this.showLoader = false;
         console.log('deleteAuctionImagesResp RespError : ', error);
@@ -924,7 +936,11 @@ export class AuctionProductComponent implements OnInit {
     } else {
       this.files.splice(index, 1);
       this.productFiles.removeAt(index);
-      this.navigateToPage(currentPage, 'productFileAttach');
+      if (this.files.length % 10 === 0) {
+        this.navigateToPage(currentPage-1, 'productFileAttach');
+      } else {
+        this.navigateToPage(currentPage, 'productFileAttach');
+      }
     }
   }
 
