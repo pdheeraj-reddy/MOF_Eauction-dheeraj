@@ -197,7 +197,8 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.get('auctionEndTime')?.setValue('02:00 AM');
     this.basicFormGroup.get('startAuction')?.setValue('T');
     this.basicFormGroup.get('auctionAnncStartDate')?.setValue(moment(startADate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-    this.basicFormGroup.get('auctionAnncEndDate')?.setValue(moment(endADate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
+    // this.basicFormGroup.get('auctionAnncEndDate')?.setValue(moment(endADate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
+    this.basicFormGroup.get('auctionAnncEndDate')?.setValue('02:00 AM');
     this.basicFormGroup.get('startPrice')?.setValue('5600000');
     this.basicFormGroup.get('lowBidValue')?.setValue('60000');
     this.basicFormGroup.get('gnteePercentage')?.setValue('2');
@@ -285,7 +286,7 @@ export class AuctionDetailComponent implements OnInit {
       $("#auctionAnncEndDate").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
-        format: "YYYY-MM-DD",
+        format: "hh:mm A",
         minDate: todayDate,
         showSwitcher: false,
         icons: {
@@ -351,6 +352,9 @@ export class AuctionDetailComponent implements OnInit {
     if (formControlName === 'auctionStartDate') {
       $("#auctionStartDate").hijriDatePicker({ minDate: $event.target.value });
     }
+    if (formControlName === 'auctionEndDate') {
+      $("#auctionAnncEndDate").hijriDatePicker({ minDate: $event.target.value });
+    }
     this.basicFormGroup.controls[formControlName].setValue($event.target.value);
     if (formControlName == 'auctionStartDate' || formControlName == 'auctionEndDate') {
       let startDate = this.basicFormGroup.controls['auctionStartDate'].value;
@@ -363,13 +367,13 @@ export class AuctionDetailComponent implements OnInit {
         }
       }
     }
-    if (formControlName == 'auctionStartDate' || formControlName == 'auctionAnncStartDate') {
+    if (formControlName == 'auctionStartDate' || formControlName == 'auctionAnncStartDate' || formControlName == 'auctionEndDate') {
       let anncStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
       let anncEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
       let StartDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
       // This is for Bid Opening Date validation
       if (anncStartDate && anncEndDate && StartDate) {
-        if ((moment(StartDate).isAfter(anncEndDate, 'day')) || (moment(StartDate).isBefore(anncStartDate, 'day'))) {
+        if ((moment(StartDate).isBefore(anncEndDate, 'day')) || (moment(StartDate).isBefore(anncStartDate, 'day'))) {
           this.isValidAnncSDate = true;
         } else {
           this.isValidAnncSDate = false;
@@ -383,28 +387,29 @@ export class AuctionDetailComponent implements OnInit {
       //   }
       // }
     }
-    if (formControlName == 'auctionEndDate' || formControlName == 'auctionAnncEndDate') {
-      let anncStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
-      let anncEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
-      let EndDate = this.basicFormGroup.controls['auctionAnncEndDate'].value;
+    // if (formControlName == 'auctionEndDate' || formControlName == 'auctionAnncEndDate') {
+    //   let anncStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
+    //   let anncEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
+    //   let EndDate = this.basicFormGroup.controls['auctionAnncEndDate'].value;
 
-      // This is for Bid Opening Time validation
-      if (anncStartDate && anncEndDate && EndDate) {
-        if ((moment(EndDate).isAfter(anncEndDate, 'day')) || (moment(EndDate).isBefore(anncStartDate, 'day'))) {
-          this.isValidAnncEDate = true;
-        } else {
-          this.isValidAnncEDate = false;
-        }
-      }
-      // This is for start date validation
-      // if (anncStartDate1 && anncEndDate2) {
-      //   if ((moment(anncEndDate2).isBefore(anncStartDate1, 'day'))) {
-      //     this.isValidAnncEDate = true;
-      //   } else {
-      //     this.isValidAnncEDate = false;
-      //   }
-      // }
-    }
+    //   // This is for Bid Opening Time validation
+    //   if (anncStartDate && anncEndDate && EndDate) {
+    //     if ((moment(EndDate).isBefore(anncEndDate, 'day'))) {
+    //       this.isValidAnncEDate = true;
+    //     } else {
+    //       this.isValidAnncEDate = false;
+    //     }
+    //     console.log("🚀 ~ onChangeDateTime ~ this.isValidAnncEDate", this.isValidAnncEDate)
+    //   }
+    //   // This is for start date validation
+    //   // if (anncStartDate1 && anncEndDate2) {
+    //   //   if ((moment(anncEndDate2).isBefore(anncStartDate1, 'day'))) {
+    //   //     this.isValidAnncEDate = true;
+    //   //   } else {
+    //   //     this.isValidAnncEDate = false;
+    //   //   }
+    //   // }
+    // }
   }
 
   onChangeEndDate($event: any) {
@@ -1246,7 +1251,7 @@ export class AuctionDetailComponent implements OnInit {
       ZzAucEndDt: (obj.auctionEndDate ? moment(obj.auctionEndDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '') + (obj.auctionEndTime ? " " + moment(obj.auctionEndTime, 'h:m:s A').format('HH:mm:ss') : ''),
       ZzStartMethod: obj.startAuction,
       ZzAnncSrtD: obj.auctionAnncStartDate ? moment(obj.auctionAnncStartDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-      ZzAnncEndD: obj.auctionAnncEndDate ? moment(obj.auctionAnncEndDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
+      ZzAnncEndD: obj.auctionAnncEndDate ? moment(obj.auctionAnncEndDate, 'h:m:s A').format('HH:mm:ss') : '',
       ZzBidSrtPrice: obj.startPrice,
       ZzLowBidVl: obj.lowBidValue,
       ZzIbgaPercent: '2', // HardCoded to 2, need to changed in future

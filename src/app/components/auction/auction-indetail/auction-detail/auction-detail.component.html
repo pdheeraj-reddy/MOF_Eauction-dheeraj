@@ -400,7 +400,7 @@
                             <input type="text" id="auctionAnncEndDate" formControlName="auctionAnncEndDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                                 (change)="onChangeDateTime($event, 'auctionAnncEndDate')"
-                                class="form-control calendar-control calendar-both-control" [required]="true" />
+                                class="form-control time-control" [required]="true" />
                             <!-- <input type="text" formControlName="auctionAnncEndDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
                             <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
                                 | translate }}</div>

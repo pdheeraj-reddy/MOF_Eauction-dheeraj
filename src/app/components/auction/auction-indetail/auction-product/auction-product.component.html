@@ -581,15 +581,15 @@
                                                                 <td>
                                                                     <div class="qq-btn-group text-center">
 
-                                                                        <button *ngIf="activePictureIndex != index" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(file,index,'Picture')" data-dismiss="alert" aria-label="VIew" data-toggle="modal" data-target="#viewAttachmentModal">
+                                                                        <button *ngIf="!file.downloading" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(file,index,'Picture')" data-dismiss="alert" aria-label="VIew" data-toggle="modal" data-target="#viewAttachmentModal">
                                                                             <img src="assets/icons/eye_open.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="ViewMode != 'view' && activePictureIndex != index" type="button" (click)="removeFile(file, index, pageRangeForProductPictureAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
+                                                                        <button *ngIf="ViewMode != 'view' && !file.downloading" type="button" (click)="removeFile(file, index, pageRangeForProductPictureAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
                                                                             <img src="assets/icons/delete.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="activePictureIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                                                        <button *ngIf="file.downloading" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                                                             <span class="btn-text pr-0">
                                                                                 <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                                                     role="status">
@@ -688,15 +688,15 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="qq-btn- text-center">
-                                                                        <button *ngIf="activeFileIndex != index" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(doc,index , 'File')" data-dismiss="alert" aria-label="VIew" data-toggle="modal" data-target="#viewAttachmentModal">
+                                                                        <button *ngIf="!doc.downloading" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(doc,index , 'File')" data-dismiss="alert" aria-label="VIew" data-toggle="modal" data-target="#viewAttachmentModal">
                                                                             <img src="assets/icons/eye_open.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="ViewMode != 'view' && activeFileIndex != index" type="button" (click)="removeDoc(doc, index, pageRangeForProductFileAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
+                                                                        <button *ngIf="ViewMode != 'view' && !doc.downloading" type="button" (click)="removeDoc(doc, index, pageRangeForProductFileAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
                                                                             <img src="assets/icons/delete.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="activeFileIndex == index" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                                                        <button *ngIf="doc.downloading" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                                                             <span class="btn-text pr-0">
                                                                                 <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                                                     role="status">
