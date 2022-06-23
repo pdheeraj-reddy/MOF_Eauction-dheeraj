@@ -267,7 +267,7 @@
         "back_auctionRequest": "رجوع إلى طلبات المزاد",
         "success_sendrequest_para": "تم الإرسال بنجاح ، يمكنك العثور على الطلب بحالة'في انتظار المراجعة' في صفحة طلبات المزاد عبر الإنترنت.",
         "success_sendrequest_title": "تم إرسال الطلب للموافقة عليه بنجاح",
-        "success_cancel_title": "تم إلغاء الطلب بنجاح.",
+        "success_cancel_title": "تم رفض الطلب بنجاح",
         "success_attach_title": "تم إلغاء المرفق بنجاح.",
         "confirm_cancel_title": "تأكيد إلغاء نموذج طلب المزاد؟",
         "confirm_cancel_para": "عند التأكيد سوف تلغى جميع البيانات التي تم إدخالها وحفظها. ",
@@ -366,17 +366,17 @@
             "reject-popup": {
                 "title": "تأكيد رفض طلب المزاد",
                 "subTitle": "هل أنت متأكد من إرسال طلب الرفض؟",
-                "section1-head1": "الرقم المرجعي للمزاد",
+                "section1-head1": "الرقم المرجعي للطلب",
                 "section1-head2": "نوع المزاد",
                 "section2-head1": "الرجاء إدخال سبب الرفض",
                 "section2-opt1": "تم الإعلان عنه مرتين",
                 "section3-head1": "ملاحظات",
-                "section3-letter": "حروف",
+                "section3-letter": "حرف",
                 "section3-cnt": "0/250",
                 "section3-phold": "اكتب ملاحظاتك",
                 "back_btn": "خلف",
-                "reject_btn": "رفض الطلب",
-                "cancel_btn": "إلغاء"
+                "reject_btn": "تأكيد الرفض ",
+                "cancel_btn": "رجوع"
             },
             "auction-details": {
                 "title1": "معلومات عامة عن الطلب",

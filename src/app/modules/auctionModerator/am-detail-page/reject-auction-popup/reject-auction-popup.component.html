@@ -1,16 +1,18 @@
-<div style="padding: 5%; padding-top: 3%;" [ngStyle]="{ 'direction' : textDir }">
+<div style="padding: 5%; padding-top: 3%;overflow-x: hidden;" [ngStyle]="{ 'direction' : textDir }">
     <div class="d-flex m-1">
         <p style="color: #f66f5b;
           font-size: 24px;
           line-height: 26px; width: 95%;
         "> {{ "auctionModerator.am-detail.reject-popup.title" | translate }} </p>
-        <button (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown" aria-label="Close" style="outline: none;">
-      <a class="btn btn-ghost btn-sm fill-primary-green">
-        <span class="icon-close"></span>
-      </a>
-    </button>
+        <button (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown" aria-label="Close"
+            style="outline: none;">
+            <a class="btn btn-ghost btn-sm fill-primary-green">
+                <span class="icon-close" style="color: black;"></span>
+            </a>
+        </button>
     </div>
-    <div class="text-20 mt-3 m-1" style="color: #414042;"> {{ "auctionModerator.am-detail.reject-popup.subTitle" | translate }} </div>
+    <div class="text-20 mt-3 m-1" style="color: #414042;"> {{ "auctionModerator.am-detail.reject-popup.subTitle" |
+        translate }} </div>
     <div class="form-row mt-4">
         <div class="col-md-4 mb-2">
             <label>{{ "auctionModerator.am-detail.reject-popup.section1-head1" | translate }}</label>
@@ -18,16 +20,21 @@
         </div>
         <div class="col-md-4 mb-2">
             <label>{{ "auctionModerator.am-detail.reject-popup.section1-head2" | translate }}</label>
-            <div class="text-success" *ngIf="preAuctionData?.BidType == 'O'">{{ "auctionModerator.am-detail.auction-details.sec1-opt1" | translate }}</div>
-            <div class="text-success" *ngIf="preAuctionData?.BidType != 'O'">{{ "auctionModerator.am-detail.auction-details.sec1-opt2" | translate }}</div>
+            <div class="text-success" *ngIf="preAuctionData?.BidType == 'O'">{{
+                "auctionModerator.am-detail.auction-details.sec1-opt1" | translate }}</div>
+            <div class="text-success" *ngIf="preAuctionData?.BidType != 'O'">{{
+                "auctionModerator.am-detail.auction-details.sec1-opt2" | translate }}</div>
         </div>
     </div>
     <div class="form-row mt-2">
         <div class="col-md-4 mb-2">
             <label class="text-12" style="width: 320%;">{{ "auctionModerator.am-detail.reject-popup.section2-head1" |
                 translate }}</label>
-            <input type="text" formControlName="locRegion" class="form-control" placeholder="{{ 'auctionModerator.am-detail.reject-popup.section2-head1' |
-            translate }}" id="validationCustom01" [required]="true" />
+            <input type="text" [(ngModel)]="rejectionReason" class="form-control" placeholder="{{ 'auctionModerator.am-detail.reject-popup.section2-head1' |
+                        translate }}" id="validationCustom01" [required]="true" />
+            <div *ngIf="submitForm && !rejectionReason" class="invalid-feedback">
+                please enter reason
+            </div>
             <!-- <select class="text-success border-bottom" style="width: 335%; border: none; outline: none;">
                 <option class="text-success" selected> {{ "auctionModerator.am-detail.reject-popup.section2-opt1" | translate }}
                 </option>
@@ -38,11 +45,13 @@
         <div class="form-group col w-100">
             <div class="border-bottom color-grey">
                 <label for="goverusermessage">{{ "auctionModerator.am-detail.reject-popup.section3-head1" | translate }}
-        </label>
-                <span class="float-left text-muted">{{ "auctionModerator.am-detail.reject-popup.section3-letter" | translate }}
-          &nbsp;<small id="charNum">{{ (rejectionNotes + '').length || 0 }} / {{maxLen}} </small></span>
+                </label>
+                <span class="float-left text-muted">{{ "auctionModerator.am-detail.reject-popup.section3-letter" |
+                    translate }}
+                    &nbsp;<small id="charNum">{{ (rejectionNotes + '').length || 0 }} / {{maxLen}} </small></span>
             </div>
-            <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" style="height: 60%;" maxlength="{{maxLen}}" placeholder="{{
+            <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" style="height: 60%;"
+                maxlength="{{maxLen}}" placeholder="{{
           'auctionModerator.am-detail.reject-popup.section3-phold'
             | translate
         }}" rows="6"></textarea>
@@ -51,29 +60,35 @@
     <div class="d-flex justify-content-end w-90">
         <div class="d-flex flex-column flex-md-row">
             <button (click)="closeDialog()" class="btn btn-outline-light btn-lg mx-0 mx-md-2" type="button">
-            {{ "auctionModerator.am-detail.reject-popup.cancel_btn" | translate }} </button>
-            <button *ngIf="showSubmitBtnLoader" type="button" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
-            <span class="btn-text pr-3">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </span> {{ "auctionModerator.am-detail.reject-popup.reject_btn" | translate }} </button>
-            <button *ngIf="!showSubmitBtnLoader" (click)="approveOrRejectAuction('R')" class="btn arrow-btn btn-danger btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
-        <span class="btn-text">{{ "auctionModerator.am-detail.reject-popup.reject_btn" | translate }}</span>
-      </button>
+                {{ "auctionModerator.am-detail.reject-popup.cancel_btn" | translate }} </button>
+            <button *ngIf="showSubmitBtnLoader" type="button"
+                class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                <span class="btn-text pr-3">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </span> {{ "auctionModerator.am-detail.reject-popup.reject_btn" | translate }} </button>
+            <button *ngIf="!showSubmitBtnLoader" (click)="approveOrRejectAuction('R')"
+                class="btn arrow-btn btn-danger btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                <span class="btn-text">{{ "auctionModerator.am-detail.reject-popup.reject_btn" | translate }}</span>
+            </button>
         </div>
     </div>
 </div>
 
-<div class="modal show" id="showCancelSuccessfulModal" *ngIf="showCancelSuccessfulModal" [ngClass]="{'modal-show': showCancelSuccessfulModal}">
+<div class="modal show" id="showCancelSuccessfulModal" *ngIf="showCancelSuccessfulModal"
+    [ngClass]="{'modal-show': showCancelSuccessfulModal}">
     <!-- showCancelSuccessfulModal -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_cancel_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_cancel_title' | translate }} </h4>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeCancelSuccessfulModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
+            <div class="modal-footer justify-content-center"> <button type="button"
+                    (click)="closeCancelSuccessfulModal('success')" class="btn btn-primary-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
             </div>
         </div>
     </div>

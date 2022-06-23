@@ -267,7 +267,7 @@
         "back_auctionRequest": "Back to Auction Requests",
         "success_sendrequest_para": "Sent successfully, you can find the request with Pending Review status on the online auction requests page.",
         "success_sendrequest_title": "The request is sent for approval successfully",
-        "success_cancel_title": "The request has been canceled successfully.",
+        "success_cancel_title": "The request has been rejected successfully.",
         "success_attach_title": "The attachment has been canceled successfully.",
         "confirm_cancel_title": "Confirmation of Cancellation of Auction Request Form?",
         "confirm_cancel_para": "Upon confirmation, all data entered and saved will be cancelled.",
@@ -363,19 +363,19 @@
                 "accept_btn": "Announcement of the Auction on the Platform"
             },
             "reject-popup": {
-                "title": "Confirmation of rejection of the auction request",
+                "title": "Confirm reject of the auction request",
                 "subTitle": "Are you sure to send a rejection request?",
-                "section1-head1": "Auction Reference Number",
+                "section1-head1": "Request Reference Number",
                 "section1-head2": "Auction Type",
                 "section2-head1": "Please enter the reason for rejection",
                 "section2-opt1": "It's been announced twice.",
                 "section3-head1": "Notes",
-                "section3-letter": "Letters",
+                "section3-letter": "Letter",
                 "section3-cnt": "0/250",
                 "section3-phold": "Write your notes",
                 "back_btn": "Back",
-                "reject_btn": "Rejection of the Application",
-                "cancel_btn": "Cancellation"
+                "reject_btn": "Confirm Reject",
+                "cancel_btn": "Back"
             },
             "auction-details": {
                 "title1": "General information about the order",
