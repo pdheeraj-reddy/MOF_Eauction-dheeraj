@@ -689,7 +689,11 @@ export class AuctionDetailComponent implements OnInit {
         this.showLoader = false;
         this.files.splice(index, 1);
         this.auctionAttachement.removeAt(index);
-        this.navigateToPage(currentPage, 'auctionAttach');
+        if (this.files.length % 10 === 0) {
+          this.navigateToPage(currentPage-1, 'auctionAttach');
+        } else {
+          this.navigateToPage(currentPage, 'auctionAttach');
+        }
       }, (error) => {
         this.showLoader = false;
         console.log('deleteAuctionImagesResp RespError : ', error);
@@ -697,7 +701,11 @@ export class AuctionDetailComponent implements OnInit {
     } else {
       this.files.splice(index, 1);
       this.auctionAttachement.removeAt(index);
-      this.navigateToPage(currentPage, 'auctionAttach');
+      if (this.files.length % 10 === 0) {
+        this.navigateToPage(currentPage-1, 'auctionAttach');
+      } else {
+        this.navigateToPage(currentPage, 'auctionAttach');
+      }
     }
   }
 

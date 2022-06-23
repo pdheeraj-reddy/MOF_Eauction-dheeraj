@@ -339,11 +339,11 @@
         "am-detail": {
             "bcrumb1": "Etimad Services",
             "bcrumb2": "Online Auction Request",
-            "bcrumb3": "Auction Details",
-            "pageTitle": "Auction Details",
+            "bcrumb3": "Request details",
+            "pageTitle": "Request details",
             "section1-head1": "Request Name",
             "section1-head2": "Auction Status",
-            "stepper1": "Request Accept",
+            "stepper1": "Accept Request",
             "stepper2": "Appointment of Pricing Committee",
             "stepper3": "Appointment of Auction Committee",
             "stepper4": "Waiting for Publish",
@@ -354,10 +354,10 @@
             "showAuction-back_btn": "Back",
             "showAuction-next_btn": "Next",
             "showAuction-reject_btn": "Rejection of the Application",
-            "showAuction-accept_btn": "Request Accept",
+            "showAuction-accept_btn": "Accept Request",
             "showProduct-back_btn": "Back",
             "showProduct-reject_btn": "Rejection of the Application",
-            "showProduct-accept_btn": "Request Accept",
+            "showProduct-accept_btn": "Accept Request",
             "auction-publish": {
                 "back_btn": "Back",
                 "accept_btn": "Announcement of the Auction on the Platform"
@@ -412,7 +412,7 @@
                 "table-result": "No Attachments"
             },
             "auction-details-confirmation": {
-                "title1": "Confirmation of Request accept?",
+                "title1": "Confirmation of Accept Request?",
                 "sec1-head1": "Upon confirmation, the auction will be sent for assigning pricing committee.",
                 "Reference": "Back",
                 "Postconfirmation": "Confirmation of Acceptance"
@@ -447,7 +447,7 @@
                 "back_btn": "Back",
                 "next_btn": "Next",
                 "reject_btn": "Rejection of the Application",
-                "accept_btn": "Request Accept",
+                "accept_btn": "Accept Request",
                 "card1-head1": "Add Pricing Committee Head",
                 "card1-head2": "Committee Head",
                 "jobNumber": "Job Number",
