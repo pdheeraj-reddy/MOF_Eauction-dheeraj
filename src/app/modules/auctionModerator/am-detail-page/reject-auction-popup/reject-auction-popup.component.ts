@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   MatDialog,
@@ -6,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
+import { ignoreElements } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reject-auction-popup',
@@ -15,9 +17,11 @@ import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/a
 export class RejectAuctionPopupComponent implements OnInit {
   preAuctionData: any;
   rejectionNotes = '';
+  rejectionReason: string = '';
   maxLen = 250;
   textDir = 'ltr';
   showSubmitBtnLoader: boolean = false;
+  submitForm: boolean = false;
   showCancelSuccessfulModal: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<RejectAuctionPopupComponent>,
@@ -41,33 +45,35 @@ export class RejectAuctionPopupComponent implements OnInit {
   }
 
   approveOrRejectAuction(action: any) {
+    this.submitForm = true;
+    if (!this.rejectionReason) return;
     this.showSubmitBtnLoader = true;
     this.preAuctionData.ActionTaken = action;
     if (action == 'R') {
       this.preAuctionData.RejectNotes = this.rejectionNotes;
-    console.log(this.preAuctionData);
-    this._AuctionService
-      .approveOrRejectAuction({
-        ActionTaken: action,
-        RejectNotes: this.rejectionNotes,
-        ObjectId: this.preAuctionData.ObjectId,
-        Description: this.preAuctionData.Description,
-        Status: 'Pending Review',
-        listtoproductnav: [],
-      })
-      .subscribe(
-        (res: any) => {
-          console.log(res);
-          this.showSubmitBtnLoader = false;
-          this.showCancelSuccessfulModal = true;
-        },
-        (error) => {
-          console.log('approveOrRejectAuction RespError : ', error);
-        }
-      );
+      console.log(this.preAuctionData);
+      this._AuctionService
+        .approveOrRejectAuction({
+          ActionTaken: action,
+          RejectNotes: this.rejectionNotes,
+          ObjectId: this.preAuctionData.ObjectId,
+          Description: this.preAuctionData.Description,
+          Status: 'Pending Review',
+          listtoproductnav: [],
+        })
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            this.showSubmitBtnLoader = false;
+            this.showCancelSuccessfulModal = true;
+          },
+          (error) => {
+            console.log('approveOrRejectAuction RespError : ', error);
+          }
+        );
     }
   }
-  
+
 
   public closeCancelSuccessfulModal(confirmType: string) {
     if (confirmType == 'success') {
