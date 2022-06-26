@@ -105,7 +105,7 @@ export class AuctionReqDetailsComponent implements OnInit {
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     this.PaginationServc.sortByTableHeaderId(
-      'inventoryAllocationTable',
+      'auctionAttachment',
       columnId,
       sortType,
       dateFormat
@@ -245,8 +245,18 @@ export class AuctionReqDetailsComponent implements OnInit {
     }
   }
 
+  isSorting(columnId: number){
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number){
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number){
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
   sortByAuctionAttachTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
   }
 
   navigateToPage(pageNoVal: number, section: string) {

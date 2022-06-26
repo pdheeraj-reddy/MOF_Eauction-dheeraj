@@ -358,3 +358,27 @@ body {
 .border-dashed {
     border: 1px dashed #dee2e6 !important;
 }
+
+.sort {
+    .sort-none {
+        background: url("/assets/icons/sort.svg") center no-repeat;
+        height: 16px;
+        width: 14px;
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .sort-asc {
+        background: url("/assets/icons/sort-asc.svg") center no-repeat;
+        height: 16px;
+        width: 14px;
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .sort-desc {
+        background: url("/assets/icons/sort-desc.svg") center no-repeat;
+        height: 16px;
+        width: 14px;
+        display: inline-block;
+        margin-left: 5px;
+    }
+}

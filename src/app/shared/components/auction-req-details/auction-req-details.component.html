@@ -233,16 +233,16 @@
                     </div>
                     <div class="row">
                         <div class="col-12 mt-3" *ngIf="auctionItem.auctionAttachement?.length">
-                            <table id="inventoryAllocationTable" class="table table-bordered table-striped table-expanded table-hover">
+                            <table id="auctionAttachment" class="table table-bordered table-striped table-expanded table-hover">
                                 <thead>
                                     <tr class="btn-primary-light">
                                         <th class="th-serials" scope="col" (click)="sortByTableHeaderId(0, 'string')"><span>{{
                                             'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' |
-                                            translate }}</span><span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                            translate }}</span><span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                         </th>
                                         <th class="" scope="col" (click)="sortByTableHeaderId(1, 'string')"><span>{{
                                             'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' |
-                                            translate }}</span><span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                            translate }}</span><span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                         </th>
                                         <th class="th-action" scope="col"></th>
                                     </tr>
@@ -469,7 +469,7 @@
         </div>
 
         <div class="row">
-            <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
+            <table id="auctionAttachment" class="table table-bordered table-expanded">
                 <thead class="thead-dark">
                     <tr class="">
                         <th style="width: 12%" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
