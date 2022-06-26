@@ -171,6 +171,7 @@ export class AuctionListsComponent implements OnInit {
         { code: "Pending Pricing", disp: "Pending Pricing" },
         { code: "Pending to Publish", disp: "Pending to Publish" },
         { code: "Rejected", disp: "Rejected" },
+        { code: "Published", disp: "Published" }
       ];
     } else if (this.loggedUserRole.isPricingMember) {
       this.dropValStatus = [
@@ -184,6 +185,7 @@ export class AuctionListsComponent implements OnInit {
         { code: "Pending Pricing Approval", disp: "Pending Pricing Approval" },
         { code: "Pending Pricing", disp: "Pending Pricing" },
         { code: "Rejected Prices", disp: "Rejected Prices" },
+        { code: "Pending to Publish", disp: "Pending to Publish" }
       ];
     }
   }
