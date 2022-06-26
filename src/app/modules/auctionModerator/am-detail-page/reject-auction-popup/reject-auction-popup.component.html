@@ -14,11 +14,11 @@
     <div class="text-20 mt-3 m-1" style="color: #414042;"> {{ "auctionModerator.am-detail.reject-popup.subTitle" |
         translate }} </div>
     <div class="form-row mt-4">
-        <div class="col-md-12 mb-2">
+        <div class="col-md-6 mb-2">
             <label>{{ "auctionModerator.am-detail.reject-popup.section1-head1" | translate }}</label>
             <div class="text-success"> {{ preAuctionData.ObjectId || "-" }} </div>
         </div>
-        <div class="col-md-12 mb-2">
+        <div class="col-md-6 mb-2">
             <label>{{ "auctionModerator.am-detail.reject-popup.section1-head2" | translate }}</label>
             <div class="text-success" *ngIf="preAuctionData?.BidType == 'O'">{{
                 "auctionModerator.am-detail.auction-details.sec1-opt1" | translate }}</div>
@@ -33,7 +33,7 @@
             <input type="text" [(ngModel)]="rejectionReason" class="form-control" placeholder="{{ 'auctionModerator.am-detail.reject-popup.section2-head1' |
                         translate }}" id="validationCustom01" [required]="true" />
             <div *ngIf="submitForm && !rejectionReason" class="invalid-feedback">
-                please enter reason
+                {{ "auctionModerator.am-detail.reject-popup.enter_reason" | translate }}
             </div>
             <!-- <select class="text-success border-bottom" style="width: 335%; border: none; outline: none;">
                 <option class="text-success" selected> {{ "auctionModerator.am-detail.reject-popup.section2-opt1" | translate }}

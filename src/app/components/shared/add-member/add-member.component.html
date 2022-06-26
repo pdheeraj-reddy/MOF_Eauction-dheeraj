@@ -98,7 +98,7 @@
                     <label class="d-flex" for="validationCustom02">{{ "auctionModerator.am-detail.add-member.heading" | translate}}</label>
                     <form>
                         <mat-form-field class="example-full-width w-100" appearance="fill">
-                            <input matInput type="search" aria-label="Enter employee number or email" [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="{{ 'auctionModerator.am-detail.add-member.phold' | translate}}" style="height: 21px;">
+                            <input matInput tabIndex="-1" type="search" aria-label="Enter employee number or email" [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="{{ 'auctionModerator.am-detail.add-member.phold' | translate}}" style="height: 21px;">
                             <mat-icon matSuffix> <i class="icon-search pr-4"></i> </mat-icon>
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option (click)="memberSelected(state)" *ngFor="let state of filteredStates | async" [value]="state.EmployeeId">
