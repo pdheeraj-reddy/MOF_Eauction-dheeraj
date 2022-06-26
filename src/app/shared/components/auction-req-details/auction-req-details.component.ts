@@ -245,6 +245,9 @@ export class AuctionReqDetailsComponent implements OnInit {
     }
   }
 
+  sortByAuctionAttachTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+  }
 
   navigateToPage(pageNoVal: number, section: string) {
     this.PaginationServc.setPagerValues(

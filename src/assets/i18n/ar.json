@@ -40,6 +40,7 @@
     "EAuction_PricingCommitteeMember": "عضو  التسعير",
     "EAuction_PricingCommitteSecretary": "سكرتيرلجنة التسعير",
     "EAuction_PricingCommitteeChairman": "رئيس لجنة التسعير",
+    "ZEAUCTION_PRICECOMM_HEAD": "رئيس لجنة التسعير",
     "Enter the total estimated value of the products": "أدخل القيمة الإجمالية المقدرة للمنتجات",
     "Enter the estimated value for each product separately": "أدخل القيمة المقدرة لكل منتج على حدة",
     "header": {
@@ -295,9 +296,9 @@
         "guree_percentage": "نسبة من قيمة العرض يتم حجزها من البنك لإثبات جدية مقدم العرض"
     },
     "auctionModerator": {
-        "bcrumb1": "خدمات الثقة",
-        "bcrumb2": "طلبات المزاد عبر الإنترنت",
-        "pageTitle": "طلبات المزاد عبر الإنترنت",
+        "bcrumb1": "خدمات اعتماد",
+        "bcrumb2": "طلبات المزاد الالكتروني",
+        "pageTitle": "طلبات المزاد الالكتروني",
         "navdropdown1": "إنشاء مزاد جديد",
         "navdropdown1_opt1": "مزاد علني",
         "navdropdown1_opt2": "مناقصة",
@@ -338,8 +339,8 @@
             "status4": "معاد لتعديل المزاد"
         },
         "am-detail": {
-            "bcrumb1": "خدمات الثقة",
-            "bcrumb2": "طلبات المزاد عبر الإنترنت",
+            "bcrumb1": "خدمات اعتماد",
+            "bcrumb2": "طلبات المزاد الالكتروني",
             "bcrumb3": "تفاصيل الطلب",
             "pageTitle": "تفاصيل الطلب",
             "section1-head1": "اسم الطلب",
@@ -490,10 +491,10 @@
             "add-member": {
                 "heading": "البحث عن طريق رقم الموظف أو البريد الإلكتروني",
                 "phold": "أدخل رقم الموظف أو البريد الإلكتروني",
-                "ename": "اسم الموظف:",
-                "eid": "هوية الموظف:",
-                "email": "بريد الالكتروني:",
-                "aId": "معرّف الوكالة:",
+                "emp-name": "الاسم",
+                "emp-id": "الرقم الوظيفي",
+                "emp-email": "البريد الإلكترزوني",
+                "emp-role": "الصلاحية",
                 "add": "يضيف",
                 "add_commitee_member": "Add Committee Member",
                 "add_commitee_head": "Add Committee Head",
@@ -511,9 +512,9 @@
         }
     },
     "auctionHead": {
-        "bcrumb1": "خدمات الثقة",
-        "bcrumb2": "طلبات المزاد عبر الإنترنت",
-        "pageTitle": "طلبات المزاد عبر الإنترنت",
+        "bcrumb1": "خدمات اعتماد",
+        "bcrumb2": "طلبات المزاد الالكتروني",
+        "pageTitle": "طلبات المزاد الالكتروني",
         "navdropdown1": "إنشاء مزاد جديد",
         "navdropdown1_opt1": "مزاد علني",
         "navdropdown1_opt2": "مناقصة",
@@ -547,8 +548,8 @@
         "filter-actionname-pholder": "أدخل اسم المزاد",
         "filter-refno-pholder": "أدخل الرقم المرجعي",
         "head-detail": {
-            "bcrumb1": "خدمات الثقة",
-            "bcrumb2": "طلبات المزاد عبر الإنترنت",
+            "bcrumb1": "خدمات اعتماد",
+            "bcrumb2": "طلبات المزاد الالكتروني",
             "bcrumb3": "تفاصيل المزاد",
             "pageTitle": "تفاصيل المزاد",
             "tab1": "تفاصيل المزاد",
@@ -558,9 +559,9 @@
         }
     },
     "auctionMember": {
-        "bcrumb1": "خدمات الثقة",
-        "bcrumb2": "طلبات المزاد عبر الإنترنت",
-        "pageTitle": "طلبات المزاد عبر الإنترنت",
+        "bcrumb1": "خدمات اعتماد",
+        "bcrumb2": "طلبات المزاد الالكتروني",
+        "pageTitle": "طلبات المزاد الالكتروني",
         "navdropdown1": "إنشاء مزاد جديد",
         "navdropdown1_opt1": "مزاد علني",
         "navdropdown1_opt2": "مناقصة",
@@ -594,8 +595,8 @@
         "filter-actionname-pholder": "أدخل اسم المزاد",
         "filter-refno-pholder": "أدخل الرقم المرجعي",
         "mem-detail": {
-            "bcrumb1": "خدمات الثقة",
-            "bcrumb2": "طلبات المزاد عبر الإنترنت",
+            "bcrumb1": "خدمات اعتماد",
+            "bcrumb2": "طلبات المزاد الالكتروني",
             "bcrumb3": "تفاصيل المزاد",
             "pageTitle": "تفاصيل المزاد",
             "tab1": "تفاصيل المزاد",
@@ -628,7 +629,7 @@
         }
     },
     "auctionCommittee": {
-        "bcrumb1": "خدمات الثقة",
+        "bcrumb1": "خدمات اعتماد",
         "bcrumb2": "المزادات",
         "pageTitle": "المزادات",
         "tab1": "الجميع",

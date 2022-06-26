@@ -40,6 +40,7 @@
     "EAuction_PricingCommitteeMember": "Pricing Committee Member",
     "EAuction_PricingCommitteSecretary": "Pricing Commitee Secretary",
     "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
+    "ZEAUCTION_PRICECOMM_HEAD": "Pricing Commitee Head",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "header": {
@@ -489,10 +490,10 @@
             "add-member": {
                 "heading": "Search by employee number or email",
                 "phold": "Enter employee number or email",
-                "ename": "Employee Name:",
-                "eid": "Employee Id:",
-                "email": "Email:",
-                "aId": "Agency Id:",
+                "emp-name": "Employee Name",
+                "emp-id": "Employee Id",
+                "emp-email": "Email",
+                "emp-role": "Employee Role",
                 "add": "Add",
                 "add_commitee_member": "Add Committee Member",
                 "add_commitee_head": "Add Committee Head",
