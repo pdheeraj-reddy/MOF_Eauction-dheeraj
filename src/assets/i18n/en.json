@@ -17,6 +17,9 @@
     "Select": "Select",
     "Auction Type": "Auction Type",
     "Auction Status": "Auction Status",
+    "Add Committee Head": "Add Committee Head",
+    "Add Committee Member": "Add Committee Member",
+    "Add Committee Secretary": "Add Committee Secretary",
     "Closed": "Closed",
     "Direct": "Direct",
     "To me": "Automatic",
@@ -344,8 +347,8 @@
             "section1-head1": "Request Name",
             "section1-head2": "Auction Status",
             "stepper1": "Accept Request",
-            "stepper2": "Appointment of Pricing Committee",
-            "stepper3": "Appointment of Auction Committee",
+            "stepper2": "Selecting Pricing Committee",
+            "stepper3": "Selecting Auction Committee",
             "stepper4": "Waiting for Publish",
             "tab1-head": "Auction Details",
             "tab2-head": "Product Details",
@@ -412,10 +415,10 @@
                 "table-result": "No Attachments"
             },
             "auction-details-confirmation": {
-                "title1": "Confirmation of Accept Request?",
+                "title1": "Confirm of Accept Request?",
                 "sec1-head1": "Upon confirmation, the auction will be sent for assigning pricing committee.",
                 "Reference": "Back",
-                "Postconfirmation": "Confirmation of Acceptance"
+                "Postconfirmation": "Confirm Accept Request"
             },
             "auction-details-success": {
                 "title1": "The request has been successfully accepted",
@@ -448,7 +451,7 @@
                 "next_btn": "Next",
                 "reject_btn": "Rejection of the Application",
                 "accept_btn": "Accept Request",
-                "card1-head1": "Add Pricing Committee Head",
+                "card1-head1": "Add Pricing Head",
                 "card1-head2": "Committee Head",
                 "jobNumber": "Job Number",
                 "email": "E-mail",
@@ -457,7 +460,7 @@
                 "card3-head1": "Add Committee Member",
                 "card3-head2": "Committee Member",
                 "reject": "Cancel",
-                "accept": "Submit",
+                "accept": "Send Pricing",
                 "popup1-title": "Confirmation of assignment of Pricing Committee?",
                 "popup1-subtitle": "Upon confirmation, the auction will be sent to Pricing Committee member for pricing.",
                 "popup1-accept": "Post Confirmation",
@@ -487,16 +490,16 @@
                 "popup2-subtitle": "You can now pulish the acution."
             },
             "add-member": {
-                "heading": "Search by employee number or email",
+                "heading": "Search with employee number or email",
                 "phold": "Enter employee number or email",
                 "ename": "Employee Name:",
                 "eid": "Employee Id:",
                 "email": "Email:",
                 "aId": "Agency Id:",
                 "add": "Add",
-                "add_commitee_member": "Add Committee Member",
-                "add_commitee_head": "Add Committee Head",
-                "add_commitee_secretary": "Add Committee Secretary"
+                "add_committee_member": "Add Committee Member",
+                "add_committee_head": "Add Committee Head",
+                "add_committee_secretary": "Add Committee Secretary"
             }
         },
         "publish-popup": {

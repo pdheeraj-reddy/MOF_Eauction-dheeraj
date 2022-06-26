@@ -53,9 +53,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
 
   committeeMem4Data: any;
   committeeMem4Selected: any;
-  committeeMemTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_member');
-  committeeHeadTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_head');
-  committeeSecTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_secretary');
+  committeeMemTitle: string = 'Add Committee Member';
+  committeeHeadTitle: string = 'Add Committee Head'
+  committeeSecTitle: string = 'Add Committee Secretary';
   addcommitteeMemberList: any = [];
   list: any = [];
   foods: any = [
