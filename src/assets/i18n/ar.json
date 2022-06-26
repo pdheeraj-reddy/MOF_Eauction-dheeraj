@@ -17,6 +17,9 @@
     "Select": "اختار",
     "Auction Type": " نوع المزاد",
     "Auction Status": "حاله المزاد",
+    "Add Committee Head": "إضافة رئيس اللجنه",
+    "Add Committee Member": "Add Committee Member",
+    "Add Committee Secretary": "Add Committee Secretary",
     "Closed": "مغلقه",
     "Direct": "مباشر",
     "To me": "آلي",
@@ -347,11 +350,11 @@
             "section1-head2": "حالة الطلب",
             "stepper1": "قبول الطلب",
             "stepper2": "تعيين لجنة التسعير",
-            "stepper3": "تعيين لجنة البيع",
-            "stepper4": "في انتظار النشر",
+            "stepper3": "تعيين لجنه المزاد",
+            "stepper4": "بانتظار الاعلان",
             "tab1-head": "تفاصيل المزاد",
             "tab2-head": "تفاصيل المنتجات",
-            "tab3-head": "أعضاء لجنة التسعير",
+            "tab3-head": "اعضاء لجنه التسعير",
             "tab4-head": "بيع أعضاء اللجنة",
             "showAuction-back_btn": "رجوع",
             "showAuction-next_btn": "التالي",
@@ -377,7 +380,8 @@
                 "section3-phold": "اكتب ملاحظاتك",
                 "back_btn": "رجوع",
                 "reject_btn": "تأكيد الرفض ",
-                "cancel_btn": "رجوع"
+                "cancel_btn": "رجوع",
+                "enter_reason": "سبب الرفض مطلوب"
             },
             "auction-details": {
                 "title1": "معلومات عامة عن الطلب",
@@ -443,14 +447,14 @@
             "pricing-committee": {
                 "tab1": "تفاصيل المزاد",
                 "tab2": "تفاصيل المنتجات",
-                "tab3": "بيع أعضاء اللجنة",
+                "tab3": "اعضاء لجنه التسعير",
                 "tab4": "أعضاء لجنة المزاد",
                 "alert": "يرجى اختيار 3 أعضاء على الأقل من أعضاء اللجنة",
                 "back_btn": "رجوع",
                 "next_btn": "التالي",
                 "reject_btn": "رفض الطلب",
                 "accept_btn": "قبول الطلب",
-                "card1-head1": "اضافة رئيس لجنة التسعير",
+                "card1-head1": "إضافة رئيس اللجنة",
                 "card1-head2": "رئيس اللجنة",
                 "jobNumber": "رقم الوظيفة",
                 "email": "بريد الالكتروني",
@@ -458,8 +462,8 @@
                 "card2-head2": "اضافة سكرتير اللجنة",
                 "card3-head1": "اضافة عضو لجنة",
                 "card3-head2": "عضو لجنة",
-                "reject": "يلغي",
-                "accept": "إرسال",
+                "reject": "إلغاء",
+                "accept": "إرسال التسعير",
                 "popup1-title": "تأكيد تكليف لجنة التسعير؟",
                 "popup1-subtitle": "عند التأكيد، سيتم إرسال المزاد إلى عضو لجنة التسعير للتسعير.",
                 "popup1-accept": "بعد التأكيد",
@@ -470,7 +474,7 @@
             "auction-committee": {
                 "tab1": "تفاصيل المزاد",
                 "tab2": "تفاصيل المنتجات",
-                "tab3": "أعضاء لجنة التسعير",
+                "tab3": "اعضاء لجنه التسعير",
                 "tab4": "بيع أعضاء اللجنة",
                 "card1-head1": "إضافة رئيس اللجنة",
                 "card1-head2": "رئيس اللجنة",
@@ -482,23 +486,23 @@
                 "email": "بريد الالكتروني",
                 "back_btn": "رجوع",
                 "accept": "إرسال",
-                "reject": "يلغي",
+                "reject": "إلغاء",
                 "popup1-title": "تأكيد تكليف لجنة المزادات؟",
                 "popup1-subtitle": "عند التأكيد، سيتم تعيين أعضاء لجنة المزاد وإخطارهم.",
                 "popup2-title": "تم إرسال الطلب بنجاح إلى لجنة المزاد",
                 "popup2-subtitle": "يمكنك الآن أن تنبض بالفطنة."
             },
             "add-member": {
-                "heading": "البحث عن طريق رقم الموظف أو البريد الإلكتروني",
-                "phold": "أدخل رقم الموظف أو البريد الإلكتروني",
+                "heading": "البحث برقم الموظف او البريد الالكتروني",
+                "phold": "أدخل رقم الموظف او البريد الالكتروني",
                 "emp-name": "الاسم",
                 "emp-id": "الرقم الوظيفي",
                 "emp-email": "البريد الإلكترزوني",
                 "emp-role": "الصلاحية",
-                "add": "يضيف",
-                "add_commitee_member": "Add Committee Member",
-                "add_commitee_head": "Add Committee Head",
-                "add_commitee_secretary": "Add Committee Secretary"
+                "add": "إضافة",
+                "add_committee_member": "Add Committee Member",
+                "add_committee_head": "إضافة رئيس اللجنه",
+                "add_committee_secretary": "Add Committee Secretary"
             }
         },
         "publish-popup": {
@@ -554,7 +558,7 @@
             "pageTitle": "تفاصيل المزاد",
             "tab1": "تفاصيل المزاد",
             "tab2": "تفاصيل المنتجات",
-            "tab3": "أعضاء لجنة التسعير",
+            "tab3": "اعضاء لجنه التسعير",
             "tab4": "بيع أعضاء اللجنة"
         }
     },
@@ -601,7 +605,7 @@
             "pageTitle": "تفاصيل المزاد",
             "tab1": "تفاصيل المزاد",
             "tab2": "تفاصيل المنتجات",
-            "tab3": "أعضاء لجنة التسعير",
+            "tab3": "اعضاء لجنه التسعير",
             "tab4": "بيع أعضاء اللجنة"
         },
         "bid-value": {

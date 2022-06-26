@@ -83,7 +83,7 @@
 <!-- <div class="modal-dialog modal-lg modal-dialog-centered" role="document"> -->
 <div class="modal-content" [ngClass]="{'rtl': currentLang == 'ar','ltr':currentLang !== 'ar'}">
     <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel"> {{ title }} </h4>
+        <h4 class="modal-title" id="exampleModalLabel"> {{ title | translate}} </h4>
         <div style="outline: none" (click)="closeDialog('close')" type="button" class="close " data-dismiss="dropdown" aria-label="Close" [ngClass]="{'custom-close-buttton': currentLang == 'ar'}">
             <a class="btn btn-ghost btn-md fill-primary-green">
                 <span class="icon-close"></span>
@@ -95,11 +95,10 @@
         <div class="">
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <label class="d-flex" for="validationCustom02">{{ "auctionModerator.am-detail.add-member.heading" | translate
-            }}</label>
+                    <label class="d-flex" for="validationCustom02">{{ "auctionModerator.am-detail.add-member.heading" | translate}}</label>
                     <form>
                         <mat-form-field class="example-full-width w-100" appearance="fill">
-                            <input matInput type="search" aria-label="Enter employee number or email" [matAutocomplete]="auto" [formControl]="stateCtrl">
+                            <input matInput tabIndex="-1" type="search" aria-label="Enter employee number or email" [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="{{ 'auctionModerator.am-detail.add-member.phold' | translate}}" style="height: 21px;">
                             <mat-icon matSuffix> <i class="icon-search pr-4"></i> </mat-icon>
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option (click)="memberSelected(state)" *ngFor="let state of filteredStates | async" [value]="state.EmployeeId">
@@ -146,7 +145,7 @@
     </div>
     <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-primary-light btn-md" (click)="closeDialog('add')">
-      <span class="icon-add"></span> {{ "auctionModerator.am-detail.add-member.add" | translate }} </button>
+      <span class="icon-plus" style="height: 16px; width: 16px; "></span> &nbsp; {{ "auctionModerator.am-detail.add-member.add" | translate }} </button>
     </div>
 </div>
 <!-- </div> -->

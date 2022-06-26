@@ -203,6 +203,7 @@ export class AmDetailPageComponent implements OnInit {
         console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
+        console.log(this.preAuctionData, "saurabh kumar singh")
         if (this.preAuctionData.ActionTaken == 'A') {
           this.tabTwo = true;
         } else {

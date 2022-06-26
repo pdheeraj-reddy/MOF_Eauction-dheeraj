@@ -53,9 +53,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
 
   committeeMem4Data: any;
   committeeMem4Selected: any;
-  committeeMemTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_member');
-  committeeHeadTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_head');
-  committeeSecTitle: string = this.translate.instant('auctionModerator.am-detail.add-member.add_commitee_secretary');
+  committeeMemTitle: string = 'Add Committee Member';
+  committeeHeadTitle: string = 'Add Committee Head'
+  committeeSecTitle: string = 'Add Committee Secretary';
   addcommitteeMemberList: any = [];
   list: any = [];
   foods: any = [
@@ -254,6 +254,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
             console.log("this.test");
             console.log(result);
             if (result) {
+              if (this.committeeChairData) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
+              }
               this.committeeChairData = result;
               console.log(this.committeeMemberList);
               this.existingCommitteMemberList.push(this.committeeChairData.EmployeeId);
@@ -420,11 +423,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
         (res: any) => {
           this.unsaved = true;
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log("🚀 ~ openAddMem2Dialog ~ this.addcommitteeMemberList", this.addcommitteeMemberList)
-          console.log("🚀 ~ openAddMem2Dialog ~ this.existingCommitteMemberList", this.existingCommitteMemberList)
           this.filterMember(this.existingCommitteMemberList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
