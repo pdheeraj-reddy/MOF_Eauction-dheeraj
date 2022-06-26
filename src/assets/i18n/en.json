@@ -375,7 +375,8 @@
                 "section3-phold": "Write your notes",
                 "back_btn": "Back",
                 "reject_btn": "Confirm Reject",
-                "cancel_btn": "Back"
+                "cancel_btn": "Back",
+                "enter_reason": "Reason of rejection required"
             },
             "auction-details": {
                 "title1": "General information about the order",

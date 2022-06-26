@@ -376,7 +376,8 @@
                 "section3-phold": "اكتب ملاحظاتك",
                 "back_btn": "رجوع",
                 "reject_btn": "تأكيد الرفض ",
-                "cancel_btn": "رجوع"
+                "cancel_btn": "رجوع",
+                "enter_reason": "سبب الرفض مطلوب"
             },
             "auction-details": {
                 "title1": "معلومات عامة عن الطلب",

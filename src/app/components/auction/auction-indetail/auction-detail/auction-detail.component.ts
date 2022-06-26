@@ -690,7 +690,7 @@ export class AuctionDetailComponent implements OnInit {
         this.files.splice(index, 1);
         this.auctionAttachement.removeAt(index);
         if (this.files.length % 10 === 0) {
-          this.navigateToPage(currentPage-1, 'auctionAttach');
+          this.navigateToPage(currentPage - 1, 'auctionAttach');
         } else {
           this.navigateToPage(currentPage, 'auctionAttach');
         }
@@ -702,7 +702,7 @@ export class AuctionDetailComponent implements OnInit {
       this.files.splice(index, 1);
       this.auctionAttachement.removeAt(index);
       if (this.files.length % 10 === 0) {
-        this.navigateToPage(currentPage-1, 'auctionAttach');
+        this.navigateToPage(currentPage - 1, 'auctionAttach');
       } else {
         this.navigateToPage(currentPage, 'auctionAttach');
       }
@@ -811,7 +811,7 @@ export class AuctionDetailComponent implements OnInit {
       }
     }
     if (startDate && endDate && anncStartDate) {
-      if ((moment(anncStartDate).isAfter(endDate, 'day')) || (moment(anncStartDate).isBefore(startDate, 'day'))) {
+      if ((moment(anncStartDate).isBefore(endDate, 'day')) || (moment(anncStartDate).isBefore(startDate, 'day'))) {
         this.isValidAnncSDate = true;
         return;
       }

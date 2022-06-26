@@ -100,8 +100,8 @@
             }}</label>
           <form>
             <mat-form-field class="example-full-width w-100" appearance="fill">
-              <input matInput type="search" aria-label="Enter employee number or email" [matAutocomplete]="auto"
-                [formControl]="stateCtrl">
+              <input matInput type="search" tabIndex="-1" aria-label="Enter employee number or email"
+                [matAutocomplete]="auto" [formControl]="stateCtrl">
               <mat-icon matSuffix> <i class="icon-search pr-4"></i> </mat-icon>
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option (click)="memberSelected(state)" *ngFor="let state of filteredStates | async"

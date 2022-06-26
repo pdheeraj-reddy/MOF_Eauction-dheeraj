@@ -37,7 +37,6 @@ export class AddMemberComponent implements OnInit {
   filteredStates: Observable<Employee[]>;
   selectedEmployee: any;
   get currentLang() {
-    console.log("🚀 ~ getcurrentLang ~ localStorage.getItem('lang_pref')", localStorage.getItem('lang_pref'))
     return localStorage.getItem('lang_pref') ?? 'en'
   }
   memberSelected(member: any) {
@@ -107,6 +106,7 @@ export class AddMemberComponent implements OnInit {
         EmployeeId: this.selectedEmployee.EmployeeId,
         EmployeeName: this.selectedEmployee.EmployeeName,
         EmployeeRole: this.selectedEmployee.EmployeeRole,
+        AgencyId: this.selectedEmployee.AgencyId,
       });
     }
   }
@@ -117,14 +117,15 @@ export class AddMemberComponent implements OnInit {
     this.role = this.dialogData.role;
     this.committeeMemberList = this.dialogData.committeeMemberList;
     console.log(this.committeeMemberList);
-    this.stateCtrl.setValue(((this.dialogData.committeeEditData != undefined) ? this.dialogData.committeeEditData.EmployeeId : ''));
+    // this.stateCtrl.setValue(((this.dialogData.committeeEditData != undefined) ? this.dialogData.committeeEditData.EmployeeId : ''));
 
 
+    console.log("🚀 ~ ngOnInit ~ this.dialogData", this.dialogData)
     if (this.dialogData.committeeEditData != undefined) {
-      var committeeEditData = this.getDimensionsByFilter(this.dialogData.committeeEditData.EmployeeId);
+      // var committeeEditData = this.getDimensionsByFilter(this.dialogData.committeeEditData.EmployeeId);
       // console.log("this.test");
       // console.log(committeeEditData);
-      this.selectedEmployee = committeeEditData;
+      this.selectedEmployee = this.dialogData.committeeEditData;
     }
   }
 
