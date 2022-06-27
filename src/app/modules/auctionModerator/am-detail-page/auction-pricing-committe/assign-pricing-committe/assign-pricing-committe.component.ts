@@ -126,9 +126,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     this.committeeMem1Data = undefined
     this.committeeMem2Data = undefined
     this.committeeMem3Data = undefined
+    this.committeeSecData = undefined;
     this.existingCommitteMemberList = [];
     // this.committeeChairData = [];
-    // this.committeeSecData = [];
     // this.committeeMem1Data = [];
     // this.committeeMem2Data = [];
     // this.committeeMem3Data = [];

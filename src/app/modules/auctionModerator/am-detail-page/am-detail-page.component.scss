@@ -68,6 +68,7 @@
         
          ::ng-deep .mat-horizontal-stepper-header-container {
             height: 96px !important;
+            justify-content: space-evenly !important;
         }
         
          ::ng-deep .mat-horizontal-content-container {
@@ -80,7 +81,7 @@
         }
         
          ::ng-deep .mat-step-header {
-            width: 25%;
+            // width: 25%;
             .mat-step-label {
                 color: #ccc;
                 &.mat-step-label-active {
@@ -116,22 +117,22 @@
                 }
             }
             .mat-step-icon-selected {
-                // background: #32ad71;
-                // color: #fff;
-                // box-shadow: 0 3px 6px 0 rgb(50 173 113 / 26%);
-                background: #fff;
-                color: #32ad71;
-                position: relative;
-                border: 2px solid #32ad71;
-                 :before {
-                    content: "";
-                    position: absolute;
-                    background-image: url(../../../../assets/icons/check-icon.svg);
-                    width: 16px;
-                    height: 14px;
-                    right: -26px;
-                    top: -5px;
-                }
+                background: #32ad71;
+                color: #fff;
+                box-shadow: 0 3px 6px 0 rgb(50 173 113 / 26%);
+                // background: #fff;
+                // color: #32ad71;
+                // position: relative;
+                // border: 2px solid #32ad71;
+                //  :before {
+                //     content: "";
+                //     position: absolute;
+                //     background-image: url(../../../../assets/icons/check-icon.svg);
+                //     width: 16px;
+                //     height: 14px;
+                //     right: -26px;
+                //     top: -5px;
+                // }
             }
         }
         

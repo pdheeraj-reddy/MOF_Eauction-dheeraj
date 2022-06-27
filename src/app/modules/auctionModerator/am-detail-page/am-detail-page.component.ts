@@ -25,6 +25,7 @@ export class AmDetailPageComponent implements OnInit {
   selectedIndex = 0;
   activeIndex: number;
   tabThreeFour = true;
+  tabTwoThree = true;
   tabFourFive = false;
   tabTwo = false;
   showAuction = true;
@@ -216,13 +217,21 @@ export class AmDetailPageComponent implements OnInit {
         ) {
           this.tabThreeFour = false;
         }
+
+        if (
+          this.preAuctionData.Status == 'Pending Review' ||
+          this.preAuctionData.Status == 'Rejected'
+        ) {
+          this.tabTwoThree = false;
+        }
+
         if (this.preAuctionData.Status == 'Pending to Publish') {
           this.tabFourFive = false;
 
           let data = this.preAuctionData.listtocomiteememnav.results;
           for (let i = 0; i < data.length; i++) {
             if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
-              this.tabFourFive = true;
+              // this.tabFourFive = true;
             }
           }
         }

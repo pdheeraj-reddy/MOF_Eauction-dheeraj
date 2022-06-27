@@ -44,6 +44,7 @@
     "EAuction_PricingCommitteSecretary": "Pricing Commitee Secretary",
     "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
     "ZEAUCTION_PRICECOMM_HEAD": "Pricing Commitee Head",
+    "ZEAUCTION_PRICECOMM_SECRETARY": "Pricing Commitee Secretary",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "header": {
@@ -360,7 +361,7 @@
             "showAuction-reject_btn": "Rejection of the Application",
             "showAuction-accept_btn": "Accept Request",
             "showProduct-back_btn": "Back",
-            "showProduct-reject_btn": "Rejection of the Application",
+            "showProduct-reject_btn": "Reject Request",
             "showProduct-accept_btn": "Accept Request",
             "auction-publish": {
                 "back_btn": "Back",
@@ -455,7 +456,7 @@
                 "accept_btn": "Accept Request",
                 "card1-head1": "Add Pricing Head",
                 "card1-head2": "Committee Head",
-                "jobNumber": "Job Number",
+                "jobNumber": "Employee ID",
                 "email": "E-mail",
                 "card2-head1": "Add Committee Secretary (Optional)",
                 "card2-head2": "Add Committee Secretary",
@@ -463,9 +464,9 @@
                 "card3-head2": "Committee Member",
                 "reject": "Cancel",
                 "accept": "Send Pricing",
-                "popup1-title": "Confirmation of assignment of Pricing Committee?",
+                "popup1-title": "Confirmation of sending a pricing request ?",
                 "popup1-subtitle": "Upon confirmation, the auction will be sent to Pricing Committee member for pricing.",
-                "popup1-accept": "Post Confirmation",
+                "popup1-accept": "Post Confirm",
                 "popup2-title": "The request has been successfully sent to the pricing committee",
                 "popup2-subtitle": "After pricing the products by the committee, the request will be returned to appoint the auction committee and publish the auction.",
                 "popup2-accept": "Back to Auction Requests"
@@ -481,7 +482,7 @@
                 "card2-head2": "Committee President",
                 "card3-head1": "Add Committee Member",
                 "card3-head2": "Committee Member",
-                "jobNumber": "Job Number",
+                "jobNumber": "Employee ID",
                 "email": "E-mail",
                 "back_btn": "Back",
                 "accept": "Submit",
@@ -492,8 +493,8 @@
                 "popup2-subtitle": "You can now pulish the acution."
             },
             "add-member": {
-                "heading": "Search with employee number or email",
-                "phold": "Enter employee number or email",
+                "heading": "Search by Employee ID or email",
+                "phold": "Search by Employee ID or email",
                 "emp-name": "Employee Name",
                 "emp-id": "Employee Id",
                 "emp-email": "Email",
