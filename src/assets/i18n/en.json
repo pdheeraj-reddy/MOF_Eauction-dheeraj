@@ -455,7 +455,7 @@
                 "accept_btn": "Accept Request",
                 "card1-head1": "Add Pricing Head",
                 "card1-head2": "Committee Head",
-                "jobNumber": "Job Number",
+                "jobNumber": "Employee ID",
                 "email": "E-mail",
                 "card2-head1": "Add Committee Secretary (Optional)",
                 "card2-head2": "Add Committee Secretary",
@@ -481,7 +481,7 @@
                 "card2-head2": "Committee President",
                 "card3-head1": "Add Committee Member",
                 "card3-head2": "Committee Member",
-                "jobNumber": "Job Number",
+                "jobNumber": "Employee ID",
                 "email": "E-mail",
                 "back_btn": "Back",
                 "accept": "Submit",
@@ -492,8 +492,8 @@
                 "popup2-subtitle": "You can now pulish the acution."
             },
             "add-member": {
-                "heading": "Search with employee number or email",
-                "phold": "Enter employee number or email",
+                "heading": "Search by Employee ID or email",
+                "phold": "Search by Employee ID or email",
                 "emp-name": "Employee Name",
                 "emp-id": "Employee Id",
                 "emp-email": "Email",
