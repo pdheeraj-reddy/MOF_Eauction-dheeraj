@@ -32,6 +32,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
   unsaved: boolean = false;
   popupTitle: any = '';
   committeeMemberList: any = [];
+  existingCommitteSecList: any = [];
   existingCommitteMemberList: any = [];
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -290,7 +291,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          this.filterMember(this.existingCommitteMemberList);
+          this.filterMember(this.existingCommitteSecList);
           console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
@@ -309,48 +310,26 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
             panelClass: 'my-custom-dialog-class',
           });
           dialogRef.afterClosed().subscribe((result) => {
-            if (this.preAuctionData.listtocomiteememnav.results.length > 0) {
-              for (
-                let i = 0;
-                i < this.preAuctionData.listtocomiteememnav.results;
-                i++
-              ) {
-                if (
-                  this.preAuctionData.listtocomiteememnav.results[i]
-                    .EmployeeRole == result.EmployeeRole
-                ) {
-                  this.preAuctionData.listtocomiteememnav.results[i].push({
-                    AucId: this.preAuctionData.ObjectId,
-                    EmployeeId: result.EmployeeId,
-                    EmployeeName: result.EmployeeName,
-                    AucDesc: '',
-                    EmpMailid: result.EmpMailid,
-                    EmployeeRole: result.EmployeeRole,
-                    Requestor: '',
-                    UserId: '',
-                  });
-                }
-              }
-            } else {
-              this.preAuctionData.listtocomiteememnav.results.push({
-                AucId: this.preAuctionData.ObjectId,
-                EmployeeId: result.EmployeeId,
-                EmployeeName: result.EmployeeName,
-                AucDesc: '',
-                EmpMailid: result.EmpMailid,
-                EmployeeRole: result.EmployeeRole,
-                Requestor: '',
-                UserId: '',
-              });
-            }
+            console.log(this.preAuctionData);
+            console.log("this.test");
+            console.log(result);
             if (result) {
+              if (this.committeeSecData) {
+                this.existingCommitteSecList = this.existingCommitteSecList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
+              }
               this.committeeSecData = result;
-              this.existingCommitteMemberList.push(this.committeeSecData.EmployeeId);
+              console.log(this.committeeMemberList);
+              this.existingCommitteSecList.push(this.committeeSecData.EmployeeId);
+
+              // console.log(this.committeeMemberList);
             }
-            console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_SECRETARY')
               this.committeeSecSelected = true;
             this.hideErrorMsg();
+            if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
+              this.add4Mem = true;
+            }
+            console.log(result);
           });
         },
         (error) => {
@@ -401,8 +380,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
               console.log(this.existingCommitteMemberList.length);
             }
             console.log(result?.EmployeeRole);
-            if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
+            if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER'){
               this.committeeMem1Selected = true;
+            }
             if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
               this.add4Mem = true;
             }
