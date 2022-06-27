@@ -151,13 +151,13 @@
                 </div>
                 <!-- <button mat-button matStepperNext>Next</button> -->
             </mat-step>
-            <mat-step *ngIf="!tabTwo" [completed]="tabThreeFour">
+            <mat-step *ngIf="!tabTwo" [completed]="tabTwoThree">
                 <ng-template matStepLabel>
                     <span matTooltip="{{'auctionModerator.am-detail.stepper2' | translate}}">{{"auctionModerator.am-detail.stepper2"
                         | translate}}</span>
                 </ng-template>
             </mat-step>
-            <mat-step *ngIf="tabTwo" [completed]="tabThreeFour">
+            <mat-step *ngIf="tabTwo" [completed]="tabTwoThree">
                 <ng-template matStepLabel>
                     <span matTooltip="{{'auctionModerator.am-detail.stepper2' | translate}}">{{"auctionModerator.am-detail.stepper2"
                         | translate}}</span>
