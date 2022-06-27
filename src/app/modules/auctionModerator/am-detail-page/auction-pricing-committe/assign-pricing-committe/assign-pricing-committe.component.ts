@@ -125,9 +125,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     this.committeeMem1Data = undefined
     this.committeeMem2Data = undefined
     this.committeeMem3Data = undefined
+    this.committeeSecData = undefined;
     this.existingCommitteMemberList = [];
     // this.committeeChairData = [];
-    // this.committeeSecData = [];
     // this.committeeMem1Data = [];
     // this.committeeMem2Data = [];
     // this.committeeMem3Data = [];
@@ -309,7 +309,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
             panelClass: 'my-custom-dialog-class',
           });
           dialogRef.afterClosed().subscribe((result) => {
-            if (this.preAuctionData.listtocomiteememnav.results.length > 0) {
+            if (result && this.preAuctionData.listtocomiteememnav.results.length > 0) {
               for (
                 let i = 0;
                 i < this.preAuctionData.listtocomiteememnav.results;
@@ -332,18 +332,23 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
                 }
               }
             } else {
-              this.preAuctionData.listtocomiteememnav.results.push({
-                AucId: this.preAuctionData.ObjectId,
-                EmployeeId: result.EmployeeId,
-                EmployeeName: result.EmployeeName,
-                AucDesc: '',
-                EmpMailid: result.EmpMailid,
-                EmployeeRole: result.EmployeeRole,
-                Requestor: '',
-                UserId: '',
-              });
+              if (result) {
+                this.preAuctionData.listtocomiteememnav.results.push({
+                  AucId: this.preAuctionData.ObjectId,
+                  EmployeeId: result.EmployeeId,
+                  EmployeeName: result.EmployeeName,
+                  AucDesc: '',
+                  EmpMailid: result.EmpMailid,
+                  EmployeeRole: result.EmployeeRole,
+                  Requestor: '',
+                  UserId: '',
+                });
+              }
             }
             if (result) {
+              if (this.committeeSecData) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeSecData.EmployeeId)
+              }
               this.committeeSecData = result;
               this.existingCommitteMemberList.push(this.committeeSecData.EmployeeId);
             }

@@ -44,6 +44,7 @@
     "EAuction_PricingCommitteSecretary": "سكرتيرلجنة التسعير",
     "EAuction_PricingCommitteeChairman": "رئيس لجنة التسعير",
     "ZEAUCTION_PRICECOMM_HEAD": "رئيس لجنة التسعير",
+    "ZEAUCTION_PRICECOMM_SECRETARY": "Pricing Commitee Secretary",
     "Enter the total estimated value of the products": "أدخل القيمة الإجمالية المقدرة للمنتجات",
     "Enter the estimated value for each product separately": "أدخل القيمة المقدرة لكل منتج على حدة",
     "header": {
@@ -464,9 +465,9 @@
                 "card3-head2": "عضو لجنة",
                 "reject": "إلغاء",
                 "accept": "إرسال التسعير",
-                "popup1-title": "تأكيد تكليف لجنة التسعير؟",
+                "popup1-title": "تأكيد إرسال طلب التسعير؟",
                 "popup1-subtitle": "عند التأكيد، سيتم إرسال المزاد إلى عضو لجنة التسعير للتسعير.",
-                "popup1-accept": "بعد التأكيد",
+                "popup1-accept": "تأكيد",
                 "popup2-title": "تم إرسال الطلب بنجاح إلى لجنة التسعير",
                 "popup2-subtitle": "بعد تسعير المنتجات من قبل اللجنة يعاد الطلب لتعيين لجنة المزاد ونشر المزاد.",
                 "popup2-accept": "رجوع إلى طلبات المزاد"
