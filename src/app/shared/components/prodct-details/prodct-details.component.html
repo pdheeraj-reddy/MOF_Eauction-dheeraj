@@ -3,44 +3,34 @@
         <h4>
             {{ "auctionModerator.am-detail.product-details.title" | translate }}
         </h4>
-        <div style="display: flex"
-            *ngIf="loggedUserRole.isPricingHead && preAuctionData.Status != 'Rejected Prices' && preAuctionData.Status != 'Pending Pricing'">
-            <h1 class="text-14 text-primary font-weight-medium"
-                style="padding-right: 10px; margin: 0; font-size: 14px !important">
-                Price adjustment
-            </h1>
+        <div style="display: flex" *ngIf="loggedUserRole.isPricingHead && preAuctionData.Status != 'Rejected Prices' && preAuctionData.Status != 'Pending Pricing' && preAuctionData.Status != 'Pending to Publish'">
+            <h1 class="text-14 text-primary font-weight-medium" style="padding-right: 10px; margin: 0; font-size: 14px !important">
+                {{ "auctionHead.head-detail.Price_adjustment" | translate }}
+            </h1> &nbsp; &nbsp;
             <a class="btn btn-ghost btn-sm fill-primary-light-green" (click)="adjustPrice()">
                 <span class="icon-edit"></span>
             </a>
         </div>
     </div>
     <div class="row no-gutters">
-        <div *ngIf="showAdjustPriceOption && preAuctionData?.Status!='Pending to Publish'"
-            class="col-12 rounded p-4 mb-4" style="background-color: #eaf6ef">
+        <div *ngIf="showAdjustPriceOption && preAuctionData?.Status!='Pending to Publish'" class="col-12 rounded p-4 mb-4" style="background-color: #eaf6ef">
             <label class="text-12">{{ "auctionMember.bid-value.subHead" | translate }}</label>
-            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-                [(ngModel)]="inputMode">
-                <mat-radio-button class="example-radio-button" style="width: 40%" *ngFor="let type of types"
-                    [value]="type.value" (click)="selection(type.value)">
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="inputMode">
+                <mat-radio-button class="example-radio-button" style="width: 40%" *ngFor="let type of types" [value]="type.value" (click)="selection(type.value)">
                     <label class="lbl1 text-14 mt-1" style="color: #414042" for="all">{{ type.name | translate }}
                     </label>
                 </mat-radio-button>
             </mat-radio-group>
-            <div class="container"
-                *ngIf="inputMode && (loggedUserRole.isPricingHead && (preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')) )">
+            <div class="container" *ngIf="inputMode && (loggedUserRole.isPricingHead && (preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')) )">
                 <label class="text-12">{{ "auctionMember.bid-value.phold" | translate }}</label>
                 <div style="display: flex">
-                    <input [(ngModel)]="pdtEstPricePc" (ngModelChange)="adjustTotalPrice()" onClick="this.select();"
-                        digitOnly [decimal]="true" type="text"
-                        placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
+                    <input [(ngModel)]="pdtEstPricePc" (ngModelChange)="adjustTotalPrice()" onClick="this.select();" digitOnly [decimal]="true" type="text" placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
                         width: 300px; outline: none; border: none; border-bottom: 1px solid grey;
                         background-color: #eaf6ef; " />&nbsp; &nbsp; &nbsp;
                     <!-- <button class="btn btn-primary-light btn-md" (click)="adjustTotalPrice()"> {{
                         "auctionMember.bid-value.save" | translate }}</button> -->
                 </div>
-                <div *ngIf="invalidQty" class="invalid-feedback d-block">{{
-                    'auctionMember.bid-value.overall_failure_mssg' |
-                    translate }}
+                <div *ngIf="invalidQty" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.overall_failure_mssg' | translate }}
                 </div>
             </div>
         </div>
@@ -49,35 +39,28 @@
                 <tr class="">
                     <th width="200px" scope="col" (click)="sortByTableHeaderId(0, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th1" | translate}}</span> <span
-                                class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th1" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
                     </th>
                     <th width="150px" scope="col" (click)="sortByTableHeaderId(1, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th2" | translate}}</span> <span
-                                class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th2" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
                     </th>
                     <th width="220px" scope="col" (click)="sortByTableHeaderId(2, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th3" | translate}}</span> <span
-                                class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th3" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
                     </th>
-                    <th width="200px"
-                        *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')"
-                        class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                    <th width="200px" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" class="btn-primary-light"
+                        scope="col" (click)="sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span
-                                class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
                     </th>
-                    <th scope="col"
-                        (click)="(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval') ? sortByTableHeaderId(4, 'string') : sortByTableHeaderId(3, 'string')">
+                    <th scope="col" (click)="(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval') ? sortByTableHeaderId(4, 'string') : sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th5" | translate}}</span> <span
-                                class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th5" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                         </div>
                     </th>
                     <th class="th-action" scope="col"></th>
@@ -86,47 +69,32 @@
             <tbody>
                 <ng-container *ngIf="preAuctionData?.listtoproductnav?.results.length > 0">
                     <tr *ngFor=" let product of preAuctionData?.listtoproductnav?.results; let i=index ">
-                        <ng-container
-                            *ngIf=" i >=pageRangeForProductAttach.rangeStart && i <=pageRangeForProductAttach.rangeEnd ">
+                        <ng-container *ngIf=" i >=pageRangeForProductAttach.rangeStart && i <=pageRangeForProductAttach.rangeEnd ">
                             <td scope="row">{{product?.Description}}</td>
                             <td>{{product?.Quantity.split('.')[0]}}</td>
                             <td>{{product?.ProductValue}}</td>
-                            <td class="position-relative" [ngClass]="{'border-lightgreen' : product.show}"
-                                *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'">
-                                <div class="row align-items-center no-gutters"
-                                    [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
+                            <td class="position-relative" [ngClass]="{'border-lightgreen' : product.show}" *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'">
+                                <div class="row align-items-center no-gutters" [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
                                     <span *ngIf="!product.show">{{product.ZzPdtEstPricePc}}</span>
-                                    <input *ngIf="product.show" #autoFocus class="col-9 h-100 p-0 form-control"
-                                        onClick="this.select();" digitOnly [decimal]="true" type="text"
-                                        [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />
+                                    <input *ngIf="product.show" #autoFocus class="col-9 h-100 p-0 form-control" onClick="this.select();" digitOnly [decimal]="true" type="text" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />
                                     <span class="ml-2">{{"common.SAR" | translate}}</span>
                                     <a *ngIf="!product.show && showAdjustPriceOption && ((loggedUserRole.isPricingHead && preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')))"
-                                        class="btn btn-ghost btn-sm fill-primary-light-green"
-                                        (click)="openAdjustPriceOption(i)"> <span class="icon-Group-3286"></span> </a>
+                                        class="btn btn-ghost btn-sm fill-primary-light-green" (click)="openAdjustPriceOption(i)"> <span class="icon-Group-3286"></span> </a>
                                 </div>
-                                <div *ngIf="product.show"
-                                    class="row w-100 bg-white justify-content-between align-items-center no-gutters px-1 btn-edit">
-                                    <button class="btn btn-danger btn-sm rounded border-0 m-2"
-                                        (click)="product.show = false">{{"common.Cancel" | translate}}</button> <button
-                                        (click)="adjustProductPriceInEdit()"
-                                        class="btn btn-primary-light btn-sm rounded border-0 m-2">{{"common.Save" |
+                                <div *ngIf="product.show" class="row w-100 bg-white justify-content-between align-items-center no-gutters px-1 btn-edit">
+                                    <button class="btn btn-danger btn-sm rounded border-0 m-2" (click)="product.show = false">{{"common.Cancel" | translate}}</button> <button (click)="adjustProductPriceInEdit()" class="btn btn-primary-light btn-sm rounded border-0 m-2">{{"common.Save" |
                                         translate}}</button>
                                 </div>
-                                <div *ngIf="indexError == i" class="invalid-feedback d-block">{{
-                                    'auctionMember.bid-value.failure_mssg' | translate }}
+                                <div *ngIf="indexError == i" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
                                 </div>
                             </td>
-                            <td
-                                *ngIf=" !isBidUpdate && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')">
+                            <td *ngIf=" !isBidUpdate && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')">
                                 -
-                                <a *ngIf="isBidUpdate" class="btn btn-ghost btn-sm fill-primary-light-green"
-                                    style="margin-left: 60px;" (click)="editPrice(i, product)"> <span
-                                        class="icon-Group-3286"></span> </a>
+                                <a *ngIf="isBidUpdate" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 60px;" (click)="editPrice(i, product)"> <span class="icon-Group-3286"></span> </a>
                             </td>
                             <td>{{product?.ZzProductCond}}</td>
                             <td style="text-align: center;">
-                                <button class="btn btn-ghost btn-sm fill-primary-light-green"
-                                    (click)="editPriceInPopup(i, product)"><span class="icon-eye-open"></span></button>
+                                <button class="btn btn-ghost btn-sm fill-primary-light-green" (click)="editPriceInPopup(i, product)"><span class="icon-eye-open"></span></button>
                             </td>
                         </ng-container>
 
@@ -138,18 +106,13 @@
             <tfoot>
                 <tr>
                     <td width="200px" class="border-0 font-medium color-lightgreen">
-                        {{preAuctionData?.listtoproductnav?.results.length}}
-                        {{"auctionModerator.am-detail.product-details.product" | translate}}</td>
+                        {{preAuctionData?.listtoproductnav?.results.length}} {{"auctionModerator.am-detail.product-details.product" | translate}}</td>
                     <td width="150px" class="border-0"></td>
                     <td width="220px" class="border-bottom-0 font-weight-bold color-darkgreen">
-                        {{"auctionModerator.am-detail.product-details.bookValue" | translate}}<br />
-                        {{preAuctionData?.ZzPbEstPrice}} {{"auctionModerator.am-detail.product-details.currency" |
-                        translate}}
+                        {{"auctionModerator.am-detail.product-details.bookValue" | translate}}<br /> {{preAuctionData?.ZzPbEstPrice}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
                     </td>
-                    <td width="200px" class="border-bottom-0 font-weight-bold color-darkgreen"
-                        *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&& (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices' )">
-                        {{"auctionModerator.am-detail.product-details.estimatedValue" | translate}}<br />
-                        {{productValue}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
+                    <td width="200px" class="border-bottom-0 font-weight-bold color-darkgreen" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&& (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices' )">
+                        {{"auctionModerator.am-detail.product-details.estimatedValue" | translate}}<br /> {{productValue}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
                     </td>
                     <td class="border-0"></td>
                     <td class="border-0"></td>
@@ -161,18 +124,14 @@
                 <nav aria-label="..." class="nav-pagination">
                     <ul class="pagination">
                         <li class="page-item" [ngClass]="{disabled: pageRangeForProductAttach.currentPage===1}">
-                            <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage - 1, 'productAttach' ) "
-                                class="page-link" tabindex="-1" aria-disabled="true">{{"auctionlist.grid-previous" |
+                            <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage - 1, 'productAttach' ) " class="page-link" tabindex="-1" aria-disabled="true">{{"auctionlist.grid-previous" |
                                 translate}}</a>
                         </li>
-                        <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item"
-                            [ngClass]="{active: pageRangeForProductAttach.currentPage===page}">
+                        <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item" [ngClass]="{active: pageRangeForProductAttach.currentPage===page}">
                             <a (click)="navigateToPage(page, 'productAttach')" class="page-link">{{page}}</a>
                         </li>
-                        <li class="page-item"
-                            [ngClass]="{disabled: pageRangeForProductAttach.currentPage===pageRangeForProductAttach.totalPages}">
-                            <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage + 1, 'productAttach' ) "
-                                class="page-link">{{"auctionlist.grid-next" | translate}}</a>
+                        <li class="page-item" [ngClass]="{disabled: pageRangeForProductAttach.currentPage===pageRangeForProductAttach.totalPages}">
+                            <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage + 1, 'productAttach' ) " class="page-link">{{"auctionlist.grid-next" | translate}}</a>
                         </li>
                     </ul>
                 </nav>
@@ -181,19 +140,24 @@
 
 
     </div>
-    <div class="row mt-4 mb-5"
-        *ngIf="preAuctionData?.Status == 'Pending Pricing' || preAuctionData?.Status == 'Rejected Prices'">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col">
-            <button *ngIf="!isAuctionHead" (click)="sendPricingValues()"
-                class="btn btn-primary-light btn-lg mt-1 font-weight-bold rounded w-100" data-backdrop="static">
+</div>
+<div class="row mt-5" *ngIf="preAuctionData?.Status == 'Pending Pricing' || preAuctionData?.Status == 'Rejected Prices'">
+    <div class="col">
+        <button *ngIf="!isAuctionHead" (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
+                <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
+                    class="v-divider"></span>
+                <span class="icon icon-arrow-left"></span>
+            </button>
+    </div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+        <button *ngIf="!isAuctionHead" (click)="sendPricingValues()" class="btn btn-primary-light btn-lg mt-1 font-weight-bold rounded w-100" data-backdrop="static">
                 {{ "auctionModerator.am-detail.product-details.sendQuotes" | translate }}
             </button>
-        </div>
     </div>
-    <!-- <div class="btn-submit-grp">
+</div>
+<!-- <div class="btn-submit-grp">
         <button class="btn btn-with-arrow btn-outline-light btn-md">
       <span class="icon-keyboard_arrow_left"></span>
       <font _mstmutation="1" _msthash="1230112" _msttexthash="94172">
@@ -212,260 +176,245 @@
       </button>
         </div>
     </div> -->
-    <div *ngIf="preAuctionData?.Status == 'Pending Pricing Approval' && loggedUserRole.isPricingHead "
-        class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5">
-        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-            <button type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+<div *ngIf="preAuctionData?.Status == 'Pending Pricing Approval' && loggedUserRole.isPricingHead " class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5">
+    <div class="flex-grow-1 flex-md-grow-0">
+        <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
                 <span class="btn-text">{{
                     "auctionModerator.am-detail.product-details.back_btn" | translate
                     }}</span>
                 <span class="v-divider"></span>
                 <span class="icon icon-arrow-left"></span>
             </button>
-        </div>
-        <div class="d-flex flex-column flex-md-row mb-5">
-            <button class="btn btn-danger btn-lg mx-0 mx-md-2" data-toggle="modal" data-target="#rejectPricing"
-                _msthash="1893008" _msttexthash="94172">
+    </div>
+    <div class="d-flex flex-column flex-md-row">
+        <button class="btn btn-danger btn-lg mx-0 mx-md-2" data-toggle="modal" data-target="#rejectPricing" _msthash="1893008" _msttexthash="94172">
                 {{ "auctionModerator.am-detail.product-details.reject_btn" | translate }}
             </button>
 
-            <button (click)="checkPrices()"
-                class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0" _msthash="1893008"
-                _msttexthash="94172">
+        <button (click)="checkPrices()" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0" _msthash="1893008" _msttexthash="94172">
                 <span class="btn-text">{{
                     "auctionModerator.am-detail.product-details.accept_btn" | translate
                     }}</span>
             </button>
-        </div>
     </div>
+</div>
 
-    <!-- confirmation of sending quotes -->
-    <div class="modal show" *ngIf="isPriceSuccess" [ngClass]="{ 'modal-show': isPriceSuccess }">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">
-                        {{ "auctionMember.confirmation-popup.title" | translate }}
-                    </h4>
-                    <!-- <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+
+
+<!-- confirmation of sending quotes -->
+<div class="modal show" *ngIf="isPriceSuccess" [ngClass]="{ 'modal-show': isPriceSuccess }">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    {{ "auctionMember.confirmation-popup.title" | translate }}
+                </h4>
+                <!-- <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                         <span class="icon-close"></span>
                     </button> -->
-                </div>
-                <div class="modal-body">
-                    <label for="confirmation" style="color: #414042; font-size: 16px">{{
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px">{{
                         "auctionMember.confirmation-popup.subtitle" | translate }}</label>
-                </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button type="button" class="btn btn-primary-light btn-md"
-                        (click)="approveOrRejectAuction('A', 'Pending Pricing')">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" (click)="approveOrRejectAuction('A', 'Pending Pricing')">
                         {{ "auctionMember.confirmation-popup.accept" | translate }}
                     </button>
-                    <button type="button" class="btn btn-md" (click)="closeAllModal();"
-                        style="border: 1px solid #cccccc; border-radius: 5px">
+                <button type="button" class="btn btn-md" (click)="closeAllModal();" style="border: 1px solid #cccccc; border-radius: 5px">
                         {{ "common.Cancel" | translate }}
                     </button>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal show" *ngIf="isPriceError" [ngClass]="{ 'modal-show': isPriceError }">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content" style="align-items: center;">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">
-                        {{ "auctionMember.confirmation-popup.title" | translate }}
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <label for="confirmation" style="color: #414042; font-size: 16px">{{
+<div class="modal show" *ngIf="isPriceError" [ngClass]="{ 'modal-show': isPriceError }">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content" style="align-items: center;">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    {{ "auctionMember.confirmation-popup.title" | translate }}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px">{{
                         "auctionMember.error-popup.subtitle" | translate }}</label>
-                </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button type="button" class="btn btn-primary-light btn-md" (click)="sendPricingValuesFinal()">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" (click)="sendPricingValuesFinal()">
                         {{ "auctionMember.error-popup.accept" | translate }}
                     </button>
-                    <button type="button" class="btn btn-md" (click)="closeAllModal();"
-                        style="border: 1px solid #cccccc; border-radius: 5px">
+                <button type="button" class="btn btn-md" (click)="closeAllModal();" style="border: 1px solid #cccccc; border-radius: 5px">
                         {{ "common.Cancel" | translate }}
                     </button>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Successful popup publish -->
-    <div class="modal show" *ngIf="confirmPublish" [ngClass]="{ 'modal-show': confirmPublish }">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content" style="align-items: center;">
-                <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+<!-- Successful popup publish -->
+<div class="modal show" *ngIf="confirmPublish" [ngClass]="{ 'modal-show': confirmPublish }">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content" style="align-items: center;">
+            <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                                 <span class="icon-close"></span>
                                 </button> -->
-                <div class="card result result-success">
-                    <div class="alert-body">
-                        <i class="alert-icon">
+            <div class="card result result-success">
+                <div class="alert-body">
+                    <i class="alert-icon">
                             <span class="icon-alert-success"></span>
                         </i>
-                    </div>
                 </div>
-                <div class="modal-header">
+            </div>
+            <div class="modal-header">
 
-                    <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                        {{ "auctionMember.successful-popup.title" | translate }}
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+                <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                    {{ "auctionMember.successful-popup.title" | translate }}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
                         {{ "auctionMember.successful-popup.subtitle" | translate }}
                     </label>
-                </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md"
-                        data-dismiss="modal" aria-label="Close">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
                         {{ "auctionMember.successful-popup.accept" | translate }}
                     </button>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- Confirmation of pricing approval -->
-    <div class="modal show" *ngIf="showConfim" [ngClass]="{ 'modal-show': showConfim }">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">
-                        Confirmation of acceptance of pricing request?
-                    </h4>
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+<!-- Confirmation of pricing approval -->
+<div class="modal show" *ngIf="showConfim" [ngClass]="{ 'modal-show': showConfim }">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    Confirmation of acceptance of pricing request?
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                         <span class="icon-close"></span>
                     </button>
-                </div>
-                <div class="modal-body">
-                    <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, the pricing
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, the pricing
                         request will be approved and sent to the head of the government authority. </label>
-                </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
-                        (click)="approveOrRejectAuction('A', 'Pending Pricing Approval')">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close" (click)="approveOrRejectAuction('A', 'Pending Pricing Approval')">
                         Accepting the Application
                     </button>
-                    <button type="button" class="btn btn-md" (click)="closeConfirm()"
-                        style="border: 1px solid #cccccc; border-radius: 5px">
+                <button type="button" class="btn btn-md" (click)="closeConfirm()" style="border: 1px solid #cccccc; border-radius: 5px">
                         Back
                     </button>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Successful popup for approval -->
-    <div class="modal show" *ngIf="confirmApproval" [ngClass]="{ 'modal-show': confirmApproval }">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content" style="align-items: center;">
-                <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+<!-- Successful popup for approval -->
+<div class="modal show" *ngIf="confirmApproval" [ngClass]="{ 'modal-show': confirmApproval }">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content" style="align-items: center;">
+            <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                                 <span class="icon-close"></span>
                                 </button> -->
-                <div class="card result result-success">
-                    <div class="alert-body">
-                        <i class="alert-icon">
+            <div class="card result result-success">
+                <div class="alert-body">
+                    <i class="alert-icon">
                             <span class="icon-alert-success"></span>
                         </i>
-                    </div>
                 </div>
-                <div class="modal-header">
+            </div>
+            <div class="modal-header">
 
-                    <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                        The application was successfully accepted
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The
+                <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                    The application was successfully accepted
+                </h4>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The
                         application was successfully sent to the head of the authority to complete the auction approval
                     </label>
-                </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md"
-                        data-dismiss="modal" aria-label="Close">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
                         Back to Auction Requests
                     </button>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- Confirmation of pricing rejection -->
-    <div class="modal fade" id="rejectPricing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title denial-model" id="exampleModalLabel" style="color: #f66f5b"> Confirm
-                        application rejection? </h4>
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+<!-- Confirmation of pricing rejection -->
+<div class="modal fade" id="rejectPricing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title denial-model" id="exampleModalLabel" style="color: #f66f5b"> Confirm application rejection? </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                         <span class="icon-close"></span>
                     </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body text-20" style="color: #414042">
+                    Are you sure to send a rejection request?
                 </div>
-                <div class="modal-body">
-                    <div class="modal-body text-20" style="color: #414042">
-                        Are you sure to send a rejection request?
-                    </div>
 
-                    <div class="row mt-4">
-                        <div class="form-group col w-100">
-                            <div class="border-bottom color-grey"> <label for="goverusermessage">Please Enter the
+                <div class="row mt-4">
+                    <div class="form-group col w-100">
+                        <div class="border-bottom color-grey"> <label for="goverusermessage">Please Enter the
                                     Reason</label> <span class="float-left text-muted">Letter&nbsp;<small
                                         id="charNum">{{ (rejectionNotes + '').length || 0 }} / {{maxLen}}</small></span>
-                            </div>
-                            <textarea [(ngModel)]="rejectionNotes" class="form-control text-success"
-                                maxlength="{{maxLen}}" placeholder="Text..." rows="4"></textarea>
                         </div>
+                        <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" maxlength="{{maxLen}}" placeholder="Text..." rows="4"></textarea>
                     </div>
                 </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button (click)="approveOrRejectAuction('R', 'Rejected Prices')" type="button" class="btn btn-md"
-                        style="background-color: #f66f5b; border-radius: 5px; color: #ffff" data-dismiss="modal"
-                        aria-label="Close">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button (click)="approveOrRejectAuction('R', 'Rejected Prices')" type="button" class="btn btn-md" style="background-color: #f66f5b; border-radius: 5px; color: #ffff" data-dismiss="modal" aria-label="Close">
                         Cancel </button>
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Successful popup for rejection -->
-    <div class="modal show" *ngIf="confirmRejection" [ngClass]="{ 'modal-show': confirmRejection }">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content" style="align-items: center;">
-                <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+<!-- Successful popup for rejection -->
+<div class="modal show" *ngIf="confirmRejection" [ngClass]="{ 'modal-show': confirmRejection }">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content" style="align-items: center;">
+            <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                                 <span class="icon-close"></span>
                                 </button> -->
-                <div class="card result result-success">
-                    <div class="alert-body">
-                        <i class="alert-icon">
+            <div class="card result result-success">
+                <div class="alert-body">
+                    <i class="alert-icon">
                             <span class="icon-alert-success"></span>
                         </i>
-                    </div>
                 </div>
-                <div class="modal-header">
+            </div>
+            <div class="modal-header">
 
-                    <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                        The application was successfully rejected
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The rejection
+                <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                    The application was successfully rejected
+                </h4>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The rejection
                         of the application has been successfully sent and will reach the member of the pricing committee
                         To re-edit.
                     </label>
-                </div>
-                <div class="modal-footer" style="justify-content: end">
-                    <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md"
-                        data-dismiss="modal" aria-label="Close">
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
                         Back to Auction Requests
                     </button>
-                </div>
             </div>
         </div>
     </div>
+</div>

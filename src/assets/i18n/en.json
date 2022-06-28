@@ -564,7 +564,8 @@
             "tab1": "Auction Details",
             "tab2": "Product Details",
             "tab3": "Pricing Committee Members",
-            "tab4": "Auction Committee Members"
+            "tab4": "Auction Committee Members",
+            "Price_adjustment": "Price adjustment"
         }
     },
     "auctionMember": {

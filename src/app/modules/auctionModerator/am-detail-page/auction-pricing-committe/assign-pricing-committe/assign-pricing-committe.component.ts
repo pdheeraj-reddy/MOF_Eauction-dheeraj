@@ -37,6 +37,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   ObjectId: any = '';
+  loggedUserRole: any;
   committeeChairSelected: any;
   committeeChairData: any;
   stepIndex: number = 0;
@@ -380,7 +381,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
               console.log(this.existingCommitteMemberList.length);
             }
             console.log(result?.EmployeeRole);
-            if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER'){
+            if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
               this.committeeMem1Selected = true;
             }
             if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
@@ -663,6 +664,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     // this.stepIndex = this.step;
     console.log(this.step, "thara", this.activestep)
     if (this.step == this.activestep1) {

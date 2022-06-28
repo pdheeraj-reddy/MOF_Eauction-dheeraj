@@ -92,14 +92,44 @@
     <div *ngIf="showAuction">
         <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId" [ViewMode]="ViewMode">
         </app-auction-req-details>
+
+        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 50px !important">
+            <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
+                <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
+                    class="v-divider"></span>
+                <span class="icon icon-arrow-left"></span>
+            </button>
+        </div>
     </div>
     <div [ngClass]="{'hide':!showProduct}">
         <app-prodct-details [ngClass]="{'hide':priceAdjustment}" [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="true">
         </app-prodct-details>
         <app-bid-value-update [ngClass]="{'hide':!priceAdjustment}"></app-bid-value-update>
+        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 0px !important">
+            <button *ngIf="preAuctionData?.Status != 'Pending Pricing Approval' && preAuctionData?.Status != 'Pending to Publish'" (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
+                <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
+                    class="v-divider"></span>
+                <span class="icon icon-arrow-left"></span>
+            </button>
+        </div>
+
+        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 50px !important">
+            <button *ngIf="preAuctionData?.Status == 'Pending to Publish'" (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
+                <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
+                    class="v-divider"></span>
+                <span class="icon icon-arrow-left"></span>
+            </button>
+        </div>
     </div>
     <div *ngIf="showPricing">
         <app-assign-pricing-committe></app-assign-pricing-committe>
+        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 25px !important">
+            <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
+                <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
+                    class="v-divider"></span>
+                <span class="icon icon-arrow-left"></span>
+            </button>
+        </div>
     </div>
     <div *ngIf="showAuctionCommittee">
         <app-assign-auction-committe> </app-assign-auction-committe>
