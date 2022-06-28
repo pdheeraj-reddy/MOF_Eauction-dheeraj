@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { EnvService } from '../env.service';
+import * as CryptoJS from 'crypto-js';
+
 
 @Injectable({
   providedIn: 'root'
@@ -144,6 +146,8 @@ export class AuctionService {
       observe: 'response' as 'body'
     };
     let queryId = (DraftId && DraftId != '0') ? DraftId : ObjectId;
+    console.log('queryId for Encrypt');
+    let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>(
       this.envService.environment.apiAuctionURL + '/' + queryId +
       "?$expand=listtoproductnav,listtoattachnav" +

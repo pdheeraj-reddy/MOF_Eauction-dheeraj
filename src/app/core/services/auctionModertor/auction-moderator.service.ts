@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { AuctionService } from 'src/app/service/auction.service';
 import { EnvService } from 'src/app/env.service';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root',
@@ -104,6 +105,9 @@ export class AuctionModeratorService {
       },
       observe: 'response' as 'body'
     };
+    let queryId = (DraftId && DraftId != '0') ? DraftId : ObjectId;
+    console.log('queryId for Encrypt');
+    let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
       this.envService.environment.apiAuctionURL +
