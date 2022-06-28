@@ -41,6 +41,7 @@
     "EAuction_AuctionManager": "Auction Moderator",
     "EAuction_SalesCommitteeMember": "Auction Committee Member",
     "EAuction_PricingCommitteeMember": "Pricing Committee Member",
+    "ZEAUCTION_PRICECOMM_MEMBER": "Pricing Committee Member",
     "EAuction_PricingCommitteSecretary": "Pricing Commitee Secretary",
     "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
     "ZEAUCTION_PRICECOMM_HEAD": "Pricing Commitee Head",

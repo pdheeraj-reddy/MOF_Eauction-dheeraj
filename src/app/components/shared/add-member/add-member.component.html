@@ -82,71 +82,85 @@
 > -->
 <!-- <div class="modal-dialog modal-lg modal-dialog-centered" role="document"> -->
 <div class="modal-content" [ngClass]="{'rtl': currentLang == 'ar','ltr':currentLang !== 'ar'}">
-    <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel"> {{ title | translate}} </h4>
-        <div style="outline: none" (click)="closeDialog('close')" type="button" class="close " data-dismiss="dropdown" aria-label="Close" [ngClass]="{'custom-close-buttton': currentLang == 'ar'}">
-            <a class="btn btn-ghost btn-md fill-primary-green">
-                <span class="icon-close"></span>
-            </a>
-        </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLabel"> {{ title | translate}} </h4>
+    <div style="outline: none" (click)="closeDialog('close')" type="button" class="close " data-dismiss="dropdown"
+      aria-label="Close" [ngClass]="{'custom-close-buttton': currentLang == 'ar'}">
+      <a class="btn btn-ghost btn-md fill-primary-green">
+        <span class="icon-close"></span>
+      </a>
+    </div>
 
-    </div>
-    <div class="modal-body">
-        <div class="">
-            <div class="form-row">
-                <div class="col-md-12 mb-3">
-                    <label class="d-flex" for="validationCustom02">{{ "auctionModerator.am-detail.add-member.heading" | translate}}</label>
-                    <form>
-                        <mat-form-field class="example-full-width w-100" appearance="fill">
-                            <input matInput tabIndex="-1" type="search" aria-label="Enter employee number or email" [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="{{ 'auctionModerator.am-detail.add-member.phold' | translate}}" style="height: 21px;">
-                            <mat-icon matSuffix> <i class="icon-search pr-4"></i> </mat-icon>
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option (click)="memberSelected(state)" *ngFor="let state of filteredStates | async" [value]="state.EmployeeId">
-                                    <span>{{state.EmployeeId}}</span> &nbsp;
-                                    <span>{{state.EmpMailid}}</span>
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-                        <br>
-                    </form>
-                </div>
-            </div>
-            <div class="form-row pt-2">
-                <div class="col-12 col-md-12">
-                    <table class="table table-borderless" style="min-width: 100%; min-height: 120px;">
-                        <thead>
-                            <tr>
-                                <td class="p-3 pt-4">
-                                    <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-role" | translate }} :</h5>
-                                </td>
-                                <td class="p-3 pt-4 table-data-bg">
-                                    <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-name" | translate }} :</h5>
-                                </td>
-                                <td class="p-3 pt-4 table-data-bg">
-                                    <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-id" | translate }} :</h5>
-                                </td>
-                                <td class="p-3 pt-4 table-data-bg">
-                                    <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-email" | translate }} :</h5>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="data-table">
-                                <td class="px-3 py-0 h-100">{{ (selectedEmployee?.EmployeeRole || "auctionModerator.am-detail.add-member.emp-role-phold") | translate }}</td>
-                                <td class="px-3 py-0 h-100 table-data-bg">{{ selectedEmployee?.EmployeeName || "auctionModerator.am-detail.add-member.emp-name-phold" | translate }}</td>
-                                <td class="px-3 py-0 h-100 table-data-bg">{{ selectedEmployee?.EmployeeId || "auctionModerator.am-detail.add-member.emp-id-phold" | translate }}</td>
-                                <td class="px-3 py-0 h-100 table-data-bg">{{ selectedEmployee?.EmpMailid || "auctionModerator.am-detail.add-member.emp-email-phold" | translate }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  </div>
+  <div class="modal-body">
+    <div class="">
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label class="d-flex" for="validationCustom02">{{ "auctionModerator.am-detail.add-member.heading" |
+            translate}}</label>
+          <form>
+            <mat-form-field class="example-full-width w-100" appearance="fill">
+              <input matInput tabIndex="-1" type="search" aria-label="Enter employee number or email"
+                [matAutocomplete]="auto" [formControl]="stateCtrl"
+                placeholder="{{ 'auctionModerator.am-detail.add-member.phold' | translate}}" style="height: 21px;">
+              <mat-icon matSuffix> <i class="icon-search pr-4"></i> </mat-icon>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option (click)="memberSelected(state)" *ngFor="let state of filteredStates | async"
+                  [value]="state.EmployeeId">
+                  <span>{{state.EmployeeId}}</span> &nbsp;
+                  <span>{{state.EmpMailid}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <br>
+          </form>
         </div>
+      </div>
+      <div class="form-row pt-2">
+        <div class="col-12 col-md-12">
+          <table class="table table-borderless" style="min-width: 100%; min-height: 120px;">
+            <thead>
+              <tr>
+                <td class="p-3 pt-4">
+                  <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-role" | translate }} :</h5>
+                </td>
+                <td class="p-3 pt-4 table-data-bg">
+                  <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-name" | translate }} :</h5>
+                </td>
+                <td class="p-3 pt-4 table-data-bg">
+                  <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-id" | translate }} :</h5>
+                </td>
+                <td class="p-3 pt-4 table-data-bg">
+                  <h5 class="text-info m-0">{{ "auctionModerator.am-detail.add-member.emp-email" | translate }} :</h5>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="data-table">
+                <td class="px-3 py-0 h-100">
+                  {{ (selectedEmployee?.EmployeeRole || this.dialogData?.role) | translate }}
+                </td>
+                <td class="px-3 py-0 h-100 table-data-bg">
+                  {{ selectedEmployee?.EmployeeName || "auctionCommittee.ac-openOffers.noData" | translate }}
+                </td>
+                <td class="px-3 py-0 h-100 table-data-bg">
+                  {{ selectedEmployee?.EmployeeId || "auctionCommittee.ac-openOffers.noData" | translate }}
+                </td>
+                <td class="px-3 py-0 h-100 table-data-bg">
+                  {{ selectedEmployee?.EmpMailid || "auctionCommittee.ac-openOffers.noData" | translate }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md" (click)="closeDialog('add')">
-      <span class="icon-plus" style="height: 16px; width: 16px; "></span> &nbsp; {{ "auctionModerator.am-detail.add-member.add" | translate }} </button>
-    </div>
+  </div>
+  <div class="modal-footer" style="justify-content: end">
+    <button type="button" class="btn btn-primary-light btn-md" (click)="closeDialog('add')">
+      <span class="icon-plus" style="height: 16px; width: 16px; "></span> &nbsp; {{
+      "auctionModerator.am-detail.add-member.add" | translate }} </button>
+  </div>
 </div>
 <!-- </div> -->
 <!-- </div> -->

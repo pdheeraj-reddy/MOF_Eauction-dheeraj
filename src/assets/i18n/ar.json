@@ -41,6 +41,7 @@
     "EAuction_AuctionManager": "مشرف المزاد",
     "EAuction_SalesCommitteeMember": "عضو لجنة البيع",
     "EAuction_PricingCommitteeMember": "عضو  التسعير",
+    "ZEAUCTION_PRICECOMM_MEMBER": "عضو  التسعير",
     "EAuction_PricingCommitteSecretary": "سكرتيرلجنة التسعير",
     "EAuction_PricingCommitteeChairman": "رئيس لجنة التسعير",
     "ZEAUCTION_PRICECOMM_HEAD": "رئيس لجنة التسعير",
