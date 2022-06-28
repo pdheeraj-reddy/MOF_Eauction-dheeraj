@@ -47,7 +47,7 @@ export class AuctionApprovalService {
     };
     let queryId = ObjectId;
     console.log('queryId for Encrypt');
-    let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
+    //let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>( 
       // 'https://10.13.85.56:9443' + 
       environment.apiAuctionURL + '/' + ObjectId +

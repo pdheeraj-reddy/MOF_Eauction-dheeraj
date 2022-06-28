@@ -147,7 +147,7 @@ export class AuctionService {
     };
     let queryId = (DraftId && DraftId != '0') ? DraftId : ObjectId;
     console.log('queryId for Encrypt');
-    let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
+    //let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>(
       this.envService.environment.apiAuctionURL + '/' + queryId +
       "?$expand=listtoproductnav,listtoattachnav" +
