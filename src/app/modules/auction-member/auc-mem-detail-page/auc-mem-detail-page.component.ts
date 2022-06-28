@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { AuctionService } from 'src/app/service/auction.service';
 
@@ -24,7 +24,8 @@ export class AucMemDetailPageComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     private _AuctionService: AuctionModeratorService,
     public auctionServc: AuctionService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +76,10 @@ export class AucMemDetailPageComponent implements OnInit {
     this.showProduct = false;
     this.showPricing = false;
     this.showAuctionCommittee = true;
+  }
+
+  goBack() {
+    this.router.navigateByUrl('/');
   }
 
   getPreAuctionData() {

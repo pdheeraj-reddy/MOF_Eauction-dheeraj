@@ -41,6 +41,7 @@
     "EAuction_AuctionManager": "Auction Moderator",
     "EAuction_SalesCommitteeMember": "Auction Committee Member",
     "EAuction_PricingCommitteeMember": "Pricing Committee Member",
+    "ZEAUCTION_PRICECOMM_MEMBER": "Pricing Committee Member",
     "EAuction_PricingCommitteSecretary": "Pricing Commitee Secretary",
     "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
     "ZEAUCTION_PRICECOMM_HEAD": "Pricing Commitee Head",
@@ -564,7 +565,8 @@
             "tab1": "Auction Details",
             "tab2": "Product Details",
             "tab3": "Pricing Committee Members",
-            "tab4": "Auction Committee Members"
+            "tab4": "Auction Committee Members",
+            "Price_adjustment": "Price adjustment"
         }
     },
     "auctionMember": {

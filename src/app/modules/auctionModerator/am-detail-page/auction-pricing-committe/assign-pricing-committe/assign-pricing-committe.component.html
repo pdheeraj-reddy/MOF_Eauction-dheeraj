@@ -100,7 +100,7 @@
             <div style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
                 <img src="assets\icons\User.svg" alt="User icon" />
                 <p>{{"auctionModerator.am-detail.pricing-committee.card2-head2" | translate}}</p>
-                <button (click)=" openAddSecDialog(committeeHeadTitle, 'ZEAUCTION_PRICECOMM_SECRETARY') " class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
+                <button (click)=" openAddSecDialog(committeeSecTitle, 'ZEAUCTION_PRICECOMM_SECRETARY') " class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
         class="icon-edit"></span></button>
             </div>
             <p style="color: #414042; font-size: 16px; margin-top: 20px; text-align: center;">
@@ -305,7 +305,7 @@
         {{"auctionModerator.am-detail.pricing-committee.accept" | translate}} </button>
         </div>
     </div>
-    <div *ngIf="preAuctionData?.Status!=='Pending Review' && stepIndex !=3" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin-bottom: 0 !important;width: 100%;">
+    <div *ngIf="(preAuctionData?.Status!=='Pending Review' && stepIndex !=3 && loggedUserRole.isAuctionModerator)" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin-bottom: 0 !important;width: 100%;">
         <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
       <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
         class="v-divider"></span>

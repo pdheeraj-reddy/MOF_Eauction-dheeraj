@@ -88,6 +88,10 @@ export class ProdctDetailsComponent implements OnInit {
   closeConfirm() {
     this.showConfim = false;
   }
+
+  goBack() {
+    this.router.navigateByUrl('/');
+  }
   editPrice(index: any, product: any) {
     console.log("Click");
     const dialogRef = this.dialog.open(EditBidValueComponent, {

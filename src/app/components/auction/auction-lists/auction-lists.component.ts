@@ -364,7 +364,7 @@ export class AuctionListsComponent implements OnInit {
     this.filterFormGroup.controls['auctionStartDate'].setValue('');
     this.filterFormGroup.controls['auctionEndDate'].setValue('');
     this.refreshCalendarCntrl();
-    this.getAuctionList(1);
+    // this.getAuctionList(1);
   }
 
 }
