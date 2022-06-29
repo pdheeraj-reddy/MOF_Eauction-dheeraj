@@ -243,14 +243,16 @@ export class AuctionListsComponent implements OnInit {
   onTabSelection(value: string) {
     this.filterFormGroup.controls['auctionStatus'].enable();
     this.selectedTab = value;
-    this.getAuctionList(1);
 
     this.resetFilter();
     this.showFilterForm = false;
-    if (value !== 'All') {
+    if (value === 'All') {
+      this.filterFormGroup.controls['auctionStatus'].setValue('');
+    } else {
       this.filterFormGroup.controls['auctionStatus'].setValue(value);
       this.filterFormGroup.controls['auctionStatus'].disable();
     }
+    this.getAuctionList(1);
   }
 
   getAuctionList(pageNumber?: number, sortBy?: string, sorttype?: string) {
@@ -261,7 +263,7 @@ export class AuctionListsComponent implements OnInit {
       pageNumber: pageNumber,
       pageLimit: this.pagelimit
     };
-    const filters = {
+    let filters = {
       Status: this.selectedTab,
       ObjectId: this.filterFormGroup.controls['prevRefNo'].value ? this.filterFormGroup.controls['prevRefNo'].value : '',
       Description: this.filterFormGroup.controls['auctionName'].value ? this.filterFormGroup.controls['auctionName'].value : '',
@@ -279,6 +281,7 @@ export class AuctionListsComponent implements OnInit {
       filters.Msgty = sorttype + ' ' + sortBy;
     }
 
+    console.log("🚀 ~ this.auctionServc.getAuctionList ~ filters", filters)
     this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;

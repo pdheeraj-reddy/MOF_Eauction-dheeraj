@@ -123,7 +123,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.committeeMem1Data = undefined;
     this.committeeMem2Data = undefined;
     this.committeeMem3Data = undefined;
+    this.committeeSecData = undefined;
     this.existingCommitteMemberList = [];
+    this.addcommitteeMemberList = [];
     this._3MembersErrorMsg.emit(false);
     this.committeeChairSelected = false;
     this.committeeSecSelected = false;
@@ -180,8 +182,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
       temp.push(this.committeeMem1Data);
       temp.push(this.committeeMem2Data);
       temp.push(this.committeeMem3Data);
-      temp.push(this.committeeMem4Data);
+      if (this.committeeMem4Data != undefined) temp.push(this.committeeMem4Data);
       if (this.committeeSecData != undefined) temp.push(this.committeeSecData);
+      if (this.addcommitteeMemberList?.length) {
+        this.addcommitteeMemberList.forEach((element: any) => {
+          temp.push(element);
+        });
+      }
       console.log({
         ActionTaken: 'A',
         ZzPrtReason: '', // Reject reason
@@ -192,7 +199,6 @@ export class AssignAuctionCommitteComponent implements OnInit {
         ZzAgencyId: this.preAuctionData.ZzAgencyId,
         listtoproductnav: [{}],
       });
-
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: 'A',
@@ -249,6 +255,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
             console.log(this.preAuctionData);
             if (result) {
+              if (this.committeeChairData) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
+              }
               this.committeeChairData = result;
               this.existingCommitteMemberList.push(this.committeeChairData.EmployeeId);
               if (this.existingCommitteMemberList.length == 4) {
@@ -298,7 +307,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
             panelClass: 'my-custom-dialog-class',
           });
           dialogRef.afterClosed().subscribe((result) => {
-            if (this.preAuctionData.listtocomiteememnav.results.length > 0) {
+            if (result && this.preAuctionData.listtocomiteememnav.results.length > 0) {
               for (
                 let i = 0;
                 i < this.preAuctionData.listtocomiteememnav.results;
@@ -320,7 +329,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
                   });
                 }
               }
-            } else {
+            } else if (result) {
               this.preAuctionData.listtocomiteememnav.results.push({
                 AucId: this.preAuctionData.ObjectId,
                 EmployeeId: result.EmployeeId,
@@ -334,6 +343,9 @@ export class AssignAuctionCommitteComponent implements OnInit {
             }
 
             if (result) {
+              if (this.committeeSecData) {
+                this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeSecData.EmployeeId)
+              }
               this.committeeSecData = result;
               this.existingCommitteMemberList.push(this.committeeSecData.EmployeeId);
             }
@@ -690,10 +702,6 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }
-
-  goBacktoList() {
-    this.router.navigateByUrl('/');
-  }
   goAhead() {
     this.stepperEvent2.emit();
   }
@@ -718,6 +726,10 @@ export class AssignAuctionCommitteComponent implements OnInit {
               this.committeeChairSelected = true;
               this.committeeChairData = data[i];
             }
+            if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_SECRETARY') {
+              this.committeeSecSelected = true;
+              this.committeeSecData = data[i];
+            }
             if (data[i].EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
               if (this.committeeMem1Data == undefined) {
                 this.committeeMem1Selected = true;
@@ -731,27 +743,11 @@ export class AssignAuctionCommitteComponent implements OnInit {
                 this.committeeMem3Selected = true;
                 this.committeeMem3Data = data[i];
               }
-              else if (this.committeeMem4Selected == undefined) {
+              else if (this.committeeMem4Data == undefined) {
                 this.committeeMem4Selected = true;
-                this.committeeMem4Data = data[i];
+                this.addcommitteeMemberList.push(data[i])
               }
             }
-            // if (data[i].SlNo == '05') {
-            //   this.committeeMem1Selected = true;
-            //   this.committeeMem1Data = data[i];
-            // }
-            // if (data[i].SlNo == '06') {
-            //   this.committeeMem2Selected = true;
-            //   this.committeeMem2Data = data[i];
-            // }
-            // if (data[i].SlNo == '07') {
-            //   this.committeeMem3Selected = true;
-            //   this.committeeMem3Data = data[i];
-            // }
-            // if (data[i].SlNo == '08') {
-            //   this.committeeMem4Selected = true;
-            //   this.committeeMem4Data = data[i];
-            // }
           }
         }
         else {
@@ -771,6 +767,10 @@ export class AssignAuctionCommitteComponent implements OnInit {
     //       this.preAuctionData.listtoproductnav.results[i].ProductValue
     //     );
     // }
+  }
+
+  goBacktoList() {
+    this.router.navigateByUrl('/');
   }
 
   private _filter(value: string): string[] {
