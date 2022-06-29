@@ -102,7 +102,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     // this.getPreAuctionData();
     if (
       this.committeeChairData == undefined ||
-      this.committeeSecData == undefined ||
+      // this.committeeSecData == undefined ||
       this.committeeMem1Data == undefined ||
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
@@ -156,7 +156,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     this.preAuctionData;
     if (
       this.committeeChairData == undefined ||
-      this.committeeSecData == undefined ||
+      // this.committeeSecData == undefined ||
       this.committeeMem1Data == undefined ||
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
@@ -173,7 +173,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       temp.push(this.committeeMem3Data);
       if (this.committeeMem4Data != undefined) temp.push(this.committeeMem4Data);
       if (this.committeeSecData != undefined) temp.push(this.committeeSecData);
-
+      if (this.addcommitteeMemberList?.length) {
+        this.addcommitteeMemberList.forEach((element: any) => {
+          temp.push(element);
+        });
+      }
+      console.log("🚀 ~ assignPricingCommittee ~ temp", temp)
+      console.log("🚀 ~ assignPricingCommittee ~ temp", this.addcommitteeMemberList)
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: 'A',
@@ -621,7 +627,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
                 // this.committeeMem4Selected = true;
                 this.addcommitteeMemberList.push(result);
                 this.existingCommitteMemberList.push(result.EmployeeId);
-                console.log("this.addcommitteeMemberList");
                 console.log(result);
               }
             }
@@ -727,6 +732,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
         this.preAuctionData = res.body.d.results[0];
         let temp = this.preAuctionData;
         console.log(temp);
+        this.addcommitteeMemberList = [];
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;
           console.log(data.length);
@@ -753,9 +759,10 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
               this.committeeMem3Selected = true;
               this.committeeMem3Data = data[i];
             }
-            if (data[i].SlNo == '04') {
+            if (data[i].SlNo !== '01' && data[i].SlNo !== '02' && data[i].SlNo !== '03' && data[i].EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
               this.committeeMem4Selected = true;
-              this.committeeMem4Data = data[i];
+              this.addcommitteeMemberList.push(data[i])
+              // this.committeeMem4Data = data[i];
             }
           }
         }
