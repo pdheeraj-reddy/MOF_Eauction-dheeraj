@@ -35,6 +35,7 @@ export class ProdctDetailsComponent implements OnInit {
   indexError = -1;
   isPriceError: boolean = false;
   isPriceSuccess: boolean = false;
+  removeError: boolean = true;
   estimatedValueOfProducts: any;
   selectedPageNumber: number;
   p: number = 1;
@@ -213,8 +214,15 @@ export class ProdctDetailsComponent implements OnInit {
       this.navigateToPage(1, 'productAttach');
       this.adjustProductPrice();
       if (this.inputMode) {
-        this.pdtEstPricePc = parseFloat(this.preAuctionData.ZzPbEstPricePc);
-        this.productValue = this.pdtEstPricePc;
+        if (parseFloat(this.preAuctionData.ZzPbEstPricePc) == 0) {
+          console.log("check for placeholder1")
+          this.pdtEstPricePc = null;
+          this.productValue = 0;
+        }
+        else {
+          this.pdtEstPricePc = parseFloat(this.preAuctionData.ZzPbEstPricePc);
+          this.productValue = this.pdtEstPricePc;
+        }
       }
       this.auctionProducts = this.interconversionService.mappingObjForProducts(this.preAuctionData);
       // if (this.preAuctionData?.listtoattachnav['results']) {
@@ -281,7 +289,10 @@ export class ProdctDetailsComponent implements OnInit {
 
   selection(value: any) {
     if (!value) this.isBidUpdate = true;
-    else this.isBidUpdate = false; this.pdtEstPricePc = 0; this.invalidQty = false;
+    else this.isBidUpdate = false; this.pdtEstPricePc = null; this.productValue = 0; this.invalidQty = false; this.removeError = false;
+    this.preAuctionData?.listtoproductnav?.results.forEach((product: any) => {
+      product.ZzPdtEstPricePc = "0.00";
+    });
   }
 
   convertBlobToBase64 = (blob: any) =>
@@ -375,6 +386,7 @@ export class ProdctDetailsComponent implements OnInit {
 
   adjustProductPrice() {
     this.pdtEstPricePc = 0.00;
+    console.log("check for placeholder3")
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any) => {
       console.log(product);
       product.show = false;
@@ -385,6 +397,7 @@ export class ProdctDetailsComponent implements OnInit {
   }
   adjustProductPriceInEdit() {
     this.pdtEstPricePc = 0.00;
+    console.log("check for placeholder4")
     let product = this.preAuctionData?.listtoproductnav?.results;
     for (let i = 0; i < product.length; i++) {
       console.log(product[i]);

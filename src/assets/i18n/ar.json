@@ -46,8 +46,8 @@
     "EAuction_PricingCommitteeChairman": "رئيس لجنة التسعير",
     "ZEAUCTION_PRICECOMM_HEAD": "رئيس لجنة التسعير",
     "ZEAUCTION_PRICECOMM_SECRETARY": "Pricing Commitee Secretary",
-    "Enter the total estimated value of the products": "أدخل القيمة الإجمالية المقدرة للمنتجات",
-    "Enter the estimated value for each product separately": "أدخل القيمة المقدرة لكل منتج على حدة",
+    "Enter the total estimated value of the products": "إدخال إجمالي القيمة التقديرية للمنتجات",
+    "Enter the estimated value for each product separately": "إدخال القيمة التقديرية لكل منتج على حدة",
     "header": {
         "main-menu1": "المزادات",
         "main-menu2": "طلبات المزاد الالكتروني"
@@ -62,8 +62,8 @@
         "msg-nodata": "لا تتوافر بيانات",
         "msg-loading": "جار التحميل",
         "SAR": "ريال",
-        "Save": "أنقذ",
-        "Cancel": "إلغاء الأمر"
+        "Save": "حفظ",
+        "Cancel": "إلغاء"
     },
     "auctionlist": {
         "bcrumb1": "خدمات اعتماد",
@@ -435,11 +435,11 @@
                 "th1": "اسم المنتج",
                 "th2": "كمية المنتج",
                 "th3": "القيمة الدفترية للمنتج",
-                "th4": "القيمة المقدرة للمنتج",
+                "th4": "القيمة التقديرية للمنتج",
                 "th5": "حالة المنتج",
-                "product": "منتجات",
+                "product": "منتج",
                 "bookValue": "إجمالي القيمة الدفترية للمنتجات:",
-                "estimatedValue": "إجمالي القيمة المقدرة للمنتجات:",
+                "estimatedValue": "إجمالي القيمة التقديرية للمنتجات:",
                 "currency": "ريال سعودي",
                 "sendQuotes": "إرسال قيم التسعير",
                 "back_btn": "رجوع",
@@ -618,7 +618,8 @@
         "bid-value": {
             "head": "معلومات عامة عن الطلب",
             "subHead": "تسعير المنتجات",
-            "phold": "إجمالي القيمة المقدرة للمنتجات",
+            "heading": "إجمالي القيمة التقديرية للمنتجات",
+            "phold": "١دخل القيمة التقديرية للمنتجات",
             "save": "يحفظ",
             "failure_mssg": "أدخل قيمة أكبر من الصفر",
             "overall_failure_mssg": "يرجى ادخال قيمة تقديرية صحيحة"
@@ -636,7 +637,7 @@
         },
         "error-popup": {
             "subtitle": "يرجى الإنتباه بأن أحد القيم التقديرية تساوى 0.هل تريد المتابعة ؟",
-            "accept": "المضي قدما للنشر"
+            "accept": "تأكيد"
         }
     },
     "auctionCommittee": {

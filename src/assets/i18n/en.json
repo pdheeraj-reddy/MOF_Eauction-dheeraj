@@ -436,7 +436,7 @@
                 "th3": "Book Value of the Product",
                 "th4": "Estimated Value of the Product",
                 "th5": "Product Condition",
-                "product": "Products",
+                "product": "Product",
                 "bookValue": "Total Book Value of Products:",
                 "estimatedValue": "Total Estimated Value of Products:",
                 "currency": "SAR",
@@ -618,7 +618,8 @@
         "bid-value": {
             "head": "General information about the order",
             "subHead": "Product Pricing",
-            "phold": "Total estimated value of products",
+            "heading": "Total estimated value of products",
+            "phold": "Enter estimated value of products",
             "save": "Save",
             "failure_mssg": "Enter value greater than zero",
             "overall_failure_mssg": "Please enter correct estimated amount"
@@ -635,8 +636,8 @@
             "accept": "Back to Auction Requests"
         },
         "error-popup": {
-            "subtitle": "Please note that one of the estimated values is equal to 0.Do you want to continue?",
-            "accept": "Proceed for Publication"
+            "subtitle": "Please note that one of the estimated values is equal to 0. Do you want to continue?",
+            "accept": "Confirm"
         }
     },
     "auctionCommittee": {
