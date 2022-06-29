@@ -690,6 +690,10 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }
+
+  goBacktoList() {
+    this.router.navigateByUrl('/');
+  }
   goAhead() {
     this.stepperEvent2.emit();
   }
