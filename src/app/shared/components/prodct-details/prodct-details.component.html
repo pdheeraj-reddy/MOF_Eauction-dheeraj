@@ -24,7 +24,7 @@
             <div class="container" *ngIf="inputMode && (loggedUserRole.isPricingHead && (preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')) )">
                 <label class="text-12">{{ "auctionMember.bid-value.heading" | translate }}</label>
                 <div style="display: flex">
-                    <input [(ngModel)]="pdtEstPricePc" (ngModelChange)="adjustTotalPrice()" onClick="this.select();" digitOnly [decimal]="true" type="text" placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
+                    <input [(ngModel)]="pdtEstPricePc" appNumberComma (ngModelChange)="adjustTotalPrice()" onClick="this.select();" digitOnly [decimal]="true" type="text" placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
                         width: 300px; outline: none; border: none; border-bottom: 1px solid grey;
                         background-color: #eaf6ef; " />&nbsp; &nbsp; &nbsp;
                     <!-- <button class="btn btn-primary-light btn-md" (click)="adjustTotalPrice()"> {{
@@ -72,7 +72,7 @@
                         <ng-container *ngIf=" i >=pageRangeForProductAttach.rangeStart && i <=pageRangeForProductAttach.rangeEnd ">
                             <td scope="row">{{product?.Description}}</td>
                             <td>{{product?.Quantity.split('.')[0]}}</td>
-                            <td>{{product?.ProductValue}} &nbsp; <span class="text-primary-light">{{"common.SAR" | translate}}</span></td>
+                            <td>{{product?.ProductValue | number}} &nbsp; <span class="text-primary-light">{{"common.SAR" | translate}}</span></td>
                             <td class="position-relative" [ngClass]="{'border-lightgreen' : product.show}" *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'">
                                 <div class="row align-items-center no-gutters" [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
                                     <span *ngIf="!product.show">{{product.ZzPdtEstPricePc}}</span>
@@ -110,10 +110,10 @@
                         {{preAuctionData?.listtoproductnav?.results.length}} {{"auctionModerator.am-detail.product-details.product" | translate}}</td>
 
                     <td width="220px" class="font-weight-bold color-darkgreen">
-                        {{"auctionModerator.am-detail.product-details.bookValue" | translate}}<br /> {{preAuctionData?.ZzPbEstPrice}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
+                        {{"auctionModerator.am-detail.product-details.bookValue" | translate}}<br /> {{preAuctionData?.ZzPbEstPrice | number}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
                     </td>
                     <td width="260px" class="font-weight-bold color-darkgreen" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&& (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices' )">
-                        {{"auctionModerator.am-detail.product-details.estimatedValue" | translate}}<br /> {{productValue}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
+                        {{"auctionModerator.am-detail.product-details.estimatedValue" | translate}}<br /> {{productValue | number}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
                     </td>
                     <td></td>
                 </tr>
