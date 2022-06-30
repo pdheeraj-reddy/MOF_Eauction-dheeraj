@@ -50,7 +50,7 @@ export class ViewProductDetailComponent implements OnInit {
   ) { }
 
   customOptions: OwlOptions = {
-    items: 4,
+    items: 2,
     autoHeight: true,
     autoWidth: true,
     loop: false,
@@ -60,17 +60,6 @@ export class ViewProductDetailComponent implements OnInit {
     dots: false,
     navSpeed: 300,
     nav: false,
-    responsive: {
-      0: {
-        items: 1
-      },
-      600: {
-        items: 3
-      },
-      1000: {
-        items: 3
-      }
-    }
   };
 
   // sortByTableHeaderId(a: number, b: string) { }
@@ -214,9 +203,6 @@ export class ViewProductDetailComponent implements OnInit {
           const blob = new Blob([ab], { type: index.MIMEType });
           // var a = window.URL.createObjectURL(blob);
           var base64String = await this.convertBlobToBase64(blob);
-          console.log("base64String in mapping for edit");
-          console.log(base64String)
-
 
           this.slidesStore.push({
             id: index + 1,
