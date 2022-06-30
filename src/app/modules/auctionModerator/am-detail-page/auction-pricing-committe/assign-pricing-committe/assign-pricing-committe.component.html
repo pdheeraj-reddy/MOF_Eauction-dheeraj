@@ -277,8 +277,8 @@
             </div>
         </div>
     </div>
-    <button class="add-btn" [disabled]="!add4Mem" (click)=" openAddMem4Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
-    <div *ngIf="!committeeMem4Selected" [ngClass]="{'last-card' : !add4Mem}" class="card flex-card-item">
+    <button *ngIf="!committeeMem4Selected" class="add-btn" [disabled]="!add4Mem" (click)=" openAddMem4Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
+    <div [ngClass]="{'last-card' : !add4Mem}" class="card flex-card-item">
       <div class="card-body">
         <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 18%;">
           <img src="assets\icons\User.svg" alt="User icon" />
