@@ -36,6 +36,7 @@ export class AddMemberComponent implements OnInit {
   stateCtrl = new FormControl();
   filteredStates: Observable<Employee[]>;
   selectedEmployee: any;
+  noData = false;
   get currentLang() {
     return localStorage.getItem('lang_pref') ?? 'en'
   }
@@ -73,7 +74,7 @@ export class AddMemberComponent implements OnInit {
     public dialogRef: MatDialogRef<AddMemberComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog
-  ) {
+  ) { 
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map((state) =>
@@ -81,14 +82,19 @@ export class AddMemberComponent implements OnInit {
       )
     );
   }
-
-  private _filterStates(value: string): Employee[] {
+   _filterStates(value: string): Employee[] {
     const filterValue = value.toLowerCase();
 
-    return this.committeeMemberList.filter((state) =>
+    const newVaule = this.committeeMemberList.filter((state) =>
       state.EmpMailid.toLowerCase().includes(filterValue) ||
       state.EmployeeId.toLowerCase().includes(filterValue)
     );
+    if(newVaule.length == 0) {
+      this.noData = true; 
+    } else{
+      this.noData = false;
+    }
+    return newVaule;
   }
 
   closeDialog(type: any) {
@@ -110,13 +116,18 @@ export class AddMemberComponent implements OnInit {
       });
     }
   }
-
+  checkKeyup(val:any){
+    this._filterStates(val.target.value);
+  }
   ngOnInit(): void {
     // console.log(this.committeeMemberList);
     this.title = this.dialogData.title;
     this.role = this.dialogData.role;
     this.committeeMemberList = this.dialogData.committeeMemberList;
     console.log(this.committeeMemberList);
+    if(this.committeeMemberList.length<=0){
+      this.noData = true;
+    }
     // this.stateCtrl.setValue(((this.dialogData.committeeEditData != undefined) ? this.dialogData.committeeEditData.EmployeeId : ''));
 
 
