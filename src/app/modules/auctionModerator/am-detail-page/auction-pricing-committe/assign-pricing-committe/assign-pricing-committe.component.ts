@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, NgZone, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, NgZone, ChangeDetectorRef, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './assign-pricing-committe.component.html',
   styleUrls: ['./assign-pricing-committe.component.scss'],
 })
-export class AssignPricingCommitteComponent implements OnInit, OnChanges {
+export class AssignPricingCommitteComponent implements OnInit, OnChanges, OnDestroy {
   @Input() preAuctionData: any;
   @Input() step: number;
   @Input() activestep: number;
@@ -77,7 +77,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     private translate: TranslateService
   ) {
     window.addEventListener('beforeunload', (e) => {
-      console.log("� ~ window.addEventListener ~ e", e)
+      console.log("beforeunload", e)
       if (this.unsaved) {
         // e.preventDefault();
         e.returnValue = '';
@@ -195,6 +195,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           (res: any) => {
             // alert('Updated Successfully');
             this.showSuccessPopup = true;
+            this.unsaved = false;
             console.log(res);
             this.getPreAuctionData();
           },
@@ -236,7 +237,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -266,6 +266,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
             console.log("this.test");
             console.log(result);
             if (result) {
+              this.unsaved = true;
               if (this.committeeChairData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
               }
@@ -297,7 +298,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -358,6 +358,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
               }
             }
             if (result) {
+              this.unsaved = true;
               if (this.committeeSecData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeSecData.EmployeeId)
               }
@@ -382,7 +383,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -409,6 +409,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
+              this.unsaved = true;
               result.SlNo = '01';
               if (this.committeeMem1Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem1Data.EmployeeId)
@@ -439,7 +440,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
@@ -463,6 +463,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
+              this.unsaved = true;
               result.SlNo = '02';
               if (this.committeeMem2Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem2Data.EmployeeId)
@@ -491,7 +492,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -518,6 +518,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
+              this.unsaved = true;
               result.SlNo = '03';
               if (this.committeeMem3Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem3Data.EmployeeId)
@@ -589,7 +590,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -615,6 +615,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
+              this.unsaved = true;
               if (this.addcommitteeMemberList != '') {
                 var memberno = parseInt(this.addcommitteeMemberList.slice(-1)[0].SlNo) + 1;
                 result.SlNo = (memberno < 10) ? "0" + memberno : memberno;
@@ -645,7 +646,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
       this.showPageLoader = true;
       this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
         (res: any) => {
-          this.unsaved = true;
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -671,6 +671,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
+              this.unsaved = true;
               if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
                 result.SlNo = this.addcommitteeMemberList[index].SlNo;
                 this.addcommitteeMemberList[index] = result;
@@ -790,5 +791,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges {
     return this.options.filter((option) =>
       option.toLowerCase().includes(filterValue)
     );
+  }
+
+  ngOnDestroy() {
+    this.unsaved = false;
   }
 }
