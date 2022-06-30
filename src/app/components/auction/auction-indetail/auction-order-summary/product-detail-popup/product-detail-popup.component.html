@@ -1,8 +1,6 @@
 <div class="d-flex m-2" style="justify-content: space-between" [ngStyle]="{ direction: textDir }">
-    <p class="text-success text-24 font-weight-bold mt-3"> &nbsp;&nbsp;&nbsp;{{
-        "auctioncreate.auctionproduct.section1_Title" | translate }} </p>
-    <button style="outline: none" (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown"
-        aria-label="Close">
+    <p class="text-success text-24 font-weight-bold mt-3"> &nbsp;&nbsp;&nbsp;{{ "auctioncreate.auctionproduct.section1_Title" | translate }} </p>
+    <button style="outline: none" (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown" aria-label="Close">
         <a class="btn btn-ghost btn-md fill-primary-green">
             <span class="icon-close"></span>
         </a>
@@ -63,10 +61,8 @@
     <div class="col-md-6" *ngIf="!showLoader">
         <div class="mt-4" *ngIf="slidesStore.length >= 1">
             <!-- <img [src]="fullImage" class="img-fluid" alt="No Images to show" /> -->
-            <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark"
-                [src]="fullImage.src" />
-            <video *ngIf="fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime'" autoplay controls
-                class="img-fluid bg-dark" width="420">
+            <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark" [src]="fullImage.src" />
+            <video *ngIf="fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime'" autoplay controls class="img-fluid bg-dark" width="420">
                 <source [src]="fullImage.src" type="video/mp4">
                 <!-- <source [src]="sanitizer.bypassSecurityTrustResourceUrl(fullImage.src)" type="video/mp4"> -->
                 Your browser does not support HTML video.
@@ -75,10 +71,8 @@
                 <ng-container *ngFor="let slide of slidesStore" carouselSlide>
                     <ng-template carouselSlide [id]="slide.id" class="col-md-4 p-2">
                         <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
-                        <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'" class="img-fluid rounded"
-                            [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
-                        <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'" id="video1"
-                            width="420" (click)="viewItem(slide)">
+                        <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'" class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" />
+                        <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'" id="video1" width="420" (click)="viewItem(slide)">
                             <source [src]="slide.src" type="video/mp4">
                             Your browser does not support HTML video.
                         </video>
@@ -141,7 +135,7 @@
 
             </owl-carousel-o>
         </div>
-        <div class="mt-4" *ngIf="slidesStore.length < 1">No Picture Found</div>
+        <div class="mt-4" *ngIf="slidesStore.length < 1">{{"common.no_picture" | translate }}</div>
     </div>
     <div class="col-md-6">
         <div class="product-full-summary-form">
@@ -187,10 +181,8 @@
                                             }}</label>
                                         <div class="text-success">
                                             <span>{{ viewproduct.location.deliveryDate }}</span>
-                                            <ul *ngIf="viewproduct.location.deliveryTime"
-                                                class="list list-primary-bullets d-inline-block">
-                                                <li class="text-muted"> {{ viewproduct.location.deliveryTime }} {{
-                                                    viewproduct.location.deliveryTimeSufix | translate }} </li>
+                                            <ul *ngIf="viewproduct.location.deliveryTime" class="list list-primary-bullets d-inline-block">
+                                                <li class="text-muted"> {{ viewproduct.location.deliveryTime }} {{ viewproduct.location.deliveryTimeSufix | translate }} </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -229,14 +221,10 @@
                                             <!-- <a *ngIf="activeDownloadFileIndex != index" (click)="viewAttachment(file,index, 'view')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                 <span class="icon-eye-open"></span>
                                             </a> -->
-                                            <a *ngIf="!file.downloading"
-                                                (click)="viewAttachment(file,index, 'download')"
-                                                class="btn btn-ghost btn-sm fill-primary-light-green">
+                                            <a *ngIf="!file.downloading" (click)="viewAttachment(file,index, 'download')" class="btn btn-ghost btn-sm fill-primary-light-green">
                                                 <span class="icon-download"></span>
                                             </a>
-                                            <button *ngIf="file.downloading" type="button"
-                                                class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0"
-                                                style="height: 12px;">
+                                            <button *ngIf="file.downloading" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0" style="height: 12px;">
                                                 <span class="btn-text pr-0">
                                                     <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                         role="status">

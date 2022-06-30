@@ -7,6 +7,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuctionService } from 'src/app/service/auction.service';
+import { PaginationSortingService } from 'src/app/service/pagination.service';
 
 export interface DialogData {
   viewproduct: any;
@@ -36,9 +37,11 @@ export class ViewProductDetailComponent implements OnInit {
   loggedUserRole: any;
   showLoader: boolean = false;
   fetchPicture: boolean = true;
+  pageRangeForAttach: any;
 
 
   constructor(
+    public PaginationServc: PaginationSortingService,
     public dialogRef: MatDialogRef<ViewProductDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog,
@@ -70,7 +73,7 @@ export class ViewProductDetailComponent implements OnInit {
     }
   };
 
-  sortByTableHeaderId(a: number, b: string) { }
+  // sortByTableHeaderId(a: number, b: string) { }
   closeDialog() {
     if (this.price < 1) {
       this.invalid = true;
@@ -104,6 +107,7 @@ export class ViewProductDetailComponent implements OnInit {
     //   this.fullImage = this.slidesStore[0].src;
     // }
     this.viewproduct = this.dialogData.viewproduct;
+    this.navigateToPage(1, 'auctionAttach');
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;
     } else {
@@ -125,6 +129,46 @@ export class ViewProductDetailComponent implements OnInit {
     this.isBidUpdate = this.dialogData.isBidUpdate;
     this.price = this.product?.['ZzPdtEstPricePc'];
     console.log('haro', this.dialogData.status);
+  }
+
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId(
+      'auctionAttachment',
+      columnId,
+      sortType,
+      dateFormat
+    );
+  }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
+  sortByAuctionAttachTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
+  }
+
+  navigateToPage(pageNoVal: number, section: string) {
+    this.PaginationServc.setPagerValues(
+      this.viewproduct.productFiles.length,
+      4,
+      pageNoVal
+    );
+    if (section == 'auctionAttach') {
+      this.pageRangeForAttach = {
+        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 4),
+        rangeEnd: pageNoVal == 1 ? 3 : ((pageNoVal - 1) * 4) + 3,
+        pages: this.PaginationServc.pages,
+        currentPage: this.PaginationServc.currentPage,
+        totalPages: this.PaginationServc.totalPages,
+      }
+    }
   }
 
   downloadFile(fileName: string, contentType: string, base64Data: string) {

@@ -16,7 +16,7 @@
         <div *ngIf="showAdjustPriceOption && preAuctionData?.Status!='Pending to Publish'" class="col-12 rounded p-4 mb-4" style="background-color: #eaf6ef">
             <label class="text-12">{{ "auctionMember.bid-value.subHead" | translate }}</label>
             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="inputMode">
-                <mat-radio-button class="example-radio-button" style="width: 40%" *ngFor="let type of types" [value]="type.value" (click)="selection(type.value)">
+                <mat-radio-button class="example-radio-button" style="width: 40%" [disabled]="loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing Approval')" *ngFor="let type of types" [value]="type.value" (change)="selection(type.value)">
                     <label class="lbl1 text-14 mt-1" style="color: #414042" for="all">{{ type.name | translate }}
                     </label>
                 </mat-radio-button>
@@ -39,28 +39,28 @@
                 <tr class="">
                     <th width="180px" scope="col" (click)="sortByTableHeaderId(0, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th1" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th1" | translate}}</span> <span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                         </div>
                     </th>
                     <th width="120px" scope="col" (click)="sortByTableHeaderId(1, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th2" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th2" | translate}}</span> <span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                         </div>
                     </th>
                     <th width="220px" scope="col" (click)="sortByTableHeaderId(2, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th3" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th3" | translate}}</span> <span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                         </div>
                     </th>
                     <th width="260px" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" class="btn-primary-light"
                         scope="col" (click)="sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                         </div>
                     </th>
                     <th scope="col" (click)="(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval') ? sortByTableHeaderId(4, 'string') : sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th5" | translate}}</span> <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th5" | translate}}</span> <span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
                         </div>
                     </th>
                     <th class="th-action" scope="col"></th>
@@ -75,7 +75,7 @@
                             <td>{{product?.ProductValue | number}} &nbsp; <span class="text-primary-light">{{"common.SAR" | translate}}</span></td>
                             <td class="position-relative" [ngClass]="{'border-lightgreen' : product.show}" *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'">
                                 <div class="row align-items-center no-gutters" [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
-                                    <span *ngIf="!product.show">{{product.ZzPdtEstPricePc}}</span>
+                                    <span *ngIf="!product.show">{{product.ZzPdtEstPricePc | number}}</span>
                                     <input *ngIf="product.show" #autoFocus class="col-9 h-100 p-0 form-control" onClick="this.select();" digitOnly [decimal]="true" type="text" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" /> &nbsp;
                                     <span class="text-primary-light">  {{"common.SAR" | translate}}</span>
                                     <a *ngIf="!product.show && showAdjustPriceOption && ((loggedUserRole.isPricingHead && preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')))"
@@ -89,7 +89,7 @@
                                 <!-- <div *ngIf="((indexError == i) && removeError)" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
                                 </div> -->
                             </td>
-                            <td *ngIf=" !isBidUpdate && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')">
+                            <td *ngIf=" !isBidUpdate && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" style="text-align: center;">
                                 -
                                 <a *ngIf="isBidUpdate" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 60px;" (click)="editPrice(i, product)"> <span class="icon-Group-3286"></span> </a>
                             </td>
@@ -119,26 +119,28 @@
                 </tr>
             </tfoot>
         </table>
-        <div *ngIf="preAuctionData?.listtoproductnav?.results.length > 10" class="mt-4 row justify-content-end">
-            <div class="mb-5">
-                <nav aria-label="..." class="nav-pagination">
-                    <ul class="pagination">
-                        <li class="page-item" [ngClass]="{disabled: pageRangeForProductAttach.currentPage===1}">
-                            <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage - 1, 'productAttach' ) " class="page-link" tabindex="-1" aria-disabled="true">{{"auctionlist.grid-previous" |
+
+
+
+    </div>
+
+    <div class="mt-4 row justify-content-end" *ngIf="preAuctionData?.listtoproductnav?.results.length > 10">
+        <div class="mb-5">
+            <nav aria-label="..." class="nav-pagination">
+                <ul class="pagination">
+                    <li class="page-item clickable" disabled [ngClass]="{disabled: pageRangeForProductAttach.currentPage===1}">
+                        <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage - 1, 'productAttach' ) " class="page-link" aria-disabled="true">{{"auctionlist.grid-previous" |
                                 translate}}</a>
-                        </li>
-                        <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item" [ngClass]="{active: pageRangeForProductAttach.currentPage===page}">
-                            <a (click)="navigateToPage(page, 'productAttach')" class="page-link">{{page}}</a>
-                        </li>
-                        <li class="page-item" [ngClass]="{disabled: pageRangeForProductAttach.currentPage===pageRangeForProductAttach.totalPages}">
-                            <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage + 1, 'productAttach' ) " class="page-link">{{"auctionlist.grid-next" | translate}}</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+                    </li>
+                    <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item" [ngClass]="{active: pageRangeForProductAttach.currentPage===page}">
+                        <a (click)="navigateToPage(page, 'productAttach')" class="page-link">{{page}}</a>
+                    </li>
+                    <li class="page-item clickable" disabled [ngClass]="{disabled: pageRangeForProductAttach.currentPage===pageRangeForProductAttach.totalPages}">
+                        <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage + 1, 'productAttach' ) " class="page-link">{{"auctionlist.grid-next" | translate}}</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-
-
     </div>
 </div>
 <div class="row mt-5" *ngIf="preAuctionData?.Status == 'Pending Pricing' || preAuctionData?.Status == 'Rejected Prices'">

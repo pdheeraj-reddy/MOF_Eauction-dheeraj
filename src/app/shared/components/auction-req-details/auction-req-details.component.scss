@@ -1,21 +1,20 @@
-.wait{
+.wait {
     color: #F6972F;
     font-size: 25px;
 }
 
-.mytabs{
+.mytabs {
     margin-top: 0px;
     display: flex;
     flex-wrap: wrap;
     max-width: 100%;
-
 }
 
-.mytabs input[type='radio']{
+.mytabs input[type='radio'] {
     display: none;
 }
 
-.mytabs label{
+.mytabs label {
     padding: 15px;
     color: #08594D;
     font-weight: bold;
@@ -25,7 +24,7 @@
     text-align: center;
 }
 
-.mytabs .tab{
+.mytabs .tab {
     width: 100%;
     border: #cac1c1 1px solid;
     padding: 35px;
@@ -33,17 +32,22 @@
     display: none;
 }
 
-.mytabs input[type='radio']:checked + label + .tab {
+.mytabs input[type='radio']:checked+label+.tab {
     display: block;
 }
 
-.mytabs input[type='radio']:checked + label {
+.mytabs input[type='radio']:checked+label {
     background-color: #32AD71;
     color: white;
     font-weight: bold;
 }
-.icon-spinner{
-  width: 18px;
-  height: 18px;
-  font-size: x-small;
+
+.icon-spinner {
+    width: 18px;
+    height: 18px;
+    font-size: x-small;
+}
+
+.clickable:not(:disabled) {
+    color: #32AD71;
 }

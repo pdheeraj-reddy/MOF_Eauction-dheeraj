@@ -60,10 +60,12 @@
         "ftrlink-needhelp": "بحاجة لمساعدة؟",
         "ftrtext-certi": "تدعم منصة اعتماد المتصفحات التالية",
         "msg-nodata": "لا تتوافر بيانات",
+        "msg-noattach": "لا يوجد مرفق متاح",
         "msg-loading": "جار التحميل",
         "SAR": "ريال",
         "Save": "حفظ",
-        "Cancel": "إلغاء"
+        "Cancel": "إلغاء",
+        "no_picture": "لا يوجد صور"
     },
     "auctionlist": {
         "bcrumb1": "خدمات اعتماد",
@@ -184,7 +186,7 @@
             "attach-col2": "اسم المرفق"
         },
         "auctionproduct": {
-            "section1_Title": "تفاصيل المنتجات",
+            "section1_Title": "تفاصيل المنتج",
             "section1_subheading1": "هل عنوان وتاريخ التسليم واحد ؟",
             "section1_subheading1_opt1": "نعم",
             "section1_subheading1_opt2": "لا",
@@ -622,7 +624,10 @@
             "phold": "١دخل القيمة التقديرية للمنتجات",
             "save": "يحفظ",
             "failure_mssg": "أدخل قيمة أكبر من الصفر",
-            "overall_failure_mssg": "يرجى ادخال قيمة تقديرية صحيحة"
+            "overall_failure_mssg": "يرجى ادخال قيمة تقديرية صحيحة",
+            "popup_label": "القيمة التقديرية للمنتج",
+            "popup_save": "حفظ القيمة",
+            "popup_phold": "أدخل القيمة التقديرية للمنتج"
         },
         "confirmation-popup": {
             "title": "تأكيد إرسال تسعير المنتجات؟",
