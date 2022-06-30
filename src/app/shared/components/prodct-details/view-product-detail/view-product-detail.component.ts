@@ -50,7 +50,7 @@ export class ViewProductDetailComponent implements OnInit {
   ) { }
 
   customOptions: OwlOptions = {
-    items: 2,
+    items: 3,
     autoHeight: true,
     autoWidth: true,
     loop: false,

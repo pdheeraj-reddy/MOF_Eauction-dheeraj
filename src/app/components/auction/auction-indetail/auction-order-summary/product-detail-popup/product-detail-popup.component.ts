@@ -47,17 +47,6 @@ export class ProductDetailPopupComponent implements OnInit {
     dots: false,
     navSpeed: 300,
     nav: false,
-    responsive: {
-      0: {
-        items: 1
-      },
-      600: {
-        items: 3
-      },
-      1000: {
-        items: 3
-      }
-    }
   };
 
   sortByTableHeaderId(a: number, b: string) { }
