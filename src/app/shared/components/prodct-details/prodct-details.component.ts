@@ -398,7 +398,12 @@ export class ProdctDetailsComponent implements OnInit {
     this.productValue = parseFloat(this.pdtEstPricePc as string);
     // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
   }
+  cancel() {
+    this.showDepricated = false;
+  }
+
   adjustProductPriceInEdit() {
+    this.showDepricated = false;
     this.pdtEstPricePc = 0.00;
     console.log("check for placeholder4")
     let product = this.preAuctionData?.listtoproductnav?.results;
