@@ -635,6 +635,12 @@
             "accept": "Confirmation of Publication",
             "back": "Back"
         },
+        "accept-popup": {
+            "title": " Confirmation of acceptance of pricing request?",
+            "subtitle": "Upon confirmation, the pricing request will be approved and sent to the head of the government authority.",
+            "accept": "Accepting the Application",
+            "back": "Back"
+        },
         "successful-popup": {
             "title": "Pricing was sent successfully",
             "subtitle": "The request was successfully sent, and you'll receive an email. To follow up on your request",

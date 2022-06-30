@@ -398,8 +398,25 @@ export class ProdctDetailsComponent implements OnInit {
     this.productValue = parseFloat(this.pdtEstPricePc as string);
     // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
   }
-  cancel() {
+  cancel(index: number) {
     this.showDepricated = false;
+    let product = this.preAuctionData?.listtoproductnav?.results;
+    product[index].ZzPdtEstPricePc = 0.00;
+    for (let i = 0; i < product.length; i++) {
+      console.log(product[i]);
+      product[i].show = false;
+      if (product[i].ZzPdtEstPricePc < 1) {
+        this.indexError = i;
+        this.showError = true;
+        break;
+      } else {
+        this.indexError = -1;
+        this.showError = false;
+      }
+      this.pdtEstPricePc += product[i].ZzPdtEstPricePc * product[i].Quantity.split('.')[0];
+
+    }
+    this.productValue = parseFloat(this.pdtEstPricePc as string);
   }
 
   adjustProductPriceInEdit() {
@@ -415,28 +432,13 @@ export class ProdctDetailsComponent implements OnInit {
         this.showError = true;
         break;
       } else {
-        // product[i].ZzPdtEstPricePc = parseFloat(product[i].ZzPdtEstPricePc as string);
         this.indexError = -1;
         this.showError = false;
       }
       this.pdtEstPricePc += product[i].ZzPdtEstPricePc * product[i].Quantity.split('.')[0];
 
     }
-    // this.preAuctionData?.listtoproductnav?.results.forEach((product:any, index:number) => {
-    //   console.log(product);
-    //   product.show = false;
-    //   this.pdtEstPricePc += product.ZzPdtEstPricePc * product.Quantity.split('.')[0];
-    //   if(product.ZzPdtEstPricePc<1){
-    //     this.indexError = index;
-    //     console.log(this.indexError);
-    //     this.showError = true;
-    //   }else{
-    //     this.indexError = -1;
-    //     this.showError = false;
-    //   }
-    // });
     this.productValue = parseFloat(this.pdtEstPricePc as string);
-    // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
   }
 
   adjustTotalPrice() {
