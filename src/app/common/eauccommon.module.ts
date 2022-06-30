@@ -14,6 +14,7 @@ import { TimePickerDirective } from './directives/time-picker.directive';
 import { DatePickerDirective } from './directives/date-picker.directive';
 import { AuctionSliderComponent } from './components/auction-slider/auction-slider.component';
 import { DigitOnlyDirective } from './directives/digit-only.directive';
+import { CommaDirective } from './directives/comma.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DigitOnlyDirective } from './directives/digit-only.directive';
     AuctionCardComponent,
     TimePickerDirective,
     DatePickerDirective,
-    AuctionSliderComponent
+    AuctionSliderComponent,
+    CommaDirective
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { DigitOnlyDirective } from './directives/digit-only.directive';
     AuctionCountdownTimerComponent,
     AuctionCardComponent,
     TimePickerDirective,
-    DatePickerDirective
+    DatePickerDirective,
+    CommaDirective
   ],
 })
 export class EAucCommonModule { }

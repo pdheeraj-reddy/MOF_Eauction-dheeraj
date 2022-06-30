@@ -291,15 +291,15 @@
                                 <div class="mb-5">
                                     <nav aria-label="..." class="nav-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item" [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
-                                                <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                            <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
+                                                <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')" class="page-link" aria-disabled="true">{{
                                                     'auctionlist.grid-previous' | translate }}</a>
                                             </li>
                                             <li *ngFor="let page of pageRangeForAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
                                                 <a (click)="navigateToPage(page, 'auctionAttach')" class="page-link"> {{
                                                     page }} </a>
                                             </li>
-                                            <li class="page-item" [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
+                                            <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
                                                 <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                             </li>
                                         </ul>

@@ -291,7 +291,7 @@ export class ProdctDetailsComponent implements OnInit {
     if (!value) this.isBidUpdate = true;
     else this.isBidUpdate = false; this.pdtEstPricePc = null; this.productValue = 0; this.invalidQty = false; this.removeError = false;
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any) => {
-      product.ZzPdtEstPricePc = "0.00";
+      product.ZzPdtEstPricePc = null;
     });
   }
 
@@ -530,4 +530,20 @@ export class ProdctDetailsComponent implements OnInit {
       dateFormat
     );
   }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
+  sortByAuctionAttachTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
+  }
+
+
 }
