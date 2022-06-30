@@ -100,7 +100,7 @@
                     <form>
                         <mat-form-field class="example-full-width w-100" appearance="fill">
                             <input matInput tabIndex="-1" type="search" aria-label="Enter employee number or email" (keyup)="checkKeyup($event)" [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="{{ 'auctionModerator.am-detail.add-member.phold' | translate}}" style="height: 21px;">
-                            <mat-icon matSuffix> <i class="icon-search pr-4"></i> </mat-icon>
+                            <mat-icon matSuffix> <i class="icon-search pr-4" style="color: #ccc;"></i> </mat-icon>
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option (click)="memberSelected(state)" *ngFor="let state of filteredStates | async" [value]="state.EmployeeId">
                                     <span>{{state.EmployeeId}}</span> &nbsp;

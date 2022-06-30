@@ -40,6 +40,7 @@ export class ProdctDetailsComponent implements OnInit {
   selectedPageNumber: number;
   p: number = 1;
   pageRangeForProductAttach: any;
+  showDepricated: boolean = false;
 
   @ViewChild('autoFocus') inputFieldElementFocus: ElementRef;
 
@@ -369,6 +370,8 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   openAdjustPriceOption(index: number) {
+    this.showDepricated = true;
+    console.log(this.showAdjustPriceOption, "ram")
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any, pindex: number) => {
       if (pindex == index) {
         setTimeout(() => { // this will make the execution after the above boolean has changed
