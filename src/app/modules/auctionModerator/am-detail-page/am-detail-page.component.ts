@@ -105,10 +105,12 @@ export class AmDetailPageComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
-          this.showSuccessfulModal = true;
+          // this.showSuccessfulModal = true;
           // alert('Updated Successfully');
+
           this.getPreAuctionData();
           console.log(res);
+          this.stepper.next();
         },
         (error) => {
           // alert('Error Updating');
@@ -154,6 +156,7 @@ export class AmDetailPageComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
+          this.stepper.next();
           this.showSuccessfulModalPub = true;
           console.log(res);
           console.log(res.d.Msgty);
