@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,8 @@ import { AuctionService } from 'src/app/service/auction.service';
   styleUrls: ['./bid-value-update.component.scss'],
 })
 export class BidValueUpdateComponent implements OnInit {
-  userInfo : any;
+  @Output() tabSwitch = new EventEmitter();
+  userInfo: any;
   preAuctionData: any;
   editmode1: boolean = false;
   inputMode: boolean = true;
@@ -35,7 +36,7 @@ export class BidValueUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _AuctionService: AuctionModeratorService,
     public auctionServc: AuctionService,
-  ) {}
+  ) { }
 
   saveBidValue() {
     this.estimatedValueOfProducts = this.totalBidValue;
@@ -46,19 +47,23 @@ export class BidValueUpdateComponent implements OnInit {
     else this.isBidUpdate = false;
   }
 
+  goBack() {
+    this.tabSwitch.emit();
+  }
+
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
     }
     this.userInfo = this.getUserInfo();
-    if(this.userInfo.role === 'EAuction_InteriorMarketer'){
-    } else if(this.userInfo.role === 'EAuction_AuctionManager'){
+    if (this.userInfo.role === 'EAuction_InteriorMarketer') {
+    } else if (this.userInfo.role === 'EAuction_AuctionManager') {
       this.isAuctionHead = true;
-    } else if(this.userInfo.role === 'EAuction_PricingCommitteeChairman'){
+    } else if (this.userInfo.role === 'EAuction_PricingCommitteeChairman') {
       this.isAuctionHead = true;
-    } else if(this.userInfo.role === 'EAuction_PricingCommitteeMember'){
+    } else if (this.userInfo.role === 'EAuction_PricingCommitteeMember') {
       this.isAuctionHead = false;
-    } 
+    }
     this.getPreAuctionData();
   }
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
@@ -123,7 +128,7 @@ export class BidValueUpdateComponent implements OnInit {
     // this.preAuctionData = temp['d']['results'][0];
   }
 
-  public getUserInfo(){
+  public getUserInfo() {
     return localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo") as string) : '';
   }
 }

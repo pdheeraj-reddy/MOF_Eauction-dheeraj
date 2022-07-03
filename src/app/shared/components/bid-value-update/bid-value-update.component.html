@@ -50,7 +50,7 @@
 <div class="row no-gutters" *ngIf="!showPageLoader">
 
     <div class="col-12" *ngIf="preAuctionData">
-        <app-prodct-details [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="isAuctionHead">
+        <app-prodct-details [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="isAuctionHead" (tabSwitch)="goBack()">
         </app-prodct-details>
     </div>
 </div>

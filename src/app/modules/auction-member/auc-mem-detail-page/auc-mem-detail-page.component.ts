@@ -78,6 +78,7 @@ export class AucMemDetailPageComponent implements OnInit {
     this.showAuctionCommittee = true;
   }
 
+
   goBack() {
     this.router.navigateByUrl('/');
   }

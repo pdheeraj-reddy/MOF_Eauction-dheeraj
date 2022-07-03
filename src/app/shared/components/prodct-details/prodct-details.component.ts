@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, ViewChild, ElementRef, HostListener, Output } from '@angular/core';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from "src/app/service/auction.service";
 import { InterconversionService } from 'src/app/service/interconversion.service';
 import { AuctionHeadDetailPageComponent } from 'src/app/modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
+// import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-prodct-details',
@@ -18,6 +19,7 @@ export class ProdctDetailsComponent implements OnInit {
   @Input() preAuctionData: any;
   @Input() isBidUpdate: boolean = false;
   @Input() isAuctionHead: boolean = true;
+  @Output() tabSwitch = new EventEmitter();
   loggedUserRole: any;
   confirmPublish = false;
   confirmApproval = false;
@@ -92,7 +94,7 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('/');
+    this.tabSwitch.emit();
   }
   editPrice(index: any, product: any) {
     console.log("Click");

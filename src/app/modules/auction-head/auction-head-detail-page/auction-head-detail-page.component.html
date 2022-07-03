@@ -77,13 +77,13 @@
     <br />
     <ul class="nav et-tabs et-tabs-filled nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true" (click)="changeToAuction()">{{ "auctionHead.head-detail.tab1" | translate }}</a>
+            <a class="nav-link" [ngClass]="showAuction ? 'active' : ''" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true" (click)="changeToAuction()">{{ "auctionHead.head-detail.tab1" | translate }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToProduct()">{{ "auctionHead.head-detail.tab2" | translate }}</a>
+            <a class="nav-link" [ngClass]="showProduct ? 'active' : ''" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToProduct()">{{ "auctionHead.head-detail.tab2" | translate }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToPricing()">{{ "auctionHead.head-detail.tab3" | translate }}</a>
+            <a class="nav-link" [ngClass]="showPricing ? 'active' : ''" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToPricing()">{{ "auctionHead.head-detail.tab3" | translate }}</a>
         </li>
         <!-- <li class="nav-item">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false">{{ "auctionHead.head-detail.tab4" | translate }}</a>
@@ -99,32 +99,36 @@
                     class="v-divider"></span>
                 <span class="icon icon-arrow-left"></span>
             </button>
+
+            <button (click)="changeToProduct()" class="btn arrow-btn btn-outline-light btn-lg justify-content-end" style="margin-bottom: 40px !important;">
+            <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.next_btn" | translate}}</span>
+            <span class="v-divider"></span>
+            <span class="icon icon-arrow-left"></span>
+        </button>
         </div>
     </div>
     <div [ngClass]="{'hide':!showProduct}">
-        <app-prodct-details [ngClass]="{'hide':priceAdjustment}" [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="true">
+        <app-prodct-details [ngClass]="{'hide':priceAdjustment}" [isBidUpdate]="isBidUpdate" [preAuctionData]="preAuctionData" [isAuctionHead]="true" (tabSwitch)="changeToAuction()">
         </app-prodct-details>
-        <app-bid-value-update [ngClass]="{'hide':!priceAdjustment}"></app-bid-value-update>
-        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 0px !important">
-            <button *ngIf="preAuctionData?.Status != 'Pending Pricing Approval' && preAuctionData?.Status != 'Pending to Publish'" (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
-                <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
-                    class="v-divider"></span>
-                <span class="icon icon-arrow-left"></span>
-            </button>
-        </div>
-
+        <app-bid-value-update [ngClass]="{'hide':!priceAdjustment}" (tabSwitch)="changeToAuction()"></app-bid-value-update>
         <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 50px !important">
-            <button *ngIf="preAuctionData?.Status == 'Pending to Publish'" (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
+            <button *ngIf="preAuctionData?.Status != 'Pending Pricing Approval'" (click)="changeToAuction()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
                 <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
                     class="v-divider"></span>
                 <span class="icon icon-arrow-left"></span>
             </button>
+
+            <button *ngIf="preAuctionData?.Status != 'Pending Pricing Approval'" (click)="changeToPricing()" class="btn arrow-btn btn-outline-light btn-lg justify-content-end" style="margin-bottom: 40px !important;">
+            <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.next_btn" | translate}}</span>
+            <span class="v-divider"></span>
+            <span class="icon icon-arrow-left"></span>
+        </button>
         </div>
     </div>
     <div *ngIf="showPricing">
         <app-assign-pricing-committe></app-assign-pricing-committe>
-        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 25px !important">
-            <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
+        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5" style="margin: 0 !important; margin-top: 50px !important">
+            <button (click)="changeToProduct()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg" style="margin-bottom: 40px !important;">
                 <span class="btn-text">{{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}}</span> <span
                     class="v-divider"></span>
                 <span class="icon icon-arrow-left"></span>
