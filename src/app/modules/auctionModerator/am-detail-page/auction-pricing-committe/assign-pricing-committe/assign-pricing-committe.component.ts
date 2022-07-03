@@ -38,7 +38,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   stepIndex: number = 0;
   committeeSecSelected: any;
   committeeSecData: any;
-
+  isPendingReview: boolean = false;
   committeeMem1Data: any;
   committeeMem1Selected: any;
 
@@ -712,6 +712,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
         let temp = this.preAuctionData;
+        this.isPendingReview = this.preAuctionData.Status == 'Pending Review' ? true : false;
         console.log(temp);
         this.addcommitteeMemberList = [];
         if (temp?.listtocomiteememnav?.results?.length > 0) {
