@@ -58,14 +58,17 @@ const routes: Routes = [
   {
     path: 'auctionMember',
     component: AuctionMemberComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'landingPage',
         component: AucMemLandingPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AucMemDetailPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: '',
@@ -77,14 +80,17 @@ const routes: Routes = [
   {
     path: 'auctionHead',
     component: AuctionHeadComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'landingPage',
         component: AuctionHeadLandingPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AuctionHeadDetailPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: '',
@@ -96,18 +102,22 @@ const routes: Routes = [
   {
     path: 'auctionCommitee',
     component: AuctionCommiteeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'landingPage',
         component: AuctionCommiteeLandingPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'detailPage/:ObjectId',
         component: AuctionCommiteeDetailPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'openOffer/:ObjectId',
         component: AuctionCommiteeOpenOffersComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: '',
