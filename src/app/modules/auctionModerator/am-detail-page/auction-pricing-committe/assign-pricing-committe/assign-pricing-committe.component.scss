@@ -199,7 +199,7 @@ label {
 
 .btn-submit-grp {
     width: 100%;
-    margin-top: 20px;
+    // margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -272,4 +272,14 @@ ul.nav.et-tabs.et-tabs-filled li a {
     font-size: 30px;
     top: 85px;
     color: #32ad71;
+}
+
+.ml-n2,
+.mx-n2 {
+    margin-left: 0rem!important;
+}
+
+.mr-n2,
+.mx-n2 {
+    margin-right: 0rem!important;
 }

@@ -510,7 +510,8 @@
                 "add": "أضافه",
                 "add_committee_member": "Add Committee Member",
                 "add_committee_head": "إضافة رئيس اللجنه",
-                "add_committee_secretary": "Add Committee Secretary"
+                "add_committee_secretary": "Add Committee Secretary",
+                "no-data": "لاتوجد بيانات"
             }
         },
         "publish-popup": {

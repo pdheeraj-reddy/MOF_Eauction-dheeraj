@@ -14,21 +14,16 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './assign-pricing-committe.component.html',
   styleUrls: ['./assign-pricing-committe.component.scss'],
 })
-export class AssignPricingCommitteComponent implements OnInit, OnChanges, OnDestroy {
+export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   @Input() preAuctionData: any;
-  @Input() step: number;
-  @Input() activestep: number;
-  @Input() activestep1: number;
 
   @Output() _3MembersErrorMsg = new EventEmitter();
   @Output() stepperEvent1 = new EventEmitter();
   @Output() stepperEvent = new EventEmitter();
-  @Output() stepperEventAhead = new EventEmitter();
   showSuccessPopup = false;
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
-  showNext: boolean = true;
   unsaved: boolean = false;
   popupTitle: any = '';
   committeeMemberList: any = [];
@@ -689,24 +684,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges, OnDest
   }
   filteredOptions: Observable<string[]>;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes?.['step'].currentValue) {
-      console.log(changes?.['step'], "check for the steps")
-      this.stepIndex = changes?.['step'].currentValue;
-
-      console.log(this.step, "current step", this.stepIndex)
-      this.cdr.detectChanges();
-    }
-
-  }
-
   ngOnInit() {
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
-    // this.stepIndex = this.step;
-    console.log(this.step, "thara", this.activestep)
-    if (this.step == this.activestep1) {
-      this.showNext = false;
-    }
+
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
     }
@@ -777,9 +757,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnChanges, OnDest
     );
   }
 
-  goAhead() {
-    this.stepperEventAhead.emit();
-  }
 
   goBackAgain() {
     this.stepperEvent.emit();

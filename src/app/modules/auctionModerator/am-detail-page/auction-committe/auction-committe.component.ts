@@ -15,12 +15,8 @@ import { AuctionService } from 'src/app/service/auction.service';
 })
 export class AuctionCommitteComponent implements OnInit {
   @Input() preAuctionData: any;
-  @Input() step: number;
-  @Input() activestep: number;
+  @Input() auctionAnnouncement: boolean;
   @Output() steppernext = new EventEmitter();
-  @Output() stepperACEvent = new EventEmitter();
-  @Output() stepperEventAhead = new EventEmitter();
-  @Output() stepperNextEvent = new EventEmitter();
 
   showAuction = false;
   showProduct = false;
@@ -39,31 +35,17 @@ export class AuctionCommitteComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public auctionServc: AuctionService,
     private _AuctionService: AuctionApprovalService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    console.log(this.step, " thara thara thara", this.activestep)
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
       this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
     }
     this.getPreAuctionData();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes?.['step'].currentValue) {
-      this.step = changes['step'].currentValue;
-      if (this.step == 3) {
-        this.gonext = false;
-      } else {
-        this.gonext = true;
-      }
-    }
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-
   }
 
   showErrorMsg(error: any) {
@@ -88,20 +70,50 @@ export class AuctionCommitteComponent implements OnInit {
     );
   }
 
-  goBack() {
-    this.stepperACEvent.emit();
+  goBacktoList() {
+    this.router.navigateByUrl('/');
   }
 
-  goBackAgain() {
-    this.stepperACEvent.emit();
+  goAheadtoProduct() {
+    this.showAuction = false;
+    this.showProduct = true;
+    this.showPricing = false;
+    this.showAuctionCommittee = false;
   }
 
-  goAheadAgain() {
-    this.stepperNextEvent.emit();
+  goBacktoAuction() {
+    this.showAuction = true;
+    this.showProduct = false;
+    this.showPricing = false;
+    this.showAuctionCommittee = false;
   }
 
-  goAhead() {
-    this.stepperEventAhead.emit();
+  goAheadtoPricing() {
+    this.showAuction = false;
+    this.showProduct = false;
+    this.showPricing = true;
+    this.showAuctionCommittee = false;
+  }
+
+  goBacktoProduct() {
+    this.showAuction = false;
+    this.showProduct = true;
+    this.showPricing = false;
+    this.showAuctionCommittee = false;
+  }
+
+  goAheadtoCommittee() {
+    this.showAuction = false;
+    this.showProduct = false;
+    this.showPricing = false;
+    this.showAuctionCommittee = true;
+  }
+
+  goBacktoPricing() {
+    this.showAuction = false;
+    this.showProduct = false;
+    this.showPricing = true;
+    this.showAuctionCommittee = false;
   }
 
   changeToAuction() {

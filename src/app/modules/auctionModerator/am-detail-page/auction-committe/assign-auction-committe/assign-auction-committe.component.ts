@@ -16,13 +16,12 @@ import { AuctionService } from 'src/app/service/auction.service';
   styleUrls: ['./assign-auction-committe.component.scss'],
 })
 export class AssignAuctionCommitteComponent implements OnInit {
-  @Input()
-  isPublishTab: boolean = false;
+  @Input() isPublishTab: boolean = false;
+  @Input() auctionAnnouncement: boolean;
 
   @Output() _3MembersErrorMsg = new EventEmitter();
   @Output() callstepper = new EventEmitter();
   @Output() stepperEvent1 = new EventEmitter();
-  @Output() stepperEvent2 = new EventEmitter();
   @Output()
   _3MembersAdded = false;
   showConfirm = false;
@@ -701,9 +700,6 @@ export class AssignAuctionCommitteComponent implements OnInit {
   goBack() {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
-  }
-  goAhead() {
-    this.stepperEvent2.emit();
   }
 
   getPreAuctionData() {

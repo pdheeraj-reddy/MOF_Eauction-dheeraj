@@ -106,7 +106,7 @@
                                     <span>{{state.EmployeeId}}</span> &nbsp;
                                     <span>{{state.EmpMailid}}</span>
                                 </mat-option>
-                                <mat-option *ngIf="noData" (click)="_filterStates('')">No data found</mat-option>
+                                <mat-option *ngIf="noData" (click)="_filterStates('')">{{ "auctionModerator.am-detail.add-member.no-data" | translate }}</mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
                         <br>

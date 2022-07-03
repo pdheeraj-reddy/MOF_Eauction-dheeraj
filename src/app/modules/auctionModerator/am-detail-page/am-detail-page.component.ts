@@ -28,8 +28,8 @@ export class AmDetailPageComponent implements OnInit {
   tabTwoThree = true;
   tabFourFive = false;
   tabTwo = false;
-  showAuction = true;
-  showProduct = false;
+  showAuction = false;
+  showProduct = true;
   isPublishTab = true;
   showSuccessfulModal = false;
   showSuccessfulModalPub = false;
@@ -171,24 +171,13 @@ export class AmDetailPageComponent implements OnInit {
     this.router.navigateByUrl('/');
     console.log("parent")
   }
-
-  goBackPublish() {
-    this.stepper.previous();
+  goBacktoAuction() {
+    this.showAuction = true;
+    this.showProduct = false;
   }
-
-  goBackStepper() {
-    this.stepper.previous();
-  }
-
-  goAheadStepper() {
-    console.log(this.stepper._getFocusIndex());
-
-    this.stepper.next();
-  }
-
-
-  goAhead() {
-    this.stepper.next();
+  goAheadtoProduct() {
+    this.showAuction = false;
+    this.showProduct = true;
   }
 
   onStepChange(ev: any) {

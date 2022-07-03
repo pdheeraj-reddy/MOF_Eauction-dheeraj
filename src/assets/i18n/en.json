@@ -509,7 +509,8 @@
                 "add": "Add",
                 "add_committee_member": "Add Committee Member",
                 "add_committee_head": "Add Committee Head",
-                "add_committee_secretary": "Add Committee Secretary"
+                "add_committee_secretary": "Add Committee Secretary",
+                "no-data": "No Data Found"
             }
         },
         "publish-popup": {
