@@ -1,9 +1,9 @@
 <div class="card p-5 shadow-lg" *ngIf="showPageLoader">
-    <div class="form-row">
-        <div class="col-12">
-            <table id="inventoryAllocationTable" class="table">
-                <td colspan="10" class="p-3 bg-white">
-                    <div class="alert-body text-center"><i class="alert-icon">
+  <div class="form-row">
+    <div class="col-12">
+      <table id="inventoryAllocationTable" class="table">
+        <td colspan="10" class="p-3 bg-white">
+          <div class="alert-body text-center"><i class="alert-icon">
               <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
                 <g fill-rule="nonzero" fill="#32AD71">
                   <path
@@ -41,19 +41,20 @@
                 </g>
               </svg>
             </i>
-                        <div class="alert-content">
-                            <h5 class="text-black-50">Loading</h5>
-                        </div>
-                    </div>
-                </td>
-            </table>
-        </div>
+            <div class="alert-content">
+              <h5 class="text-black-50">Loading</h5>
+            </div>
+          </div>
+        </td>
+      </table>
     </div>
+  </div>
 </div>
 
 <div class="card flex-card" *ngIf="!showPageLoader">
-    <!-- Committee Chairman -->
-    <button *ngIf="!committeeChairSelected" class="add-btn" (click)="openAddChairDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')">
+  <!-- Committee Chairman -->
+  <button *ngIf="!committeeChairSelected" class="add-btn"
+    (click)="openAddChairDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="
@@ -69,29 +70,33 @@
       </div>
     </div>
   </button>
-    <div *ngIf="committeeChairSelected" class="card flex-card-item-data">
-        <div class="card-body-data">
-            <div style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
-                <img src="assets\icons\User.svg" alt="User icon" />
-                <p>{{ "auctionModerator.am-detail.auction-committee.card1-head2" | translate }}</p>
-                <button (click)="openAddChairDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')" *ngIf="isPendingReview" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;">
+  <div *ngIf="committeeChairSelected" class="card flex-card-item-data">
+    <div class="card-body-data">
+      <div
+        style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
+        <img src="assets\icons\User.svg" alt="User icon" />
+        <p>{{ "auctionModerator.am-detail.auction-committee.card1-head2" | translate }}</p>
+        <button (click)="openAddChairDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')"
+          *ngIf="isPendingPublish" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;">
           <span class="icon-edit"></span></button>
-            </div>
-            <p style="color: #414042; font-size: 16px; margin-top: 20px; text-align: center;">{{ committeeChairData?.EmployeeName }}</p>
-            <div>
-                <div style=" display: flex;  justify-content: space-between;  margin-top: 10px; ">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
-                    <p>{{ committeeChairData?.EmployeeId }}</p>
-                </div>
-                <div style="display: flex; justify-content: space-between;margin-top: 5px;">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
-                    <p>{{ committeeChairData?.EmpMailid }}</p>
-                </div>
-            </div>
+      </div>
+      <p style="color: #414042; font-size: 16px; margin-top: 20px; text-align: center;">{{
+        committeeChairData?.EmployeeName }}</p>
+      <div>
+        <div style=" display: flex;  justify-content: space-between;  margin-top: 10px; ">
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
+          <p>{{ committeeChairData?.EmployeeId }}</p>
         </div>
+        <div style="display: flex; justify-content: space-between;margin-top: 5px;">
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
+          <p>{{ committeeChairData?.EmpMailid }}</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <button *ngIf="!committeeSecSelected  && isPendingReview" class="add-btn" (click)=" openAddSecDialog('Add Committee Secretary', 'ZEAUCTION_SALCOMM_SECRETARY')">
+  <button *ngIf="!committeeSecSelected  && isPendingPublish" class="add-btn"
+    (click)=" openAddSecDialog('Add Committee Secretary', 'ZEAUCTION_SALCOMM_SECRETARY')">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="
@@ -108,32 +113,34 @@
     </div>
   </button>
 
-    <div *ngIf="committeeSecSelected" class="card flex-card-item-data">
-        <div class="card-body-data">
-            <div style="display: flex;justify-content: space-around; align-items: center;
+  <div *ngIf="committeeSecSelected" class="card flex-card-item-data">
+    <div class="card-body-data">
+      <div style="display: flex;justify-content: space-around; align-items: center;
             padding-bottom: 15px; border-bottom: 1px solid #dfebe8; ">
-                <img src="assets\icons\User.svg" alt="User icon" />
-                <p>{{ "auctionModerator.am-detail.auction-committee.card2-head2" | translate }}</p>
-                <button (click)=" openAddSecDialog('Add Committee Secretary', 'ZEAUCTION_SALCOMM_SECRETARY')" *ngIf="isPendingReview" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
+        <img src="assets\icons\User.svg" alt="User icon" />
+        <p>{{ "auctionModerator.am-detail.auction-committee.card2-head2" | translate }}</p>
+        <button (click)=" openAddSecDialog('Add Committee Secretary', 'ZEAUCTION_SALCOMM_SECRETARY')"
+          *ngIf="isPendingPublish" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
           <span class="icon-edit"></span>
         </button>
-            </div>
-            <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{ committeeSecData?.EmployeeName }} </p>
-            <div>
-                <div style=" display: flex; justify-content: space-between; margin-top: 10px;">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
-                    <p>{{ committeeSecData?.EmployeeId }}</p>
-                </div>
-                <div style="display: flex;
+      </div>
+      <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{
+        committeeSecData?.EmployeeName }} </p>
+      <div>
+        <div style=" display: flex; justify-content: space-between; margin-top: 10px;">
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
+          <p>{{ committeeSecData?.EmployeeId }}</p>
+        </div>
+        <div style="display: flex;
                   justify-content: space-between;
                   margin-top: 5px;">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
-                    <p>{{ committeeSecData?.EmpMailid }}</p>
-                </div>
-            </div>
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
+          <p>{{ committeeSecData?.EmpMailid }}</p>
         </div>
+      </div>
     </div>
-    <button *ngIf="!committeeMem1Selected" class="add-btn" (click)="
+  </div>
+  <button *ngIf="!committeeMem1Selected" class="add-btn" (click)="
       openAddMem1Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')">
     <div class="card flex-card-item">
       <div class="card-body">
@@ -151,40 +158,42 @@
     </div>
   </button>
 
-    <div *ngIf="committeeMem1Selected" class="card flex-card-item-data">
-        <div class="card-body-data">
-            <div style="display: flex;
+  <div *ngIf="committeeMem1Selected" class="card flex-card-item-data">
+    <div class="card-body-data">
+      <div style="display: flex;
                 justify-content: space-around;
                 align-items: center;
                 padding-bottom: 15px;
                 border-bottom: 1px solid #dfebe8;
               ">
-                <img src="assets\icons\User.svg" alt="User icon" />
-                <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
-                <button (click)="openAddMem1Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')" *ngIf="isPendingReview" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
+        <img src="assets\icons\User.svg" alt="User icon" />
+        <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
+        <button (click)="openAddMem1Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')" *ngIf="isPendingPublish"
+          class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
           <span class="icon-edit"></span>
         </button>
-            </div>
-            <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{ committeeMem1Data?.EmployeeName }} </p>
-            <div>
-                <div style="display: flex;
+      </div>
+      <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{
+        committeeMem1Data?.EmployeeName }} </p>
+      <div>
+        <div style="display: flex;
                     justify-content: space-between;
                     margin-top: 10px;
                   ">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
-                    <p>{{ committeeMem1Data?.EmployeeId }}</p>
-                </div>
-                <div style="display: flex;
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
+          <p>{{ committeeMem1Data?.EmployeeId }}</p>
+        </div>
+        <div style="display: flex;
                     justify-content: space-between;
                     margin-top: 5px;
                   ">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
-                    <p>{{ committeeMem1Data?.EmpMailid }}</p>
-                </div>
-            </div>
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
+          <p>{{ committeeMem1Data?.EmpMailid }}</p>
         </div>
+      </div>
     </div>
-    <button *ngIf="!committeeMem2Selected" class="add-btn" (click)="
+  </div>
+  <button *ngIf="!committeeMem2Selected" class="add-btn" (click)="
       openAddMem2Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')">
     <div class="card flex-card-item">
       <div class="card-body">
@@ -203,41 +212,43 @@
     </div>
   </button>
 
-    <div *ngIf="committeeMem2Selected" class="card flex-card-item-data">
-        <div class="card-body-data">
-            <div style="
+  <div *ngIf="committeeMem2Selected" class="card flex-card-item-data">
+    <div class="card-body-data">
+      <div style="
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
                 padding-bottom: 15px;
                 border-bottom: 1px solid #dfebe8;">
-                <img src="assets\icons\User.svg" alt="User icon" />
-                <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
-                <button (click)="openAddMem2Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')" *ngIf="isPendingReview" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
+        <img src="assets\icons\User.svg" alt="User icon" />
+        <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
+        <button (click)="openAddMem2Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')" *ngIf="isPendingPublish"
+          class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
           <span class="icon-edit"></span>
         </button>
-            </div>
-            <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{ committeeMem2Data?.EmployeeName }} </p>
-            <div>
-                <div style="display: flex;
+      </div>
+      <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{
+        committeeMem2Data?.EmployeeName }} </p>
+      <div>
+        <div style="display: flex;
                     justify-content: space-between;
                     margin-top: 10px;
                   ">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
-                    <p>{{ committeeMem2Data?.EmployeeId }}</p>
-                </div>
-                <div style="display: flex;
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
+          <p>{{ committeeMem2Data?.EmployeeId }}</p>
+        </div>
+        <div style="display: flex;
                     justify-content: space-between;
                     margin-top: 5px;
                   ">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
-                    <p>{{ committeeMem2Data?.EmpMailid }}</p>
-                </div>
-            </div>
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
+          <p>{{ committeeMem2Data?.EmpMailid }}</p>
         </div>
+      </div>
     </div>
+  </div>
 
-    <button *ngIf="!committeeMem3Selected" class="add-btn" (click)="
+  <button *ngIf="!committeeMem3Selected" class="add-btn" (click)="
       openAddMem3Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER') ">
     <div class="card flex-card-item">
       <div class="card-body">
@@ -255,59 +266,66 @@
     </div>
   </button>
 
-    <div *ngIf="committeeMem3Selected" class="card flex-card-item-data">
-        <div class="card-body-data">
-            <div style="display: flex;
+  <div *ngIf="committeeMem3Selected" class="card flex-card-item-data">
+    <div class="card-body-data">
+      <div style="display: flex;
                 justify-content: space-around;
                 align-items: center;
                 padding-bottom: 15px;
                 border-bottom: 1px solid #dfebe8;
               ">
-                <img src="assets\icons\User.svg" alt="User icon" />
-                <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
-                <button (click)="openAddMem3Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')" *ngIf="isPendingReview" class="btn btn-ghost btn-sm fill-primary-light-green " style="margin-left: 20px ">
+        <img src="assets\icons\User.svg" alt="User icon" />
+        <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
+        <button (click)="openAddMem3Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')" *ngIf="isPendingPublish"
+          class="btn btn-ghost btn-sm fill-primary-light-green " style="margin-left: 20px ">
           <span class="icon-edit "></span>
         </button>
-            </div>
-            <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px "> {{ committeeMem3Data?.EmployeeName }} </p>
-            <div>
-                <div style=" display: flex; justify-content: space-between; margin-top: 10px; ">
-                    <p style="color: #117abe ">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
-                    <p>{{ committeeMem3Data?.EmployeeId }}</p>
-                </div>
-                <div style=" display: flex; justify-content: space-between; margin-top: 5px; ">
-                    <p style="color: #117abe ">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
-                    <p>{{ committeeMem3Data?.EmpMailid }}</p>
-                </div>
-            </div>
+      </div>
+      <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px "> {{
+        committeeMem3Data?.EmployeeName }} </p>
+      <div>
+        <div style=" display: flex; justify-content: space-between; margin-top: 10px; ">
+          <p style="color: #117abe ">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
+          <p>{{ committeeMem3Data?.EmployeeId }}</p>
         </div>
+        <div style=" display: flex; justify-content: space-between; margin-top: 5px; ">
+          <p style="color: #117abe ">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
+          <p>{{ committeeMem3Data?.EmpMailid }}</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- auciton member 4 -->
-    <div *ngFor="let committeeMultiMemData of addcommitteeMemberList; let i = index" class="card flex-card-item-data">
-        <div class="card-body-data">
-            <div style="display: flex; justify-content: space-around; align-items: center;  padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
-                <img src="assets\icons\User.svg" alt="User icon" />
-                <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
-                <button (click)="openEditMem4Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER',i)" *ngIf="isPendingReview" class="card flex-card-item last-card-data" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
+  <!-- auciton member 4 -->
+  <div *ngFor="let committeeMultiMemData of addcommitteeMemberList; let i = index" class="card flex-card-item-data">
+    <div class="card-body-data">
+      <div
+        style="display: flex; justify-content: space-around; align-items: center;  padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
+        <img src="assets\icons\User.svg" alt="User icon" />
+        <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
+        <button (click)="openEditMem4Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER',i)"
+          *ngIf="isPendingPublish" class="card flex-card-item last-card-data"
+          class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
           <span class="icon-edit"></span>
         </button>
-            </div>
-            <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{ committeeMultiMemData?.EmployeeName }} </p>
-            <div>
-                <div style=" display: flex; justify-content: space-between; margin-top: 10px; ">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
-                    <p>{{ committeeMultiMemData?.EmployeeId }}</p>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                    <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
-                    <p>{{ committeeMultiMemData?.EmpMailid}}</p>
-                </div>
-            </div>
+      </div>
+      <p style="color: #414042;align-self: flex-start; font-size: 16px; margin-top: 20px"> {{
+        committeeMultiMemData?.EmployeeName }} </p>
+      <div>
+        <div style=" display: flex; justify-content: space-between; margin-top: 10px; ">
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.jobNumber" | translate }}</p>
+          <p>{{ committeeMultiMemData?.EmployeeId }}</p>
         </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+          <p style="color: #117abe">{{ "auctionModerator.am-detail.auction-committee.email" | translate }}</p>
+          <p>{{ committeeMultiMemData?.EmpMailid}}</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <button *ngIf="!committeeMem4Selected && isPendingReview" class="add-btn" [disabled]="!add4Mem" (click)="openAddMem4Dialog( 'Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')">
+  <button *ngIf="!committeeMem4Selected && isPendingPublish" class="add-btn" [disabled]="!add4Mem"
+    (click)="openAddMem4Dialog( 'Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')">
     <div [ngClass]="{'last-card': !add4Mem}" class="card flex-card-item">
       <div class="card-body">
         <div style=" display: flex; justify-content: space-around; align-items: center; margin-top: 18%;">
@@ -319,7 +337,7 @@
     </div>
   </button>
 
-    <!-- <button class="add-btn" (click)=" openAddMem4Dialog( 'Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')">
+  <!-- <button class="add-btn" (click)=" openAddMem4Dialog( 'Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER')">
     <div *ngIf="!committeeMem4Selected " class="card flex-card-item last-card ">
       <div class="card-body ">
         <div style=" display: flex; justify-content: space-around; align-items: center; ">
@@ -354,79 +372,93 @@
 </button> -->
 </div>
 <div *ngIf="!isPublishTab" class="btn-submit-grp">
-    <!-- <button (click)="goBack()" class="btn btn-with-arrow btn-outline-light btn-md">
+  <!-- <button (click)="goBack()" class="btn btn-with-arrow btn-outline-light btn-md">
   <span class="btn-text">{{ "auctionModerator.am-detail.auction-committee.back_btn" | translate }}</span>
   <span class="v-divider"></span>
   <span class="icon icon-arrow-left"></span>
   </button> -->
-    <button class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg mt-5" (click)="goBack()">
+  <button class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg mt-5" (click)="goBack()">
     <span class="btn-text">{{"auctionModerator.am-detail.auction-committee.back_btn" | translate}}</span>
     <span class="v-divider"></span> <span class="icon icon-arrow-left"></span>
   </button>
 
-    <div *ngIf="!commiteeMemberData">
-        <div>
-            <button (click)="cancelMember()" class="btn btn-danger mt-5" _msthash="1893008" _msttexthash="94172" style="direction: ltr">
+  <div *ngIf="!commiteeMemberData">
+    <div>
+      <button (click)="cancelMember()" class="btn btn-danger mt-5" _msthash="1893008" _msttexthash="94172"
+        style="direction: ltr">
         {{"auctionModerator.am-detail.auction-committee.reject" | translate }} </button>&nbsp;
-            <button (click)="checkMember()" class="btn btn-primary-light mt-5" _msthash="1893008" _msttexthash="94172" style="direction: ltr">
+      <button (click)="checkMember()" class="btn btn-primary-light mt-5" _msthash="1893008" _msttexthash="94172"
+        style="direction: ltr">
         {{"auctionModerator.am-detail.auction-committee.accept" | translate }} </button>
-        </div>
     </div>
+  </div>
 </div>
 
-<div *ngIf="isPublishTab" class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
-    <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-        <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
-      <span class="btn-text">{{"auctionModerator.am-detail.auction-publish.back_btn" | translate}}</span> <span class="v-divider"></span> 
-      <span class="icon icon-arrow-left"></span> 
+<div *ngIf="isPublishTab"
+  class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2 my-5 mb-5">
+  <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+    <button (click)="goBack()" type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+      <span class="btn-text">{{"auctionModerator.am-detail.auction-publish.back_btn" | translate}}</span> <span
+        class="v-divider"></span>
+      <span class="icon icon-arrow-left"></span>
     </button>
-    </div>
-    <div class="d-flex flex-column flex-md-row mb-5" *ngIf="auctionAnnouncement">
-        <button data-toggle="modal" data-target="#confirmMemberModalPub" data-backdrop="static" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> 
-      <span class="btn-text">{{"auctionModerator.am-detail.auction-publish.accept_btn" | translate}}</span> 
+  </div>
+  <div class="d-flex flex-column flex-md-row mb-5" *ngIf="auctionAnnouncement">
+    <button data-toggle="modal" data-target="#confirmMemberModalPub" data-backdrop="static"
+      class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+      <span class="btn-text">{{"auctionModerator.am-detail.auction-publish.accept_btn" | translate}}</span>
     </button>
-    </div>
+  </div>
 </div>
 
 <!-- Confirmation model -->
 <div class="modal show" *ngIf="showConfirm" [ngClass]="{ 'modal-show': showConfirm }">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">{{"auctionModerator.am-detail.auction-committee.popup1-title" | translate}}
-                </h4>
-                <button type="button" (click)="closeConfirm()" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"><span class="icon-close"></span></button>
-            </div>
-            <div class="modal-body"><label for="confirmation" style="color: #414042; font-size: 16px;">{{"auctionModerator.am-detail.auction-committee.popup1-subtitle" |
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">{{"auctionModerator.am-detail.auction-committee.popup1-title" |
+          translate}}
+        </h4>
+        <button type="button" (click)="closeConfirm()" class="modal-close btn-close btn-sm" data-dismiss="modal"
+          aria-label="Close"><span class="icon-close"></span></button>
+      </div>
+      <div class="modal-body"><label for="confirmation"
+          style="color: #414042; font-size: 16px;">{{"auctionModerator.am-detail.auction-committee.popup1-subtitle" |
           translate}}</label></div>
-            <div class="modal-footer" style="justify-content: end;">
-                <button type="button" (click)="assignAuctionCommittee()" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+      <div class="modal-footer" style="justify-content: end;">
+        <button type="button" (click)="assignAuctionCommittee()" class="btn btn-primary-light btn-md"
+          data-dismiss="modal" aria-label="Close">
           {{"auctionModerator.am-detail.pricing-committee.popup1-accept" | translate}} </button>
-                <button type="button" (click)="closeConfirm()" class="btn btn-md" data-dismiss="modal" aria-label="Close" style="border: 1px solid #cccccc; border-radius: 5px;">
+        <button type="button" (click)="closeConfirm()" class="btn btn-md" data-dismiss="modal" aria-label="Close"
+          style="border: 1px solid #cccccc; border-radius: 5px;">
           {{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}} </button>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Successful model -->
 <div class="modal show" *ngIf="showSuccessPopup" [ngClass]="{ 'modal-show': showSuccessPopup }">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content" style="align-items: center;">
-            <button (click)="closeSuccess()" style="position: absolute; left: 90%;" type="button" class="modal-close btn-close btn-sm" aria-label="Close"><span class="icon-close"></span></button> <span class="icon-check"></span>
-            <div class="modal-header">
-                <div class="status-success-icon">
-                    <div style="display: flex;">
-                        <div class="circle"></div>
-                    </div>
-                    <h4 class="modal-title" id="exampleModalLabel" style="text-align: center;">
-                        {{"auctionModerator.am-detail.auction-committee.popup2-title" | translate}}</h4>
-                </div>
-            </div>
-            <div class="modal-body"><label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{"auctionModerator.am-detail.auction-committee.popup2-subtitle"
-          | translate}}</label></div>
-            <div class="modal-footer" style="justify-content: end;">
-                <button type="button" (click)="goBacktoList()" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.popup2-accept" | translate}}</button>
-            </div>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content" style="align-items: center;">
+      <button (click)="closeSuccess()" style="position: absolute; left: 90%;" type="button"
+        class="modal-close btn-close btn-sm" aria-label="Close"><span class="icon-close"></span></button> <span
+        class="icon-check"></span>
+      <div class="modal-header">
+        <div class="status-success-icon">
+          <div style="display: flex;">
+            <div class="circle"></div>
+          </div>
+          <h4 class="modal-title" id="exampleModalLabel" style="text-align: center;">
+            {{"auctionModerator.am-detail.auction-committee.popup2-title" | translate}}</h4>
         </div>
+      </div>
+      <div class="modal-body"><label for="confirmation"
+          style="color: #414042; font-size: 16px; text-align: center;">{{"auctionModerator.am-detail.auction-committee.popup2-subtitle"
+          | translate}}</label></div>
+      <div class="modal-footer" style="justify-content: end;">
+        <button type="button" (click)="goBacktoList()" class="btn btn-primary-light btn-md" data-dismiss="modal"
+          aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.popup2-accept" | translate}}</button>
+      </div>
     </div>
+  </div>
 </div>

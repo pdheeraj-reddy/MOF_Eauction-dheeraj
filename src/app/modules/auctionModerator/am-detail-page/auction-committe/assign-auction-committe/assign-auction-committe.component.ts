@@ -38,7 +38,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   committeeChairSelected: any;
   committeeChairData: any;
   showPageLoader: boolean = false;
-  isPendingReview: boolean = false;
+  isPendingPublish: boolean = false;
   ObjectId: any = '';
   DraftId: any = '';
 
@@ -78,7 +78,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       // e.returnValue = '';
       // }
     });
-    this.auctionServc.unsaved = false;
+    // this.auctionServc.unsaved = false;
   }
 
   memberSelected(data: any) {
@@ -709,7 +709,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
         this.preAuctionData = res.body.d.results[0];
         let temp = res.body.d.results[0];
         console.log(temp);
-        this.isPendingReview = this.preAuctionData.Status == 'Pending Review' ? true : false;
+        this.isPendingPublish = this.preAuctionData.Status == 'Pending to Publish' ? true : false;
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;
           console.log(data.length);

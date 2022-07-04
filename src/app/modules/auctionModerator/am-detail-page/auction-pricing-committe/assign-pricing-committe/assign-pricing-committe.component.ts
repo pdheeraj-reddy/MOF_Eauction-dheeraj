@@ -78,7 +78,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       //   e.returnValue = '';
       // }
     });
-    this.auctionServc.unsaved = false;
+    // this.auctionServc.unsaved = false;
   }
   closeConfirm() {
     this.showConfirm = false;
@@ -90,7 +90,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }
-  goBacktoList() {
+  async goBacktoList() {
     this.router.navigateByUrl('/');
   }
   checkMember() {
