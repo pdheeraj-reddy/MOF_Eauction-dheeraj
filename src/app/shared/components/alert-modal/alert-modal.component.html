@@ -1,14 +1,23 @@
 <div class="modal show modal-show" id="showAlertModal">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeAlertModal()" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeAlertModal()" class="modal-close btn-close btn-sm" data-dismiss="modal"
+                aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-alert-warning text-danger text-40 mb-4"></span>
             <div class="modal-body text-center">
-                <label class="text-16 text-secondary-gray text-danger" for="confirmation"> {{ dialogObj.message | translate }} </label>
+                <label class="text-16 text-secondary-gray text-danger" for="confirmation"> {{ dialogObj.message |
+                    translate }} </label>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeAlertModal()" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ dialogObj.mnBtntext | translate }} </button>
+            <div class="modal-footer justify-content-center">
+                <button type="button" (click)="closeAlertModal()" class="btn btn-primary-light btn-md ml-1 mr-1"
+                    data-dismiss="modal" aria-label="Close"> {{ dialogObj.mnBtntext | translate }}
+                </button>
+                <button *ngIf="dialogObj?.confirm" type="button" (click)="confirmAlert()"
+                    class="btn btn-primary-light btn-md ml-1 mr-1" data-dismiss="modal" aria-label="Close">
+                    {{ dialogObj.mnBtntext1 | translate }}
+                </button>
             </div>
         </div>
     </div>

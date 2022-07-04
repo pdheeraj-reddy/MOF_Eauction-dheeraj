@@ -8,6 +8,7 @@ import { AddMemberComponent } from 'src/app/components/shared/add-member/add-mem
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from 'src/app/service/auction.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertModalComponent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-assign-pricing-committe',
@@ -24,7 +25,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
-  unsaved: boolean = false;
   popupTitle: any = '';
   committeeMemberList: any = [];
   existingCommitteSecList: any = [];
@@ -72,13 +72,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     private translate: TranslateService
   ) {
     window.addEventListener('beforeunload', (e) => {
-      console.log("beforeunload", e)
-      if (this.unsaved) {
-        // e.preventDefault();
-        e.returnValue = '';
-      }
-
+      // if (this.auctionServc.unsaved) {
+      //   e.preventDefault();
+      //   this.handleUnsavedError();
+      //   e.returnValue = '';
+      // }
     });
+    this.auctionServc.unsaved = false;
   }
   closeConfirm() {
     this.showConfirm = false;
@@ -86,7 +86,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   closeSuccess() {
     this.showSuccessPopup = false;
   }
-  goBack() {
+  async goBack() {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }
@@ -141,7 +141,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     this.committeeMem4Selected = false;
     this.add4Mem = false;
 
-    this.unsaved = false;
+    this.auctionServc.unsaved = false;
     // this.ngOnInit();
   }
 
@@ -190,7 +190,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           (res: any) => {
             // alert('Updated Successfully');
             this.showSuccessPopup = true;
-            this.unsaved = false;
+            this.auctionServc.unsaved = false;
             console.log(res);
             this.getPreAuctionData();
           },
@@ -261,7 +261,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
             console.log("this.test");
             console.log(result);
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (this.committeeChairData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
               }
@@ -353,7 +353,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
               }
             }
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (this.committeeSecData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeSecData.EmployeeId)
               }
@@ -404,7 +404,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               result.SlNo = '01';
               if (this.committeeMem1Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem1Data.EmployeeId)
@@ -458,7 +458,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               result.SlNo = '02';
               if (this.committeeMem2Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem2Data.EmployeeId)
@@ -513,7 +513,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               result.SlNo = '03';
               if (this.committeeMem3Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem3Data.EmployeeId)
@@ -610,7 +610,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (this.addcommitteeMemberList != '') {
                 var memberno = parseInt(this.addcommitteeMemberList.slice(-1)[0].SlNo) + 1;
                 result.SlNo = (memberno < 10) ? "0" + memberno : memberno;
@@ -666,7 +666,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
                 result.SlNo = this.addcommitteeMemberList[index].SlNo;
                 this.addcommitteeMemberList[index] = result;
@@ -772,6 +772,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsaved = false;
+    this.auctionServc.unsaved = false;
   }
 }

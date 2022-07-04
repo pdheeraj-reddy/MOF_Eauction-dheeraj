@@ -6,20 +6,25 @@ import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { EnvService } from '../env.service';
 import * as CryptoJS from 'crypto-js';
+import { AlertModalComponent } from '../shared/components/alert-modal/alert-modal.component';
+import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionService {
-  loggedUser : any;
-  loggedUserRole : any;
-  XCSRFToken : any;
-
+  loggedUser: any;
+  loggedUserRole: any;
+  XCSRFToken: any;
+  unsaved: boolean = false;
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
     private envService: EnvService,
+    private translate: TranslateService,
+    public dialog: MatDialog,
   ) { }
 
 
@@ -31,12 +36,12 @@ export class AuctionService {
     }
   }
 
-  hasUserRole(role: string){
+  hasUserRole(role: string) {
     let isvalidRole;
-    if(typeof this.loggedUser.roles === "string"){
+    if (typeof this.loggedUser.roles === "string") {
       isvalidRole = !!(this.loggedUser.roles == role);
     } else {
-      isvalidRole = !!(this.loggedUser.roles.find((r:any) => r == role));
+      isvalidRole = !!(this.loggedUser.roles.find((r: any) => r == role));
     }
     return isvalidRole;
   }
@@ -58,11 +63,11 @@ export class AuctionService {
 
   getLoggedUserEAucRole() {
     let currentUserRole = this.loggedUser, role = '';
-    if(currentUserRole.roles){
-      if(typeof currentUserRole.roles === "string"){
+    if (currentUserRole.roles) {
+      if (typeof currentUserRole.roles === "string") {
         role = currentUserRole.roles;
       } else {
-        role = currentUserRole.roles.find((r:any) => r.includes("EAuction"));
+        role = currentUserRole.roles.find((r: any) => r.includes("EAuction"));
       }
     }
     console.log('getLoggedUserEAucRole ', role);
@@ -254,6 +259,25 @@ export class AuctionService {
 
   public getHomeUrl() {
     return this.envService.environment.idmHomeUrl;
+  }
+
+  public handleUnsavedError() {
+    return new Promise<boolean>((resolve, reject) => {
+      const dialogRef = this.dialog.open(AlertModalComponent, {
+        data: {
+          message: 'changes_not_saved',
+          mnBtntext: this.translate.instant('auctioncreate.auctionproduct.section1_subheading1_opt2'),
+          mnBtntext1: this.translate.instant('auctioncreate.auctionproduct.section1_subheading1_opt1'),
+          confirm: true,
+        }
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.unsaved = false;
+          resolve(true);
+        }
+      });
+    })
   }
 
 }

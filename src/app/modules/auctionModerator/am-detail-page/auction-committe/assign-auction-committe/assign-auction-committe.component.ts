@@ -32,7 +32,6 @@ export class AssignAuctionCommitteComponent implements OnInit {
 
   commiteeMemberData = false;
   add4Mem: boolean = false;
-  unsaved: boolean = false;
   list: any = [];
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -74,13 +73,12 @@ export class AssignAuctionCommitteComponent implements OnInit {
     public router: Router
   ) {
     window.addEventListener('beforeunload', (e) => {
-      console.log("� ~ window.addEventListener ~ e", e)
-      if (this.unsaved) {
-        // e.preventDefault();
-        e.returnValue = '';
-      }
-
+      // if (this.auctionServc.unsaved) {
+      // e.preventDefault();
+      // e.returnValue = '';
+      // }
     });
+    this.auctionServc.unsaved = false;
   }
 
   memberSelected(data: any) {
@@ -133,7 +131,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.committeeMem3Selected = false;
     this.committeeMem4Selected = false;
     this.add4Mem = false;
-    this.unsaved = false;
+    this.auctionServc.unsaved = false;
     // this.ngOnInit();
   }
 
@@ -253,7 +251,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
             console.log(this.preAuctionData);
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (this.committeeChairData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
               }
@@ -341,7 +339,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
             }
 
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (this.committeeSecData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeSecData.EmployeeId)
               }
@@ -393,7 +391,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
 
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               result.SlNo = '05';
               if (this.committeeMem1Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem1Data.EmployeeId)
@@ -448,7 +446,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               result.SlNo = '06';
               if (this.committeeMem2Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem2Data.EmployeeId)
@@ -502,7 +500,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
 
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               result.SlNo = '07';
               if (this.committeeMem3Data) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeMem3Data.EmployeeId)
@@ -597,7 +595,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (this.addcommitteeMemberList != '') {
                 var memberno = parseInt(this.addcommitteeMemberList.slice(-1)[0].SlNo) + 1;
                 result.SlNo = (memberno < 10) ? "0" + memberno : memberno;
@@ -656,7 +654,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
           });
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-              this.unsaved = true;
+              this.auctionServc.unsaved = true;
               if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER') {
                 result.SlNo = this.addcommitteeMemberList[index].SlNo;
                 this.addcommitteeMemberList[index] = result;
@@ -697,7 +695,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
       map((value) => this._filter(value))
     );
   }
-  goBack() {
+  async goBack() {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
   }

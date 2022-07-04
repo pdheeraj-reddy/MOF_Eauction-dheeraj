@@ -48,6 +48,7 @@
     "ZEAUCTION_PRICECOMM_SECRETARY": "سكرتير اللجنه",
     "Enter the total estimated value of the products": "إدخال إجمالي القيمة التقديرية للمنتجات",
     "Enter the estimated value for each product separately": "إدخال القيمة التقديرية لكل منتج على حدة",
+    "changes_not_saved": "قد لا يتم حفظ التغييرات التي قمت بإجرائها. هل ما زلت تريد التنقل؟",
     "header": {
         "main-menu1": "المزادات",
         "main-menu2": "طلبات المزاد الالكتروني"

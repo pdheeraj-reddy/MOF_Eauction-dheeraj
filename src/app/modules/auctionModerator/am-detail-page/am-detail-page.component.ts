@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AuctionService } from 'src/app/service/auction.service';
+import { AlertModalComponent } from 'src/app/shared/components/alert-modal/alert-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-am-detail-page',
@@ -45,7 +47,7 @@ export class AmDetailPageComponent implements OnInit {
     private interconversionService: InterconversionService,
     public auctionServc: AuctionService,
     public dialog: MatDialog,
-    public router: Router
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -184,7 +186,6 @@ export class AmDetailPageComponent implements OnInit {
   }
 
   onStepChange(ev: any) {
-    console.log("🚀 ~ onStepChange ~ ev", ev)
     this.selectedIndex = ev.selectedIndex;
   }
 
@@ -277,4 +278,16 @@ export class AmDetailPageComponent implements OnInit {
     //     );
     // }
   }
+
+  async goToAuctionList() {
+    if (this.auctionServc.unsaved) {
+      const confirm = await this.auctionServc.handleUnsavedError();;
+      if (confirm) {
+        this.router.navigate(['/auctionlist'])
+      }
+    } else {
+      this.router.navigate(['/auctionlist'])
+    }
+  }
+
 }
