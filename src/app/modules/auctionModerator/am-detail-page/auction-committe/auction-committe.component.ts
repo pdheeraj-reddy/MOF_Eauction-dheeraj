@@ -70,8 +70,17 @@ export class AuctionCommitteComponent implements OnInit {
     );
   }
 
-  goBacktoList() {
-    this.router.navigateByUrl('/');
+  async goBacktoList() {
+    alert(1)
+    console.log("🚀 ~ goBacktoList ~ this.auctionServc.unsaved", this.auctionServc.unsaved)
+    if (this.auctionServc.unsaved) {
+      const confirm = await this.auctionServc.handleUnsavedError();;
+      if (confirm) {
+        this.router.navigateByUrl('/');
+      }
+    } else {
+      this.router.navigateByUrl('/');
+    }
   }
 
   goAheadtoProduct() {

@@ -50,8 +50,15 @@ export class AuctionPricingCommitteComponent implements OnInit {
     console.log(data);
   }
 
-  goBacktoList() {
-    this.router.navigateByUrl('/');
+  async goBacktoList() {
+    if (this.auctionServc.unsaved) {
+      const confirm = await this.auctionServc.handleUnsavedError();;
+      if (confirm) {
+        this.router.navigateByUrl('/');
+      }
+    } else {
+      this.router.navigateByUrl('/');
+    }
   }
   goAheadtoProduct() {
     this.showAuction = false;
