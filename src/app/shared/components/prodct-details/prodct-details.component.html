@@ -84,7 +84,7 @@
                                     <span class="col" *ngIf="!product.show">{{product.ZzPdtEstPricePc | number}}</span>
                                     <input *ngIf="product.show" #autoFocus class="col-6 h-100 p-0" style="font-size: 16px; background-color: none; border: none; outline: none;" digitOnly [decimal]="true" type="text" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />                                    &nbsp;
                                     <span class="col text-primary-light"> {{"common.SAR" | translate}}</span>&nbsp;&nbsp;
-                                    <span class="icon-edit" style="color: #ccc;" *ngIf="showDepricated"></span>
+                                    <span class="icon-edit" style="color: #ccc;" *ngIf="product.show && showDepricated"></span>
                                     <a *ngIf="!product.show && showAdjustPriceOption && ((loggedUserRole.isPricingHead && preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')))"
                                         class="btn btn-ghost btn-sm fill-primary-light-green" (click)="openAdjustPriceOption(i)"> <span class="icon-edit"></span> </a>
                                 </div>

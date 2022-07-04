@@ -417,6 +417,7 @@ export class ProdctDetailsComponent implements OnInit {
   cancel(index: number) {
     this.showDepricated = false;
     let product = this.preAuctionData?.listtoproductnav?.results;
+    // this.productValue = this.productValue - product?.ZzPdtEstPricePc;
     product[index].ZzPdtEstPricePc = 0.00;
     for (let i = 0; i < product.length; i++) {
       console.log(product[i]);
@@ -429,7 +430,7 @@ export class ProdctDetailsComponent implements OnInit {
         this.indexError = -1;
         this.showError = false;
       }
-      this.pdtEstPricePc += product[i].ZzPdtEstPricePc * product[i].Quantity.split('.')[0];
+      // this.pdtEstPricePc += product[i].ZzPdtEstPricePc * product[i].Quantity.split('.')[0];
 
     }
     this.productValue = parseFloat(this.pdtEstPricePc as string);
