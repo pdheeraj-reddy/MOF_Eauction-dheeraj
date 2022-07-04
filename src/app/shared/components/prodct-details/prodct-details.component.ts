@@ -78,12 +78,27 @@ export class ProdctDetailsComponent implements OnInit {
 
   }
   checkPrices() {
-    console.log(this.productValue);
+    console.log(this.inputMode, "SKA");
     // this.showConfim = true;
-    if (this.showAdjustPriceOption == true && this.productValue < 1) {
+    if (this.showAdjustPriceOption == true && this.productValue < 1 && this.inputMode) {
       this.invalidQty = true;
-      window.scroll({ top: 0, behavior: "smooth" });
+      // window.scroll({ top: 0, behavior: "smooth" });
+      this.inputFieldElementFocus.nativeElement.focus();
+      this.inputFieldElementFocus.nativeElement.select();
       // this.showConfim = false;
+    } else if (!this.inputMode) {
+      let product = this.preAuctionData?.listtoproductnav?.results;
+      let flag = false;
+      product.forEach((element: any) => {
+        if (element.ZzPdtEstPricePc < 1) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        this.isPriceError = true;
+      } else {
+        this.showConfim = true;
+      }
     }
     else {
       this.showConfim = true;
@@ -373,7 +388,6 @@ export class ProdctDetailsComponent implements OnInit {
 
   openAdjustPriceOption(index: number) {
     this.showDepricated = true;
-    console.log(this.showAdjustPriceOption, "ram")
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any, pindex: number) => {
       if (pindex == index) {
         setTimeout(() => { // this will make the execution after the above boolean has changed
@@ -497,30 +511,29 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   sendPricingValues() {
-    // console.log(this.inputMode);
     console.log(this.productValue);
-    if (this.productValue < 1) {
+    if (this.productValue < 1 && this.inputMode) {
       this.invalidQty = true;
-      window.scroll({ top: 0, behavior: "smooth" });
-    } else {
-      if (!this.inputMode) {
-        let product = this.preAuctionData?.listtoproductnav?.results;
-        let flag = false;
-        console.log(product);
-        product.forEach((element: any) => {
-          if (element.ZzPdtEstPricePc < 1) {
-            flag = true;
-          }
-        });
-        if (flag) {
-          this.isPriceError = true;
-        } else {
-          this.isPriceSuccess = true;
+      // window.scroll({ top: 0, behavior: "smooth" });
+      this.inputFieldElementFocus.nativeElement.focus();
+      this.inputFieldElementFocus.nativeElement.select();
+    } else if (!this.inputMode) {
+      let product = this.preAuctionData?.listtoproductnav?.results;
+      let flag = false;
+      product.forEach((element: any) => {
+        if (element.ZzPdtEstPricePc < 1) {
+          flag = true;
         }
+      });
+      if (flag) {
+        this.isPriceError = true;
       } else {
         this.isPriceSuccess = true;
       }
+    } else {
+      this.isPriceSuccess = true;
     }
+
 
   }
 

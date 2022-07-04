@@ -24,7 +24,7 @@
             <div class="container" *ngIf="inputMode && (loggedUserRole.isPricingHead && (preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')) )">
                 <label class="text-12">{{ "auctionMember.bid-value.heading" | translate }}</label>
                 <div style="display: flex">
-                    <input [(ngModel)]="pdtEstPricePc" appComma (ngModelChange)="adjustTotalPrice()" onClick="this.select();" digitOnly [decimal]="true" type="text" placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
+                    <input #autoFocus [(ngModel)]="pdtEstPricePc" appComma (ngModelChange)="adjustTotalPrice()" onClick="this.select();" digitOnly [decimal]="true" type="text" placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
                         width: 300px; outline: none; border: none; border-bottom: 1px solid grey;
                         background-color: #eaf6ef; " />&nbsp; &nbsp; &nbsp;
                     <!-- <button class="btn btn-primary-light btn-md" (click)="adjustTotalPrice()"> {{
@@ -218,9 +218,9 @@
                 <h4 class="modal-title" id="exampleModalLabel">
                     {{ "auctionMember.confirmation-popup.title" | translate }}
                 </h4>
-                <!-- <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <button (click)="closeAllModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                         <span class="icon-close"></span>
-                    </button> -->
+                    </button>
             </div>
             <div class="modal-body">
                 <label for="confirmation" style="color: #414042; font-size: 16px">{{
@@ -239,12 +239,15 @@
 </div>
 
 <div class="modal show" *ngIf="isPriceError" [ngClass]="{ 'modal-show': isPriceError }">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">
                     {{ "auctionMember.confirmation-popup.title" | translate }}
                 </h4>
+                <button (click)="closeAllModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                        <span class="icon-close"></span>
+                    </button>
             </div>
             <div class="modal-body">
                 <label for="confirmation" style="color: #414042; font-size: 16px">{{
