@@ -14,7 +14,10 @@ export class BidderService {
   ) { }
 
   getAuctionList(page: any, filters: any): Observable<any> {
-    let role = '';
+    let role = '', config1 = '', config2 = '';
+    role = "AuctionManager";
+    config1 = "?$expand=page1tolistnav";
+    config2 = " and ScreenNav eq 'R'";
     console.log('page ', page, ' filters ', filters);
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     const pageNumber = page.pageNumber;
@@ -34,7 +37,8 @@ export class BidderService {
     console.log('apiBidderAuctions', this.envService.environment.apiBidderAuctions);
     return this.http.get<any>(
       this.envService.environment.apiBidderAuctions +
-      "?$expand=page1tolistnav&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + ")&$format=json"
+      config1 +
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json"
       , httpOptions);
 
   }

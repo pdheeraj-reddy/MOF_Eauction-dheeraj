@@ -66,49 +66,49 @@
     </div>
     <div *ngIf="!showPageLoader" class="row justify-content-between no-gutters">
         <div class="col-md-9 justify-content-start">
-            <div class="row no-gutters">
+            <div class=" row no-gutters">
                 <div class="col-12">
                     <div class="card">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-12 col-md-12">
-
-                                        <!-- filled -->
                                         <ul class="nav nav-fill p-0">
                                             <li class="nav-item">
                                                 <a class="nav-link nav-link-tabs"
                                                     [ngClass]="{ active: selectedTab === 'All' }"
-                                                    (click)="onTabSelection('All')">{{ 'bidderAuctions.All' | translate
-                                                    }} ({{totcntforall}})</a>
+                                                    (click)="onTabSelection('All')">
+                                                    {{ 'auctionlist.tab1-item1' | translate }}
+                                                    ({{totalCounts.total_all}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Ongoing' }"
-                                                    (click)="onTabSelection('Ongoing')">{{
-                                                    'bidderAuctions.OngoingAuctions' | translate }}
-                                                    ({{totcntforongoingauction}})</a>
-                                            </li>
-                                            <li class="nav-item border-left ">
-                                                <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Upcoming' }"
-                                                    (click)="onTabSelection('Upcoming')">{{
-                                                    'bidderAuctions.UpcomingAuctions' | translate }}
-                                                    ({{totcntforupcommingauction}})</a>
+                                                    [ngClass]="{ active: selectedTab === 'Ongoing Auction' }"
+                                                    (click)="onTabSelection('Ongoing Auction')">
+                                                    {{ 'auctionCommittee.tab2' | translate }}
+                                                    ({{totalCounts.total_ongoing}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Pending Selecting' }"
-                                                    (click)="onTabSelection('Pending Selecting')">{{
-                                                    'bidderAuctions.UnderGear' | translate }}
-                                                    ({{totcntforundergear}})</a>
+                                                    [ngClass]="{ active: selectedTab === 'Upcoming Auction' }"
+                                                    (click)="onTabSelection('Upcoming Auction')">
+                                                    {{ 'auctionCommittee.tab3' | translate }}
+                                                    ({{totalCounts.total_upcoming}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Closed' }"
-                                                    (click)="onTabSelection('Closed')">{{
-                                                    'bidderAuctions.ClosedAuctions' | translate }}
-                                                    ({{totcntforendedauction}})</a>
+                                                    [ngClass]="{ active: selectedTab === 'Under Gear' }"
+                                                    (click)="onTabSelection('Under Gear')">
+                                                    {{ 'auctionCommittee.tab4' | translate }}
+                                                    ({{totalCounts.total_under_gear}})</a>
+                                            </li>
+                                            <li class="nav-item border-left">
+                                                <a class="nav-link nav-link-tabs"
+                                                    [ngClass]="{ active: selectedTab === 'Ended Auction' }"
+                                                    (click)="onTabSelection('Ended Auction')">
+                                                    {{ 'auctionCommittee.tab5' | translate }}
+                                                    ({{totalCounts.total_completed}})
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -119,10 +119,12 @@
                 </div>
             </div>
         </div>
+
         <div class="col-auto justify-content-end">
-            <button (click)="toggleFilter()" class="btn nav-tabs-btn h-100" style="color:#32ad71"
-                [ngClass]="{'filter-active': showFilterForm }" type="button" id="dropdownMenuButton"
-                aria-haspopup="true" aria-expanded="false">
+            <button (click)="toggleFilter()"
+                class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm"
+                style="color:#32ad71" [ngClass]="{ 'filter-active': showFilterForm }" type="button"
+                id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                 <span class="text-14 icon-filters"></span>
             </button>
         </div>
@@ -141,44 +143,53 @@
             <div class="modal-body mb-3">
                 <div class="col-12 row pr-0">
                     <div class="col-md-4 mb-3">
-                        <label class="d-flex" for="validationCustom02">{{ 'bidderAuctions.AuctionReferenceNumber' |
-                            translate }}</label>
+                        <label class="d-flex" for="validationCustom02">{{ 'auctionlist.filter-refno' | translate
+                            }}</label>
                         <input type="text" maxlength="10" formControlName="prevRefNo" class="form-control"
-                            placeholder="{{ 'bidderAuctions.AuctionReferenceNumber' | translate }}"
+                            placeholder="{{ 'auctionlist.filter-refno-pholder' | translate }}" id="validationCustom01"
+                            [required]="true" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationCustom01">{{ 'auctionlist.filter-actionname' | translate }}</label>
+                        <input type="text" formControlName="auctionName" class="form-control"
+                            placeholder="{{ 'auctionlist.filter-actionname-pholder' | translate }}"
                             id="validationCustom01" [required]="true" />
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="validationCustom04">{{ 'bidderAuctions.BiddingMethod' | translate }}</label>
+                        <label for="validationCustom04">{{ 'auctionlist.filter-auctiontype' | translate }}</label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionType"
                             (change)="changeSelect($event, 'auctionType')" [required]="true">
-                            <option value="">{{ 'bidderAuctions.Select' | translate }} </option>
-                            <option *ngFor="let product of dropValProducts">{{product | translate }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3"
-                        *ngIf="selectedTab === 'All' || selectedTab === 'Pending Selecting' || selectedTab === 'Closed'">
-                        <label for="validationCustom04">{{ 'bidderAuctions.AuctionStatus' | translate }}</label>
-                        <select class="form-control" formControlName="auctionStatus"
-                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
-                            <option value="">{{ 'bidderAuctions.AuctionStatus' | translate }} </option>
-                            <option *ngFor="let status of dropValStatus">{{status | translate }}</option>
+                            <option value="">{{ 'Auction Type' | translate }} </option>
+                            <option [value]="product.code" *ngFor="let product of dropValProducts">{{product.disp |
+                                translate }}</option>
                         </select>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label class="d-flex" for="validationCustom02">{{ 'bidderAuctions.AuctionStartDate' | translate
-                            }}</label>
+                        <label class="d-flex" for="validationCustom02">{{ 'auctionlist.filter-auctionstartdate' |
+                            translate }}</label>
                         <input type="text" id="auctionStartDate" formControlName="auctionStartDate"
-                            placeholder="{{ 'bidderAuctions.Auction-formDate-pholder' | translate }}"
-                            (change)="onChangeStartDate($event)"
-                            class="form-control calendar-control calendar-both-control" />
+                            placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                            (change)="onChangeStartDate($event)" class="form-control calendar-control
+                                calendar-both-control" />
+                        <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="validationCustom01">{{ 'bidderAuctions.AuctionEndDate' | translate }}</label>
+                        <label for="validationCustom01">{{ 'auctionlist.filter-auctionenddate' | translate }}</label>
                         <input type="text" id="auctionEndDate" formControlName="auctionEndDate"
-                            placeholder="{{ 'bidderAuctions.Auction-formDate-pholder' | translate }}"
+                            placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                             (change)="onChangeEndDate($event)"
                             class="form-control calendar-control calendar-both-control" />
-                        <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="{{ 'bidderAuctions.Auction-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
+                        <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
+                    </div>
+                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All'">
+                        <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
+                        <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
+                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
+                            <option value="">{{ 'Auction Status' | translate }} </option>
+                            <option [value]="status.code" *ngFor="let status of dropValStatus">{{status.disp |
+                                translate
+                                }}</option>
+                        </select>
                     </div>
                 </div>
                 <!-- {{filterFormGroup.value | json}} -->
@@ -195,20 +206,16 @@
         </form>
     </div>
     <div>
-        <!-- Card group  -->
         <div class="card-grp">
-            <ng-container *ngIf="auctionListData?.length > 0">
+            <ng-container *ngIf="auctionListData!.length > 0">
                 <app-auction-card [auction]="rowItem" *ngFor="let rowItem of auctionListData"></app-auction-card>
             </ng-container>
         </div>
-        <div class="mt-4 row margin-auto" *ngIf="auctionListData?.length > 0">
+        <div class="mt-4 row margin-auto" *ngIf="auctionListData!.length > 0">
             <div class="mb-5">
                 <nav aria-label="..." class="nav-pagination">
 
                     <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
-                        <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                            <a (click)="getServerData(1)" class="page-link" href="#">Last</a>
-                        </li> -->
                         <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
                             <a (click)="getServerData(PaginationServc.currentPage)" class="page-link" tabindex="-1"
                                 aria-disabled="true">{{ 'bidderAuctions.grid-previous' | translate }}</a>
@@ -224,27 +231,7 @@
                             <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
                                 'bidderAuctions.grid-next' | translate }}</a>
                         </li>
-                        <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                            <a (click)="getServerData(PaginationServc.currentPage + 1)" class="page-link" href="#">Last</a>
-                        </li> -->
                     </ul>
-                    <!-- <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item" aria-current="page">
-                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link dot-link">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">15</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul> -->
                 </nav>
             </div>
         </div>
