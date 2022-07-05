@@ -11,4 +11,6 @@ export const environment = {
   apiCommiteeURL : "/internal/v1/e-auction/committees",
   apiBidderFinalInvoiceURL : "/mock-internal/auctions/1/final-invoice",
   apiBidderAuctions : "/mock-internal/auctions",
+  apiBidderMyAuctions : "/mock-internal/myauctions",
+  apiBidderMyInvoices : "/mock-internal/myinvoices",
 };
