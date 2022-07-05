@@ -13,4 +13,6 @@ export const environment = {
   apiBidderAuctions : "https://10.13.85.56:9443/internal/v1/e-auction/e-bidder/bidders",
   apiBidderBidAuctions : "/sap/opu/odata/sap/ZSRM_PREAUCTION_APPROVAL_SRV/PreAuctionListSet",
   apiBidderParticipationAuctions : "/sap/opu/odata/sap/ZSRM_PREAUCTION_APPROVAL_SRV/BidderParticipationSet",
+  apiBidderMyAuctions:"",
+  apiBidderMyInvoices:""
 };  

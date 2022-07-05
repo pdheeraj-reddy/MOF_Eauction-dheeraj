@@ -133,9 +133,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionCommiteeLandingPageComponent,
     AuctionCommiteeDetailPageComponent,
     AuctionCommiteeOpenOffersComponent,
-    AlertModalComponent,
-    MyInvoicesComponent,
-    MyAuctionsComponent,
+    AlertModalComponent
+   
   ],
   imports: [
     MatTooltipModule,
