@@ -573,8 +573,188 @@
             "Price_adjustment": "Price adjustment"
         }
     },
+    "bidderAuctionDetails": {
+        "Auctions": "Auctions",
+        "AuctionDetails": "Auction Details",
+        "ThisAuctionIsComing": "This auction is coming",
+        "YouCanRegisterYourEntry": "You can register your entry until it's auction time.",
+        "AuctionStartDate": "Auction start date",
+        "ParticipateInTheAuction": "Participate in the auction",
+        "Product": "products",
+        "AuctionStarts": "Auction starts",
+        "BiddingIs": "Bidding is",
+        "ImportantInformation": "Important Information",
+        "AuctionStartPrice": "Auction start price",
+        "InitialGuaranteePercentage": "Initial guarantee percentage",
+        "CommissionRate": "Commission rate",
+        "EndOfBidding": "End of bidding",
+        "BidOpeningDate": "Bid opening date",
+        "AuctionDetails1": "Auction Details",
+        "StartsDuring": "Starts during:",
+        "Day": "Day",
+        "Hour": "Hour",
+        "Accurate": "Accurate",
+        "Second": "Second",
+        "UpcomingAuction": "Upcoming Auction",
+        "ProductDetails": "Product Details",
+        "AuctionSettings": "Auction settings",
+        "auction-popup": {
+            "ConfirmationOfParticipation": "Confirmation of participation in the auction?",
+            "UponConformation": "Upon confirmation your information will be registered as an auction participant.",
+            "Cancellation": "Cancellation",
+            "SubscriptionConfirmation": "Subscription confirmation",
+            "SubscriptionConfirmedSuccessfully": "Subscription has been confirmed successfully",
+            "ReceiveEmail": "You will receive an email when the auction starts",
+            "BackToAuctions": "Back to auctions"
+        },
+        "auction-settings": {
+            "You-can-manage-the-auction": "You can manage the auction from this menu",
+            "AuctionDetails": "Auction Details",
+            "AuctionInstructions": "Auction Instructions",
+            "ManagingAuctions": "For help or support in managing auctions",
+            "PressHere": "Press here",
+            "NumberOfBids": "Number of bids",
+            "Participants": "Participants"
+        },
+        "auction-details": {
+            "AuctionReferenceNumber": "Auction reference number",
+            "AuctionType": "Auction type",
+            "BiddingMethod": "Bidding method",
+            "AuctionName": "Auction name",
+            "AuctionProducts": "Auction Products",
+            "EntityNo": "Entity No.",
+            "EntityName": "EntityName",
+            "AuctionDescription": "Auction Description",
+            "AuctionDateAndTime": "Auction date and time",
+            "BiddingBegins": "Bidding begins",
+            "EndOfBidding": "End of bidding",
+            "HowToStartTheAuction": "How to start the auction",
+            "BidOpeningDate": "Bid opening date",
+            "FinancialAuctionItems": "Financial Auction Items",
+            "AuctionStartPrice": "Auction start price",
+            "WarrantyPercentage": "Warranty percentage",
+            "CommissionType": "Commission type",
+            "Pursuit-percentage-commission": "Pursuit percentage - commission %",
+            "Final-guarantee-payment-date": "Final guarantee payment date",
+            "Attachments": "Attachments",
+            "Attached": "Attached",
+            "AttachmentName": "Attachment name"
+        },
+        "auction-instruction": {
+            "AuctionInstructions": "Auction Instructions",
+            "AuctionParticipationInstructions": "Auction Participation Instructions",
+            "instructionsList1": "1. Before participating in the auction, the commercial registration status must be “Participant” in the Etimad platform.",
+            "instructionsList2": "2. When the auction starts, you will be required to issue and attach the bid bond, submit your bid, and attach the final bond in case the auction is awarded to you. And you can issue guarantees through the adoption platform -",
+            "instructionsList2-link": "the bank guarantee service",
+            "instructionsList3": "3. At the start of the auction, the initial guarantee amount will be reserved, after which the bidding can be started, and in the event that the auction is not awarded to the bidder, the bank guarantee will be immediately released.",
+            "instructionsList4": "4. If the minimum estimated price of the products is not met, the auction will not be awarded.",
+            "AuctionWorkflow": "Auction workflow",
+            "Participate-in-the-auction": "Participate in the auction",
+            "WarrantyLiftPrimary": "Warranty Lift Primary",
+            "AuctionStartSubmitBids": "Auction start Submit bids",
+            "InitialAward": "(initial award) Auction Award on top view",
+            "FinalAward": "(final award) Warranty Lift Final",
+            "payTheBill": "pay the bill"
+        },
+
+        "product-details": {
+            "ProductTruckNo": "Isuzu Truck No. 23",
+            "ProductDetails": "Product Details",
+            "ProductName": "Product name",
+            "ProductCondition": "Product condition",
+            "DeliveryDateAndTime": "Delivery date and time",
+            "ProductNumber": "Product Number",
+            "ProductSpecification": "Product Specification",
+            "DeliveryAddress": "Delivery Address",
+            "OtherAttachments": "Other Attachments",
+            "Attached": "Attached",
+            "AttachmentName": "Attachment name"
+        }
+    },
+    "bidderMyAuctions": {
+        "TrustServices": "Trust services",
+        "MyAuctions": "My Auctions",
+        "All": "All",
+        "OngoingAuctions": "Ongoing",
+        "UpcomingAuctions": "Upcoming",
+        "UnderGear": "Pending Selecting",
+        "ClosedAuctions": "Closed",
+        "filter-title": "Filter",
+        "AuctionReferenceNumber": "Auction reference number",
+        "AuctionName": "Auction Name",
+        "filter-actionname-pholder": "Enter the Auction Name",
+        "AuctionStatus": "Auction Status",
+        "AuctionType": "Auction Type",
+        "AuctionStartDate": "Auction start date",
+        "Auction-formDate-pholder": "day - month - year",
+        "AuctionEndDate": "Auction end date",
+        "filter-btn1": "Filter",
+        "filter-btn2": "Reset",
+        "ThAuctionReferenceNumber": "Auction reference number",
+        "ThAuctionName": "Auction Name",
+        "ThAuctionType": "Auction Type",
+        "DisplayCase": "Display Case"
+    },
+    "bidderMyInvoices": {
+        "TrustServices": "Trust services",
+        "Invoices": "Invoices",
+        "InvoicesTitle": "Invoices",
+        "All": "All",
+        "AwaitingPayment": "Awaiting Payment",
+        "Paid": "Paid",
+        "filter-title": "Filter",
+        "InvoiceReferenceNumber": "Invoice reference number",
+        "InvoiceReferenceNumberPholder": "Enter the Reference Number",
+        "InvoiceIssueDate": "Invoice issue date",
+        "Invoice-formDate-pholder": "day - month - year",
+        "AmountOfTheInvoice": "Amount of the invoice",
+        "EntityName": "Entity Name",
+        "InvoicePaymentStatus": "Invoice payment status and final warranty",
+
+        "filter-btn1": "Filter",
+        "filter-btn2": "Reset",
+        "TheadInvoiceReferenceNumber": "Invoice reference number",
+        "ThInvoiceIssueDate": "Invoice issue date",
+        "ThAmountOfTheInvoice": "Amount of the invoice",
+        "ThEntityName": "Entity Name",
+        "ThInvoicePaymentStatusFinalWarranty": "Invoice payment status and final warranty"
+    },
+    "bidderSendOffer": {
+        "LatestOffersSent": "Latest offers sent",
+        "AttachThePrimaryWarranty": "Attach the primary warranty",
+        "ForHelpSupportManagingAuctions": "For help or support in managing auctions",
+        "ClickHere": "Click here",
+        "UploadFileFormat": "PNG, JPG, DOCX, DOC, PDF File",
+        "AddYourOffer": "Add your offer",
+        "SAR": "SAR",
+        "PersuitRate": "Persuit rate",
+        "AddedTaxValue": "Added tax value",
+        "TotalOfferPrice": "Total offer price",
+        "SendOffer": "Send offer",
+        "ConfirmationBidSubmission": "Confirmation of bid submission?",
+        "BidSubmissionDescription": "Upon confirmation, your bid will be sent to the auction committee. You will not be able to modify or cancel the offer after it has been sent.",
+        "SubmitOffer": "Post confirmation",
+        "Cancellation": "Back",
+        "OfferSuccess": "Offer sent successfully",
+        "OfferContent": "We wish you good luck!",
+        "OfferDescription": "You will receive an email if the auction is awarded to your bid.",
+        "BackToAuctions": "Back to auctions"
+    },
+    "bidderPayInvoice": {
+        "AwaitingPayment": "Awaiting payment",
+        "PleasePayInvoice-approve-final-award": " Please pay the invoice to approve the final award.",
+        "AwardCanceled": "The award will be canceled if the invoice is not paid within 30 days of awarding.",
+        "PayTheBill": "Pay the bill"
+    },
+    "bidderfbga": {
+        "YourBidHasBeenAwarded": "Your bid has been awarded !",
+        "FinalGuaranteeApproveInitialAward": "Please attach the final guarantee to approve the initial award.",
+        "UploadFileFormat": "PNG, JPG, DOCX, DOC, PDF File",
+        "AttachTheFinalWarranty": "Please issue and attach the final warranty within 15 days of awarding. You can issue the guarantee through the bank guarantee service of the Etimad platform.",
+        "SendTheFinalGuarantee": "Send the final guarantee"
+    },
     "auctionMember": {
-        "bcrumb1": "Etimad Services",
+        "bcrumb1": "Trust Services",
         "bcrumb2": "Online Auction Requests",
         "pageTitle": "Online Auction Requests",
         "navdropdown1": "Create a new auction",
@@ -597,7 +777,7 @@
         "grid1-btn2": "Auction cancellation",
         "grid1-btn3": "View auction details",
         "grid-previous": "Previous",
-        "grid-next": "Next",
+        "grid-next": "Next one",
         "filter-title": "Filter",
         "filter-btn1": "Filter",
         "filter-btn2": "Reset",
@@ -609,8 +789,9 @@
         "filter-formDate-pholder": "day - month - year",
         "filter-actionname-pholder": "Enter the Auction Name",
         "filter-refno-pholder": "Enter the Reference number",
+
         "mem-detail": {
-            "bcrumb1": "Etimad Services",
+            "bcrumb1": "Trust Services",
             "bcrumb2": "Online Auction Requests",
             "bcrumb3": "Auction Details",
             "pageTitle": "Auction Details",
@@ -619,40 +800,15 @@
             "tab3": "Pricing Committee Members",
             "tab4": "Auction Committee Members"
         },
+
         "bid-value": {
             "head": "General information about the order",
             "subHead": "Product Pricing",
-            "heading": "Total estimated value of products",
-            "phold": "Enter estimated value of products",
-            "save": "Save",
-            "failure_mssg": "Enter value greater than zero",
-            "overall_failure_mssg": "Please enter correct estimated amount",
-            "popup_label": "Estimated Value of the Product",
-            "popup_save": "Save Value",
-            "popup_phold": "Enter the estimated value of the product"
-        },
-        "confirmation-popup": {
-            "title": "Confirm sending product pricing?",
-            "subtitle": "Upon confirmation, the auction application will be approved and sent for approval.",
-            "accept": "Confirmation of Publication",
-            "back": "Back"
-        },
-        "accept-popup": {
-            "title": " Confirmation of acceptance of pricing request?",
-            "subtitle": "Upon confirmation, the pricing request will be approved and sent to the head of the government authority.",
-            "accept": "Accepting the Application",
-            "back": "Back"
-        },
-        "successful-popup": {
-            "title": "Pricing was sent successfully",
-            "subtitle": "The request was successfully sent, and you'll receive an email. To follow up on your request",
-            "accept": "Back to Auction Requests"
-        },
-        "error-popup": {
-            "subtitle": "Please note that one of the estimated values is equal to 0. Do you want to continue?",
-            "accept": "Confirm"
+            "phold": "Total estimated value of products",
+            "save": "Save"
         }
     },
+
     "auctionCommittee": {
         "bcrumb1": "Trust Services",
         "bcrumb2": "Auctions",
@@ -676,6 +832,7 @@
         "accurate": "Accurate",
         "second": "Second",
         "detail_btn": "Auction Details",
+
         "ac-detail": {
             "bcrumb1": "Accreditation Services",
             "bcrumb2": "Auctions",
@@ -713,6 +870,7 @@
             "bids": "Number of bids",
             "participant": "Participants"
         },
+
         "ac-openOffers": {
             "bcrumb1": "Accreditation Services",
             "bcrumb2": "Auctions",
@@ -731,6 +889,7 @@
             "next": "Next One"
         }
     },
+
     "offerReport": {
         "bcrumb1": "Trust services",
         "bcrumb2": "Auctions",
@@ -758,13 +917,16 @@
         "content1": "Number of Bids",
         "content2": "participants"
     },
+
     "AuctionDetails": "Auction Details",
-    "EndsThrough": "Ends through",
+    "Ends Through": "Ends Through",
+    "Starts During": "Starts During",
     "Day": "Day",
     "Hour": "Hour",
     "Accurate": "Accurate",
     "Second": "Second",
-    "Product": "product",
+    "Product": "products",
+    "TrustServices": "Trust services",
     "bidderFinalInvoice": {
         "InvoiceDetails": "Invoice Details",
         "InvoiceInformation": "Invoice Information",

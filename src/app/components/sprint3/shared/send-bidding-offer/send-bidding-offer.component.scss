@@ -1,0 +1,236 @@
+.card-grp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.left-card {
+    width: 68%;
+}
+
+.right-card {
+    width: 28%;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.collapse-card {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.collapse-card:focus {
+    border: 1px solid #cccccc;
+    outline: none;
+}
+
+.collapse-card-inside {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffff;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+.icon-card-grp {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+    min-height: 300px;
+    align-content: space-between;
+    border-bottom: 1px solid #cccccc;
+}
+
+.icon-card {
+    margin: 5px;
+    padding-top: 25px;
+    width: 118px;
+    color: #414042;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    background-color: #f9fcfa;
+}
+
+.icon-card:focus {
+    outline: none;
+    border: 2px solid #28ab6d;
+    box-shadow: 0 6px 11px 0 rgba(0, 91, 78, 0.17);
+    color: #32ad71;
+}
+
+.disabled {
+    background-color: #f5f5f5;
+    color: #cccccc;
+}
+
+.details-grp {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.details {
+    color: #32ad71;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-code-rn-detail {
+    border-radius: 1px;
+    background-color: #f66f5b;
+    font-size: 16px;
+    color: #ffff;
+    text-align: center;
+    width: 180px;
+    margin-top: 25px;
+    margin-left: 35px;
+    margin-bottom: 25px;
+    padding: 5px 5px 5px 5px;
+    align-self: flex-end;
+}
+
+.card-img-top {
+    margin-left: 20px;
+}
+
+.img-btn {
+    margin-top: 20px;
+    margin-left: 30px;
+    position: absolute;
+}
+
+.left-left-card {
+    width: 60%;
+}
+
+.card-titel {
+    color: #005b4e;
+    font-size: 22px;
+}
+
+.left-right-card {
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 40%;
+    border-top: 2px solid #28ab6d;
+    border-bottom: 2px solid #28ab6d;
+    border-left: 2px solid #28ab6d;
+    border-radius: 5px 0 0 5px;
+    background-color: #f9fcfa;
+}
+
+.list-card {
+    margin-bottom: 10px;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #ffff;
+}
+
+.page-item {
+    color: #ffff;
+}
+
+.page-link {
+    color: #ffff;
+    background-color: transparent;
+}
+
+.page-link:hover {
+    background-color: #ffff;
+    color: #32ad71;
+}
+
+.page-item .dot-link:hover {
+    background-color: #ffff;
+    color: #32ad71;
+}
+
+.point-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffff;
+    border: 1px solid #32ad71;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.left-right-card-title {
+    display: flex;
+    align-items: center;
+}
+
+.file-uploader-zone {
+    padding: 5px;
+}
+
+.file-uploader-zone {
+    margin-top: 10px;
+}
+
+.amount {
+    margin-top: 20px;
+}
+
+.adder {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.adder input {
+    text-align: center;
+    font-weight: bold;
+    color: #32ad71;
+}
+
+.amt-input {
+    height: 34px;
+    border: none;
+    border-bottom: 2px solid #32ad71;
+    border-top: 2px solid #32ad71;
+}
+
+.amt-input:focus-visible {
+    border: none;
+    border-bottom: 2px solid #32ad71;
+    border-top: 2px solid #32ad71;
+    outline: none;
+}
+
+.status-success-icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.circle {
+    width: 96px;
+    height: 96px;
+    background: #f9fcfa;
+    border-radius: 50%;
+}
+
+.icon-card.active {
+    outline: none;
+    border: 2px solid #28ab6d !important;
+    box-shadow: 0 6px 11px 0 rgb(0 91 78 / 17%) !important;
+    color: #32ad71 !important;
+}
