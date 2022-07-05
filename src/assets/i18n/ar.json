@@ -805,11 +805,26 @@
     },
     "bidderAuctions": {
         "TrustServices": "خدمات اعتماد",
-        "Auctions": "المزادات",
+        "MyAuctions": "مزاداتي",
         "All": "الكل",
         "OngoingAuctions": "مزادات جارية",
         "UpcomingAuctions": "مزادات قادمة",
         "UnderGear": "تحت الترسية",
-        "ClosedAuctions": "مزادات منتهية"
+        "ClosedAuctions": "مزادات منتهية",
+        "filter-title": "البحث المتقدم",
+        "AuctionReferenceNumber": "الرقم المرجعي للمزاد",
+        "AuctionName": "اسم المزاد",
+        "filter-actionname-pholder": "أدخل اسم المزاد",
+        "AuctionStatus": "حالة المزاد",
+        "AuctionType": "نوع المزاد",
+        "AuctionStartDate": "تاريخ بداية المزاد",
+        "Auction-formDate-pholder": "يوم  -  شهر  -  سنة",
+        "AuctionEndDate": "تاريخ نهاية المزاد",
+        "filter-btn1": "بحث",
+        "filter-btn2": "إعادة تعيين",
+        "ThAuctionReferenceNumber": "الرقم المرجعي للمزاد",
+        "ThAuctionName": "اسم المزاد",
+        "ThAuctionType": "نوع المزاد",
+        "DisplayCase": "حالة العرض"
     }
 }
