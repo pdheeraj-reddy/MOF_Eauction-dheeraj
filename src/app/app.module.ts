@@ -87,7 +87,6 @@ import { ProductDetailPopupComponent } from './components/auction/auction-indeta
 import { EnvService } from './env.service';
 import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { AuctionDetailsComponent } from './components/sprint3/shared/auction-details/auction-details.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -133,7 +132,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionCommiteeDetailPageComponent,
     AuctionCommiteeOpenOffersComponent,
     AlertModalComponent,
-    AuctionDetailsComponent,
   ],
   imports: [
     MatTooltipModule,

@@ -129,7 +129,7 @@ const routes: Routes = [
   {
     path: 'bidder',
     // canActivate: [AuthGuard],
-    loadChildren: () => import('./components/sprint3/bidder/am-auction/am-auction.module').then(m => m.AmAuctionModule)
+    loadChildren: () => import('./components/sprint3/am-auction.module').then(m => m.AmAuctionModule)
   },
 ];
 
