@@ -1,0 +1,86 @@
+<div style="display: flex; border: #cac1c1 solid 1px; border-radius: 8px; margin-top: 30px;">
+    <div style="background-color: #eaf6ef; color: #117ABE; padding-top: 20px; padding-bottom: 15px; padding-left: 25px; width: 32%; border-right: rgb(88, 88, 233);">
+        <p style="font-weight: bold; font-size: 20px;">{{ 'bidderAuctionDetails.ThisAuctionIsComing' | translate }}</p>
+        <p>{{ 'bidderAuctionDetails.YouCanRegisterYourEntry' | translate }}</p>
+    </div>
+
+    <div style="color: #117ABE; padding-bottom: 15px; padding-top: 20px; padding-left: 35px; width: 35%;">
+        <p>{{ 'bidderAuctionDetails.AuctionStartDate' | translate }}</p>
+        <div style="display: flex;">
+            <p style="color: #08594D;">{{upcomingAuction.auction_start_date}}</p>&nbsp; &nbsp; <span style="font-size: 6px; margin-top: 7px; color: #32AD71;" class="icon-fiber_manual_record"></span> &nbsp; &nbsp;
+            <p style="color: #cac1c1;">{{upcomingAuction.auction_start_time}} {{upcomingAuction.auction_start_timeSufix}}</p>
+        </div>
+    </div>
+    <div class="dropdown dropdown-filters-container d-inline">
+        <button class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm" type="button" (click)="participation();" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 50px; width: 200px; margin-top: 35px; margin-left:140px; border: none; outline: none; background-color: #32AD71; color: white; border-radius: 5px;">{{ 'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
+        </button>
+
+        <div style="width: 600px; margin-left: 100px;" class="dropdown-menu dropdown-filter" aria-labelledby="dropdownMenuButton">
+            <div class="card filter shadow-lg-5" id="collapseExample">
+
+                <div class="" style="display: flex; margin-top: 80px;">
+                    <div style="margin-left: 30px; width: 500px;">
+                        <p style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px;">{{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}</p>
+                    </div>
+
+                    <div style="margin-left: 10px;">
+                        <button type="button" class="close" data-dismiss="dropdown" aria-label="Close">
+                            <a class="btn btn-ghost btn-sm fill-primary-green"> <span class="icon-close"></span> </a>
+                        </button>
+                    </div>
+                </div>
+                <br><br>
+
+                <div style="width: 490px;">
+                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px; margin-left: 30px;">{{ 'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</p>
+                </div>
+
+                <br><br><br>
+
+                <div style="margin-left: 200px;">
+                    <button style="height:50px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">{{ 'bidderAuctionDetails.auction-popup.Cancellation' | translate }}</button>
+
+
+
+                    <button (click)="submitparticipation();" [routerLink]="['/auctionParticipation', AuctionId]" type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#showSuccessfulModal" style="height:50px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                        {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmation' | translate }}</button>
+                </div>
+
+                <br><br>
+
+            </div>
+        </div>
+
+        <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+                <div class="card shadow-lg result result-success" style="align-items: center;">
+                    <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                        <span class="icon-close"></span>
+                    </button>
+                    <div class="alert-body">
+                        <i class="alert-icon">
+                          <span class="icon-alert-success"></span>
+                        </i>
+                        <div class="alert-content">
+                            <h4>{{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}</h4>
+                            <p style="color: #414042;">
+                                {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="alert-action">
+                        <button type="button" class="btn btn-primary-light">
+                            {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

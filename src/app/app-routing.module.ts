@@ -21,15 +21,15 @@ import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/a
 
 import { AuctionSliderComponent } from './common/components/auction-slider/auction-slider.component';
 const routes: Routes = [
-  { path:'', redirectTo:'/auctionlist', pathMatch:'full' },
-  { path:'tender',  component:TenderComponent },
-  { path:'dashboard',  component:DashboardComponent },
+  { path: '', redirectTo: '/auctionlist', pathMatch: 'full' },
+  { path: 'tender', component: TenderComponent },
+  { path: 'dashboard', component: DashboardComponent },
   // { path:'**', redirectTo:'/dashboard' },
   // { path:'**', redirectTo:'/auctionlist' },
   // { path:'auctionlist', component:AuctionListsComponent },
-  { path:'auctionlist', component:AuctionListsComponent , canActivate: [AuthGuard] },
-  { path:'auction', component:AuctionComponent , canActivate: [AuthGuard] },
-  { path:'auction/:ObjectId/:DraftId/:ViewMode', component:AuctionComponent , canActivate: [AuthGuard] },
+  { path: 'auctionlist', component: AuctionListsComponent, canActivate: [AuthGuard] },
+  { path: 'auction', component: AuctionComponent, canActivate: [AuthGuard] },
+  { path: 'auction/:ObjectId/:DraftId/:ViewMode', component: AuctionComponent, canActivate: [AuthGuard] },
   { path: 'tender', component: TenderComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'slider', component: AuctionSliderComponent },
@@ -125,6 +125,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
     ],
+  },
+  {
+    path: 'bidder',
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./components/sprint3/am-auction.module').then(m => m.AmAuctionModule)
   },
 ];
 
