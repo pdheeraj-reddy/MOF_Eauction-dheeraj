@@ -637,12 +637,6 @@
             "accept": "Confirmation of Publication",
             "back": "Back"
         },
-        "accept-popup": {
-            "title": " Confirmation of acceptance of pricing request?",
-            "subtitle": "Upon confirmation, the pricing request will be approved and sent to the head of the government authority.",
-            "accept": "Accepting the Application",
-            "back": "Back"
-        },
         "successful-popup": {
             "title": "Pricing was sent successfully",
             "subtitle": "The request was successfully sent, and you'll receive an email. To follow up on your request",
@@ -651,6 +645,30 @@
         "error-popup": {
             "subtitle": "Please note that one of the estimated values is equal to 0. Do you want to continue?",
             "accept": "Confirm"
+        },
+        "accept-popup": {
+            "title": " Confirmation of acceptance of pricing request?",
+            "subtitle": "Upon confirmation, the pricing request will be approved and sent to the head of the government authority.",
+            "accept": "Accepting the Application",
+            "back": "Back"
+        },
+        "accept-success": {
+            "title": "The application was successfully accepted",
+            "subtitle": "The application was successfully sent to the head of the authority to complete the auction approval",
+            "accept": "Back to Auction Requests"
+        },
+        "reject-popup": {
+            "title": "Confirmation of rejection of the request?",
+            "sub-title": "Are you sure to send the rejection request?",
+            "reason-label": "Please enter the reason",
+            "letter": "Letter",
+            "phold": "Text..",
+            "cancel": "Cancel"
+        },
+        "reject-success": {
+            "title": "The application was successfully rejected",
+            "subtitle": "The rejection of the application has been successfully sent and will reach the member of the pricing committee to re-edit.",
+            "accept": "Back to Auction Requests"
         }
     },
     "auctionCommittee": {

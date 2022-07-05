@@ -265,7 +265,7 @@
     </div>
 </div>
 
-<!-- Successful popup publish -->
+<!-- Successful popup send quotes -->
 <div class="modal show" *ngIf="confirmPublish" [ngClass]="{ 'modal-show': confirmPublish }">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content" style="align-items: center;">
@@ -317,11 +317,11 @@
                     'auctionMember.accept-popup.subtitle' | translate }} </label>
             </div>
             <div class="modal-footer" style="justify-content: end">
-                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close" (click)="approveOrRejectAuction('A', 'Pending Pricing Approval')">
-                    {{ 'auctionMember.accept-popup.accept' | translate }}
-                </button>
                 <button type="button" class="btn btn-md" (click)="closeConfirm()" style="border: 1px solid #cccccc; border-radius: 5px">
                     {{ 'auctionMember.accept-popup.back' | translate }}
+                </button>
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close" (click)="approveOrRejectAuction('A', 'Pending Pricing Approval')">
+                    {{ 'auctionMember.accept-popup.accept' | translate }}
                 </button>
             </div>
         </div>
@@ -345,17 +345,16 @@
             <div class="modal-header">
 
                 <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                    The application was successfully accepted
+                    {{ 'auctionMember.accept-success.title' | translate }}
                 </h4>
             </div>
             <div class="modal-body">
-                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The
-                    application was successfully sent to the head of the authority to complete the auction approval
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{ 'auctionMember.accept-success.subtitle' | translate }}
                 </label>
             </div>
             <div class="modal-footer" style="justify-content: end">
                 <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
-                    Back to Auction Requests
+                    {{ 'auctionMember.accept-success.accept' | translate }}
                 </button>
             </div>
         </div>
@@ -368,29 +367,27 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title denial-model" id="exampleModalLabel" style="color: #f66f5b"> Confirm application rejection? </h4>
+                <h4 class="modal-title denial-model" id="exampleModalLabel" style="color: #f66f5b"> {{ 'auctionMember.reject-popup.title' | translate }} </h4>
                 <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                     <span class="icon-close"></span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="modal-body text-20" style="color: #414042">
-                    Are you sure to send a rejection request?
+                    {{ 'auctionMember.reject-popup.subtitle' | translate }}
                 </div>
 
                 <div class="row mt-4">
                     <div class="form-group col w-100">
-                        <div class="border-bottom color-grey"> <label for="goverusermessage">Please Enter the
-                                Reason</label> <span class="float-left text-muted">Letter&nbsp;<small id="charNum">{{
-                                    (rejectionNotes + '').length || 0 }} / {{maxLen}}</small></span>
+                        <div class="border-bottom color-grey"> <label for="goverusermessage">{{ 'auctionMember.reject-popup.reason-label' | translate }}</label> <span class="float-left text-muted">{{ 'auctionMember.reject-popup.letter' | translate }}&nbsp;<small id="charNum">{{ (rejectionNotes + '').length || 0 }}/{{maxLen}}</small></span>
                         </div>
-                        <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" maxlength="{{maxLen}}" placeholder="Text..." rows="4"></textarea>
+                        <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" maxlength="{{maxLen}}" placeholder="{{ 'auctionMember.reject-popup.phold' | translate }}" rows="4"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: end">
                 <button (click)="approveOrRejectAuction('R', 'Rejected Prices')" type="button" class="btn btn-md" style="background-color: #f66f5b; border-radius: 5px; color: #ffff" data-dismiss="modal" aria-label="Close">
-                    Cancel </button>
+                    {{ 'auctionMember.reject-popup.cancel' | translate }} </button>
             </div>
         </div>
     </div>
@@ -413,18 +410,16 @@
             <div class="modal-header">
 
                 <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                    The application was successfully rejected
+                    {{ 'auctionMember.reject-success.title' | translate }}
                 </h4>
             </div>
             <div class="modal-body">
-                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The rejection
-                    of the application has been successfully sent and will reach the member of the pricing committee
-                    To re-edit.
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{ 'auctionMember.reject-popup.subtitle' | translate }}
                 </label>
             </div>
             <div class="modal-footer" style="justify-content: end">
                 <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
-                    Back to Auction Requests
+                    {{ 'auctionMember.reject-popup.accept' | translate }}
                 </button>
             </div>
         </div>
