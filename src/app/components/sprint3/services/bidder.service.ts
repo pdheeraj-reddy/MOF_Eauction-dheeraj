@@ -17,7 +17,7 @@ export class BidderService {
     let role = '', config1 = '', config2 = '';
     role = "AuctionManager";
     config1 = "?$expand=page1tolistnav";
-    config2 = " and ScreenNav eq 'R'";
+    config2 = " and ScreenNav eq 'A'";
     console.log('page ', page, ' filters ', filters);
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     const pageNumber = page.pageNumber;
