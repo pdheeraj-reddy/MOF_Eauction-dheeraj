@@ -5,6 +5,7 @@ import { PaginationSortingService } from "src/app/service/pagination.service";
 import * as moment from 'moment-mini';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BidderService } from '../../services/bidder.service';
+import { AuctionList } from '../../interface/bidder.interface';
 declare var $: any;
 
 @Component({
@@ -14,24 +15,33 @@ declare var $: any;
 })
 export class AmAuctionComponent implements OnInit {
 
-  auctionListData: any;
+  auctionListData: AuctionList[] = [];
   selectedPageNumber: number;
   pagelimit: number = 10;
-
-  totcntforendedauction: number;
-  totcntforundergear: number;
-  totcntforupcommingauction: number;
-  totcntforongoingauction: number;
-  totcntforall: number;
+  totalCounts = {
+    total_completed: 0,
+    total_under_gear: 0,
+    total_upcoming: 0,
+    total_ongoing: 0,
+    total_all: 0
+  }
   showLoader: boolean = false;
-  dropValProducts: any = [
+  dropValProducts = [
     { code: "Public", disp: "Public" },
     { code: "Private", disp: "Private" }
   ];
-  dropValStatus: any = [];
+  dropValStatus = [
+    { code: "Published", disp: "Published" },
+    { code: "Ongoing", disp: "Ongoing" },
+    { code: "Pending Selecting", disp: "Pending Selecting" },
+    { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
+    { code: "Pending FBGA", disp: "Pending FBGA" },
+    { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+    { code: "Awarded", disp: "Awarded" },
+    { code: "Terminated", disp: "Terminated" },
+  ];;
   showPageLoader: boolean = false;
   selectedTab: string = 'All';
-  //filter Form controls
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
   lang: string;
@@ -47,27 +57,13 @@ export class AmAuctionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.showPageLoader = true;
+    // this.showPageLoader = true;
     this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.lang = event.lang;
     });
-    this.setStatus();
     this.defineForm();
     this.getAuctionList(1);
-  }
-
-  setStatus() {
-    this.dropValStatus = [
-      { code: "Published", disp: "Published" },
-      { code: "Ongoing", disp: "Ongoing" },
-      { code: "Pending Selecting", disp: "Pending Selecting" },
-      { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
-      { code: "Pending FBGA", disp: "Pending FBGA" },
-      { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
-      { code: "Awarded", disp: "Awarded" },
-      { code: "Terminated", disp: "Terminated" },
-    ];
   }
 
   defineForm() {
@@ -84,7 +80,6 @@ export class AmAuctionComponent implements OnInit {
 
   getAuctionList(pageNumber?: number, sortBy?: string, sorttype?: string) {
     this.showLoader = true;
-    let role = '';
     const pageNoVal = '' + pageNumber;
     const page = {
       pageNumber: pageNumber,
@@ -108,7 +103,6 @@ export class AmAuctionComponent implements OnInit {
       filters.Msgty = sorttype + ' ' + sortBy;
     }
 
-    console.log("🚀 ~ this.auctionServc.getAuctionList ~ filters", filters)
     this.bidderService.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
@@ -126,20 +120,20 @@ export class AmAuctionComponent implements OnInit {
 
     }, (error) => {
       this.showLoader = false;
-      console.log('getAuctionList RespError : ', error);
     });
   }
 
-  public mapping(serverObj: any) {
-    let resultSet: any = [];
-    this.totcntforendedauction = serverObj.d.results[0].TotCompleted;
-    this.totcntforundergear = serverObj.d.results[0].TotPendingRw;
-    this.totcntforupcommingauction = serverObj.d.results[0].TotPublished;
-    this.totcntforongoingauction = serverObj.d.results[0].TotOngoing;
-    this.totcntforall = serverObj.d.results[0].TotAll;
+  public mapping(serverObj: any): AuctionList[] {
+    let resultSet: AuctionList[] = [];
+    this.totalCounts = {
+      total_completed: serverObj.d.results[0].TotDraft,
+      total_under_gear: serverObj.d.results[0].TotRejected,
+      total_upcoming: serverObj.d.results[0].TotPublish,
+      total_ongoing: serverObj.d.results[0].TotPendingRw,
+      total_all: serverObj.d.results[0].TotAll
+    }
     serverObj.d.results[0].page1tolistnav.results.forEach((result: any) => {
-      console.log(result['Description'], "sdsd");
-      const items = {
+      const items: AuctionList = {
         ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
         title: result['Description'] ? result['Description'] : '',
         description: result['ZzAucDesc'] ? result['ZzAucDesc'] : '',
@@ -151,7 +145,6 @@ export class AmAuctionComponent implements OnInit {
       }
       resultSet.push(items);
     });
-    console.log(resultSet, "auc");
     return resultSet;
   }
 
@@ -252,11 +245,28 @@ export class AmAuctionComponent implements OnInit {
   }
   getstatus(type: any) {
     if (type === "All") {
-      this.dropValStatus = ["Published", "Ongoing", "Pending Selecting", "Pending Primary Awarding", "Pending FBGA", "Pending FBGA Approval", "Awarded", "Terminated"];
+      this.dropValStatus = [
+        { code: "Published", disp: "Published" },
+        { code: "Ongoing", disp: "Ongoing" },
+        { code: "Pending Selecting", disp: "Pending Selecting" },
+        { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
+        { code: "Pending FBGA", disp: "Pending FBGA" },
+        { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+        { code: "Awarded", disp: "Awarded" },
+        { code: "Terminated", disp: "Terminated" },
+      ];
     } else if (type === "Pending Selecting") {
-      this.dropValStatus = ["Pending Selecting", "Pending Primary Awarding", "Pending FBGA", "Pending FBGA Approval"];
+      this.dropValStatus = [
+        { code: "Pending Selecting", disp: "Pending Selecting" },
+        { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
+        { code: "Pending FBGA", disp: "Pending FBGA" },
+        { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+      ];
     } else if (type === "Closed") {
-      this.dropValStatus = ["Awarded", "Terminated"];
+      this.dropValStatus = [
+        { code: "Awarded", disp: "Awarded" },
+        { code: "Terminated", disp: "Terminated" },
+      ];
     }
   }
   resetFilter() {
@@ -270,15 +280,4 @@ export class AmAuctionComponent implements OnInit {
     this.getAuctionList(1);
   }
 
-  // changeCheckbox(e: any, dd: string) {
-  //   if(e.target.checked){
-  //     this.filterFormGroup.controls[dd].setValue(e.target.value, {
-  //       onlySelf: true
-  //     })      
-  //   }else{
-  //     this.filterFormGroup.controls[dd].setValue('', {
-  //       onlySelf: true
-  //     })     
-  //   }
-  // }
 }
