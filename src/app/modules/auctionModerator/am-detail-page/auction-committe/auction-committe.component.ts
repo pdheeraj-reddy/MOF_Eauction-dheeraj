@@ -71,7 +71,7 @@ export class AuctionCommitteComponent implements OnInit {
   }
 
   async goBacktoList() {
-    alert(1)
+    // alert(1)
     console.log("🚀 ~ goBacktoList ~ this.auctionServc.unsaved", this.auctionServc.unsaved)
     if (this.auctionServc.unsaved) {
       const confirm = await this.auctionServc.handleUnsavedError();;

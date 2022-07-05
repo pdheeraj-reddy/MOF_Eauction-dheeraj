@@ -42,7 +42,6 @@ export class ProdctDetailsComponent implements OnInit {
   selectedPageNumber: number;
   p: number = 1;
   pageRangeForProductAttach: any;
-  showDepricated: boolean = false;
 
   @ViewChild('autoFocus') inputFieldElementFocus: ElementRef;
 
@@ -78,7 +77,6 @@ export class ProdctDetailsComponent implements OnInit {
 
   }
   checkPrices() {
-    console.log(this.inputMode, "SKA");
     // this.showConfim = true;
     if (this.showAdjustPriceOption == true && this.productValue < 1 && this.inputMode) {
       this.invalidQty = true;
@@ -112,7 +110,6 @@ export class ProdctDetailsComponent implements OnInit {
     this.tabSwitch.emit();
   }
   editPrice(index: any, product: any) {
-    console.log("Click");
     const dialogRef = this.dialog.open(EditBidValueComponent, {
       height: '90%',
       width: '90%',
@@ -134,7 +131,6 @@ export class ProdctDetailsComponent implements OnInit {
       let temp = this.preAuctionData['listtoproductnav']['results'];
       this.productValue = 0;
       for (let i = 0; i < temp.length; i++) {
-        console.log(parseInt(temp[i]?.ZzPdtEstPricePc));
         this.productValue =
           this.productValue + parseInt(temp[i]?.ZzPdtEstPricePc);
       }
@@ -143,8 +139,6 @@ export class ProdctDetailsComponent implements OnInit {
 
 
   editPriceInPopup(index: any, product: any) {
-
-    console.log("saurabh", product)
     const dialogRef = this.dialog.open(ViewProductDetailComponent, {
       disableClose: true,
       height: '90%',
@@ -163,16 +157,13 @@ export class ProdctDetailsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (this.isBidUpdate) {
-        console.log(result);
         // this.adjustProductPrice();
         this.preAuctionData['listtoproductnav']['results'][result?.index][
           'ZzPdtEstPricePc'
         ] = result.price;
         let temp = this.preAuctionData['listtoproductnav']['results'];
-        console.log(temp);
         this.productValue = 0;
         for (let i = 0; i < temp.length; i++) {
-          console.log(parseInt(temp[i]?.ZzPdtEstPricePc));
           this.productValue =
             this.productValue + parseInt(temp[i]?.ZzPdtEstPricePc) * temp[i].Quantity;
         }
@@ -208,16 +199,10 @@ export class ProdctDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
-    console.log('this.loggedUserRole ➼ ', this.loggedUserRole);
     if (this.preAuctionData) {
 
       if (this.preAuctionData.ZzPbEstPricePc != undefined) {
         this.productValue = parseFloat(this.preAuctionData.ZzPbEstPricePc);
-        console.log(
-          '*******',
-          this.preAuctionData.ZzPbEstPricePc,
-          this.productValue
-        );
       }
       if (this.preAuctionData.ZzEstOpt == 'I') {
         this.inputMode = false;
@@ -233,7 +218,6 @@ export class ProdctDetailsComponent implements OnInit {
       this.adjustProductPrice();
       if (this.inputMode) {
         if (parseFloat(this.preAuctionData.ZzPbEstPricePc) == 0) {
-          console.log("check for placeholder1")
           this.pdtEstPricePc = null;
           this.productValue = 0;
         }
@@ -243,60 +227,7 @@ export class ProdctDetailsComponent implements OnInit {
         }
       }
       this.auctionProducts = this.interconversionService.mappingObjForProducts(this.preAuctionData);
-      // if (this.preAuctionData?.listtoattachnav['results']) {
-      //   this.temp = [];
-      //   console.log("att data form API", this.preAuctionData?.listtoattachnav['results']);
-      //   this.preAuctionData?.listtoattachnav['results'].forEach(
-      //     (value: any, index: any, array: any) => {
-      //       if (value.ObjectType == '/AuctionProductImages') {
-      //         console.log(index, 'attachment index');
-      //         var fileupload = {
-      //           name: value.FileName + '.' + value.FileExt,
-      //           size: '',
-      //           type: '',
-      //           filesrc: '',
-      //           FilenetId: value.FilenetId,
-      //           MIMEType: value.MIMEType,
-      //         };
-      //         this.auctionServc
-      //           .downloadAuctionImages(fileupload.FilenetId)
-      //           .subscribe(
-      //             async (downloadAuctionImagesResp: any) => {
-      //               const fileResp = downloadAuctionImagesResp.d;
-      //               var byteString = atob(
-      //                 atob(fileResp.FileContent).split(',')[1]
-      //               );
-      //               var ab = new ArrayBuffer(byteString.length);
-      //               var ia = new Uint8Array(ab);
-      //               for (var i = 0; i < byteString.length; i++) {
-      //                 ia[i] = byteString.charCodeAt(i);
-      //               }
-      //               const blob = new Blob([ab], { type: fileupload.MIMEType });
-      //               // var a = window.URL.createObjectURL(blob);
-      //               var base64String = await this.convertBlobToBase64(blob);
-      //               console.log("base64String in mapping for edit", base64String);
 
-      //               this.temp.push({
-      //                 id: index + 1,
-      //                 src: base64String,
-      //                 alt: 'test',
-      //                 title: 'hello world',
-      //                 type: value.MIMEType,
-      //               });
-      //               if (
-      //                 index + 1 ==
-      //                 this.preAuctionData?.listtoattachnav['results'].length
-      //               ) {
-      //               }
-      //             },
-      //             (error) => {
-      //               console.log('downloadAuctionImages RespError : ', error);
-      //             }
-      //           );
-      //       }
-      //     }
-      //   );
-      // }
     }
     if (this.loggedUserRole.isPricingHead) {
       this.showAdjustPriceOption = false;
@@ -342,37 +273,12 @@ export class ProdctDetailsComponent implements OnInit {
 
 
   attachmentDownload(attchment: any) {
-    console.log(attchment);
     window.open(attchment.DispUrl, '_blank');
   }
   adjustPrice() {
     this.showAdjustPriceOption = !this.showAdjustPriceOption;
   }
 
-
-  // adjustTotalPriceAuction(action: any) {
-  //   this.preAuctionData.ActionTaken = action;
-  //   console.log(this.preAuctionData);
-  //   this._AuctionService
-  //     .approveOrRejectAuction({
-  //       ObjectId: this.preAuctionData.ObjectId,
-  //       Description: this.preAuctionData.Description,
-  //       Status: 'Pending Pricing',
-  //       ZzPbEstPricePc: this.totalBidValue.toString(),
-  //       ZzEstOpt: 'A',
-  //       UserId: '1622234795',
-  //       listtoproductnav: [],
-  //     })
-  //     .subscribe(
-  //       (res: any) => {
-  //         console.log(res);
-  //         this.getPreAuctionData();
-  //       },
-  //       (error) => {
-  //         console.log('approveOrRejectAuction RespError : ', error);
-  //       }
-  //     );
-  // }
 
   public getServerData(selectedPageNumber: number) {
     if (selectedPageNumber <= 2) {
@@ -387,7 +293,6 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   openAdjustPriceOption(index: number) {
-    this.showDepricated = true;
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any, pindex: number) => {
       if (pindex == index) {
         setTimeout(() => { // this will make the execution after the above boolean has changed
@@ -405,9 +310,7 @@ export class ProdctDetailsComponent implements OnInit {
 
   adjustProductPrice() {
     this.pdtEstPricePc = 0.00;
-    console.log("check for placeholder3")
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any) => {
-      console.log(product);
       product.show = false;
       this.pdtEstPricePc += product.ZzPdtEstPricePc * product.Quantity.split('.')[0];
     });
@@ -415,46 +318,29 @@ export class ProdctDetailsComponent implements OnInit {
     // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
   }
   cancel(index: number) {
-    this.showDepricated = false;
     let product = this.preAuctionData?.listtoproductnav?.results;
-    // this.productValue = this.productValue - product?.ZzPdtEstPricePc;
-    product[index].ZzPdtEstPricePc = 0.00;
-    for (let i = 0; i < product.length; i++) {
-      console.log(product[i]);
-      product[i].show = false;
-      if (product[i].ZzPdtEstPricePc < 1) {
-        this.indexError = i;
-        this.showError = true;
-        break;
-      } else {
-        this.indexError = -1;
-        this.showError = false;
+    product[index].ZzPdtEstPricePc = null;
+    this.pdtEstPricePc = 0;
+    product[index].show = false;
+    product.forEach((p: any) => {
+      if (p.ZzPdtEstPricePc !== null) {
+        this.pdtEstPricePc += (p.ZzPdtEstPricePc * p.Quantity.split('.')[0]);
       }
-      // this.pdtEstPricePc += product[i].ZzPdtEstPricePc * product[i].Quantity.split('.')[0];
-
-    }
+    });
     this.productValue = parseFloat(this.pdtEstPricePc as string);
   }
 
-  adjustProductPriceInEdit() {
-    this.showDepricated = false;
+  adjustProductPriceInEdit(index: any) {
     this.pdtEstPricePc = 0.00;
-    console.log("check for placeholder4")
     let product = this.preAuctionData?.listtoproductnav?.results;
-    for (let i = 0; i < product.length; i++) {
-      console.log(product[i]);
-      product[i].show = false;
-      if (product[i].ZzPdtEstPricePc < 1) {
-        this.indexError = i;
-        this.showError = true;
-        break;
-      } else {
-        this.indexError = -1;
-        this.showError = false;
-      }
-      this.pdtEstPricePc += product[i].ZzPdtEstPricePc * product[i].Quantity.split('.')[0];
+    product[index].show = false;
 
-    }
+    product.forEach((p: any) => {
+      if (p.ZzPdtEstPricePc !== null) {
+        this.pdtEstPricePc += (p.ZzPdtEstPricePc * p.Quantity.split('.')[0]);
+      }
+    });
+
     this.productValue = parseFloat(this.pdtEstPricePc as string);
   }
 
@@ -482,15 +368,11 @@ export class ProdctDetailsComponent implements OnInit {
     this.preAuctionData.ZzEstOpt = !this.isBidUpdate ? 'A' : 'I';
     this.preAuctionData.ZzPbEstPricePc = this.productValue.toString();
     this.preAuctionData.UserId = '1622234795';
-    console.log(this.preAuctionData);
     adjustedPriceData = this.preAuctionData;
     adjustedPriceData?.listtoproductnav?.results.forEach((product: any) => {
-      product.ZzPdtEstPricePc = product.ZzPdtEstPricePc.toString();
-      console.log(product.ZzPdtEstPricePc);
+      product.ZzPdtEstPricePc = product.ZzPdtEstPricePc?.toString();
       delete product.show;
     });
-    console.log(this.showError, "🚀 ~ adjustedPriceData?.listtoproductnav?.results.forEach ~ adjustedPriceData", adjustedPriceData)
-    // return
     this._AuctionService.approveOrRejectAuction(adjustedPriceData).subscribe(
       (res: any) => {
         if (status == 'Pending Pricing') {
@@ -503,7 +385,6 @@ export class ProdctDetailsComponent implements OnInit {
           this.confirmRejection = true;
         }
 
-        console.log(res);
       },
       (error) => {
         console.log('approveOrRejectAuction RespError : ', error);
@@ -512,7 +393,6 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   sendPricingValues() {
-    console.log(this.productValue);
     if (this.productValue < 1 && this.inputMode) {
       this.invalidQty = true;
       // window.scroll({ top: 0, behavior: "smooth" });

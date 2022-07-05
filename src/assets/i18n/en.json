@@ -46,6 +46,9 @@
     "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
     "ZEAUCTION_PRICECOMM_HEAD": "Commitee Head",
     "ZEAUCTION_PRICECOMM_SECRETARY": "Commitee Secretary",
+    "ZEAUCTION_SALCOMM_CHAIRMAN": "Commitee Head",
+    "ZEAUCTION_SALCOMM_SECRETARY": "Commitee Secretary",
+    "ZEAUCTION_SALCOMM_MEMBER": "Committee Member",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
@@ -659,7 +662,7 @@
         },
         "reject-popup": {
             "title": "Confirmation of rejection of the request?",
-            "sub-title": "Are you sure to send the rejection request?",
+            "subtitle": "Are you sure to send the rejection request?",
             "reason-label": "Please enter the reason",
             "letter": "Letter",
             "phold": "Text..",

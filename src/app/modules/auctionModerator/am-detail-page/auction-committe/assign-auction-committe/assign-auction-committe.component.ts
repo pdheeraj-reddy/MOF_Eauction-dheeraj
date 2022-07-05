@@ -214,7 +214,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
             console.log(res);
           },
           (error) => {
-            alert("Internal server error!");
+            // alert("Internal server error!");
             console.log('approveOrRejectAuction RespError : ', error);
           }
         );

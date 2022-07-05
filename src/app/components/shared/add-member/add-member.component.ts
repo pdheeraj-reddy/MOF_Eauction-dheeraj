@@ -74,7 +74,7 @@ export class AddMemberComponent implements OnInit {
     public dialogRef: MatDialogRef<AddMemberComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog
-  ) { 
+  ) {
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map((state) =>
@@ -82,16 +82,16 @@ export class AddMemberComponent implements OnInit {
       )
     );
   }
-   _filterStates(value: string): Employee[] {
+  _filterStates(value: string): Employee[] {
     const filterValue = value.toLowerCase();
 
     const newVaule = this.committeeMemberList.filter((state) =>
       state.EmpMailid.toLowerCase().includes(filterValue) ||
       state.EmployeeId.toLowerCase().includes(filterValue)
     );
-    if(newVaule.length == 0) {
-      this.noData = true; 
-    } else{
+    if (newVaule.length == 0) {
+      this.noData = true;
+    } else {
       this.noData = false;
     }
     return newVaule;
@@ -116,7 +116,7 @@ export class AddMemberComponent implements OnInit {
       });
     }
   }
-  checkKeyup(val:any){
+  checkKeyup(val: any) {
     this._filterStates(val.target.value);
   }
   ngOnInit(): void {
@@ -125,7 +125,7 @@ export class AddMemberComponent implements OnInit {
     this.role = this.dialogData.role;
     this.committeeMemberList = this.dialogData.committeeMemberList;
     console.log(this.committeeMemberList);
-    if(this.committeeMemberList.length<=0){
+    if (this.committeeMemberList.length <= 0) {
       this.noData = true;
     }
     // this.stateCtrl.setValue(((this.dialogData.committeeEditData != undefined) ? this.dialogData.committeeEditData.EmployeeId : ''));

@@ -157,7 +157,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this.committeeMem3Data == undefined
     ) {
       console.log(this.committeeChairData);
-      alert('Enter Required fields');
+      // alert('Enter Required fields');
       return;
     } else {
       console.log(this.committeeChairData);
