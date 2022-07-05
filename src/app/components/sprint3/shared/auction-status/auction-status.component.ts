@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { getStatusText } from 'src/app/utils/util';
+
 
 @Component({
   selector: 'app-auction-status',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auction-status.component.scss']
 })
 export class AuctionStatusComponent implements OnInit {
-
+  @Input() auctionStatus: string;
+  @Input() count: number = 0;
+  status: string = '';
   constructor() { }
 
   ngOnInit(): void {
+    this.status = getStatusText(this.auctionStatus);
   }
 
 }

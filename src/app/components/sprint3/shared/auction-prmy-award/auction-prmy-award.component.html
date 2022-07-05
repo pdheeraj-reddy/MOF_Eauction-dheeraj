@@ -1,1 +1,221 @@
-<p>auction-prmy-award works!</p>
+<div class="top-card">
+
+    <!-- This is hardcorded -->
+    <div class="top-card-left">
+        <div class="card-body" style="padding-top:50px;padding-bottom:50px">
+            <h5 class="card-title" style="color: #F9B122;font-size: 18px;">Initial gearing</h5>
+            <p class="card-text" style="color: #F9B122;font-size: 14px;">
+                This bid has been awarding by the auction committee, please approve the initial awarding.
+            </p>
+        </div>
+    </div>
+    <!-- End of hardcorded -->
+
+    <div class="top-card-right">
+        <div class="top-card-right-left">
+            <div class="card-body" style="padding-top:25px;padding-bottom:10px">
+                <div style="display: flex;align-items: center;">
+                    <span class="icon-alert-success"></span>
+                    <h5 style="font-size: 30px;color: #28AB6D; font-weight: 500;margin-bottom: 0;margin-left: 10px;">3,567,938 SAR</h5>
+                    <!-- BidOfferValue -->
+                </div>
+                <p class="card-text" style="color: #414042;font-size: 16px;margin-top: 25px;margin-bottom: 5px;">
+                    <!-- BidSupplierName -->
+                    Hammat Trading Est
+                </p>
+                <p style="color: #414042;font-size: 16px;margin-bottom: 5px;">No. 707365514 </p>
+                <!-- BidCrNumber -->
+                <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;font-size: 14px;">
+                    Primary Warranty
+                </a>
+                <span class="icon-download"></span>
+            </div>
+        </div>
+
+        <div class="top-card-right-right">
+            <div>
+                <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;;font-size: 16px;">
+                    Auction report and bid submitted BidOfferPDF
+                </a>
+                <span class="icon-download"></span>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-primary-light btn-md" style="margin-right: 10px;" data-toggle="modal" data-target="#confirmAprModal">Initial award approval</button>
+                <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#confirmRejModal">Refusal to be awarded</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Model to confirm Approval -->
+<div class="modal fade" id="confirmAprModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    Confirmation of Auction Awarding Approval?
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+         <span class="icon-close"></span>
+       </button>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, the accreditation will be sent to the desired committee</label
+       >
+     </div>
+     <div class="modal-footer" style="justify-content: end">
+       <button
+         type="button"
+         class="btn btn-primary-light btn-md"
+         data-dismiss="modal"
+         (click)="approve()"
+       >
+         Auction Award
+       </button>
+       <button
+         type="button"
+         class="btn btn-md"
+         data-dismiss="modal"
+         aria-label="Close"
+         style="border: 1px solid #cccccc; border-radius: 5px"
+       >
+         Back
+       </button>
+     </div>
+   </div>
+ </div>
+</div>
+
+<!-- Model to show confirmed (Successful)  Approval-->
+<ng-template #showSuccessfulModal let-modal>
+
+ <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+   <div class="modal-content" style="align-items: center;">
+     <button
+       style="position: absolute;left: 90%;"
+       type="button"
+       class="modal-close btn-close btn-sm"
+       data-dismiss="modal"
+       aria-label="Close"
+     >
+       <span class="icon-close"></span>
+     </button>
+     <span class="icon-check"></span>
+     <div class="modal-header">
+       <div class="status-success-icon">
+         <div style="display: flex;">
+           <div class="circle"></div>
+           
+         </div>
+         <h4
+           class="modal-title"
+           id="exampleModalLabel"
+           style="text-align: center"
+         >
+           The award has been successfully approved
+         </h4>
+       </div>
+     </div>
+     <div class="modal-body">
+       <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;"
+         >The award has been successfully approved
+         </label>
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+       Back to Auction Requests
+       </button>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+
+    <!-- Model to confirm Rejection -->
+    <div class="modal fade" id="confirmRejModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="color: red !important;">
+                    <h4 class="modal-title" id="exampleModalLabel" style="color: red !important;">
+                        Are you sure of the rejection of the award?
+                    </h4>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+         <span class="icon-close"></span>
+       </button>
+                </div>
+                <div class="modal-body">
+                    <label for="confirmation" style="color: #414042; font-size: 16px"> This offer has been awarded by the auction committee, and in the event of rejection of the award, it will result
+         in the auction being canceled and the awarding will not take place.
+         </label
+       >
+     </div>
+     <div class="modal-footer" style="justify-content: end ">
+       <button
+         type="button"
+         style="background: red !important;"
+         class="btn btn-primary-light btn-md"
+         data-dismiss="modal"
+         (click)="reject()"
+       >
+         Reject Award
+       </button>
+       <button
+         type="button"
+         class="btn btn-md"
+         data-dismiss="modal"
+         aria-label="Close"
+         style="border: 1px solid #cccccc; border-radius: 5px"
+       >
+         Back
+       </button>
+     </div>
+   </div>
+ </div>
+</div>
+
+
+<!-- Model to show confirmed (Successful)  Rejection-->
+<ng-template #showSuccessfulRejModal let-modal>
+
+ <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+   <div class="modal-content" style="align-items: center;">
+     <button
+       style="position: absolute;left: 90%;"
+       type="button"
+       class="modal-close btn-close btn-sm"
+       data-dismiss="modal"
+       aria-label="Close"
+     >
+       <span class="icon-close"></span>
+     </button>
+     <span class="icon-check"></span>
+     <div class="modal-header">
+       <div class="status-success-icon">
+         <div style="display: flex;">
+           <div class="circle"></div>
+           
+         </div>
+         <h4
+           class="modal-title"
+           id="exampleModalLabel"
+           style="text-align: center"
+         >
+           The award has been rejected and the auction has been successfully cancelled
+         </h4>
+       </div>
+     </div>
+     <div class="modal-body">
+       <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;"
+         >The auction was cancelled due to the failure to award the bid that was nominated by the auction committee
+         </label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+       Back to Auctions
+       </button>
+                </div>
+            </div>
+        </div>
+        </ng-template>

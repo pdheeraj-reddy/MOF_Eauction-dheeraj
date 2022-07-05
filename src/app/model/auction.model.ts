@@ -43,6 +43,8 @@ export class AuctionProduct {
     productCondition: string;
     productSKUNumber: string;
     productSerialNumber: string;
+    productNo : string;
+    productFiles : [];
     productValue: string;
     productSpec: string;
     productImages: [];

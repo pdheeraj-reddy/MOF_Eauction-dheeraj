@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-auction-fbga',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auction-fbga.component.scss']
 })
 export class AuctionFbgaComponent implements OnInit {
-
+  @Input() upcomingAuction:any;
   constructor() { }
 
   ngOnInit(): void {

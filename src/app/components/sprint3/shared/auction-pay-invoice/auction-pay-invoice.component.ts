@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-auction-pay-invoice',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auction-pay-invoice.component.scss']
 })
 export class AuctionPayInvoiceComponent implements OnInit {
-
+  @Input() upcomingAuction:any;
   constructor() { }
 
   ngOnInit(): void {
