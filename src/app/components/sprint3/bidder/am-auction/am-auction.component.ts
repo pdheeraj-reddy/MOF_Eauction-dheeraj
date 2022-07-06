@@ -141,12 +141,12 @@ export class AmAuctionComponent implements OnInit {
         statuscode: result['Status'] ? result['Status'] : '',
         product: result['ZzTotPdt'] ? parseInt(result['ZzTotPdt']) : '',
         auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD') : '' : '',
-        auctiontime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('H:mm') : '' : '',
-        auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD H:mm') : '' : '',
+        auctiontime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'], 'YYYY-MM-DD').format('YYYY-MM-DD HH:mm:ss') : '' : '',
+        auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? new Date(result['ZzAucEndDt']).getTime() : '' : '',
+        auctiontimeSufix: 'evening'
       }
       resultSet.push(items);
     });
-    console.log("🚀 ~ serverObj.d.results[0].page1tolistnav.results.forEach ~ resultSet", resultSet)
     return resultSet;
   }
 
@@ -161,6 +161,7 @@ export class AmAuctionComponent implements OnInit {
     this.selectedPageNumber = selectedPageNumber;
 
     this.getAuctionList(selectedPageNumber);
+    window.scrollTo(0, 100);
     this.PaginationServc.resetSorting();
   }
 
@@ -240,10 +241,13 @@ export class AmAuctionComponent implements OnInit {
     this.getstatus(value);
     this.resetFilter();
     this.showFilterForm = false;
-    if (value !== 'All' && value !== 'Pending Selecting' && value !== 'Closed') {
+    if (value === 'All') {
+      this.filterFormGroup.controls['auctionStatus'].setValue('');
+    } else {
       this.filterFormGroup.controls['auctionStatus'].setValue(value);
       this.filterFormGroup.controls['auctionStatus'].disable();
     }
+    this.getAuctionList(1);
   }
   getstatus(type: any) {
     if (type === "All") {
@@ -280,7 +284,6 @@ export class AmAuctionComponent implements OnInit {
     this.filterFormGroup.controls['auctionStartDate'].setValue('');
     this.filterFormGroup.controls['auctionEndDate'].setValue('');
     this.refreshCalendarCntrl();
-    this.getAuctionList(1);
   }
 
 }

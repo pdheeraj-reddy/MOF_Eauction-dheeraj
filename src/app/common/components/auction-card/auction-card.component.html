@@ -12,11 +12,11 @@
             <img src="assets/icons/layers.png" alt="" width="20px">
             <span style="margin-left:5px;margin-right:5px"> {{auction.product}} {{ 'Product' | translate }}</span>
         </div>
-        <div style="color: #4F5457; font-size: 18px;" *ngIf="auction.auctiondate">
+        <div style="color: #4F5457; font-size: 18px;display: flex;" *ngIf="auction.auctiondate">
             <span class="icon-date_range" style="color: #005B4F;"></span>
             <span style="margin-left:9px;margin-right:9px"> {{auction.auctiondate | date:'dd-MM-yyyy'}} </span>
-            <span *ngIf="auction.auctiontimeSufix">
-                . {{auction.auctiontime | date:'h:mm'}} {{ auction.auctiontimeSufix | translate }}
+            <span *ngIf="auction.auctiontimeSufix && auction.auctiontime">.
+                {{auction.auctiontime | date:'h:mm'}} {{ auction.auctiontimeSufix | translate }}
             </span>
         </div>
         <div style="display: flex;justify-content: space-between;align-items: flex-end;">
