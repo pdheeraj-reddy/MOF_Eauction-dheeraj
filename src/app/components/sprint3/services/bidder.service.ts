@@ -14,13 +14,12 @@ export class BidderService {
     private http: HttpClient,
     private envService: EnvService,
     public auctionServc: AuctionService,
+    private auctionService: AuctionService
   ) { }
 
   getAuctionList(page: any, filters: any): Observable<any> {
-    // let retRole = this.auctionService.getLoggedUserRole();
-    let config1 = '', config2 = '';
-    // let role = retRole;
-    // console.log(retRole);
+    let role = '', config1 = '', config2 = '';
+    role = "AuctionManager";
     config1 = "?$expand=page1tolistnav";
     config2 = " and ScreenNav eq 'A'";
     console.log('page ', page, ' filters ', filters);
@@ -45,6 +44,7 @@ export class BidderService {
       config1 +
       "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json"
       , httpOptions);
+
   }
 
   getAuctionDetail(auctionId?:any):Observable<any>{

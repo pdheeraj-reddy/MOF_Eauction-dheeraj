@@ -40,6 +40,7 @@
     "Next Financial": "Next Financial",
     "15": "15 days",
     "Manual": "Manual",
+    "evening": "Evening",
     "anchorlink": "Press here",
     "EAuction_SalesCommitteeChairman": "Auction Committee Head",
     "EAuction_SalesCommitteSecretary": "Auction Committee Secretary",
@@ -662,7 +663,6 @@
             "FinalAward": "(final award) Warranty Lift Final",
             "payTheBill": "pay the bill"
         },
-
         "product-details": {
             "ProductTruckNo": "Isuzu Truck No. 23",
             "ProductDetails": "Product Details",
@@ -716,7 +716,6 @@
         "AmountOfTheInvoice": "Amount of the invoice",
         "EntityName": "Entity Name",
         "InvoicePaymentStatus": "Invoice payment status and final warranty",
-
         "filter-btn1": "Filter",
         "filter-btn2": "Reset",
         "TheadInvoiceReferenceNumber": "Invoice reference number",
@@ -795,7 +794,6 @@
         "filter-formDate-pholder": "day - month - year",
         "filter-actionname-pholder": "Enter the Auction Name",
         "filter-refno-pholder": "Enter the Reference number",
-
         "mem-detail": {
             "bcrumb1": "Trust Services",
             "bcrumb2": "Online Auction Requests",
@@ -806,7 +804,6 @@
             "tab3": "Pricing Committee Members",
             "tab4": "Auction Committee Members"
         },
-
         "bid-value": {
             "head": "General information about the order",
             "subHead": "Product Pricing",
@@ -814,7 +811,6 @@
             "save": "Save"
         }
     },
-
     "auctionCommittee": {
         "bcrumb1": "Trust Services",
         "bcrumb2": "Auctions",
@@ -838,7 +834,6 @@
         "accurate": "Accurate",
         "second": "Second",
         "detail_btn": "Auction Details",
-
         "ac-detail": {
             "bcrumb1": "Accreditation Services",
             "bcrumb2": "Auctions",
@@ -876,7 +871,6 @@
             "bids": "Number of bids",
             "participant": "Participants"
         },
-
         "ac-openOffers": {
             "bcrumb1": "Accreditation Services",
             "bcrumb2": "Auctions",
@@ -895,7 +889,6 @@
             "next": "Next One"
         }
     },
-
     "offerReport": {
         "bcrumb1": "Trust services",
         "bcrumb2": "Auctions",
@@ -923,7 +916,6 @@
         "content1": "Number of Bids",
         "content2": "participants"
     },
-
     "AuctionDetails": "Auction Details",
     "Ends Through": "Ends Through",
     "Starts During": "Starts During",

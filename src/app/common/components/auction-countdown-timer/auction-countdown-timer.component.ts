@@ -23,11 +23,12 @@ export class AuctionCountdownTimerComponent implements OnInit {
   ngOnInit(): void {
     const timeout = setInterval(() => {
       // get total seconds between the times
-      let timestamp = 0;
-      if(this.timestamp && this.timestamp > 0) {
-        timestamp = this.timestamp
+
+      let time = 0;
+      if (this.timestamp && this.timestamp > 0) {
+        time = this.timestamp
       }
-      var delta = (timestamp - Date.now()) / 1000;
+      var delta = (time - Date.now()) / 1000;
 
       if (delta > 0) {
         // calculate (and subtract) whole days

@@ -4,3 +4,17 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.filter-active {
+    color: #fff;
+    background-color: #32ad71 !important;
+    border-color: #32ad71 !important;
+
+    span {
+        color: #fff !important;
+    }
+}
+
+.clickable:not(:disabled) {
+    color: #32AD71;
+}
