@@ -3,18 +3,18 @@
         <ol class="breadcrumb px-0">
             <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{ 'TrustServices' | translate }}</a></li>
             <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{ 'bidderAuctionDetails.Auctions' | translate }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page" style="font-size: 14px;">{{ 'bidderAuctionDetails.AuctionDetails' | translate }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ 'bidderAuctionDetails.AuctionDetails' | translate }}</li>
         </ol>
     </nav>
 </div>
 
 
 <div class="col-12">
-    <h2 style="font-weight: bold; color: #08594D;">{{ 'bidderAuctionDetails.AuctionDetails' | translate }}</h2>
+    <h3 class="text-primary" style="font-size: 32px;">{{ 'bidderAuctionDetails.AuctionDetails' | translate }}</h3>
 </div>
 <hr/>
 
-<app-auction-participation *ngIf="upcomingAuction?.auctionStatus=='Published'" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
+<app-auction-participation [isParticipated]="isParticipated" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
 <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction"></app-auction-fbga>
 <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'" [upcomingAuction]="upcomingAuction"></app-auction-pay-invoice>
 
@@ -23,13 +23,26 @@
 
 <app-auction-final-award [finalaward]="upcomingAuction" *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && userRole === 'EAuction_AuctionManager'"></app-auction-final-award>
 
-<div style="display: flex; margin-top: 35px;">
+<div class="d-flex mt-4">
 
-    <div style="border: #cac1c1 1px solid; width: 30%; padding-left: 30px; border-radius: 8px; height: 600px;">
+    <div class="card">
         <br>
-        <p style="color: #08594D; font-weight: bold; font-size: 25px;">{{ 'bidderAuctionDetails.AuctionSettings' | translate }}</p>
-        <p style="color: #08594D;">{{ 'bidderAuctionDetails.auction-settings.You-can-manage-the-auction' | translate }}</p>
-
+        <p class="text-20 text-primary m-4 font-weight-bold">{{ 'bidderAuctionDetails.AuctionSettings' | translate }}</p>
+        <p class="text-12 text-primary mr-4 ml-4 mb-4">{{ 'bidderAuctionDetails.auction-settings.You-can-manage-the-auction' | translate }}</p>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-custom-radioselect">
+              <span class="icon-all-tenders"></span>
+              Left
+            </button>
+            <button type="button" class="btn btn-custom-radioselect">
+              <span class="icon-heart"></span>
+              Middle
+            </button>
+            <button type="button" class="btn btn-custom-radioselect">
+              <span class="icon-user"></span>
+              Right
+            </button>
+        </div>
         <div style="display: flex; margin-left: -20px; margin-top: 25px;">
             <div class="etimad-option ml-0">
                 <input (click)="auctionSettings('auctionDetail')" type="radio" id="checkbox07" name="details" value="detail" checked="checked" />
@@ -624,3 +637,4 @@
         </div>
 
     </div>
+</div>

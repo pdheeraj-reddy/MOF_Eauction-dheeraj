@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { EnvService } from 'src/app/env.service';
 import { Component,Input, OnInit } from '@angular/core';
+import { BidderService } from '../../services/bidder.service';
 
 @Component({
   selector: 'app-auction-participation',
@@ -11,7 +12,8 @@ import { Component,Input, OnInit } from '@angular/core';
 export class AuctionParticipationComponent implements OnInit {
   @Input() upcomingAuction:any;
   @Input() AuctionId:any;
-  constructor(private http: HttpClient, private envService : EnvService) { }
+  @Input() isParticipated:boolean;
+  constructor(private http: HttpClient, private envService : EnvService, private bidderService:BidderService) { }
 
   ngOnInit(): void {
   }
@@ -26,16 +28,8 @@ export class AuctionParticipationComponent implements OnInit {
         "AucId" : this.AuctionId,
         "ZzUserAction" : "P"
       }
+      this.bidderService.makeParticipateIn(auctionParticipation).subscribe((res)=>{
 
-     this.http.post<any>(
-      this.envService.environment.apiBidderParticipationAuctions
-      , JSON.stringify(auctionParticipation)).subscribe(res=>{
-        // alert('Auction is Saved as Draft Successfully');
-        console.log('auctionCreateResp', res);
-        // this.activeStep ++;
-        // this.changeSteps.emit(this.activeStep);
-      }, (error) => {
-        console.log('createAuction RespError : ', error);
       });
     }
   }

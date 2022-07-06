@@ -13,7 +13,7 @@ export class BidderService {
   constructor(
     private http: HttpClient,
     private envService: EnvService,
-    private auctionService : AuctionService
+    public auctionServc: AuctionService,
   ) { }
 
   getAuctionList(page: any, filters: any): Observable<any> {
@@ -33,7 +33,7 @@ export class BidderService {
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
-        'X_User_Role': this.auctionService.getLoggedUserRole(),
+        'X_User_Role': 'AuctionManager',
       },
       params: {
       },
@@ -45,5 +45,35 @@ export class BidderService {
       config1 +
       "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json"
       , httpOptions);
+  }
+
+  getAuctionDetail(auctionId?:any):Observable<any>{
+    console.log("Function called");
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiBidderAuctions+"/"
+    +auctionId+"?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json",httpOptions);
+  }
+
+  makeParticipateIn(participationDetails?:any):Observable<any>{
+    const httpOptions = {
+      headers: {
+        'X-CSRF-TOKEN': this.XCSRFToken as string,
+      },
+      params: {
+      }
+    };
+    if(httpOptions){
+      console.log(httpOptions);
+    }
+    return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
+      , JSON.stringify(participationDetails),httpOptions);
   }
 }

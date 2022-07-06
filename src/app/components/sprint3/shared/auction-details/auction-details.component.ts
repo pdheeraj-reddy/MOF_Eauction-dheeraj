@@ -8,6 +8,7 @@ import { EnvService } from 'src/app/env.service';
 import { MapsAPILoader } from '@agm/core';
 import * as moment from 'moment-mini';
 import { DatePipe } from '@angular/common'
+import { BidderService } from '../../services/bidder.service';
 declare var $:any;
 
 @Component({
@@ -20,6 +21,7 @@ export class AuctionDetailsComponent implements OnInit {
   editmode1 : boolean = true;
   editmode2 : boolean = false;
 
+  isParticipated : boolean = false;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   days:number;
   hours:number;
@@ -39,6 +41,7 @@ export class AuctionDetailsComponent implements OnInit {
     private http: HttpClient,
     public PaginationServc: PaginationSortingService,
     private envService: EnvService,
+    private bidderService : BidderService
     ) { }
 
   ngOnInit(): void {
@@ -53,7 +56,17 @@ export class AuctionDetailsComponent implements OnInit {
     console.log(this.userRole);
 
     this.refreshCalendarCntrl();
-    this.getupcomingAuctionList(1);
+    this.getAuctionDetails();
+    
+    // this.getupcomingAuctionList(1);
+  }
+  getAuctionDetails(){
+    console.log("API");
+    this.bidderService.getAuctionDetail(this.auctionId).subscribe((res)=>{
+      console.log(res);
+      this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
+      this.mapping(res.body);
+    });
   }
   refreshCalendarCntrl() {
     setTimeout(() => {
@@ -303,10 +316,8 @@ export class AuctionDetailsComponent implements OnInit {
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     let $filters = (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
     this.showLoader = true;
-    this.http.get<any>(this.envService.environment.apiBidderBidAuctions +
-      "?$expand=listtoproductnav,listtoattachnav" + 
-      "&$filter=ObjectId eq '" + this.auctionId + "'&$format=json"
-      ,{responseType: 'json'}).subscribe(res=>{
+    let ObjectId = "9700000780";
+    this.http.get<any>('https://aqarattest.mof.gov.sa:4200/internal/v1/e-auction/auctions/9700000752?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json').subscribe(res=>{
         this.showLoader = false;
         
     //   this.PaginationServc.setPagerValues(
