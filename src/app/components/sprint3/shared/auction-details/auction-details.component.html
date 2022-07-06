@@ -14,7 +14,7 @@
 </div>
 <hr/>
 
-<app-auction-participation [isParticipated]="isParticipated" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
+<app-auction-participation *ngIf="isParticipated" [isParticipated]="isParticipated" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
 <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction"></app-auction-fbga>
 <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'" [upcomingAuction]="upcomingAuction"></app-auction-pay-invoice>
 

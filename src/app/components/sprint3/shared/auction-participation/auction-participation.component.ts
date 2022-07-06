@@ -12,10 +12,15 @@ import { BidderService } from '../../services/bidder.service';
 export class AuctionParticipationComponent implements OnInit {
   @Input() upcomingAuction:any;
   @Input() AuctionId:any;
-  @Input() isParticipated:boolean;
+  @Input() isParticipated:any;
   constructor(private http: HttpClient, private envService : EnvService, private bidderService:BidderService) { }
-
+  btnDisable = false;
   ngOnInit(): void {
+    console.log(this.isParticipated);
+      if(this.isParticipated.ZzBidderSts === 'P'){
+        console.log(this.isParticipated);
+        this.btnDisable = true;
+      }
   }
   participation() {
 
@@ -29,7 +34,7 @@ export class AuctionParticipationComponent implements OnInit {
         "ZzUserAction" : "P"
       }
       this.bidderService.makeParticipateIn(auctionParticipation).subscribe((res)=>{
-
+        
       });
     }
   }

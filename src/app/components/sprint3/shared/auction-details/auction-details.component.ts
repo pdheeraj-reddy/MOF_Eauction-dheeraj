@@ -21,7 +21,7 @@ export class AuctionDetailsComponent implements OnInit {
   editmode1 : boolean = true;
   editmode2 : boolean = false;
 
-  isParticipated : boolean = false;
+  isParticipated : any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   days:number;
   hours:number;
@@ -62,9 +62,11 @@ export class AuctionDetailsComponent implements OnInit {
   }
   getAuctionDetails(){
     console.log("API");
-    this.bidderService.getAuctionDetail(this.auctionId).subscribe((res)=>{
+    this.bidderService.getAuctionDetail(9700000760).subscribe((res)=>{
       console.log(res);
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
+      console.log(res.body.d.results[0].ZzBidderSts);
+      this.isParticipated = res.body.d.results[0];
       this.mapping(res.body);
     });
   }
