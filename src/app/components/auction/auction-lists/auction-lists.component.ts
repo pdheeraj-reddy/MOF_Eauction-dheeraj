@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Moment } from 'moment-mini';
 import * as moment from 'moment-mini';
+import { filter } from 'rxjs/operators';
 declare var $: any;
 
 @Component({
@@ -63,6 +64,7 @@ export class AuctionListsComponent implements OnInit {
     { col: 'ZzAucEndDt', 'sType': 'D' },
     { col: 'Status', 'sType': 'D' }
   ];
+  isFilterSearch: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -110,6 +112,23 @@ export class AuctionListsComponent implements OnInit {
         pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
       } else if (this.loggedUserRole.isPricingHead) {
         pagetolistnav = serverObj.d.results[0].page1tolistnav.results;
+      }
+    } else {
+      this.totalCounts = {
+        totAll: 0,
+        totDraft: 0,
+        totCompleted: 0,
+        totEle: 0,
+        totPendSelect: 0,
+        totPgs: 0,
+        totPrcApprPend: 0,
+        totPrcRejected: 0,
+        totPricingPend: 0,
+        totPublishPend: 0,
+        totPublished: 0,
+        totPublishedOngoing: 0,
+        totRejected: 0,
+        totReviewPend: 0
       }
     }
     pagetolistnav?.forEach((result: any) => {
@@ -246,12 +265,7 @@ export class AuctionListsComponent implements OnInit {
 
     this.resetFilter();
     this.showFilterForm = false;
-    if (value === 'All') {
-      this.filterFormGroup.controls['auctionStatus'].setValue('');
-    } else {
-      this.filterFormGroup.controls['auctionStatus'].setValue(value);
-      this.filterFormGroup.controls['auctionStatus'].disable();
-    }
+    this.filterFormGroup.controls['auctionStatus'].setValue('');
     this.getAuctionList(1);
   }
 
@@ -273,9 +287,30 @@ export class AuctionListsComponent implements OnInit {
       Message: '',
       Msgty: ''
     };
-    if (this.selectedTab === 'All' && this.filterFormGroup.controls['auctionStatus'].value !== '') {
+    if (this.isFilterSearch) {
       filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
-      filters.Message = 'F';
+      // filters.Message = 'F';
+        if(filters.ObjectId || filters.Description || filters.BidType || filters.EndDate || filters.StartDate){
+          if(this.selectedTab == 'All' || this.selectedTab == ''){
+            this.selectedTab = 'All';
+            filters.Status = 'All';
+          } else {
+            filters.Status = this.selectedTab;
+          }
+        } else {
+          if(this.selectedTab == 'All' || this.selectedTab == ''){
+            if(this.filterFormGroup.controls['auctionStatus'].value){
+              this.selectedTab = this.filterFormGroup.controls['auctionStatus'].value;
+              filters.Status = this.selectedTab;
+            } else {
+              this.selectedTab = '';
+              filters.Status = '';
+            }
+          } else {
+            this.selectedTab = this.filterFormGroup.controls['auctionStatus'].value;
+            filters.Status = this.selectedTab;
+          }
+        }
     }
     if (sortBy && sorttype) {
       filters.Msgty = sorttype + ' ' + sortBy;
@@ -285,6 +320,7 @@ export class AuctionListsComponent implements OnInit {
     this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
+      this.isFilterSearch = false;
 
       this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
       this.auctionListData = this.mapping(res.body);
@@ -303,8 +339,21 @@ export class AuctionListsComponent implements OnInit {
     });
   }
 
-  sortBy(sortBy?: string) {
+  isSorting(columnId: number){
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number){
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number){
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+  
+
+  sortBy(sortBy?: string, columnId?: number) {
+    columnId = columnId ? columnId : 0;
     var foundIndex = this.sortCol.findIndex((el: { col: any; }) => el.col === sortBy);
+    this.sortByTableHeaderId(columnId, 'string');
     this.sortCol[foundIndex].sType = this.sortCol[foundIndex].sType === 'A' ? 'D' : 'A';
     this.getAuctionList(1, sortBy, this.sortCol[foundIndex].sType);
   }
