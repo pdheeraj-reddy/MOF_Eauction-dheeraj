@@ -5,6 +5,7 @@ export interface AuctionList {
     imgsrc: string;
     statuscode: string;
     product: string | number;
-    auctionstartdate: string;
+    auctiondate: string;
+    auctiontime: string;
     auctionenddate: string;
 }

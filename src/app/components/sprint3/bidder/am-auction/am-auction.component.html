@@ -79,35 +79,35 @@
                                                     [ngClass]="{ active: selectedTab === 'All' }"
                                                     (click)="onTabSelection('All')">
                                                     {{ 'auctionlist.tab1-item1' | translate }}
-                                                    ({{totalCounts.total_all}})</a>
+                                                    ({{totalCounts.total_all || 0}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
                                                     [ngClass]="{ active: selectedTab === 'Ongoing Auction' }"
                                                     (click)="onTabSelection('Ongoing Auction')">
                                                     {{ 'auctionCommittee.tab2' | translate }}
-                                                    ({{totalCounts.total_ongoing}})</a>
+                                                    ({{totalCounts.total_ongoing || 0}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
                                                     [ngClass]="{ active: selectedTab === 'Upcoming Auction' }"
                                                     (click)="onTabSelection('Upcoming Auction')">
                                                     {{ 'auctionCommittee.tab3' | translate }}
-                                                    ({{totalCounts.total_upcoming}})</a>
+                                                    ({{totalCounts.total_upcoming || 0}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
                                                     [ngClass]="{ active: selectedTab === 'Under Gear' }"
                                                     (click)="onTabSelection('Under Gear')">
                                                     {{ 'auctionCommittee.tab4' | translate }}
-                                                    ({{totalCounts.total_under_gear}})</a>
+                                                    ({{totalCounts.total_under_gear || 0}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
                                                     [ngClass]="{ active: selectedTab === 'Ended Auction' }"
                                                     (click)="onTabSelection('Ended Auction')">
                                                     {{ 'auctionCommittee.tab5' | translate }}
-                                                    ({{totalCounts.total_completed}})
+                                                    ({{totalCounts.total_completed || 0}})
                                                 </a>
                                             </li>
                                         </ul>

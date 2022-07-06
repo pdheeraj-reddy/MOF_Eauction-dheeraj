@@ -17,7 +17,7 @@ export class AmAuctionComponent implements OnInit {
 
   auctionListData: AuctionList[] = [];
   selectedPageNumber: number;
-  pagelimit: number = 10;
+  pagelimit: number = 6;
   totalCounts = {
     total_completed: 0,
     total_under_gear: 0,
@@ -57,7 +57,7 @@ export class AmAuctionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.showPageLoader = true;
+    this.showPageLoader = true;
     this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.lang = event.lang;
@@ -126,10 +126,10 @@ export class AmAuctionComponent implements OnInit {
   public mapping(serverObj: any): AuctionList[] {
     let resultSet: AuctionList[] = [];
     this.totalCounts = {
-      total_completed: serverObj.d.results[0].TotDraft,
+      total_completed: serverObj.d.results[0].TotCompleted,
       total_under_gear: serverObj.d.results[0].TotRejected,
       total_upcoming: serverObj.d.results[0].TotPublish,
-      total_ongoing: serverObj.d.results[0].TotPendingRw,
+      total_ongoing: serverObj.d.results[0].TotPublishedOngoing,
       total_all: serverObj.d.results[0].TotAll
     }
     serverObj.d.results[0].page1tolistnav.results.forEach((result: any) => {
@@ -140,11 +140,13 @@ export class AmAuctionComponent implements OnInit {
         imgsrc: result['imgsrc'] ? result['imgsrc'] : '',
         statuscode: result['Status'] ? result['Status'] : '',
         product: result['ZzTotPdt'] ? parseInt(result['ZzTotPdt']) : '',
-        auctionstartdate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? result['ZzAucSrtDt'] : '' : '',
-        auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? result['ZzAucEndDt'] : '' : '',
+        auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD') : '' : '',
+        auctiontime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('H:mm') : '' : '',
+        auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD H:mm') : '' : '',
       }
       resultSet.push(items);
     });
+    console.log("🚀 ~ serverObj.d.results[0].page1tolistnav.results.forEach ~ resultSet", resultSet)
     return resultSet;
   }
 
@@ -269,6 +271,7 @@ export class AmAuctionComponent implements OnInit {
       ];
     }
   }
+
   resetFilter() {
     this.filterFormGroup.controls['prevRefNo'].setValue('');
     this.filterFormGroup.controls['auctionName'].setValue('');

@@ -811,7 +811,7 @@
     },
     "bidderAuctions": {
         "TrustServices": "خدمات اعتماد",
-        "MyAuctions": "مزاداتي",
+        "Auctions": "مزاداتي",
         "All": "الكل",
         "OngoingAuctions": "مزادات جارية",
         "UpcomingAuctions": "مزادات قادمة",

@@ -37,6 +37,7 @@ export class ViewProductDetailComponent implements OnInit {
   loggedUserRole: any;
   showLoader: boolean = false;
   fetchPicture: boolean = true;
+  showVideo: boolean = true;
   pageRangeForAttach: any;
 
 
@@ -233,11 +234,14 @@ export class ViewProductDetailComponent implements OnInit {
   }
 
   viewItem(a: any) {
+    this.showVideo = false;
     this.fullImage = {
       src: a.src,
       type: a.type
     }
-    console.log(this.fullImage)
+    setTimeout(() => {
+      this.showVideo = true;
+    });
   }
 
 

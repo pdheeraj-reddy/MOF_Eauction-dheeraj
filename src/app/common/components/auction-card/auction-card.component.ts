@@ -13,10 +13,10 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 export class AuctionCardComponent implements OnInit {
 
   @Input() auction: any;
-
+  defaultImg: string = 'assets/icons/logo-mini.svg'
   constructor(
     public translate: TranslateService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
