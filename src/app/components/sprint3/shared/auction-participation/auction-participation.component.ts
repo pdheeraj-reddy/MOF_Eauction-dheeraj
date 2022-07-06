@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { EnvService } from 'src/app/env.service';
 import { Component,Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +11,7 @@ import { Component,Input, OnInit } from '@angular/core';
 export class AuctionParticipationComponent implements OnInit {
   @Input() upcomingAuction:any;
   @Input() AuctionId:any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private envService : EnvService) { }
 
   ngOnInit(): void {
   }
@@ -21,11 +22,13 @@ export class AuctionParticipationComponent implements OnInit {
     if(this.AuctionId){
       // "AucId" : this.AuctionId,
       let auctionParticipation ={
-        "AucId" : "9700000300",
+        // "AucId" : "9700000300",
+        "AucId" : this.AuctionId,
         "ZzUserAction" : "P"
       }
+
      this.http.post<any>(
-      environment.apiBidderParticipationAuctions
+      this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(auctionParticipation)).subscribe(res=>{
         // alert('Auction is Saved as Draft Successfully');
         console.log('auctionCreateResp', res);

@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment-mini';
+import { EnvService } from 'src/app/env.service';
 declare var $:any;
 
 @Component({
@@ -45,6 +46,7 @@ export class MyInvoicesComponent implements OnInit {
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     private http: HttpClient,
     public translate: TranslateService,
+    private envService: EnvService,
     ) { }
 
     public mapping(serverObj: any) {
@@ -172,9 +174,9 @@ export class MyInvoicesComponent implements OnInit {
     let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
     this.showLoader = true;
 
-    this.http.get<any>(environment.apiBidderMyInvoices+ 
-      "?$expand=page1tolistnav" + 
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
+    this.http.get<any>(this.envService.environment.apiBidderMyInvoices 
+      // "?$expand=page1tolistnav" + 
+      // "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
       ,{responseType: 'json'}).subscribe(res=>{
         this.showLoader = false;
         

@@ -5,6 +5,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 // import { getStatusText } from 'angular-in-memory-web-api';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
+import { EnvService } from 'src/app/env.service';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { environment } from 'src/environments/environment';
 import {getStatusText} from '../../../../utils/util';
@@ -51,6 +52,7 @@ export class MyAuctionsComponent implements OnInit {
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     private http: HttpClient,
     public translate: TranslateService,
+    private envService: EnvService,
   ) { }
 
   public mapping(serverObj: any) {
@@ -131,9 +133,9 @@ export class MyAuctionsComponent implements OnInit {
     let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
     this.showLoader = true;
 
-    this.http.get<any>(environment.apiBidderMyAuctions+ 
+    this.http.get<any>(this.envService.environment.apiBidderMyAuctions+ 
       "?$expand=page1tolistnav" + 
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + $filters + ")&$format=json" 
       ,{responseType: 'json'}).subscribe(res=>{
         this.showLoader = false;
         

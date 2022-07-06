@@ -18,7 +18,7 @@ export class NoOfParticipantsBidsComponent implements OnInit {
     // TODO: Call the API and get the numbers
   }
   getauctionList(pageNumber?: number){
-    this.http.get<any>(this.envService.environment.apiBidderParticipantsBids,{responseType: 'json'}).subscribe(res=>{
+    this.http.get<any>(this.envService.environment.apiBidderParticipantsBids + "?auctionId="+this.auctionId+"&status=Ongoing",{responseType: 'json'}).subscribe(res=>{
     //   const csrfToken = localStorage.getItem("x-csrf-token");    
     //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
       this.bids = res.d.NoBids;

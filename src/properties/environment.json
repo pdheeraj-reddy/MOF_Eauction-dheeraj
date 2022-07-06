@@ -10,5 +10,13 @@
     "apiFilenetURL": "/internal/v1/e-auction/files",
     "apiCommiteeURL": "/internal/v1/e-auction/committees",
     "apiBidderFinalInvoiceURL": "/mock-internal/auctions/1/final-invoice",
-    "apiBidderAuctions": "/internal/v1/e-auction/auctions"
+    "apiBidderAuctions": "/internal/v1/e-auction/auctions",
+    "apiBidderMyAuctions": "/internal/v1/e-auction/auctions",
+    "apiBidderMyInvoices": "/internal/v1/e-auction/e-bidder/bidders/invoices",
+    "apiBidderBidAuctions": "/internal/v1/e-auction/e-bidder",
+    "apiAppRej": "/internal/v1/e-auction/e-bidder/bidders",
+    "apiLatestBid": "/internal/v1/e-auction/e-bidder/bidders",
+    "apiBidderParticipationAuctions": "/internal/v1/e-auction/e-bidder/bidders",
+    "apiBidderParticipantsBids": "/internal/v1/e-auction/e-bidder/bidders"
+
 }

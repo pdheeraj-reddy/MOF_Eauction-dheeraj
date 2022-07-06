@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EnvService } from 'src/app/env.service';
+import { AuctionService } from 'src/app/service/auction.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +13,14 @@ export class BidderService {
   constructor(
     private http: HttpClient,
     private envService: EnvService,
+    private auctionService : AuctionService
   ) { }
 
   getAuctionList(page: any, filters: any): Observable<any> {
-    let role = '', config1 = '', config2 = '';
-    role = "AuctionManager";
+    // let retRole = this.auctionService.getLoggedUserRole();
+    let config1 = '', config2 = '';
+    // let role = retRole;
+    // console.log(retRole);
     config1 = "?$expand=page1tolistnav";
     config2 = " and ScreenNav eq 'A'";
     console.log('page ', page, ' filters ', filters);
@@ -28,7 +33,7 @@ export class BidderService {
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
-        'X_User_Role': role,
+        'X_User_Role': this.auctionService.getLoggedUserRole(),
       },
       params: {
       },
@@ -40,6 +45,5 @@ export class BidderService {
       config1 +
       "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + config2 + ")&$format=json"
       , httpOptions);
-
   }
 }

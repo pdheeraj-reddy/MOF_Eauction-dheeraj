@@ -4,6 +4,7 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { UpcomingAuction } from "src/app/model/auction.model";
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { EnvService } from 'src/app/env.service';
 import { MapsAPILoader } from '@agm/core';
 import * as moment from 'moment-mini';
 import { DatePipe } from '@angular/common'
@@ -36,7 +37,9 @@ export class AuctionDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
-    public PaginationServc: PaginationSortingService) { }
+    public PaginationServc: PaginationSortingService,
+    private envService: EnvService,
+    ) { }
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
@@ -300,7 +303,7 @@ export class AuctionDetailsComponent implements OnInit {
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     let $filters = (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
     this.showLoader = true;
-    this.http.get<any>(environment.apiBidderBidAuctions +
+    this.http.get<any>(this.envService.environment.apiBidderBidAuctions +
       "?$expand=listtoproductnav,listtoattachnav" + 
       "&$filter=ObjectId eq '" + this.auctionId + "'&$format=json"
       ,{responseType: 'json'}).subscribe(res=>{
