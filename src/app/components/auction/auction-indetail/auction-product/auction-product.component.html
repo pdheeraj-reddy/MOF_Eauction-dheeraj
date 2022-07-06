@@ -301,15 +301,15 @@
                                 <div class="mb-5">
                                     <nav aria-label="..." class="nav-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item" [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === 1 }">
-                                                <a (click)="navigateToPage(pageRangeForProductAttach.currentPage -1, 'productAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                            <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === 1 }">
+                                                <a (click)="navigateToPage(pageRangeForProductAttach.currentPage -1, 'productAttach')" class="page-link" aria-disabled="true">{{
                                                     'auctionlist.grid-previous' | translate }}</a>
                                             </li>
                                             <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForProductAttach.currentPage === page }">
                                                 <a (click)="navigateToPage(page, 'productAttach')" class="page-link"> {{
                                                     page }} </a>
                                             </li>
-                                            <li class="page-item" [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === pageRangeForProductAttach.totalPages }">
+                                            <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === pageRangeForProductAttach.totalPages }">
                                                 <a (click)="navigateToPage(pageRangeForProductAttach.currentPage + 1, 'productAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                             </li>
                                         </ul>
@@ -612,14 +612,14 @@
                                     <div class="mb-5">
                                         <nav aria-label="..." class="nav-pagination">
                                             <ul class="pagination">
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === 1 }">
-                                                    <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage -1, 'productPictureAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                                <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === 1 }">
+                                                    <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage -1, 'productPictureAttach')" class="page-link" aria-disabled="true">{{
                                                         'auctionlist.grid-previous' | translate }}</a>
                                                 </li>
                                                 <li *ngFor="let page of pageRangeForProductPictureAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForProductPictureAttach.currentPage === page }">
                                                     <a (click)="navigateToPage(page, 'productPictureAttach')" class="page-link"> {{ page }} </a>
                                                 </li>
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === pageRangeForProductPictureAttach.totalPages }">
+                                                <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === pageRangeForProductPictureAttach.totalPages }">
                                                     <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage + 1, 'productPictureAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                                 </li>
                                             </ul>
@@ -719,14 +719,14 @@
                                     <div class="mb-5">
                                         <nav aria-label="..." class="nav-pagination">
                                             <ul class="pagination">
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === 1 }">
-                                                    <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage -1, 'productFileAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                                <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === 1 }">
+                                                    <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage -1, 'productFileAttach')" class="page-link" aria-disabled="true">{{
                                                         'auctionlist.grid-previous' | translate }}</a>
                                                 </li>
                                                 <li *ngFor="let page of pageRangeForProductFileAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForProductFileAttach.currentPage === page }">
                                                     <a (click)="navigateToPage(page, 'productFileAttach')" class="page-link"> {{ page }} </a>
                                                 </li>
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === pageRangeForProductFileAttach.totalPages }">
+                                                <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === pageRangeForProductFileAttach.totalPages }">
                                                     <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage + 1, 'productFileAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                                 </li>
                                             </ul>
