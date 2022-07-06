@@ -40,12 +40,18 @@
     outline: none;
     opacity: 0;
 }
+
 .spinner-border-light-green {
-  border-color: #28a745!important;
-  border-right-color: transparent !important;
+    border-color: #28a745!important;
+    border-right-color: transparent !important;
 }
-.icon-spinner{
-  width: 18px;
-  height: 18px;
-  font-size: x-small;
+
+.icon-spinner {
+    width: 18px;
+    height: 18px;
+    font-size: x-small;
+}
+
+.clickable:not(:disabled) {
+    color: #32AD71;
 }

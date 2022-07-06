@@ -704,12 +704,11 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
         let temp = res.body.d.results[0];
         console.log(temp);
-        this.isPendingPublish = this.preAuctionData.Status == 'Pending to Publish' ? true : false;
+        this.isPendingPublish = this.preAuctionData.CommitteeAssigned == 'X' ? false : true;
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;
           console.log(data.length);

@@ -227,11 +227,11 @@
                     "auctionMember.confirmation-popup.subtitle" | translate }}</label>
             </div>
             <div class="modal-footer" style="justify-content: end">
-                <button type="button" class="btn btn-primary-light btn-md" (click)="approveOrRejectAuction('A', 'Pending Pricing')">
-                    {{ "auctionMember.confirmation-popup.accept" | translate }}
-                </button>
                 <button type="button" class="btn btn-md" (click)="closeAllModal();" style="border: 1px solid #cccccc; border-radius: 5px">
                     {{ "auctionMember.confirmation-popup.back" | translate }}
+                </button>
+                <button type="button" class="btn btn-primary-light btn-md" (click)="approveOrRejectAuction('A', 'Pending Pricing')">
+                    {{ "auctionMember.confirmation-popup.accept" | translate }}
                 </button>
             </div>
         </div>

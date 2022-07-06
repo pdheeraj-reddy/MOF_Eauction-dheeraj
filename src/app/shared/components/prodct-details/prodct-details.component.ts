@@ -362,6 +362,8 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   approveOrRejectAuction(action: any, status: any) {
+    this.isPriceSuccess = false;
+    this.showConfim = false;
     let adjustedPriceData: any = {};
     this.preAuctionData.Status = status;
     this.preAuctionData.ActionTaken = action;
@@ -390,6 +392,7 @@ export class ProdctDetailsComponent implements OnInit {
         console.log('approveOrRejectAuction RespError : ', error);
       }
     );
+
   }
 
   sendPricingValues() {
