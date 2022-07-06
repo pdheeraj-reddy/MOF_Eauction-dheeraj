@@ -10,13 +10,20 @@ import { AuctionDetailsComponent } from './shared/auction-details/auction-detail
 import { AuctionParticipationComponent } from './shared/auction-participation/auction-participation.component';
 import { AuctionFbgaComponent } from './shared/auction-fbga/auction-fbga.component';
 import { AuctionPayInvoiceComponent } from './shared/auction-pay-invoice/auction-pay-invoice.component';
-import { AuctionPrmyAwardComponent } from './shared/auction-prmy-award/auction-prmy-award.component';
-import { AuctionFinalAwardComponent } from './shared/auction-final-award/auction-final-award.component';
+
 import { NoOfParticipantsBidsComponent } from './shared/no-of-participants-bids/no-of-participants-bids.component';
 import { AuctionCountdownTimerComponent } from './shared/auction-countdown-timer/auction-countdown-timer.component';
 import { AuctionStatusComponent } from './shared/auction-status/auction-status.component';
 import { SendBiddingOfferComponent } from './shared/send-bidding-offer/send-bidding-offer.component';
 import { LatestOffersSentComponent } from './shared/latest-offers-sent/latest-offers-sent.component';
+import { MyAuctionsComponent } from './bidder/my-auctions/my-auctions.component';
+import { MyInvoicesComponent } from './bidder/my-invoices/my-invoices.component';
+import { SendInvoiceComponent } from './auc_mod/send-invoice/send-invoice.component';
+import { BillPdfTemplateComponent } from './auc_mod/bill-pdf-template/bill-pdf-template.component';
+import { BillPdfProductComponent } from './auc_mod/bill-pdf-product/bill-pdf-product.component';
+import { BillOffferReportComponent } from './auc_mod/bill-offfer-report/bill-offfer-report.component';
+import { AuctionPrmyAwardComponent } from './shared/auction-prmy-award/auction-prmy-award.component';
+import { AuctionFinalAwardComponent } from './shared/auction-final-award/auction-final-award.component';
 
 
 @NgModule({
@@ -26,13 +33,22 @@ import { LatestOffersSentComponent } from './shared/latest-offers-sent/latest-of
     AuctionParticipationComponent,
     AuctionFbgaComponent,
     AuctionPayInvoiceComponent,
-    AuctionPrmyAwardComponent,
-    AuctionFinalAwardComponent,
+ 
     NoOfParticipantsBidsComponent,
     AuctionCountdownTimerComponent,
     AuctionStatusComponent,
     SendBiddingOfferComponent,
-    LatestOffersSentComponent
+    LatestOffersSentComponent,
+    MyInvoicesComponent,
+    MyAuctionsComponent,
+    SendInvoiceComponent,
+    BillPdfTemplateComponent,
+    BillPdfProductComponent,
+    BillOffferReportComponent,
+    AuctionPrmyAwardComponent,
+    AuctionFinalAwardComponent
+
+
   ],
   imports: [
     CommonModule,
