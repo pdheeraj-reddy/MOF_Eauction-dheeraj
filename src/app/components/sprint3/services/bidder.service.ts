@@ -47,7 +47,7 @@ export class BidderService {
 
   }
 
-  getAuctionDetail(auctionId?:any):Observable<any>{
+  getAuctionDetail(auctionId?: any): Observable<any> {
     console.log("Function called");
     const httpOptions = {
       headers: {
@@ -58,11 +58,11 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiBidderAuctions+"/"
-    +auctionId+"?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json",httpOptions);
+    return this.http.get<any>(this.envService.environment.apiBidderAuctions + "/"
+      + auctionId + "?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json", httpOptions);
   }
 
-  makeParticipateIn(participationDetails?:any):Observable<any>{
+  makeParticipateIn(participationDetails?: any): Observable<any> {
     const httpOptions = {
       headers: {
         'X-CSRF-TOKEN': this.XCSRFToken as string,
@@ -70,16 +70,16 @@ export class BidderService {
       params: {
       }
     };
-    if(httpOptions){
+    if (httpOptions) {
       console.log(httpOptions);
     }
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
-      , JSON.stringify(participationDetails),httpOptions);
+      , JSON.stringify(participationDetails), httpOptions);
   }
 
 
-  getNoOfParticipants(auctionId:any,pageNumber?: number):Observable<any>{
-    
+  getNoOfParticipants(auctionId: any, pageNumber?: number): Observable<any> {
+
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
@@ -89,12 +89,12 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiBidderParticipantsBids + 
-      "?auctionId="+auctionId+"&status=Ongoing",httpOptions)
+    return this.http.get<any>(this.envService.environment.apiBidderParticipantsBids +
+      "?auctionId=" + auctionId + "&status=Ongoing", httpOptions)
 
   }
-  getMyAuctionsList(filters:any,pageLimit:any,pageNumber?: number):Observable<any>{
-    
+  getMyAuctionsList(filters: any, pageLimit: any, pageNumber?: number): Observable<any> {
+
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
@@ -104,12 +104,12 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiBidderMyAuctions+ 
-      "?$expand=page1tolistnav" + 
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + filters + ")&$format=json",httpOptions)
+    return this.http.get<any>(this.envService.environment.apiBidderMyAuctions +
+      "?$expand=page1tolistnav" +
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + filters + ")&$format=json", httpOptions)
 
   }
-  getMyInvoiceList():Observable<any>{
+  getMyInvoiceList(): Observable<any> {
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
@@ -119,6 +119,25 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiBidderMyInvoices+"&$format=json",httpOptions)
+    return this.http.get<any>(this.envService.environment.apiBidderMyInvoices + "&$format=json", httpOptions)
+  }
+
+  getOfferList(page: any, filters: any, auctionId: string): Observable<any> {
+    const pageLimit = page.pageLimit ? page.pageLimit : '10';
+    const pageNumber = page.pageNumber;
+    let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '');
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(
+      this.envService.environment.apiOfferReport.replace('{auctionId}', auctionId) +
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + ")&$format=json"
+      , httpOptions);
   }
 }
