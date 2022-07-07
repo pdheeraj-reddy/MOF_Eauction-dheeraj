@@ -55,7 +55,7 @@
                                     [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                         </div>
                     </th>
-                    <th width="260px" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" class="btn-primary-light"
+                    <th width="260px" *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember) && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" class="btn-primary-light"
                         scope="col" (click)="sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
                             <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span class="sort"><span class="sort-none"
@@ -64,8 +64,9 @@
                     </th>
                     <th scope="col" (click)="(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval') ? sortByTableHeaderId(4, 'string') : sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
-                            <span>{{"auctionModerator.am-detail.product-details.th5" | translate}}</span> <span class="sort"><span class="sort-none"
-                                    [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
+                            <span>{{"auctionModerator.am-detail.product-details.th5" | translate}}</span>
+                            <span *ngIf="(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval')" class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
+                            <span *ngIf="!(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval')" class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                         </div>
                     </th>
                     <th class="th-action" scope="col"></th>
@@ -79,7 +80,7 @@
                             <td>{{product?.Quantity.split('.')[0]}}</td>
                             <td><span class="row"><span class="col">{{product?.ProductValue | number}}</span><span class="col text-primary-light">{{"common.SAR" | translate}}</span></span>
                             </td>
-                            <td class="position-relative" [ngClass]="{'border-lightgreen' : product.show}" *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'">
+                            <td *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'" class="position-relative" [ngClass]="{'border-lightgreen' : product.show}">
                                 <div class="row align-items-center no-gutters" [ngClass]="{'justify-content-between': showAdjustPriceOption , 'justify-content-start': !showAdjustPriceOption}">
                                     <span class="col" *ngIf="!product.show">{{product.ZzPdtEstPricePc | number}}</span>
                                     <input *ngIf="product.show" #autoFocus class="col-6 h-100 p-0" style="font-size: 16px; background-color: none; border: none; outline: none;" digitOnly [decimal]="true" type="text" [(ngModel)]="product.ZzPdtEstPricePc" [disabled]="false" />                                    &nbsp;
@@ -96,7 +97,7 @@
                                 <!-- <div *ngIf="((indexError == i) && removeError)" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
                                 </div> -->
                             </td>
-                            <td *ngIf=" !isBidUpdate && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&&(preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')" style="text-align: center;">
+                            <td *ngIf="!isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices') && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)" style="text-align: center;">
                                 -
                                 <a *ngIf="isBidUpdate" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 60px;" (click)="editPrice(i, product)"> <span class="icon-Group-3286"></span> </a>
                             </td>
