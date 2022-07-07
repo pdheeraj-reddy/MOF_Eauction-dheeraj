@@ -240,22 +240,26 @@
                                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(0, 'string')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth1' |
                                                     translate }}</span>
-                                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                             </th>
                                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(1, 'numeric')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth2' |
                                                     translate }}</span>
-                                                <span class="arrow asc "><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                             </th>
                                             <th class="btn-primary-light cursor-pointer" scope="col " (click)="sortByTableHeaderId(2, 'numeric')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth3' |
                                                     translate }}</span>
-                                                <span class="arrow asc "><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                                             </th>
                                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(3, 'string')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth4' |
                                                     translate }}</span>
-                                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                                             </th>
                                             <th class="th-action" scope="col"></th>
                                         </tr>
@@ -266,7 +270,7 @@
                                                 <ng-container *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
                                                     <td width="170px" scope="row">{{code.productName}}</td>
                                                     <td width="160px">{{code.productSerialNumber}}</td>
-                                                    <td width="210px">{{code.productValue}}</td>
+                                                    <td width="220px">{{code.productValue}}</td>
                                                     <td width="160px">{{code.productCondition | translate }}</td>
                                                     <td>
                                                         <div class="qq-btn-group">
