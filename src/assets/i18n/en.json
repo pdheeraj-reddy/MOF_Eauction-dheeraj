@@ -985,6 +985,8 @@
         "grid-previous": "Previous",
         "grid-next": "Next One",
         "Reset": "Reset",
-        "Research": "Apply"
+        "Research": "Apply",
+        "payment_bill": "Payment Bill",
+        "auction_report_and_bids_submitted": "Auction report and bids submitted"
     }
 }

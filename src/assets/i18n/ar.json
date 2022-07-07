@@ -824,15 +824,6 @@
         "PaymentConfirmation": "تأكيد الدفع",
         "InvoiceCopy": "نسخة الفاتورة"
     },
-    "bidderAuctions": {
-        "TrustServices": "خدمات اعتماد",
-        "Auctions": "المزادات",
-        "All": "الكل",
-        "OngoingAuctions": "مزادات جارية",
-        "UpcomingAuctions": "مزادات قادمة",
-        "UnderGear": "تحت الترسية",
-        "ClosedAuctions": "مزادات منتهية"
-    },
     "bidderAuctionDetails": {
         "Auctions": "المزادات",
         "AuctionDetails": "تفاصيل المزاد",
@@ -969,7 +960,6 @@
         "AmountOfTheInvoice": "مبلغ الفاتورة",
         "EntityName": "اسم الجهة",
         "InvoicePaymentStatusFinalWarranty": "حالة دفع الفاتورة والضمان النهائي",
-
         "filter-btn1": "بحث",
         "filter-btn2": "إعادة تعيين",
         "TheadInvoiceReferenceNumber": "الرقم المرجعي للفاتورة",
@@ -1011,5 +1001,31 @@
         "UploadFileFormat": "PNG, JPG, DOCX, DOC, PDF File",
         "AttachTheFinalWarranty": "Please issue and attach the final warranty within 15 days of awarding. You can issue the guarantee through the bank guarantee service of the Etimad platform.",
         "SendTheFinalGuarantee": "Send the final guarantee"
+    },
+    "bidderAuctions": {
+        "TrustServices": "خدمات اعتماد",
+        "Auctions": "المزادات",
+        "All": "الكل",
+        "OngoingAuctions": "مزادات جارية",
+        "UpcomingAuctions": "مزادات قادمة",
+        "UnderGear": "تحت الترسية",
+        "ClosedAuctions": "مزادات منتهية",
+        "AuctionReferenceNumber": "Auction reference number",
+        "AuctionStatus": "Auction Status",
+        "BiddingMethod": "Bidding Method",
+        "Select": "Select",
+        "AuctionStartDate": "Auction start date",
+        "Auction-formDate-pholder": "day - month - year",
+        "AuctionEndDate": "Auction end date",
+        "filter-title": "Filter",
+        "filter-btn1": "Filter",
+        "filter-btn2": "Reset",
+        "filter-actionname-pholder": "Enter the Auction Name",
+        "grid-previous": "Previous",
+        "grid-next": "Next One",
+        "Reset": "Reset",
+        "Research": "Apply",
+        "payment_bill": "فاتورة الدفع",
+        "auction_report_and_bids_submitted": "تم إرسال تقرير المزاد والعطاءات"
     }
 }

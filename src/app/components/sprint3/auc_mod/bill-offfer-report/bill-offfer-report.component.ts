@@ -111,7 +111,6 @@ export class BillOffferReportComponent implements OnInit {
   }
 
   getOfferList(pageNumber?: number) {
-    const pageNoVal = '' + pageNumber;
     this.showLoader = true;
     const page = {
       pageNumber: pageNumber,
@@ -212,7 +211,7 @@ export class BillOffferReportComponent implements OnInit {
       myAuction: this.filterFormGroup.controls['myAuction'].value ? this.filterFormGroup.controls['myAuction'].value : '',
     };
     this.bidderService.getOfferList(page, filters, '9700000300').subscribe((res: any) => {
-      // this.showLoader = false;
+      this.showLoader = false;
 
       localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
       this.offerListData = this.mapping(res.body);

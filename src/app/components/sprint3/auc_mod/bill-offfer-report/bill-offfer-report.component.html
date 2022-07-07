@@ -1,15 +1,20 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">Trust services</a></li>
-            <li class="breadcrumb-item" style="font-size: 14px;"><a routerLink="/bidder">Auction</a></li>
-            <li class="breadcrumb-item active" aria-current="page" style="font-size: 14px;">Auction details</li>
+            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{'bidderMyAuctions.TrustServices' |
+                    translate}}</a></li>
+            <li class="breadcrumb-item" style="font-size: 14px;"><a
+                    routerLink="/bidder">{{'auctionCommittee.ac-detail.bcrumb2' |
+                    translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page" style="font-size: 14px;">
+                {{'auctionCommittee.ac-detail.bcrumb3' | translate}}</li>
         </ol>
     </nav>
 </div>
 
 <div class="col-12">
-    <h2 style="font-weight: bold; color: #08594D;">Auction Details</h2>
+    <h2 style="font-weight: bold; color: #08594D;">{{'auctionCommittee.ac-detail.bcrumb3' |
+        translate}}</h2>
 </div>
 <hr>
 
@@ -88,12 +93,13 @@
 
         <div style="display: flex;margin-left: 30px;">
             <div style="width: 50%;">
-                <p style="color:#005B4E; font-size: 21px; line-height: 31px; font-weight: bold;">Offers Report</p>
+                <p style="color:#005B4E; font-size: 21px; line-height: 31px; font-weight: bold;">{{
+                    'auctionSettings.tab5' | translate }}</p>
             </div>
 
             <div style="display: flex;">
-                <p style="color:#08594D; font-weight:bold; font-size:16px; text-decoration:underline;">Auction report
-                    and bids submitted</p> &nbsp; &nbsp;
+                <p style="color:#08594D; font-weight:bold; font-size:16px; text-decoration:underline;">
+                    {{ 'bidderAuctions.auction_report_and_bids_submitted' | translate }}</p> &nbsp; &nbsp;
                 <span (click)="downloadReport(offerReport.auctionReport)" class="icon-download"></span>
             </div>
 
@@ -170,31 +176,31 @@
                         </th>
                         <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
                             <div style=" padding-left: 10px;" class="table-header-cell">
-                                <span>Offer value</span>
+                                <span>{{ 'auctionCommittee.ac-openOffers.th2' | translate }}</span>
                                 <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
                         <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
                             <div style=" padding-left: 10px;" class="table-header-cell">
-                                <span>Primary Warranty</span>
+                                <span>{{ 'auctionCommittee.ac-openOffers.th3' | translate }}</span>
                                 <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
                         <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(4, 'string')">
                             <div style=" padding-left: 10px;" class="table-header-cell">
-                                <span>Date and time of submission</span>
+                                <span>{{ 'auctionCommittee.ac-openOffers.th4' | translate }}</span>
                                 <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
                         <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'string')">
                             <div style=" padding-left: 10px;" class="table-header-cell">
-                                <span>Facility Name</span>
+                                <span>{{ 'auctionCommittee.ac-openOffers.th5' | translate }}</span>
                                 <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
                         <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(6, 'string')">
                             <div style=" padding-left: 10px;" class="table-header-cell">
-                                <span>Commercial Registration No</span>
+                                <span>{{ 'auctionCommittee.ac-openOffers.th6' | translate }}</span>
                                 <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
