@@ -53,9 +53,9 @@
     </div>
 </div>
 <ng-container *ngIf="!showLoader">
-    <app-header [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'"></app-header>
+    <app-header *ngIf="loggedUserRole" [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'"></app-header>
     <div class="container" style="background-color: #F9FCFA;" [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'">
         <router-outlet></router-outlet>
     </div>
-    <app-footer [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'"></app-footer>
+    <app-footer *ngIf="loggedUserRole" [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'"></app-footer>
 </ng-container>

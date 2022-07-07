@@ -65,6 +65,7 @@ export class AuctionListsComponent implements OnInit {
     { col: 'Status', 'sType': 'D' }
   ];
   isFilterSearch: boolean = false;
+  isSearch = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -290,30 +291,36 @@ export class AuctionListsComponent implements OnInit {
     if (this.isFilterSearch) {
       filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
       // filters.Message = 'F';
-        if(filters.ObjectId || filters.Description || filters.BidType || filters.EndDate || filters.StartDate){
-          if(this.selectedTab == 'All' || this.selectedTab == ''){
-            this.selectedTab = 'All';
-            filters.Status = 'All';
-          } else {
-            filters.Status = this.selectedTab;
-          }
+      if (filters.ObjectId || filters.Description || filters.BidType || filters.EndDate || filters.StartDate) {
+        if (this.selectedTab == 'All' || this.selectedTab == '') {
+          this.selectedTab = 'All';
+          filters.Status = 'All';
         } else {
-          if(this.selectedTab == 'All' || this.selectedTab == ''){
-            if(this.filterFormGroup.controls['auctionStatus'].value){
-              this.selectedTab = this.filterFormGroup.controls['auctionStatus'].value;
-              filters.Status = this.selectedTab;
-            } else {
-              this.selectedTab = '';
-              filters.Status = '';
-            }
-          } else {
+          filters.Status = this.selectedTab;
+        }
+      } else {
+        if (this.selectedTab == 'All' || this.selectedTab == '') {
+          if (this.filterFormGroup.controls['auctionStatus'].value) {
             this.selectedTab = this.filterFormGroup.controls['auctionStatus'].value;
             filters.Status = this.selectedTab;
+          } else {
+            this.selectedTab = '';
+            filters.Status = '';
           }
+        } else {
+          this.selectedTab = this.filterFormGroup.controls['auctionStatus'].value;
+          filters.Status = this.selectedTab;
         }
+      }
     }
     if (sortBy && sorttype) {
       filters.Msgty = sorttype + ' ' + sortBy;
+    }
+
+    if (this.isSearch) {
+      filters.Status = 'All';
+      this.selectedTab = 'All';
+      this.isSearch = false;
     }
 
     console.log("🚀 ~ this.auctionServc.getAuctionList ~ filters", filters)
@@ -324,6 +331,8 @@ export class AuctionListsComponent implements OnInit {
 
       this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
       this.auctionListData = this.mapping(res.body);
+
+      console.log(filters, "SKA", this.auctionListData)
 
       if (res.body.d.results && res.body.d.results.length > 0) {
         this.PaginationServc.setPagerValues(
@@ -339,16 +348,16 @@ export class AuctionListsComponent implements OnInit {
     });
   }
 
-  isSorting(columnId: number){
+  isSorting(columnId: number) {
     return this.PaginationServc.columnId !== columnId;
   }
-  isSortAsc(columnId: number){
+  isSortAsc(columnId: number) {
     return this.PaginationServc.isSortAsc(columnId);
   }
-  isSorDesc(columnId: number){
+  isSorDesc(columnId: number) {
     return this.PaginationServc.isSortDesc(columnId);
   }
-  
+
 
   sortBy(sortBy?: string, columnId?: number) {
     columnId = columnId ? columnId : 0;
@@ -382,6 +391,7 @@ export class AuctionListsComponent implements OnInit {
     this.filterFormGroup.controls[dd].setValue(e.target.value, {
       onlySelf: true
     })
+    this.isSearch = false;
   }
 
   toggleFilter() {

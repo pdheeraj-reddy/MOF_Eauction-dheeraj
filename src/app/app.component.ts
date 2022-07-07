@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common';
 // import { authCodeFlowConfig } from "./sso.config";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-root',
@@ -14,22 +15,24 @@ export class AppComponent implements OnInit {
   showLoader: boolean = false;
   public browserLang: string;
   title = 'etimad';
-  
+  loggedUserRole: any;
+
   constructor(
-    private cookieService:CookieService,
+    public auctionServc: AuctionService,
+    private cookieService: CookieService,
     public translate: TranslateService,
     @Inject(DOCUMENT) private document: Document
-    
-    ){
 
-      
-      // this.configureSingleSignOn();
-      translate.addLangs(['en', 'ar']);
-      translate.setDefaultLang('en');
+  ) {
 
-      const browserLang:any = translate.getBrowserLang();
-      translate.use(browserLang.match(/en|ar/) ? browserLang : 'en');
-    }
+
+    // this.configureSingleSignOn();
+    translate.addLangs(['en', 'ar']);
+    translate.setDefaultLang('en');
+
+    const browserLang: any = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|ar/) ? browserLang : 'en');
+  }
 
   // configureSingleSignOn(){
   //   this.oauthService.configure(authCodeFlowConfig);
@@ -37,10 +40,11 @@ export class AppComponent implements OnInit {
   //   this.oauthService.loadDiscoveryDocumentAndLogin();
   // }
   ngOnInit(): void {
+    this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     this.showLoader = true;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.browserLang = event.lang;
-      if(this.browserLang === 'en'){
+      if (this.browserLang === 'en') {
         this.loadStyle('https://cdn.etimad.sa/v2/styles/main-en.min.css');
       } else {
         this.loadStyle('https://cdn.etimad.sa/v2/styles/main.min.css');

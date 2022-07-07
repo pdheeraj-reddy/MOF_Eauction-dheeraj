@@ -107,8 +107,8 @@
                                                 <div class="form-group">
                                                     <label>{{ 'auctioncreate.auctionproduct.section1_formGrp2' |
                                                         translate }}</label>
-                                                    <input type="text" autocomplete="off" appDatePicker formControlName="deliveryDate" name="delivery-date" class="form-control calendar-control calendar-gregorian-control" placeholder="{{ 'auctioncreate.formDate-plch' | translate }}" (change)="changedatetime($event,'deliveryDate');"
-                                                    />
+                                                    <input type="text" onkeydown="event.preventDefault()" autocomplete="off" appDatePicker formControlName="deliveryDate" name="delivery-date" class="form-control calendar-control calendar-gregorian-control" placeholder="{{ 'auctioncreate.formDate-plch' | translate }}"
+                                                        (change)="changedatetime($event,'deliveryDate');" />
                                                     <div *ngIf="submitted && locationForm['deliveryDate'].errors" class="invalid-feedback">
                                                         <div *ngIf="locationForm['deliveryDate'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp2' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                     </div>
@@ -119,8 +119,8 @@
                                                 <div class="form-group">
                                                     <label>{{ 'auctioncreate.auctionproduct.section1_formGrp3' |
                                                         translate }}</label>
-                                                    <input type="text" autocomplete="off" appTimePicker formControlName="deliveryTime" name="delivery-time" class="form-control time-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp3-plch' | translate }}" (click)="changedatetime($event,'deliveryTime');"
-                                                    />
+                                                    <input type="text" onkeydown="event.preventDefault()" autocomplete="off" appTimePicker formControlName="deliveryTime" name="delivery-time" class="form-control time-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp3-plch' | translate }}"
+                                                        (click)="changedatetime($event,'deliveryTime');" />
                                                     <div *ngIf="submitted && locationForm['deliveryTime'].errors" class="invalid-feedback">
                                                         <div *ngIf="locationForm['deliveryTime'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp3' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                     </div>
@@ -755,8 +755,8 @@
                                     <div class="form-group">
                                         <label>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' |
                                             translate}}</label>
-                                        <input type="text" autocomplete="off" appDatePicker name="delivery-date" formControlName="deliveryDate" placeholder="{{ 'auctioncreate.formDate-plch' | translate }}" class="form-control calendar-control calendar-gregorian-control" [required]="true" (change)="productchangedatetime($event,'deliveryDate');"
-                                        />
+                                        <input type="text" onkeydown="event.preventDefault()" autocomplete="off" appDatePicker name="delivery-date" formControlName="deliveryDate" placeholder="{{ 'auctioncreate.formDate-plch' | translate }}" class="form-control calendar-control calendar-gregorian-control"
+                                            [required]="true" (change)="productchangedatetime($event,'deliveryDate');" />
                                     </div>
                                     <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryDate'].errors" class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['deliveryDate'].errors['required']">
@@ -768,8 +768,8 @@
                                     <div class="form-group">
                                         <label>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' |
                                             translate}}</label>
-                                        <input type="text" autocomplete="off" appTimePicker formControlName="deliveryTime" name="delivery-time" class="form-control time-control" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11-plch' | translate}}" [required]="true"
-                                            (change)="productchangedatetime($event,'deliveryTime');" />
+                                        <input type="text" onkeydown="event.preventDefault()" autocomplete="off" appTimePicker formControlName="deliveryTime" name="delivery-time" class="form-control time-control" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11-plch' | translate}}"
+                                            [required]="true" (change)="productchangedatetime($event,'deliveryTime');" />
                                         <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryTime'].errors" class="invalid-feedback">
                                             <div *ngIf="addproductlocationForm['deliveryTime'].errors['required']">
                                                 {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
