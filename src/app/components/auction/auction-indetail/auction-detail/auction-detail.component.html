@@ -272,7 +272,7 @@
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker (click)="makeConsole('enter')" (keydown.esc)="makeConsole('esc')" (keydown.alt)="makeConsole('alt')" (keydown.tab)="makeConsole('tab')" -->
                             <!-- <input type="text" id="auctionStartDate" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'Public'"> -->
-                            <input type="text" id="auctionStartDate" formControlName="auctionStartDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionStartDate')" class="form-control calendar-control calendar-both-control"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionStartDate" formControlName="auctionStartDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionStartDate')" class="form-control calendar-control calendar-both-control"
                                 [required]="form['auctionType'].value === 'Public'" />
                             <div *ngIf="submitted && form['auctionStartDate'].errors" class="invalid-feedback">
                                 <div *ngIf="form['auctionStartDate'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp7' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
@@ -283,7 +283,7 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp8' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionEndDate" class="form-control calendar-control calendar-gregorian-control" placeholder="day-month-year" [required]="form['auctionType'].value === 'Public'" /> -->
-                            <input type="text" id="auctionEndDate" formControlName="auctionEndDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionEndDate')" class="form-control calendar-control calendar-both-control"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionEndDate" formControlName="auctionEndDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionEndDate')" class="form-control calendar-control calendar-both-control"
                                 [required]="form['auctionType'].value === 'Public'" />
                             <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'Public'" /> -->
                         </div>
@@ -296,8 +296,8 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp9' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionStartTime" class="time-control form-control" placeholder="Auction start time" [required]="form['auctionType'].value === 'Public'" (click)="changetime($event,'auctionStartTime');" /> -->
-                            <input type="text" id="auctionStartTime" formControlName="auctionStartTime" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }}" (change)="onChangeDateTime($event, 'auctionStartTime')" class="form-control time-control" [required]="form['auctionType'].value === 'Public'"
-                            />
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionStartTime" formControlName="auctionStartTime" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }}" (change)="onChangeDateTime($event, 'auctionStartTime')" class="form-control time-control"
+                                [required]="form['auctionType'].value === 'Public'" />
                         </div>
                         <div *ngIf="submitted && form['auctionStartTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionStartTime'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
@@ -307,8 +307,8 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp10' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionEndTime" class="time-control form-control" placeholder="Auction end time" [required]="form['auctionType'].value === 'Public'" (click)="changetime($event,'auctionEndTime');" /> -->
-                            <input type="text" id="auctionEndTime" formControlName="auctionEndTime" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }}" (change)="onChangeDateTime($event, 'auctionEndTime')" class="form-control time-control" [required]="form['auctionType'].value === 'Public'"
-                            />
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionEndTime" formControlName="auctionEndTime" placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }}" (change)="onChangeDateTime($event, 'auctionEndTime')" class="form-control time-control"
+                                [required]="form['auctionType'].value === 'Public'" />
                         </div>
                         <div *ngIf="submitted && form['auctionEndTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionEndTime'].errors['required']">{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
@@ -335,7 +335,7 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp12' |
                                     translate }}</span></label>
-                            <input type="text" id="auctionAnncStartDate" formControlName="auctionAnncStartDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionAnncStartDate')" class="form-control calendar-control calendar-both-control"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionAnncStartDate" formControlName="auctionAnncStartDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionAnncStartDate')" class="form-control calendar-control calendar-both-control"
                                 [required]="true" />
                             <!-- <input type="text" formControlName="auctionAnncStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
                             <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' | translate }}</div>
@@ -344,7 +344,7 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp13' |
                                     translate }}</span></label>
-                            <input type="text" id="auctionAnncEndDate" formControlName="auctionAnncEndDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionAnncEndDate')" class="form-control calendar-control calendar-both-control"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionAnncEndDate" formControlName="auctionAnncEndDate" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" (change)="onChangeDateTime($event, 'auctionAnncEndDate')" class="form-control calendar-control calendar-both-control"
                                 [required]="true" />
                             <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' | translate }}</div>
                         </div>

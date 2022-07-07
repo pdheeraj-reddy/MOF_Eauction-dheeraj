@@ -343,7 +343,7 @@
                                 <div class="mb-5">
                                     <nav aria-label="..." class="nav-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item" [ngClass]="{
+                                            <li class="page-item clickable" disabled [ngClass]="{
                           disabled: pageRangeForProductAttach.currentPage === 1
                         }">
                                                 <a (click)="
@@ -351,7 +351,7 @@
                               pageRangeForProductAttach.currentPage - 1,
                               'productAttach'
                             )
-                          " class="page-link" tabindex="-1" aria-disabled="true">{{ "auctionlist.grid-previous" |
+                          " class="page-link" aria-disabled="true">{{ "auctionlist.grid-previous" |
                           translate }}</a>
                                             </li>
                                             <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item" [ngClass]="{
@@ -359,7 +359,7 @@
                         }">
                                                 <a (click)="navigateToPage(page, 'productAttach')" class="page-link"> {{ page }} </a>
                                             </li>
-                                            <li class="page-item" [ngClass]="{
+                                            <li class="page-item clickable" disabled [ngClass]="{
                           disabled:
                             pageRangeForProductAttach.currentPage ===
                             pageRangeForProductAttach.totalPages

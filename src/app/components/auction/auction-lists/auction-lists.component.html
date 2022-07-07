@@ -194,8 +194,8 @@
                 <!-- {{filterFormGroup.value | json}} -->
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md" (click)="isFilterSearch = true; resetFilter()"> {{ 'auctionlist.filter-btn2' | translate }} </button>
-                <button type="button" class="btn btn-primary-light btn-md" (click)="isFilterSearch = true; getAuctionList(1)"> {{
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md" (click)="isFilterSearch = true; isSearch=true; resetFilter()"> {{ 'auctionlist.filter-btn2' | translate }} </button>
+                <button type="button" class="btn btn-primary-light btn-md" (click)="isFilterSearch = true; getAuctionList(1);"> {{
                     'auctionlist.filter-btn1' | translate }} </button>
             </div>
         </form>
