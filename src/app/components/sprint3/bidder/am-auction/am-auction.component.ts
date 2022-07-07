@@ -143,7 +143,7 @@ export class AmAuctionComponent implements OnInit {
         auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD') : '' : '',
         auctiontime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'], 'YYYY-MM-DD').format('YYYY-MM-DD HH:mm:ss') : '' : '',
         auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? new Date(result['ZzAucEndDt']).getTime() : '' : '',
-        auctiontimeSufix: 'evening'
+        auctiontimeSufix: 'evening',
       }
       resultSet.push(items);
     });

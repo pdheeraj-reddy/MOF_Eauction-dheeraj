@@ -23,7 +23,7 @@
             <app-auction-countdown-timer [timestamp]="auction.auctionenddate" style="width: 55%;">
             </app-auction-countdown-timer>
             <div>
-                <a href="#" class="btn"
+                <a [routerLink]="['/bidder/auction-details', auction.ObjectId]" class="btn"
                     [ngClass]="[(auction.statuscode === 'Under Gear' || auction.statuscode === 'Awarded' || auction.statuscode === 'Canceled' ) ? 'notact-btn' : (auction.statuscode == 'Running Now' || auction.statuscode == 'Upcoming auction') ? 'act-btn' :'']">
                     {{ 'AuctionDetails' | translate }}
                 </a>

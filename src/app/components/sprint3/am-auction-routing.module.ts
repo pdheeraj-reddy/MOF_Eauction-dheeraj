@@ -11,7 +11,7 @@ import { AuctionDetailsComponent } from './shared/auction-details/auction-detail
 
 const routes: Routes = [
   { path: '', component: AmAuctionComponent },
-  { path: 'auction-details', component: AuctionDetailsComponent},
+  { path: 'auction-details/:auctionId', component: AuctionDetailsComponent },
   { path: 'offer-report', component: BillOffferReportComponent },
   { path: 'send-invoice', component: SendInvoiceComponent },
   { path: 'pdf-template', component: BillPdfTemplateComponent },
