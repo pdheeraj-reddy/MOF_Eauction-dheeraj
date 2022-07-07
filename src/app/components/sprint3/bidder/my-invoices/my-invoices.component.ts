@@ -7,6 +7,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment-mini';
 import { EnvService } from 'src/app/env.service';
+import { BidderService } from '../../services/bidder.service';
 declare var $:any;
 
 @Component({
@@ -47,6 +48,7 @@ export class MyInvoicesComponent implements OnInit {
     private http: HttpClient,
     public translate: TranslateService,
     private envService: EnvService,
+    private bidderService: BidderService,
     ) { }
 
     public mapping(serverObj: any) {
@@ -173,27 +175,30 @@ export class MyInvoicesComponent implements OnInit {
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
     this.showLoader = true;
-
-    this.http.get<any>(this.envService.environment.apiBidderMyInvoices 
-      // "?$expand=page1tolistnav" + 
-      // "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
-      ,{responseType: 'json'}).subscribe(res=>{
-        this.showLoader = false;
-        
-    //   this.PaginationServc.setPagerValues(
-    //     +res.body.d.results[0].TotEle,
-    //     10,
-    //     +pageNoVal
-    //   );
-    
-    //   const csrfToken = localStorage.getItem("x-csrf-token");    
-    //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-      console.log(res,"f");
+    this.bidderService.getMyInvoiceList().subscribe((res:any)=>{
+      this.showLoader = false;
       this.invoiceListData = this.mapping(res);
-    }, (error) => {
-        this.showLoader = false;
-        console.log('getAuctionList RespError : ', error);
-      });
+    });
+    // this.http.get<any>(this.envService.environment.apiBidderMyInvoices 
+    //   // "?$expand=page1tolistnav" + 
+    //   // "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
+    //   ,{responseType: 'json'}).subscribe(res=>{
+    //     this.showLoader = false;
+        
+    // //   this.PaginationServc.setPagerValues(
+    // //     +res.body.d.results[0].TotEle,
+    // //     10,
+    // //     +pageNoVal
+    // //   );
+    
+    // //   const csrfToken = localStorage.getItem("x-csrf-token");    
+    // //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
+    //   console.log(res,"f");
+    //   this.invoiceListData = this.mapping(res);
+    // }, (error) => {
+    //     this.showLoader = false;
+    //     console.log('getAuctionList RespError : ', error);
+    //   });
     // this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
     //   this.showLoader = false;
 

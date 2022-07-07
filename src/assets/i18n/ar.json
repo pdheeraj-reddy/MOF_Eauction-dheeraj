@@ -10,12 +10,6 @@
     "Upcoming Auction": "المزاد القادم",
     "Under Gear": "تحت العتاد",
     "Running Now": "يعمل الآن",
-    "Ongoing": "Ongoing",
-    "Terminated": "Terminated",
-    "Pending FBGA Approval": "Pending FBGA Approval",
-    "Pending FBGA": "Pending FBGA",
-    "Pending Primary Awarding": "Pending Primary Awarding",
-    "Pending Selecting": "Pending Selecting",
     "Cancelled": "ألغيت",
     "Awarded": "منحت",
     "Public": "مزاد عام",
@@ -40,7 +34,6 @@
     "Next Financial": "المقبل المالي",
     "15": "١٥ يوم",
     "Manual": "يدوي",
-    "evening": "اخر النهار",
     "anchorlink": "اضغط هنا",
     "EAuction_SalesCommitteeChairman": "لجنة البيع",
     "EAuction_SalesCommitteSecretary": "بيع سكرتير اللجنة",
@@ -53,6 +46,9 @@
     "EAuction_PricingCommitteeChairman": "رئيس لجنة التسعير",
     "ZEAUCTION_PRICECOMM_HEAD": "رئيس اللجنه",
     "ZEAUCTION_PRICECOMM_SECRETARY": "سكرتير اللجنه",
+    "ZEAUCTION_SALCOMM_CHAIRMAN": "رئيس اللجنه",
+    "ZEAUCTION_SALCOMM_SECRETARY": "سكرتير اللجنه",
+    "ZEAUCTION_SALCOMM_MEMBER": "عضو اللجنة",
     "Enter the total estimated value of the products": "إدخال إجمالي القيمة التقديرية للمنتجات",
     "Enter the estimated value for each product separately": "إدخال القيمة التقديرية لكل منتج على حدة",
     "changes_not_saved": "قد لا يتم حفظ التغييرات التي قمت بإجرائها. هل ما زلت تريد التنقل؟",
@@ -515,7 +511,7 @@
                 "emp-id-phold": "لا يوجد بيانات",
                 "emp-email-phold": "لا يوجد بيانات",
                 "emp-role-phold": "سكرتير اللجنه",
-                "add": "أضافه",
+                "add": "إضافة",
                 "add_committee_member": "Add Committee Member",
                 "add_committee_head": "إضافة رئيس اللجنه",
                 "add_committee_secretary": "Add Committee Secretary",
@@ -639,10 +635,19 @@
             "popup_phold": "أدخل القيمة التقديرية للمنتج"
         },
         "confirmation-popup": {
-            "title": "تأكيد قبول طلب التسعير؟",
-            "subtitle": "عند التأكيد سيتم اعتماد طلب التسعير وإرساله لرئيس الجهة الحكومية. ",
-            "accept": "قبول الطلب",
+            "title": "تأكيد إرسال تسعير المنتجات؟",
+            "subtitle": "عند التأكيد سيتم اعتماد الطلب المزاد وإرساله للموافقة.",
+            "accept": "تأكيد النشر",
             "back": "رجوع"
+        },
+        "successful-popup": {
+            "title": "تم إرسال التسعير بنجاح",
+            "subtitle": "تم إرسال الطلب بنجاح، وستصلك رسالة بالبريد الإلكتروني لمتابعة طلبك",
+            "accept": "العودة إلى طلبات المزاد"
+        },
+        "error-popup": {
+            "subtitle": "يرجى الإنتباه بأن أحد القيم التقديرية تساوى 0.هل تريد المتابعة ؟",
+            "accept": "تأكيد"
         },
         "accept-popup": {
             "title": "تأكيد قبول طلب التسعير؟",
@@ -650,14 +655,23 @@
             "accept": "قبول التطبيق",
             "back": "ظهر"
         },
-        "successful-popup": {
-            "title": "تم إرسال التسعير بنجاح",
-            "subtitle": "تم إرسال الطلب بنجاح، وستصلك رسالة بالبريد الإلكتروني لمتابعة طلبك ",
+        "accept-success": {
+            "title": "تم قبول الطلب بنجاح",
+            "subtitle": "تم إرسال الطلب بنجاح لرئيس الجهة لإكمال اعتماد المزاد",
             "accept": "العودة إلى طلبات المزاد"
         },
-        "error-popup": {
-            "subtitle": "يرجى الإنتباه بأن أحد القيم التقديرية تساوى 0.هل تريد المتابعة ؟",
-            "accept": "تأكيد"
+        "reject-popup": {
+            "title": "تأكيد رفض الطلب؟",
+            "subtitle": "هل أنت متأكد من إرسال طلب الرفض؟",
+            "reason-label": "الرجاء إدخال السبب",
+            "letter": "حرف",
+            "phold": "نص..",
+            "cancel": "إلغاء "
+        },
+        "reject-success": {
+            "title": "تم رفض الطلب بنجاح",
+            "subtitle": "تم إرسال رفض الطلب بنجاح، وسوفيصل لعضو لجنة التسعير لإعادة التعديل",
+            "accept": "العودة إلى طلبات المزاد"
         }
     },
     "auctionCommittee": {
@@ -812,7 +826,113 @@
     },
     "bidderAuctions": {
         "TrustServices": "خدمات اعتماد",
-        "Auctions": "مزاداتي",
+        "Auctions": "المزادات",
+        "All": "الكل",
+        "OngoingAuctions": "مزادات جارية",
+        "UpcomingAuctions": "مزادات قادمة",
+        "UnderGear": "تحت الترسية",
+        "ClosedAuctions": "مزادات منتهية"
+    },
+    "bidderAuctionDetails": {
+        "Auctions": "المزادات",
+        "AuctionDetails": "تفاصيل المزاد",
+        "ThisAuctionIsComing": "هذا المزاد قادم",
+        "YouCanRegisterYourEntry": "يمكنك تسجيل اشتراكك حتى يحين وقت المزاد.",
+        "AuctionStartDate": "تاريخ بداية المزاد",
+        "ParticipateInTheAuction": "المشاركة في المزاد",
+        "Product": "منتج",
+        "AuctionStarts": "بداية المزاد",
+        "BiddingIs": "طريقة المزايدة",
+        "ImportantInformation": "معلومات مهمة",
+        "AuctionStartPrice": "سعر بدء المزاد",
+        "InitialGuaranteePercentage": "نسبة الضمان المبدئي",
+        "CommissionRate": "نسبة العمولة",
+        "EndOfBidding": "نهاية تقديم العروض",
+        "BidOpeningDate": "تاريخ فتح العروض",
+        "AuctionDetails1": "تفاصيل المزاد",
+        "StartsDuring": "يبدأ خلال:",
+        "Day": "يوم",
+        "Hour": "ساعة",
+        "Accurate": "دقيقة",
+        "Second": "ثانية",
+        "UpcomingAuction": "مزاد قادم",
+        "ProductDetails": "تفاصيل المنتج",
+        "AuctionSettings": "إجراءات المزاد",
+        "auction-popup": {
+            "ConfirmationOfParticipation": "تأكيد الاشتراك في المزاد؟",
+            "UponConformation": "عند التأكيد سيتم تسجيل معلوماتك كمشارك في المزاد.",
+            "Cancellation": "إلغاء",
+            "SubscriptionConfirmation": "تأكيد الاشتراك",
+            "SubscriptionConfirmedSuccessfully": "تم تأكيد الإشتراك بنجاح",
+            "ReceiveEmail": "سوف تصلك رسالة بالبريد الإلكتروني عند بدء المزاد",
+            "BackToAuctions": "العودة إلى المزادات"
+        },
+        "auction-settings": {
+            "You-can-manage-the-auction": "يمكنك إدارة المزاد من هذه القائمة",
+            "AuctionDetails": "تفاصيل المزاد",
+            "AuctionInstructions": "تعليمات المزاد",
+            "ManagingAuctions": "للمساعدة أو الدعم في إدارة المزادات",
+            "PressHere": "اضغط هنا",
+            "NumberOfBids": "عدد المزايدات",
+            "Participants": "مشارك"
+        },
+        "auction-details": {
+            "AuctionReferenceNumber": "الرقم المرجعي للمزاد",
+            "AuctionType": "نوع المزاد",
+            "BiddingMethod": "طريقة المزايدة",
+            "AuctionName": "اسم المزاد",
+            "AuctionProducts": "منتجات المزاد",
+            "EntityNo": "رقم الجهة",
+            "EntityName": "اسم الجهة",
+            "AuctionDescription": "وصف المزاد",
+            "AuctionDateAndTime": "تاريخ ووقت المزاد",
+            "BiddingBegins": "بداية تقديم العروض",
+            "EndOfBidding": "نهاية تقديم العروض",
+            "HowToStartTheAuction": "طريقة بدء المزاد",
+            "BidOpeningDate": "تاريخ فتح العروض",
+            "FinancialAuctionItems": "بنود المزاد المالية",
+            "AuctionStartPrice": "سعر بدء المزاد",
+            "WarrantyPercentage": "نسبة الضمان",
+            "CommissionType": "نوع العمولة",
+            "Pursuit-percentage-commission": "نسبة السعي - العمولة ٪",
+            "Final-guarantee-payment-date": "موعد دفع الضمان النهائي",
+            "Attachments": "مرفقات",
+            "Attached": "المرفق",
+            "AttachmentName": "اسم المرفق"
+        },
+        "auction-instruction": {
+            "AuctionInstructions": "تعليمات المزاد",
+            "AuctionParticipationInstructions": "تعليمات المشاركة في المزاد",
+            "instructionsList1": "١. قبل المشاركة في المزاد يجب ان تكون حالة السجل التجاري “مشترك” في منصة اعتماد.",
+            "instructionsList2": "٢. عند بدء المزاد سوف يتطلب منك اصدار الضمان الابتدائي وإرفاقه وتقديم مزايدتك، وارفاق الضضمان النهائي في حال تمت ترسية المزاد عليك. ويمكنك اصدار الضمانات عن طريق منصة اعتماد - ",
+            "instructionsList2-link": "خدمة الضمان البنكي",
+            "instructionsList3": "٣.  عند بدء المزاد سيتم حجز مبلغ الضمان الابتدائي، بعد ذلك يمكن البدء بالمزايدة، وفي حال عدم ترسية المزاد على المزايد يتم فك حجز الضمان البنكي مباشرة.",
+            "instructionsList4": "٤.  في حال عدم تحقيق الحد الأدنى للسعر التقديري للمنتجات لا يتم ترسية المزاد.",
+            "AuctionWorkflow": "سير عمل المزاد",
+            "Participate-in-the-auction": "المشاركة في المزاد",
+            "WarrantyLiftPrimary": "رفع الضمان الابتدائي",
+            "AuctionStartSubmitBids": "بدء المزاد وتقديم المزايدات",
+            "InitialAward": "(الترسية المبدئية) ترسية المزاد على أعلى عرض",
+            "FinalAward": "(الترسية النهائية) رفع الضمان النهائي",
+            "payTheBill": "دفع الفاتورة"
+        },
+        "product-details": {
+            "ProductTruckNo": "شاحنة ايسوزو رقم 23",
+            "ProductDetails": "تفاصيل المنتج",
+            "ProductName": "اسم المنتج",
+            "ProductCondition": "حالة المنتج",
+            "DeliveryDateAndTime": "تاريخ ووقت التسليم",
+            "ProductNumber": "Product Number",
+            "ProductSpecification": "مواصفات المنتج",
+            "DeliveryAddress": "عنوان التسليم",
+            "OtherAttachments": "مرفقات أخرى",
+            "Attached": "المرفق",
+            "AttachmentName": "اسم المرفق"
+        }
+    },
+    "bidderMyAuctions": {
+        "TrustServices": "خدمات اعتماد",
+        "MyAuctions": "مزاداتي",
         "All": "الكل",
         "OngoingAuctions": "مزادات جارية",
         "UpcomingAuctions": "مزادات قادمة",
@@ -833,5 +953,63 @@
         "ThAuctionName": "اسم المزاد",
         "ThAuctionType": "نوع المزاد",
         "DisplayCase": "حالة العرض"
+    },
+    "bidderMyInvoices": {
+        "TrustServices": "خدمات اعتماد",
+        "Invoices": "الفواتير",
+        "InvoicesTitle": "الفواتير",
+        "All": "الكل",
+        "AwaitingPayment": "بإنتظار الدفع",
+        "Paid": "مدفوعة",
+        "filter-title": "البحث المتقدم",
+        "InvoiceReferenceNumber": "الرقم المرجعي للمزاد",
+        "InvoiceReferenceNumberPholder": "أدخل الرقم المرجعي",
+        "InvoiceIssueDate": "تاريخ إصدار الفاتورة",
+        "Invoice-formDate-pholder": "يوم  -  شهر  -  سنة",
+        "AmountOfTheInvoice": "مبلغ الفاتورة",
+        "EntityName": "اسم الجهة",
+        "InvoicePaymentStatusFinalWarranty": "حالة دفع الفاتورة والضمان النهائي",
+
+        "filter-btn1": "بحث",
+        "filter-btn2": "إعادة تعيين",
+        "TheadInvoiceReferenceNumber": "الرقم المرجعي للفاتورة",
+        "ThInvoiceIssueDate": "تاريخ إصدار الفاتورة",
+        "ThAmountOfTheInvoice": "مبلغ الفاتورة",
+        "ThEntityName": "اسم الجهة",
+        "ThInvoicePaymentStatusFinalWarranty": "حالة دفع الفاتورة والضمان النهائي"
+    },
+    "bidderSendOffer": {
+        "LatestOffersSent": "آخر العروض المرسلة",
+        "AttachThePrimaryWarranty": "إرفاق الضمان الأساسي",
+        "ForHelpSupportManagingAuctions": "للمساعدة أو الدعم في إدارة المزادات",
+        "ClickHere": "انقر هنا",
+        "UploadFileFormat": "PNG ، JPG ، DOCX ، DOC ، ملف PDF",
+        "AddYourOffer": "أضف عرضك",
+        "SAR": "ريال سعودي",
+        "PersuitRate": "معدل بيرسويت",
+        "AddedTaxValue": "قيمة الضريبة المضافة",
+        "TotalOfferPrice": "اجمالي سعر العرض",
+        "SendOffer": "إرسال العرض",
+        "ConfirmationBidSubmission": "تأكيد تقديم العرض؟",
+        "BidSubmissionDescription": "عند التأكيد يوف يتم إرسال عرضك للجنة المزاد. ولن تستطيع تعديل او إلغاء العرض بعد إرساله.",
+        "SubmitOffer": "إرسال العرض",
+        "Cancellation": "إلغاء",
+        "OfferSuccess": "تم إرسال العرض بنجاح",
+        "OfferContent": "تمنياتنا لك بالتوفيق!",
+        "OfferDescription": "سوف تصلك رسالة بالبريد الإلكتروني في حال تم ترسية المزاد على عرضك.",
+        "BackToAuctions": "العودة إلى المزادات"
+    },
+    "bidderPayInvoice": {
+        "AwaitingPayment": "Awaiting payment",
+        "PleasePayInvoice-approve-final-award": " Please pay the invoice to approve the final award.",
+        "AwardCanceled": "The award will be canceled if the invoice is not paid within 30 days of awarding.",
+        "PayTheBill": "Pay the bill"
+    },
+    "bidderfbga": {
+        "YourBidHasBeenAwarded": "Your bid has been awarded !",
+        "FinalGuaranteeApproveInitialAward": "Please attach the final guarantee to approve the initial award.",
+        "UploadFileFormat": "PNG, JPG, DOCX, DOC, PDF File",
+        "AttachTheFinalWarranty": "Please issue and attach the final warranty within 15 days of awarding. You can issue the guarantee through the bank guarantee service of the Etimad platform.",
+        "SendTheFinalGuarantee": "Send the final guarantee"
     }
 }

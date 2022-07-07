@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EnvService } from 'src/app/env.service';
+import { BidderService } from '../../services/bidder.service';
 
 @Component({
   selector: 'app-no-of-participants-bids',
@@ -9,25 +10,29 @@ import { EnvService } from 'src/app/env.service';
 })
 export class NoOfParticipantsBidsComponent implements OnInit {
 
-  constructor(private http: HttpClient,private envService: EnvService,) { }
-  auctionId:number;
+  @Input() auctionId:any;
+
+  constructor(private http: HttpClient,
+  private api: BidderService) { }
   participants: number = 0;
   bids:number = 0;
   ngOnInit(): void {
-    // this.getauctionList();
-    // TODO: Call the API and get the numbers
+    console.log('no of partipate',this.auctionId)
+   
+    this.getParticipants();
   }
-  // getauctionList(pageNumber?: number){
-  //   this.auctionId = 9700000780;
-  //   // let id = this.auctionId.toString();
-  //   this.http.get<any>(this.envService.environment.apiBidderParticipantsBids + "?auctionId="+this.auctionId+"&status=Ongoing",{responseType: 'json'}).subscribe(res=>{
-  //   //   const csrfToken = localStorage.getItem("x-csrf-token");    
-  //   //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-  //     this.bids = res.d.NoBids;
-  //     this.participants = res.d.NoParticipant? res.d.NoParticipant : 0;
-  //     // this.auctionListData = this.mapping(res);
-  //   }, (error) => {
-  //       console.log('getAuctionList RespError : ', error);
-  //     });
-  // }
+  getParticipants(){
+
+    this.api.getNoOfParticipants(this.auctionId).subscribe((res:any)=>{
+      console.log(res.body.d);
+      this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
+      this.bids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
+
+      setTimeout(() => {
+        // console.log(5);
+         this.getParticipants()
+      }, 5000);
+    })
+  }
+ 
 } 

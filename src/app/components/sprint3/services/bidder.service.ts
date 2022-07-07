@@ -76,4 +76,49 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(participationDetails),httpOptions);
   }
+
+
+  getNoOfParticipants(auctionId:any,pageNumber?: number):Observable<any>{
+    
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiBidderParticipantsBids + 
+      "?auctionId="+auctionId+"&status=Ongoing",httpOptions)
+
+  }
+  getMyAuctionsList(filters:any,pageLimit:any,pageNumber?: number):Observable<any>{
+    
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiBidderMyAuctions+ 
+      "?$expand=page1tolistnav" + 
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + filters + ")&$format=json",httpOptions)
+
+  }
+  getMyInvoiceList():Observable<any>{
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiBidderMyInvoices+"&$format=json",httpOptions)
+  }
 }

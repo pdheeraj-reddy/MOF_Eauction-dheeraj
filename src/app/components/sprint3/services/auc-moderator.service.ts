@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import jwt_decode from 'jwt-decode';
 import { EnvService } from 'src/app/env.service';
+import { BidderService } from './bidder.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AucModeratorService {
   constructor( 
     private http: HttpClient,
     private envService: EnvService,
-    private cookieService:CookieService 
+    private cookieService:CookieService,
+    private bidder : BidderService,
   ) { }
 
   getDecodedAccessToken(token: string): any {
@@ -34,7 +36,7 @@ export class AucModeratorService {
 
     const httpOptions = {
       headers: {
-        'X-CSRF-TOKEN': localStorage.getItem("x-csrf-token") as string
+        'X-CSRF-TOKEN': this.bidder.XCSRFToken
       },
       params: {
       }
