@@ -3,115 +3,107 @@
     <!--=================== Blue box to show auction status ===================-->
     <div class="w-25 d-flex flex-column justify-content-center custom-bg-info" style="min-height: 130px;">
         <div class="mx-4">
-            <p class="text-18 text-info font-weight-bold">{{ 'bidderAuctionDetails.ThisAuctionIsComing' | translate }}</p>
+            <p class="text-18 text-info font-weight-bold">{{ 'bidderAuctionDetails.ThisAuctionIsComing' | translate }}
+            </p>
             <p class="text-12 text-info">{{ 'bidderAuctionDetails.YouCanRegisterYourEntry' | translate }}</p>
         </div>
     </div>
     <!-- End -->
 
-    <div class="vr-line"></div> 
+    <div class="vr-line"></div>
 
-    <!--=================== Shows auction start date and time  ===================-->
-    <div class="d-flex flex-column justify-content-center mx-4">
-        <p class="text-info text-12">{{ 'bidderAuctionDetails.AuctionStartDate' | translate }}</p>
-        <div class="d-flex flex-row text-primary text-14 align-items-center justify-content-between">
-            <p>{{upcomingAuction.auction_start_date}}</p>
-            &nbsp;&nbsp;
-            <label class="icon-dot"></label>
-            &nbsp;&nbsp;
-            <p style="opacity:.5;">{{upcomingAuction.auction_start_time}} {{upcomingAuction.auction_start_timeSufix}}</p>
+    <!--============ Shows auction start date and time and Participation Button ============-->
+    <div class="d-flex justify-content-between mx-4 w-75">
+
+        <!--=================== Shows auction start date and time ===================-->
+        <div class="d-flex flex-column justify-content-center">
+            <p class="text-info text-12">{{ 'bidderAuctionDetails.AuctionStartDate' | translate }}</p>
+            <div class="d-flex flex-row text-primary text-14 align-items-center justify-content-between">
+                <p>{{upcomingAuction.auction_start_date}}</p>
+                &nbsp;&nbsp;
+                <label class="icon-dot"></label>
+                &nbsp;&nbsp;
+                <p style="opacity:.5;">{{upcomingAuction.auction_start_time}}
+                    {{upcomingAuction.auction_start_timeSufix}}
+                </p>
+            </div>
+        </div>
+        <!-- End -->
+
+        <!--=================== Participation Button ===================-->
+        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center"
+            data-toggle="modal" data-target="#confirmMemberModal">
+            {{'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
+        </button>
+        <!-- End -->
+
+    </div>
+    <!-- End -->
+
+    <!--=================== Confirmatiom model  ===================-->
+    <div class="modal fade" id="confirmMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">
+                        {{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}
+                    </h4>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="confirmation"
+                        style="color: #414042; font-size: 16px">{{ 'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
+                        data-toggle="modal" data-target="#showSuccessfulModal" (click)="submitparticipation()">
+                        {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
+                    </button>
+                    <button type="button" class="btn btn-outline-light btn-md" data-dismiss="modal" aria-label="Close">
+                        {{'bidderAuctionDetails.auction-popup.Cancellation' | translate }}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <!-- End -->
-    
-    <div class="dropdown dropdown-filters-container d-inline">
-        <button [disabled]="btnDisable"
-            class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm"
-            type="button" (click)="participation();" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"
-            style="height: 50px; width: 200px; margin-top: 35px; margin-left:140px; border: none; outline: none; background-color: #32AD71; color: white; border-radius: 5px;">{{
-            'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
-        </button>
 
-        <div style="width: 600px; margin-left: 100px;" class="dropdown-menu dropdown-filter"
-            aria-labelledby="dropdownMenuButton">
-            <div class="card filter shadow-lg-5" id="collapseExample">
+    <!--=================== Successful model  ===================-->
+    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                <div class="" style="display: flex; margin-top: 80px;">
-                    <div style="margin-left: 30px; width: 500px;">
-                        <p
-                            style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px;">
-                            {{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}</p>
-                    </div>
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="close" data-dismiss="dropdown" aria-label="Close">
-                            <a class="btn btn-ghost btn-sm fill-primary-green"> <span class="icon-close"></span> </a>
-                        </button>
+            <div class="card shadow-lg result result-success" style="align-items: center;">
+                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
+                    data-dismiss="modal" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-alert-success"></span>
+                    </i>
+                    <div class="alert-content">
+                        <h4>{{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
+                        </h4>
+                        <p style="color: #414042;">
+                            {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
+                        </p>
                     </div>
                 </div>
-                <br><br>
-
-                <div style="width: 490px;">
-                    <p
-                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px; margin-left: 30px;">
-                        {{ 'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</p>
-                </div>
-
-                <br><br><br>
-
-                <div style="margin-left: 200px;">
-                    <button
-                        style="height:50px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">{{
-                        'bidderAuctionDetails.auction-popup.Cancellation' | translate }}</button>
-
-
-
-                    <button (click)="submitparticipation();" [routerLink]="['/auctionParticipation', AuctionId]"
-                        type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close"
-                        data-toggle="modal" data-target="#showSuccessfulModal"
-                        style="height:50px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
-                        {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmation' | translate }}</button>
-                </div>
-
-                <br><br>
-
-            </div>
-        </div>
-
-        <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1"
-            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-
-                <div class="card shadow-lg result result-success" style="align-items: center;">
-                    <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                        data-dismiss="modal" aria-label="Close">
-                        <span class="icon-close"></span>
+                <div class="alert-action">
+                    <button type="button" class="btn btn-primary-light">
+                        {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
                     </button>
-                    <div class="alert-body">
-                        <i class="alert-icon">
-                            <span class="icon-alert-success"></span>
-                        </i>
-                        <div class="alert-content">
-                            <h4>{{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
-                            </h4>
-                            <p style="color: #414042;">
-                                {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="alert-action">
-                        <button type="button" class="btn btn-primary-light">
-                            {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
-                        </button>
-                    </div>
                 </div>
             </div>
-
-
         </div>
+
 
     </div>
+    <!-- End -->
 
 </div>
