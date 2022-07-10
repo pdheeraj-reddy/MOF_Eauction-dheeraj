@@ -38,7 +38,6 @@
         *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && userRole === 'EAuction_AuctionManager'">
     </app-auction-final-award>
 
-
     <div class="d-flex mt-4">
 
         <!--============== Auction Settings card ==============-->
@@ -99,9 +98,9 @@
         <!-- End -->
 
         <!-- Auction Details start -->
-
-        <div *ngIf="editmode1" class=" w-75">
-            <div style="margin-left: 25px; border: #cac1c1 1px solid; border-radius: 7px; padding-left: 30px;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div *ngIf="editmode1" class="card w-75">
+            <div>
                 <div style="display: flex; margin-top: 40px;">
                     <div style="width: 75%">
                         <app-auction-countdown-timer *ngIf="upcomingAuction.auctionStatus"
