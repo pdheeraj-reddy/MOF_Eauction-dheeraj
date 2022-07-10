@@ -286,7 +286,8 @@ export class AuctionDetailsComponent implements OnInit {
         this.upcomingAuction.productDetails?.auctionAttachement?.push(items);
       });
     }
-    console.log(this.upcomingAuction,"sd");
+    console.log(this.upcomingAuction,"Thara");
+    
   }
   productclick(){
     this.refreshCalendarCntrl();

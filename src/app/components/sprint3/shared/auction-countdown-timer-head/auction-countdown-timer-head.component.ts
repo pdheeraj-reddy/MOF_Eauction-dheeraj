@@ -20,6 +20,7 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
   label: string = ''
 
   ngOnInit(): void {
+    console.log("Auction Start date",this.auctionStartDate);
     let dateStr;
 
     if (this.auctionStatus == "Ongoing") {
@@ -35,11 +36,11 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     if (dateStr) {
       timestamp = Number(moment(dateStr, 'DD.MM.YYYY HH:mm:ss').format('x'));
     }
-
+    // console.log(dateStr);
     const timeout = setInterval(() => {
       // get total seconds between the times
       var delta = (timestamp - Date.now()) / 1000;
-
+      // console.log(delta);
       if (delta > 0) {
         // calculate (and subtract) whole days
         const days = Math.floor(delta / 86400);
@@ -59,6 +60,7 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
         this.hours = hours;
         this.minutes = minutes;
         this.seconds = seconds;
+        // console.log(this.days);
       } else {
         this.days = 0;
         this.hours = 0;
