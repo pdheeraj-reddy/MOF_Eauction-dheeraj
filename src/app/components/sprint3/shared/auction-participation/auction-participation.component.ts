@@ -19,6 +19,7 @@ export class AuctionParticipationComponent implements OnInit {
   constructor(private http: HttpClient, private bidderService: BidderService, private router: Router) { }
   btnDisable = false;
   ngOnInit(): void {
+    console.log("🚀🚀 ~~ upcomingAuction", this.upcomingAuction);
     console.log("🎯TC🎯 <--", this.isParticipated);
     if (this.isParticipated.ZzBidderSts == 'P') {
       console.log("🎯TC🎯 <--", this.isParticipated);

@@ -18,14 +18,19 @@
         <!--=================== Shows auction start date and time ===================-->
         <div class="d-flex flex-column justify-content-center">
             <p class="text-info text-12">{{ 'bidderAuctionDetails.AuctionStartDate' | translate }}</p>
-            <div class="d-flex flex-row text-primary text-14 align-items-center justify-content-between">
-                <p>{{upcomingAuction.auction_start_date}}</p>
+            <div>
+                <span class="text-primary">{{upcomingAuction.auctionStartsdate}}</span>
+                <ul class="list list-primary-bullets d-inline-block">
+                    <li class="text-muted"> {{upcomingAuction.auctionStartstime}}
+                        {{upcomingAuction.auction_start_timeSufix | translate}} </li>
+                </ul>
+                <!-- <p>{{upcomingAuction.auction_start_date}}</p>
                 &nbsp;&nbsp;
                 <label class="icon-dot"></label>
                 &nbsp;&nbsp;
                 <p style="opacity:.5;">{{upcomingAuction.auction_start_time}}
                     {{upcomingAuction.auction_start_timeSufix}}
-                </p>
+                </p> -->
             </div>
         </div>
         <!-- End -->
