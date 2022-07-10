@@ -38,42 +38,43 @@
         *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && userRole === 'EAuction_AuctionManager'">
     </app-auction-final-award>
 
-    <div class="d-flex mt-4">
+    <div class="d-flex mt-4" style="justify-content: space-around;">
 
         <!--============== Auction Settings card ==============-->
-        <div class="card w-25 justify-content-between" style="max-height: 590px;">
+        <div class="card justify-content-between" style="max-height: 590px; width: 26%;">
             <!-- Top section  -->
             <div>
-                <p class="text-20 text-primary m-4 mt-5 font-weight-bold">
+                <p class="text-20 text-primary m-3 mt-5 font-weight-bold">
                     {{ 'bidderAuctionDetails.AuctionSettings' | translate}}
                 </p>
-                <p class="text-12 text-primary mr-4 ml-4 mb-4">{{
+                <p class="text-12 text-primary m-3 mb-2">{{
                     'bidderAuctionDetails.auction-settings.You-can-manage-the-auction' | translate }}
                 </p>
 
                 <!--============== Radio Button group ==============-->
-                <div class="btn-group mr-4 ml-4">
-                    <div class="etimad-option etimad-option-xs mr-1" (click)="auctionSettings('auctionDetail')"
-                        style="width: 118px;height: 118px;">
+                <div class="btn-group m-3">
+                    <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionDetail')"
+                        style="width: 118.8px;height: 118.8px;">
                         <input type="radio" id="checkbox1" name="sampleCheckbox" checked="checked">
                         <label class="input-target d-flex" for="checkbox1">
                             <span>
-                                <span class="icon-pin"></span><br>
+                                <span class="icon-information"></span><br>
                                 {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
                             </span>
                         </label>
-                    </div>
+                    </div>&nbsp;&nbsp;
 
                     <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionInstruction')"
                         style="width: 118px;height: 118px;">
                         <input type="radio" id="checkbox2" name="sampleCheckbox">
-                        <label class="input-target d-flex ml-0" for="checkbox2">
+                        <label class="input-target d-flex" for="checkbox2">
                             <span>
                                 <span class="icon-pin"></span><br>
-                                {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
+                                {{ 'bidderAuctionDetails.auction-settings.AuctionInstructions' | translate }}
                             </span>
                         </label>
                     </div>
+
                 </div>
                 <!-- End -->
             </div>
@@ -99,7 +100,7 @@
 
         <!-- Auction Details start -->
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div *ngIf="editmode1" class="card w-75">
+        <div *ngIf="editmode1" class="card" style="width: 73%; float: right;">
             <div>
                 <div style="display: flex; margin-top: 40px;">
                     <div style="width: 75%">
@@ -497,7 +498,7 @@
 
         <!-- Auction Instruction strats here -->
 
-        <div *ngIf="editmode2" style="width: 69%; margin-left: 25px; border: #cac1c1 1px solid; border-radius: 7px;">
+        <div *ngIf="editmode2" class="card" style="width: 73%;">
 
             <div style="margin-top: 50px; margin-left: 30px;">
                 <p style="font-size: 20px; line-height: 26px; color: #005B4E; font-weight: bold;"><span

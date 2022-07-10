@@ -1,8 +1,8 @@
 <div class="card flex-row">
 
     <!--=================== Blue box to show auction status ===================-->
-    <div class="w-25 d-flex flex-column justify-content-center custom-bg-info" style="min-height: 130px;">
-        <div class="mx-4">
+    <div class="d-flex flex-column justify-content-center custom-bg-info" style="min-height: 130px; width: 30%;">
+        <div class="mx-3">
             <p class="text-18 text-info font-weight-bold">{{ 'bidderAuctionDetails.ThisAuctionIsComing' | translate }}
             </p>
             <p class="text-12 text-info">{{ 'bidderAuctionDetails.YouCanRegisterYourEntry' | translate }}</p>
@@ -31,8 +31,8 @@
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center"
-            data-toggle="modal" data-target="#confirmMemberModal">
+        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center" data-toggle="modal"
+            data-target="#confirmMemberModal">
             {{'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
         </button>
         <!-- End -->
@@ -54,8 +54,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="confirmation"
-                        style="color: #414042; font-size: 16px">{{ 'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
+                    <label for="confirmation" style="color: #414042; font-size: 16px">{{
+                        'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
                 </div>
                 <div class="modal-footer" style="justify-content: end">
                     <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
@@ -90,8 +90,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <label for="confirmation"
-                        style="color: #414042; font-size: 16px; text-align: center;">
+                    <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
                         {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
                     </label>
                 </div>
