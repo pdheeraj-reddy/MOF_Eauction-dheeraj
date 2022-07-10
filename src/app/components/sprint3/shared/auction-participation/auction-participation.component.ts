@@ -14,15 +14,15 @@ import { mode } from 'crypto-js';
 export class AuctionParticipationComponent implements OnInit {
   @Input() upcomingAuction: any;
   @Input() AuctionId: any;
-  @Input() isParticipated: any;
+  @Input() response: any;
   showSuccessfulModal: boolean = false;
   constructor(private http: HttpClient, private bidderService: BidderService, private router: Router) { }
   btnDisable = false;
   ngOnInit(): void {
     console.log("🚀🚀 ~~ upcomingAuction", this.upcomingAuction);
-    console.log("🎯TC🎯 <--", this.isParticipated);
-    if (this.isParticipated.ZzBidderSts == 'P') {
-      console.log("🎯TC🎯 <--", this.isParticipated);
+    console.log("🎯TC🎯 <--", this.response);
+    if (this.response.ZzBidderSts == 'P') {
+      console.log("🎯TC🎯 <--", this.response);
       this.btnDisable = true;
     }
   }
@@ -33,7 +33,7 @@ export class AuctionParticipationComponent implements OnInit {
   submitparticipation() {
     if (this.AuctionId) {
       this.bidderService.makeParticipateIn(this.AuctionId).subscribe((res) => {
-        if (res) {
+        if (res.Msgty=='S') {
           this.showSuccessfulModal = true;
         }
       });
