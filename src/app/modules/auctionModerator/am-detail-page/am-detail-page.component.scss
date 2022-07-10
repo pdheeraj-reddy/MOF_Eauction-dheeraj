@@ -2,18 +2,18 @@
             color: #F6972F;
             font-size: 25px;
         }
-        
+
         .mytabs {
             margin-top: 0px;
             display: flex;
             flex-wrap: wrap;
             max-width: 100%;
         }
-        
+
         .mytabs input[type='radio'] {
             display: none;
         }
-        
+
         .mytabs label {
             padding: 15px;
             color: #08594D;
@@ -23,7 +23,7 @@
             width: 170px;
             text-align: center;
         }
-        
+
         .mytabs .tab {
             width: 100%;
             border: #cac1c1 1px solid;
@@ -31,63 +31,66 @@
             order: 1;
             display: none;
         }
-        
+
         .mytabs input[type='radio']:checked+label+.tab {
             display: block;
         }
-        
+
         .mytabs input[type='radio']:checked+label {
             background-color: #32AD71;
             color: white;
             font-weight: bold;
         }
-        
+
         ul.nav.et-tabs.et-tabs-filled li a {
             max-width: inherit;
         }
-        
+
         .status-success-icon {
             display: flex;
             align-items: center;
             flex-direction: column;
         }
-        
+
         .circle {
             width: 96px;
             height: 96px;
             background: #f9fcfa;
             border-radius: 50%;
         }
-        
+
         .icon-check {
             position: absolute;
             font-size: 30px;
             top: 85px;
             color: #32ad71;
         }
-        
-         ::ng-deep .mat-horizontal-stepper-header-container {
+
+        ::ng-deep .mat-horizontal-stepper-header-container {
             height: 96px !important;
             justify-content: space-evenly !important;
         }
-        
-         ::ng-deep .mat-horizontal-content-container {
+
+        ::ng-deep .mat-horizontal-content-container {
             background-color: #F9FCFA;
             padding: 0 !important;
         }
-        
-         ::ng-deep .mat-stepper-horizontal-line {
+
+        ::ng-deep .mat-stepper-horizontal-line {
             display: none;
         }
-        
-         ::ng-deep .mat-step-header {
+
+        ::ng-deep .mat-step-header {
+
             // width: 25%;
             .mat-step-label {
                 color: #ccc;
+
                 &.mat-step-label-active {
                     color: #32ad71;
                 }
             }
+
             .mat-step-icon {
                 width: 44px;
                 height: 44px;
@@ -99,12 +102,14 @@
                 background: #faf9f7;
                 margin-right: 15px;
             }
+
             .mat-step-icon-state-edit {
                 background: #fff !important;
                 color: #32ad71 !important;
                 position: relative !important;
                 border: 2px solid #32ad71 !important;
                 text-align: center !important;
+
                 &:before {
                     box-sizing: border-box;
                     content: "";
@@ -116,6 +121,7 @@
                     top: 5px;
                 }
             }
+
             .mat-step-icon-selected {
                 background: #32ad71;
                 color: #fff;
@@ -135,33 +141,33 @@
                 // }
             }
         }
-        
-         ::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+
+        ::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
             opacity: 0.3 !important;
             background-color: #005B4E !important;
         }
-        
-         ::ng-deep .mat-dialog-container {
+
+        ::ng-deep .mat-dialog-container {
             /* box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%); */
             box-shadow: none !important;
             background: white;
             color: rgba(0, 0, 0, 0.87);
         }
-        
-         ::ng-deep .mat-horizontal-stepper-header {
+
+        ::ng-deep .mat-horizontal-stepper-header {
             pointer-events: none !important;
         }
-        
+
         .nav-link {
             padding: 15px 24px !important;
         }
-        
+
         .ml-n2,
         .mx-n2 {
-            margin-left: 0rem!important;
+            margin-left: 0rem !important;
         }
-        
+
         .mr-n2,
         .mx-n2 {
-            margin-right: 0rem!important;
+            margin-right: 0rem !important;
         }

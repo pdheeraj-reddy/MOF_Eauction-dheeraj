@@ -62,7 +62,7 @@ export class AuctionDetailsComponent implements OnInit {
   }
   getAuctionDetails(){
     console.log("API");
-    this.bidderService.getAuctionDetail(9700000760).subscribe((res)=>{
+    this.bidderService.getAuctionDetail(this.auctionId).subscribe((res)=>{
       console.log(res);
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);

@@ -19,20 +19,20 @@ export class NoOfParticipantsBidsComponent implements OnInit {
   ngOnInit(): void {
     console.log('no of partipate',this.auctionId)
    
-    this.getParticipants();
+    // this.getParticipants();
   }
-  getParticipants(){
+  // getParticipants(){
 
-    this.api.getNoOfParticipants(this.auctionId).subscribe((res:any)=>{
-      console.log(res.body.d);
-      this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
-      this.bids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
+  //   this.api.getNoOfParticipants(this.auctionId).subscribe((res:any)=>{
+  //     console.log(res.body.d);
+  //     this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
+  //     this.bids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
 
-      setTimeout(() => {
-        // console.log(5);
-         this.getParticipants()
-      }, 5000);
-    })
-  }
+  //     setTimeout(() => {
+  //       // console.log(5);
+  //        this.getParticipants()
+  //     }, 5000);
+  //   })
+  // }
  
 } 

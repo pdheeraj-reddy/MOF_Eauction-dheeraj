@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { EnvService } from 'src/app/env.service';
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BidderService } from '../../services/bidder.service';
+import { mode } from 'crypto-js';
 
 @Component({
   selector: 'app-auction-participation',
@@ -10,32 +12,39 @@ import { BidderService } from '../../services/bidder.service';
   styleUrls: ['./auction-participation.component.scss']
 })
 export class AuctionParticipationComponent implements OnInit {
-  @Input() upcomingAuction:any;
-  @Input() AuctionId:any;
-  @Input() isParticipated:any;
-  constructor(private http: HttpClient, private envService : EnvService, private bidderService:BidderService) { }
+  @Input() upcomingAuction: any;
+  @Input() AuctionId: any;
+  @Input() isParticipated: any;
+  showSuccessfulModal: boolean = false;
+  constructor(private http: HttpClient, private bidderService: BidderService, private router: Router) { }
   btnDisable = false;
   ngOnInit(): void {
-    console.log(this.isParticipated);
-      if(this.isParticipated.ZzBidderSts === 'P'){
-        console.log(this.isParticipated);
-        this.btnDisable = true;
-      }
+    console.log("🎯TC🎯 <--", this.isParticipated);
+    if (this.isParticipated.ZzBidderSts == 'P') {
+      console.log("🎯TC🎯 <--", this.isParticipated);
+      this.btnDisable = true;
+    }
   }
-  participation() {
-
-  }
-  submitparticipation(){
-    if(this.AuctionId){
-      // "AucId" : this.AuctionId,
-      let auctionParticipation ={
-        // "AucId" : "9700000300",
-        "AucId" : this.AuctionId,
-        "ZzUserAction" : "P"
-      }
-      this.bidderService.makeParticipateIn(auctionParticipation).subscribe((res)=>{
-        
+  // participation() {
+  //   this.showSuccessfulModal = true;
+  //   console.log("🎯TC🎯 <-- AuctionParticipationComponent <-- participation <-- this.showSuccessfulModal", this.showSuccessfulModal);
+  // }
+  submitparticipation() {
+    if (this.AuctionId) {
+      this.bidderService.makeParticipateIn(this.AuctionId).subscribe((res) => {
+        if (res) {
+          this.showSuccessfulModal = true;
+        }
       });
+    }
+  }
+  closeModal(model: string) {
+    if (model == "close") {
+      this.showSuccessfulModal = false;
+    }
+    if (model == "success") {
+      this.showSuccessfulModal = false;
+      this.router.navigate(['/bidder']);
     }
   }
 }

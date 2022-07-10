@@ -62,7 +62,11 @@ export class BidderService {
       + auctionId + "?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json", httpOptions);
   }
 
-  makeParticipateIn(participationDetails?: any): Observable<any> {
+  makeParticipateIn(auctionId?: any): Observable<any> {
+    let participationDetails ={
+      "AucId" : auctionId,
+      "ZzUserAction" : "P"
+    }
     const httpOptions = {
       headers: {
         'X-CSRF-TOKEN': this.XCSRFToken as string,

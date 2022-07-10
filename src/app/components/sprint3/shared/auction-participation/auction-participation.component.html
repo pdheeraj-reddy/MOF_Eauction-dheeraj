@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-footer" style="justify-content: end">
                     <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
-                        data-toggle="modal" data-target="#showSuccessfulModal" (click)="submitparticipation()">
+                        (click)="submitparticipation()">
                         {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
                     </button>
                     <button type="button" class="btn btn-outline-light btn-md" data-dismiss="modal" aria-label="Close">
@@ -72,37 +72,36 @@
     <!-- End -->
 
     <!--=================== Successful model  ===================-->
-    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
+    <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-
-            <div class="card shadow-lg result result-success" style="align-items: center;">
-                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                    data-dismiss="modal" aria-label="Close">
+            <div class="modal-content" style="align-items: center;">
+                <button (click)="closeModal('close')" type="button" class="modal-close btn-close btn-sm">
                     <span class="icon-close"></span>
                 </button>
-                <div class="alert-body">
-                    <i class="alert-icon">
-                        <span class="icon-alert-success"></span>
-                    </i>
-                    <div class="alert-content">
-                        <h4>{{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
+                <span class="icon-check"></span>
+                <div class="modal-header">
+                    <div class="status-success-icon">
+                        <div style="display: flex;">
+                            <div class="circle"></div>
+                        </div>
+                        <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                            {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
                         </h4>
-                        <p style="color: #414042;">
-                            {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
-                        </p>
                     </div>
                 </div>
-                <div class="alert-action">
-                    <button type="button" class="btn btn-primary-light">
+                <div class="modal-body">
+                    <label for="confirmation"
+                        style="color: #414042; font-size: 16px; text-align: center;">
+                        {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
+                    </label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md">
                         {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
                     </button>
                 </div>
             </div>
         </div>
-
-
     </div>
     <!-- End -->
 
