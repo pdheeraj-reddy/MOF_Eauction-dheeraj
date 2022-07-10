@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment-mini';
 
 @Component({
-  selector: 'app-auction-countdown-timer',
-  templateUrl: './auction-countdown-timer.component.html',
-  styleUrls: ['./auction-countdown-timer.component.scss']
+  selector: 'app-auction-countdown-timer-head',
+  templateUrl: './auction-countdown-timer-head.component.html',
+  styleUrls: ['./auction-countdown-timer-head.component.scss']
 })
-export class AuctionCountdownTimerComponent implements OnInit {
+export class AuctionCountdownTimerComponentHead implements OnInit {
   @Input() auctionStatus: string;
   @Input() auctionStartDate: string;
   @Input() auctionEndDate: string;
@@ -21,18 +21,18 @@ export class AuctionCountdownTimerComponent implements OnInit {
 
   ngOnInit(): void {
     let dateStr;
-    
-    if(this.auctionStatus=="Ongoing") {
+
+    if (this.auctionStatus == "Ongoing") {
       this.label = 'Ends Through';
       dateStr = this.auctionEndDate;
-    } else if(this.auctionStatus=="Published") {
+    } else if (this.auctionStatus == "Published") {
       this.label = 'Starts During';
       dateStr = this.auctionStartDate;
-    }else{
+    } else {
       this.label = 'Ends Through';
     }
-    let timestamp:number = 0;
-    if(dateStr) {
+    let timestamp: number = 0;
+    if (dateStr) {
       timestamp = Number(moment(dateStr, 'DD.MM.YYYY HH:mm:ss').format('x'));
     }
 

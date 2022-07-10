@@ -104,11 +104,11 @@
             <div>
                 <div style="display: flex; margin-top: 40px;">
                     <div style="width: 75%">
-                        <app-auction-countdown-timer *ngIf="upcomingAuction.auctionStatus"
+                        <app-auction-countdown-timer-head *ngIf="upcomingAuction.auctionStatus"
                             [auctionStatus]="upcomingAuction.auctionStatus"
                             [auctionStartDate]="upcomingAuction?.auction_start_date"
                             [auctionEndDate]="upcomingAuction?.auction_end_date" class="d-block" style="width: 200px;">
-                        </app-auction-countdown-timer>
+                        </app-auction-countdown-timer-head>
                     </div>
                     <div style="width: 25%;">
                         <app-auction-status *ngIf="(upcomingAuction?.auctionStatus)"
