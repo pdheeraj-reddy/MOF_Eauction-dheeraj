@@ -41,7 +41,7 @@
     <div class="d-flex mt-4" style="justify-content: space-around;">
 
         <!--============== Auction Settings card ==============-->
-        <div class="card justify-content-between" style="max-height: 590px; width: 26%;">
+        <div class="card justify-content-between" style="max-height: 680px; width: 26%;">
             <!-- Top section  -->
             <div>
                 <p class="text-20 text-primary m-3 mt-5 font-weight-bold">
@@ -102,11 +102,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div *ngIf="editmode1" class="card" style="width: 73%; float: right;">
             <div>
-                <div class="d-flex align-items-center mt-4">
+                <div class="d-flex align-items-center mt-3">
                     <div class="w-75">
                         <app-auction-countdown-timer-head *ngIf="upcomingAuction.auctionStatus"
                             [auctionStatus]="upcomingAuction.auctionStatus"
-                            [auctionStartDate]="'10.08.2022'"
+                            [auctionStartDate]="upcomingAuction?.auction_start_date"
                             [auctionEndDate]="upcomingAuction?.auction_end_date" class="d-block" style="width: 200px;">
                         </app-auction-countdown-timer-head>
                     </div>
@@ -117,7 +117,7 @@
                         <!-- <button *ngIf="(upcomingAuction?.auctionStatus)" style="color: #117ABE; background-color: #E7F1F8; border: none; outline: none; width: 160px; height: 30px; margin-top: 30px;">{{upcomingAuction?.auctionStatus}}</button> -->
                     </div>
                 </div>
-                <div class="mx-2" style="display: flex;">
+                <div class="mx-3" style="display: flex;">
                     <div class="left-left-card" [ngClass]="{'flex-fill': upcomingAuction.auctionStatus == 'Published'}">
                         <div style="position: relative; margin-top: 5px;">
 
@@ -162,26 +162,30 @@
                                 'bidderAuctionDetails.ProductDetails' | translate }}</button>
 
                         </div>
-                        <p class="count_of_image" style="color: #414042; text-align: center; width: 100%;">10 of 23</p>
+                        <p class="text-12 text-center">10 of 23</p>
 
-                        <p style="color: #08594D; font-size: 16px;  font-weight: bold;">
-                            {{upcomingAuction?.auctionnote1}}</p>
+                        <p class="text-primary font-weight-bold text-22">{{upcomingAuction?.auctionnote1}}</p>
 
-                        <p style="color: #414042; font-size: 14px; ">{{upcomingAuction?.auctionnote2}}</p>
+                        <p class="text-16 text-muted">{{upcomingAuction?.auctionnote2}}</p>
 
-                        <p style="color: #414042; font-size: 14px; "><span class="icon-all-tenders"
-                                style="color: #08594D; font-weight: bold;"></span>&nbsp;
-                            &nbsp;{{upcomingAuction?.productCount}} {{ 'bidderAuctionDetails.Product' | translate }}</p>
+                        <p class="text-14 text-black">
+                            <span class="icon-all-tenders text-primary font-weight-bold text-20"></span>&nbsp;
+                            &nbsp;{{upcomingAuction?.productCount | number}} {{ 'bidderAuctionDetails.Product' | translate }}
+                        </p>
 
-                        <p style="color: #414042; font-size: 14px; "><span class="icon-calendar"
-                                style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;{{
-                            'bidderAuctionDetails.AuctionStarts' | translate }} {{upcomingAuction?.auctionStartsdate}} ∙
-                            {{upcomingAuction?.auctionStartstime}} {{upcomingAuction?.auctionStartstimeSufix}}</p>
+                        <p class="text-14 text-black">
+                            <span class="icon-calendar text-primary font-weight-bold text-20"></span>
+                            &nbsp;
+                            {{'bidderAuctionDetails.AuctionStarts' | translate }} 
+                            {{upcomingAuction?.auctionStartsdate}} ∙
+                            {{upcomingAuction?.auctionStartstime}} 
+                            {{upcomingAuction?.auctionStartstimeSufix}}
+                        </p>
 
-                        <p style="color: #414042; font-size: 14px; "><span class="icon-pin"
-                                style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;{{
-                            'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}</p>
-
+                        <p class="text-14 text-black">
+                            <span class="icon-pin text-primary font-weight-bold text-20"></span>&nbsp;&nbsp;
+                            {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}
+                        </p>
                     </div>
 
                     <div class="left-right-card" *ngIf="upcomingAuction.auctionStatus!='Published'"
@@ -598,7 +602,7 @@
 
     </div>
 
-
+    <!--============== Product details popup ==============-->
     <div class="modal fade" id="viewDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
 
@@ -826,5 +830,5 @@
 
         </div>
     </div>
-
+    <!-- End -->
 </div>
