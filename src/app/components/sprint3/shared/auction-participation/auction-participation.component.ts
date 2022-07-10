@@ -35,6 +35,7 @@ export class AuctionParticipationComponent implements OnInit {
       this.bidderService.makeParticipateIn(this.AuctionId).subscribe((res) => {
         if (res.Msgty=='S') {
           this.showSuccessfulModal = true;
+          
         }
       });
     }
