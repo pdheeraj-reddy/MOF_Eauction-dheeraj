@@ -82,7 +82,7 @@ export class BidderService {
   }
 
 
-  getNoOfParticipants(auctionId: any, pageNumber?: number): Observable<any> {
+  getNoOfParticipants(auctionId: any, auctionStatus:any): Observable<any> {
 
     const httpOptions = {
       headers: {
@@ -94,7 +94,7 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(this.envService.environment.apiBidderParticipantsBids +
-      "?auctionId=" + auctionId + "&status=Ongoing", httpOptions)
+      "?auctionId=" + auctionId + "&status="+auctionStatus, httpOptions)
 
   }
   getMyAuctionsList(filters: any, pageLimit: any, pageNumber?: number): Observable<any> {

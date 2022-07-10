@@ -22,7 +22,7 @@ export class AuctionDetailsComponent implements OnInit {
   editmode1: boolean = true;
   editmode2: boolean = false;
 
-  isParticipated: any;
+  response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   days: number;
   hours: number;
@@ -71,7 +71,7 @@ export class AuctionDetailsComponent implements OnInit {
       console.log(res);
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);
-      this.isParticipated = res.body.d.results[0];
+      this.response = res.body.d.results[0];
       this.mapping(res.body);
     });
   }
