@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuctionCountdownTimerComponent } from './auction-countdown-timer.component';
+import { AuctionCountdownTimerComponentHead } from './auction-countdown-timer-head.component';
 
 describe('AuctionCountdownTimerComponent', () => {
-  let component: AuctionCountdownTimerComponent;
-  let fixture: ComponentFixture<AuctionCountdownTimerComponent>;
+  let component: AuctionCountdownTimerComponentHead;
+  let fixture: ComponentFixture<AuctionCountdownTimerComponentHead>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuctionCountdownTimerComponent ]
+      declarations: [ AuctionCountdownTimerComponentHead ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuctionCountdownTimerComponent);
+    fixture = TestBed.createComponent(AuctionCountdownTimerComponentHead);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

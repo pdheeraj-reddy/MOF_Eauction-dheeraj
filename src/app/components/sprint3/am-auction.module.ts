@@ -10,9 +10,8 @@ import { AuctionDetailsComponent } from './shared/auction-details/auction-detail
 import { AuctionParticipationComponent } from './shared/auction-participation/auction-participation.component';
 import { AuctionFbgaComponent } from './shared/auction-fbga/auction-fbga.component';
 import { AuctionPayInvoiceComponent } from './shared/auction-pay-invoice/auction-pay-invoice.component';
-
+import { AuctionCountdownTimerComponentHead } from './shared/auction-countdown-timer-head/auction-countdown-timer-head.component';
 import { NoOfParticipantsBidsComponent } from './shared/no-of-participants-bids/no-of-participants-bids.component';
-import { AuctionCountdownTimerComponent } from './shared/auction-countdown-timer/auction-countdown-timer.component';
 import { AuctionStatusComponent } from './shared/auction-status/auction-status.component';
 import { SendBiddingOfferComponent } from './shared/send-bidding-offer/send-bidding-offer.component';
 import { LatestOffersSentComponent } from './shared/latest-offers-sent/latest-offers-sent.component';
@@ -33,9 +32,8 @@ import { AuctionFinalAwardComponent } from './shared/auction-final-award/auction
     AuctionParticipationComponent,
     AuctionFbgaComponent,
     AuctionPayInvoiceComponent,
- 
+    AuctionCountdownTimerComponentHead,
     NoOfParticipantsBidsComponent,
-    AuctionCountdownTimerComponent,
     AuctionStatusComponent,
     SendBiddingOfferComponent,
     LatestOffersSentComponent,

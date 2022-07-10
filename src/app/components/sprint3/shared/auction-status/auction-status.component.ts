@@ -11,10 +11,14 @@ export class AuctionStatusComponent implements OnInit {
   @Input() auctionStatus: string;
   @Input() count: number = 0;
   status: string = '';
+  showEye: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
     this.status = getStatusText(this.auctionStatus);
+    if(this.status == "Ongoing"){
+      this.showEye = true;
+    }
   }
 
 }
