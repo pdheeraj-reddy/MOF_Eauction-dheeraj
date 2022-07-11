@@ -9,7 +9,6 @@ import { MapsAPILoader } from '@agm/core';
 import * as moment from 'moment-mini';
 import { DatePipe } from '@angular/common'
 import { BidderService } from '../../services/bidder.service';
-import { AuctionService } from 'src/app/service/auction.service';
 declare var $: any;
 
 @Component({
@@ -34,6 +33,8 @@ export class AuctionDetailsComponent implements OnInit {
   showViewAttachmentsModal: boolean = false;
   selectedFileFormat: any;
   selectedFileURL: any;
+  auctionAttachment: any = [];
+  transformedAttachment: any = [];
 
   // Added by Mohammed Salick
   prmyaward: any;
@@ -46,7 +47,6 @@ export class AuctionDetailsComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     private envService: EnvService,
     private bidderService: BidderService,
-    public auctionService: AuctionService,
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +73,32 @@ export class AuctionDetailsComponent implements OnInit {
       console.log(res.body.d.results[0].ZzBidderSts);
       this.response = res.body.d.results[0];
       this.mapping(res.body);
+      this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
+      console.log("🚀🚀 ~~ this.auctionAttachment", this.auctionAttachment);
+
+      if (this.auctionAttachment) {
+        this.auctionAttachment.forEach(
+          (value: any, index: any, array: any) => {
+            var fileupload = {
+              name: value.FileName + '.' + value.FileExt,
+              size: '',
+              type: '',
+              filesrc: '',
+              FilenetId: value.FilenetId,
+              MIMEType: value.MIMEType,
+              downloading: false,
+            };
+            this.transformedAttachment.push(fileupload);
+
+          }
+        );
+      }
+
+
+
+      console.log("🚀🚀 ~~ this.transformedAttachment", this.transformedAttachment);
+
+
     });
   }
   refreshCalendarCntrl() {
@@ -158,6 +184,8 @@ export class AuctionDetailsComponent implements OnInit {
         auctionAttachement: [],
       }
     }
+
+
 
 
 
@@ -258,13 +286,7 @@ export class AuctionDetailsComponent implements OnInit {
   participation() {
 
   }
-  // download report
-  downloadReport(data: any) {
-    console.log(data);
-    const blob = new Blob([data], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
-  }
+
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
@@ -280,6 +302,10 @@ export class AuctionDetailsComponent implements OnInit {
     }
   }
 
+  downloadReport(file: any) { }
+
+
+
 
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
@@ -292,15 +318,19 @@ export class AuctionDetailsComponent implements OnInit {
   }
 
 
+
+
   activeDownloadFileIndex = -1
 
   viewAttachment(file: any, index: number, option: string) {
+
+    console.log("🚀🚀 ~~ auctionDetails", this.upcomingAuction.auction_detail?.auctionAttachement);
     if (file.FilenetId) {
+      console.log("🚀🚀 ~~ file.FilenetId", file.FilenetId);
       file.downloading = true;
       this.activeDownloadFileIndex = index;
-      this.auctionService.downloadAuctionImages(file.FilenetId).subscribe(
+      this.bidderService.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
-          console.log(downloadAuctionImagesResp);
           const fileResp = downloadAuctionImagesResp.d;
           var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
           console.log('asdasd', byteString.split(',')[1]);
@@ -328,7 +358,6 @@ export class AuctionDetailsComponent implements OnInit {
         },
         (error) => {
           file.downloading = false;
-          this.showLoader = false;
           this.activeDownloadFileIndex = -1;
           console.log('downloadAuctionImages RespError : ', error);
         }

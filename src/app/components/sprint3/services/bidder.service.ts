@@ -62,10 +62,23 @@ export class BidderService {
       + auctionId + "?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json", httpOptions);
   }
 
+  downloadAuctionImages(fileId: any): Observable<any> {
+    const httpOptions = {
+      headers: {
+        'X-CSRF-TOKEN': this.XCSRFToken as string
+      },
+      params: {
+      }
+    };
+    return this.http.get<any>(
+      this.envService.environment.apiFilenetURL + '/' + fileId
+      , httpOptions);
+  }
+
   makeParticipateIn(auctionId?: any): Observable<any> {
-    let participationDetails ={
-      "AucId" : auctionId,
-      "ZzUserAction" : "P"
+    let participationDetails = {
+      "AucId": auctionId,
+      "ZzUserAction": "P"
     }
     const httpOptions = {
       headers: {
@@ -82,7 +95,7 @@ export class BidderService {
   }
 
 
-  getNoOfParticipants(auctionId: any, auctionStatus:any): Observable<any> {
+  getNoOfParticipants(auctionId: any, auctionStatus: any): Observable<any> {
 
     const httpOptions = {
       headers: {
@@ -94,7 +107,7 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(this.envService.environment.apiBidderParticipantsBids +
-      "?auctionId=" + auctionId + "&status="+auctionStatus, httpOptions)
+      "?auctionId=" + auctionId + "&status=" + auctionStatus, httpOptions)
 
   }
   getMyAuctionsList(filters: any, pageLimit: any, pageNumber?: number): Observable<any> {
