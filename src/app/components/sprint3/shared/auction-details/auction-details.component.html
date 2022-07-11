@@ -21,6 +21,8 @@
             </div>
         </div>
     </div>
+
+    <!--********** Loader **********-->
     <div class="row text-center" *ngIf="!response">
         <div class="col-md-12 justify-content-start">
             <div class="alert-body text-center">
@@ -68,6 +70,8 @@
             </div>
         </div>
     </div>
+    <!-- End -->
+    
     <div *ngIf="response">
         <app-auction-participation *ngIf="response && upcomingAuction?.auctionStatus=='Published'" [response]="response"
             [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
