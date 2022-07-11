@@ -14,16 +14,22 @@
             <a href="#" style="color: #117ABE;font-size: 15px;margin-top: 10px;">{{ 'bidderSendOffer.ClickHere' | translate }}</a>
         </p>
     </div>
-
-    <div class="file-uploader-zone">
-        <div class="buttons">
-            <div class="uploader-button-caption">
-                <span class="icon-attachment mx-22"></span>
-                <label style="padding-left: 5px;">{{ 'bidderSendOffer.UploadFileFormat' | translate }}</label>
-                <input qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" title="file input" multiple="" type="file" name="qqfile" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
+    <!-- ============= File upload area and view area ===============-->
+    <div>
+        <div *ngIf="!checkFile()" class="file-uploader-zone">
+            <div class="buttons">
+                <div class="uploader-button-caption">
+                    <span class="icon-attachment mx-22"></span>
+                    <label style="padding-left: 5px;">{{ 'bidderSendOffer.UploadFileFormat' | translate }}</label>
+                    <input accept=".docx,.doc,application/pdf,image/jpg,image/jpeg,image/png" qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" (change)="selectFiles($event, 'primaryWarranty')" title="file input" multiple="" type="file" name="qqfile" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
+                </div>
             </div>
         </div>
+        <div *ngIf="checkFile()">
+            <label for="">{{files[0].name}}</label>
+        </div>
     </div>
+    <!--===== End =========-->
 
     <div class="left-right-card-title">
         <div class="point-circle">
@@ -40,7 +46,7 @@
                 <button class="btn btn-sm" style="height: 30px;" (click)="decAmt()">-</button>
             </div>
 
-            <input type="text" class="amt-input" readonly placeholder="Amount" aria-label="Amount" [(ngModel)]="amount" aria-describedby="basic-addon2" />
+            <input type="text" class="amt-input" readonly placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" aria-describedby="basic-addon2" />
 
             <div class="IncDec-controls" style="border: 2px solid #32AD71; border-top-right-radius: 5px;border-bottom-right-radius: 5px;">
                 <button class="btn btn-sm" style="height: 30px;" (click)="incAmt()">+</button>
@@ -65,44 +71,42 @@
         <p style="color: #005B4E;font-size: 12px;">{{totalOfferPrice}} {{ 'bidderSendOffer.SAR' | translate }}</p>
     </div>
 
-    <button class="btn btn-primary-light btn-lg" data-toggle="modal" data-target="#confirmMemberModal" style="width: 100%;">{{ 'bidderSendOffer.SendOffer' | translate }}</button>
+    <button (click)="sendBidOffer()" class="btn btn-primary-light btn-lg" style="width: 100%;">{{ 'bidderSendOffer.SendOffer' | translate }}</button>
 
 </div>
 
 <!-- TODO: The following has to when successfully submitted for bidding-->
 <!-- Model to confirm -->
-<div class="modal fade" id="confirmMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" *ngIf="showConfirmation" style="display: block!important;" id="confirmMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="width: 40%;">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">
                     {{ 'bidderSendOffer.ConfirmationBidSubmission' | translate }}
                 </h4>
-                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-            <span class="icon-close"></span>
+                <button (click)="showConfirmation=false" type="button" class="modal-close btn-close btn-sm">
+            <span class=" icon-close "></span>
           </button>
             </div>
-            <div class="modal-body">
-                <label for="confirmation" style="color: #414042; font-size: 16px">{{ 'bidderSendOffer.BidSubmissionDescription' | translate }}</label
+            <div class="modal-body ">
+                <label for="confirmation " style="color: #414042; font-size: 16px ">{{ 'bidderSendOffer.BidSubmissionDescription' | translate }}</label
           >
         </div>
-        <div class="modal-footer" style="justify-content: end">
+        <div class="modal-footer " style="justify-content: end ">
           <button
-            type="button"
-            class="btn btn-primary-light btn-md"
-            data-dismiss="modal"
-            aria-label="Close"
+          (click)="showConfirmation=false "
+            type="button "
+            class="btn btn-primary-light btn-md "
             data-toggle="modal"
-            data-target="#showSuccessfulModal"
+            data-target="#showSuccessfulModal "
           >
           {{ 'bidderSendOffer.SubmitOffer' | translate }}
           </button>
           <button
-            type="button"
-            class="btn btn-md"
-            data-dismiss="modal"
-            aria-label="Close"
-            style="border: 1px solid #cccccc; border-radius: 5px"
+          (click)="showConfirmation=false "
+            type="button "
+            class="btn btn-md "
+            style="border: 1px solid #cccccc; border-radius: 5px "
           >
             {{ 'bidderSendOffer.Cancellation' | translate }}
           </button>
@@ -113,55 +117,52 @@
   
   <!-- Model to show confirmed (Successful) -->
   <div
-    class="modal fade"
-    id="showSuccessfulModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
+    class="modal fade "
+    id="showSuccessfulModal "
+    tabindex="-1 "
+    role="dialog "
+    aria-labelledby="exampleModalLabel "
+    aria-hidden="true "
   >
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="width: 40%;">
-      <div class="modal-content" style="align-items: center;">
+    <div class="modal-dialog modal-lg modal-dialog-centered " role="document " style="width: 40%; ">
+      <div class="modal-content " style="align-items: center; ">
         <button
-          style="position: absolute;left: 90%;"
-          type="button"
-          class="modal-close btn-close btn-sm"
-          data-dismiss="modal"
-          aria-label="Close"
+          style="position: absolute;left: 90%; "
+          type="button "
+          class="modal-close btn-close btn-sm "
+          data-dismiss="modal "
+          aria-label="Close "
         >
-          <span class="icon-close"></span>
+          <span class="icon-close "></span>
         </button>
-        <span class="icon-check" style="
-              position: absolute;
-              top: 85px;
-              color: #32AD71;"></span>
-        <div class="modal-header">
-          <div class="status-success-icon">
-            <div style="display: flex;">
-              <div class="circle"></div>
+        <span class="icon-check " style=" position: absolute; top: 85px; color: #32AD71; "></span>
+        <div class="modal-header ">
+          <div class="status-success-icon ">
+            <div style="display: flex; ">
+              <div class="circle "></div>
               
             </div>
             <h4
-              class="modal-title"
-              id="exampleModalLabel"
-              style="text-align: center"
+              class="modal-title "
+              id="exampleModalLabel "
+              style="text-align: center "
             >
             {{ 'bidderSendOffer.OfferSuccess' | translate }}
             </h4>
           </div>
         </div>
-        <div class="modal-body" style="text-align: center;margin-bottom: 2rem;">
-          <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;"
+        <div class="modal-body " style="text-align: center;margin-bottom: 2rem; ">
+          <label for="confirmation " style="color: #414042; font-size: 16px; text-align: center; "
             >
             {{ 'bidderSendOffer.OfferContent' | translate }}
             </label>
                 <br>
-                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+                <label for="confirmation " style="color: #414042; font-size: 16px; text-align: center; ">
                   {{ 'bidderSendOffer.OfferDescription' | translate }}
             </label>
             </div>
-            <div class="modal-footer" style="justify-content: end">
-                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+            <div class="modal-footer " style="justify-content: end ">
+                <button type="button " class="btn btn-primary-light btn-md " data-dismiss="modal " aria-label="Close ">
                   {{ 'bidderSendOffer.BackToAuctions' | translate }}
           </button>
             </div>
