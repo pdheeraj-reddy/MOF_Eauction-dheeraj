@@ -134,16 +134,25 @@
     font-size: 22px;
 }
 
-.left-right-card {
-    margin-left: 10px;
+.left-right-card-ar {
     width: 50%;
-    border-top: 2px solid #a3a3a3;
-    border-bottom: 2px solid #a3a3a3;
-    border-left: 2px solid #a3a3a3;
-    border-right: 2px solid #a3a3a3;
+    border-top: 2px solid #32ad71;
+    border-bottom: 2px solid #32ad71;
+    border-left: 2px solid #32ad71;
     border-radius: 5px 0 0 5px;
-    background-color: #f5f5f5;
+    background-color: #F9FCFA;
 }
+
+.left-right-card-en {
+  width: 50%;
+  border-top: 2px solid #32ad71;
+  border-bottom: 2px solid #32ad71;
+  border-right: 2px solid #32ad71;
+  border-radius: 0 5px 5px 0;
+  background-color: #F9FCFA;
+}
+
+
 
 .list-card {
     margin-bottom: 10px;
