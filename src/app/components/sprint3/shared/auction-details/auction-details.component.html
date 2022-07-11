@@ -22,7 +22,6 @@
         </div>
     </div>
 
-<<<<<<< Updated upstream
     <!--********** Loader **********-->
     <div class="row text-center" *ngIf="showLoader">
         <div class="col-md-12 justify-content-start">
@@ -67,60 +66,6 @@
                 </i>
                 <div class="alert-content">
                     <h5 class="text-black-50">{{ 'common.msg-loading' | translate }}</h5>
-=======
-    <!-- =================This is to show error message if there is no file is selected ================= -->
-    <div *ngIf="showFileError" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
-        <div class="alert-wrapper">
-            <div class="alert-body">
-                <i class="alert-icon">
-        <span class="icon-filled-wrong"></span>
-      </i>
-                <div class="alert-content">
-                    <p>الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF</p>
-                </div>
-            </div>
-            <div class="alert-action">
-                <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close">
-        <span class="icon-close"></span>
-      </button>
-            </div>
-        </div>
-    </div>
-    <!-- ==========End======= -->
-
-    <app-auction-participation *ngIf="data && upcomingAuction?.auctionStatus=='Published'" [isParticipated]="isParticipated" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
-    <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction"></app-auction-fbga>
-    <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'" [upcomingAuction]="upcomingAuction"></app-auction-pay-invoice>
-
-    <!-- Added by Mohammed Salick -->
-    <app-auction-prmy-award [prmyaward]="upcomingAuction" *ngIf="upcomingAuction?.auctionStatus =='Pending Primary Awarding' && userRole === 'EAuction_AuctionManager'"></app-auction-prmy-award>
-
-    <app-auction-final-award [finalaward]="upcomingAuction" *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && userRole === 'EAuction_AuctionManager'"></app-auction-final-award>
-
-    <div class="d-flex mt-4">
-        <div class="card">
-            <!-- <br> -->
-            <p class="text-20 text-primary m-4 font-weight-bold">{{ 'bidderAuctionDetails.AuctionSettings' | translate }}</p>
-            <p class="text-12 text-primary mr-4 ml-4 mb-4">{{ 'bidderAuctionDetails.auction-settings.You-can-manage-the-auction' | translate }}</p>
-            <!-- <div class="btn-group" role="group" aria-label="Radio select">
-                <button type="button" class="btn m-2 btn-custom-radioselect">
-                    <span class="icon-pin"></span>
-                    {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
-                </button>
-                <button type="button" class="btn  btn-custom-radioselect">
-              <span class="icon-pin"></span>
-              {{ 'bidderAuctionDetails.auction-settings.AuctionInstructions' | translate }}
-            </button>
-            </div> -->
-            <div style="display: flex; margin-left: -20px; margin-top: 25px;">
-                <div class="etimad-option ml-0">
-                    <input (click)="auctionSettings('auctionDetail')" type="radio" id="checkbox07" name="details" value="detail" checked="checked" />
-                    <label class="input-target" for="checkbox07" style="width: 118.8px; height: 118.8px;"> <span><span class="icon-pin"></span><br>{{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}</span> </label>
-                </div>
-                <div class="etimad-option mr-0" style="margin-left: -50px;">
-                    <input (click)="auctionSettings('auctionInstruction')" type="radio" id="checkbox08" name="details" value="instructions" />
-                    <label class="input-target" for="checkbox08" style="width: 118.8px; height: 118.8px;"><span><span class="icon-pin"></span><br>{{ 'bidderAuctionDetails.auction-settings.AuctionInstructions' | translate }}</span> </label>
->>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -283,33 +228,10 @@
                                     data-target="#viewDetails"><span class="icon-eye-open"></span> {{
                                     'bidderAuctionDetails.ProductDetails' | translate }}</button>
 
-<<<<<<< Updated upstream
                             </div>
                             <p class="text-12 text-center">10 of 23</p>
 
                             <p class="text-primary font-weight-bold text-22">{{upcomingAuction?.auctionnote1}}</p>
-=======
-                        </div>
-                        <p class="count_of_image" style="color: #414042; text-align: center; width: 100%;">10 of 23</p>
-
-                        <p style="color: #08594D; font-size: 16px;  font-weight: bold;">{{upcomingAuction?.auctionnote1}}</p>
-
-                        <p style="color: #414042; font-size: 14px; ">{{upcomingAuction?.auctionnote2}}</p>
-
-                        <p style="color: #414042; font-size: 14px; "><span class="icon-all-tenders" style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;{{upcomingAuction?.productCount}} {{ 'bidderAuctionDetails.Product' | translate }}</p>
-
-                        <p style="color: #414042; font-size: 14px; "><span class="icon-calendar" style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;{{ 'bidderAuctionDetails.AuctionStarts' | translate }} {{upcomingAuction?.auctionStartsdate}} ∙ {{upcomingAuction?.auctionStartstime}} {{upcomingAuction?.auctionStartstimeSufix}}</p>
-
-                        <p style="color: #414042; font-size: 14px; "><span class="icon-pin" style="color: #08594D; font-weight: bold;"></span>&nbsp; &nbsp;{{ 'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}</p>
-
-                    </div>
-
-                    <div class="left-right-card" *ngIf="upcomingAuction.auctionStatus=='Published'" [ngClass]="{'grayscale': upcomingAuction.auctionStatus?.startsWith('Pending')}">
-
-                        <!-- Added by Mohammed Salick -->
-                        <app-send-bidding-offer *ngIf="data" [totalBookValue]="data.d.results[0].ZzPbEstPrice" (showError)="showError($event)"></app-send-bidding-offer>
-                        <app-latest-offers-sent [aucId]="auctionId" pageno="1" *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
->>>>>>> Stashed changes
 
                             <p class="text-16 text-muted">{{upcomingAuction?.auctionnote2}}</p>
 

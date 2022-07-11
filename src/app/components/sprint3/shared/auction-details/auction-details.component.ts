@@ -21,12 +21,7 @@ export class AuctionDetailsComponent implements OnInit {
   editmode1: boolean = true;
   editmode2: boolean = false;
 
-<<<<<<< Updated upstream
   response: any;
-=======
-  data : any;
-  isParticipated : any;
->>>>>>> Stashed changes
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   days: number;
   hours: number;
@@ -45,12 +40,7 @@ export class AuctionDetailsComponent implements OnInit {
   prmyaward: any;
   finalaward: any;
 
-<<<<<<< Updated upstream
   userRole: any;
-=======
-  userRole : any;
-  showFileError: boolean = false;
->>>>>>> Stashed changes
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
@@ -79,10 +69,8 @@ export class AuctionDetailsComponent implements OnInit {
     console.log("API");
     this.bidderService.getAuctionDetail(this.auctionId).subscribe((res) => {
       console.log(res);
-      this.data = res.body;
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);
-<<<<<<< Updated upstream
       this.response = res.body.d.results[0];
       if(this.response){
         this.showLoader = false;
@@ -114,10 +102,6 @@ export class AuctionDetailsComponent implements OnInit {
       console.log("🚀🚀 ~~ this.transformedAttachment", this.transformedAttachment);
 
 
-=======
-      this.isParticipated = res.body.d.results[0];
-      this.mapping(this.data);
->>>>>>> Stashed changes
     });
   }
   refreshCalendarCntrl() {
@@ -310,14 +294,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
   // send offer
-<<<<<<< Updated upstream
 
-=======
-  showError(nowShow:boolean){
-    console.log("Check here : ",nowShow);
-    this.showFileError = nowShow;
-  }
->>>>>>> Stashed changes
   Amt: any;
   incAmt() {
     this.Amt++;
