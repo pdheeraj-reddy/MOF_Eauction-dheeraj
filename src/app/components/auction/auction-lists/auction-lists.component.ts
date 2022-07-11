@@ -66,6 +66,7 @@ export class AuctionListsComponent implements OnInit {
   ];
   isFilterSearch: boolean = false;
   isSearch = false;
+  showStatusFilter = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -321,6 +322,10 @@ export class AuctionListsComponent implements OnInit {
       filters.Status = 'All';
       this.selectedTab = 'All';
       this.isSearch = false;
+    }
+
+    if (this.showStatusFilter) {
+      this.showStatusFilter = false;
     }
 
     console.log("🚀 ~ this.auctionServc.getAuctionList ~ filters", filters)
