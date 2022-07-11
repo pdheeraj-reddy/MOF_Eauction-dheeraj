@@ -21,7 +21,8 @@ export class AuctionDetailsComponent implements OnInit {
   editmode1: boolean = true;
   editmode2: boolean = false;
 
-  response: any;
+  data : any;
+  isParticipated : any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   days: number;
   hours: number;
@@ -37,12 +38,14 @@ export class AuctionDetailsComponent implements OnInit {
   transformedAttachment: any = [];
   textDir: boolean;
   currentLang:any;
+  response:any;
 
   // Added by Mohammed Salick
   prmyaward: any;
   finalaward: any;
 
-  userRole: any;
+  userRole : any;
+  showFileError: boolean = false;
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
@@ -93,6 +96,7 @@ export class AuctionDetailsComponent implements OnInit {
     console.log("API");
     this.bidderService.getAuctionDetail(this.auctionId).subscribe((res) => {
       console.log(res);
+      this.data = res.body;
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);
       this.response = res.body.d.results[0];
@@ -346,7 +350,10 @@ export class AuctionDetailsComponent implements OnInit {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
   // send offer
-
+  showError(nowShow:boolean){
+    console.log("Check here : ",nowShow);
+    this.showFileError = nowShow;
+  }
   Amt: any;
   incAmt() {
     this.Amt++;
