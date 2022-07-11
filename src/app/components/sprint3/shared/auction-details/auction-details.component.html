@@ -73,9 +73,13 @@
     <!-- End -->
 
     <div *ngIf="!showLoader">
+
+        <!--============= Auction Participation card =============-->
         <app-auction-participation *ngIf="response && upcomingAuction?.auctionStatus=='Published'" [response]="response"
             [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
         </app-auction-participation>
+        <!-- End -->
+
         <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction">
         </app-auction-fbga>
         <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'"
@@ -156,6 +160,8 @@
             <div *ngIf="editmode1" style="width: 73%; float: right;">
                 <div class="card">
                     <div class="d-flex align-items-center mt-3">
+
+                        <!--============= Timer in head =============-->
                         <div class="w-75">
                             <app-auction-countdown-timer-head *ngIf="upcomingAuction.auctionStatus"
                                 [auctionStatus]="upcomingAuction.auctionStatus"
@@ -164,12 +170,17 @@
                                 style="width: 200px;">
                             </app-auction-countdown-timer-head>
                         </div>
+                        <!-- End -->
+
+                        <!--============= Shows different status =============-->
                         <div class="w-25 d-flex justify-content-end">
                             <app-auction-status *ngIf="(upcomingAuction?.auctionStatus)"
                                 [auctionStatus]="upcomingAuction.auctionStatus || ''" class="status-code">
                             </app-auction-status>
                             <!-- <button *ngIf="(upcomingAuction?.auctionStatus)" style="color: #117ABE; background-color: #E7F1F8; border: none; outline: none; width: 160px; height: 30px; margin-top: 30px;">{{upcomingAuction?.auctionStatus}}</button> -->
                         </div>
+                        <!-- End -->
+                        
                     </div>
                     <div class="mx-3" style="display: flex;">
                         <div class="left-left-card"
@@ -249,8 +260,12 @@
                             [ngClass]="{'grayscale': upcomingAuction.auctionStatus?.startsWith('Pending')}">
 
                             <!-- Added by Mohammed Salick -->
+
+                            <!--============= Send offer card =============-->
                             <app-send-bidding-offer *ngIf="userRole != 'EAuction_AuctionManager'">
                             </app-send-bidding-offer>
+                            <!-- End -->
+
                             <app-latest-offers-sent [aucId]="auctionId" pageno="1"
                                 *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
 

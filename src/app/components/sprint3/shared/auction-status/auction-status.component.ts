@@ -9,7 +9,7 @@ import { getStatusText } from 'src/app/utils/util';
 })
 export class AuctionStatusComponent implements OnInit {
   @Input() auctionStatus: string;
-  @Input() count: number = 0;
+  @Input() count: number = 120;
   status: string = '';
   showEye: boolean = false;
   constructor() { }
