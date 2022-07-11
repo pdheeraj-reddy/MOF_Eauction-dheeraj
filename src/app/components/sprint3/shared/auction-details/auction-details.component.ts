@@ -35,6 +35,8 @@ export class AuctionDetailsComponent implements OnInit {
   selectedFileURL: any;
   auctionAttachment: any = [];
   transformedAttachment: any = [];
+  textDir: boolean;
+  currentLang:any;
 
   // Added by Mohammed Salick
   prmyaward: any;
@@ -50,6 +52,13 @@ export class AuctionDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.currentLang = localStorage.getItem('lang_pref');
+    if(this.currentLang == 'en'){
+      this.textDir = true;
+    }
+    else{
+      this.textDir = false;
+    }
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     console.log("this.auctionId", this.auctionId);
 
@@ -65,6 +74,21 @@ export class AuctionDetailsComponent implements OnInit {
 
     // this.getupcomingAuctionList(1);
   }
+  ngDoCheck(){
+    let newLang = localStorage.getItem('lang_pref')
+    if(this.currentLang != newLang){
+      if (newLang == 'ar') {
+        this.currentLang = newLang;
+        this.textDir = false;
+        console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
+      }
+      else{
+        this.textDir = true;
+        this.currentLang = newLang;
+      }
+    }
+
+  }
   getAuctionDetails() {
     console.log("API");
     this.bidderService.getAuctionDetail(this.auctionId).subscribe((res) => {
@@ -76,8 +100,9 @@ export class AuctionDetailsComponent implements OnInit {
         this.showLoader = false;
       }
       this.mapping(res.body);
+
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
-      console.log("🚀🚀 ~~ this.auctionAttachment", this.auctionAttachment);
+      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.upcomingAuction);
 
       if (this.auctionAttachment) {
         this.auctionAttachment.forEach(
@@ -97,10 +122,37 @@ export class AuctionDetailsComponent implements OnInit {
         );
       }
 
+      if(this.upcomingAuction?.biddingStatus){
+        if(this.upcomingAuction?.biddingStatus == 'C'){
+          this.upcomingAuction.biddingStatus = 'Closed';
+        }
+        else if(this.upcomingAuction?.biddingStatus == 'D'){
+          this.upcomingAuction.biddingStatus = 'Direct';
+        }
+      }
+
+      if(this.upcomingAuction.auction_detail?.BiddingMethod){
+        if(this.upcomingAuction.auction_detail?.BiddingMethod == 'C'){
+          this.upcomingAuction.auction_detail.BiddingMethod  = 'Closed';
+        }
+        else if(this.upcomingAuction.auction_detail?.BiddingMethod == 'D'){
+          this.upcomingAuction.auction_detail.BiddingMethod  = 'Direct';
+        }
+      }
+
+      if(this.upcomingAuction.auction_detail?.startAuction){
+        if(this.upcomingAuction.auction_detail?.startAuction == 'T'){
+          this.upcomingAuction.auction_detail.startAuction  = 'Automatic';
+        }
+        else if(this.upcomingAuction.auction_detail?.startAuction == 'M'){
+          this.upcomingAuction.auction_detail.startAuction  = 'Manual';
+        }
+      }
 
 
-      console.log("🚀🚀 ~~ this.transformedAttachment", this.transformedAttachment);
 
+      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 135 ~ this.upcomingAuction.important_info?.guarantee_per", this.upcomingAuction.important_info?.guarantee_per);
+      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 135 ~ this.upcomingAuction.important_info?.commissionRate", this.upcomingAuction.important_info?.commissionRate);
 
     });
   }
