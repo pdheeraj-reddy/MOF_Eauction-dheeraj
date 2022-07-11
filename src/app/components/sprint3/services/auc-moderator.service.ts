@@ -27,7 +27,7 @@ export class AucModeratorService {
     }
   }
 
-  kpostAppporRej(data:any,action: any):Observable<any>{
+  postAppporRej(data:any,action: any):Observable<any>{
     let data1 = {
     "AucId": data.AucId,
     "BidderId": data.BidderId,
