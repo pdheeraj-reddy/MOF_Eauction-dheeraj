@@ -29,7 +29,7 @@ export class AuctionDetailsComponent implements OnInit {
   second: number;
   selectedPageNumber: number;
   pagelimit: number = 10;
-  showLoader: boolean = false;
+  showLoader: boolean = true;
   showViewAttachmentsModal: boolean = false;
   selectedFileFormat: any;
   selectedFileURL: any;
@@ -72,6 +72,9 @@ export class AuctionDetailsComponent implements OnInit {
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);
       this.response = res.body.d.results[0];
+      if(this.response){
+        this.showLoader = false;
+      }
       this.mapping(res.body);
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
       console.log("🚀🚀 ~~ this.auctionAttachment", this.auctionAttachment);
@@ -231,7 +234,7 @@ export class AuctionDetailsComponent implements OnInit {
       //     +pageNoVal
       //   );
 
-      //   const csrfToken = localStorage.getItem("x-csrf-token");    
+      //   const csrfToken = localStorage.getItem("x-csrf-token");
       //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
       console.log(res, "f");
       this.mapping(res);
@@ -251,7 +254,7 @@ export class AuctionDetailsComponent implements OnInit {
     //     +pageNoVal
     //   );
 
-    //   const csrfToken = localStorage.getItem("x-csrf-token");    
+    //   const csrfToken = localStorage.getItem("x-csrf-token");
     //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
     //   this.auctionListData = this.mapping(res.body);
 

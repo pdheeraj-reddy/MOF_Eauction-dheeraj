@@ -1,10 +1,8 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { EnvService } from 'src/app/env.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { BidderService } from '../../services/bidder.service';
-import { mode } from 'crypto-js';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-auction-participation',
@@ -15,6 +13,8 @@ export class AuctionParticipationComponent implements OnInit {
   @Input() upcomingAuction: any;
   @Input() AuctionId: any;
   @Input() response: any;
+
+  showLoader: boolean = false;
   showSuccessfulModal: boolean = false;
   constructor(private http: HttpClient, private bidderService: BidderService, private router: Router) { }
   btnDisable = false;
@@ -32,10 +32,13 @@ export class AuctionParticipationComponent implements OnInit {
   // }
   submitparticipation() {
     if (this.AuctionId) {
+      this.showLoader = true;
       this.bidderService.makeParticipateIn(this.AuctionId).subscribe((res) => {
-        if (res.Msgty=='S') {
+        console.log("🎯TC🎯 ~ file: auction-participation.component.ts ~ line 37 ~ res.d.Msgty", res.d.Msgty);
+        if (res.d.Msgty == 'S') {
           this.showSuccessfulModal = true;
-          
+          this.btnDisable = true;
+          this.showLoader = false;
         }
       });
     }
