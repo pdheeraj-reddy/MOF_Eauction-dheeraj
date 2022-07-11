@@ -71,7 +71,7 @@
         </div>
     </div>
     <!-- End -->
-    
+
     <div *ngIf="response">
         <app-auction-participation *ngIf="response && upcomingAuction?.auctionStatus=='Published'" [response]="response"
             [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
@@ -261,20 +261,20 @@
 
                     <div class="et-accordion">
                         <div class="card" style="border: none; margin: 2%;">
-                            <div class="card-header" style="border-bottom: 1px solid #CCCCCC;" data-toggle="collapse"
-                                data-target="#localContentFirst" aria-expanded="false"
-                                aria-controls="localContentFirst">
+                            <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
+                                data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
+                                aria-controls="localContentFirst2">
                                 <h2 class="mb-0 text-body">{{'bidderAuctionDetails.ImportantInformation' | translate }}
                                 </h2>
                                 <button class="btn btn-accordion-control" type="button" data-toggle="collapse"
-                                    data-target="#localContentFirst" aria-expanded="false"
-                                    aria-controls="localContentFirst">
+                                    data-target="#localContentFirst2" aria-expanded="false"
+                                    aria-controls="localContentFirst2">
                                     <div class="collapsed-icon">
                                         <span class="icon-arrow-down"></span>
                                     </div>
                                 </button>
                             </div>
-                            <div class="collapse" id="localContentFirst">
+                            <div class="collapse" id="localContentFirst2" style="border-top: none;">
                                 <div class="card-body">
                                     <div class="form-field">
                                         <form class="needs-validation" novalidate>
