@@ -22,6 +22,7 @@
         </div>
     </div>
 
+<<<<<<< Updated upstream
     <!--********** Loader **********-->
     <div class="row text-center" *ngIf="showLoader">
         <div class="col-md-12 justify-content-start">
@@ -66,6 +67,7 @@
                 </i>
                 <div class="alert-content">
                     <h5 class="text-black-50">{{ 'common.msg-loading' | translate }}</h5>
+=======
     <!-- =================This is to show error message if there is no file is selected ================= -->
     <div *ngIf="showFileError" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
         <div class="alert-wrapper">
@@ -86,7 +88,7 @@
     </div>
     <!-- ==========End======= -->
 
-    <app-auction-participation *ngIf="data && upcomingAuction?.auctionStatus=='Published'" [response]="response" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
+    <app-auction-participation *ngIf="data && upcomingAuction?.auctionStatus=='Published'" [isParticipated]="isParticipated" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction"></app-auction-participation>
     <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction"></app-auction-fbga>
     <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'" [upcomingAuction]="upcomingAuction"></app-auction-pay-invoice>
 
@@ -118,6 +120,7 @@
                 <div class="etimad-option mr-0" style="margin-left: -50px;">
                     <input (click)="auctionSettings('auctionInstruction')" type="radio" id="checkbox08" name="details" value="instructions" />
                     <label class="input-target" for="checkbox08" style="width: 118.8px; height: 118.8px;"><span><span class="icon-pin"></span><br>{{ 'bidderAuctionDetails.auction-settings.AuctionInstructions' | translate }}</span> </label>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -280,6 +283,12 @@
                                     data-target="#viewDetails"><span class="icon-eye-open"></span> {{
                                     'bidderAuctionDetails.ProductDetails' | translate }}</button>
 
+<<<<<<< Updated upstream
+                            </div>
+                            <p class="text-12 text-center">10 of 23</p>
+
+                            <p class="text-primary font-weight-bold text-22">{{upcomingAuction?.auctionnote1}}</p>
+=======
                         </div>
                         <p class="count_of_image" style="color: #414042; text-align: center; width: 100%;">10 of 23</p>
 
@@ -300,6 +309,7 @@
                         <!-- Added by Mohammed Salick -->
                         <app-send-bidding-offer *ngIf="data" [totalBookValue]="data.d.results[0].ZzPbEstPrice" (showError)="showError($event)"></app-send-bidding-offer>
                         <app-latest-offers-sent [aucId]="auctionId" pageno="1" *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
+>>>>>>> Stashed changes
 
                             <p class="text-16 text-muted">{{upcomingAuction?.auctionnote2}}</p>
 
