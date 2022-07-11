@@ -43,6 +43,8 @@ export class AuctionDetailsComponent implements OnInit {
   finalaward: any;
 
   userRole: any;
+  showFileError:boolean = false;
+
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
@@ -346,6 +348,9 @@ export class AuctionDetailsComponent implements OnInit {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
   // send offer
+  showError(nowShow:boolean){
+    this.showFileError = nowShow;
+  }
 
   Amt: any;
   incAmt() {

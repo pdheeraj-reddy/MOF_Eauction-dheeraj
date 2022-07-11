@@ -74,6 +74,26 @@
 
     <div *ngIf="!showLoader">
 
+      <!-- =================This is to show error message if there is no file is selected ================= -->
+        <div *ngIf="showFileError" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+          <div class="alert-wrapper">
+              <div class="alert-body">
+                  <i class="alert-icon">
+          <span class="icon-filled-wrong"></span>
+        </i>
+                  <div class="alert-content">
+                      <p>الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF</p>
+                  </div>
+              </div>
+              <div class="alert-action">
+                  <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close">
+          <span class="icon-close"></span>
+        </button>
+              </div>
+          </div>
+        </div>
+      <!-- ==========End======= -->
+
         <!--============= Auction Participation card =============-->
         <app-auction-participation *ngIf="response && upcomingAuction?.auctionStatus=='Published'" [response]="response"
             [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
@@ -189,7 +209,7 @@
                       <!-- Added by Mohammed Salick -->
 
                       <!--============= Send offer card =============-->
-                      <app-send-bidding-offer *ngIf="userRole != 'EAuction_AuctionManager'">
+                      <app-send-bidding-offer [totalBookValue]="response.ZzPbEstPrice" (showError)="showError($event)">
                       </app-send-bidding-offer>
                       <!-- End -->
 
