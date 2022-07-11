@@ -42,7 +42,8 @@ export class ProdctDetailsComponent implements OnInit {
   selectedPageNumber: number;
   p: number = 1;
   pageRangeForProductAttach: any;
-
+  columnLst1 = ['Description', 'Quantity', 'ProductValue', 'ZzProductCond'];
+  columnLst2 = ['Description', 'Quantity', 'ProductValue', 'ZzPdtEstPricePc', 'ZzProductCond'];
   @ViewChild('autoFocus') inputFieldElementFocus: ElementRef;
 
   @Input('estimatedValueOfProducts')
@@ -432,12 +433,13 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId(
-      'inventoryAllocationTable',
-      columnId,
-      sortType,
-      dateFormat
-    );
+    // this.PaginationServc.sortByTableHeaderId(      'inventoryAllocationTable',      columnId,      sortType,      dateFormat    );
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    if ((this.preAuctionData?.Status == 'Pending Pricing' || this.preAuctionData?.Status == 'Pending Pricing Approval' || this.preAuctionData?.Status == 'Rejected Prices') && this.preAuctionData?.Status != 'Pending to Publish') {
+      this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst2[columnId]));
+    } else {
+      this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst1[columnId]));
+    }
   }
 
   isSorting(columnId: number) {

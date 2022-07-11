@@ -44,7 +44,7 @@ export class AuctionProductComponent implements OnInit {
   totalValue: number = 0;
   activePictureIndex = -1;
   activeFileIndex = -1;
-
+  columnLst = ['productName', 'productSerialNumber', 'productValue', 'productCondition'];
   // ------- product file attachment --------
   // ------- file validation         --------
   maxFileCount: Number = 30;
@@ -900,7 +900,7 @@ export class AuctionProductComponent implements OnInit {
         this.files.splice(index, 1);
         this.productImages.removeAt(index);
         if (this.files.length % 10 === 0) {
-          this.navigateToPage(currentPage-1, 'productPictureAttach');
+          this.navigateToPage(currentPage - 1, 'productPictureAttach');
         } else {
           this.navigateToPage(currentPage, 'productPictureAttach');
         }
@@ -912,7 +912,7 @@ export class AuctionProductComponent implements OnInit {
       this.files.splice(index, 1);
       this.productImages.removeAt(index);
       if (this.files.length % 10 === 0) {
-        this.navigateToPage(currentPage-1, 'productPictureAttach');
+        this.navigateToPage(currentPage - 1, 'productPictureAttach');
       } else {
         this.navigateToPage(currentPage, 'productPictureAttach');
       }
@@ -930,7 +930,7 @@ export class AuctionProductComponent implements OnInit {
         this.files.splice(index, 1);
         this.productFiles.removeAt(index);
         if (this.files.length % 10 === 0) {
-          this.navigateToPage(currentPage-1, 'productFileAttach');
+          this.navigateToPage(currentPage - 1, 'productFileAttach');
         } else {
           this.navigateToPage(currentPage, 'productFileAttach');
         }
@@ -942,7 +942,7 @@ export class AuctionProductComponent implements OnInit {
       this.files.splice(index, 1);
       this.productFiles.removeAt(index);
       if (this.files.length % 10 === 0) {
-        this.navigateToPage(currentPage-1, 'productFileAttach');
+        this.navigateToPage(currentPage - 1, 'productFileAttach');
       } else {
         this.navigateToPage(currentPage, 'productFileAttach');
       }
@@ -1632,7 +1632,9 @@ export class AuctionProductComponent implements OnInit {
 
   // sorting
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.auctionProducts.value, this.columnLst[columnId]);
   }
 
   formatDate(date: any) {

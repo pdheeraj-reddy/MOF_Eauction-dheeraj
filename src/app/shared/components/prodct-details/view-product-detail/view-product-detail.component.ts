@@ -39,7 +39,7 @@ export class ViewProductDetailComponent implements OnInit {
   fetchPicture: boolean = true;
   showVideo: boolean = true;
   pageRangeForAttach: any;
-
+  columnLst = ['index', 'name'];
 
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -119,12 +119,9 @@ export class ViewProductDetailComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId(
-      'auctionAttachment',
-      columnId,
-      sortType,
-      dateFormat
-    );
+    // this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.viewproduct.productFiles, (this.columnLst[columnId]));
   }
 
   isSorting(columnId: number) {

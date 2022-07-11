@@ -258,10 +258,41 @@ export class PaginationSortingService {
     this.columnId = columnId;
     this.tableId = tableId;
     this.sortType = sortType;
-    if(dateFormat){
-        this.dateFormat = dateFormat;
+    if (dateFormat) {
+      this.dateFormat = dateFormat;
     }
     this.sortTable();
+  }
+
+  sortByColumnName(tableId: string, columnId: number, sortType: string, dateFormat?: string) {
+    if (this.columnId === columnId) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    }
+    this.columnId = columnId;
+    this.tableId = tableId;
+    this.sortType = sortType;
+    if (dateFormat) {
+      this.dateFormat = dateFormat;
+    }
+  }
+
+  sortAllTableData(tableData: any, column: string) {
+    let sortedData;
+    if (this.sortDirection === 'asc') {
+      if (this.sortType === 'string') {
+        sortedData = tableData.sort((a: any, b: any) => (a[column] > b[column]) ? 1 : ((b[column] > a[column]) ? -1 : 0))
+      } else if (this.sortType === 'numeric') {
+        sortedData = tableData.sort((a: any, b: any) => +a[column] - +b[column]);
+      }
+    } else {
+      if (this.sortType === 'string') {
+        sortedData = tableData.sort((a: any, b: any) => (a[column] < b[column]) ? 1 : ((b[column] < a[column]) ? -1 : 0))
+      } else if (this.sortType === 'numeric') {
+        sortedData = tableData.sort((a: any, b: any) => +b[column] - +a[column]);
+      }
+    }
+    return sortedData;
+
   }
 
   /*Sorting End */
