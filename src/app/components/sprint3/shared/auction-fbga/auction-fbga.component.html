@@ -1,38 +1,48 @@
-<div class="card-grp">
-    <div class="top-card">
+<div class="card flex-row">
 
-        <div class="top-card-left">
-            <div class="card-body" style="padding-top:50px;padding-bottom:50px">
-                <h5 class="card-title" style="color: #F9B122;font-size: 18px;">{{'bidderfbga.YourBidHasBeenAwarded'}}</h5>
-                <p class="card-text" style="color: #F9B122;font-size: 14px;">
-                    {{'bidderfbga.FinalGuaranteeApproveInitialAward'}}
-                </p>
-            </div>
+    <!--=================== Yellow box to show auction status ===================-->
+    <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%;">
+        <div class="mx-3">
+            <p class="text-18 text-warning font-weight-bold">تمت الترسية على عرضك!
+            </p>
+            <p class="text-12 text-warning">الرجاء إرفق الضمان النهائيلإعتماد الترسية المبدئية</p>
         </div>
+    </div>
+    <!-- End -->
 
-        <div class="top-card-right">
-            <div class="top-card-right-left">
-                <div class="card-body" style="padding-top:25px;padding-bottom:10px">
-                    <div class="file-uploader-zone">
-                        <div class="buttons">
-                            <div class="uploader-button-caption">
-                                <span class="icon-attachment mx-22"></span>
-                                <label style="padding-left: 5px; font-weight: 500;">{{'bidderfbga.UploadFileFormat'}}</label>
-                                <input qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" title="file input" multiple="" type="file" name="qqfile" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
-                            </div>
-                        </div>
+    <div class="vr-line"></div>
+
+    <!--============ Shows file upload and Submit Button ============-->
+    <div class="d-flex justify-content-between mx-4 w-75">
+
+        <!--=================== Description ===================-->
+        <div class="d-flex flex-column justify-content-center m-4" style="max-width: 440px;">
+            <div class="file-uploader-zone">
+                <div class="buttons">
+                    <div class="uploader-button-caption">
+                        <span class="icon-attachment mx-22"></span>
+                        <label class="font-weight-bold px-2">{{ 'bidderSendOffer.UploadFileFormat' | translate }}</label>
+                        <input accept=".docx,.doc,application/pdf,image/jpg,image/jpeg,image/png" qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" (change)="selectFiles($event, 'primaryWarranty')" title="file input" multiple="" type="file" name="qqfile" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
                     </div>
-                    <p class="card-text" style="color: #005B4E;font-size: 14px;margin-top: 10px;margin-bottom: 5px;">
-                        {{'bidderfbga.AttachTheFinalWarranty'}}
-                    </p>
                 </div>
             </div>
-
-            <div class="top-card-right-right">
-                <button class="btn btn-primary-light btn-md" data-toggle="modal" data-target="#confirmMemberModal" style="margin-right: 10px;"> {{'bidderfbga.SendTheFinalGuarantee'}}</button>
+            <div>
+                <p class="text-info text-12 m-0">الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك إصدار  الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد 
+                    <a class="text-info text-12" style="text-decoration: underline;">اضغط هنا</a>
+                </p>
+                
             </div>
-
         </div>
+        <!-- End -->
+
+        <!--=================== Participation Button ===================-->
+        <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()">
+            إرسال الضمان النهائي
+        </button>
+        <!-- End -->
 
     </div>
+    <!-- End -->
+
+
 </div>

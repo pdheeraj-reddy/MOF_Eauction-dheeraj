@@ -100,8 +100,11 @@
         </app-auction-participation>
         <!-- End -->
 
-        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction">
+        <!--============ Send FBGA card ============-->
+        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction" (showError)="showError($event)">
         </app-auction-fbga>
+        <!-- End -->
+        
         <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'"
             [upcomingAuction]="upcomingAuction"></app-auction-pay-invoice>
 
