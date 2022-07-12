@@ -1027,5 +1027,13 @@
         "Research": "Apply",
         "payment_bill": "فاتورة الدفع",
         "auction_report_and_bids_submitted": "تم إرسال تقرير المزاد والعطاءات"
+    },
+    "bidderSendInvoice": {
+        "send_invoice": "Send Invoice",
+        "reference": "Reference",
+        "approval_of_the_final_award_title": "Approval of the final award and send the invoice ?",
+        "approval_of_the_final_award_desc": "When the award is approved and the invoice is sent to complete the payment by the bidder, the auction will be awarded automatically.",
+        "invoice_sent_successfully": "Invoice sent successfully",
+        "you_will_receive_invoice": "You will receive an email when payment has been completed and the auction has been awarded."
     }
 }

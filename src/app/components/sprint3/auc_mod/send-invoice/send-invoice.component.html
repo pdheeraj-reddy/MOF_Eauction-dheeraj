@@ -246,16 +246,16 @@
     <br>
 
     <!-- Added by Mohammed Salick -->
-    <div *ngIf="userRole != 'EAuction_AuctionManager'">
+    <div *ngIf="userRole != 'EAuction_AuctionManager'" style="display: flex; justify-content: space-between;">
         <button type="button"
             style="outline: none; color: grey; background-color: white; height: 50px; width: 130px; border: 1px solid grey; border-radius: 5px; font-size: 18px;"
             class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
-            <span class="btn-text">Reference</span> <span class="v-divider"></span>
+            <span class="btn-text">{{'bidderSendInvoice.reference' | translate}}</span> <span class="v-divider"></span>
             <span class="icon icon-arrow-left"></span>
         </button>
         <button data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#showSuccessfulModal"
-            style="margin-left: 63%; outline: none; background-color: #32AD71; color: white; font-weight: bold; height: 50px; width: 140px; border: none; border-radius: 5px;">Send
-            Invoice
+            style="outline: none; background-color: #32AD71; color: white; font-weight: bold; height: 50px; width: 140px; border: none; border-radius: 5px;">
+            {{'bidderSendInvoice.send_invoice' | translate}}
         </button>
     </div>
 </div>
@@ -276,11 +276,11 @@
                 <div style="width: 400px; text-align: left;">
                     <p
                         style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
-                        Approval of the final award and send the invoice ?</p>
+                        {{'bidderSendInvoice.approval_of_the_final_award_title' | translate}}</p>
                 </div>
 
-                <div style="margin-left: 110px;">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                <div>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                         <span class="icon-close"></span>
                     </button>
                 </div>
@@ -288,20 +288,20 @@
 
             <div class="modal-body" style="width: 470px; margin-top: 10px; text-align: left;">
                 <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                    When the award is approved and the invoice is sent to complete the payment by the bidder, the
-                    auction will be awarded automatically.
+                    {{'bidderSendInvoice.approval_of_the_final_award_desc' | translate}}
                 </p>
             </div>
 
 
-            <div style="margin-left: 220px;">
-                <button
-                    style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
+            <div style="margin-left: 220px;" style="display: flex;justify-content: end;">
+                <button class="mr-2 ml-2"
+                    style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">{{'bidderSendInvoice.reference'
+                    | translate}}</button>
 
                 <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close"
                     data-toggle="modal" data-target="#secondPopup"
-                    style="height:45px; width: 120px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">Send
-                    Invoice</button>
+                    style="height:45px; width: 120px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                    {{'bidderSendInvoice.send_invoice' | translate}}</button>
             </div>
         </div>
     </div>
@@ -315,8 +315,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
 
         <div class="card shadow-lg result result-success" style="align-items: center;">
-            <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                data-dismiss="modal" aria-label="Close">
+            <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <div class="alert-body">
@@ -324,14 +323,15 @@
                     <span class="icon-alert-success"></span>
                 </i>
                 <div class="alert-content">
-                    <h4>Invoice sent successfully</h4>
+                    <h4>{{'bidderSendInvoice.invoice_sent_successfully' | translate}}</h4>
                     <p style="color: #414042;">
-                        You will receive an email when payment has been completed and the auction has been awarded.
+                        {{'bidderSendInvoice.you_will_receive_invoice' | translate}}
                     </p>
                 </div>
             </div>
             <div class="alert-action">
-                <button type="button" class="btn btn-primary-light"> Back to auctions</button>
+                <button type="button" class="btn btn-primary-light"> {{'bidderSendOffer.BackToAuctions' |
+                    translate}}</button>
             </div>
         </div>
     </div>
