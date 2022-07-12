@@ -124,6 +124,8 @@ export class AmAuctionComponent implements OnInit {
   }
 
   public mapping(serverObj: any): AuctionList[] {
+    console.log("🚀 ~ mapping ~ serverObj", serverObj);
+    if (!serverObj.d.results?.length) return [];
     let resultSet: AuctionList[] = [];
     this.totalCounts = {
       total_completed: serverObj.d.results[0].TotCompleted,

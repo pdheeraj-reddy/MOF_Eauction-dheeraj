@@ -85,7 +85,7 @@ export class SendInvoiceComponent implements OnInit {
       this.showLoader = false;
       this.PaginationServc.setPagerValues(+res.body.d.results[0].TotEle, 10, +pageNoVal);
       localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-      // this.mapping(res.body);
+      this.mapping(res.body);
     }, (error: any) => {
       this.showLoader = false;
       console.log('getInvoice RespError : ', error);
