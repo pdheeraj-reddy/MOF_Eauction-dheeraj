@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { BidderService } from '../../services/bidder.service';
 // import { EventEmitter } from 'stream';
 
@@ -9,17 +9,21 @@ import { BidderService } from '../../services/bidder.service';
 })
 export class SendBiddingOfferComponent implements OnInit {
 
+
   @Output() showError = new EventEmitter<boolean>();
-  @Input() totalBookValue : number;
-  @Input() auctionId : any;
+  @Input() totalBookValue: number;
+  @Input() auctionId: any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
   acceptedFiles = [
     'image/png',
-    'application/pdf',];
+    'image/jpeg',
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
-  files: any[] =[];
+  files: any[] = [];
   // amount: number = 0;
   minAmount: number;
   persuitRate: number = 0;
@@ -29,7 +33,10 @@ export class SendBiddingOfferComponent implements OnInit {
   invalidFileSize: boolean;
   showFileError: boolean = false;
   showConfirmation: boolean = false;
-  constructor(private bidderService : BidderService) { }
+  selectedFileFormat: any;
+  selectedFileURL: any;
+  amountValidation: boolean = false;
+  constructor(private bidderService: BidderService) { }
 
   ngOnInit(): void {
     // this.amount = 30005;
@@ -40,11 +47,21 @@ export class SendBiddingOfferComponent implements OnInit {
   }
 
   decAmt() {
-    if(this.totalBookValue > this.minAmount) {
+    if (this.totalBookValue > this.minAmount) {
       this.totalBookValue--;
       this.calc();
     }
   }
+
+  // resetAmount() {
+  //   if (this.totalBookValue < this.minAmount) {
+  //     // this.totalBookValue = this.minAmount
+  //     this.amountValidation = true;
+  //   }
+  //   else {
+  //     this.amountValidation = false;
+  //   }
+  // }
 
   incAmt() {
     this.totalBookValue++;
@@ -84,10 +101,11 @@ export class SendBiddingOfferComponent implements OnInit {
                 this.customLoop(++index, limit, file);
               }
               this.files.push(fileupload);
-              if(this.checkFile()){
+              console.log("🚀🚀 ~~ this.files", this.files);
+              if (this.checkFile()) {
 
               }
-             // this.auctionAttachement.push(new FormControl(fileupload));
+              // this.auctionAttachement.push(new FormControl(fileupload));
             });
           } else {
             this.invalidFileSize = true;
@@ -96,13 +114,42 @@ export class SendBiddingOfferComponent implements OnInit {
       }
     }
   }
-  checkFile(){
-    if(this.files.length){
+  checkFile() {
+    if (this.files.length) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
+
+  previewFile(file: any) {
+    const fileType = file.name.split(".").pop()?.toLowerCase();
+    // var reader = new FileReader();
+    // reader.readAsDataURL(file.filesrc['0']);
+    var byteString = atob(file.filesrc['0'].split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: file.type });
+
+    console.log('fileURL', blob);
+    let fileURL = window.URL.createObjectURL(blob);
+    if ((file.type.indexOf('image') > -1) || (file.type.indexOf('video') > -1) || fileType === 'docx' || fileType === 'doc' || fileType === 'pdf') {
+      window.open(fileURL, '_blank');
+    } else {
+      if (file.type.indexOf('image') > -1) {
+        this.selectedFileFormat = 'image';
+      }
+      this.selectedFileURL = file.filesrc['0'].split(',')[1];;
+    }
+  }
+
+  removeFile() {
+    this.files.pop();
+  }
+
   FilePushTOArray(file: any, callback: (filesrc: any) => any) {
     const reader = new FileReader();
     reader.onload = (function (f) {
@@ -112,20 +159,25 @@ export class SendBiddingOfferComponent implements OnInit {
     })(file);
     reader.readAsDataURL(file);
   }
-  sendBidOffer(){
-    console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 115 ~ this.files", this.files);
-    
-    if(this.checkFile()){
-      this.showFileError =true;
-      this.showConfirmation = true;
-      this.showError.emit(!this.showFileError);
-      this.bidderService.submitBid(this.auctionId, this.totalBookValue.toString()).subscribe((res:any)=>{
+  sendBidOffer() {
+    if (this.totalBookValue < this.minAmount) {
+      this.amountValidation = true;
+      this.totalBookValue = this.minAmount;
+    }
+    else {
+      this.amountValidation = false;
+      if (this.checkFile()) {
+        this.showFileError = true;
+        this.showConfirmation = true;
+        this.showError.emit(!this.showFileError);
+        // this.bidderService.submitBid(this.auctionId, this.totalBookValue.toString()).subscribe((res: any) => {
 
-      });
-    }else{
-      this.showFileError = false;
-      this.showConfirmation = false;
-      this.showError.emit(!this.showFileError);
+        // });
+      } else {
+        this.showFileError = false;
+        this.showConfirmation = false;
+        this.showError.emit(!this.showFileError);
+      }
     }
     console.log(this.showFileError);
   }
