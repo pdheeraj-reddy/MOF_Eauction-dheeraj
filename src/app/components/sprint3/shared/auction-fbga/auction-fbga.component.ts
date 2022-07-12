@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { BidderService } from '../../services/bidder.service';
 
 @Component({
@@ -12,6 +13,9 @@ export class AuctionFbgaComponent implements OnInit {
   invalidFileType: boolean;
   invalidFileSize: boolean;
   auctionId:any;
+  showConfirmationModal = false;
+  showSuccessfulModal = false;
+  showLoader = false;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -21,7 +25,7 @@ export class AuctionFbgaComponent implements OnInit {
   ];
   files: any[] =[];
 
-  constructor(private bidderService : BidderService) { }
+  constructor(private bidderService : BidderService, private router: Router) { }
 
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
@@ -55,9 +59,6 @@ export class AuctionFbgaComponent implements OnInit {
                 this.customLoop(++index, limit, file);
               }
               this.files.push(fileupload);
-              if(this.checkFile()){
-
-              }
              // this.auctionAttachement.push(new FormControl(fileupload));
             });
           } else {
@@ -69,9 +70,11 @@ export class AuctionFbgaComponent implements OnInit {
   }
   checkFile(){
     if(this.files.length){
-      return true;
+      this.showConfirmationModal = true;
+      console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 73 ~ this.showConfirmationModal", this.showConfirmationModal);
+      this.showError.emit(false);
     }else{
-      return false;
+      this.showError.emit(true);
     }
   }
   FilePushTOArray(file: any, callback: (filesrc: any) => any) {
@@ -84,14 +87,27 @@ export class AuctionFbgaComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   sendFbga(){
+    this.showLoader = true;
     console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
-    if(this.checkFile()){
-      this.showError.emit(false);
       this.bidderService.submitFbga(this.auctionId).subscribe((res)=>{
+      console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 92 ~ res", res.d.Msgty);
+      if(res.d.Msgty == 'S'){
+        this.showConfirmationModal = false;
+        this.showSuccessfulModal = true;
+      }
         
       });
-    }else{
-      this.showError.emit(true);
-    }
+  }
+  closeModal(model:string){
+  if(model == 'Confirmation'){
+    this.showConfirmationModal = false;
+  }
+  if(model == 'Success'){
+    this.showSuccessfulModal = false;
+  }
+  if(model == "AuctionList"){
+    this.showSuccessfulModal = false;
+    this.router.navigate(['/bidder']);
+  }
   }
 }

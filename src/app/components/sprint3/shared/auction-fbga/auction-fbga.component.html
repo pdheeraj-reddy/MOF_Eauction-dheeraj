@@ -1,11 +1,11 @@
 <div class="card flex-row">
-
     <!--=================== Yellow box to show auction status ===================-->
-    <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%;">
+    <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
         <div class="mx-3">
-            <p class="text-18 text-warning font-weight-bold">تمت الترسية على عرضك!
+            <p class="text-18 text-warning font-weight-bold">تمت الترسية على عرضك!</p>
+            <p class="text-12 text-warning">
+                الرجاء إرفق الضمان النهائيلإعتماد الترسية المبدئية
             </p>
-            <p class="text-12 text-warning">الرجاء إرفق الضمان النهائيلإعتماد الترسية المبدئية</p>
         </div>
     </div>
     <!-- End -->
@@ -14,35 +14,126 @@
 
     <!--============ Shows file upload and Submit Button ============-->
     <div class="d-flex justify-content-between mx-4 w-75">
-
         <!--=================== Description ===================-->
-        <div class="d-flex flex-column justify-content-center m-4" style="max-width: 440px;">
+        <div class="d-flex flex-column justify-content-center m-4" style="max-width: 440px">
             <div class="file-uploader-zone">
                 <div class="buttons">
                     <div class="uploader-button-caption">
                         <span class="icon-attachment mx-22"></span>
-                        <label class="font-weight-bold px-2">{{ 'bidderSendOffer.UploadFileFormat' | translate }}</label>
-                        <input accept=".docx,.doc,application/pdf,image/jpg,image/jpeg,image/png" qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" (change)="selectFiles($event, 'primaryWarranty')" title="file input" multiple="" type="file" name="qqfile" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
+                        <label class="font-weight-bold px-2">{{
+                            "bidderSendOffer.UploadFileFormat" | translate
+                            }}</label>
+                        <input accept=".docx,.doc,application/pdf,image/jpg,image/jpeg,image/png"
+                            qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80"
+                            (change)="selectFiles($event, 'primaryWarranty')" title="file input" multiple="" type="file"
+                            name="qqfile" style="
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                font-family: Arial;
+                font-size: 118px;
+                margin: 0px;
+                padding: 0px;
+                cursor: pointer;
+                opacity: 0;
+                height: 100%;
+              " />
                     </div>
                 </div>
             </div>
             <div>
-                <p class="text-info text-12 m-0">الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك إصدار  الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد 
-                    <a class="text-info text-12" style="text-decoration: underline;">اضغط هنا</a>
+                <p class="text-info text-12 m-0">
+                    الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك
+                    إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد
+                    <a class="text-info text-12" style="text-decoration: underline">اضغط هنا</a>
                 </p>
-                
             </div>
         </div>
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()">
+        <button class="btn btn-primary-light btn-md align-self-center" (click)="checkFile()">
             إرسال الضمان النهائي
         </button>
         <!-- End -->
-
     </div>
     <!-- End -->
-
-
 </div>
+
+<!--=================== Confirmatiom model  ===================-->
+<div class="modal show" *ngIf="showConfirmationModal" [ngClass]="{ 'modal-show': showConfirmationModal }"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    {{
+                    "bidderAuctionDetails.auction-popup.ConfirmationOfParticipation"
+                    | translate
+                    }}
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" (click)="closeModal('Confirmation')">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px">{{
+                    "bidderAuctionDetails.auction-popup.UponConformation" | translate
+                    }}</label>
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
+                    (click)="sendFbga()">
+                    {{
+                    "auctionModerator.am-detail.auction-details-confirmation.Postconfirmation"
+                    | translate
+                    }}
+                    &nbsp;
+                    <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light text-14" style="width: 20px;height: 20px;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+                <button type="button" class="btn btn-outline-light btn-md" (click)="closeModal('Confirmation')">
+                    {{ "bidderAuctionDetails.auction-popup.Cancellation" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End -->
+
+<!--=================== Successful model  ===================-->
+<div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="align-items: center">
+            <button (click)="closeModal('Success')" type="button" class="modal-close btn-close btn-sm">
+                <span class="icon-close"></span>
+            </button>
+            <span class="icon-check"></span>
+            <div class="modal-header">
+                <div class="status-success-icon">
+                    <div style="display: flex">
+                        <div class="circle"></div>
+                    </div>
+                    <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                        {{
+                        "bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully"
+                        | translate
+                        }}
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center">
+                    {{ "bidderAuctionDetails.auction-popup.ReceiveEmail" | translate }}
+                </label>
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" (click)="closeModal('AuctionList')" class="btn btn-primary-light btn-md">
+                    {{ "bidderAuctionDetails.auction-popup.BackToAuctions" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End -->
