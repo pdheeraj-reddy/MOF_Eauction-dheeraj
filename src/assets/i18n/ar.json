@@ -971,9 +971,9 @@
     "bidderSendOffer": {
         "LatestOffersSent": "آخر العروض المرسلة",
         "AttachThePrimaryWarranty": "إرفاق الضمان الأساسي",
-        "ForHelpSupportManagingAuctions": "للمساعدة أو الدعم في إدارة المزادات",
-        "ClickHere": "انقر هنا",
-        "UploadFileFormat": "PNG ، JPG ، DOCX ، DOC ، ملف PDF",
+        "ForHelpSupportManagingAuctions": "بإمكانك إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد",
+        "ClickHere": "اضغط هنا",
+        "UploadFileFormat": "رفع ملف PNG, JPG, DOCX, DOC, PDF",
         "AddYourOffer": "أضف عرضك",
         "SAR": "ريال سعودي",
         "PersuitRate": "معدل بيرسويت",

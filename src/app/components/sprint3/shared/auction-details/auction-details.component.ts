@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { UpcomingAuction } from "src/app/model/auction.model";
@@ -17,6 +17,9 @@ declare var $: any;
   styleUrls: ['./auction-details.component.scss']
 })
 export class AuctionDetailsComponent implements OnInit {
+
+  @ViewChild('errorMessageFocus') errorFocus: ElementRef;
+
   auctionId: string
   editmode1: boolean = true;
   editmode2: boolean = false;
@@ -36,14 +39,14 @@ export class AuctionDetailsComponent implements OnInit {
   auctionAttachment: any = [];
   transformedAttachment: any = [];
   textDir: boolean;
-  currentLang:any;
+  currentLang: any;
 
   // Added by Mohammed Salick
   prmyaward: any;
   finalaward: any;
 
   userRole: any;
-  showFileError:boolean = false;
+  showFileError: boolean = false;
 
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
@@ -55,10 +58,10 @@ export class AuctionDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentLang = localStorage.getItem('lang_pref');
-    if(this.currentLang == 'en'){
+    if (this.currentLang == 'en') {
       this.textDir = true;
     }
-    else{
+    else {
       this.textDir = false;
     }
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
@@ -76,15 +79,15 @@ export class AuctionDetailsComponent implements OnInit {
 
     // this.getupcomingAuctionList(1);
   }
-  ngDoCheck(){
+  ngDoCheck() {
     let newLang = localStorage.getItem('lang_pref')
-    if(this.currentLang != newLang){
+    if (this.currentLang != newLang) {
       if (newLang == 'ar') {
         this.currentLang = newLang;
         this.textDir = false;
         console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
       }
-      else{
+      else {
         this.textDir = true;
         this.currentLang = newLang;
       }
@@ -98,7 +101,7 @@ export class AuctionDetailsComponent implements OnInit {
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);
       this.response = res.body.d.results[0];
-      if(this.response){
+      if (this.response) {
         this.showLoader = false;
       }
       this.mapping(res.body);
@@ -124,30 +127,30 @@ export class AuctionDetailsComponent implements OnInit {
         );
       }
 
-      if(this.upcomingAuction?.biddingStatus){
-        if(this.upcomingAuction?.biddingStatus == 'C'){
+      if (this.upcomingAuction?.biddingStatus) {
+        if (this.upcomingAuction?.biddingStatus == 'C') {
           this.upcomingAuction.biddingStatus = 'Closed';
         }
-        else if(this.upcomingAuction?.biddingStatus == 'D'){
+        else if (this.upcomingAuction?.biddingStatus == 'D') {
           this.upcomingAuction.biddingStatus = 'Direct';
         }
       }
 
-      if(this.upcomingAuction.auction_detail?.BiddingMethod){
-        if(this.upcomingAuction.auction_detail?.BiddingMethod == 'C'){
-          this.upcomingAuction.auction_detail.BiddingMethod  = 'Closed';
+      if (this.upcomingAuction.auction_detail?.BiddingMethod) {
+        if (this.upcomingAuction.auction_detail?.BiddingMethod == 'C') {
+          this.upcomingAuction.auction_detail.BiddingMethod = 'Closed';
         }
-        else if(this.upcomingAuction.auction_detail?.BiddingMethod == 'D'){
-          this.upcomingAuction.auction_detail.BiddingMethod  = 'Direct';
+        else if (this.upcomingAuction.auction_detail?.BiddingMethod == 'D') {
+          this.upcomingAuction.auction_detail.BiddingMethod = 'Direct';
         }
       }
 
-      if(this.upcomingAuction.auction_detail?.startAuction){
-        if(this.upcomingAuction.auction_detail?.startAuction == 'T'){
-          this.upcomingAuction.auction_detail.startAuction  = 'Automatic';
+      if (this.upcomingAuction.auction_detail?.startAuction) {
+        if (this.upcomingAuction.auction_detail?.startAuction == 'T') {
+          this.upcomingAuction.auction_detail.startAuction = 'Automatic';
         }
-        else if(this.upcomingAuction.auction_detail?.startAuction == 'M'){
-          this.upcomingAuction.auction_detail.startAuction  = 'Manual';
+        else if (this.upcomingAuction.auction_detail?.startAuction == 'M') {
+          this.upcomingAuction.auction_detail.startAuction = 'Manual';
         }
       }
 
@@ -348,8 +351,15 @@ export class AuctionDetailsComponent implements OnInit {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
   // send offer
-  showError(nowShow:boolean){
+  showError(nowShow: boolean) {
     this.showFileError = nowShow;
+    window.scrollTo({
+      top: 100,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+    this.errorFocus.nativeElement.focus();
   }
 
   Amt: any;

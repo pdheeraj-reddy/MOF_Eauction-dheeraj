@@ -74,25 +74,27 @@
 
     <div *ngIf="!showLoader">
 
-      <!-- =================This is to show error message if there is no file is selected ================= -->
-        <div *ngIf="showFileError" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
-          <div class="alert-wrapper">
-              <div class="alert-body">
-                  <i class="alert-icon">
-          <span class="icon-filled-wrong"></span>
-        </i>
-                  <div class="alert-content">
-                      <p>الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF</p>
-                  </div>
-              </div>
-              <div class="alert-action">
-                  <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close">
-          <span class="icon-close"></span>
-        </button>
-              </div>
-          </div>
+        <!-- =================This is to show error message if there is no file is selected ================= -->
+        <div *ngIf="showFileError" #errorMessageFocus
+            class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-wrong"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
         </div>
-      <!-- ==========End======= -->
+        <!-- ==========End======= -->
 
         <!--============= Auction Participation card =============-->
         <app-auction-participation *ngIf="response && upcomingAuction?.auctionStatus=='Published'" [response]="response"
@@ -101,12 +103,14 @@
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction" (showError)="showError($event)">
+        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction"
+            (showError)="showError($event)">
         </app-auction-fbga>
         <!-- End -->
-        
+
         <!--============ Send FBGA card ============-->
-        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'" [upcomingAuction]="upcomingAuction">
+        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'"
+            [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
         <!-- End -->
 
@@ -172,7 +176,8 @@
                         </a>
                         <hr>
                     </div>
-                    <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId" [participants]="upcomingAuction.auctionSetting?.participants"
+                    <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId"
+                        [participants]="upcomingAuction.auctionSetting?.participants"
                         [auctionStatus]="upcomingAuction.auctionStatus"></app-no-of-participants-bids>
                 </div>
                 <!-- End -->
@@ -209,92 +214,97 @@
                     </div>
                     <div class="mt-4" style="display: flex;">
 
-                      <div [ngClass]="textDir ? 'left-right-card-en' : 'left-right-card-ar'" *ngIf="upcomingAuction.auctionStatus!='Published'">
+                        <div [ngClass]="textDir ? 'left-right-card-en' : 'left-right-card-ar'"
+                            *ngIf="upcomingAuction.auctionStatus!='Published'">
 
-                      <!-- Added by Mohammed Salick -->
+                            <!-- Added by Mohammed Salick -->
 
-                      <!--============= Send offer card =============-->
-                      <app-send-bidding-offer [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice" (showError)="showError($event)">
-                      </app-send-bidding-offer>
-                      <!-- End -->
+                            <!--============= Send offer card =============-->
+                            <app-send-bidding-offer [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
+                                (showError)="showError($event)">
+                            </app-send-bidding-offer>
+                            <!-- End -->
 
-                      <app-latest-offers-sent [aucId]="auctionId" pageno="1"
-                          *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
+                            <app-latest-offers-sent [aucId]="auctionId" pageno="1"
+                                *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
 
-                      </div>
+                        </div>
 
-                      &nbsp; &nbsp; &nbsp;
-                      <div class="left-left-card"
-                          [ngClass]="{'flex-fill': upcomingAuction.auctionStatus == 'Published'}">
-                          <div style="position: relative; margin-top: 5px;">
+                        &nbsp; &nbsp; &nbsp;
+                        <div class="left-left-card"
+                            [ngClass]="{'flex-fill': upcomingAuction.auctionStatus == 'Published'}">
+                            <div style="position: relative; margin-top: 5px;">
 
-                              <div id="">
+                                <div id="">
 
-                                  <ng-container *ngIf="upcomingAuction.auctionImage">
-                                      <div id="slideshow">
-                                          <div style="width: 100%; height: 348px;position: relative;">
-                                              <ng-container
-                                                  *ngFor="let item of upcomingAuction.auctionImage; index as i">
-                                                  <div id="{{'img-' + i}}" attr.data-img-id="{{ i }}"
-                                                      class="img-wrapper" [ngClass]="{ active: i === 0 }"
-                                                      style="background-image: url({{item.imgsrc}})"></div>
-                                              </ng-container>
-                                          </div>
-                                          <div class="thumbs-container bottom">
-                                              <div id="prev-btn" class="prev">
-                                                  <i class="icon-keyboard_arrow_left"></i>
-                                              </div>
+                                    <ng-container *ngIf="upcomingAuction.auctionImage">
+                                        <div id="slideshow">
+                                            <div style="width: 100%; height: 348px;position: relative;">
+                                                <ng-container
+                                                    *ngFor="let item of upcomingAuction.auctionImage; index as i">
+                                                    <div id="{{'img-' + i}}" attr.data-img-id="{{ i }}"
+                                                        class="img-wrapper" [ngClass]="{ active: i === 0 }"
+                                                        style="background-image: url({{item.imgsrc}})"></div>
+                                                </ng-container>
+                                            </div>
+                                            <div class="thumbs-container bottom">
+                                                <div id="prev-btn" class="prev">
+                                                    <i class="icon-keyboard_arrow_left"></i>
+                                                </div>
 
-                                              <ul class="thumbs">
-                                                  <ng-container
-                                                      *ngFor="let item of upcomingAuction.auctionImage; index as i">
-                                                      <li attr.data-thumb-id="{{i}}" class="thumb"
-                                                          [ngClass]="{ active: i === 0 }"
-                                                          style="background-image: url({{item.imgsrc}})"></li>
-                                                  </ng-container>
-                                              </ul>
+                                                <ul class="thumbs">
+                                                    <ng-container
+                                                        *ngFor="let item of upcomingAuction.auctionImage; index as i">
+                                                        <li attr.data-thumb-id="{{i}}" class="thumb"
+                                                            [ngClass]="{ active: i === 0 }"
+                                                            style="background-image: url({{item.imgsrc}})"></li>
+                                                    </ng-container>
+                                                </ul>
 
-                                              <div id="next-btn" class="next">
-                                                  <i class="icon-keyboard_arrow_right"></i>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </ng-container>
-                              </div>
-                              <!-- <img src="https://cdn.cwsplatform.com/abitruckscom/vp2937192_1_large.jpg" alt="" style="width: 100%; height: 380px;"> -->
+                                                <div id="next-btn" class="next">
+                                                    <i class="icon-keyboard_arrow_right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <!-- <img src="https://cdn.cwsplatform.com/abitruckscom/vp2937192_1_large.jpg" alt="" style="width: 100%; height: 380px;"> -->
 
-                              <button class="btn btn-primary-light btn-lg" style="position: absolute; top: 20px; right: 20px; height: 32px;" data-toggle="modal" data-target="#viewDetails">
-                                <span class="font-weight-bold text-14">{{ 'bidderAuctionDetails.ProductDetails' | translate }}</span>
-                                <span class="icon-eye-open text-14 font-weight-bold mx-1"></span>
-                              </button>
+                                <button class="btn btn-primary-light btn-lg"
+                                    style="position: absolute; top: 20px; right: 20px; height: 32px;"
+                                    data-toggle="modal" data-target="#viewDetails">
+                                    <span class="font-weight-bold text-14">{{ 'bidderAuctionDetails.ProductDetails' |
+                                        translate }}</span>
+                                    <span class="icon-eye-open text-14 font-weight-bold mx-1"></span>
+                                </button>
 
-                          </div>
-                          <p class="text-12 text-center">10 of 23</p>
+                            </div>
+                            <p class="text-12 text-center">10 of 23</p>
 
-                          <p class="text-primary font-weight-bold text-22">{{upcomingAuction?.auctionnote1}}</p>
+                            <p class="text-primary font-weight-bold text-22">{{upcomingAuction?.auctionnote1}}</p>
 
-                          <p class="text-16 text-muted">{{upcomingAuction?.auctionnote2}}</p>
+                            <p class="text-16 text-muted">{{upcomingAuction?.auctionnote2}}</p>
 
-                          <p class="text-14 text-black d-flex">
-                              <span class="icon-all-tenders text-primary font-weight-bold text-20"></span>&nbsp;
-                              <span class="mx-1">{{upcomingAuction?.productCount | number}}</span>
-                              <span>{{ 'bidderAuctionDetails.Product' | translate }}</span>
-                          </p>
+                            <p class="text-14 text-black d-flex">
+                                <span class="icon-all-tenders text-primary font-weight-bold text-20"></span>&nbsp;
+                                <span class="mx-1">{{upcomingAuction?.productCount | number}}</span>
+                                <span>{{ 'bidderAuctionDetails.Product' | translate }}</span>
+                            </p>
 
-                          <p class="text-14 text-black">
-                              <span class="icon-calendar text-primary font-weight-bold text-20"></span>
-                              &nbsp;
-                              {{'bidderAuctionDetails.AuctionStarts' | translate }}
-                              {{upcomingAuction?.auctionStartsdate}} ∙
-                              {{upcomingAuction?.auctionStartstime}}
-                              {{upcomingAuction?.auctionStartstimeSufix}}
-                          </p>
+                            <p class="text-14 text-black">
+                                <span class="icon-calendar text-primary font-weight-bold text-20"></span>
+                                &nbsp;
+                                {{'bidderAuctionDetails.AuctionStarts' | translate }}
+                                {{upcomingAuction?.auctionStartsdate}} ∙
+                                {{upcomingAuction?.auctionStartstime}}
+                                {{upcomingAuction?.auctionStartstimeSufix}}
+                            </p>
 
-                          <p class="text-14 text-black">
-                              <span class="icon-pin text-primary font-weight-bold text-20"></span>&nbsp;&nbsp;
-                              {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}
-                          </p>
-                      </div>
+                            <p class="text-14 text-black">
+                                <span class="icon-pin text-primary font-weight-bold text-20"></span>&nbsp;&nbsp;
+                                {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}
+                            </p>
+                        </div>
 
 
 
@@ -326,7 +336,8 @@
                                                         <label>{{ 'bidderAuctionDetails.AuctionStartPrice' | translate
                                                             }}</label>
                                                         <div class="text-success">
-                                                            {{upcomingAuction.important_info?.auctionstartprice | number}} {{'common.SAR' | translate}} </div>
+                                                            {{upcomingAuction.important_info?.auctionstartprice |
+                                                            number}} {{'common.SAR' | translate}} </div>
                                                     </div>
                                                 </div>
                                                 <div *ngIf="upcomingAuction.important_info?.guarantee_per"
@@ -601,7 +612,8 @@
                                                             |
                                                             translate }}</label>
                                                         <div class="text-success">
-                                                            {{upcomingAuction.auction_detail?.startPrice | number}} </div>
+                                                            {{upcomingAuction.auction_detail?.startPrice | number}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">

@@ -160,9 +160,17 @@ export class SendBiddingOfferComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   sendBidOffer() {
-    if (this.totalBookValue < this.minAmount) {
+
+    let totalValue = parseFloat(this.totalBookValue.toString());
+    let bidValue = parseFloat(this.minAmount.toString());
+
+    console.log("🚀🚀 ~~ this.totalBookValue < this.minAmount", this.totalBookValue, this.minAmount, this.totalBookValue < this.minAmount);
+    if (totalValue < bidValue) {
       this.amountValidation = true;
       this.totalBookValue = this.minAmount;
+      setTimeout(() => {
+        this.amountValidation = false;
+      }, 3000);
     }
     else {
       this.amountValidation = false;
