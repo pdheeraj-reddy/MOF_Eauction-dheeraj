@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { BidderService } from '../../services/bidder.service';
 // import { EventEmitter } from 'stream';
 
 @Component({
@@ -10,18 +11,13 @@ export class SendBiddingOfferComponent implements OnInit {
 
   @Output() showError = new EventEmitter<boolean>();
   @Input() totalBookValue : number;
+  @Input() auctionId : any;
 
-  acceptedExtensions = ['mp4', 'mov', 'png', 'jpg', 'jpeg', 'docx', 'doc', 'pdf'];
+  acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
-  acceptedFiles = ['audio/mp4',
-    'video/mp4',
-    'application/mp4',
-    'video/quicktime',
+  acceptedFiles = [
     'image/png',
-    'image/jpeg',
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    'application/pdf',];
 
   files: any[] =[];
   // amount: number = 0;
@@ -33,7 +29,7 @@ export class SendBiddingOfferComponent implements OnInit {
   invalidFileSize: boolean;
   showFileError: boolean = false;
   showConfirmation: boolean = false;
-  constructor() { }
+  constructor(private bidderService : BidderService) { }
 
   ngOnInit(): void {
     // this.amount = 30005;
@@ -117,11 +113,15 @@ export class SendBiddingOfferComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   sendBidOffer(){
-    console.log(this.files);
+    console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 115 ~ this.files", this.files);
+    
     if(this.checkFile()){
       this.showFileError =true;
       this.showConfirmation = true;
       this.showError.emit(!this.showFileError);
+      this.bidderService.submitBid(this.auctionId, this.totalBookValue.toString()).subscribe((res:any)=>{
+
+      });
     }else{
       this.showFileError = false;
       this.showConfirmation = false;

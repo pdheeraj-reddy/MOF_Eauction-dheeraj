@@ -167,7 +167,7 @@
                         </a>
                         <hr>
                     </div>
-                    <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId"
+                    <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId" [participants]="upcomingAuction.auctionSetting?.participants"
                         [auctionStatus]="upcomingAuction.auctionStatus"></app-no-of-participants-bids>
                 </div>
                 <!-- End -->
@@ -209,7 +209,7 @@
                       <!-- Added by Mohammed Salick -->
 
                       <!--============= Send offer card =============-->
-                      <app-send-bidding-offer [totalBookValue]="response.ZzPbEstPrice" (showError)="showError($event)">
+                      <app-send-bidding-offer [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice" (showError)="showError($event)">
                       </app-send-bidding-offer>
                       <!-- End -->
 

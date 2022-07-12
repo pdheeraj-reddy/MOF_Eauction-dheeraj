@@ -9,7 +9,7 @@ import { getStatusText } from 'src/app/utils/util';
 })
 export class AuctionStatusComponent implements OnInit {
   @Input() auctionStatus: string;
-  @Input() count: number = 120;
+  @Input() count: number;
   status: string = '';
   showEye: boolean = false;
   constructor() { }
@@ -17,6 +17,8 @@ export class AuctionStatusComponent implements OnInit {
   ngOnInit(): void {
     this.status = getStatusText(this.auctionStatus);
     if(this.status == "Ongoing"){
+      // Has to be changed 
+      this.count = 120;
       this.showEye = true;
     }
   }
