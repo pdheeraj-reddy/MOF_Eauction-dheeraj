@@ -112,6 +112,24 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(bidDetails), httpOptions);
   }
+  submitFbga(auctionId?: any): Observable<any> {
+    let bidDetails = {
+      "AucId": auctionId,
+      "ZzUserAction": "F"
+    }
+    const httpOptions = {
+      headers: {
+        'X-CSRF-TOKEN': this.XCSRFToken as string,
+      },
+      params: {
+      }
+    };
+    if (httpOptions) {
+      console.log(httpOptions);
+    }
+    return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
+      , JSON.stringify(bidDetails), httpOptions);
+  }
 
 
   getNoOfParticipants(auctionId: any, auctionStatus: any): Observable<any> {

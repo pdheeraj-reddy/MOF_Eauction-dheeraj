@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { BidderService } from '../../services/bidder.service';
 
 @Component({
   selector: 'app-auction-fbga',
@@ -10,6 +11,7 @@ export class AuctionFbgaComponent implements OnInit {
   @Output() showError = new EventEmitter<boolean>();
   invalidFileType: boolean;
   invalidFileSize: boolean;
+  auctionId:any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -19,9 +21,11 @@ export class AuctionFbgaComponent implements OnInit {
   ];
   files: any[] =[];
 
-  constructor() { }
+  constructor(private bidderService : BidderService) { }
 
   ngOnInit(): void {
+    this.auctionId = this.upcomingAuction.auction_detail.auctionId;
+    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.upcomingAuction.auction_detail.auctionId);
   }
   selectFiles(e: any, dd: string): void {
     this.invalidFileType = true;
@@ -83,6 +87,9 @@ export class AuctionFbgaComponent implements OnInit {
     console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
     if(this.checkFile()){
       this.showError.emit(false);
+      this.bidderService.submitFbga(this.auctionId).subscribe((res)=>{
+        
+      });
     }else{
       this.showError.emit(true);
     }
