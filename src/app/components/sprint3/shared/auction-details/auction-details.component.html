@@ -105,8 +105,10 @@
         </app-auction-fbga>
         <!-- End -->
         
-        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'"
-            [upcomingAuction]="upcomingAuction"></app-auction-pay-invoice>
+        <!--============ Send FBGA card ============-->
+        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'" [upcomingAuction]="upcomingAuction">
+        </app-auction-pay-invoice>
+        <!-- End -->
 
         <!-- Added by Mohammed Salick -->
         <app-auction-prmy-award [prmyaward]="upcomingAuction"
