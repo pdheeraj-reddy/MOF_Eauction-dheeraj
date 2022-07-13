@@ -47,7 +47,7 @@
             </h3>&nbsp;&nbsp;
             <div class="download-file-information">
               <label class="text-body text-14">{{files[0].size/1024 | number: '1.0-0'}}kb</label>
-              <a (click)="previewFile(files[0])" class="btn btn-sm btn-ghost fill-primary-light-green">
+              <a (click)="openFile(files[0],'view')" class="btn btn-sm btn-ghost fill-primary-light-green">
                 <span class="icon-eye-open"></span>
               </a>
               <a (click)="removeFile()" class="btn btn-sm btn-ghost fill-primary-light-green">
@@ -146,15 +146,30 @@
               <label class="text-success text-15" for="" data-toggle="tooltip" data-placement="top"
                 title="{{ibgaDoc[0].FileName}}.{{ibgaDoc[0].FileExt}}">{{ibgaDoc[0].FileName}}.{{ibgaDoc[0].FileExt}}</label>
             </h3>&nbsp;&nbsp;
-            <div class="download-file-information">
+
+            <!--============== Without loader ==============-->
+            <div *ngIf="!showAttachLoader" class="download-file-information">
               <label class="text-body text-14">{{ibgaDoc[0].FileLength/1024 | number: '1.0-0'}} kb</label>
-              <a (click)="previewFile(ibgaDoc[0])" class="btn btn-sm btn-ghost fill-primary-light-green">
+              <a (click)="openFile(ibgaDoc[0], 'view')" class="btn btn-sm btn-ghost fill-primary-light-green">
                 <span class="icon-eye-open"></span>
               </a>
-              <a (click)="downloadFile(ibgaDoc[0])" class="btn btn-sm btn-ghost fill-primary-light-green">
+              <a (click)="openFile(ibgaDoc[0],'download')" class="btn btn-sm btn-ghost fill-primary-light-green">
                 <span class="icon-download"></span>
               </a>
             </div>
+            <!-- End -->
+
+            <!--============== With loader ==============-->
+            <div *ngIf="showAttachLoader">
+              <label class="text-body text-14">{{ibgaDoc[0].FileLength/1024 | number: '1.0-0'}} kb</label>
+              <button class="btn btn-ghost btn-md fill-primary-light-green">
+                <div class="spinner-border text-primary" style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </button>
+            </div>
+            <!-- End -->
+
           </div>
         </div>
       </div>
