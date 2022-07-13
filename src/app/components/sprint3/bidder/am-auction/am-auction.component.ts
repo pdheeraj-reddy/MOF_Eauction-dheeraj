@@ -109,6 +109,7 @@ export class AmAuctionComponent implements OnInit {
 
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       this.auctionListData = this.mapping(res.body);
+      console.log("🚀🚀 ~~ this.auctionListData", this.mapping(res.body));
 
       if (res.body.d.results && res.body.d.results.length > 0) {
         this.PaginationServc.setPagerValues(
@@ -139,7 +140,7 @@ export class AmAuctionComponent implements OnInit {
         ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
         title: result['Description'] ? result['Description'] : '',
         description: result['ZzAucDesc'] ? result['ZzAucDesc'] : '',
-        imgsrc: result['imgsrc'] ? result['imgsrc'] : '',
+        imgsrc: result['ZzPrevAucId2'] ? result['ZzPrevAucId2'] : '',
         statuscode: result['Status'] ? result['Status'] : '',
         product: result['ZzTotPdt'] ? parseInt(result['ZzTotPdt']) : '',
         auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD') : '' : '',

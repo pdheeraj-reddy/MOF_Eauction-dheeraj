@@ -1,21 +1,21 @@
 <div>
-    <label for="end-through" style="color: #4F5457; font-size: 10px;">{{ 'EndsThrough' | translate }}:</label>
-    <div style="display: flex;justify-content: space-evenly;">
-        <div style="display: flex; flex-direction: column;align-items: center;">
-            <label for="day" style="color: #32AD71;font-size: 16px;">{{days | number : '2.0'}}</label>
-            <label for="day" style="color: #32AD71;font-size: 12px;">{{ 'Day' | translate }}</label>
-        </div>
-        <div style="display: flex; flex-direction: column;align-items: center;">
-            <label for="hour" style="color: #32AD71;font-size: 16px;">{{hours | number : '2.0'}}</label>
-            <label for="hour" style="color: #32AD71;font-size: 12px;">{{ 'Hour' | translate }}</label>
-        </div>
-        <div style="display: flex; flex-direction: column;align-items: center;">
-            <label for="accurate" style="color: #32AD71;font-size: 16px;">{{minutes | number : '2.0'}}</label>
-            <label for="accurate" style="color: #32AD71;font-size: 12px;">{{ 'Accurate' | translate }}</label>
-        </div>
-        <div style="display: flex; flex-direction: column;align-items: center;">
-            <label for="second" style="color: #32AD71;font-size: 16px;">{{seconds | number : '2.0'}}</label>
-            <label for="second" style="color: #32AD71;font-size: 12px;">{{ 'Second' | translate }}</label>
+    <label for="end-through" class="text-body text-10">{{ 'EndsThrough' | translate }}:</label>
+    <div class="row" style="display: flex;justify-content: space-evenly;">
+        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+            <label for="day" class="text-success text-16">{{days | number : '2.0'}}</label>
+            <label for="day" class="text-primary text-12">{{ 'Day' | translate }}</label>
+        </div>&nbsp;
+        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+            <label for="hour" class="text-success text-16">{{hours | number : '2.0'}}</label>
+            <label for="hour" class="text-primary text-12">{{ 'Hour' | translate }}</label>
+        </div>&nbsp;
+        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+            <label for="accurate" class="text-success text-16">{{minutes | number : '2.0'}}</label>
+            <label for="accurate" class="text-primary text-12">{{ 'Accurate' | translate }}</label>
+        </div>&nbsp;
+        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+            <label for="second" class="text-success text-16">{{seconds | number : '2.0'}}</label>
+            <label for="second" class="text-primary text-12">{{ 'Second' | translate }}</label>
         </div>
     </div>
 </div>
