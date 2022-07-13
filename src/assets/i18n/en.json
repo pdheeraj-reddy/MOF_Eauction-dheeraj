@@ -298,7 +298,10 @@
         "failure_nonZero": "Value should be greater than 0",
         "failure_invalid_minnumber": "At least enter 1 product",
         "alert_maxfilesize": "The file size is more than 2MB",
-        "alert_validfile": "The file type not allowed"
+        "alert_validfile": "The file type not allowed",
+        "alert_validAmount": "Amount entered is less than the minimum bid value",
+        "alert_validCount": "Please upload single file",
+        "alert_upload": "The uploaded format is not supported, please upload a file that supports the following formats: PNG, JPG, DOCX, DOC, PDF"
     },
     "OK": "OK",
     "ServiceUnavailable": "Service Unavailable",

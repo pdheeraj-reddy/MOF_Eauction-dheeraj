@@ -15,8 +15,14 @@
     </p>
   </div>
   <!-- ============= File upload area and view area ===============-->
-  <div>
-    <div *ngIf="!checkFile()" class="file-uploader-zone mt-4">
+  <div class="mt-4">
+
+    <p *ngIf="invalidFileType" class="text-danger text-12">{{'message.alert_validfile' | translate}}</p>
+    <p *ngIf="invalidFileSize" class="text-danger text-12">{{'message.alert_maxfilesize' | translate}}</p>
+    <p *ngIf="invalidFileCount" class="text-danger text-12">{{'message.alert_validCount' | translate}}</p>
+    <div *ngIf="!checkFile()" class="file-uploader-zone">
+
+
       <div class="buttons">
         <div class="uploader-button-caption d-flex px-4">
           <span class="icon-attachment mx-1" style="font-size: 20px;"></span>
@@ -31,7 +37,7 @@
       </div>
     </div>
     <div *ngIf="checkFile()">
-      <div class="row mt-4 ml-0 mr-0">
+      <div class="row ml-0 mr-0">
         <div class="form-group w-100">
           <div class="file-download file-download-sm">
             <h3>
@@ -63,12 +69,13 @@
   </div>
   <br>
 
-  <p *ngIf="amountValidation" class="text-danger text-12">Amount entered is less than the minimum bid value.</p>
+  <p *ngIf="amountValidation" class="text-danger text-12">{{'message.alert_validAmount' | translate}}</p>
 
-  <div class="d-flex" style=" margin: 1%; width: 98%; border: 1px solid #32AD71; border-radius: 4px; height: 50px;"
-    role="group" aria-label="Basic example">
+  <div class="d-flex" style="width: 98%; border: 1px solid #32AD71; border-radius: 2px; height: 50px;" role="group"
+    aria-label="Basic example">
     <div style="width: 15%; align-items: center;">
-      <button type="button" style="width: 100%; height: 100%; color: #32AD71; border: none; outline: none;"
+      <button type="button"
+        style="width: 100%; height: 100%; color: #32AD71; border: none; outline: none; background-color: white;"
         (click)="decAmt()">
         <span class="icon-negative" style="font-size: 27px;">--</span>
       </button>
@@ -78,10 +85,12 @@
     <div class="" style="border-left: 1px solid #32AD71; border-right: 1px solid #32AD71; width: 70%;">
       <input type="text" class="amt-input"
         style="height: 100%; width: 100%; border:none; text-align: center; color: #32AD71; font-size: 25px;"
-        placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" aria-describedby="basic-addon2" />
+        placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" (blur)="resetAmount()" appComma
+        aria-describedby="basic-addon2" />
     </div>
     <div style="width: 15%;">
-      <button type="button" style="width: 100%; height: 100%; border: none; outline: none;" (click)="incAmt()">
+      <button type="button" style="width: 100%; height: 100%; border: none; outline: none; background-color: white;"
+        (click)="incAmt()">
         <span class="icon-plus text-success"></span>
       </button>
     </div>

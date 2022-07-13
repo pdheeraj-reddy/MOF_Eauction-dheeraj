@@ -83,12 +83,13 @@
                         <span class="icon-filled-wrong"></span>
                     </i>
                     <div class="alert-content">
-                        <p>الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF
+                        <p>{{'message.alert_upload' | translate}}
                         </p>
                     </div>
                 </div>
                 <div class="alert-action">
-                    <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close">
+                    <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close"
+                        style="outline: none;">
                         <span class="icon-close"></span>
                     </button>
                 </div>

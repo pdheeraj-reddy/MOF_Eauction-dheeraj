@@ -294,7 +294,10 @@
         "failure_nonZero": "يجب أن تكون القيمة أكبر من 0",
         "failure_invalid_minnumber": "ادخل منتج واحد علي الاقل",
         "alert_maxfilesize": "حجم الملف اكبر من 2 ميجا بايت",
-        "alert_validfile": "نوع الملف غير مسموح به"
+        "alert_validfile": "نوع الملف غير مسموح به",
+        "alert_validAmount": "المبلغ الذي تم إدخاله أقل من الحد الأدنى لقيمة العطاء",
+        "alert_validCount": "الرجاء تحميل ملف واحد",
+        "alert_upload": "الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF"
     },
     "OK": "نعم",
     "ServiceUnavailable": "الخدمة غير متوفرة",

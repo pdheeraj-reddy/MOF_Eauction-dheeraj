@@ -30,7 +30,8 @@ export class SendBiddingOfferComponent implements OnInit {
   addedTaxValue: number = 0;
   totalOfferPrice: number = 0;
   invalidFileType: boolean;
-  invalidFileSize: boolean;
+  invalidFileCount: boolean;
+  invalidFileSize: boolean = false;
   showFileError: boolean = false;
   showConfirmation: boolean = false;
   selectedFileFormat: any;
@@ -53,15 +54,17 @@ export class SendBiddingOfferComponent implements OnInit {
     }
   }
 
-  // resetAmount() {
-  //   if (this.totalBookValue < this.minAmount) {
-  //     // this.totalBookValue = this.minAmount
-  //     this.amountValidation = true;
-  //   }
-  //   else {
-  //     this.amountValidation = false;
-  //   }
-  // }
+  resetAmount() {
+    let totalValue = parseFloat(this.totalBookValue.toString());
+    let bidValue = parseFloat(this.minAmount.toString());
+    if (totalValue < bidValue) {
+      this.totalBookValue = this.minAmount
+      this.amountValidation = true;
+      setTimeout(() => {
+        this.amountValidation = false;
+      }, 3000);
+    }
+  }
 
   incAmt() {
     this.totalBookValue++;
@@ -75,9 +78,20 @@ export class SendBiddingOfferComponent implements OnInit {
   }
   selectFiles(e: any, dd: string): void {
     this.invalidFileType = true;
-    this.invalidFileSize = false;
+    setTimeout(() => {
+      this.invalidFileType = false;
+    }, 3000);
     let filecount = e.target.files.length;
-    this.customLoop(0, filecount, e.target.files);
+    if (filecount > 1) {
+      this.invalidFileType = false;
+      this.invalidFileCount = true;
+      setTimeout(() => {
+        this.invalidFileCount = false;
+      }, 3000);
+    } else {
+      this.customLoop(0, filecount, e.target.files);
+    }
+
   }
   customLoop(index: number, limit: number, file: any) {
     let filesize = file[index]['size'];
@@ -109,6 +123,9 @@ export class SendBiddingOfferComponent implements OnInit {
             });
           } else {
             this.invalidFileSize = true;
+            setTimeout(() => {
+              this.invalidFileSize = false;
+            }, 3000);
           }
         }
       }
