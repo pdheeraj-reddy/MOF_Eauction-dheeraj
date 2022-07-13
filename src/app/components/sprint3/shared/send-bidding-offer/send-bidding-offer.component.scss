@@ -161,16 +161,7 @@
     color: #32ad71;
 }
 
-.point-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffff;
-    border: 1px solid #32ad71;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
+
 
 .left-right-card-title {
     display: flex;
@@ -234,3 +225,46 @@
     box-shadow: 0 6px 11px 0 rgb(0 91 78 / 17%) !important;
     color: #32ad71 !important;
 }
+// <--=========== Newly added SCSS - Required ===========-->
+.status-success-icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.circle {
+    width: 96px;
+    height: 96px;
+    background: #f9fcfa;
+    border-radius: 50%;
+}
+
+.icon-check {
+    position: absolute;
+    font-size: 30px;
+    top: 85px;
+    color: #32ad71;
+}
+
+.point-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffff;
+    border: 1px solid #32ad71;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.point-circle-disable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F9FCFA;
+    border: 1px solid #6c757d;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+//<--=========== End ===========-->

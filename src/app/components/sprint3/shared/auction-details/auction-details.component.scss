@@ -151,8 +151,22 @@
   border-radius: 0 5px 5px 0;
   background-color: #F9FCFA;
 }
-
-
+.left-right-card-ar-disable{
+    width: 50%;
+    border-top: 2px solid #b1b1b1;
+    border-bottom: 2px solid #b1b1b1;
+    border-left: 2px solid #b1b1b1;
+    border-radius: 5px 0 0 5px;
+    background-color: #F6F6F6;
+}
+.left-right-card-en-disable {
+    width: 50%;
+    border-top: 2px solid #b1b1b1;
+    border-bottom: 2px solid #b1b1b1;
+    border-right: 2px solid #b1b1b1;
+    border-radius: 0 5px 5px 0;
+    background-color: #F6F6F6;
+  }
 
 .list-card {
     margin-bottom: 10px;

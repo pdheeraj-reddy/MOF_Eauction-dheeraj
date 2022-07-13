@@ -26,6 +26,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
+  ibgaDoc : any;
   days: number;
   hours: number;
   minutes: number;
@@ -107,7 +108,9 @@ export class AuctionDetailsComponent implements OnInit {
       this.mapping(res.body);
 
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
-      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.upcomingAuction);
+      this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
+      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
+      // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
         this.auctionAttachment.forEach(
