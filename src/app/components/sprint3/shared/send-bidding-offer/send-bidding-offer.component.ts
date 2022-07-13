@@ -37,6 +37,8 @@ export class SendBiddingOfferComponent implements OnInit {
   selectedFileFormat: any;
   selectedFileURL: any;
   amountValidation: boolean = false;
+  fileToUpload: any;
+  showSuccess: boolean = false;
   constructor(private bidderService: BidderService) { }
 
   ngOnInit(): void {
@@ -98,7 +100,7 @@ export class SendBiddingOfferComponent implements OnInit {
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
     var ext = file[index]['name'].match(/\.(.+)$/)[1];
     if (ext.indexOf('.') === -1) {
-      this.invalidFileType = false;
+      // this.invalidFileType = false;
       if (!!this.acceptedExtensions.find(x => x === fileType)) {
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
@@ -176,7 +178,7 @@ export class SendBiddingOfferComponent implements OnInit {
     })(file);
     reader.readAsDataURL(file);
   }
-  sendBidOffer() {
+  checkOffer() {
 
     let totalValue = parseFloat(this.totalBookValue.toString());
     let bidValue = parseFloat(this.minAmount.toString());
@@ -195,9 +197,21 @@ export class SendBiddingOfferComponent implements OnInit {
         this.showFileError = true;
         this.showConfirmation = true;
         this.showError.emit(!this.showFileError);
-        // this.bidderService.submitBid(this.auctionId, this.totalBookValue.toString()).subscribe((res: any) => {
-
-        // });
+        
+        this.fileToUpload = {
+          "FileName": this.files[0].name.split('.')[0],
+          // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+          "FileContent": btoa(this.files[0].filesrc),
+          "MIMEType": this.files[0].type,
+          "FileLength": '' + this.files[0].size,
+          "FileExt": this.files[0].name.substring(this.files[0].name.lastIndexOf('.')).replace('.', ''),
+          "ObjectType": "/AuctionPaymentDocuments",
+          "ObjectId": this.auctionId,
+          "InvoiceForm": "I",
+        };
+        console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 210 ~ this.files", this.fileToUpload);
+        this.showConfirmation = true;
+        
       } else {
         this.showFileError = false;
         this.showConfirmation = false;
@@ -205,5 +219,19 @@ export class SendBiddingOfferComponent implements OnInit {
       }
     }
     console.log(this.showFileError);
+  }
+  sendBidOffer(){
+    this.showConfirmation = false;
+    
+    this.bidderService.submitBid(this.auctionId, this.totalBookValue.toString()).subscribe((resData: any) => {
+      
+      this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile:any)=>{
+      console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 227 ~ resFile", resFile);
+        if(resData && resFile){
+          this.showSuccess = true;
+        }
+      });
+      console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 226 ~ resData", resData);
+    });
   }
 }

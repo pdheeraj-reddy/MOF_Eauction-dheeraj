@@ -112,7 +112,7 @@
     <p class="text-primary text-12">{{totalOfferPrice}} {{ 'bidderSendOffer.SAR' | translate }}</p>
   </div>
 
-  <button (click)="sendBidOffer()" class="btn btn-primary-light btn-lg mt-4" style="width: 100%;">{{
+  <button (click)="checkOffer()" class="btn btn-primary-light btn-lg mt-4" style="width: 100%;">{{
     'bidderSendOffer.SendOffer' | translate }}</button>
 
 </div>
@@ -136,7 +136,7 @@
           'bidderSendOffer.BidSubmissionDescription' | translate }}</label>
       </div>
       <div class="modal-footer " style="justify-content: end ">
-        <button (click)="showConfirmation=false " type="button " class="btn btn-primary-light btn-md "
+        <button (click)="sendBidOffer() " type="button " class="btn btn-primary-light btn-md "
           data-toggle="modal" data-target="#showSuccessfulModal ">
           {{ 'bidderSendOffer.SubmitOffer' | translate }}
         </button>
@@ -150,8 +150,7 @@
 </div>
 
 <!-- Model to show confirmed (Successful) -->
-<div class="modal fade " id="showSuccessfulModal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel "
-  aria-hidden="true ">
+<div class="modal show " *ngIf="showConfirmation" tyle="display: block!important;" id="showSuccessfulModal " tabindex="-1 " >
   <div class="modal-dialog modal-lg modal-dialog-centered " role="document " style="width: 40%; ">
     <div class="modal-content " style="align-items: center; ">
       <button style="position: absolute;left: 90%; " type="button " class="modal-close btn-close btn-sm "

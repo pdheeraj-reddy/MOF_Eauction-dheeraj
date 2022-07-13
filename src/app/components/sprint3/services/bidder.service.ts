@@ -112,6 +112,17 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(bidDetails), httpOptions);
   }
+  uploadFile(file:any){
+    const httpOptions = {
+      headers: {
+        'X-CSRF-TOKEN': this.XCSRFToken as string,
+      },
+      params: {
+      }
+    };
+    return this.http.post<any>(this.envService.environment.apiFilenetURL
+      ,JSON.stringify(file),httpOptions);
+  }
   submitFbga(auctionId?: any): Observable<any> {
     let bidDetails = {
       "AucId": auctionId,

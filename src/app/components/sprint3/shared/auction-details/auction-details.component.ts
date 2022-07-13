@@ -353,11 +353,13 @@ export class AuctionDetailsComponent implements OnInit {
   // send offer
   showError(nowShow: boolean) {
     this.showFileError = nowShow;
+    if(this.showFileError){
     window.scrollTo({
       top: 100,
       left: 0,
       behavior: 'smooth'
     });
+  }
 
     this.errorFocus.nativeElement.focus();
   }
