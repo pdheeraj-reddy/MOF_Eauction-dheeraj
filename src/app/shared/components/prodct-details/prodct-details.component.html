@@ -70,7 +70,7 @@
                     </th>
                     <th width="260px"
                         *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember) && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices')"
-                        class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                        class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'numeric')">
                         <div class="table-header-cell">
                             <span>{{"auctionModerator.am-detail.product-details.th4" | translate}}</span> <span
                                 class="sort"><span class="sort-none"

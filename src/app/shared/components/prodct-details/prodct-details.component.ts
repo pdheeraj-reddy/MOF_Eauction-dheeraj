@@ -140,6 +140,9 @@ export class ProdctDetailsComponent implements OnInit {
 
 
   editPriceInPopup(index: any, product: any) {
+    console.log("🚀🚀 ~~ product", product.ZzProductNo);
+    let index_temp = parseInt(product.ZzProductNo);
+
     const dialogRef = this.dialog.open(ViewProductDetailComponent, {
       disableClose: true,
       height: '90%',
@@ -149,7 +152,7 @@ export class ProdctDetailsComponent implements OnInit {
       },
       data: {
         data: this.temp,
-        viewproduct: this.auctionProducts[index],
+        viewproduct: this.auctionProducts[index_temp - 1],
         index: index,
         productDetails: product,
         isBidUpdate: this.isBidUpdate,
@@ -433,12 +436,16 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    let tableData1 = [];
     // this.PaginationServc.sortByTableHeaderId(      'inventoryAllocationTable',      columnId,      sortType,      dateFormat    );
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     if ((this.preAuctionData?.Status == 'Pending Pricing' || this.preAuctionData?.Status == 'Pending Pricing Approval' || this.preAuctionData?.Status == 'Rejected Prices') && this.preAuctionData?.Status != 'Pending to Publish') {
-      this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst2[columnId]));
+      tableData1 = this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst2[columnId]));
+      console.log("🚀🚀 ~~ tableData1", tableData1);
     } else {
-      this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst1[columnId]));
+      tableData1 = this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst1[columnId]));
+      console.log("🚀🚀 ~~ tableData2", tableData1);
+      this.preAuctionData.listtoproductnav.results = tableData1
     }
   }
 
