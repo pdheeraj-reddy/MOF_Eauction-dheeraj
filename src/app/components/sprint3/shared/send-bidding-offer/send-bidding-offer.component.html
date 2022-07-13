@@ -1,4 +1,5 @@
-<div class="card-body">
+<!--=============== Enabled card area ===============-->
+<div *ngIf="!disable" class="card-body">
   <h2 class="text-21 text-primary mx-1">{{ 'bidderSendOffer.LatestOffersSent' | translate }}</h2>
 
   <div class="left-right-card-title mt-4">
@@ -71,11 +72,11 @@
 
   <p *ngIf="amountValidation" class="text-danger text-12">{{'message.alert_validAmount' | translate}}</p>
 
-  <div class="d-flex" style="width: 98%; border: 1px solid #32AD71; border-radius: 2px; height: 50px;" role="group"
+  <div class="d-flex" style="width: 98%; border: 1px solid #32AD71; border-radius: 5px; height: 50px;" role="group"
     aria-label="Basic example">
     <div style="width: 15%; align-items: center;">
       <button type="button"
-        style="width: 100%; height: 100%; color: #32AD71; border: none; outline: none; background-color: white;"
+        style="width: 100%; height: 100%;border-radius: 5px; color: #32AD71; border: none; outline: none; background-color: white;"
         (click)="decAmt()">
         <span class="icon-negative" style="font-size: 27px;">--</span>
       </button>
@@ -83,13 +84,13 @@
 
 
     <div class="" style="border-left: 1px solid #32AD71; border-right: 1px solid #32AD71; width: 70%;">
-      <input type="text" class="amt-input"
+      <input type="text" digitOnly class="amt-input"
         style="height: 100%; width: 100%; border:none; text-align: center; color: #32AD71; font-size: 25px;"
         placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" (blur)="resetAmount()" appComma
         aria-describedby="basic-addon2" />
     </div>
     <div style="width: 15%;">
-      <button type="button" style="width: 100%; height: 100%; border: none; outline: none; background-color: white;"
+      <button type="button" style="width: 100%;border-radius: 5px; height: 100%; border: none; outline: none; background-color: white;"
         (click)="incAmt()">
         <span class="icon-plus text-success"></span>
       </button>
@@ -116,73 +117,167 @@
     'bidderSendOffer.SendOffer' | translate }}</button>
 
 </div>
+<!-- End -->
 
-<!-- TODO: The following has to when successfully submitted for bidding-->
-<!-- Model to confirm -->
-<div class="modal" *ngIf="showConfirmation" style="display: block!important;" id="confirmMemberModal" tabindex="-1"
-  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="width: 40%;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">
-          {{ 'bidderSendOffer.ConfirmationBidSubmission' | translate }}
-        </h4>
-        <button (click)="showConfirmation=false" type="button" class="modal-close btn-close btn-sm">
-          <span class=" icon-close "></span>
-        </button>
-      </div>
-      <div class="modal-body ">
-        <label for="confirmation " style="color: #414042; font-size: 16px ">{{
-          'bidderSendOffer.BidSubmissionDescription' | translate }}</label>
-      </div>
-      <div class="modal-footer " style="justify-content: end ">
-        <button (click)="sendBidOffer() " type="button " class="btn btn-primary-light btn-md "
-          data-toggle="modal" data-target="#showSuccessfulModal ">
-          {{ 'bidderSendOffer.SubmitOffer' | translate }}
-        </button>
-        <button (click)="showConfirmation=false " type="button " class="btn btn-md "
-          style="border: 1px solid #cccccc; border-radius: 5px ">
-          {{ 'bidderSendOffer.Cancellation' | translate }}
-        </button>
-      </div>
+<!--=============== Diabled card area ===============-->
+<div *ngIf="disable" class="card-body">
+  <h2 class="text-21 text-dark mx-1">{{ 'bidderSendOffer.LatestOffersSent' | translate }}</h2>
+
+  <div class="left-right-card-title mt-4">
+    <div class="point-circle-disable">
+      <p class="text-align-center mb-0 text-18 font-weight-bold text-muted">1</p>
     </div>
+    <h5 class="text-dark text-16 mt-2 mx-2">{{ 'bidderSendOffer.AttachThePrimaryWarranty' | translate }}</h5>
   </div>
-</div>
 
-<!-- Model to show confirmed (Successful) -->
-<div class="modal show " *ngIf="showConfirmation" tyle="display: block!important;" id="showSuccessfulModal " tabindex="-1 " >
-  <div class="modal-dialog modal-lg modal-dialog-centered " role="document " style="width: 40%; ">
-    <div class="modal-content " style="align-items: center; ">
-      <button style="position: absolute;left: 90%; " type="button " class="modal-close btn-close btn-sm "
-        data-dismiss="modal " aria-label="Close ">
-        <span class="icon-close "></span>
-      </button>
-      <span class="icon-check " style=" position: absolute; top: 85px; color: #32AD71; "></span>
-      <div class="modal-header ">
-        <div class="status-success-icon ">
-          <div style="display: flex; ">
-            <div class="circle "></div>
-
+  <div class="mt-4">
+    <p class="text-dark text-16 m-0">{{ 'bidderSendOffer.ForHelpSupportManagingAuctions' | translate}}
+      <a href="#" class="text-muted text-15" style="text-decoration: underline;">{{ 'bidderSendOffer.ClickHere' |
+        translate}}</a>
+    </p>
+  </div>
+  <!-- ============= File upload area and view area ===============-->
+  <div class="mt-4">
+    <div>
+      <div class="row ml-0 mr-0">
+        <div class="form-group w-100" style="background-color: #ffff;">
+          <div class="file-download file-download-sm">
+            <h3>
+              <label class="text-success text-15" for="" data-toggle="tooltip" data-placement="top"
+                title="{{ibgaDoc[0].FileName}}.{{ibgaDoc[0].FileExt}}">{{ibgaDoc[0].FileName}}.{{ibgaDoc[0].FileExt}}</label>
+            </h3>&nbsp;&nbsp;
+            <div class="download-file-information">
+              <label class="text-body text-14">{{ibgaDoc[0].FileLength/1024 | number: '1.0-0'}} kb</label>
+              <a (click)="previewFile(ibgaDoc[0])" class="btn btn-sm btn-ghost fill-primary-light-green">
+                <span class="icon-eye-open"></span>
+              </a>
+              <a (click)="downloadFile(ibgaDoc[0])" class="btn btn-sm btn-ghost fill-primary-light-green">
+                <span class="icon-download"></span>
+              </a>
+            </div>
           </div>
-          <h4 class="modal-title " id="exampleModalLabel " style="text-align: center ">
-            {{ 'bidderSendOffer.OfferSuccess' | translate }}
-          </h4>
         </div>
       </div>
-      <div class="modal-body " style="text-align: center;margin-bottom: 2rem; ">
-        <label for="confirmation " style="color: #414042; font-size: 16px; text-align: center; ">
-          {{ 'bidderSendOffer.OfferContent' | translate }}
-        </label>
-        <br>
-        <label for="confirmation " style="color: #414042; font-size: 16px; text-align: center; ">
-          {{ 'bidderSendOffer.OfferDescription' | translate }}
-        </label>
-      </div>
-      <div class="modal-footer " style="justify-content: end ">
-        <button type="button " class="btn btn-primary-light btn-md " data-dismiss="modal " aria-label="Close ">
-          {{ 'bidderSendOffer.BackToAuctions' | translate }}
-        </button>
-      </div>
+
     </div>
   </div>
+  <!--===== End =========-->
+
+  <div class="left-right-card-title mt-4">
+    <div class="point-circle-disable">
+      <p class="text-align-center mb-0 text-18 font-weight-bold text-muted">2</p>
+    </div>
+    <h5 class="text-dark text-16 mt-2 mx-2">{{ 'bidderSendOffer.AddYourOffer' | translate }}</h5>
+  </div>
+  <br>
+  <div class="d-flex" style="width: 98%; border: 1px solid #b1b1b1; border-radius: 5px; height: 50px;" role="group"
+    aria-label="Basic example">
+    <div style="width: 15%; align-items: center;">
+      <button type="button" disabled
+        style="width: 100%; height: 100%; color: #b1b1b1;border-radius: 5px; border: none; outline: none; background-color:#F9FCFA">
+        <span class="icon-negative" style="font-size: 27px;">--</span>
+      </button>
+    </div>
+
+
+    <div class="" style="border-left: 1px solid #b1b1b1; border-right: 1px solid #b1b1b1; width: 70%;">
+      <input type="text" class="amt-input" disabled="true"
+        style="height: 100%; width: 100%; border:none; text-align: center; color: #b1b1b1 ; font-size: 25px; background-color:#F9FCFA"
+        placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" (blur)="resetAmount()" appComma
+        aria-describedby="basic-addon2" />
+    </div>
+    <div style="width: 15%;">
+      <button type="button" disabled style="width: 100%;border-radius: 5px;color: #b1b1b1; height: 100%; border: none; outline: none; background-color:#F9FCFA">
+        <span class="icon-plus"></span>
+      </button>
+    </div>
+  </div>
+  <p class="text-muted text-10" style="text-align: center;">{{ 'bidderSendOffer.SAR' | translate }}</p>
+
+  <div style="border-bottom: 1px solid #B4B4B4;">
+    <div style="display: flex;justify-content: space-between;">
+      <p class="text-body text-12">{{ 'bidderSendOffer.PersuitRate' | translate }} 2.5%</p>
+      <p class="text-body text-12">{{persuitRate}} {{ 'bidderSendOffer.SAR' | translate }}</p>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+      <p class="text-body text-12">{{ 'bidderSendOffer.AddedTaxValue' | translate }}:</p>
+      <p class="text-body text-12">{{addedTaxValue}} {{ 'bidderSendOffer.SAR' | translate }}</p>
+    </div>
+  </div>
+  <div class="d-flex mt-4" style="justify-content: space-between;">
+    <p class="text-body text-12">{{ 'bidderSendOffer.TotalOfferPrice' | translate }}</p>
+    <p class="text-body text-12">{{totalOfferPrice | number}} {{ 'bidderSendOffer.SAR' | translate }}</p>
+  </div>
+
+  <button disabled  class="btn btn-lg mt-4" style="width: 100%;color: #ffff !important;background-color: #818181 !important;">{{
+    'bidderSendOffer.SendOffer' | translate }}</button>
+
 </div>
+<!-- End -->
+
+<!--=================== Confirmatiom model  ===================-->
+<div class="modal show" *ngIf="showConfirmation" id="confirmMemberModal" [ngClass]="{ 'modal-show': showConfirmation }">
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">
+                {{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}
+            </h4>
+            <button type="button" class="modal-close btn-close btn-sm" (click)="showConfirmation=false">
+                <span class="icon-close"></span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label for="confirmation" style="color: #414042; font-size: 16px">{{
+                'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
+        </div>
+        <div class="modal-footer" style="justify-content: end">
+            <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
+                (click)="sendBidOffer()">
+                <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                &nbsp;
+                {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
+            </button>
+            <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmation=false">
+                {{'bidderAuctionDetails.auction-popup.Cancellation' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- End -->
+
+<!--=================== Successful model  ===================-->
+<div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content" style="align-items: center;">
+        <button (click)="showSuccessfulModal=false"type="button" class="modal-close btn-close btn-sm">
+            <span class="icon-close"></span>
+        </button>
+        <span class="icon-check"></span>
+        <div class="modal-header">
+            <div class="status-success-icon">
+                <div style="display: flex;">
+                    <div class="circle"></div>
+                </div>
+                <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                    {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
+                </h4>
+            </div>
+        </div>
+        <div class="modal-body">
+            <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+                {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
+            </label>
+        </div>
+        <div class="modal-footer" style="justify-content: end">
+            <button type="button" (click)="showSuccessfulModal=false" class="btn btn-primary-light btn-md">
+                {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- End -->

@@ -13,6 +13,8 @@ export class SendBiddingOfferComponent implements OnInit {
   @Output() showError = new EventEmitter<boolean>();
   @Input() totalBookValue: number;
   @Input() auctionId: any;
+  @Input() disable: any;
+  @Input() ibgaDoc: any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -38,12 +40,16 @@ export class SendBiddingOfferComponent implements OnInit {
   selectedFileURL: any;
   amountValidation: boolean = false;
   fileToUpload: any;
-  showSuccess: boolean = false;
+  showSuccessfulModal: boolean = false;
+  showLoader:boolean = false;
+
   constructor(private bidderService: BidderService) { }
 
   ngOnInit(): void {
     // this.amount = 30005;
     this.minAmount = this.totalBookValue;
+    console.log(this.ibgaDoc);
+    
     // this.minAmount = 10;
     // this.totalBookValue = 10;
     this.calc();
@@ -164,6 +170,9 @@ export class SendBiddingOfferComponent implements OnInit {
       this.selectedFileURL = file.filesrc['0'].split(',')[1];;
     }
   }
+  downloadFile(file: any){
+    
+  }
 
   removeFile() {
     this.files.pop();
@@ -221,14 +230,19 @@ export class SendBiddingOfferComponent implements OnInit {
     console.log(this.showFileError);
   }
   sendBidOffer(){
-    this.showConfirmation = false;
+    this.showLoader = true;
+    let dataUpdate = false;
+    let fileupload = false;
     
     this.bidderService.submitBid(this.auctionId, this.totalBookValue.toString()).subscribe((resData: any) => {
-      
+      if(resData.d.Msgty == 'S') dataUpdate = true;
       this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile:any)=>{
-      console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 227 ~ resFile", resFile);
-        if(resData && resFile){
-          this.showSuccess = true;
+        if(resFile.d.Msgty == 'S') fileupload = true;
+      console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 227 ~ resFile",resFile);
+        if(dataUpdate && fileupload){
+          this.showConfirmation = false;
+          this.showSuccessfulModal = true;
+          console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 235 ~ this.showSuccess", this.showSuccessfulModal);
         }
       });
       console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 226 ~ resData", resData);

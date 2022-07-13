@@ -215,19 +215,31 @@
                     </div>
                     <div class="mt-4" style="display: flex;">
 
-                        <div [ngClass]="textDir ? 'left-right-card-en' : 'left-right-card-ar'"
+                        <!-- <div [ngClass]="textDir ? 'left-right-card-en' : 'left-right-card-ar'"
                             *ngIf="upcomingAuction.auctionStatus!='Published'">
 
-                            <!-- Added by Mohammed Salick -->
+
+                            <app-latest-offers-sent [aucId]="auctionId" pageno="1"
+                                *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
+
+                        </div> -->
+                        <div [ngClass]="{
+                            'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
+                            'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',
+                            'left-right-card-en-disable': textDir && response.ZzBidderSts == 'B',
+                            'left-right-card-ar-disable': !textDir && response.ZzBidderSts == 'B'
+                        }"
+                            *ngIf="upcomingAuction.auctionStatus=='Ongoing'">
 
                             <!--============= Send offer card =============-->
-                            <app-send-bidding-offer [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
+                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'P'" [disable]="false" [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
                                 (showError)="showError($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
 
-                            <app-latest-offers-sent [aucId]="auctionId" pageno="1"
-                                *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
+                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'B'" [ibgaDoc]="ibgaDoc" [disable]="true"  [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
+                                (showError)="showError($event)">
+                            </app-send-bidding-offer>
 
                         </div>
 
