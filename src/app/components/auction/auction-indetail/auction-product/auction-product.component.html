@@ -344,13 +344,13 @@
                                                     <td>
                                                         <div class="qq-btn-group" style="min-width: 76px;">
                                                             <button type="button" *ngIf="ViewMode != 'view'"
-                                                                (click)="editProduct(i)" data-toggle="modal"
+                                                                (click)="editProduct(code)" data-toggle="modal"
                                                                 data-target="#exampleModal"
                                                                 class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green "
                                                                 data-dismiss="alert " aria-label="Close ">
                                                                 <span class="icon-edit"></span> </button>
                                                             <button type="button" *ngIf="ViewMode == 'view'"
-                                                                (click)="editProduct(i)" data-toggle="modal"
+                                                                (click)="editProduct(code)" data-toggle="modal"
                                                                 data-target="#exampleModal"
                                                                 class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green "
                                                                 data-dismiss="alert " aria-label="Close ">

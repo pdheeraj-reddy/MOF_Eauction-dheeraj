@@ -636,6 +636,10 @@ export class AuctionProductComponent implements OnInit {
     return this.productsFormGroup.controls['productFormGroup'].get('products') as FormArray;
   }
 
+  set auctionProducts(value) {
+    this.productsFormGroup.controls['productFormGroup'].get('products')!.setValue(value);
+  }
+
   get auctionLocation(): FormGroup {
     return this.productsFormGroup.get('locationFormGroup') as FormGroup;
   }
@@ -1171,7 +1175,13 @@ export class AuctionProductComponent implements OnInit {
 
   // edit Product
 
-  editProduct(index: number) {
+  editProduct(item: any) {
+    let index: number = 0;
+    this.auctionProducts.controls.forEach((element, i) => {
+      if (element.value == item) {
+        index = i;
+      }
+    });
     this.invalidQty = false;
     this.showProductModal = true;
     const editdata = this.auctionProducts.controls[index].value;
@@ -1634,7 +1644,7 @@ export class AuctionProductComponent implements OnInit {
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
-    this.PaginationServc.sortAllTableData(this.auctionProducts.value, this.columnLst[columnId]);
+    const tableData = this.PaginationServc.sortAllTableData(this.auctionProducts.value, this.columnLst[columnId]);
   }
 
   formatDate(date: any) {

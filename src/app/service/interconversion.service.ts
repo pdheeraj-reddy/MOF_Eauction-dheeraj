@@ -139,6 +139,7 @@ export class InterconversionService {
               FilenetId: value.FilenetId,
               MIMEType: value.MIMEType,
               downloading: false,
+              index: index
             };
             auctionDetails.auctionAttachement.push(fileupload);
           }
@@ -151,6 +152,7 @@ export class InterconversionService {
               FilenetId: value.FilenetId,
               MIMEType: value.MIMEType,
               downloading: false,
+              index: index
             };
           }
         }

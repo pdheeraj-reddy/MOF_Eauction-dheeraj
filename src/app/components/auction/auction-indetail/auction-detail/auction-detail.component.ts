@@ -103,7 +103,9 @@ export class AuctionDetailComponent implements OnInit {
 
   auctionStartDate: any;
   pageRangeForAttach: any;
-
+  get form(): { [key: string]: AbstractControl } {
+    return this.basicFormGroup.controls;
+  }
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -115,6 +117,7 @@ export class AuctionDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.createForm();
     this.invalidFileType = false;
     this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -128,7 +131,6 @@ export class AuctionDetailComponent implements OnInit {
       if (this.ObjectId || this.DraftId) {
         this.getAuctionDetails(this.ObjectId, this.DraftId);
       }
-      this.createForm();
     }
 
     this.refreshCalendarCntrl();
@@ -567,10 +569,6 @@ export class AuctionDetailComponent implements OnInit {
         }
       })
     }
-  }
-
-  get form(): { [key: string]: AbstractControl } {
-    return this.basicFormGroup.controls;
   }
 
   makeConsole(val: string) {

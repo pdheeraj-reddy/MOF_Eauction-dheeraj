@@ -272,9 +272,10 @@
             <table id="auctionAttachment" class="table table-bordered table-striped table-expanded table-hover">
                 <thead>
                     <tr class="btn-primary-light">
-                        <th class="th-serials" scope="col"><span>{{
+                        <th class="th-serials" scope="col" (click)="sortByTableHeaderId(0, 'numeric')"><span>{{
                                 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' |
-                                translate }}</span>
+                                translate }}</span><span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                         </th>
                         <th class="" scope="col" (click)="sortByTableHeaderId(1, 'string')"><span>{{
                                 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' |
@@ -313,7 +314,7 @@
                         <tr *ngFor=" let file of viewproduct.productFiles; let index = index ">
                             <ng-container
                                 *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
-                                <td>{{index+1}}</td>
+                                <td>{{file.index+1}}</td>
                                 <td>
                                     <div class="text-capitalize text-success"><span
                                             class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>

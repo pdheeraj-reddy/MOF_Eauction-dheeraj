@@ -112,6 +112,12 @@ export class ViewProductDetailComponent implements OnInit {
       }
     }
 
+    if (this.viewproduct?.productFiles.length) {
+      this.viewproduct?.productFiles.forEach((element: any, index: number) => {
+        element.index = index;
+      });
+    }
+
     this.product = this.dialogData.productDetails;
     this.index = this.dialogData.index;
     this.isBidUpdate = this.dialogData.isBidUpdate;

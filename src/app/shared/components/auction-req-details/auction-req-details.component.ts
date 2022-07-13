@@ -107,6 +107,7 @@ export class AuctionReqDetailsComponent implements OnInit {
     // this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     this.PaginationServc.sortAllTableData(this.auctionItem.auctionAttachement, this.columnLst[columnId]);
+    console.log("🚀 ~ sortByTableHeaderId ~ this.auctionItem.auctionAttachement", this.auctionItem.auctionAttachement)
   }
 
   getPreAuctionData() {
