@@ -1,3 +1,4 @@
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -54,7 +55,8 @@ import { AuctionFinalAwardComponent } from './shared/auction-final-award/auction
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    EAucCommonModule
+    EAucCommonModule,
+    CarouselModule
   ]
 })
 export class AmAuctionModule { }
