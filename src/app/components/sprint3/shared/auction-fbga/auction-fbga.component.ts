@@ -29,6 +29,11 @@ export class AuctionFbgaComponent implements OnInit {
   selectedFileFormat: string;
   selectedFileURL: any;
   showAttachLoader: boolean = false;
+  fileToUpload: {
+    FileName: any;
+    // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+    FileContent: string; MIMEType: any; FileLength: string; FileExt: any; ObjectType: string; ObjectId: any; InvoiceForm: string;
+  };
 
   constructor(private bidderService : BidderService, private router: Router) { }
 
@@ -45,7 +50,7 @@ export class AuctionFbgaComponent implements OnInit {
     if (filecount > 1) {
       this.invalidFileType = false;
       this.invalidFileCount = true;
-      
+      this.showError.emit(true);
       setTimeout(() => {
         this.invalidFileCount = false;
       }, 3000);
@@ -61,10 +66,13 @@ export class AuctionFbgaComponent implements OnInit {
     if (ext.indexOf('.') === -1) {
       // this.invalidFileType = false;
       if (!!this.acceptedExtensions.find(x => x === fileType)) {
+        this.showError.emit(false);
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
+          this.showError.emit(false);
           this.invalidFileType = false;
           if (filesize <= 2097152) {
+            this.showError.emit(false);
             this.FilePushTOArray(file[index], (filesrc: any) => {
               var fileupload = {
                 "name": file[index]['name'],
@@ -77,18 +85,20 @@ export class AuctionFbgaComponent implements OnInit {
               }
               this.files.push(fileupload);
               console.log("🚀🚀 ~~ this.files", this.files);
-              if (this.checkFile()) {
-
-              }
               // this.auctionAttachement.push(new FormControl(fileupload));
             });
           } else {
+            this.showError.emit(true);
             this.invalidFileSize = true;
             setTimeout(() => {
               this.invalidFileSize = false;
             }, 3000);
           }
+        }else{
+          this.showError.emit(true);
         }
+      }else{
+        this.showError.emit(true);
       }
     }
   }
@@ -108,17 +118,40 @@ export class AuctionFbgaComponent implements OnInit {
     })(file);
     reader.readAsDataURL(file);
   }
+
   sendFbga(){
+    if(this.checkFile()){
+      this.showError.emit(false);
+      this.showConfirmationModal = true;
+    }else{
+      this.showError.emit(true);
+    }
+    
+  }
+  makeAPIcall(){
+    this.fileToUpload = {
+      "FileName": this.files[0].name.split('.')[0],
+      // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
+      "FileContent": btoa(this.files[0].filesrc),
+      "MIMEType": this.files[0].type,
+      "FileLength": '' + this.files[0].size,
+      "FileExt": this.files[0].name.substring(this.files[0].name.lastIndexOf('.')).replace('.', ''),
+      "ObjectType": "/AuctionPaymentDocuments",
+      "ObjectId": this.auctionId,
+      "InvoiceForm": "F",
+    };
     this.showLoader = true;
-    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
-      this.bidderService.submitFbga(this.auctionId).subscribe((res)=>{
-      console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 92 ~ res", res.d.Msgty);
-      if(res.d.Msgty == 'S'){
-        this.showConfirmationModal = false;
-        this.showSuccessfulModal = true;
-      }
-        
+  console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
+    this.bidderService.submitFbga(this.auctionId).subscribe((resData)=>{
+      this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile)=>{
+        if(resData.d.Msgty == 'S' && resFile.d.Msgty == 'S'){
+          this.showConfirmationModal = false;
+          this.showSuccessfulModal = true;
+        }
       });
+    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 92 ~ res", resData.d.Msgty);
+      
+    });
   }
   openFile(file: any, option: string) {
     console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 151 ~ file", file);

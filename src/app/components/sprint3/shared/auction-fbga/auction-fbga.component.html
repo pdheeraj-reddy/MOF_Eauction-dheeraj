@@ -70,7 +70,7 @@
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button class="btn btn-primary-light btn-md align-self-center" (click)="checkFile()">
+        <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()">
             إرسال الضمان النهائي
         </button>
         <!-- End -->
@@ -101,7 +101,7 @@
             </div>
             <div class="modal-footer" style="justify-content: end">
                 <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
-                    (click)="sendFbga()">
+                    (click)="makeAPIcall()">
                     {{
                     "auctionModerator.am-detail.auction-details-confirmation.Postconfirmation"
                     | translate
