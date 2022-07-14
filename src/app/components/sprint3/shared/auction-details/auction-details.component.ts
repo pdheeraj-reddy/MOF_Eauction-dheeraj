@@ -27,6 +27,7 @@ export class AuctionDetailsComponent implements OnInit {
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   ibgaDoc : any;
+  fbgaDoc : any;
   days: number;
   hours: number;
   minutes: number;
@@ -110,6 +111,7 @@ export class AuctionDetailsComponent implements OnInit {
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
       this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
       console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
+      this.fbgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'F');
       // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
@@ -392,9 +394,6 @@ export class AuctionDetailsComponent implements OnInit {
     downloadLink.click();
   }
 
-
-
-
   activeDownloadFileIndex = -1
 
   viewAttachment(file: any, index: number, option: string) {
@@ -470,6 +469,11 @@ export class AuctionDetailsComponent implements OnInit {
         this.selectedFileURL = file.filesrc['0'].split(',')[1];
         this.showViewAttachmentsModal = true;
       }
+    }
+  }
+  diableParticipation(bool:boolean){
+    if(bool){
+      this.response.ZzBidderSts = 'B';
     }
   }
 }

@@ -104,12 +104,12 @@
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA'" [upcomingAuction]="upcomingAuction"
-            (showError)="showError($event)">
+        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M'" [upcomingAuction]="upcomingAuction"
+           [fbgaDoc]="fbgaDoc" (showError)="showError($event)">
         </app-auction-fbga>
         <!-- End -->
 
-        <!--============ Send FBGA card ============-->
+        <!--============ Send Invoice card ============-->
         <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'"
             [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
@@ -226,18 +226,18 @@
                         <div [ngClass]="{
                             'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
                             'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',
-                            'left-right-card-en-disable': textDir && response.ZzBidderSts == 'B',
-                            'left-right-card-ar-disable': !textDir && response.ZzBidderSts == 'B'
+                            'left-right-card-en-disable': textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'),
+                            'left-right-card-ar-disable': !textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M')
                         }"
-                            *ngIf="upcomingAuction.auctionStatus=='Ongoing'">
+                            *ngIf="upcomingAuction.auctionStatus=='Ongoing' || upcomingAuction.auctionStatus=='Pending Selecting' || upcomingAuction.auctionStatus=='Pending FBGA'">
 
                             <!--============= Send offer card =============-->
                             <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'P'" [disable]="false" [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
-                                (showError)="showError($event)">
+                                (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
 
-                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'B'" [ibgaDoc]="ibgaDoc" [disable]="true"  [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
+                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'" [ibgaDoc]="ibgaDoc" [disable]="true"  [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
                                 (showError)="showError($event)">
                             </app-send-bidding-offer>
 
