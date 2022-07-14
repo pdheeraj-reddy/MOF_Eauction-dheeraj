@@ -11,6 +11,7 @@ export class SendBiddingOfferComponent implements OnInit {
 
 
   @Output() showError = new EventEmitter<boolean>();
+  @Output() diableNow = new EventEmitter<boolean>();
   @Input() totalBookValue: number;
   @Input() auctionId: any;
   @Input() disable: any;
@@ -281,6 +282,7 @@ export class SendBiddingOfferComponent implements OnInit {
         if (dataUpdate && fileupload) {
           this.showConfirmation = false;
           this.showSuccessfulModal = true;
+          this.diableNow.emit(true);
           console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 235 ~ this.showSuccess", this.showSuccessfulModal);
         }
       });

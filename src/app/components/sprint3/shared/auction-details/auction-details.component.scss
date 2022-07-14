@@ -144,14 +144,15 @@
 }
 
 .left-right-card-en {
-  width: 50%;
-  border-top: 2px solid #32ad71;
-  border-bottom: 2px solid #32ad71;
-  border-right: 2px solid #32ad71;
-  border-radius: 0 5px 5px 0;
-  background-color: #F9FCFA;
+    width: 50%;
+    border-top: 2px solid #32ad71;
+    border-bottom: 2px solid #32ad71;
+    border-right: 2px solid #32ad71;
+    border-radius: 0 5px 5px 0;
+    background-color: #F9FCFA;
 }
-.left-right-card-ar-disable{
+
+.left-right-card-ar-disable {
     width: 50%;
     border-top: 2px solid #b1b1b1;
     border-bottom: 2px solid #b1b1b1;
@@ -159,6 +160,7 @@
     border-radius: 5px 0 0 5px;
     background-color: #F6F6F6;
 }
+
 .left-right-card-en-disable {
     width: 50%;
     border-top: 2px solid #b1b1b1;
@@ -166,7 +168,7 @@
     border-right: 2px solid #b1b1b1;
     border-radius: 0 5px 5px 0;
     background-color: #F6F6F6;
-  }
+}
 
 .list-card {
     margin-bottom: 10px;
@@ -331,3 +333,74 @@
 ::ng-deep .etimad-option.etimad-option-xs .input-target {
     padding: 0 !important;
 }
+
+.carousel-wrapper {
+    width: 1000px;
+    margin: auto;
+    position: relative;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+::ng-deep .owl-carousel .owl-nav {
+    overflow: hidden;
+    height: 0px;
+}
+
+::ng-deep.owl-theme .owl-dots .owl-dot.active span,
+::ng-deep.owl-theme .owl-dots .owl-dot:hover span {
+    background: #5110e9;
+}
+
+::ng-deep.owl-carousel .item {
+    text-align: center;
+    width: auto;
+}
+
+::ng-deep.owl-carousel .nav-button {
+    height: 50px;
+    width: 25px;
+    cursor: pointer;
+    position: absolute;
+    top: 110px !important;
+}
+
+::ng-deep.owl-carousel .owl-prev.disabled,
+::ng-deep.owl-carousel .owl-next.disabled {
+    pointer-events: none;
+    opacity: 0.25;
+}
+
+::ng-deep.owl-carousel .owl-prev {
+    left: 0px;
+    top: 0 !important;
+}
+
+::ng-deep.owl-carousel .owl-next {
+    right: 0px;
+    // position: absolute;
+    // right: 0;
+    top: 0 !important;
+}
+
+::ng-deep.owl-theme .owl-nav [class*=owl-] {
+    color: #ffffff;
+    font-size: 39px;
+    // background: #000000;
+    border-radius: 3px;
+}
+
+::ng-deep.owl-carousel .prev-carousel:hover {
+    background-position: 0px -53px;
+}
+
+::ng-deep.owl-carousel .next-carousel:hover {
+    background-position: -24px -53px;
+}
+
+// .full-video {
+video {
+    width: -webkit-fill-available;
+}
+
+// }

@@ -9,6 +9,8 @@ import { MapsAPILoader } from '@agm/core';
 import * as moment from 'moment-mini';
 import { DatePipe } from '@angular/common'
 import { BidderService } from '../../services/bidder.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 declare var $: any;
 
 @Component({
@@ -26,7 +28,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
-  ibgaDoc : any;
+  ibgaDoc: any;
   days: number;
   hours: number;
   minutes: number;
@@ -49,12 +51,32 @@ export class AuctionDetailsComponent implements OnInit {
   userRole: any;
   showFileError: boolean = false;
 
+  slidesStore: any = [];
+  fullImage: any;
+  filenetImagesLst: any = [];
+  showLoaderMainImage: boolean = true;
+  showLoaderSubImage: boolean = true;
+  showVideo: boolean = true;
+  customOptions: OwlOptions = {
+    items: 7,
+    autoHeight: true,
+    autoWidth: true,
+    loop: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 300,
+    nav: true,
+    navText: ["<div class='nav-button owl-prev'>‹</div>", "<div class='nav-button owl-next'>›</div>"],
+  };
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
     public PaginationServc: PaginationSortingService,
     private envService: EnvService,
     private bidderService: BidderService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -108,27 +130,35 @@ export class AuctionDetailsComponent implements OnInit {
       this.mapping(res.body);
 
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
+      console.log("🚀 ~ this.bidderService.getAuctionDetail ~ this.auctionAttachment", this.auctionAttachment)
       this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
       console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
       // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
-        this.auctionAttachment.forEach(
-          (value: any, index: any, array: any) => {
-            var fileupload = {
-              name: value.FileName + '.' + value.FileExt,
-              size: '',
-              type: '',
-              filesrc: '',
-              FilenetId: value.FilenetId,
-              MIMEType: value.MIMEType,
-              downloading: false,
-            };
-            this.transformedAttachment.push(fileupload);
-
+        this.auctionAttachment.forEach((value: any) => {
+          const fileupload = {
+            name: value.FileName + '.' + value.FileExt,
+            size: '',
+            type: '',
+            filesrc: '',
+            FilenetId: value.FilenetId,
+            MIMEType: value.MIMEType,
+            downloading: false,
+          };
+          this.transformedAttachment.push(fileupload);
+          if (value.ObjectType == '/AuctionProductImages') {
+            const isExist = this.filenetImagesLst.filter((x: any) => x.ZzProductNo === value.ZzProductNo);
+            if (isExist.length == 0) {
+              this.filenetImagesLst.push(value)
+            }
           }
-        );
+        });
+        this.filenetImagesLst.forEach((element: any) => {
+          this.downloadImages(element);
+        })
       }
+      console.log("🚀 ~ this.auctionAttachment.forEach ~ this.filenetImagesLst", this.filenetImagesLst)
 
       if (this.upcomingAuction?.biddingStatus) {
         if (this.upcomingAuction?.biddingStatus == 'C') {
@@ -156,12 +186,6 @@ export class AuctionDetailsComponent implements OnInit {
           this.upcomingAuction.auction_detail.startAuction = 'Manual';
         }
       }
-
-
-
-      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 135 ~ this.upcomingAuction.important_info?.guarantee_per", this.upcomingAuction.important_info?.guarantee_per);
-      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 135 ~ this.upcomingAuction.important_info?.commissionRate", this.upcomingAuction.important_info?.commissionRate);
-
     });
   }
   refreshCalendarCntrl() {
@@ -356,13 +380,13 @@ export class AuctionDetailsComponent implements OnInit {
   // send offer
   showError(nowShow: boolean) {
     this.showFileError = nowShow;
-    if(this.showFileError){
-    window.scrollTo({
-      top: 100,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
+    if (this.showFileError) {
+      window.scrollTo({
+        top: 100,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
 
     this.errorFocus.nativeElement.focus();
   }
@@ -471,6 +495,69 @@ export class AuctionDetailsComponent implements OnInit {
         this.showViewAttachmentsModal = true;
       }
     }
+  }
+
+  convertBlobToBase64 = (blob: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
+
+
+  downloadImages(item: any) {
+    this.bidderService.downloadAuctionImages(item.FilenetId).subscribe(async (downloadAuctionImagesResp: any) => {
+      const fileResp = downloadAuctionImagesResp.d;
+      var byteString = atob(
+        atob(fileResp.FileContent).split(',')[1]
+      );
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: item.MIMEType });
+      var base64String = await this.convertBlobToBase64(blob);
+
+      this.slidesStore.push({
+        id: item.ZzProductNo,
+        src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
+        alt: 'test',
+        title: 'hello world',
+        type: item.MIMEType
+      });
+
+      console.log("auctionAttachment this.slidesStore", this.slidesStore)
+      if (this.slidesStore.length == this.filenetImagesLst.length) {
+        this.showLoaderSubImage = false;
+      }
+
+      if (this.slidesStore.length == 1) {
+        this.fullImage = {
+          src: this.slidesStore[0].src,
+          type: this.slidesStore[0].type
+        }
+        this.showLoaderMainImage = false;
+      }
+    },
+      (error) => {
+        console.log('downloadAuctionImages RespError : ', error);
+      }
+    );
+  }
+
+  viewItem(a: any) {
+    this.showVideo = false;
+    this.fullImage = {
+      src: a.src,
+      type: a.type
+    }
+    setTimeout(() => {
+      this.showVideo = true;
+    });
   }
 }
 
