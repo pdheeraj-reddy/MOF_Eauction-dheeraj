@@ -11,27 +11,28 @@ import { BidderService } from './bidder.service';
   providedIn: 'root'
 })
 export class AucModeratorService {
+  XCSRFToken: any;
 
-  constructor( 
+  constructor(
     private http: HttpClient,
     private envService: EnvService,
-    private cookieService:CookieService,
-    private bidder : BidderService,
+    private cookieService: CookieService,
+    private bidder: BidderService,
   ) { }
 
   getDecodedAccessToken(token: string): any {
     try {
       return jwt_decode(token);
-    } catch(Error) {
+    } catch (Error) {
       return null;
     }
   }
 
-  postAppporRej(data:any,action: any):Observable<any>{
+  postAppporRej(data: any, action: any): Observable<any> {
     let data1 = {
-    "AucId": data.AucId,
-    "BidderId": data.BidderId,
-    "ZzUserAction": action
+      "AucId": data.AucId,
+      "BidderId": data.BidderId,
+      "ZzUserAction": action
     }
 
     const httpOptions = {
@@ -41,7 +42,7 @@ export class AucModeratorService {
       params: {
       }
     };
-    return this.http.post<any>( 
+    return this.http.post<any>(
       // 'https://10.13.85.56:9443' + 
       this.envService.environment.apiAppRej
       , data1
@@ -49,7 +50,7 @@ export class AucModeratorService {
 
   }
 
-  getLatestBiddetails(ObjectId: string, PageNo: string) : Observable<any> {
+  getLatestBiddetails(ObjectId: string, PageNo: string): Observable<any> {
 
     const httpOptions = {
       headers: {
@@ -61,12 +62,32 @@ export class AucModeratorService {
       observe: 'response' as 'body'
     };
 
-    return this.http.get<any>( 
-      this.envService.environment.apiLatestBid + 
-      "?$expand=pagetoaucbiddernav" + 
-      "&$filter=(ObjectId eq '" + ObjectId + "' and PageNo eq '" + PageNo + "' )&$format=json" 
+    return this.http.get<any>(
+      this.envService.environment.apiLatestBid +
+      "?$expand=pagetoaucbiddernav" +
+      "&$filter=(ObjectId eq '" + ObjectId + "' and PageNo eq '" + PageNo + "' )&$format=json"
       , httpOptions);
 
 
+  }
+
+  sendInvoice(auctionId?: any, bidderId?: any): Observable<any> {
+    let invoiceDetails = {
+      "AucId": auctionId,
+      "BidderId": bidderId,
+      "ZzUserAction": "N"
+    }
+    const httpOptions = {
+      headers: {
+        'X-CSRF-TOKEN': this.XCSRFToken as string,
+      },
+      params: {
+      }
+    };
+    if (httpOptions) {
+      console.log(httpOptions);
+    }
+    return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
+      , JSON.stringify(invoiceDetails), httpOptions);
   }
 }

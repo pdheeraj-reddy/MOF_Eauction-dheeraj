@@ -1,167 +1,216 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{'auctionCommittee.ac-detail.bcrumb1' |
+            <li class="breadcrumb-item"><a href="#">{{'auctionCommittee.ac-detail.bcrumb1' |
                     translate}}</a></li>
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{'auctionCommittee.ac-detail.bcrumb2' |
+            <li class="breadcrumb-item"><a href="#">{{'auctionCommittee.ac-detail.bcrumb2' |
                     translate}}</a></li>
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{'auctionCommittee.ac-detail.bcrumb3' |
+            <li class="breadcrumb-item"><a href="#">{{'auctionCommittee.ac-detail.bcrumb3' |
                     translate}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page" style="font-size: 14px;">
+            <li class="breadcrumb-item active" aria-current="page">
                 {{'bidderAuctions.payment_bill' | translate}}</li>
         </ol>
     </nav>
 </div>
 
-<br>
 
-<div class="col-12">
-    <h2 style="font-weight: bold; color: #08594D; font-size: 32px">{{'bidderAuctions.payment_bill' | translate}}</h2>
+<div class="col-12 border-bottom pb-2 mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-20 text-primary font-weight-500">{{'bidderAuctions.payment_bill' | translate}}</h1>
+        </div>
+    </div>
 </div>
-<hr>
-<br>
 
-<div style="padding-left: 10%;">
-    <p style="color: #32AD71; font-size: 24px; font-weight: bold;">{{'bidderFinalInvoice.InvoiceInformation' |
+
+<div class="mt-5 mb-4 pb-2" style=" width: 896px; padding-left: 10%; padding-right: 10%;">
+    <p class="text-success text-24 font-weight-bold">{{'bidderFinalInvoice.InvoiceInformation' |
         translate}}</p>
-    <div style="border: #cac1c1 1px solid; border-radius: 5px; width: 896px;">
+</div>
 
-        <div style="width: 801px; margin: 5%;">
-            <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{'bidderFinalInvoice.AuctionData' |
-                translate}}</p>
-            <br>
-            <div style="display: flex;">
-                <div style="width: 35%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.AuctionReferenceNumber' |
-                        translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.auctionReferenceNo}}</p>
-                </div>
-                <div style="width: 35%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.AuctionStartDateandTime' |
-                        translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.auctionDate}}&nbsp;&nbsp;<span
-                            style="font-size: 6px; color: #32AD71;"
-                            class="icon-fiber_manual_record"></span>&nbsp;&nbsp;<span
-                            style="color: #cac1c1;">{{invoiceForSend.auctionTime}}</span></p>
-                </div>
-                <div style="width: 30%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.ProductsType' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.productsType}}</p>
-                </div>
-            </div>
-            <br>
-            <div style="display: flex;">
-                <div style="width: 35%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.OfferAwardDate' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.offerAwardDate}}&nbsp;&nbsp;<span
-                            style="font-size: 6px; color: #32AD71;"
-                            class="icon-fiber_manual_record"></span>&nbsp;&nbsp;<span
-                            style="color: #cac1c1;">{{invoiceForSend.offerAwardTime}}</span></p>
-                </div>
-            </div>
-            <hr>
-            <br>
 
-            <div style="display: flex;">
+<div class="" style="padding-left: 10%; padding-right: 10%;">
 
-                <div style="width: 50%;">
-                    <p style="color: #005B4D; font-size: 18px; font-weight: bold;">
-                        {{'bidderFinalInvoice.BillHolderInformation' | translate}}</p>
-                    <br>
-                    <div>
-                        <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.FacilityName' | translate}}
-                        </p>
-                        <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.facilityName}}</p>
+    <div class="border rounded" style="width: 896px; background-color: #FFFFFF;">
+
+        <div style="margin: 6%;">
+            <p class="text-primary text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}</p>
+            <br>
+            <div class="form-field">
+                <form class="needs-validation" novalidate>
+                    <div class="border-bottom">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.AuctionReferenceNumber' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.auctionReferenceNo}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.AuctionStartDateandTime' | translate}}</label>
+                                    <div class="row text-primary">
+                                        <span class="col-md-6">{{invoiceForSend.auctionDate}}</span>
+
+                                        <ul class="col list list-primary-bullets d-inline-block"
+                                            style="margin-right: -22px; margin-left: -22px;">
+                                            <li class="text-muted">
+                                                <span
+                                                    style="margin-left: -10px; margin-right: -10px;">{{invoiceForSend.auctionTime}}</span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.ProductsType' | translate}}</label>
+                                    <div class="text-primary">
+                                        {{invoiceForSend.productsType}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label> {{'bidderFinalInvoice.OfferAwardDate' | translate}}</label>
+                                    <div class="row text-primary">
+                                        <span class="col-md-6">{{invoiceForSend.offerAwardDate}}</span>
+
+                                        <ul class="col list list-primary-bullets d-inline-block"
+                                            style="margin-right: -22px; margin-left: -22px;">
+                                            <li class="text-muted">
+                                                <span
+                                                    style="margin-left: -10px; margin-right: -10px;">{{invoiceForSend.offerAwardTime}}</span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <div>
-                        <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.CommercialRegistrationNo' |
-                            translate}}</p>
-                        <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.commercialRegNo}}</p>
+
+                    <div class="border-bottom d-flex mt-4">
+                        <div class="w-50">
+                            <p class="text-primary font-weight-bold text-18">
+                                {{'bidderFinalInvoice.BillHolderInformation' | translate}}</p>
+                            <div class="form-row mt-4">
+                                <div class="col mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.FacilityName' | translate}}</label>
+                                        <div class="text-primary">{{invoiceForSend.facilityName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mt-4">
+                                <div class="col mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.CommercialRegistrationNo' | translate}}</label>
+                                        <div class="text-primary">{{invoiceForSend.commercialRegNo}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-50">
+                            <p class="text-primary font-weight-bold text-18">
+                                {{'bidderFinalInvoice.BillerData' | translate}}</p>
+                            <div class="form-row mt-4">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.EntityName' | translate}}</label>
+                                        <div class="text-primary">{{invoiceForSend.entityName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mt-4">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.EntityNo' | translate}}</label>
+                                        <div class="text-primary">{{invoiceForSend.entityNo}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div style="width: 50%;">
-                    <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{'bidderFinalInvoice.BillerData' |
-                        translate}}</p>
-                    <br>
-                    <div>
-                        <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.EntityName' | translate}}</p>
-                        <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.entityName}}</p>
+                    <div class="border-bottom mt-4 mb-4">
+                        <p class="text-primary font-weight-bold text-18 mb-4">
+                            {{'bidderFinalInvoice.DeliveryData' | translate}}</p>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.DeliveryDate' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.deliveryDate}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.Region' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.region}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.City' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.city}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.District' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.district}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.Street' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.street}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.OtherNotes' | translate}}</label>
+                                    <div class="text-primary">{{invoiceForSend.otherNotes}}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <div>
-                        <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.EntityNo' | translate}}</p>
-                        <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.entityNo}}</p>
-                    </div>
-                </div>
 
+                </form>
             </div>
-            <hr>
 
-            <br>
 
-            <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{'bidderFinalInvoice.DeliveryData' |
-                translate}}</p>
-            <br>
-            <div>
-                <div style="width: 40%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.DeliveryDate' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.deliveryDate}}</p>
-                </div>
-            </div>
-            <br>
-            <div style="display: flex;">
-                <div style="width: 40%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.Region' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.region}}</p>
-                </div>
-                <div style="width: 35%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.City' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.city}}</p>
-                </div>
-                <div style="width: 25%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.District' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.district}}</p>
-                </div>
-            </div>
-            <br>
-            <div style="display: flex;">
-                <div style="width: 40%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.Street' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.street}}</p>
-                </div>
-                <div style="width: 35%;">
-                    <p style="color: #117ABE; font-size: 15px;">{{'bidderFinalInvoice.OtherNotes' | translate}}</p>
-                    <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.otherNotes}}</p>
-                </div>
-            </div>
-            <hr>
-            <br>
-
-            <p style="color: #005B4D; font-size: 18px; font-weight: bold;">
+            <p class="text-primary text-18 font-weight-bold">
                 {{'bidderFinalInvoice.TableOfProductsAndPrices' | translate}}</p>
 
             <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
                 <thead class="thead-dark">
                     <tr>
-                        <th style="width: 12%;" class="btn-primary-light" scope="col"
-                            (click)="sortByTableHeaderId(1, 'string')">
-                            <div style=" padding-left: 10px;" class="table-header-cell">
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
                                 <span>#</span>
-                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
-                        <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
-                            <div style=" padding-left: 10px;" class="table-header-cell">
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
                                 <span>{{'bidderFinalInvoice.ProductName' | translate}}</span>
-                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
-                        <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
-                            <div style=" padding-left: 10px;" class="table-header-cell">
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
                                 <span>{{'bidderFinalInvoice.SKU_Number' | translate}}</span>
-                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                             </div>
                         </th>
                     </tr>
@@ -179,27 +228,36 @@
                     </ng-container>
                     <ng-container *ngIf="invoiceForSend.productGrandTotal">
                         <tr>
-                            <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                {{'bidderFinalInvoice.GearPrice' | translate}} <span
-                                    style="color: #32AD71; margin-left: 78%;">{{invoiceForSend.productGrandTotal.gearPrice}}</span>
+                            <td colspan="3">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice' |
+                                    translate}}</span>
+                                <span [ngStyle]="{float: textFloat}"
+                                    class="text-success">{{invoiceForSend.productGrandTotal.gearPrice}}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                {{'bidderFinalInvoice.QuestRate' | translate}} <span
-                                    style="color: #32AD71; margin-left: 74%;">{{invoiceForSend.productGrandTotal.questRate}}</span>
+                            <td colspan="3">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate' |
+                                    translate}}</span>
+                                <span [ngStyle]="{float: textFloat}"
+                                    class="text-success">{{invoiceForSend.productGrandTotal.questRate}}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                {{'bidderFinalInvoice.ValueAddedTax' | translate}} <span
-                                    style="color: #32AD71; margin-left: 74%;">{{invoiceForSend.productGrandTotal.valueAddTax}}</span>
+                            <td colspan="3">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                    | translate}}</span>
+                                <span [ngStyle]="{float: textFloat}"
+                                    class="text-success">{{invoiceForSend.productGrandTotal.valueAddTax}}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                {{'bidderFinalInvoice.TotalInvoicePrice' | translate}} <span
-                                    style="color: #32AD71; margin-left: 72%;">{{invoiceForSend.productGrandTotal.totalInvPrice}}</span>
+                            <td colspan="3">
+                                <span
+                                    class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                    | translate}}</span>
+                                <span [ngStyle]="{float: textFloat}"
+                                    class="text-success">{{invoiceForSend.productGrandTotal.totalInvPrice}}</span>
                             </td>
                         </tr>
                     </ng-container>
@@ -243,98 +301,87 @@
         </div>
 
     </div>
-    <br>
 
     <!-- Added by Mohammed Salick -->
-    <div *ngIf="userRole != 'EAuction_AuctionManager'" style="display: flex; justify-content: space-between;">
-        <button type="button"
-            style="outline: none; color: grey; background-color: white; height: 50px; width: 130px; border: 1px solid grey; border-radius: 5px; font-size: 18px;"
-            class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
-            <span class="btn-text">{{'bidderSendInvoice.reference' | translate}}</span> <span class="v-divider"></span>
-            <span class="icon icon-arrow-left"></span>
-        </button>
-        <button data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#showSuccessfulModal"
-            style="outline: none; background-color: #32AD71; color: white; font-weight: bold; height: 50px; width: 140px; border: none; border-radius: 5px;">
-            {{'bidderSendInvoice.send_invoice' | translate}}
-        </button>
+    <div *ngIf="userRole != 'EAuction_AuctionManager'" style="width: 896px;"
+        class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between my-5 mb-5">
+        <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
+            <button type="submit" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+                <span class="btn-text">{{'bidderSendInvoice.reference' | translate}}</span> <span
+                    class="v-divider"></span> <span class="icon icon-arrow-left"></span>
+            </button>
+        </div>
+        <div class="d-flex flex-column flex-md-row mb-5">
+            <button *ngIf="!invoiceSent" data-toggle="modal" data-target="#showSuccessfulModal" data-backdrop="static"
+                class="btn arrow-btn btn-primary-light btn-lg mt-2 mt-md-0"> <span
+                    class="btn-text">{{'bidderSendInvoice.send_invoice' | translate}}</span> </button>
+        </div>
     </div>
+
 </div>
 
 
 
 
-<!-- Approval of the final award and send the invoice -->
+<!-- Confirmation pop-up for approval of the final award and send the invoice -->
 
-<div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog modal-lg" role="document">
-
-        <div class="modal-content" style="width: 100%; height: 100%;">
-
-            <div class="" style="display: flex; margin-top: 10px;">
-                <div style="width: 400px; text-align: left;">
-                    <p
-                        style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
-                        {{'bidderSendInvoice.approval_of_the_final_award_title' | translate}}</p>
-                </div>
-
-                <div>
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-                        <span class="icon-close"></span>
-                    </button>
-                </div>
+<div class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    {{'bidderSendInvoice.approval_of_the_final_award_title' | translate}}
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"><span
+                        class="icon-close"></span></button>
             </div>
+            <div class="modal-body"><label for="confirmation"
+                    class="text-body text-16">{{'bidderSendInvoice.approval_of_the_final_award_desc' |
+                    translate}}</label></div>
+            <div class="modal-footer" style="justify-content: end;">
+                <button type="button" class="btn btn-lg btn-outline-light rounded" data-dismiss="modal"
+                    aria-label="Close">
+                    {{"bidderSendInvoice.reference" | translate}} </button>
+                <button type="button" class="btn btn-primary-light btn-lg" data-dismiss="modal" aria-label="Close"
+                    (click)="sendInvoice()">
+                    {{'bidderSendInvoice.send_invoice' | translate}} </button>
 
-            <div class="modal-body" style="width: 470px; margin-top: 10px; text-align: left;">
-                <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                    {{'bidderSendInvoice.approval_of_the_final_award_desc' | translate}}
-                </p>
-            </div>
-
-
-            <div style="margin-left: 220px;" style="display: flex;justify-content: end;">
-                <button class="mr-2 ml-2"
-                    style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">{{'bidderSendInvoice.reference'
-                    | translate}}</button>
-
-                <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close"
-                    data-toggle="modal" data-target="#secondPopup"
-                    style="height:45px; width: 120px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
-                    {{'bidderSendInvoice.send_invoice' | translate}}</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Approval of the final award and send the invoice -->
 
-<div style="width: 600px; margin-left: 400px;" class="modal" id="secondPopup" tabindex="-2" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Success pop-up for approval of the final award and send the invoice -->
 
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal show" *ngIf="showSuccessPopup" [ngClass]="{ 'modal-show': showSuccessPopup }">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content align-items-md-center">
 
-        <div class="card shadow-lg result result-success" style="align-items: center;">
-            <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button (click)="closeSuccess()" style="outline: none;" type="button" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <div class="alert-body">
-                <i class="alert-icon">
-                    <span class="icon-alert-success"></span>
-                </i>
-                <div class="alert-content">
-                    <h4>{{'bidderSendInvoice.invoice_sent_successfully' | translate}}</h4>
-                    <p style="color: #414042;">
-                        {{'bidderSendInvoice.you_will_receive_invoice' | translate}}
-                    </p>
+
+            <span class="icon-check"></span>
+            <div class="modal-header">
+                <div class="status-success-icon">
+                    <div style="display: flex;">
+                        <div class="circle">
+                        </div>
+                    </div>
+                    <h4 class="modal-title text-align-center mt-4" id="exampleModalLabel">
+                        {{'bidderSendInvoice.invoice_sent_successfully' | translate}}</h4>
                 </div>
             </div>
-            <div class="alert-action">
-                <button type="button" class="btn btn-primary-light"> {{'bidderSendOffer.BackToAuctions' |
-                    translate}}</button>
+            <div class="modal-body"><label for="confirmation"
+                    class="text-body text-16 text-align-center">{{'bidderSendInvoice.you_will_receive_invoice'
+                    | translate}}</label></div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" (click)="goBack()" class="btn btn-primary-light btn-md" data-dismiss="modal"
+                    aria-label="Close">{{'bidderSendOffer.BackToAuctions' | translate}}</button>
             </div>
         </div>
     </div>
 </div>
-
-<br><br><br><br>

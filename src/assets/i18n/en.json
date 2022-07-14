@@ -994,7 +994,7 @@
     },
     "bidderSendInvoice": {
         "send_invoice": "Send Invoice",
-        "reference": "Reference",
+        "reference": "Back",
         "approval_of_the_final_award_title": "Approval of the final award and send the invoice ?",
         "approval_of_the_final_award_desc": "When the award is approved and the invoice is sent to complete the payment by the bidder, the auction will be awarded automatically.",
         "invoice_sent_successfully": "Invoice sent successfully",

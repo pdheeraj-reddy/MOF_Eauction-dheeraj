@@ -1,3 +1,23 @@
 html[dir='rtl'] .close-button {
     margin-left: 110px;
 }
+
+.status-success-icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.circle {
+    width: 96px;
+    height: 96px;
+    background: #f9fcfa;
+    border-radius: 50%;
+}
+
+.icon-check {
+    position: absolute;
+    font-size: 30px;
+    top: 85px;
+    color: #32ad71;
+}

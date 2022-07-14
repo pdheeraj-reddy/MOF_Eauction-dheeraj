@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InvoiceForSend } from 'src/app/model/auction.model';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
+import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
 
 @Component({
@@ -14,16 +16,30 @@ export class SendInvoiceComponent implements OnInit {
   pagelimit: number = 10;
   userRole: string;
   showLoader: boolean = true;
+  textFloat: string = '';
+  showSuccessPopup: boolean = false;
+  invoiceSent: boolean = false;
   invoiceForSend: InvoiceForSend = new InvoiceForSend();
   constructor(
     public PaginationServc: PaginationSortingService,
     public bidderService: BidderService,
+    public moderatorService: AucModeratorService,
+    private router: Router
   ) {
     this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
   }
 
   ngOnInit(): void {
     this.getInvoice(1);
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textFloat = 'left';
+    }
+    else {
+      this.textFloat = 'right';
+    }
   }
 
   getInvoice(pageNumber?: number) {
@@ -82,6 +98,8 @@ export class SendInvoiceComponent implements OnInit {
     }
     // Service call
     this.bidderService.getSendInvoice('9700000300').subscribe((res: any) => {
+      console.log("🚀🚀 ~~ res", res);
+
       this.showLoader = false;
       this.PaginationServc.setPagerValues(+res.body.d.results[0].TotEle, 10, +pageNoVal);
       localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
@@ -131,9 +149,22 @@ export class SendInvoiceComponent implements OnInit {
     }
   }
 
-  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+  sendInvoice() {
+    // this.showSuccessPopup = true;
+    this.moderatorService.sendInvoice("9700000300", "1000306470").subscribe((res: any) => {
+      console.log("🚀🚀 ~~ res", res);
+    })
   }
+
+  goBack() {
+    this.router.navigateByUrl('/');
+  }
+  closeSuccess() {
+    this.showSuccessPopup = false;
+    this.ngOnInit();
+    this.invoiceSent = true;
+  }
+
 
   /** Populating the table */
   public getServerData(selectedPageNumber: number) {
