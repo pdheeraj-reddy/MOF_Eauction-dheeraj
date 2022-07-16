@@ -29,6 +29,7 @@ export class AuctionDetailsComponent implements OnInit {
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
   ibgaDoc: any;
+  fbgaDoc: any;
   days: number;
   hours: number;
   minutes: number;
@@ -133,6 +134,7 @@ export class AuctionDetailsComponent implements OnInit {
       console.log("🚀 ~ this.bidderService.getAuctionDetail ~ this.auctionAttachment", this.auctionAttachment)
       this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
       console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
+      this.fbgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'F');
       // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
@@ -559,7 +561,9 @@ export class AuctionDetailsComponent implements OnInit {
       this.showVideo = true;
     });
   }
+  diableParticipation(bool:boolean){
+    if(bool){
+      this.response.ZzBidderSts = 'B';
+    }
+  }
 }
-
-
-
