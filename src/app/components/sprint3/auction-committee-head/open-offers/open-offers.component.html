@@ -1,0 +1,382 @@
+<div class="col-12 mt-1">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-openOffers.bcrumb1" | translate }}</a></li>
+            <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-openOffers.bcrumb2" | translate }}</a></li>
+            <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-openOffers.bcrumb3" | translate }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ "auctionCommittee.ac-openOffers.bcrumb4" | translate }}</li>
+        </ol>
+    </nav>
+</div>
+<div class="col-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="heading">
+                <h1 class="text-20 text-primary font-medium"> {{ "auctionCommittee.ac-openOffers.pageTitle" | translate }} </h1>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="dropdown dropdown-filters-container d-flex">
+        <div style="width: 96%;"></div>
+        <div>
+            <button (click)="toggleFilter()" class="btn btn-ghost fill-primary-light-green btn-with-badge filters-btn shadow-sm" type="button">
+                <span class="text-14 icon-filters"></span>
+            </button>
+        </div>
+    </div>
+    <div class="modal-content p-4 shadow-lg border" *ngIf="showFilterForm">
+        <form [formGroup]="filterFormGroup">
+            <div class="modal-header">
+                <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">FILTERS</h3>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close" (click)="toggleFilter()">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+            <div class="modal-body mb-3">
+                <div class="col-12 row pr-0">
+                    <div class="col-md-4 mb-2">
+                        <label class="d-flex" for="validationCustom01">Status</label>
+                        <select formControlName="status" class="form-control" id="validationCustom01" (change)="changeSelect($event, 'status')" [required]="true">
+                            <option selected disabled value="">Select</option>
+                            <option *ngFor="let status of dropValStatus" [ngValue]="status">{{status}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="d-flex" for="validationCustom02">Type</label>
+                        <select formControlName="type" class="form-control" id="validationCustom02" (change)="changeSelect($event, 'type')">
+                            <option selected disabled value="">Select</option>
+                            <option *ngFor="let type of dropValType" [ngValue]="type">{{type}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="resetFilter()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-light btn-md">Reset</button>
+                <button (click)="applyFilter()" type="button" class="btn btn-primary-light btn-md">Apply</button>
+            </div>
+        </form>
+    </div>
+    <!-- Block level -->
+    <!-- Inline level -->
+    <div class="mt-3">
+        <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
+            <thead class="thead-dark">
+                <tr class="">
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                        <div class="table-header-cell">
+                            <span>#</span>
+                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ "auctionCommittee.ac-openOffers.th2" | translate }}</span>
+                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ "auctionCommittee.ac-openOffers.th3" | translate }}</span>
+                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(4, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ "auctionCommittee.ac-openOffers.th4" | translate }}</span>
+                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ "auctionCommittee.ac-openOffers.th5" | translate }}</span>
+                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(6, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ "auctionCommittee.ac-openOffers.th6" | translate }}</span>
+                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" style="width: 17%;" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody style="color: #414042;">
+                <ng-container *ngIf="!openofferListData?.length">
+                    <tr>
+                        <td colspan="8" class="p-3 bg-white">
+                            <div class="alert-body text-center"><i class="alert-icon"><svg width="48" height="48"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g fill="#CCC" fill-rule="nonzero">
+                                            <path
+                                                d="M46.884 15.272L24.513 8.087a1.545 1.545 0 00-1.005-.006L1.113 15.273A1.606 1.606 0 000 16.802v21.35a2.4 2.4 0 001.618 2.268l21.592 7.445a2.365 2.365 0 001.57 0l21.6-7.447A2.4 2.4 0 0048 38.153V16.802c0-.698-.451-1.316-1.116-1.53zM23.2 9.862v10.94a.8.8 0 001.6 0V9.86l21.6 6.935V16.808h-.005L24 24.001 1.605 16.795 23.2 9.861zM1.6 38.151V18.488l21.6 6.938v20.744l-21.058-7.26a.8.8 0 01-.542-.756zm44.26.757l-21.06 7.26V25.426l21.6-6.938v19.666a.8.8 0 01-.54.756z">
+                                            </path>
+                                            <path
+                                                d="M20.246 26.289l-14.87-4.88a1.538 1.538 0 00-1.399.231c-.404.3-.643.78-.644 1.291v13.563c0 .682.424 1.289 1.055 1.511l14.87 5.24c.478.17 1.007.091 1.42-.21.411-.3.656-.785.655-1.302V27.816a1.592 1.592 0 00-1.087-1.527zM4.9 28.353l14.87 4.88v3.74l-14.87-4.878v-3.742zm14.87-.537v3.742l-14.87-4.879v-3.748l14.87 4.885zm-14.87 8.678v-2.72l14.87 4.88v3.079l-14.87-5.24zM44.023 21.64a1.546 1.546 0 00-1.4-.231l-14.87 4.879a1.592 1.592 0 00-1.086 1.53v13.916c0 .517.245 1.002.657 1.302.412.3.94.378 1.418.21l14.87-5.24a1.598 1.598 0 001.055-1.51V22.932a1.62 1.62 0 00-.644-1.294zm-.922 1.293v5.565l-3.932 1.288a2.326 2.326 0 00-1.546 2.27 1.595 1.595 0 01-1.122 1.53c-.664.2-1.378-.07-1.755-.663a2.166 2.166 0 00-2.53-.867l-3.984 1.305v-5.544l14.87-4.884zm-14.87 18.801V35.04l4.462-1.458a.645.645 0 01.738.207 3.098 3.098 0 003.519 1.327c1.33-.404 2.242-1.656 2.238-3.076a.728.728 0 01.458-.73l3.455-1.133v6.32l-14.87 5.237zM24 6.667c.368 0 .667-.373.667-.834v-5C24.667.373 24.368 0 24 0c-.368 0-.667.373-.667.833v5c0 .46.299.834.667.834zM12.484 7.539a.786.786 0 001.073.373.85.85 0 00.359-1.118l-2.4-5a.786.786 0 00-1.073-.373.85.85 0 00-.359 1.119l2.4 4.999zM34.44 7.911c.192.1.413.116.615.046a.81.81 0 00.463-.423l2.398-4.995a.85.85 0 00-.359-1.118.785.785 0 00-1.072.373L34.087 6.79a.864.864 0 00-.047.637c.066.21.21.385.4.484z">
+                                            </path>
+                                        </g>
+                                    </svg></i>
+                                <div class="alert-content">
+                                    <h5 class="text-black-50">{{ "auctionCommittee.ac-openOffers.noData" | translate }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="openofferListData?.length > 0">
+                    <tr *ngFor="let rowItem of openofferListData;index as i">
+                        <td>{{rowItem.serialNo}}</td>
+                        <td>{{rowItem.offerValue}}</td>
+                        <td><span class="d-inline-block text-truncate" style="max-width: 200px;"><a
+                                    (click)="viewAttachment()"
+                                    class="btn btn-ghost btn-sm fill-primary-light-green"><span
+                                        class="icon-Group-3319"></span></a> &nbsp; <a style="text-decoration: underline; color: #32AD71;">{{rowItem.primaryWarranty}}</a></span>
+                        </td>
+                        <td>{{ rowItem.submissionDate }} <br>
+                            <p style="color: #9D9D9D;">{{ rowItem.submissionTime }}</p>
+                        </td>
+                        <td>{{ rowItem.facilityName }}</td>
+                        <td>{{ rowItem.commercialRegistrationNo }}</td>
+                        <td>
+                            <ng-container *ngIf="i==0">
+                                <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#notSuccessModal">{{ "auctionCommittee.ac-openOffers.reject" |
+                                    translate }}</button> &nbsp; &nbsp; <button class="btn btn-primary-light btn-sm" type="button" (click)="acceptOffer(openofferListData[i])" data-toggle="modal" data-target="#showSuccessfulModal"> {{ "auctionCommittee.ac-openOffers.accept" |
+                                    translate }}</button>
+                            </ng-container>
+                            <ng-container *ngIf="i>0">
+                                <button class="btn btn-primary-light btn-sm" disabled>{{
+                                    "auctionCommittee.ac-openOffers.reject" | translate }}</button> &nbsp; &nbsp;
+                                <button class="btn btn-primary-light btn-sm" disabled>{{
+                                    "auctionCommittee.ac-openOffers.accept" | translate }}</button>
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                    <td>2</td>
+                    <td>4,000,000 SAR</td>
+                    <td><a class="btn btn-ghost btn-sm fill-primary-light-green"><span class="icon-Group-3319"></span></a> &nbsp; <a style="text-decoration: underline; color: #32AD71;">attached file</a></td>
+                    <td>2022-01-01 <br>
+                        <p style="color: #9D9D9D;">02:31 PM </p>
+                    </td>
+                    <td>Andalusia companies</td>
+                    <td>7003884440975</td>
+                    <td>
+                        <button style="background-color: #F5F5F5; color: #817F83; border: none; border-radius: 3px; margin-top: 10px; padding: 5px; margin-left: 10px; outline: none;">Reject</button>
+
+                        <button style="background-color: #F5F5F5; color: #817F83; border: none; border-radius: 3px; margin-top: 10px; padding: 5px; margin-left: 20px; outline: none;">Accept</button>
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>3,900,000 SAR</td>
+                    <td><a class="btn btn-ghost btn-sm fill-primary-light-green"><span class="icon-Group-3319"></span></a> &nbsp; <a style="text-decoration: underline; color: #32AD71;">attached file</a></td>
+                    <td>2022-01-01 <br>
+                        <p style="color: #9D9D9D;">02:31 PM </p>
+                    </td>
+                    <td>Al-Sulaiman Company</td>
+                    <td>7003884440975</td>
+                    <td>
+                        <button style="background-color: #F5F5F5; color: #817F83; border: none; border-radius: 3px; margin-top: 10px; padding: 5px; margin-left: 10px; outline: none;">Reject</button>
+                        <button style="background-color: #F5F5F5; color: #817F83; border: none; border-radius: 3px; margin-top: 10px; padding: 5px; margin-left: 20px; outline: none;">Accept</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>3,500,000 SAR</td>
+                    <td><a class="btn btn-ghost btn-sm fill-primary-light-green"><span class="icon-Group-3319"></span></a> &nbsp; <a style="text-decoration: underline; color: #32AD71;">attached file</a></td>
+                    <td>2022-01-01 <br>
+                        <p style="color: #9D9D9D;">02:31 PM </p>
+                    </td>
+                    <td>Alshaya & Brothers Foundation</td>
+                    <td>7003884440975</td>
+                    <td>
+                        <button style="background-color: #F5F5F5; color: #817F83; border: none; border-radius: 3px; margin-top: 10px; padding: 5px; margin-left: 10px; outline: none;">Reject</button>
+                        <button style="background-color: #F5F5F5; color: #817F83; border: none; border-radius: 3px; margin-top: 10px; padding: 5px; margin-left: 20px; outline: none;">Accept</button>
+                    </td>
+                </tr> -->
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4 row margin-auto justify-content-end" *ngIf="openofferListData?.length > 0">
+        <div class="mb-5">
+            <nav aria-label="..." class="nav-pagination">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true">{{
+                            "auctionCommittee.ac-openOffers.previous" | translate }}</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link">1</a>
+                    </li>
+                    <li class="page-item" aria-current="page">
+                        <a class="page-link">2 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link dot-link">...</a></li>
+                    <li class="page-item"><a class="page-link">15</a></li>
+                    <li class="page-item">
+                        <a class="page-link">{{ "auctionCommittee.ac-openOffers.next" | translate }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <br><br><br><br>
+    <!-- Successful modal first -->
+    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width: 100%; height: 100%;">
+                <div class="" style="display: flex; margin-top: 10px;">
+                    <div style="width: 400px; text-align: left;">
+                        <p style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
+                            Adoption of awarding offer No. 1?</p>
+                    </div>
+                    <div style="margin-left: 110px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                            <span class="icon-close"></span>
+                        </button>
+                    </div>
+                </div>
+                <div style="width: 470px; margin-top: 10px; text-align: left;">
+                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                        Upon confirmation, the initial award will be approved and sent for final approval</p>
+                </div>
+                <div style="margin-top: 10px; display: flex;">
+                    <div style="width: 50%; text-align: left;">
+                        <p style="color: #117ABE;">Offer value</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{offervalue}}</p>
+                    </div>
+                    <div style="width: 36%; text-align: left;">
+                        <p style="color: #117ABE;">Facility name</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{facilityname}}</p>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; display: flex;">
+                    <div style="width: 42%; text-align: left;">
+                        <p style="color: #117ABE;">Commercial Registration No</p>
+                        <p style="color: #08594D; margin-top: -10px;">{{commercialNo}}</p>
+                    </div>
+                </div>
+                <div style="margin-left: 220px;">
+                    <button style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
+                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#secondPopup" style="height:45px; width: 120px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                        Gear adoption</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- success modal confirmation -->
+    <div style="width: 600px; margin-left: 400px;" class="modal" id="secondPopup" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="card shadow-lg result result-success" style="align-items: center;">
+                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-alert-success"></span>
+                    </i>
+                    <div class="alert-content">
+                        <h4>The award has been successfully approved</h4>
+                        <p style="color: #414042;"> The initial award will be sent for final approval with a report <br> Auction and all bids submitted </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button type="button" class="btn btn-primary-light"> Back to auctions </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offer less than estimated price -->
+    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="notSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width: 100%; height: 100%;">
+                <div class="" style="display: flex; margin-top: 10px;">
+                    <div style="width: 400px; text-align: left;">
+                        <p style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
+                            This offer cannot be awarded.</p>
+                    </div>
+                    <div style="margin-left: 110px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                            <span class="icon-close"></span>
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div style="width: 470px; margin-top: 10px; text-align: left; background-color: #F8FCFA; width: 100%; padding: 25px;">
+                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                        This offer cannot be chosen as the offered price is less than the price estimated by the pricing committee and according to the auction instructions: If the minimum estimated price for the products is not achieved, the auction will not be awarded.</p>
+                </div>
+                <br><br>
+                <div style="margin-left: 145px;">
+                    <button style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
+                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#rejectPopup" style="height:45px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                        Confirm that the auction was not awarded</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Reject popup -->
+    <div style="width: 690px; margin-left: 400px;" class="modal fade" id="rejectPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width: 100%; height: 100%;">
+                <div class="" style="display: flex; margin-top: 10px;">
+                    <div style="width: 650px; text-align: left;">
+                        <p style="font-family:DIN Next LT Arabic Regular; color: #F66F5B; font-size: 22px; line-height: 26px; font-weight: bold;">
+                            Upon confirmation, the bidder will be crossed off the list.</p>
+                    </div>
+                    <div style="margin-left: 25px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                            <span class="icon-close"></span>
+                        </button>
+                    </div>
+                </div>
+                <div style="width: 470px; margin-top: 10px; text-align: left; width: 100%;">
+                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                        Are you sure of the rejection of the award?</p>
+                </div>
+                <br>
+                <div style="display: flex;">
+                    <p style="color: #117ABE;">Please enter the reason for rejection</p>
+                    <p style="margin-left: 265px; color: #cac1c1;">Letter 0/250</p>
+                </div>
+                <div>
+                    <textarea style="width: 100%; height: 130px;border: none;  border-bottom: 1px solid #cac1c1; border-top: 1px solid #cac1c1; padding: 10px;" maxlength="250" name="" id="" cols="30" rows="10" placeholder="the reason of refuse.."></textarea>
+                </div>
+                <br><br>
+                <div>
+                    <button style="background-color: white; color: #cac1c1; border: #cac1c1 1px solid; border-radius: 4px; width: 100px; height: 50px; margin-left: 275px;">Cancellation</button>
+                    <button class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#confirmPopup" style="background-color: #F66F5B; color: #FFFFFF; border: none; border-radius: 4px; width: 160px; height: 50px; margin-left: 40px;">Rejection
+                        confirmation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Rejection confirmation -->
+    <div style="width: 600px; margin-left: 400px;" class="modal" id="confirmPopup" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="card shadow-lg result result-success" style="align-items: center; width: 100%;">
+                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-alert-success"></span>
+                    </i>
+                    <div class="alert-content">
+                        <h4>Rejection sent successfully</h4>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button type="button" class="btn btn-primary-light"> Back to auctions </button>
+                </div>
+            </div>
+        </div>
+    </div>
