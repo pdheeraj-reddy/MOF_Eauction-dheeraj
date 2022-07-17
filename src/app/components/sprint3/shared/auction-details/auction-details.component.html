@@ -104,13 +104,14 @@
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M'" [upcomingAuction]="upcomingAuction"
+        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M' 
+        || upcomingAuction?.auctionStatus=='Pending FBGA Approval' && response.ZzBidderSts == 'F' " [bidderStatus]="response.ZzBidderSts" [upcomingAuction]="upcomingAuction"
             [fbgaDoc]="fbgaDoc" (showError)="showError($event)">
         </app-auction-fbga>
         <!-- End -->
 
         <!--============ Send Invoice card ============-->
-        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying'"
+        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying' && response.ZzBidderSts == 'N'"
             [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
         <!-- End -->
@@ -179,6 +180,7 @@
                     </div>
                     <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId"
                         [participants]="upcomingAuction.auctionSetting?.participants"
+                        [noBids]="upcomingAuction.auctionSetting?.bitsNo"
                         [auctionStatus]="upcomingAuction.auctionStatus"></app-no-of-participants-bids>
                 </div>
                 <!-- End -->
@@ -241,7 +243,6 @@
                                 [disable]="true" [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
                                 (showError)="showError($event)">
                             </app-send-bidding-offer>
-
                         </div>
 
                         &nbsp; &nbsp; &nbsp;

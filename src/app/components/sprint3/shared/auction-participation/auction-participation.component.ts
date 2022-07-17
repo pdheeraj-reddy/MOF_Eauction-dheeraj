@@ -16,6 +16,7 @@ export class AuctionParticipationComponent implements OnInit {
 
   showLoader: boolean = false;
   showSuccessfulModal: boolean = false;
+  showConfirmationModal : boolean = false;
   constructor(private http: HttpClient, private bidderService: BidderService, private router: Router) { }
   btnDisable = false;
   ngOnInit(): void {
@@ -36,6 +37,7 @@ export class AuctionParticipationComponent implements OnInit {
       this.bidderService.makeParticipateIn(this.AuctionId).subscribe((res) => {
         console.log("🎯TC🎯 ~ file: auction-participation.component.ts ~ line 37 ~ res.d.Msgty", res.d.Msgty);
         if (res.d.Msgty == 'S') {
+          this.showConfirmationModal = false;
           this.showSuccessfulModal = true;
           this.btnDisable = true;
           this.showLoader = false;

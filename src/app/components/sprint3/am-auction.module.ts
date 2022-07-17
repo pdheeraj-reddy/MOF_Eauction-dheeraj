@@ -24,6 +24,7 @@ import { BillPdfProductComponent } from './auc_mod/bill-pdf-product/bill-pdf-pro
 import { BillOffferReportComponent } from './auc_mod/bill-offfer-report/bill-offfer-report.component';
 import { AuctionPrmyAwardComponent } from './shared/auction-prmy-award/auction-prmy-award.component';
 import { AuctionFinalAwardComponent } from './shared/auction-final-award/auction-final-award.component';
+import { PayFinalInvoiceComponent } from './shared/pay-final-invoice/pay-final-invoice.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { AuctionFinalAwardComponent } from './shared/auction-final-award/auction
     BillPdfProductComponent,
     BillOffferReportComponent,
     AuctionPrmyAwardComponent,
-    AuctionFinalAwardComponent
+    AuctionFinalAwardComponent,
+    PayFinalInvoiceComponent
 
 
   ],

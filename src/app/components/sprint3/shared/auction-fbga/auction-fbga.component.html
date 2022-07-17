@@ -17,7 +17,7 @@
         <!--=================== Description ===================-->
         <div class="d-flex flex-column justify-content-center m-4" style="max-width: 440px">
             <!-- ============= File upload area and view area ===============-->
-            <div>
+            <div *ngIf="!disable">
                 <div *ngIf="!checkFile()" class="file-uploader-zone mt-0 p-0">
                     <div class="buttons">
                         <div class="uploader-button-caption d-flex px-4">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="checkFile()" class="w-75">
+                <div *ngIf="checkFile() || disableInput" class="w-75">
                     <div class="row ml-0 mr-0">
                         <div class="form-group w-100">
                             <div class="file-download file-download-sm">
@@ -48,10 +48,55 @@
                                         class="btn btn-sm btn-ghost fill-primary-light-green">
                                         <span class="icon-eye-open"></span>
                                     </a>
-                                    <a (click)="removeFile()" class="btn btn-sm btn-ghost fill-primary-light-green">
+                                    <a *ngIf="disableInput" (click)="openFile(files[0],'download')" class="btn btn-sm btn-ghost fill-primary-light-green">
+                                        <span class="icon-download"></span>
+                                    </a>
+                                    <a *ngIf="!disableInput" (click)="removeFile()" class="btn btn-sm btn-ghost fill-primary-light-green">
                                         <span class="icon-delete text-danger"></span>
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--===== End =========-->
+            <!-- ============= File upload area and view area - disabled ===============-->
+            <div *ngIf="disable">
+                <div class="w-75">
+                    <div class="row ml-0 mr-0">
+                        <div class="form-group w-100">
+                            <div class="file-download file-download-sm">
+                                <h3>
+                                    <label class="text-success text-15" for="" data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="{{fbgaDoc[0].FileName}}">{{fbgaDoc[0].FileName}}</label>
+                                </h3>&nbsp;&nbsp;
+                                <div *ngIf="!showAttachLoader" class="download-file-information">
+                                    <label class="text-body text-14">{{fbgaDoc[0].FileLength/1024 | number: '1.0-0'}}
+                                        kb</label>
+                                    <a (click)="openFile(fbgaDoc[0],'view')"
+                                        class="btn btn-sm btn-ghost fill-primary-light-green">
+                                        <span class="icon-eye-open"></span>
+                                    </a>
+                                    <a (click)="openFile(fbgaDoc[0],'download')"
+                                        class="btn btn-sm btn-ghost fill-primary-light-green">
+                                        <span class="icon-download"></span>
+                                    </a>
+                                </div>
+                                <!--============== With loader ==============-->
+                                <div *ngIf="showAttachLoader">
+                                    <label class="text-body text-14">{{fbgaDoc[0].FileLength/1024 | number: '1.0-0'}}
+                                        kb</label>
+                                    <button class="btn btn-ghost btn-md fill-primary-light-green">
+                                        <div class="spinner-border text-primary"
+                                            style="font-size: 12px;width: 20px !important;height: 20px !important;"
+                                            role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                                <!-- End -->
                             </div>
                         </div>
                     </div>
@@ -70,7 +115,7 @@
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()">
+        <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()" [disabled]="disableBtn">
             إرسال الضمان النهائي
         </button>
         <!-- End -->

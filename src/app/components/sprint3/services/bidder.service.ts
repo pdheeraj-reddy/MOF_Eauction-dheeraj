@@ -141,7 +141,19 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(bidDetails), httpOptions);
   }
-
+  getInvoiceDetails(auctionId : any){
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiFinalInvoiceReport +
+      "/" + auctionId + "/awardedBidderInvoices?", httpOptions)
+  }
 
   getNoOfParticipants(auctionId: any, auctionStatus: any): Observable<any> {
 

@@ -8,6 +8,7 @@ import { AmAuctionComponent } from './bidder/am-auction/am-auction.component';
 import { MyAuctionsComponent } from './bidder/my-auctions/my-auctions.component';
 import { MyInvoicesComponent } from './bidder/my-invoices/my-invoices.component';
 import { AuctionDetailsComponent } from './shared/auction-details/auction-details.component';
+import { PayFinalInvoiceComponent } from './shared/pay-final-invoice/pay-final-invoice.component';
 
 const routes: Routes = [
   { path: '', component: AmAuctionComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'pdf-product', component: BillPdfProductComponent },
   { path: 'myauctions', component: MyAuctionsComponent },
   { path: 'myinvoices', component: MyInvoicesComponent },
+  { path: 'payfinalinvoice/:auctionId', component: PayFinalInvoiceComponent},
 ]
 
 @NgModule({

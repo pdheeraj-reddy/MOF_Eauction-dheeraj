@@ -109,7 +109,7 @@ export class AuctionDetailsComponent implements OnInit {
       if (newLang == 'ar') {
         this.currentLang = newLang;
         this.textDir = false;
-        console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
+        // // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
       }
       else {
         this.textDir = true;
@@ -135,6 +135,7 @@ export class AuctionDetailsComponent implements OnInit {
       this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
       console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
       this.fbgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'F');
+      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 138 ~ this.fbgaDoc", this.fbgaDoc);
       // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
@@ -198,7 +199,7 @@ export class AuctionDetailsComponent implements OnInit {
   }
   public mapping(serverObj: any) {
     let auctionDetailList = serverObj.d.results[0];
-    console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
+    // // console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
     let productList = auctionDetailList.listtoproductnav.results[0];
     console.log(serverObj.d.results[0], "sd");
     let resultSet: any = [];
@@ -425,7 +426,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   viewAttachment(file: any, index: number, option: string) {
 
-    console.log("🚀🚀 ~~ auctionDetails", this.upcomingAuction.auction_detail?.auctionAttachement);
+    // // console.log("🚀🚀 ~~ auctionDetails", this.upcomingAuction.auction_detail?.auctionAttachement);
     if (file.FilenetId) {
       console.log("🚀🚀 ~~ file.FilenetId", file.FilenetId);
       file.downloading = true;

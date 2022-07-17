@@ -10,6 +10,7 @@ import { BidderService } from '../../services/bidder.service';
 export class AuctionFbgaComponent implements OnInit {
   @Input() upcomingAuction:any;
   @Input() fbgaDoc: any;
+  @Input() bidderStatus : any;
   @Output() showError = new EventEmitter<boolean>();
   invalidFileType: boolean;
   invalidFileSize: boolean;
@@ -17,12 +18,17 @@ export class AuctionFbgaComponent implements OnInit {
   showConfirmationModal = false;
   showSuccessfulModal = false;
   showLoader = false;
+  disableBtn = false;
+  disableInput = false;
+  disable = false;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
   acceptedFiles = [
     'image/png',
-    'application/pdf'
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   ];
   files: any[] =[];
   invalidFileCount: boolean = false;
@@ -39,7 +45,12 @@ export class AuctionFbgaComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
-    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.upcomingAuction.auction_detail.auctionId);
+    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.fbgaDoc); 
+    if(this.bidderStatus == "F"){
+      this.disable = true;
+      this.disableBtn = true;
+      this.disableInput = true;
+    }
   }
   selectFiles(e: any, dd: string): void {
     this.invalidFileType = true;
@@ -145,6 +156,8 @@ export class AuctionFbgaComponent implements OnInit {
     this.bidderService.submitFbga(this.auctionId).subscribe((resData)=>{
       this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile)=>{
         if(resData.d.Msgty == 'S' && resFile.d.Msgty == 'S'){
+          this.disableBtn = true;
+          this.disableInput = true;
           this.showConfirmationModal = false;
           this.showSuccessfulModal = true;
         }

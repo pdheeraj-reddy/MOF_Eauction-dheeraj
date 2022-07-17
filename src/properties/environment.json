@@ -18,6 +18,7 @@
     "apiLatestBid": "/internal/v1/e-auction/e-bidder/bidders",
     "apiBidderParticipationAuctions": "/internal/v1/e-auction/e-bidder/bidders",
     "apiBidderParticipantsBids": "/internal/v1/e-auction/e-bidder/bidders",
+    "apiFinalInvoiceReport":"/internal/v1/e-auction/e-bidder/bidders",
     "apiOfferReport": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/bids",
     "apiSendInvoice": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/awardedBidderInvoices"
 }

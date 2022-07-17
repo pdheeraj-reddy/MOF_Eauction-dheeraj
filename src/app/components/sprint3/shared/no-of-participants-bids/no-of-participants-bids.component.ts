@@ -13,22 +13,23 @@ export class NoOfParticipantsBidsComponent implements OnInit {
   @Input() auctionId:any;
   @Input() auctionStatus:any;
   @Input() participants:any;
+  @Input() noBids: any;
 
   constructor(private http: HttpClient,
   private api: BidderService) { }
-  bids:number = 0;
+  // bids:number = 0;
   ngOnInit(): void {
     console.log('Participants',this.participants);
-    
-    this.getParticipants();
+    console.log('No bids', this.noBids);
+    if(this.auctionStatus == "Published" || this.auctionStatus == "Ongoing"){
+      this.getParticipants();
+    }
   }
   getParticipants(){
     this.api.getNoOfParticipants(this.auctionId, this.auctionStatus).subscribe((res:any)=>{
       console.log(res.body.d);
-      if(this.auctionStatus != "Ongoing"){  
-        this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
-      }
-      this.bids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
+      this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
+      this.noBids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
 
       setTimeout(() => {
         // console.log(5);
