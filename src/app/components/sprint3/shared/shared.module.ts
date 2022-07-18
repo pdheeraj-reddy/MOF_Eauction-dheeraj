@@ -15,6 +15,7 @@ import { AuctionPrmyAwardComponent } from './auction-prmy-award/auction-prmy-awa
 import { AuctionFinalAwardComponent } from './auction-final-award/auction-final-award.component';
 import { EAucCommonModule } from 'src/app/common/eauccommon.module';
 import { RouterModule } from '@angular/router';
+import { AmAuctionComponent } from './am-auction/am-auction.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { RouterModule } from '@angular/router';
         LatestOffersSentComponent,
         AuctionPrmyAwardComponent,
         AuctionFinalAwardComponent,
+        AmAuctionComponent
     ],
     imports: [
         CommonModule,
@@ -54,7 +56,8 @@ import { RouterModule } from '@angular/router';
         ReactiveFormsModule,
         TranslateModule,
         CarouselModule,
-        EAucCommonModule
+        EAucCommonModule,
+        AmAuctionComponent
     ]
 })
 export class SharedModule { }

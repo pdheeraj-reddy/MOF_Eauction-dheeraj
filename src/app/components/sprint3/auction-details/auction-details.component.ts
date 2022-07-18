@@ -44,7 +44,9 @@ export class AuctionDetailsComponent implements OnInit {
   transformedAttachment: any = [];
   textDir: boolean;
   currentLang: any;
-
+  // User role
+  roleBidder : boolean = false;
+  
   // Added by Mohammed Salick
   prmyaward: any;
   finalaward: any;
@@ -77,7 +79,7 @@ export class AuctionDetailsComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     private envService: EnvService,
     private bidderService: BidderService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
@@ -90,14 +92,7 @@ export class AuctionDetailsComponent implements OnInit {
     }
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     console.log("this.auctionId", this.auctionId);
-
-
-    this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
-    if (this.userRole) {
-      this.userRole = this.userRole.roles;
-    }
-    console.log(this.userRole);
-
+    // let user = this.getLoggedUserRole();
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
 

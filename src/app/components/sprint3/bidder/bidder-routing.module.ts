@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AmAuctionComponent } from './am-auction/am-auction.component';
-import { BidderComponent } from './bidder.component';
+import { AmAuctionComponent } from '../shared/am-auction/am-auction.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
 import { PayFinalInvoiceComponent } from './pay-final-invoice/pay-final-invoice.component';
