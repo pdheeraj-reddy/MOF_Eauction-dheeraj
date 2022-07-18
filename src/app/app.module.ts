@@ -86,9 +86,7 @@ import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/a
 import { ProductDetailPopupComponent } from './components/auction/auction-indetail/auction-order-summary/product-detail-popup/product-detail-popup.component';
 import { EnvService } from './env.service';
 import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import { MyInvoicesComponent } from './components/sprint3/bidder/my-invoices/my-invoices.component';
-import { MyAuctionsComponent } from './components/sprint3/bidder/my-auctions/my-auctions.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -134,7 +132,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionCommiteeDetailPageComponent,
     AuctionCommiteeOpenOffersComponent,
     AlertModalComponent
-   
+
   ],
   imports: [
     MatTooltipModule,
