@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { AuctionCommitteeHeadRoutingModule } from './auction-committee-head-routing.module';
 import { AuctionCommitteeHeadComponent } from './auction-committee-head.component';
+import { SharedModule } from '../shared/shared.module';
+import { OpenOffersComponent } from './open-offers/open-offers.component';
 
 
 @NgModule({
   declarations: [
-    AuctionCommitteeHeadComponent
+    AuctionCommitteeHeadComponent,
+    OpenOffersComponent
   ],
   imports: [
     CommonModule,
-    AuctionCommitteeHeadRoutingModule
+    AuctionCommitteeHeadRoutingModule,
+    SharedModule
   ]
 })
 export class AuctionCommitteeHeadModule { }

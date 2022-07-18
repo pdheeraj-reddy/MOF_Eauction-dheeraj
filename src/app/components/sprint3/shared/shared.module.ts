@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { AmAuctionComponent } from '../bidder/am-auction/am-auction.component';
 import { AuctionParticipationComponent } from './auction-participation/auction-participation.component';
 import { AuctionFbgaComponent } from './auction-fbga/auction-fbga.component';
 import { AuctionPayInvoiceComponent } from './auction-pay-invoice/auction-pay-invoice.component';
@@ -14,11 +13,12 @@ import { SendBiddingOfferComponent } from './send-bidding-offer/send-bidding-off
 import { LatestOffersSentComponent } from './latest-offers-sent/latest-offers-sent.component';
 import { AuctionPrmyAwardComponent } from './auction-prmy-award/auction-prmy-award.component';
 import { AuctionFinalAwardComponent } from './auction-final-award/auction-final-award.component';
+import { EAucCommonModule } from 'src/app/common/eauccommon.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
     declarations: [
-        AmAuctionComponent,
         AuctionParticipationComponent,
         AuctionFbgaComponent,
         AuctionPayInvoiceComponent,
@@ -35,10 +35,11 @@ import { AuctionFinalAwardComponent } from './auction-final-award/auction-final-
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
-        CarouselModule
+        CarouselModule,
+        EAucCommonModule,
+        RouterModule
     ],
     exports: [
-        AmAuctionComponent,
         AuctionParticipationComponent,
         AuctionFbgaComponent,
         AuctionPayInvoiceComponent,
@@ -52,7 +53,8 @@ import { AuctionFinalAwardComponent } from './auction-final-award/auction-final-
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
-        CarouselModule
+        CarouselModule,
+        EAucCommonModule
     ]
 })
 export class SharedModule { }
