@@ -7,11 +7,36 @@ import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
 import { PayFinalInvoiceComponent } from './pay-final-invoice/pay-final-invoice.component';
 
 const routes: Routes = [
-  { path: '', component: BidderComponent },
+  { path: '', redirectTo: 'am-auction', pathMatch: 'full', },
   { path: 'am-auction', component: AmAuctionComponent },
   { path: 'my-auctions', component: MyAuctionsComponent },
   { path: 'my-invoices', component: MyInvoicesComponent },
   { path: 'pay-final-invoice/:auctionId', component: PayFinalInvoiceComponent },
+  // {
+  //   path: '',
+
+  //   // canActivate: [AuthGuard],
+  //   children: [
+  //     {
+  //       path: 'am-auction',
+  //       component: AmAuctionComponent,
+  //       // canActivate: [AuthGuard],
+  //     },
+  //     {
+  //       path: 'my-auctions',
+  //       component: MyAuctionsComponent,
+  //       // canActivate: [AuthGuard],
+  //     },
+  //     {
+  //       path: 'my-invoices',
+  //       component: MyInvoicesComponent,
+  //     },
+  //     {
+  //       path: 'pay-final-invoice/:auctionId',
+  //       component: PayFinalInvoiceComponent,
+  //     }
+  //   ],
+  // },
 ];
 
 @NgModule({
