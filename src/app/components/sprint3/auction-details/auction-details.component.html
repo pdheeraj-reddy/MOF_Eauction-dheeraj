@@ -98,13 +98,13 @@
         <!-- ==========End======= -->
 
         <!--============= Auction Participation card =============-->
-        <app-auction-participation *ngIf="response && upcomingAuction?.auctionStatus=='Published'" [response]="response"
-            [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
+        <app-auction-participation *ngIf="response && role.bidder && upcomingAuction?.auctionStatus=='Published'"
+            [response]="response" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
         </app-auction-participation>
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M' 
+        <app-auction-fbga *ngIf="role.bidder && upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M' 
         || upcomingAuction?.auctionStatus=='Pending FBGA Approval' && response.ZzBidderSts == 'F' "
             [bidderStatus]="response.ZzBidderSts" [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc"
             (showError)="showError($event)">
@@ -112,18 +112,19 @@
         <!-- End -->
 
         <!--============ Send Invoice card ============-->
-        <app-auction-pay-invoice *ngIf="upcomingAuction?.auctionStatus=='Pending Paying' && response.ZzBidderSts == 'N'"
+        <app-auction-pay-invoice
+            *ngIf="role.bidder && upcomingAuction?.auctionStatus=='Pending Paying' && response.ZzBidderSts == 'N'"
             [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
         <!-- End -->
 
         <!-- Added by Mohammed Salick -->
         <app-auction-prmy-award [prmyaward]="upcomingAuction"
-            *ngIf="upcomingAuction?.auctionStatus =='Pending Primary Awarding' && userRole === 'EAuction_AuctionManager'">
+            *ngIf="upcomingAuction?.auctionStatus =='Pending Primary Awarding' && role.auctionMod">
         </app-auction-prmy-award>
 
         <app-auction-final-award [finalaward]="upcomingAuction"
-            *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && userRole === 'EAuction_AuctionManager'">
+            *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && role.auctionMod">
         </app-auction-final-award>
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
@@ -186,7 +187,7 @@
                 </div>
                 <!-- End -->
 
-            </div>
+            </div>  
             <!-- End -->
 
             <!-- Auction Details start -->
@@ -218,21 +219,20 @@
                     </div>
                     <div class="mt-4" style="display: flex;">
 
-                        <!-- <div [ngClass]="textDir ? 'left-right-card-en' : 'left-right-card-ar'"
-                            *ngIf="upcomingAuction.auctionStatus!='Published'">
+                        <div style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'"
+                            *ngIf="role.auctionMod && upcomingAuction.auctionStatus =='Ongoing'">
 
+                            <app-latest-offers-sent [aucId]="auctionId" pageno="1" *ngIf="role.auctionMod">
+                            </app-latest-offers-sent>
 
-                            <app-latest-offers-sent [aucId]="auctionId" pageno="1"
-                                *ngIf="userRole === 'EAuction_AuctionManager'"></app-latest-offers-sent>
-
-                        </div> -->
+                        </div>
                         <div [ngClass]="{
                             'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
                             'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',
                             'left-right-card-en-disable': textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'),
                             'left-right-card-ar-disable': !textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M') 
                         }"
-                            *ngIf="upcomingAuction.auctionStatus=='Ongoing' || upcomingAuction.auctionStatus=='Pending Selecting' || upcomingAuction.auctionStatus=='Pending FBGA'">
+                            *ngIf="role.bidder && upcomingAuction.auctionStatus=='Ongoing' || upcomingAuction.auctionStatus=='Pending Selecting' || upcomingAuction.auctionStatus=='Pending FBGA'">
 
                             <!--============= Send offer card =============-->
                             <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'P'" [disable]="false"
@@ -454,6 +454,112 @@
                                 <span class="icon-pin text-primary font-weight-bold text-20"></span>&nbsp;&nbsp;
                                 {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}
                             </p>
+                            <div class="et-accordion">
+                                <div class="card" style="border: none; margin: 2%;">
+                                    <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
+                                        data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
+                                        aria-controls="localContentFirst2">
+                                        <h2 class="mb-0 text-body">{{'bidderAuctionDetails.ImportantInformation' | translate }}
+                                        </h2>
+                                        <button class="btn btn-accordion-control" type="button" data-toggle="collapse"
+                                            data-target="#localContentFirst2" aria-expanded="false"
+                                            aria-controls="localContentFirst2">
+                                            <div class="collapsed-icon">
+                                                <span class="icon-arrow-down"></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <!--========================= Shows Important information of the auction (Auction Mod)  =========================-->
+                                    <div *ngIf="role.auctionMod" class="collapse" id="localContentFirst2" style="border-top: none;">
+                                        <div class="card-body">
+                                            <div class="form-field">
+                                                <form class="needs-validation" novalidate>
+                                                    <div class="form-row">
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-group">
+                                                                <label>{{ 'bidderAuctionDetails.AuctionStartPrice' | translate
+                                                                    }}</label>
+                                                                <div class="text-success">
+                                                                    {{upcomingAuction.important_info?.auctionstartprice |
+                                                                    number}} {{'common.SAR' | translate}} </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="upcomingAuction.important_info?.guarantee_per"
+                                                            class="col-md-4 mb-3">
+                                                            <div class="form-group">
+                                                                <label>{{
+                                                                    "bidderAuctionDetails.InitialGuaranteePercentage"
+                                                                    | translate }}</label>
+                                                                <div class="text-success">
+                                                                    {{upcomingAuction.important_info?.guarantee_per | number}} %
+        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-group">
+                                                                <label>{{ 'bidderAuctionDetails.CommissionRate' | translate
+                                                                    }}</label>
+                                                                <div class="text-success">
+                                                                    {{upcomingAuction.important_info?.commissionRate}}%
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+                                                    <div class="form-row">
+                                                        <div *ngIf="upcomingAuction.important_info?.end_biddingdate"
+                                                            class="col-md-4 mb-3">
+                                                            <div class="form-group">
+                                                                <label>{{ 'bidderAuctionDetails.EndOfBidding' | translate
+                                                                    }}</label>
+                                                                <div class="row text-success">
+                                                                    <span
+                                                                        class="col-md-6">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;
+        
+                                                                    <ul class="col list list-primary-bullets d-inline-block">
+                                                                        <li class="text-muted">
+                                                                            <span
+                                                                                style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.end_biddingtime}}
+                                                                                {{upcomingAuction.important_info?.end_biddingtimeSufix}}</span>
+        
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+        
+                                                        <div *ngIf="upcomingAuction.important_info?.open_biddingdate"
+                                                            class="col-md-4 mb-3">
+                                                            <div class="form-group">
+                                                                <label>{{ 'bidderAuctionDetails.BidOpeningDate' | translate
+                                                                    }}</label>
+                                                                <div class="row text-success">
+                                                                    <span
+                                                                        class="col-md-6">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;
+        
+                                                                    <ul class="col list list-primary-bullets d-inline-block">
+                                                                        <li class="text-muted">
+                                                                            <span
+                                                                                style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.open_biddingtime}}
+                                                                                {{upcomingAuction.important_info?.open_biddingtimeSufix}}</span>
+        
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+        
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End -->
+                                </div>
+        
+                            </div>
                         </div>
 
 
@@ -461,7 +567,7 @@
                     </div>
 
 
-                    <div class="et-accordion">
+                    <div *ngIf="!role.auctionMod" class="et-accordion">
                         <div class="card" style="border: none; margin: 2%;">
                             <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
                                 data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"

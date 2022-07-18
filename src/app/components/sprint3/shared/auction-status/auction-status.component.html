@@ -1,4 +1,4 @@
-<div class="status-code-un" [ngClass]="[status == 'Ongoing' ? 'status-code-rn' : status == 'Upcoming' ? 'status-code-up' : status == 'Awarded' ? 'status-code-ad' : status == 'Cancelled' ? 'status-code-can' : 'status-code-un']">
+<div [ngClass]="[status == 'Ongoing' ? 'status-code-rn' : status == 'Upcoming' ? 'status-code-up' : status == 'Awarded' ? 'status-code-ad' : status == 'Cancelled' ? 'status-code-can' : 'status-code-un']">
     <span *ngIf="showEye">{{count || ''}}</span>
     <span class="icon-eye-open mx-1" *ngIf="showEye"></span>
     <span>{{status | translate}}</span>

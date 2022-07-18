@@ -64,8 +64,7 @@ export class AucModeratorService {
 
     return this.http.get<any>(
       this.envService.environment.apiLatestBid +
-      "?$expand=pagetoaucbiddernav" +
-      "&$filter=(ObjectId eq '" + ObjectId + "' and PageNo eq '" + PageNo + "' )&$format=json"
+      "" + ObjectId + "/bidders?pageNumber=" + PageNo 
       , httpOptions);
 
 

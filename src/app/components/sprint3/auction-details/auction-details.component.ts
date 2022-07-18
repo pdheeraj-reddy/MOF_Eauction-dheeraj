@@ -45,7 +45,11 @@ export class AuctionDetailsComponent implements OnInit {
   textDir: boolean;
   currentLang: any;
   // User role
-  roleBidder : boolean = false;
+  role = {
+    bidder : false,
+    auctionMod : false,
+    auctionCommitteeHead : false
+  }
   
   // Added by Mohammed Salick
   prmyaward: any;
@@ -93,6 +97,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     console.log("this.auctionId", this.auctionId);
     // let user = this.getLoggedUserRole();
+    this.role.auctionMod = true;
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
 

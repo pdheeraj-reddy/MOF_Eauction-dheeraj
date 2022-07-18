@@ -15,7 +15,7 @@
     "apiBidderMyInvoices": "/internal/v1/e-auction/e-bidder/bidders/invoices",
     "apiBidderBidAuctions": "/internal/v1/e-auction/e-bidder/bidders",
     "apiAppRej": "/internal/v1/e-auction/e-bidder/bidders",
-    "apiLatestBid": "/internal/v1/e-auction/e-bidder/bidders",
+    "apiLatestBid": "/internal/v1/e-auction/e-bidder/",
     "apiBidderParticipationAuctions": "/internal/v1/e-auction/e-bidder/bidders",
     "apiBidderParticipantsBids": "/internal/v1/e-auction/e-bidder/bidders",
     "apiFinalInvoiceReport":"/internal/v1/e-auction/e-bidder/bidders",
