@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common'
 import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BidderService } from '../services/bidder.service';
+import { AucModeratorService } from '../services/auc-moderator.service';
 declare var $: any;
 
 @Component({
@@ -28,6 +29,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
+  primaryAwardingData : any;
   ibgaDoc: any;
   fbgaDoc: any;
   days: number;
@@ -94,6 +96,7 @@ export class AuctionDetailsComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     private envService: EnvService,
     private bidderService: BidderService,
+    private modService: AucModeratorService,
     private sanitizer: DomSanitizer,
   ) { }
 
@@ -109,6 +112,7 @@ export class AuctionDetailsComponent implements OnInit {
     console.log("this.auctionId", this.auctionId);
     // let user = this.getLoggedUserRole();
     this.role.auctionMod = true;
+    // this.role.bidder = true;
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
 
@@ -134,6 +138,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.bidderService.getAuctionDetail(this.auctionId).subscribe((res) => {
       console.log(res);
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
+      this.modService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log(res.body.d.results[0].ZzBidderSts);
       this.response = res.body.d.results[0];
       if (this.response) {
@@ -285,8 +290,13 @@ export class AuctionDetailsComponent implements OnInit {
         auctionAttachement: [],
       }
     }
-
-
+    this.primaryAwardingData = {
+      bidValue : auctionDetailList.BidOfferValue,
+      bidderName : auctionDetailList.BidSupplierName,
+      bidderNo : auctionDetailList.BidCrNumber,
+      pdfData : auctionDetailList.BidOfferPDF,
+      auctionId : auctionDetailList.ObjectId,
+    }
 
     if(this.upcomingAuction.auctionStatus == "Published"){
       this.status.published = true;

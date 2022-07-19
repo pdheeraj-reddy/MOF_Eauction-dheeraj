@@ -21,58 +21,53 @@ export class AuctionPrmyAwardComponent implements OnInit {
   showSuccessAccept : boolean = false;
   showConfirmationReject : boolean = false;
   showSuccessReject : boolean = false;
+  showLoader : boolean = false;
   
   constructor(private api : AucModeratorService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    console.log("🎯TC🎯 ~ file: auction-prmy-award.component.ts ~ line 29 ~ this.prmyaward", this.prmyaward);
+    // this.prmyaward.pdfData = "";
   }
   approve(){
-    this.showSuccessAccept = true;
-    // this.api.postAppporRej(this.prmyaward,'M').subscribe((res=>{
-    //   console.log(res)
-    //   if(res['d']['Msgty'] === 'S'){
-    //     this.modalService.open(this.modalContentApp).result.then((result) => {
-    //       this.closeResult = `Closed with: ${result}`;
-    //     }, (reason) => {
-    //       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //     });
-    //   }
-    // }))
+    this.showLoader = true;
+    let data = {
+      "AucId": this.prmyaward.auctionId,
+      "BidderId": this.prmyaward.bidderNo,
+      "ZzUserAction": 'M'
+    }
+    this.api.postAppporRej(data).subscribe((res=>{
+      console.log(res)
+      if(res['d']['Msgty'] === 'S'){
+        this.showLoader = false;
+        this.showConfirmationAccept = false;
+        this.showSuccessAccept = true;
+      }
+    }));
   }
 
   reject(){
-    this.showConfirmationReject = false;
-    this.showSuccessReject = true;
-    // this.api.postAppporRej(this.prmyaward,'D').subscribe((res=>{
-    //   console.log(res)
-    //   if(res['d']['Msgty'] === 'S'){
-    //   this.modalService.open(this.modalContentRej).result.then((result) => {
-    //     this.closeResult = `Closed with: ${result}`;
-    //   }, (reason) => {
-    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //   });
-    // }
-   
-    // }))
-  }
-
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+    this.showLoader = true;
+    let data = {
+      "AucId": this.prmyaward.auctionId,
+      "BidderId": this.prmyaward.bidderNo,
+      "ZzUserAction": 'D'
     }
+    this.api.postAppporRej(data).subscribe((res=>{
+      console.log(res)
+      if(res['d']['Msgty'] === 'S'){
+        this.showLoader = false;
+        this.showConfirmationReject = false;
+        this.showSuccessReject = true;
+      }
+    }));
   }
+
   
   openFile(file: any, option: string) {
-    if(file == 'ibga') file = this.ibgaDoc;
-    console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 151 ~ file", file);
-    if (file.FilenetId) {
+    // console.log(this.ibgaDoc);
       this.showAttachLoader = true;
-      this.api.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
+      this.api.downloadAuctionImages(file[0].FilenetId).subscribe((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
         console.log('asdasd', byteString.split(',')[1]);
@@ -100,7 +95,11 @@ export class AuctionPrmyAwardComponent implements OnInit {
         console.log('downloadAuctionImages RespError : ', error);
       }
       );
-    }
+  }
+  downloadPDF(){
+    let fileName = "Bidder Report.pdf";
+    let contentType = "application/pdf";
+    this.downloadFile(fileName, contentType, this.prmyaward.pdfData);
   }
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;

@@ -119,7 +119,7 @@
         <!-- End -->
 
         <!--============ Pending primary awarding card ============-->
-        <app-auction-prmy-award [prmyaward]="upcomingAuction" *ngIf="role.auctionMod">
+        <app-auction-prmy-award *ngIf="role.auctionMod && upcomingAuction?.auctionStatus=='Pending Primary awarding'" [prmyaward]="primaryAwardingData" [ibgaDoc]="ibgaDoc">
         </app-auction-prmy-award>
         <!-- End -->
 

@@ -28,12 +28,8 @@ export class AucModeratorService {
     }
   }
 
-  postAppporRej(data: any, action: any): Observable<any> {
-    let data1 = {
-      "AucId": data.AucId,
-      "BidderId": data.BidderId,
-      "ZzUserAction": action
-    }
+  postAppporRej(data: any , action?:any): Observable<any> {
+
 
     const httpOptions = {
       headers: {
@@ -45,7 +41,7 @@ export class AucModeratorService {
     return this.http.post<any>(
       // 'https://10.13.85.56:9443' + 
       this.envService.environment.apiAppRej
-      , data1
+      , data
       , httpOptions);
 
   }
@@ -89,7 +85,7 @@ export class AucModeratorService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(invoiceDetails), httpOptions);
   }
-  
+
   downloadAuctionImages(fileId: any): Observable<any> {
     const httpOptions = {
       headers: {
@@ -98,6 +94,8 @@ export class AucModeratorService {
       params: {
       }
     };
+    console.log(httpOptions);
+    console.log(fileId);
     return this.http.get<any>(
       this.envService.environment.apiFilenetURL + '/' + fileId
       , httpOptions);

@@ -40,7 +40,7 @@ export class LatestOffersSentComponent implements OnInit {
       if (newLang == 'ar') {
         this.currentLang = newLang;
         this.textDir = false;
-        // // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
+        // // // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
       }
       else {
         this.textDir = true;
@@ -79,11 +79,11 @@ export class LatestOffersSentComponent implements OnInit {
 
   getsince(dat: string, time: string) {
     // const [dateComponents, timeComponents] = str.split(' ');
-    // console.log("🎯TC🎯 ~ file: latest-offers-sent.component.ts ~ line 83 ~ dat", dat ,time);
+    // // console.log("🎯TC🎯 ~ file: latest-offers-sent.component.ts ~ line 83 ~ dat", dat ,time);
     const [day, month, year] = dat.split('.');
     const [hours, minutes, seconds] = time.split(':');
     const date = new Date(+year, +month - 1, +day, +hours, +minutes, +seconds);
-    // console.log("🎯TC🎯 ~ file: latest-offers-sent.component.ts ~ line 86 ~ date", date);
+    // // console.log("🎯TC🎯 ~ file: latest-offers-sent.component.ts ~ line 86 ~ date", date);
     // console.log(Date.now()-date.getSeconds());
     // console.log(date);
     // let currentDate = new Date(Date.now());
@@ -92,7 +92,7 @@ export class LatestOffersSentComponent implements OnInit {
     return this.getTime(date);
   }
   getTime(date: any): any {
-    console.log("🎯TC🎯 ~ file: latest-offers-sent.component.ts ~ line 92 ~ date", date);
+    // console.log("🎯TC🎯 ~ file: latest-offers-sent.component.ts ~ line 92 ~ date", date);
     
     let dt: any = new Date();
     let seconds = Math.floor(dt - date) / (1000)
