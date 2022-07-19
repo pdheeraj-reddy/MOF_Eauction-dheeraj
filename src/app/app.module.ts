@@ -87,6 +87,7 @@ import { ProductDetailPopupComponent } from './components/auction/auction-indeta
 import { EnvService } from './env.service';
 import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -135,6 +136,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
   ],
   imports: [
+    RouterModule,
     MatTooltipModule,
     NgxPaginationModule,
     CountdownModule,

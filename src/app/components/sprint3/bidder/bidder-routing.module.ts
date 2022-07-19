@@ -11,31 +11,6 @@ const routes: Routes = [
   { path: 'my-auctions', component: MyAuctionsComponent },
   { path: 'my-invoices', component: MyInvoicesComponent },
   { path: 'pay-final-invoice/:auctionId', component: PayFinalInvoiceComponent },
-  // {
-  //   path: '',
-
-  //   // canActivate: [AuthGuard],
-  //   children: [
-  //     {
-  //       path: 'am-auction',
-  //       component: AmAuctionComponent,
-  //       // canActivate: [AuthGuard],
-  //     },
-  //     {
-  //       path: 'my-auctions',
-  //       component: MyAuctionsComponent,
-  //       // canActivate: [AuthGuard],
-  //     },
-  //     {
-  //       path: 'my-invoices',
-  //       component: MyInvoicesComponent,
-  //     },
-  //     {
-  //       path: 'pay-final-invoice/:auctionId',
-  //       component: PayFinalInvoiceComponent,
-  //     }
-  //   ],
-  // },
 ];
 
 @NgModule({

@@ -1,25 +1,38 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionService } from "../../service/auction.service";
 import { EnvService } from 'src/app/env.service';
 import { DOCUMENT } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   public applang: string = 'ar';
   loggedUser: any;
   loggedUserRole: any;
   currentUserRole: string;
   isAuction: boolean = false;
   title = 'Header';
-
+  url: string = '';
+  subscription: Subscription;
+  auctionModerator = {
+    auction: false,
+    auction_request: false
+  }
+  bidderTab = {
+    auction: false,
+    my_auction: false,
+    invitation: false,
+    my_invoices: false
+  }
   constructor(
     public translate: TranslateService,
     public router: Router,
@@ -28,18 +41,31 @@ export class HeaderComponent implements OnInit {
     private envService: EnvService,
     @Inject(DOCUMENT) private document: Document,
   ) {
+
+    this.subscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.url = event.url;
+        this.manageTab();
+      }
+    });
+    if (!this.url && this.router.url) {
+      this.url = this.router.url;
+      this.manageTab();
+    }
+
     translate.addLangs(['ar', 'en']);
     translate.setDefaultLang('ar');
 
     this.applang = localStorage.getItem('lang_pref') || translate.getBrowserLang() || 'ar';
     translate.use(this.applang.match(/en|ar/) ? this.applang : 'ar');
+
+
   }
 
   ngOnInit(): void {
     this.loggedUser = this.auctionServc.loggedUser;
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     this.currentUserRole = this.auctionServc.getLoggedUserEAucRole();
-    console.log('this.loggedUserRole ➼ ', this.loggedUserRole);
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.applang = event.lang
     });
@@ -66,5 +92,48 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     const redirectUrl = this.envService.environment.idmLogoutUrl;
     window.location.href = redirectUrl;
+  }
+
+  manageTab() {
+    if (!this.loggedUserRole) {
+      this.loggedUserRole = this.auctionServc.getLoggedUserRole();
+    }
+    console.log("🚀 ~ manageTab ~ this.loggedUserRole", this.loggedUserRole)
+    if (this.loggedUserRole.isAuctionModerator) {
+      this.auctionModerator = {
+        auction: false,
+        auction_request: false
+      }
+      if (this.url.includes('auctionlist')) {
+        this.auctionModerator.auction_request = true;
+      } else if (this.url.includes('auction-list/am-auction')) {
+        this.auctionModerator.auction = true;
+      } else if (this.url.includes('auction-details')) {
+        this.auctionModerator.auction = true;
+      }
+    } else if (this.loggedUserRole.isBidder) {
+      this.bidderTab = {
+        auction: false,
+        my_auction: false,
+        invitation: false,
+        my_invoices: false
+      }
+      if (this.url.includes('bidder/am-auction')) {
+        this.bidderTab.auction = true;
+      } else if (this.url.includes('bidder/my-auctions')) {
+        this.bidderTab.my_auction = true;
+      } else if (this.url.includes('bidder/my-invoices')) {
+        this.bidderTab.my_invoices = true;
+      } else if (this.url.includes('bidder/invitation')) {
+        this.bidderTab.invitation = true;
+      } else if (this.url.includes('auction-details')) {
+        this.bidderTab.auction = true;
+      }
+      console.log("🚀 ~ manageTab ~ this.bidderTab", this.bidderTab)
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

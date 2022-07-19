@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SecurityContext } from '@angular/core';
+import { Component, OnInit, Input, SecurityContext, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -23,7 +23,8 @@ export class AuctionCardComponent implements OnInit {
     public translate: TranslateService,
     public bidderService: BidderService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) { }
 
   async ngOnInit() {
@@ -33,7 +34,6 @@ export class AuctionCardComponent implements OnInit {
     } else {
       this.auctionImg = 'assets/icons/logo-mini.svg'
     }
-
   }
 
   convertBlobToBase64 = (blob: any) =>
@@ -47,38 +47,33 @@ export class AuctionCardComponent implements OnInit {
     });
 
   downloadImages(fileId: any) {
-    this.bidderService
-      .downloadAuctionImages(fileId)
-      .subscribe(
-        async (downloadAuctionImagesResp: any) => {
+    this.bidderService.downloadAuctionImages(fileId).subscribe(async (downloadAuctionImagesResp: any) => {
+      const fileResp = downloadAuctionImagesResp.d;
+      var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: fileResp.MIMEType });
+      var base64String = await this.convertBlobToBase64(blob);
+      this.auctionImg = await this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string));
+      this.showLoader = false;
 
-          const fileResp = downloadAuctionImagesResp.d;
-
-          var byteString = atob(
-            atob(fileResp.FileContent).split(',')[1]
-          );
-          var ab = new ArrayBuffer(byteString.length);
-          var ia = new Uint8Array(ab);
-          for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-          }
-          const blob = new Blob([ab], { type: fileResp.MIMEType });
-          var base64String = await this.convertBlobToBase64(blob);
-          this.auctionImg = await this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string));
-          this.showLoader = false;
-
-        },
-        (error) => {
-          this.showLoader = false;
-          this.auctionImg = 'assets/icons/logo-mini.svg'
-          console.log('downloadAuctionImages RespError : ', error);
-        }
-      );
+    },
+      (error) => {
+        this.showLoader = false;
+        this.auctionImg = 'assets/icons/logo-mini.svg'
+        console.log('downloadAuctionImages RespError : ', error);
+      }
+    );
   }
 
   redirectToDetail(id: string) {
     console.log("🚀 ~ redirectToDetailredirectToDetail ~ id", id)
-    this.router.navigate(['auction-details/' + id])
+    this.ngZone.run(() => {
+      this.router.navigate(['auction-details/' + id])
+    })
   }
 
 }

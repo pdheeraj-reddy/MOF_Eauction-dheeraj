@@ -999,5 +999,11 @@
         "approval_of_the_final_award_desc": "When the award is approved and the invoice is sent to complete the payment by the bidder, the auction will be awarded automatically.",
         "invoice_sent_successfully": "Invoice sent successfully",
         "you_will_receive_invoice": "You will receive an email when payment has been completed and the auction has been awarded."
+    },
+    "menu": {
+        "auction": "Auction",
+        "my_auction": "My Auction",
+        "invitation": "Invitation",
+        "my_invoices": "My Invoices"
     }
 }
