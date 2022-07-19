@@ -292,7 +292,7 @@
 
                                     <ng-container>
                                         <div id="slideshow">
-                                            <div style="width: 100%; min-height: 400px;position: relative;max-height: 400px;"
+                                            <div style="width: 100%; min-height: 400px;position: relative;"
                                                 class="mb-4">
                                                 <!-- <ng-container>
                                                     <div class="img-wrapper"
@@ -302,7 +302,7 @@
                                                     <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'"
                                                         class="img-fluid bg-dark" [src]="fullImage.src"
                                                         style="width: -webkit-fill-available;" />
-                                                    <div style="min-height:450px" class="full-video"
+                                                    <div style="min-height:400px;max-height: 400px;" class="full-video"
                                                         *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime')">
                                                         <video
                                                             *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime') && showVideo"

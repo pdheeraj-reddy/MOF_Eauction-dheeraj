@@ -5,21 +5,57 @@
             <div class="header">
                 <div class="header-navigation">
                     <a class="navbar-brand" [href]="auctionServc.getHomeUrl()">
-                        <img src="../../../assets/icons/logo.svg" alt="Etimad - Electronic Financial Services Platform" id="logo-landscape" />
-                        <img src="../../../assets/icons/logo.svg" alt="Etimad - Electronic Financial Services Platform" id="logo-portal" />
+                        <img src="../../../assets/icons/logo.svg" alt="Etimad - Electronic Financial Services Platform"
+                            id="logo-landscape" />
+                        <img src="../../../assets/icons/logo.svg" alt="Etimad - Electronic Financial Services Platform"
+                            id="logo-portal" />
                         <!-- <span class="text-10 text-secondary-plum sub-logo">أفراد | Individuals</span> -->
                         <!-- <span class="text-10 text-secondary-orange sub-logo">حكومة | Gov</span> -->
                     </a>
                     <div class="main-nav">
-                        <ul>
+                        <ul *ngIf="!loggedUserRole.isAuctionModerator && !loggedUserRole.isBidder">
                             <li class="nav-item mx-2">
                                 <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link font-medium" href="">{{ 'header.main-menu2' | translate }}</a>
                             </li>
-                            <li class="nav-item" *ngIf="loggedUserRole.isAuctionModerator">
-                                <a class="nav-link font-medium">{{ 'header.main-menu1' | translate }}</a>
+                        </ul>
+                        <ul *ngIf="loggedUserRole.isAuctionModerator">
+                            <li class="nav-item mx-2">
+                                <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
+                            </li>
+                            <li class="nav-item" [ngClass]="{'active': auctionModerator.auction_request}">
+                                <a class="nav-link font-medium" [routerLink]="['/auctionlist']"
+                                    routerLinkActive="router-link-active">{{ 'header.main-menu2' | translate }}</a>
+                            </li>
+                            <li class="nav-item" [ngClass]="{'active': auctionModerator.auction}">
+                                <a class="nav-link font-medium" [routerLink]="['/auction-list/am-auction']"
+                                    routerLinkActive="router-link-active">{{ 'header.main-menu1' | translate }}</a>
+                            </li>
+                        </ul>
+                        <ul *ngIf="loggedUserRole.isBidder">
+                            <li class="nav-item mx-2">
+                                <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
+                            </li>
+                            <li class="nav-item" [ngClass]="{'active': bidderTab.auction}">
+                                <a class="nav-link font-medium" [routerLink]="['/bidder/am-auction']"
+                                    routerLinkActive="router-link-active">{{
+                                    'menu.auction' | translate }}</a>
+                            </li>
+                            <li class="nav-item" [ngClass]="{'active': bidderTab.my_auction}">
+                                <a class="nav-link font-medium" [routerLink]="['/bidder/my-auctions']"
+                                    routerLinkActive="router-link-active">{{ 'menu.my_auction' | translate }}</a>
+                            </li>
+                            <li class="nav-item" [ngClass]="{'active': bidderTab.invitation}">
+                                <a class="nav-link font-medium" [routerLink]="['/bidder/invitation']"
+                                    routerLinkActive="router-link-active">{{
+                                    'menu.invitation' | translate }}</a>
+                            </li>
+                            <li class="nav-item" [ngClass]="{'active': bidderTab.my_invoices}">
+                                <a class="nav-link font-medium" [routerLink]="['/bidder/my-invoices']"
+                                    routerLinkActive="router-link-active">{{
+                                    'menu.my_invoices' | translate }}</a>
                             </li>
                         </ul>
                     </div>
@@ -606,13 +642,15 @@
                             </div>
                         </li>-->
                         <li>
-                            <button class="btn btn-ghost fill-primary-blue btn-user-profile" id="userProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="0,10">
+                            <button class="btn btn-ghost fill-primary-blue btn-user-profile" id="userProfile"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="0,10">
                                 <span class="icon-filled-user"></span>
                             </button>
                             <div class="dropdown-menu dropdown-user dropdown-menu-right" aria-labelledby="userProfile">
                                 <div *ngIf="loggedUser" class="align-items-start d-flex flex-column px-4 py-3">
                                     <h5 class="text-16 mb-0">{{loggedUser.fullname}}</h5>
-                                    <a class="dropdown-item text-12 text-left p-0 m-0" href="#">{{currentUserRole | translate }}</a>
+                                    <a class="dropdown-item text-12 text-left p-0 m-0" href="#">{{currentUserRole |
+                                        translate }}</a>
                                 </div>
                                 <div class="dropdown-divider mx-4"></div>
                                 <button class="btn arrow-btn btn-outline-light btn-md mx-4" (click)="logout()">
@@ -688,7 +726,8 @@
             <div class="drawer-content">
                 <div class="drawer-header">
                     <h5 class="drawer-title">خدمات اعتماد الالكترونية</h5>
-                    <button type="button" class="btn btn-ghost fill-primary-blue close-drawer" data-dismiss="model" data-target="#etimad-app-drawer">
+                    <button type="button" class="btn btn-ghost fill-primary-blue close-drawer" data-dismiss="model"
+                        data-target="#etimad-app-drawer">
                         <span class="icon-close"></span>
                     </button>
                 </div>
@@ -698,8 +737,11 @@
                             <div class="services-list-container">
                                 <a href="" class="parent">
                                     <span class="icon"><img
-                                            src="./assets/images/Tenders-and-procurement-management.png" /></span> منافسات </a>
-                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed" data-toggle="collapse" href="#services-child-list" role="button" aria-expanded="true" aria-controls="services-child-list">
+                                            src="./assets/images/Tenders-and-procurement-management.png" /></span>
+                                    منافسات </a>
+                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed"
+                                    data-toggle="collapse" href="#services-child-list" role="button"
+                                    aria-expanded="true" aria-controls="services-child-list">
                                     <span class="icon-arrow-up"></span>
                                 </a>
                             </div>
@@ -724,8 +766,11 @@
                             <div class="services-list-container">
                                 <a href="" class="parent">
                                     <span class="icon"><img
-                                            src="./assets/images/Tenders-and-procurement-management.png" /></span> منافسات </a>
-                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed" data-toggle="collapse" href="#services-child-list2" role="button" aria-expanded="true" aria-controls="services-child-list2">
+                                            src="./assets/images/Tenders-and-procurement-management.png" /></span>
+                                    منافسات </a>
+                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed"
+                                    data-toggle="collapse" href="#services-child-list2" role="button"
+                                    aria-expanded="true" aria-controls="services-child-list2">
                                     <span class="icon-arrow-up"></span>
                                 </a>
                             </div>
@@ -750,8 +795,11 @@
                             <div class="services-list-container">
                                 <a href="" class="parent">
                                     <span class="icon"><img
-                                            src="./assets/images/Tenders-and-procurement-management.png" /></span> منافسات </a>
-                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed" data-toggle="collapse" href="#services-child-list3" role="button" aria-expanded="true" aria-controls="services-child-list3">
+                                            src="./assets/images/Tenders-and-procurement-management.png" /></span>
+                                    منافسات </a>
+                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed"
+                                    data-toggle="collapse" href="#services-child-list3" role="button"
+                                    aria-expanded="true" aria-controls="services-child-list3">
                                     <span class="icon-arrow-up"></span>
                                 </a>
                             </div>
@@ -776,8 +824,11 @@
                             <div class="services-list-container">
                                 <a href="" class="parent">
                                     <span class="icon"><img
-                                            src="./assets/images/Tenders-and-procurement-management.png" /></span> منافسات </a>
-                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed" data-toggle="collapse" href="#services-child-list4" role="button" aria-expanded="true" aria-controls="services-child-list4">
+                                            src="./assets/images/Tenders-and-procurement-management.png" /></span>
+                                    منافسات </a>
+                                <a class="open-list btn btn-ghost btn-xs fill-primary-light-green collapsed"
+                                    data-toggle="collapse" href="#services-child-list4" role="button"
+                                    aria-expanded="true" aria-controls="services-child-list4">
                                     <span class="icon-arrow-up"></span>
                                 </a>
                             </div>
@@ -801,43 +852,50 @@
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/Indebtedness-management.png" /></span> الميزانية </a>
+                                    <span class="icon"><img src="./assets/images/Indebtedness-management.png" /></span>
+                                    الميزانية </a>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود والتعميدات </a>
+                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود
+                                    والتعميدات </a>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود والتعميدات </a>
+                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود
+                                    والتعميدات </a>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود والتعميدات </a>
+                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود
+                                    والتعميدات </a>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود والتعميدات </a>
+                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود
+                                    والتعميدات </a>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود والتعميدات </a>
+                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود
+                                    والتعميدات </a>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="services-list-container">
                                 <a class="parent" href="">
-                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود والتعميدات </a>
+                                    <span class="icon"><img src="./assets/images/other-payment.png" /></span> العقود
+                                    والتعميدات </a>
                             </div>
                         </li>
                     </ul>
@@ -853,12 +911,14 @@
                     <a class="nav-link" href="/LandingPage/About">عن اعتماد</a>
                 </li>
                 <li class="nav-item dropdown-submenu">
-                    <a class="nav-link collapsed" data-toggle="collapse" href="#etimadgoverMenu" role="button" aria-expanded="false" aria-controls="etimadgoverMenu">اعتماد حكومة <span
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#etimadgoverMenu" role="button"
+                        aria-expanded="false" aria-controls="etimadgoverMenu">اعتماد حكومة <span
                             class="icon-arrow_left"></span>
                     </a>
                     <ul class="drawer-sub-menu collapse" id="etimadgoverMenu">
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadbudgetMenu" role="button" aria-expanded="false" aria-controls="etimadbudgetMenu">الميزانية <span
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadbudgetMenu" role="button"
+                                aria-expanded="false" aria-controls="etimadbudgetMenu">الميزانية <span
                                     class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadbudgetMenu">
@@ -877,7 +937,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadmonafsatMenu" role="button" aria-expanded="false" aria-controls="etimadmonafsatMenu">المنافسات
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadmonafsatMenu"
+                                role="button" aria-expanded="false" aria-controls="etimadmonafsatMenu">المنافسات
                                 والمشتريات <span class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadmonafsatMenu">
@@ -890,7 +951,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadcontractsMenu" role="button" aria-expanded="false" aria-controls="etimadcontractsMenu">العقود
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadcontractsMenu"
+                                role="button" aria-expanded="false" aria-controls="etimadcontractsMenu">العقود
                                 والتعميدات <span class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadcontractsMenu">
@@ -900,7 +962,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadpayclaimsMenu" role="button" aria-expanded="false" aria-controls="etimadpayclaimsMenu">المدفوعات <span
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadpayclaimsMenu"
+                                role="button" aria-expanded="false" aria-controls="etimadpayclaimsMenu">المدفوعات <span
                                     class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadpayclaimsMenu">
@@ -923,7 +986,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadsalariesMenu" role="button" aria-expanded="false" aria-controls="etimadsalariesMenu">التقارير
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadsalariesMenu"
+                                role="button" aria-expanded="false" aria-controls="etimadsalariesMenu">التقارير
                                 والمؤشرات <span class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadsalariesMenu">
@@ -938,12 +1002,14 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown-submenu">
-                    <a class="nav-link collapsed" data-toggle="collapse" href="#etimadbusinessgoverMenu" role="button" aria-expanded="false" aria-controls="etimadbusinessgoverMenu">اعتماد اعمال <span
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#etimadbusinessgoverMenu" role="button"
+                        aria-expanded="false" aria-controls="etimadbusinessgoverMenu">اعتماد اعمال <span
                             class="icon-arrow_left"></span>
                     </a>
                     <ul class="drawer-sub-menu collapse" id="etimadbusinessgoverMenu">
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadbuyersMenu" role="button" aria-expanded="false" aria-controls="etimadbuyersMenu">المنافسات و المشتريات <span
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadbuyersMenu" role="button"
+                                aria-expanded="false" aria-controls="etimadbuyersMenu">المنافسات و المشتريات <span
                                     class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadbuyersMenu">
@@ -956,7 +1022,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadcontractsMenu" role="button" aria-expanded="false" aria-controls="etimadcontractsMenu">العقود
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadcontractsMenu"
+                                role="button" aria-expanded="false" aria-controls="etimadcontractsMenu">العقود
                                 والتعميدات <span class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadcontractsMenu">
@@ -966,7 +1033,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadpaymentsMenu" role="button" aria-expanded="false" aria-controls="etimadpaymentsMenu">المدفوعات <span
+                            <a class="nav-link collapsed" data-toggle="collapse" href="#etimadpaymentsMenu"
+                                role="button" aria-expanded="false" aria-controls="etimadpaymentsMenu">المدفوعات <span
                                     class="icon-arrow_left"></span>
                             </a>
                             <ul class="collapse" id="etimadpaymentsMenu">
@@ -982,7 +1050,8 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown-submenu">
-                    <a class="nav-link collapsed" data-toggle="collapse" href="#etimadindividualsgoverMenu" role="button" aria-expanded="false" aria-controls="etimadindividualsgoverMenu">اعتماد افراد
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#etimadindividualsgoverMenu"
+                        role="button" aria-expanded="false" aria-controls="etimadindividualsgoverMenu">اعتماد افراد
                         <span class="icon-arrow_left"></span>
                     </a>
                     <ul class="drawer-sub-menu collapse" id="etimadindividualsgoverMenu">

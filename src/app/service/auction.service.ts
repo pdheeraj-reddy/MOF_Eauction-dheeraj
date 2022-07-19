@@ -52,10 +52,12 @@ export class AuctionService {
       isSalesSecretary: this.hasUserRole("EAuction_SalesCommitteSecretary"),
       isInteriorMarketer: this.hasUserRole("EAuction_InteriorMarketer"),
       isAuctionModerator: this.hasUserRole("EAuction_AuctionManager"),
+      // isAuctionModerator: false,
       isSalesMember: this.hasUserRole("EAuction_SalesCommitteeMember"),
       isPricingMember: this.hasUserRole("EAuction_PricingCommitteeMember"),
       isPricingSecretary: this.hasUserRole("EAuction_PricingCommitteSecretary"),
-      isPricingHead: this.hasUserRole("EAuction_PricingCommitteeChairman")
+      isPricingHead: this.hasUserRole("EAuction_PricingCommitteeChairman"),
+      // isBidder: true
     }
     console.log('loggedUserRole In ➼ ', this.loggedUserRole);
     return this.loggedUserRole
