@@ -118,10 +118,10 @@
         </app-auction-pay-invoice>
         <!-- End -->
 
-        <!-- Added by Mohammed Salick -->
-        <app-auction-prmy-award [prmyaward]="upcomingAuction"
-            *ngIf="upcomingAuction?.auctionStatus =='Pending Primary Awarding' && role.auctionMod">
+        <!--============ Pending primary awarding card ============-->
+        <app-auction-prmy-award [prmyaward]="upcomingAuction" *ngIf="role.auctionMod">
         </app-auction-prmy-award>
+        <!-- End -->
 
         <app-auction-final-award [finalaward]="upcomingAuction"
             *ngIf="upcomingAuction?.auctionStatus=='Pending FGBA Approval' && role.auctionMod">
@@ -130,7 +130,7 @@
         <div class="d-flex mt-4" style="justify-content: space-around;">
 
             <!--============== Auction Settings card ==============-->
-            <div class="card justify-content-between" style="max-height: 680px; width: 26%;">
+            <div class="card justify-content-between" style="max-height: 775px; width: 26%;">
                 <!-- Top section  -->
                 <div>
                     <p class="text-20 text-primary m-3 mt-5 font-weight-bold">
@@ -140,8 +140,8 @@
                         'bidderAuctionDetails.auction-settings.You-can-manage-the-auction' | translate }}
                     </p>
 
-                    <!--============== Radio Button group ==============-->
-                    <div class="btn-group m-3">
+                    <!--============== Radio Button group 1 ==============-->
+                    <div class="btn-group m-3 d-flex flex-wrap">
                         <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionDetail')"
                             style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox1" name="sampleCheckbox" checked="checked">
@@ -164,6 +164,42 @@
                             </label>
                         </div>
 
+                    </div>
+                    <!-- End -->
+                    <!--============== Radio Button group 2 ==============-->
+                    <div class="btn-group m-3 d-flex flex-wrap">
+                        <div class="etimad-option etimad-option-xs" style="width: 118.8px;height: 118.8px;">
+                            <input type="radio" id="checkbox3" name="sampleCheckbox" disabled>
+                            <label class="input-target d-flex" for="checkbox3">
+                                <span>
+                                    <span class="icon-users"></span><br>
+                                    لجنة التسعير
+                                </span>
+                            </label>
+                        </div>&nbsp;&nbsp;
+                        <div class="etimad-option etimad-option-xs" style="width: 118px;height: 118px;">
+                            <input type="radio" id="checkbox4" name="sampleCheckbox" disabled>
+                            <label class="input-target d-flex" for="checkbox4">
+                                <span>
+                                    <span class="icon-users"></span><br>
+                                    لجنة المزاد
+                                </span>
+                            </label>
+                        </div>
+
+                    </div>
+                    <!-- End -->
+                    <!--============== Radio Button group 3 ==============-->
+                    <div class="btn-group m-3 d-flex flex-wrap">
+                        <div class="etimad-option etimad-option-xs" style="width: 118.8px;height: 118.8px;">
+                            <input type="radio" id="checkbox5" name="sampleCheckbox" disabled>
+                            <label class="input-target d-flex" for="checkbox5">
+                                <span>
+                                    <span class="icon-information"></span><br>
+                                    {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
+                                </span>
+                            </label>
+                        </div>
                     </div>
                     <!-- End -->
                 </div>
@@ -219,13 +255,13 @@
                     </div>
                     <div class="mt-4" style="display: flex;">
 
+                        <!--================ Latest offer send card ================-->
                         <div style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'"
-                            *ngIf="role.auctionMod && upcomingAuction.auctionStatus =='Ongoing'">
-
+                            *ngIf="role.auctionMod && !status.published">
                             <app-latest-offers-sent [aucId]="auctionId" pageno="1" *ngIf="role.auctionMod">
                             </app-latest-offers-sent>
-
                         </div>
+                        <!-- End -->
                         <div [ngClass]="{
                             'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
                             'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',

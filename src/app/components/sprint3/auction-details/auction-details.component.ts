@@ -46,9 +46,20 @@ export class AuctionDetailsComponent implements OnInit {
   currentLang: any;
   // User role
   role = {
-    bidder: false,
-    auctionMod: false,
-    auctionCommitteeHead: false
+    bidder : false,
+    auctionMod : false,
+    auctionCommitteeHead : false
+  }
+  status ={
+    published : false,
+    ongoing : false,
+    pendingPrimaryAwarding : false,
+    pendingSelecting : false,
+    pendingFbga : false,
+    pendingFbgaApproval: false,
+    pendingPaying : false,
+    awarded : false,
+    terminated : false
   }
 
   // Added by Mohammed Salick
@@ -277,7 +288,33 @@ export class AuctionDetailsComponent implements OnInit {
 
 
 
-
+    if(this.upcomingAuction.auctionStatus == "Published"){
+      this.status.published = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Ongoing"){
+      this.status.ongoing = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Pending Primary Awarding"){
+      this.status.pendingPrimaryAwarding = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Pending FBGA"){
+      this.status.pendingFbga = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Pending Selecting"){
+      this.status.pendingSelecting = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Pending FBGA Approval"){
+      this.status.pendingFbgaApproval = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Pending Paying"){
+      this.status.pendingPaying = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Terminated"){
+      this.status.terminated = true;
+    }
+    if(this.upcomingAuction.auctionStatus == "Awarded"){
+      this.status.awarded = true;
+    }
 
   }
   productclick() {
