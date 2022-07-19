@@ -3,8 +3,8 @@
   <!--=================== Yellow box to show auction status ===================-->
   <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
     <div class="mx-3">
-      <p class="text-18 text-warning font-weight-bold">الترسية المبدئية</p>
-      <p class="text-12 text-warning">
+      <p class="text-18 text-secondary font-weight-bold">الترسية المبدئية</p>
+      <p class="text-12 text-secondary">
         تم ترسية هذا العرض من قبل لجنة المزاد، الرجاء اعتماد الترسية المبدئية
       </p>
     </div>
@@ -17,36 +17,39 @@
     <div class="d-flex flex-column justify-content-center" style="max-width: 440px">
       <div class="card-body">
         <div class="d-flex" style="align-items: center;">
-          <span class="icon-alert-success"></span>
-          <h5 style="font-size: 30px;color: #28AB6D; font-weight: 500;margin-bottom: 0;margin-left: 10px;">3,567,938
-            SAR</h5>
+          <span class="text-30 icon-alert-success font-weight-bold"></span>
+          &nbsp;&nbsp;
+          <h5 class="text-30 text-success font-weight-bold">3,567,938 SAR</h5>
           <!-- BidOfferValue -->
         </div>
-        <p class="card-text" style="color: #414042;font-size: 16px;margin-top: 25px;margin-bottom: 5px;">
+        <p class="card-text" class=" text-16 text-dark mt-3">
           <!-- BidSupplierName -->
           Hammat Trading Est
         </p>
-        <p style="color: #414042;font-size: 16px;margin-bottom: 5px;">No. 707365514 </p>
+        <p class="text-16 text-dark mb-2">No. 707365514 </p>
         <!-- BidCrNumber -->
-        <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;font-size: 14px;">
-          Primary Warranty
+        <a (click)="openFile('ibga','download')" class="text-primary tex-14" style="text-decoration: none;">
+          <span class="text-16 icon-download"></span>
+          &nbsp;
+          <span style="text-decoration: underline;">Primary Warranty</span>
         </a>
-        <span class="icon-download"></span>
       </div>
     </div>
 
     <div class="top-card-right-right">
       <div>
-        <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;;font-size: 16px;">
-          Auction report and bid submitted BidOfferPDF
+        <a class="text-primary tex-14" style="text-decoration: none;">
+          <span class="text-16 icon-download"></span>
+          &nbsp;
+          <span style="text-decoration: underline;">Auction report and bid submitted BidOfferPDF</span>
         </a>
-        <span class="icon-download"></span>
       </div>
-      <div style="margin-top: 20px;">
-        <button class="btn btn-primary-light btn-md" style="margin-right: 10px;" data-toggle="modal"
-          data-target="#confirmAprModal">Initial award approval</button>
-        <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#confirmRejModal">Refusal to be
+      <div class="mt-3">
+        <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">Refusal to be
           awarded</button>
+          &nbsp;&nbsp;
+        <button class="btn btn-primary-light btn-md" data-toggle="modal"
+          data-target="#confirmAprModal">Initial award approval</button>
       </div>
     </div>
   </div>
@@ -84,12 +87,11 @@
 </div>
 
 <!-- Model to show confirmed (Successful)  Approval-->
-<ng-template #showSuccessfulModal let-modal>
+<div class="modal show" *ngIf="showSuccessAccept" [ngClass]="{ 'modal-show': showSuccessAccept }">
 
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
-      <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-        data-dismiss="modal" aria-label="Close">
+      <button (click)="this.showSuccessAccept = false" style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm">
         <span class="icon-close"></span>
       </button>
       <span class="icon-check"></span>
@@ -110,24 +112,23 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false">
           Back to Auction Requests
         </button>
       </div>
     </div>
   </div>
-</ng-template>
+</div>
 
 <!-- Model to confirm Rejection -->
-<div class="modal fade" id="confirmRejModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal show" *ngIf="showConfirmationReject" [ngClass]="{ 'modal-show': showConfirmationReject }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header" style="color: red !important;">
-        <h4 class="modal-title" id="exampleModalLabel" style="color: red !important;">
+      <div class="modal-header">
+        <h4 class="modal-title text-danger" id="exampleModalLabel">
           Are you sure of the rejection of the award?
         </h4>
-        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="modal-close btn-close btn-sm" (click)="this.showConfirmationReject = false">
           <span class="icon-close"></span>
         </button>
       </div>
@@ -138,13 +139,12 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end ">
-        <button type="button" style="background: red !important;" class="btn btn-primary-light btn-md"
+        <button type="button" class="btn btn-outline-light btn-md" (click)="this.showConfirmationReject = false">
+          Back
+        </button>
+        <button type="button" class="btn btn-danger btn-md"
           data-dismiss="modal" (click)="reject()">
           Reject Award
-        </button>
-        <button type="button" class="btn btn-md" data-dismiss="modal" aria-label="Close"
-          style="border: 1px solid #cccccc; border-radius: 5px">
-          Back
         </button>
       </div>
     </div>
@@ -153,8 +153,7 @@
 
 
 <!-- Model to show confirmed (Successful)  Rejection-->
-<ng-template #showSuccessfulRejModal let-modal>
-
+<div class="modal show" *ngIf="showSuccessReject" [ngClass]="{ 'modal-show': showSuccessReject }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
       <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
@@ -185,4 +184,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</div>
