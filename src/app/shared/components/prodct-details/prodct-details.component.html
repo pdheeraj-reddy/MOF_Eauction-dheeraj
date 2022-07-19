@@ -251,8 +251,9 @@
         </button>
     </div>
     <div class="d-flex flex-column flex-md-row">
-        <button class="btn btn-danger btn-lg mx-0 mx-md-2" data-toggle="modal" data-target="#rejectPricing"
-            _msthash="1893008" _msttexthash="94172">
+        <!-- <button class="btn btn-danger btn-lg mx-0 mx-md-2" data-toggle="modal" data-target="#rejectPricing"
+            _msthash="1893008" _msttexthash="94172"> -->
+        <button class="btn btn-danger btn-lg mx-0 mx-md-2" (click)="rejectPrices()">
             {{ "auctionModerator.am-detail.product-details.reject_btn" | translate }}
         </button>
 
@@ -431,19 +432,20 @@
 
 
 <!-- Confirmation of pricing rejection -->
-<div class="modal fade" id="rejectPricing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<!-- <div class="modal fade" id="rejectPricing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true"> -->
+<div class="modal show" *ngIf="rejectionModal" [ngClass]="{ 'modal-show': rejectionModal }">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title denial-model" id="exampleModalLabel" style="color: #f66f5b"> {{
+                <h4 class="modal-title denial-model text-danger" id="exampleModalLabel"> {{
                     'auctionMember.reject-popup.title' | translate }} </h4>
-                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="modal-close btn-close btn-sm" (click)="closeRejectionModal()">
                     <span class="icon-close"></span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="modal-body text-20" style="color: #414042">
+                <div class="modal-body text-20 text-body">
                     {{ 'auctionMember.reject-popup.subtitle' | translate }}
                 </div>
 
@@ -457,13 +459,15 @@
                         </div>
                         <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" maxlength="{{maxLen}}"
                             placeholder="{{ 'auctionMember.reject-popup.phold' | translate }}" rows="4"></textarea>
+
+                        <p *ngIf="rejectionReason" class="text-danger text-12 mt-2">{{
+                            'auctionMember.reject-popup.section2-validation' | translate }}</p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: end">
-                <button (click)="approveOrRejectAuction('R', 'Rejected Prices')" type="button" class="btn btn-md"
-                    style="background-color: #f66f5b; border-radius: 5px; color: #ffff" data-dismiss="modal"
-                    aria-label="Close">
+                <button (click)="rejectAuction('R', 'Rejected Prices')" type="button"
+                    class="btn btn-md btn-danger rounded">
                     {{ 'auctionMember.reject-popup.cancel' | translate }} </button>
             </div>
         </div>
@@ -492,7 +496,7 @@
             </div>
             <div class="modal-body">
                 <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{
-                    'auctionMember.reject-popup.subtitle' | translate }}
+                    'auctionMember.reject-success.subtitle' | translate }}
                 </label>
             </div>
             <div class="modal-footer" style="justify-content: end">

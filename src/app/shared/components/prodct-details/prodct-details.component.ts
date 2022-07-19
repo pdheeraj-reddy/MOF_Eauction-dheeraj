@@ -25,6 +25,8 @@ export class ProdctDetailsComponent implements OnInit {
   confirmApproval = false;
   confirmRejection = false;
   confirmationPopup = false;
+  rejectionModal = false;
+  rejectionReason = false;
   showConfim = false;
   maxLen = 250;
   pdtEstPricePc: any;
@@ -140,7 +142,6 @@ export class ProdctDetailsComponent implements OnInit {
 
 
   editPriceInPopup(index: any, product: any) {
-    console.log("🚀🚀 ~~ product", product.ZzProductNo);
     let index_temp = parseInt(product.ZzProductNo);
 
     const dialogRef = this.dialog.open(ViewProductDetailComponent, {
@@ -166,12 +167,18 @@ export class ProdctDetailsComponent implements OnInit {
           'ZzPdtEstPricePc'
         ] = result.price;
         let temp = this.preAuctionData['listtoproductnav']['results'];
+        console.log("🚀🚀 ~~ temp", temp);
         this.productValue = 0;
         for (let i = 0; i < temp.length; i++) {
-          this.productValue =
-            this.productValue + parseInt(temp[i]?.ZzPdtEstPricePc) * temp[i].Quantity;
+          if (temp[i]?.ZzPdtEstPricePc) {
+            this.productValue = this.productValue + parseInt(temp[i]?.ZzPdtEstPricePc) * temp[i].Quantity;
+          }
+
         }
       }
+
+
+      console.log("🚀🚀 ~~ this.productValue", this.productValue);
     });
   }
 
@@ -365,6 +372,41 @@ export class ProdctDetailsComponent implements OnInit {
 
   }
 
+  rejectAuction(action: any, status: any) {
+    if (this.rejectionNotes) {
+      let adjustedPriceData: any = {};
+      this.preAuctionData.Status = status;
+      this.preAuctionData.ActionTaken = action;
+      this.preAuctionData.ZzEstOpt = !this.isBidUpdate ? 'A' : 'I';
+      this.preAuctionData.ZzPbEstPricePc = this.productValue.toString();
+      this.preAuctionData.UserId = '1622234795';
+      adjustedPriceData = this.preAuctionData;
+      adjustedPriceData?.listtoproductnav?.results.forEach((product: any) => {
+        product.ZzPdtEstPricePc = product.ZzPdtEstPricePc?.toString();
+        delete product.show;
+      });
+
+      this._AuctionService.approveOrRejectAuction(adjustedPriceData).subscribe(
+        (res: any) => {
+          this.rejectionModal = false;
+          this.rejectionReason = false;
+          this.confirmRejection = true;
+
+        },
+        (error) => {
+          console.log('approveOrRejectAuction RespError : ', error);
+        }
+      );
+
+    }
+    else {
+      this.rejectionReason = true;
+      setTimeout(() => {
+        this.rejectionReason = false;
+      }, 5000);
+    }
+  }
+
   approveOrRejectAuction(action: any, status: any) {
     this.isPriceSuccess = false;
     this.showConfim = false;
@@ -428,6 +470,14 @@ export class ProdctDetailsComponent implements OnInit {
   sendPricingValuesFinal() {
     this.isPriceError = false;
     this.isPriceSuccess = true;
+  }
+
+  rejectPrices() {
+    this.rejectionModal = true;
+  }
+
+  closeRejectionModal() {
+    this.rejectionModal = false;
   }
 
   closeAllModal() {

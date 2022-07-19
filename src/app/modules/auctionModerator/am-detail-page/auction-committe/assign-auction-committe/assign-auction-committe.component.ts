@@ -31,6 +31,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   committeeMemberList: any = [];
 
   commiteeMemberData = false;
+  cancelPopupVar = false;
   add4Mem: boolean = false;
   list: any = [];
   myControl = new FormControl();
@@ -114,6 +115,14 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.callstepper.emit();
   }
 
+  cancelPopup() {
+    this.cancelPopupVar = true;
+  }
+
+  closePopup() {
+    this.cancelPopupVar = false;
+  }
+
 
   cancelMember() {
     this.committeeChairData = undefined;
@@ -133,6 +142,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.add4Mem = false;
     this.auctionServc.unsaved = false;
     // this.ngOnInit();
+    this.cancelPopupVar = false;
   }
 
   checkMember() {
