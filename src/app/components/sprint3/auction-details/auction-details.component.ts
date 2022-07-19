@@ -46,11 +46,11 @@ export class AuctionDetailsComponent implements OnInit {
   currentLang: any;
   // User role
   role = {
-    bidder : false,
-    auctionMod : false,
-    auctionCommitteeHead : false
+    bidder: false,
+    auctionMod: false,
+    auctionCommitteeHead: false
   }
-  
+
   // Added by Mohammed Salick
   prmyaward: any;
   finalaward: any;
@@ -65,7 +65,7 @@ export class AuctionDetailsComponent implements OnInit {
   showLoaderSubImage: boolean = true;
   showVideo: boolean = true;
   customOptions: OwlOptions = {
-    items: 7,
+    items: 4,
     autoHeight: true,
     autoWidth: true,
     loop: false,
