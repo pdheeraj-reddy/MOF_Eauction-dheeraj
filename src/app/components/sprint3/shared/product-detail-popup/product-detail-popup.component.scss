@@ -1,0 +1,59 @@
+ul.nav.et-tabs.et-tabs-filled li a {
+    max-width: inherit;
+}
+
+.product-summary-form .table-success,
+.product-summary-form .table-success>td,
+.product-summary-form .table-success>th {
+    background-color: #32ad71;
+}
+
+.img-fluid {
+    width: 100%;
+    height: 450px;
+    border-radius: 8px;
+}
+
+::ng-deep .owl-carousel .owl-item img,
+ ::ng-deep .owl-carousel .owl-item video {
+    min-height: 105px !important;
+    max-height: 105px !important;
+    height: 105px !important;
+    margin: 10px !important;
+    max-width: 110px !important;
+    background-color: #000;
+    opacity: .5;
+}
+
+video.bg-dark,
+img.bg-dark {
+    opacity: 1;
+}
+
+::ng-deep .owl-carousel.owl-drag .owl-item {
+    width: 120px !important;
+}
+
+.icon-spinner {
+    width: 18px;
+    height: 18px;
+    font-size: x-small;
+}
+
+// ::ng-deep .owl-carousel .owl-item::after {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-image: linear-gradient(120deg, #000, #000);
+//     opacity: .7;
+// }
+::ng-deep .owl-carousel,
+::ng-deep .bx-wrapper {
+    direction: ltr;
+}
+
+::ng-deep .owl-carousel .owl-item {
+    direction: rtl;
+}

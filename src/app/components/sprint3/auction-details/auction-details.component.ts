@@ -13,6 +13,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BidderService } from '../services/bidder.service';
 import { AucModeratorService } from '../services/auc-moderator.service';
 import { AuctionService } from 'src/app/service/auction.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductDetailPopupComponent } from '../shared/product-detail-popup/product-detail-popup.component';
+
 declare var $: any;
 
 @Component({
@@ -65,6 +68,8 @@ export class AuctionDetailsComponent implements OnInit {
     awarded : false,
     terminated : false
   }
+  products: any[] = [];
+
 
   // Added by Mohammed Salick
   prmyaward: any;
@@ -92,6 +97,7 @@ export class AuctionDetailsComponent implements OnInit {
     nav: true,
     navText: ["<div class='nav-button owl-prev'>‹</div>", "<div class='nav-button owl-next'>›</div>"],
   };
+  selectedProduct: any;
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
@@ -100,6 +106,7 @@ export class AuctionDetailsComponent implements OnInit {
     private bidderService: BidderService,
     private modService: AucModeratorService,
     private sanitizer: DomSanitizer,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -129,7 +136,7 @@ export class AuctionDetailsComponent implements OnInit {
       if (newLang == 'ar') {
         this.currentLang = newLang;
         this.textDir = false;
-        // // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
+        // // // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
       }
       else {
         this.textDir = true;
@@ -150,13 +157,103 @@ export class AuctionDetailsComponent implements OnInit {
         this.showLoader = false;
       }
       this.mapping(res.body);
-
+      let productsArray = res.body.d.results[0].listtoproductnav.results;
+      // this.products = res.body.d.results[0].listtoproductnav.results;
+      productsArray.forEach((pItem: any) => {
+        let productImages: any = [], productFiles: any = [];
+        let data = res.body.d.results[0];
+        if (pItem.ZzProductNo) {
+            if (data.listtoattachnav['results']) {
+              var productImagesArray = data.listtoattachnav['results'].filter(function (el: any) {
+                return el.ObjectType == "/AuctionProductImages" &&
+                  el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+              });
+              var productFilesArray = data.listtoattachnav['results'].filter(function (el: any) {
+                return el.ObjectType == "/AuctionProductDocuments" &&
+                  el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+              });
+              console.log(productFilesArray, "PRODUCT FILES");
+              console.log(productImagesArray, "PRODUCT IMAGES");
+              if (productImagesArray.length > 0) {
+                productImagesArray.forEach((value: any) => {
+                  var imageupload = {
+                    "name": value.FileName + '.' + value.FileExt,
+                    "size": '',
+                    "type": '',
+                    "filesrc": '',
+                    "FilenetId": value.FilenetId,
+                    "MIMEType": value.MIMEType,
+                    "no": pItem.ZzProductNo
+                  };
+                  productImages.push(imageupload);
+                  
+                });
+                console.log(productImages, "Product images")
+              }
+              if (productFilesArray.length > 0) {
+                productFilesArray.forEach((value: any) => {
+                  var fileupload = {
+                    "name": value.FileName + '.' + value.FileExt,
+                    "size": '',
+                    "type": '',
+                    "filesrc": '',
+                    "FilenetId": value.FilenetId,
+                    "MIMEType": value.MIMEType,
+                    "no": pItem.ZzProductNo
+                  };
+                  productFiles.push(fileupload);
+                });
+                // console.log(productFiles, "Product files")
+                // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 206 ~ productFiles", productFiles);
+              }
+            }
+        }
+        let item = {
+          productNo: pItem.ZzProductNo,
+          productName: pItem.Description,
+          productCondition: pItem.ZzProductCond,
+          productSKUNumber: pItem.ZzProductSku,
+          productSerialNumber: pItem.Quantity ? pItem.Quantity.split('.')[0] : '',
+          productValue: pItem.ProductValue
+            ? pItem.ProductValue.split('.')[0]
+            : '',
+          productSpec: pItem.ZzProdDesc,
+          productImages: productImages,
+          productFiles: productFiles,
+          location: {
+            deliveryDate: pItem.DelivDate
+              ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD')
+              : '',
+            deliveryTime: pItem.DelivTime
+              ? pItem.DelivTime !== 0
+                ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm')
+                : ''
+              : '',
+            deliveryTimeSufix: pItem.DelivTime
+              ? pItem.DelivTime !== 0
+                ? moment(pItem.DelivTime, 'HH:mm:ss').format('A')
+                : ''
+              : '',
+            locLatitude: pItem.ZzLocationCord,
+            locLongitude: pItem.ZzLocationCord,
+            locRegion: pItem.ZzRegion,
+            locCity: pItem.ZzCity,
+            locNeighborhood: pItem.ZzNeighbourhood,
+            locStreet: pItem.ZzStreet,
+            notes: pItem.ZzPdOthrNts,
+          },
+        };
+        this.products.push(item);
+        // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 246 ~ this.products", this.products);
+        // console.log(this.products)
+      });
+      
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
-      console.log("🚀 ~ this.bidderService.getAuctionDetail ~ this.auctionAttachment", this.auctionAttachment)
+      // console.log("🚀 ~ this.bidderService.getAuctionDetail ~ this.auctionAttachment", this.auctionAttachment)
       this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
-      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
+      // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 112 ~ this.igbaDoc", this.ibgaDoc);
       this.fbgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'F');
-      console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 138 ~ this.fbgaDoc", this.fbgaDoc);
+      // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 138 ~ this.fbgaDoc", this.fbgaDoc);
       // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
@@ -220,7 +317,7 @@ export class AuctionDetailsComponent implements OnInit {
   }
   public mapping(serverObj: any) {
     let auctionDetailList = serverObj.d.results[0];
-    // // console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
+    // // // console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
     let productList = auctionDetailList.listtoproductnav.results[0];
     console.log(serverObj.d.results[0], "sd");
     let resultSet: any = [];
@@ -478,7 +575,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   viewAttachment(file: any, index: number, option: string) {
 
-    // // console.log("🚀🚀 ~~ auctionDetails", this.upcomingAuction.auction_detail?.auctionAttachement);
+    // // // console.log("🚀🚀 ~~ auctionDetails", this.upcomingAuction.auction_detail?.auctionAttachement);
     if (file.FilenetId) {
       console.log("🚀🚀 ~~ file.FilenetId", file.FilenetId);
       file.downloading = true;
@@ -564,6 +661,8 @@ export class AuctionDetailsComponent implements OnInit {
 
 
   downloadImages(item: any) {
+  console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 663 ~ item", item);
+    
     this.bidderService.downloadAuctionImages(item.FilenetId).subscribe(async (downloadAuctionImagesResp: any) => {
       const fileResp = downloadAuctionImagesResp.d;
       var byteString = atob(
@@ -584,7 +683,6 @@ export class AuctionDetailsComponent implements OnInit {
         title: 'hello world',
         type: item.MIMEType
       });
-
       console.log("auctionAttachment this.slidesStore", this.slidesStore)
       if (this.slidesStore.length == this.filenetImagesLst.length) {
         this.showLoaderSubImage = false;
@@ -595,6 +693,8 @@ export class AuctionDetailsComponent implements OnInit {
           src: this.slidesStore[0].src,
           type: this.slidesStore[0].type
         }
+        this.selectedProduct = this.slidesStore[0].id;
+        // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 697 ~ this.selectedProduct", this.selectedProduct);
         this.showLoaderMainImage = false;
       }
     },
@@ -605,6 +705,8 @@ export class AuctionDetailsComponent implements OnInit {
   }
 
   viewItem(a: any) {
+  // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 612 ~ a", a);
+    this.selectedProduct = a.id;
     this.showVideo = false;
     this.fullImage = {
       src: a.src,
@@ -618,5 +720,20 @@ export class AuctionDetailsComponent implements OnInit {
     if (bool) {
       this.response.ZzBidderSts = 'B';
     }
+  }
+  openProductPopup(){
+    let productData = this.products.filter((attach) => attach.productNo == this.selectedProduct);
+    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 726 ~ this.selectedProduct", productData);
+    const dialogRef = this.dialog.open(ProductDetailPopupComponent, {
+      height: '90%',
+      width: '90%',
+      position: {
+        left: '10%',
+      },
+      // data: {
+      //   data: temp,
+      //   viewproduct: this.viewproduct,
+      // },
+    });
   }
 }

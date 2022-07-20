@@ -16,6 +16,7 @@ import { AuctionFinalAwardComponent } from './auction-final-award/auction-final-
 import { EAucCommonModule } from 'src/app/common/eauccommon.module';
 import { RouterModule } from '@angular/router';
 import { AmAuctionComponent } from './am-auction/am-auction.component';
+import { ProductDetailPopupComponent } from './product-detail-popup/product-detail-popup.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AmAuctionComponent } from './am-auction/am-auction.component';
         LatestOffersSentComponent,
         AuctionPrmyAwardComponent,
         AuctionFinalAwardComponent,
-        AmAuctionComponent
+        AmAuctionComponent,
+        ProductDetailPopupComponent
     ],
     imports: [
         CommonModule,
