@@ -6,8 +6,8 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { AuctionService } from 'src/app/service/auction.service';
-import { NONE_TYPE } from '@angular/compiler';
+import { AucModeratorService } from '../../services/auc-moderator.service';
+import { PaginationSortingService } from 'src/app/service/pagination.service';
 
 export interface DialogData {
   data: any;
@@ -27,17 +27,21 @@ export class ProductDetailPopupComponent implements OnInit {
   textDir = 'ltr';
   showLoader: boolean = false;
   fetchPicture: boolean = true;
+  pageRangeForAttach: any;
+  activeIndex = -1;
+  showVideo: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<ProductDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog,
-    public auctionServc: AuctionService,
-    private sanitizer: DomSanitizer
+    private auctionModServ : AucModeratorService,
+    private sanitizer: DomSanitizer,
+    public PaginationServc: PaginationSortingService,
   ) { }
 
   customOptions: OwlOptions = {
-    items: 4,
+    items: 3,
     autoHeight: true,
     autoWidth: true,
     loop: false,
@@ -48,19 +52,37 @@ export class ProductDetailPopupComponent implements OnInit {
     navSpeed: 300,
     nav: false,
   };
-  sortByTableHeaderId(a: number, b: string) { }
   closeDialog() {
     this.dialogRef.close();
   }
-
   viewItem(a: any) {
+    this.showVideo = false;
     this.fullImage = {
       src: a.src,
       type: a.type
     }
-    console.log(this.fullImage)
+    setTimeout(() => {
+      this.showVideo = true;
+    });
+  }
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId(
+      'auctionAttachment',
+      columnId,
+      sortType,
+      dateFormat
+    );
   }
 
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
 
   ngOnInit(): void {
     console.log(localStorage.getItem('lang_pref'))
@@ -72,7 +94,6 @@ export class ProductDetailPopupComponent implements OnInit {
     }
 
     // this.slidesStore = this.dialogData.data;
-
     this.viewproduct = this.dialogData.viewproduct;
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
@@ -89,11 +110,27 @@ export class ProductDetailPopupComponent implements OnInit {
         this.fetchPicture = false;
       }
     }
-
+    this.navigateToPage(1, 'auctionAttach');
 
     // if (this.slidesStore.length > 0) {
     //   this.fullImage = this.slidesStore[0].src;
     // }
+  }
+  navigateToPage(pageNoVal: number, section: string) {
+    this.PaginationServc.setPagerValues(
+      this.viewproduct.productFiles.length,
+      4,
+      pageNoVal
+    );
+    if (section == 'auctionAttach') {
+      this.pageRangeForAttach = {
+        rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 4),
+        rangeEnd: pageNoVal == 1 ? 3 : ((pageNoVal - 1) * 4) + 3,
+        pages: this.PaginationServc.pages,
+        currentPage: this.PaginationServc.currentPage,
+        totalPages: this.PaginationServc.totalPages,
+      }
+    }
   }
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
@@ -116,8 +153,7 @@ export class ProductDetailPopupComponent implements OnInit {
     });
 
   downloadImages(index: any) {
-    this.auctionServc
-      .downloadAuctionImages(index.FilenetId)
+    this.auctionModServ.downloadAuctionImages(index.FilenetId)
       .subscribe(
         async (downloadAuctionImagesResp: any) => {
 
@@ -175,7 +211,7 @@ export class ProductDetailPopupComponent implements OnInit {
     if (file.FilenetId) {
       this.activeDownloadFileIndex = index;
       file.downloading = true;
-      this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
+      this.auctionModServ.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
           console.log(downloadAuctionImagesResp);
           const fileResp = downloadAuctionImagesResp.d;

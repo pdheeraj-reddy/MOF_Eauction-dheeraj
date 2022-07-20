@@ -13,7 +13,7 @@
                     </div>
                     <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;">{{ getsince(b.BidSubmitOn,b.BidSubmitAt) }}</p>
                 </div>
-                <div *ngIf="biddet" class="list-card">
+                <div *ngIf="!biddet" class="list-card">
                     <div class="text-body" style="display: flex;justify-content: space-between;">
                         <p style="margin: 0;">No Bidder submitted</p>
                         <p style="margin: 0;"># 0</p>

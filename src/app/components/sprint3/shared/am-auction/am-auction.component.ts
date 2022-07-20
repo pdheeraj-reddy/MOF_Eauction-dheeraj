@@ -130,7 +130,7 @@ export class AmAuctionComponent implements OnInit {
     let resultSet: AuctionList[] = [];
     this.totalCounts = {
       total_completed: serverObj.d.results[0].TotCompleted,
-      total_under_gear: serverObj.d.results[0].TotRejected,
+      total_under_gear: serverObj.d.results[0].TotPendSelect,
       total_upcoming: serverObj.d.results[0].TotPublish,
       total_ongoing: serverObj.d.results[0].TotPublishedOngoing,
       total_all: serverObj.d.results[0].TotAll

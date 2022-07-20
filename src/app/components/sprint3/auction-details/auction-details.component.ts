@@ -723,17 +723,17 @@ export class AuctionDetailsComponent implements OnInit {
   }
   openProductPopup(){
     let productData = this.products.filter((attach) => attach.productNo == this.selectedProduct);
-    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 726 ~ this.selectedProduct", productData);
+    // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 726 ~ this.selectedProduct", productData);
     const dialogRef = this.dialog.open(ProductDetailPopupComponent, {
       height: '90%',
       width: '90%',
       position: {
         left: '10%',
       },
-      // data: {
-      //   data: temp,
-      //   viewproduct: this.viewproduct,
-      // },
+      data: {
+        // data: temp,
+        viewproduct: productData[0],
+      },
     });
   }
 }
