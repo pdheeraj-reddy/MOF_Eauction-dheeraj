@@ -13,13 +13,19 @@
                     </div>
                     <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;">{{ getsince(b.BidSubmitOn,b.BidSubmitAt) }}</p>
                 </div>
+                <div *ngIf="biddet" class="list-card">
+                    <div class="text-body" style="display: flex;justify-content: space-between;">
+                        <p style="margin: 0;">No Bidder submitted</p>
+                        <p style="margin: 0;"># 0</p>
+                    </div>
+                    <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;"> Not yet</p>
+                </div>
 
-
-                <div class="mt-4 ml-3 row margin-auto">
+                <div *ngIf="PaginationServc.totalPages == 1" class="mt-4 ml-3 row margin-auto">
                     <div class="mb-5">
 
                         <nav aria-label="..." class="nav-pagination">
-                            <ul class="pagination">
+                            <ul class="pagination"> 
 
                                 <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
                                     <a (click)="getBidDetails(PaginationServc.currentPage)" class="page-link" tabindex="-1" aria-disabled="true">{{ 'auctionlist.grid-previous' | translate }}</a>

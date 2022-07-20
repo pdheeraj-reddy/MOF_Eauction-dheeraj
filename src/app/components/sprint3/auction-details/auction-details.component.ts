@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BidderService } from '../services/bidder.service';
 import { AucModeratorService } from '../services/auc-moderator.service';
+import { AuctionService } from 'src/app/service/auction.service';
 declare var $: any;
 
 @Component({
@@ -52,6 +53,7 @@ export class AuctionDetailsComponent implements OnInit {
     auctionMod : false,
     auctionCommitteeHead : false
   }
+  currentUser : any;
   status ={
     published : false,
     ongoing : false,
@@ -94,13 +96,19 @@ export class AuctionDetailsComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
     public PaginationServc: PaginationSortingService,
-    private envService: EnvService,
+    private auctionSev: AuctionService,
     private bidderService: BidderService,
     private modService: AucModeratorService,
     private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
+    this.currentUser = this.auctionSev.getLoggedUserRole();
+    this.role.auctionMod = this.currentUser.isAuctionModerator;
+    this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
+    // Need role for bidder -- (Change to true if you want to check for bidder)
+    // this.role.bidder = true;
+    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 107 ~ this.currentUser", this.currentUser);
     this.currentLang = localStorage.getItem('lang_pref');
     if (this.currentLang == 'en') {
       this.textDir = true;
@@ -110,9 +118,6 @@ export class AuctionDetailsComponent implements OnInit {
     }
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     console.log("this.auctionId", this.auctionId);
-    // let user = this.getLoggedUserRole();
-    this.role.auctionMod = true;
-    // this.role.bidder = true;
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
 
