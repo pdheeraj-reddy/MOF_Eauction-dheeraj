@@ -20,33 +20,37 @@ import { AuctionCommiteeDetailPageComponent } from './modules/auction-commitee/a
 import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/auction-commitee-open-offers/auction-commitee-open-offers.component';
 
 import { AuctionSliderComponent } from './common/components/auction-slider/auction-slider.component';
+import { ModeratorGuard } from './modules/Guards/moderator.gaurd';
+import { MemberGuard } from './modules/Guards/member.gaurd';
+import { HeadGuard } from './modules/Guards/head.guard';
+import { MarketerGuard } from './modules/Guards/marketer.gaurd';
 const routes: Routes = [
-  { path:'', redirectTo:'/auctionlist', pathMatch:'full' },
-  { path:'tender',  component:TenderComponent },
-  { path:'dashboard',  component:DashboardComponent },
+  { path: '', redirectTo: '/auctionlist', pathMatch: 'full' },
+  { path: 'tender', component: TenderComponent },
+  { path: 'dashboard', component: DashboardComponent },
   // { path:'**', redirectTo:'/dashboard' },
   // { path:'**', redirectTo:'/auctionlist' },
   // { path:'auctionlist', component:AuctionListsComponent },
-  { path:'auctionlist', component:AuctionListsComponent , canActivate: [AuthGuard] },
-  { path:'auction', component:AuctionComponent , canActivate: [AuthGuard] },
-  { path:'auction/:ObjectId/:DraftId/:ViewMode', component:AuctionComponent , canActivate: [AuthGuard] },
+  { path: 'auctionlist', component: AuctionListsComponent, canActivate: [AuthGuard] },
+  { path: 'auction', component: AuctionComponent, canActivate: [AuthGuard, MarketerGuard] },
+  { path: 'auction/:ObjectId/:DraftId/:ViewMode', component: AuctionComponent, canActivate: [AuthGuard, MarketerGuard] },
   { path: 'tender', component: TenderComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'slider', component: AuctionSliderComponent },
   {
     path: 'auctionModerator',
     component: AuctionModeratorComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ModeratorGuard],
     children: [
       {
         path: 'landingPage',
         component: AucModLandingPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, ModeratorGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AmDetailPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, ModeratorGuard],
       },
       {
         path: '',
@@ -58,17 +62,17 @@ const routes: Routes = [
   {
     path: 'auctionMember',
     component: AuctionMemberComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, MemberGuard],
     children: [
       {
         path: 'landingPage',
         component: AucMemLandingPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, MemberGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AucMemDetailPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, MemberGuard],
       },
       {
         path: '',
@@ -80,17 +84,17 @@ const routes: Routes = [
   {
     path: 'auctionHead',
     component: AuctionHeadComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, HeadGuard],
     children: [
       {
         path: 'landingPage',
         component: AuctionHeadLandingPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, HeadGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AuctionHeadDetailPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, HeadGuard],
       },
       {
         path: '',

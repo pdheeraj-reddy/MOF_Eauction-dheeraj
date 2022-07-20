@@ -25,6 +25,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   @Output()
   _3MembersAdded = false;
   showConfirm = false;
+  textDir = false;
   showSuccessPopup = false;
   preAuctionData: any;
   popupTitle: any = '';
@@ -168,6 +169,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     }
   }
   assignAuctionCommittee() {
+    this.showPageLoader = true;
     this.showConfirm = false;
     console.log(this.preAuctionData);
     this.preAuctionData;
@@ -219,11 +221,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
         })
         .subscribe(
           (res: any) => {
+            this.showPageLoader = false;
             this.showSuccessPopup = true;
             this.getPreAuctionData();
             console.log(res);
           },
           (error) => {
+            this.showPageLoader = false;
             // alert("Internal server error!");
             console.log('approveOrRejectAuction RespError : ', error);
           }
@@ -705,6 +709,16 @@ export class AssignAuctionCommitteComponent implements OnInit {
       map((value) => this._filter(value))
     );
   }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
+  }
+
   async goBack() {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');

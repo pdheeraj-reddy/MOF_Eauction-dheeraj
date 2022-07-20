@@ -63,8 +63,8 @@
                 align-items: center;
                 margin-top: 18%;
               ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card1-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card1-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -105,8 +105,9 @@
               align-items: center;
               margin-top: 18%;
             ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card2-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p [ngStyle]="{'width': textDir ? '213px' : ''}" class="mt-2">{{
+            "auctionModerator.am-detail.auction-committee.card2-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -150,8 +151,8 @@
               align-items: center;
               margin-top: 18%;
             ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -203,8 +204,8 @@
                 align-items: center;
                 margin-top: 18%;
               ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
 
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
@@ -258,8 +259,8 @@
                 align-items: center;
                 margin-top: 18%;
               ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -301,8 +302,8 @@
     <div class="card-body-data">
       <div
         style="display: flex; justify-content: space-around; align-items: center;  padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
-        <img src="assets\icons\User.svg" alt="User icon" />
-        <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
+        <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+        <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
         <button (click)="openEditMem4Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER',i)"
           *ngIf="isPendingPublish" class="card flex-card-item last-card-data"
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
@@ -329,8 +330,8 @@
     <div [ngClass]="{'last-card': !add4Mem}" class="card flex-card-item">
       <div class="card-body">
         <div style=" display: flex; justify-content: space-around; align-items: center; margin-top: 18%;">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -456,7 +457,7 @@
           | translate}}</label></div>
       <div class="modal-footer" style="justify-content: end;">
         <button type="button" (click)="closeSuccess()" class="btn btn-primary-light btn-md" data-dismiss="modal"
-          aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.popup2-accept" | translate}}</button>
+          aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.accept-publish" | translate}}</button>
       </div>
     </div>
   </div>

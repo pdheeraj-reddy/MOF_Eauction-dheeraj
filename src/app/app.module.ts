@@ -86,7 +86,11 @@ import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/a
 import { ProductDetailPopupComponent } from './components/auction/auction-indetail/auction-order-summary/product-detail-popup/product-detail-popup.component';
 import { EnvService } from './env.service';
 import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ModeratorGuard } from './modules/Guards/moderator.gaurd';
+import { MemberGuard } from './modules/Guards/member.gaurd';
+import { HeadGuard } from './modules/Guards/head.guard';
+import { MarketerGuard } from './modules/Guards/marketer.gaurd';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -179,6 +183,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuthService,
     AuctionHeadDetailPageComponent,
     AuthGuard,
+    ModeratorGuard,
+    MemberGuard,
+    HeadGuard,
+    MarketerGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,

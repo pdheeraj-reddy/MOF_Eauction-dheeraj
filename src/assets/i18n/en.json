@@ -476,7 +476,8 @@
                 "popup1-accept": "Confirm",
                 "popup2-title": "The request has been successfully sent to the pricing committee",
                 "popup2-subtitle": "After pricing the products by the committee, the request will be returned to appoint the auction committee and publish the auction.",
-                "popup2-accept": "Confirm",
+                "popup2-accept": "Back to Auction Requests",
+                "accept-publish": "Confirm",
                 "reject-popup": {
                     "title": "Are you sure about canceling?",
                     "subtitle": "Upon confirmation, all data entered and saved will be cancelled.",

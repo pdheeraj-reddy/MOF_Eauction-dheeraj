@@ -25,6 +25,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
+  textDir: boolean = false;
   popupTitle: any = '';
   committeeMemberList: any = [];
   existingCommitteSecList: any = [];
@@ -146,6 +147,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   }
 
   assignPricingCommittee() {
+    this.showPageLoader = true;
     this.showConfirm = false;
     console.log(this.preAuctionData);
     this.preAuctionData;
@@ -173,8 +175,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           temp.push(element);
         });
       }
-      console.log("🚀 ~ assignPricingCommittee ~ temp", temp)
-      console.log("🚀 ~ assignPricingCommittee ~ temp", this.addcommitteeMemberList)
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: 'A',
@@ -191,11 +191,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
             // alert('Updated Successfully');
             this.showSuccessPopup = true;
             this.auctionServc.unsaved = false;
+            this.showPageLoader = false;
             console.log(res);
             this.getPreAuctionData();
           },
           (error) => {
             // alert('Error Updating');
+            this.showPageLoader = false;
             console.log('approveOrRejectAuction RespError : ', error);
           }
         );
@@ -704,6 +706,16 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     console.log(this.preAuctionData);
     this.getPreAuctionData();
   }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
+  }
+
   getPreAuctionData() {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
