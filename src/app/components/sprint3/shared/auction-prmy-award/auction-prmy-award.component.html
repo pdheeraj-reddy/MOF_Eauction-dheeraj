@@ -28,11 +28,19 @@
         </p>
         <p class="text-16 text-dark mb-2">No. {{prmyaward.bidderNo}} </p>
         <!-- BidCrNumber -->
-        <a (click)="openFile(ibgaDoc,'download')" class="text-primary tex-14" style="text-decoration: none;">
+        <a *ngIf="!showAttachLoader" (click)="openFile(ibgaDoc,'download')" class="text-primary tex-14" style="text-decoration: none;">
           <span class="text-16 icon-download"></span>
           &nbsp;
           <span style="text-decoration: underline;">Primary Warranty</span>
         </a>
+        <div *ngIf="showAttachLoader">
+          <div class="spinner-border text-primary" style="font-size: 12px;width: 20px !important;height: 20px !important;"
+          role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        &nbsp;
+        <span style="text-decoration: underline;">Primary Warranty</span>
+        </div>
       </div>
     </div>
 

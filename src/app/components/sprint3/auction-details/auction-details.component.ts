@@ -98,6 +98,7 @@ export class AuctionDetailsComponent implements OnInit {
     navText: ["<div class='nav-button owl-prev'>‹</div>", "<div class='nav-button owl-next'>›</div>"],
   };
   selectedProduct: any;
+  finalAwardingData: { bidValue: any; bidderName: any; bidderNo: any; pdfData: any; auctionId: any; };
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
@@ -399,6 +400,13 @@ export class AuctionDetailsComponent implements OnInit {
       pdfData : auctionDetailList.BidOfferPDF,
       auctionId : auctionDetailList.ObjectId,
     }
+    this.finalAwardingData = {
+      bidValue : auctionDetailList.BidOfferValue,
+      bidderName : auctionDetailList.BidSupplierName,
+      bidderNo : auctionDetailList.BidCrNumber,
+      pdfData : auctionDetailList.BidOfferPDF,
+      auctionId : auctionDetailList.ObjectId,
+    }
 
     if(this.upcomingAuction.auctionStatus == "Published"){
       this.status.published = true;
@@ -528,6 +536,15 @@ export class AuctionDetailsComponent implements OnInit {
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+  }
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
   }
   // send offer
   showError(nowShow: boolean) {

@@ -10,12 +10,10 @@ import { AucModeratorService } from '../../services/auc-moderator.service';
 export class AuctionPrmyAwardComponent implements OnInit {
   closeResult: string;
   modalOptions:NgbModalOptions;
+  
   @Input() prmyaward: any;
   @Input() ibgaDoc : any;
 
-  @ViewChild("showSuccessfulModal") modalContentApp: TemplateRef<any>;
-
-  @ViewChild("showSuccessfulRejModal") modalContentRej: TemplateRef<any>;
   showAttachLoader: boolean = false;
   showConfirmationAccept : boolean = false;
   showSuccessAccept : boolean = false;
@@ -27,7 +25,7 @@ export class AuctionPrmyAwardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("🎯TC🎯 ~ file: auction-prmy-award.component.ts ~ line 29 ~ this.prmyaward", this.prmyaward);
-    // this.prmyaward.pdfData = "";
+    // this.prmyaward.pdfData = ;
   }
   approve(){
     this.showLoader = true;
@@ -66,6 +64,7 @@ export class AuctionPrmyAwardComponent implements OnInit {
   
   openFile(file: any, option: string) {
     // console.log(this.ibgaDoc);
+    console.log(file);
       this.showAttachLoader = true;
       this.api.downloadAuctionImages(file[0].FilenetId).subscribe((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
@@ -76,7 +75,7 @@ export class AuctionPrmyAwardComponent implements OnInit {
         for (var i = 0; i < byteString.length; i++) {
           ia[i] = byteString.charCodeAt(i);
         }
-        const blob = new Blob([ab], { type: file.MIMEType });
+        const blob = new Blob([ab], { type: file[0].MIMEType });
         let fileURL = window.URL.createObjectURL(blob);
         console.log('fileURL ', fileURL);
         var newWin: any;
@@ -84,7 +83,7 @@ export class AuctionPrmyAwardComponent implements OnInit {
           newWin = window.open(fileURL, '_blank');
           this.showAttachLoader = false;
         } else {
-          newWin = this.downloadFile(file.FileName, file.MIMEType, fileURL);
+          newWin = this.downloadFile(file[0].FileName, file[0].MIMEType, fileURL);
           this.showAttachLoader = false;
         }
         if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined') && option == 'view') {
@@ -97,6 +96,7 @@ export class AuctionPrmyAwardComponent implements OnInit {
       );
   }
   downloadPDF(){
+    console.log(this.prmyaward.pdfData);
     let fileName = "Bidder Report.pdf";
     let contentType = "application/pdf";
     this.downloadFile(fileName, contentType, this.prmyaward.pdfData);

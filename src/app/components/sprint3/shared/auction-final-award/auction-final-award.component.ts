@@ -8,9 +8,18 @@ import { AucModeratorService } from '../../services/auc-moderator.service';
   styleUrls: ['./auction-final-award.component.scss']
 })
 export class AuctionFinalAwardComponent implements OnInit {
-  @Input() finalaward: any;
+  @Input() finalaward: any;  
+  @Input() fbgaDoc : any;
+
   closeResult: string;
   modalOptions:NgbModalOptions;
+
+  showAttachLoader: boolean = false;
+  showConfirmationAccept : boolean = false;
+  showSuccessAccept : boolean = false;
+  showConfirmationReject : boolean = false;
+  showSuccessReject : boolean = false;
+  showLoader : boolean = false;
 
 
   @ViewChild("showSuccessfulModal") modalContentApp: TemplateRef<any>;
@@ -19,41 +28,90 @@ export class AuctionFinalAwardComponent implements OnInit {
   constructor(private api : AucModeratorService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    // this.finalaward
+    console.log("🎯TC🎯 ~ file: auction-final-award.component.ts ~ line 32 ~ this.finalaward", this.finalaward);
   }
   approve(){
-    
-    this.api.postAppporRej(this.finalaward,'G').subscribe((res=>{
+    this.showLoader = true;
+    let data = {
+      "AucId": this.finalaward.auctionId,
+      "BidderId": this.finalaward.bidderNo,
+      "ZzUserAction": 'G'
+    }
+    this.api.postAppporRej(data).subscribe((res=>{
       console.log(res)
       if(res['d']['Msgty'] === 'S'){
-      this.modalService.open(this.modalContentApp).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-    }
-    }))
+        this.showLoader = false;
+        this.showConfirmationAccept = false;
+        this.showSuccessAccept = true;
+      }
+    }));
   }
 
   reject(){
-    this.api.postAppporRej(this.finalaward,'J').subscribe((res=>{
+    this.showLoader = true;
+    let data = {
+      "AucId": this.finalaward.auctionId,
+      "BidderId": this.finalaward.bidderNo,
+      "ZzUserAction": 'J'
+    }
+    this.api.postAppporRej(data).subscribe((res=>{
       console.log(res)
       if(res['d']['Msgty'] === 'S'){
-      this.modalService.open(this.modalContentRej).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-    }
-    }))
+        this.showLoader = false;
+        this.showConfirmationReject = false;
+        this.showSuccessReject = true;
+      }
+    }));
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
+  
+  openFile(file: any, option: string) {
+    // console.log(this.ibgaDoc);
+    console.log(file);
+      this.showAttachLoader = true;
+      this.api.downloadAuctionImages(file[0].FilenetId).subscribe((downloadAuctionImagesResp: any) => {
+        const fileResp = downloadAuctionImagesResp.d;
+        var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
+        console.log('asdasd', byteString.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([ab], { type: file[0].MIMEType });
+        let fileURL = window.URL.createObjectURL(blob);
+        console.log('fileURL ', fileURL);
+        var newWin: any;
+        if (option == 'view') {
+          newWin = window.open(fileURL, '_blank');
+          this.showAttachLoader = false;
+        } else {
+          newWin = this.downloadFile(file[0].FileName, file[0].MIMEType, fileURL);
+          this.showAttachLoader = false;
+        }
+        if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined') && option == 'view') {
+          alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+        }
+        // window.open(fileContent, "_blank");
+      }, (error) => {
+        console.log('downloadAuctionImages RespError : ', error);
+      }
+      );
+  }
+  downloadPDF(){
+    console.log(this.finalaward.pdfData);
+    let fileName = "Bidder Report.pdf";
+    let contentType = "application/pdf";
+    this.downloadFile(fileName, contentType, this.finalaward.pdfData);
+  }
+  downloadFile(fileName: string, contentType: string, base64Data: string) {
+    const linkSource = `data:${contentType};base64,${base64Data}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = base64Data;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
   }
 }
