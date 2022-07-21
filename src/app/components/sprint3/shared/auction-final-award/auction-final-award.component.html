@@ -1,48 +1,3 @@
-<div class="top-card">
-
-    <div class="top-card-left">
-        <div class="card-body" style="padding-top:50px;padding-bottom:50px">
-            <h5 class="card-title" style="color: #F9B122;font-size: 18px;">Final gearing</h5>
-            <p class="card-text" style="color: #F9B122;font-size: 14px;">
-                The final guarantee has been attached by the bidder, please approve the final award and send the invoice.
-            </p>
-        </div>
-    </div>
-
-    <div class="top-card-right">
-        <div class="top-card-right-left">
-            <div class="card-body" style="padding-top:25px;padding-bottom:10px">
-                <div style="display: flex;align-items: center;">
-                    <span class="icon-alert-success"></span>
-                    <h5 style="font-size: 30px;color: #28AB6D; font-weight: 500;margin-bottom: 0;margin-left: 10px;">3,567,938 SAR</h5>
-                </div>
-                <p class="card-text" style="color: #414042;font-size: 16px;margin-top: 25px;margin-bottom: 5px;">
-                    Hammat Trading Est
-                </p>
-                <p style="color: #414042;font-size: 16px;margin-bottom: 5px;">No. 707365514</p>
-                <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;font-size: 14px;">
-                    Final Warranty
-                </a>
-                <span class="icon-download"></span>
-            </div>
-        </div>
-
-        <div class="top-card-right-right">
-            <div>
-                <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;;font-size: 16px;">
-                    Auction report and bid submitted
-                </a>
-                <span class="icon-download"></span>
-            </div>
-            <div style="margin-top: 20px;">
-                <button class="btn btn-primary-light btn-md" style="margin-right: 10px;" data-toggle="modal" data-target="#confirmAprModal">Final award approval</button>
-                <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#confirmRejModal">Refusal to be awarded</button>
-            </div>
-        </div>
-
-    </div>
-
-</div>
 <div class="card flex-row">
 
   <!--=================== Yellow box to show auction status ===================-->
@@ -76,7 +31,7 @@
         <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')" class="text-primary tex-14" style="text-decoration: none;">
           <span class="text-16 icon-download"></span>
           &nbsp;
-          <span style="text-decoration: underline;">Primary Warranty</span>
+          <span style="text-decoration: underline;">Final Warranty</span>
         </a>
         <div *ngIf="showAttachLoader">
           <div class="spinner-border text-primary" style="font-size: 12px;width: 20px !important;height: 20px !important;"

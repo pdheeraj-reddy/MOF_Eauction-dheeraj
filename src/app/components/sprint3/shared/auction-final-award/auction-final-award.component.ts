@@ -103,7 +103,14 @@ export class AuctionFinalAwardComponent implements OnInit {
     console.log(this.finalaward.pdfData);
     let fileName = "Bidder Report.pdf";
     let contentType = "application/pdf";
-    this.downloadFile(fileName, contentType, this.finalaward.pdfData);
+    const linkSource = `data:${contentType};base64,${this.finalaward.pdfData}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = linkSource;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
+    // this.downloadFile(fileName, contentType, this.prmyaward.pdfData);
   }
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
