@@ -263,6 +263,64 @@
     </div>
 </div>
 
+<!-- Delivery Details -->
+<div *ngIf="loggedUserRole.isPricingHead || loggedUserRole.isPricingMember" class="m-4"
+    [ngStyle]="{ direction: textDir }">
+    <div class="mt-4">
+        <label for="goverusermessage">{{ "auctioncreate.auctionproduct.delivery.title" | translate }}</label>
+    </div>
+
+    <div class="mt-3 border-bottom">
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp41-plch" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.locLatitude }} </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp42-plch" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.locLongitude }}</div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp5" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.locRegion }} </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp6" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.locCity }}</div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp7" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.locNeighborhood }} </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp8" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.locStreet }}</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp9" |
+                    translate }}</label>
+                <div class="text-success"> {{ viewproduct.location.notes }} </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Product Attachments -->
 <div class="m-3" [ngStyle]="{ direction: textDir }">
     <div class="mt-4">
         <label for="goverusermessage">{{ "auctioncreate.auctionproduct.section1_orderSum22" | translate }}</label>

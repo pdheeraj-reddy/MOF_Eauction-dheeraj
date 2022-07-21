@@ -96,6 +96,7 @@ export class ViewProductDetailComponent implements OnInit {
     //   this.fullImage = this.slidesStore[0].src;
     // }
     this.viewproduct = this.dialogData.viewproduct;
+    console.log("🚀🚀 ~~ this.viewproduct", this.viewproduct);
     this.navigateToPage(1, 'auctionAttach');
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;

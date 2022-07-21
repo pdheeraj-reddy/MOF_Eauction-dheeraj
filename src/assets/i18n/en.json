@@ -269,6 +269,9 @@
                 "popup_formGrp17-hint": "Letter",
                 "popup_formGrp18": "Cancellation",
                 "popup_formGrp19": "Add Product"
+            },
+            "delivery": {
+                "title": "Delivery Address"
             }
         }
     },
@@ -635,7 +638,7 @@
             "heading": "Total estimated value of products",
             "phold": "Enter estimated value of products",
             "save": "Save",
-            "failure_mssg": "Enter value greater than zero",
+            "failure_mssg": "Please enter a valid amount",
             "overall_failure_mssg": "Please enter correct estimated amount",
             "popup_label": "Estimated Value of the Product",
             "popup_save": "Save Value",

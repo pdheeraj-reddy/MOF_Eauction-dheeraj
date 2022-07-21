@@ -129,8 +129,12 @@
                                         class="btn btn-primary-light btn-sm rounded border-0 m-2">{{"common.Save" |
                                         translate}}</button>
                                 </div>
-                                <!-- <div *ngIf="((indexError == i) && removeError)" class="invalid-feedback d-block">{{ 'auctionMember.bid-value.failure_mssg' | translate }}
-                                </div> -->
+
+                                <div *ngIf="(product.ZzPdtEstPricePc == null) && isPriceNull"
+                                    class="invalid-feedback d-block">{{
+                                    'auctionMember.bid-value.failure_mssg' | translate }}
+                                </div>
+
                             </td>
                             <td *ngIf="!isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status== 'Rejected Prices') && (loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)"
                                 style="text-align: center;">

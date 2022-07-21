@@ -39,6 +39,7 @@ export class ProdctDetailsComponent implements OnInit {
   indexError = -1;
   isPriceError: boolean = false;
   isPriceSuccess: boolean = false;
+  isPriceNull: boolean = false;
   removeError: boolean = true;
   estimatedValueOfProducts: any;
   selectedPageNumber: number;
@@ -90,16 +91,27 @@ export class ProdctDetailsComponent implements OnInit {
     } else if (!this.inputMode) {
       let product = this.preAuctionData?.listtoproductnav?.results;
       let flag = false;
+      this.isPriceNull = false;
       product.forEach((element: any) => {
-        if (element.ZzPdtEstPricePc < 1) {
-          flag = true;
+        if (element.ZzPdtEstPricePc == null) {
+          this.isPriceNull = true;
         }
       });
+
+      if (!this.isPriceNull) {
+        product.forEach((element: any) => {
+          if (element.ZzPdtEstPricePc == 0) {
+            flag = true;
+          }
+        });
+      }
+
       if (flag) {
         this.isPriceError = true;
-      } else {
+      } else if (!this.isPriceNull) {
         this.showConfim = true;
       }
+
     }
     else {
       this.showConfim = true;
@@ -379,6 +391,7 @@ export class ProdctDetailsComponent implements OnInit {
       this.preAuctionData.ActionTaken = action;
       this.preAuctionData.ZzEstOpt = !this.isBidUpdate ? 'A' : 'I';
       this.preAuctionData.ZzPbEstPricePc = this.productValue.toString();
+      this.preAuctionData.RejectNotes = this.rejectionNotes;
       this.preAuctionData.UserId = '1622234795';
       adjustedPriceData = this.preAuctionData;
       adjustedPriceData?.listtoproductnav?.results.forEach((product: any) => {
@@ -406,6 +419,7 @@ export class ProdctDetailsComponent implements OnInit {
       }, 5000);
     }
   }
+
 
   approveOrRejectAuction(action: any, status: any) {
     this.isPriceSuccess = false;
@@ -450,14 +464,24 @@ export class ProdctDetailsComponent implements OnInit {
     } else if (!this.inputMode) {
       let product = this.preAuctionData?.listtoproductnav?.results;
       let flag = false;
+      this.isPriceNull = false;
       product.forEach((element: any) => {
-        if (element.ZzPdtEstPricePc < 1) {
-          flag = true;
+        if (element.ZzPdtEstPricePc == null) {
+          this.isPriceNull = true;
         }
       });
+
+      if (!this.isPriceNull) {
+        product.forEach((element: any) => {
+          if (element.ZzPdtEstPricePc == 0) {
+            flag = true;
+          }
+        });
+      }
+
       if (flag) {
         this.isPriceError = true;
-      } else {
+      } else if (!this.isPriceNull) {
         this.isPriceSuccess = true;
       }
     } else {
