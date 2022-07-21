@@ -45,6 +45,8 @@ export class AuctionProductComponent implements OnInit {
   activePictureIndex = -1;
   activeFileIndex = -1;
   columnLst = ['productName', 'productSerialNumber', 'productValue', 'productCondition'];
+  columnPicList = ['index', 'name'];
+  columnFileList = ['index', 'name'];
   // ------- product file attachment --------
   // ------- file validation         --------
   maxFileCount: Number = 30;
@@ -324,6 +326,7 @@ export class AuctionProductComponent implements OnInit {
                 el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
             });
             if (productImagesArray.length > 0) {
+              // let i = 0;
               productImagesArray.forEach((value: any) => {
                 value.name = value.FileName + value.FileExt;
                 var imageupload = {
@@ -334,11 +337,14 @@ export class AuctionProductComponent implements OnInit {
                   "FilenetId": value.FilenetId,
                   "MIMEType": value.MIMEType,
                   downloading: false,
+                  // index: i,
                 };
+                // i++;
                 productImages.push(new FormControl(imageupload));
               });
             }
             if (productFilesArray.length > 0) {
+              // let i = 0;
               productFilesArray.forEach((value: any) => {
                 value.name = value.FileName + value.FileExt;
                 var fileupload = {
@@ -349,7 +355,9 @@ export class AuctionProductComponent implements OnInit {
                   "FilenetId": value.FilenetId,
                   "MIMEType": value.MIMEType,
                   downloading: false,
+                  // index: i,
                 };
+                // i++;
                 productFiles.push(new FormControl(fileupload));
               });
             }
@@ -1645,6 +1653,18 @@ export class AuctionProductComponent implements OnInit {
     // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     const tableData = this.PaginationServc.sortAllTableData(this.auctionProducts.value, this.columnLst[columnId]);
+  }
+
+  sortPictureByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    const tableData = this.PaginationServc.sortAllTableData(this.productImages.value, this.columnPicList[columnId]);
+  }
+
+  sortAttachByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    const tableData = this.PaginationServc.sortAllTableData(this.productFiles.value, this.columnFileList[columnId]);
   }
 
   formatDate(date: any) {

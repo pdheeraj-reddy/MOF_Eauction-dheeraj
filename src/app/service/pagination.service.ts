@@ -280,13 +280,13 @@ export class PaginationSortingService {
     let sortedData;
     if (this.sortDirection === 'asc') {
       if (this.sortType === 'string') {
-        sortedData = tableData.sort((a: any, b: any) => (a[column] > b[column]) ? 1 : ((b[column] > a[column]) ? -1 : 0))
+        sortedData = tableData.sort((a: any, b: any) => (a[column]?.toLowerCase() > b[column]?.toLowerCase()) ? 1 : ((b[column]?.toLowerCase() > a[column]?.toLowerCase()) ? -1 : 0))
       } else if (this.sortType === 'numeric') {
         sortedData = tableData.sort((a: any, b: any) => +a[column] - +b[column]);
       }
     } else {
       if (this.sortType === 'string') {
-        sortedData = tableData.sort((a: any, b: any) => (a[column] < b[column]) ? 1 : ((b[column] < a[column]) ? -1 : 0))
+        sortedData = tableData.sort((a: any, b: any) => (a[column]?.toLowerCase() < b[column]?.toLowerCase()) ? 1 : ((b[column]?.toLowerCase() < a[column]?.toLowerCase()) ? -1 : 0))
       } else if (this.sortType === 'numeric') {
         sortedData = tableData.sort((a: any, b: any) => +b[column] - +a[column]);
       }

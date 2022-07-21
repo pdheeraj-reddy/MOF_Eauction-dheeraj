@@ -128,6 +128,7 @@ export class InterconversionService {
 
     if (serverObj.listtoattachnav['results']) {
       console.log("att data form API", serverObj.listtoattachnav['results']);
+      let i = 0;
       serverObj.listtoattachnav['results'].forEach(
         (value: any, index: any, array: any) => {
           if (value.ObjectType == '/AuctionDocuments') {
@@ -139,8 +140,9 @@ export class InterconversionService {
               FilenetId: value.FilenetId,
               MIMEType: value.MIMEType,
               downloading: false,
-              index: index
+              index: i
             };
+            i++;
             auctionDetails.auctionAttachement.push(fileupload);
           }
           if (value.ObjectType == '/AuctionProductImages') {
@@ -152,9 +154,10 @@ export class InterconversionService {
               FilenetId: value.FilenetId,
               MIMEType: value.MIMEType,
               downloading: false,
-              index: index
+              index: i
             };
           }
+
         }
       );
     }

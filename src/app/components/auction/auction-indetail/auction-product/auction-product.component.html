@@ -721,12 +721,20 @@
                                                 class="table table-bordered table-striped table-expanded table-hover">
                                                 <thead>
                                                     <tr class="btn-primary-light">
-                                                        <th class="th-serials" scope="col">{{
-                                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1'
-                                                            | translate }}</th>
-                                                        <th class="" scope="col">{{
-                                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2'
-                                                            | translate }}</th>
+                                                        <th class="th-serials" scope="col"
+                                                            (click)="sortPictureByTableHeaderId(0, 'numeric')"><span>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
+                                                        </th>
+                                                        <th class="" scope="col"
+                                                            (click)="sortPictureByTableHeaderId(1, 'string')">
+                                                            <span>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
+                                                        </th>
                                                         <th class="th-action" scope="col"></th>
                                                     </tr>
                                                 </thead>
@@ -864,12 +872,20 @@
                                                 class="table table-bordered table-striped table-expanded table-hover">
                                                 <thead>
                                                     <tr class="btn-primary-light">
-                                                        <th class="th-serials" scope="col">{{
-                                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1'
-                                                            | translate }}</th>
-                                                        <th class="" scope="col">{{
-                                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2'
-                                                            | translate }}</th>
+                                                        <th class="th-serials" scope="col"
+                                                            (click)="sortAttachByTableHeaderId(0, 'numeric')"><span>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
+                                                        </th>
+                                                        <th class="" scope="col"
+                                                            (click)="sortAttachByTableHeaderId(1, 'string')"><span>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
+                                                        </th>
                                                         <th class="th-action" scope="col"></th>
                                                     </tr>
                                                 </thead>

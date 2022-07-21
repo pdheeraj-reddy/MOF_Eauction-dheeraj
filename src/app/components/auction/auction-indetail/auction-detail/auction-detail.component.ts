@@ -45,6 +45,7 @@ export class AuctionDetailComponent implements OnInit {
   showDeleteSuccessfulModal: boolean = false;
   showAlertModal: boolean = false;
   activeFileDownloadIndex = -1;
+  columnLst = ['index', 'name'];
   // Dropdown Values
   // dropValBeneCategories: any = ['category 1', 'category 2', 'category 3', 'category 4'];
   dropValProducts: any = [
@@ -177,6 +178,26 @@ export class AuctionDetailComponent implements OnInit {
 
   public getUserInfo() {
     return localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo") as string) : '';
+  }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
+  sortByAuctionAttachTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
+  }
+
+
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.auctionAttachement.value, this.columnLst[columnId]);
   }
 
   populateSome() {
@@ -551,6 +572,7 @@ export class AuctionDetailComponent implements OnInit {
       while (this.auctionAttachement.length !== 0) {
         this.auctionAttachement.removeAt(0)
       }
+      // let i = 0;
       this.auctionDetails.listtoattachnav['results'].forEach((value: any, index: any, array: any) => {
         if (value.ObjectType == "/AuctionDocuments") {
           value.name = value.FileName + value.FileExt;
@@ -562,11 +584,13 @@ export class AuctionDetailComponent implements OnInit {
             "FilenetId": value.FilenetId,
             "MIMEType": value.MIMEType,
             downloading: false,
+            // index: i,
           };
           this.files.push(fileupload);
           this.auctionAttachement.push(new FormControl(fileupload));
           this.navigateToPage(1, 'auctionAttach');
         }
+        // i++;
       })
     }
   }
