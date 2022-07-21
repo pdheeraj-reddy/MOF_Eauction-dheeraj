@@ -228,7 +228,7 @@
 
             <!-- Auction Details start -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div *ngIf="editmode1" style="width: 73%; float: right;">
+            <div *ngIf="editmode1" style="width: 72%; float: right;">
                 <div class="card">
                     <div class="d-flex align-items-center mt-3">
 
@@ -465,11 +465,11 @@
                                 </div>
                                 <!-- <img src="https://cdn.cwsplatform.com/abitruckscom/vp2937192_1_large.jpg" alt="" style="width: 100%; height: 380px;"> -->
 
-                                <button (click)="openProductPopup()" class="btn btn-primary-light btn-lg"
+                                <button *ngIf="fullImage" (click)="openProductPopup()" class="btn btn-primary-light btn-lg"
                                     style="position: absolute; top: 20px; right: 20px; height: 32px;">
                                     <span class="font-weight-bold text-14">{{ 'bidderAuctionDetails.ProductDetails' |
                                         translate }}</span>
-                                    <span class="icon-eye-open text-14 font-weight-bold mx-1"></span>
+                                    <span class="icon-eye-open mx-1" style="font-size: 15px;"></span>
                                 </button>
 
                             </div>
