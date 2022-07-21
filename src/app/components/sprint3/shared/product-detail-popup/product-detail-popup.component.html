@@ -1,6 +1,8 @@
 <div class="d-flex m-2" style="justify-content: space-between" [ngStyle]="{ direction: textDir }">
-    <p class="text-success text-24 font-weight-bold mt-3"> &nbsp;&nbsp;&nbsp;{{ "auctioncreate.auctionproduct.section1_Title" | translate }} </p>
-    <button style="outline: none" (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown" aria-label="Close">
+    <p class="text-success text-24 font-weight-bold mt-3"> &nbsp;&nbsp;&nbsp;{{
+        "auctioncreate.auctionproduct.section1_Title" | translate }} </p>
+    <button style="outline: none" (click)="closeDialog()" type="button" class="close" data-dismiss="dropdown"
+        aria-label="Close">
         <a class="btn btn-ghost btn-md fill-primary-green">
             <span class="icon-close"></span>
         </a>
@@ -56,19 +58,21 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-6 mt-4" *ngIf="!showLoader">
-        <div *ngIf="slidesStore.length >= 1">
+    <div class="col-md-6 mt-4">
+        <div>
             <!-- <img [src]="fullImage" class="img-fluid" alt="No Images to show" /> -->
-            <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'" class="img-fluid bg-dark"
-                [src]="fullImage.src" />
-            <div style="min-height:450px" *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime')">
-                <video *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime') && showVideo"
+            <!-- <div *ngIf="fullImage"> -->
+            <img *ngIf="fullImage?.type == 'image/jpeg' || fullImage?.type == 'image/png'" class="img-fluid bg-dark"
+                [src]="fullImage?.src" />
+            <div style="min-height:450px"
+                *ngIf="(fullImage?.type =='video/mp4' || fullImage?.type == 'video/quicktime')">
+                <video *ngIf="(fullImage?.type =='video/mp4' || fullImage?.type == 'video/quicktime') && showVideo"
                     autoplay controls class="img-fluid bg-dark" width="420">
-                    <source [src]="fullImage.src" type="video/mp4">
+                    <source [src]="fullImage?.src" type="video/mp4">
                     Your browser does not support HTML video.
                 </video>
             </div>
+            <!-- </div> -->
             <owl-carousel-o [options]="customOptions">
                 <ng-container *ngFor="let slide of slidesStore" carouselSlide>
                     <ng-template carouselSlide [id]="slide.id" class="col-md-4 p-2">
@@ -137,7 +141,7 @@
                 </ng-container>
             </owl-carousel-o>
         </div>
-        <div *ngIf="slidesStore.length < 1">{{"common.no_picture" | translate }}</div>
+        <div *ngIf="!showLoader && slidesStore.length < 1">{{"common.no_picture" | translate }}</div>
     </div>
     <div class="col-md-6">
         <div class="product-full-summary-form">
@@ -159,7 +163,8 @@
                                     <label for="validationCustom01">{{
                                         "auctioncreate.auctionproduct.auctionpopup.popup_formGrp2" |
                                         translate }}</label>
-                                    <div class="text-success"> Product count{{ viewproduct.productName | translate }} </div>
+                                    <div class="text-success"> Product count{{ viewproduct.productName | translate }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row">

@@ -35,13 +35,13 @@ export class ProductDetailPopupComponent implements OnInit {
     public dialogRef: MatDialogRef<ProductDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialog: MatDialog,
-    private auctionModServ : AucModeratorService,
+    private auctionModServ: AucModeratorService,
     private sanitizer: DomSanitizer,
     public PaginationServc: PaginationSortingService,
   ) { }
 
   customOptions: OwlOptions = {
-    items: 3,
+    // items: 6,
     autoHeight: true,
     autoWidth: true,
     loop: false,

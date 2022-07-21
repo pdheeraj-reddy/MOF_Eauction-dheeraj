@@ -1,7 +1,7 @@
 <div class="card">
 
     <div
-        [ngClass]="[auction.statuscode === 'Published' || auction.statuscode == 'Pending Paying' ? 'status-code-pb' : auction.statuscode == 'Ongoing' ? 'status-code-rn' : auction.statuscode == 'Upcoming auction' ? 'status-code-up' : auction.statuscode == 'Awarded' ? 'status-code-ad' : auction.statuscode == 'Pending FBGA Approval' ? 'status-code-un' : '']">
+        [ngClass]="[auction.statuscode === 'Published' || auction.statuscode == 'Pending Paying' ? 'status-code-pb' : auction.statuscode == 'Ongoing' ? 'status-code-rn' : auction.statuscode == 'Upcoming auction' ? 'status-code-up' : auction.statuscode == 'Awarded' ? 'status-code-ad' : auction.statuscode == 'Pending FBGA Approval' ||auction.statuscode == 'Pending FBGA' ||auction.statuscode == 'Pending Primary Awarding'? 'status-code-un' : '']">
         {{auction.statuscount}}<span class="icon-eye-open" *ngIf="auction.statuscode=='Running Now'"></span>
         {{auction.statuscode}}
     </div>

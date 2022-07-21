@@ -33,7 +33,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
-  primaryAwardingData : any;
+  primaryAwardingData: any;
   ibgaDoc: any;
   fbgaDoc: any;
   days: number;
@@ -52,21 +52,21 @@ export class AuctionDetailsComponent implements OnInit {
   currentLang: any;
   // User role
   role = {
-    bidder : false,
-    auctionMod : false,
-    auctionCommitteeHead : false
+    bidder: false,
+    auctionMod: false,
+    auctionCommitteeHead: false
   }
-  currentUser : any;
-  status ={
-    published : false,
-    ongoing : false,
-    pendingPrimaryAwarding : false,
-    pendingSelecting : false,
-    pendingFbga : false,
+  currentUser: any;
+  status = {
+    published: false,
+    ongoing: false,
+    pendingPrimaryAwarding: false,
+    pendingSelecting: false,
+    pendingFbga: false,
     pendingFbgaApproval: false,
-    pendingPaying : false,
-    awarded : false,
-    terminated : false
+    pendingPaying: false,
+    awarded: false,
+    terminated: false
   }
   products: any[] = [];
 
@@ -99,6 +99,7 @@ export class AuctionDetailsComponent implements OnInit {
   };
   selectedProduct: any;
   finalAwardingData: { bidValue: any; bidderName: any; bidderNo: any; pdfData: any; auctionId: any; };
+  @ViewChild('imageSlide', { read: ElementRef }) public imageSlide: ElementRef<any>;
   constructor(private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
@@ -164,50 +165,50 @@ export class AuctionDetailsComponent implements OnInit {
         let productImages: any = [], productFiles: any = [];
         let data = res.body.d.results[0];
         if (pItem.ZzProductNo) {
-            if (data.listtoattachnav['results']) {
-              var productImagesArray = data.listtoattachnav['results'].filter(function (el: any) {
-                return el.ObjectType == "/AuctionProductImages" &&
-                  el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+          if (data.listtoattachnav['results']) {
+            var productImagesArray = data.listtoattachnav['results'].filter(function (el: any) {
+              return el.ObjectType == "/AuctionProductImages" &&
+                el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+            });
+            var productFilesArray = data.listtoattachnav['results'].filter(function (el: any) {
+              return el.ObjectType == "/AuctionProductDocuments" &&
+                el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
+            });
+            console.log(productFilesArray, "PRODUCT FILES");
+            console.log(productImagesArray, "PRODUCT IMAGES");
+            if (productImagesArray.length > 0) {
+              productImagesArray.forEach((value: any) => {
+                var imageupload = {
+                  "name": value.FileName + '.' + value.FileExt,
+                  "size": '',
+                  "type": '',
+                  "filesrc": '',
+                  "FilenetId": value.FilenetId,
+                  "MIMEType": value.MIMEType,
+                  "no": pItem.ZzProductNo
+                };
+                productImages.push(imageupload);
+
               });
-              var productFilesArray = data.listtoattachnav['results'].filter(function (el: any) {
-                return el.ObjectType == "/AuctionProductDocuments" &&
-                  el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
-              });
-              console.log(productFilesArray, "PRODUCT FILES");
-              console.log(productImagesArray, "PRODUCT IMAGES");
-              if (productImagesArray.length > 0) {
-                productImagesArray.forEach((value: any) => {
-                  var imageupload = {
-                    "name": value.FileName + '.' + value.FileExt,
-                    "size": '',
-                    "type": '',
-                    "filesrc": '',
-                    "FilenetId": value.FilenetId,
-                    "MIMEType": value.MIMEType,
-                    "no": pItem.ZzProductNo
-                  };
-                  productImages.push(imageupload);
-                  
-                });
-                console.log(productImages, "Product images")
-              }
-              if (productFilesArray.length > 0) {
-                productFilesArray.forEach((value: any) => {
-                  var fileupload = {
-                    "name": value.FileName + '.' + value.FileExt,
-                    "size": '',
-                    "type": '',
-                    "filesrc": '',
-                    "FilenetId": value.FilenetId,
-                    "MIMEType": value.MIMEType,
-                    "no": pItem.ZzProductNo
-                  };
-                  productFiles.push(fileupload);
-                });
-                // console.log(productFiles, "Product files")
-                // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 206 ~ productFiles", productFiles);
-              }
+              console.log(productImages, "Product images")
             }
+            if (productFilesArray.length > 0) {
+              productFilesArray.forEach((value: any) => {
+                var fileupload = {
+                  "name": value.FileName + '.' + value.FileExt,
+                  "size": '',
+                  "type": '',
+                  "filesrc": '',
+                  "FilenetId": value.FilenetId,
+                  "MIMEType": value.MIMEType,
+                  "no": pItem.ZzProductNo
+                };
+                productFiles.push(fileupload);
+              });
+              // console.log(productFiles, "Product files")
+              // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 206 ~ productFiles", productFiles);
+            }
+          }
         }
         let item = {
           productNo: pItem.ZzProductNo,
@@ -248,7 +249,7 @@ export class AuctionDetailsComponent implements OnInit {
         // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 246 ~ this.products", this.products);
         // console.log(this.products)
       });
-      
+
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
       // console.log("🚀 ~ this.bidderService.getAuctionDetail ~ this.auctionAttachment", this.auctionAttachment)
       this.ibgaDoc = this.auctionAttachment.filter((attach: { ObjectType: string; InvoiceForm: string; }) => attach.ObjectType == "/AuctionPaymentDocuments" && attach.InvoiceForm == 'I');
@@ -394,45 +395,45 @@ export class AuctionDetailsComponent implements OnInit {
       }
     }
     this.primaryAwardingData = {
-      bidValue : auctionDetailList.BidOfferValue,
-      bidderName : auctionDetailList.BidSupplierName,
-      bidderNo : auctionDetailList.BidCrNumber,
-      pdfData : auctionDetailList.BidOfferPDF,
-      auctionId : auctionDetailList.ObjectId,
+      bidValue: auctionDetailList.BidOfferValue,
+      bidderName: auctionDetailList.BidSupplierName,
+      bidderNo: auctionDetailList.BidCrNumber,
+      pdfData: auctionDetailList.BidOfferPDF,
+      auctionId: auctionDetailList.ObjectId,
     }
     this.finalAwardingData = {
-      bidValue : auctionDetailList.BidOfferValue,
-      bidderName : auctionDetailList.BidSupplierName,
-      bidderNo : auctionDetailList.BidCrNumber,
-      pdfData : auctionDetailList.BidOfferPDF,
-      auctionId : auctionDetailList.ObjectId,
+      bidValue: auctionDetailList.BidOfferValue,
+      bidderName: auctionDetailList.BidSupplierName,
+      bidderNo: auctionDetailList.BidCrNumber,
+      pdfData: auctionDetailList.BidOfferPDF,
+      auctionId: auctionDetailList.ObjectId,
     }
 
-    if(this.upcomingAuction.auctionStatus == "Published"){
+    if (this.upcomingAuction.auctionStatus == "Published") {
       this.status.published = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Ongoing"){
+    if (this.upcomingAuction.auctionStatus == "Ongoing") {
       this.status.ongoing = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Pending Primary Awarding"){
+    if (this.upcomingAuction.auctionStatus == "Pending Primary Awarding") {
       this.status.pendingPrimaryAwarding = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Pending FBGA"){
+    if (this.upcomingAuction.auctionStatus == "Pending FBGA") {
       this.status.pendingFbga = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Pending Selecting"){
+    if (this.upcomingAuction.auctionStatus == "Pending Selecting") {
       this.status.pendingSelecting = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Pending FBGA Approval"){
+    if (this.upcomingAuction.auctionStatus == "Pending FBGA Approval") {
       this.status.pendingFbgaApproval = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Pending Paying"){
+    if (this.upcomingAuction.auctionStatus == "Pending Paying") {
       this.status.pendingPaying = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Terminated"){
+    if (this.upcomingAuction.auctionStatus == "Terminated") {
       this.status.terminated = true;
     }
-    if(this.upcomingAuction.auctionStatus == "Awarded"){
+    if (this.upcomingAuction.auctionStatus == "Awarded") {
       this.status.awarded = true;
     }
 
@@ -678,8 +679,8 @@ export class AuctionDetailsComponent implements OnInit {
 
 
   downloadImages(item: any) {
-  console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 663 ~ item", item);
-    
+    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 663 ~ item", item);
+
     this.bidderService.downloadAuctionImages(item.FilenetId).subscribe(async (downloadAuctionImagesResp: any) => {
       const fileResp = downloadAuctionImagesResp.d;
       var byteString = atob(
@@ -722,7 +723,7 @@ export class AuctionDetailsComponent implements OnInit {
   }
 
   viewItem(a: any) {
-  // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 612 ~ a", a);
+    // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 612 ~ a", a);
     this.selectedProduct = a.id;
     this.showVideo = false;
     this.fullImage = {
@@ -738,7 +739,7 @@ export class AuctionDetailsComponent implements OnInit {
       this.response.ZzBidderSts = 'B';
     }
   }
-  openProductPopup(){
+  openProductPopup() {
     let productData = this.products.filter((attach) => attach.productNo == this.selectedProduct);
     // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 726 ~ this.selectedProduct", productData);
     const dialogRef = this.dialog.open(ProductDetailPopupComponent, {
@@ -752,5 +753,13 @@ export class AuctionDetailsComponent implements OnInit {
         viewproduct: productData[0],
       },
     });
+  }
+
+  scrollImageSlider(side: string) {
+    if (side == 'left') {
+      this.imageSlide.nativeElement.scrollTo({ left: (this.imageSlide.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+    } else if (side == 'right') {
+      this.imageSlide.nativeElement.scrollTo({ left: (this.imageSlide.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+    }
   }
 }

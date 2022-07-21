@@ -419,4 +419,10 @@ ul.thumbs {
     color: rgba(0, 0, 0, 0.87);
 }
 
+.thumbs {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 // }

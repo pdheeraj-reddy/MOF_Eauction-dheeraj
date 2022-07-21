@@ -132,7 +132,7 @@ const routes: Routes = [
   //   loadChildren: () => import('./components/sprint3/am-auction.module').then(m => m.AmAuctionModule)
   // },
   { path: 'bidder', loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule) },
-  { path: 'auction-list', loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule) },
+  // { path: 'auction-list', loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule) },
   { path: 'auctions', loadChildren: () => import('./components/sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule) },
   { path: 'auction-committee-head', loadChildren: () => import('./components/sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule) },
   { path: 'auction-details/:auctionId', loadChildren: () => import('./components/sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule) },
