@@ -95,6 +95,7 @@ export class AuctionDetailComponent implements OnInit {
   isValidAuctionDate: boolean = false;
   isValidAnncSDate: boolean = false;
   isValidAnncEDate: boolean = false;
+  isBidOpeningTime: boolean = false;
 
   // Form controls
   basicFormGroup: FormGroup;
@@ -307,7 +308,18 @@ export class AuctionDetailComponent implements OnInit {
           next: '<span class="icon-keyboard_arrow_right"></span>',
         },
       });
-      $("#bidOpeningTime").hijriDatePicker({
+      // $("#bidOpeningTime").hijriDatePicker({
+      //   hijri: false,
+      //   locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
+      //   format: "hh:mm A",
+      //   showSwitcher: false,
+      //   showTodayButton: false,
+      //   icons: {
+      //     up: 'icon-arrow-up text-primary',
+      //     down: 'icon-arrow-down text-primary',
+      //   },
+      // });
+      var bidOpeningTime = $("#bidOpeningTime").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
         format: "hh:mm A",
@@ -318,6 +330,10 @@ export class AuctionDetailComponent implements OnInit {
           down: 'icon-arrow-down text-primary',
         },
       });
+      if (this.auctionItem.bidOpeningTime) {
+        bidOpeningTime.val(this.auctionItem.bidOpeningTime);
+      }
+
       $("#finalGntee").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
@@ -508,7 +524,7 @@ export class AuctionDetailComponent implements OnInit {
     // let auctionStartDateTime = this.auctionDetails.ZzAnncSrtD +" "+ this.auctionDetails.ZzAnncSrtT;
     this.auctionItem.bidOpeningTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT.split(" ")[0], 'HH:mm:ss').format('hh:mm A') : '' : '';
     console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 508 ~ this.auctionDetails.ZzAnncSrtT).format('hh:mm A')", this.auctionItem.bidOpeningTime);
-    
+
     this.auctionItem.startPrice = this.auctionDetails.ZzBidSrtPrice;
     this.auctionItem.lowBidValue = this.auctionDetails.ZzLowBidVl;
     this.auctionItem.gnteePercentage = this.auctionDetails.ZzIbgaPercent;
@@ -549,7 +565,7 @@ export class AuctionDetailComponent implements OnInit {
       pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : ''),
       auctionAttachement: new FormArray((this.auctionItem.auctionAttachement ? this.auctionItem.auctionAttachement : [])),
     });
-    console.log("Form",this.basicFormGroup);
+    console.log("Form", this.basicFormGroup);
     if (this.ViewMode == 'view') {
       this.basicFormGroup.disable();
       this.basicFormGroup.get('auctionType')?.disable();
@@ -834,7 +850,9 @@ export class AuctionDetailComponent implements OnInit {
     let endDate = this.basicFormGroup.controls['auctionEndDate'].value;
     let anncStartDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
     // Need to validate bid opening time
-    let anncEndDate = this.basicFormGroup.controls['bidOpeningTime'].value;
+    let bidOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
+
+
     if (startDate && endDate) {
       if ((moment(startDate).isAfter(endDate, 'day'))) {
         this.isValidAuctionDate = true;
@@ -844,6 +862,13 @@ export class AuctionDetailComponent implements OnInit {
     if (startDate && endDate && anncStartDate) {
       if ((moment(anncStartDate).isBefore(endDate, 'day')) || (moment(anncStartDate).isBefore(startDate, 'day'))) {
         this.isValidAnncSDate = true;
+        return;
+      }
+      if (bidOpenTime) {
+        this.isBidOpeningTime = false;
+      }
+      else {
+        this.isBidOpeningTime = true;
         return;
       }
     }

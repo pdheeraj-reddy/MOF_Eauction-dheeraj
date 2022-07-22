@@ -73,7 +73,6 @@ export class AuctionReqDetailsComponent implements OnInit {
           this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp);
           this.navigateToPage(1, 'auctionAttach');
           this.auctionDetails = auctionDetailsResp.body.d.results[0];
-          console.log('YY', this.auctionItem);
           // Load until data loads then slowly load images
           this.showLoader = false;
         },

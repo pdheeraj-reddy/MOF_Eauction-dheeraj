@@ -427,8 +427,9 @@
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp13' | translate }}"
                                 (change)="onChangeDateTime($event, 'bidOpeningTime')" class="form-control time-control"
                                 [required]="true" />
-                            <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
-                                | translate }}</div>
+                            <div *ngIf="isBidOpeningTime" class="invalid-feedback">{{
+                                'auctioncreate.auctiondetails.section1_formGrp13' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                 </div>
