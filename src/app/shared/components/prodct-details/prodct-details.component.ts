@@ -155,8 +155,12 @@ export class ProdctDetailsComponent implements OnInit {
 
   editPriceInPopup(index: any, product: any) {
     let index_temp = parseInt(product.ZzProductNo);
-
-    const dialogRef = this.dialog.open(ViewProductDetailComponent, {
+    const sendProduct = this.auctionProducts.filter((obj) => {
+      if(obj.productNo == index_temp){
+        return obj;
+      }
+    });
+      const dialogRef = this.dialog.open(ViewProductDetailComponent, {
       disableClose: true,
       height: '90%',
       width: '90%',
@@ -165,7 +169,7 @@ export class ProdctDetailsComponent implements OnInit {
       },
       data: {
         data: this.temp,
-        viewproduct: this.auctionProducts[index_temp - 1],
+        viewproduct: sendProduct[0],
         index: index,
         productDetails: product,
         isBidUpdate: this.isBidUpdate,
@@ -179,7 +183,6 @@ export class ProdctDetailsComponent implements OnInit {
           'ZzPdtEstPricePc'
         ] = result.price;
         let temp = this.preAuctionData['listtoproductnav']['results'];
-        console.log("🚀🚀 ~~ temp", temp);
         this.productValue = 0;
         for (let i = 0; i < temp.length; i++) {
           if (temp[i]?.ZzPdtEstPricePc) {
@@ -385,7 +388,8 @@ export class ProdctDetailsComponent implements OnInit {
   }
 
   rejectAuction(action: any, status: any) {
-    if (this.rejectionNotes) {
+    let rejectNote = this.rejectionNotes.trim();
+    if (rejectNote) {
       let adjustedPriceData: any = {};
       this.preAuctionData.Status = status;
       this.preAuctionData.ActionTaken = action;
@@ -413,6 +417,7 @@ export class ProdctDetailsComponent implements OnInit {
 
     }
     else {
+      this.rejectionNotes = "";
       this.rejectionReason = true;
       setTimeout(() => {
         this.rejectionReason = false;
@@ -515,10 +520,8 @@ export class ProdctDetailsComponent implements OnInit {
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     if ((this.preAuctionData?.Status == 'Pending Pricing' || this.preAuctionData?.Status == 'Pending Pricing Approval' || this.preAuctionData?.Status == 'Rejected Prices') && this.preAuctionData?.Status != 'Pending to Publish') {
       tableData1 = this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst2[columnId]));
-      console.log("🚀🚀 ~~ tableData1", tableData1);
     } else {
       tableData1 = this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst1[columnId]));
-      console.log("🚀🚀 ~~ tableData2", tableData1);
       this.preAuctionData.listtoproductnav.results = tableData1
     }
   }
