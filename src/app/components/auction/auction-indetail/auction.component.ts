@@ -15,6 +15,7 @@ export class AuctionComponent implements OnInit {
   public charNum = '0/250';
   activeStep: number = 1;
   auctionStatus: string;
+  statusOfAuction: string;
 
   showLoader: boolean = false;
   ObjectId: any = '';
@@ -82,7 +83,7 @@ export class AuctionComponent implements OnInit {
     this.auctionDetailsSubscription$ = this.auctionServc.getAuctionDetails(ObjectId, DraftId).subscribe((auctionDetailsResp: any) => {
       this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
       this.auctionDetails = auctionDetailsResp.body.d.results[0];
-      console.log("🚀🚀 ~~ this.auctionDetails", this.auctionDetails.Status);
+      this.statusOfAuction = this.auctionDetails.Status;
       this.showLoader = false;
       if (this.ViewMode == 'view') {
         if (this.auctionDetails.listtoproductnav?.results.length > 0) {

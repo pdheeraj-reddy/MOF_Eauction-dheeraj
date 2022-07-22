@@ -50,12 +50,13 @@ export class RejectAuctionPopupComponent implements OnInit {
     this.showSubmitBtnLoader = true;
     this.preAuctionData.ActionTaken = action;
     if (action == 'R') {
-      this.preAuctionData.RejectNotes = this.rejectionNotes;
+      this.preAuctionData.RejectNotes = this.rejectionReason;
+      console.log("🚀🚀 ~~ this.preAuctionData.RejectNotes", this.preAuctionData.RejectNotes);
       console.log(this.preAuctionData);
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: action,
-          RejectNotes: this.rejectionNotes,
+          RejectNotes: this.preAuctionData.RejectNotes,
           ObjectId: this.preAuctionData.ObjectId,
           Description: this.preAuctionData.Description,
           Status: 'Pending Review',

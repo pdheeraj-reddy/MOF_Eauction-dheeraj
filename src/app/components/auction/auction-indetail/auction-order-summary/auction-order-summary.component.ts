@@ -55,6 +55,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
   @Input() DraftId: string;
   @Input() ViewMode: string;
   @Input() auctionStatus: String;
+  @Input() statusOfAuction: string;
   @Output() changeSteps = new EventEmitter<number>();
   //variables
   title = 'Auction Details';

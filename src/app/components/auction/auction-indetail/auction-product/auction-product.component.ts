@@ -24,6 +24,7 @@ export class AuctionProductComponent implements OnInit {
   @Output() changeSteps = new EventEmitter<number>();
   // AUCTION edit start
   @Input() auctionStatus: String;
+  @Input() statusOfAuction: string;
   @Output() productCreateResp = new EventEmitter<any>();
   @Output() changeauctiontype = new EventEmitter<string>();
   // AUCTION edit end

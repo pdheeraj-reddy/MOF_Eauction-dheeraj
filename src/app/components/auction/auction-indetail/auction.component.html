@@ -62,81 +62,17 @@
         </div>
         <div class="col-80 mt-3">
             <app-auction-detail [activeStep]="activeStep" [ObjectId]="ObjectId" [DraftId]="DraftId"
-                [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" (auctionCreateResp)="onAuctionCreateResp($event)"
-                (changeauctiontype)="onChangeauctiontype($event)" (changeSteps)="onChangeSteps($event)"
-                *ngIf="activeStep === 1">
-
-                <div *ngIf="auctionDetails.Status == 'Rejected'"
-                    class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
-                    <div class="alert-wrapper">
-                        <div class="alert-body">
-                            <i class="alert-icon">
-                                <span class="icon-filled-wrong"></span>
-                            </i>
-                            <div class="alert-content">
-                                <p class="text-14">{{auctionDetails.RejectNotes}}</p>
-                            </div>
-                        </div>
-                        <div class="alert-action">
-                            <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert"
-                                aria-label="Close">
-                                <span class="icon-close"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </app-auction-detail>
+                [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" [statusOfAuction]="statusOfAuction"
+                (auctionCreateResp)="onAuctionCreateResp($event)" (changeauctiontype)="onChangeauctiontype($event)"
+                (changeSteps)="onChangeSteps($event)" *ngIf="activeStep === 1"></app-auction-detail>
             <app-auction-product [activeStep]="activeStep" [ObjectId]="ObjectId" [DraftId]="DraftId"
-                [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" (productCreateResp)="onProductCreateResp($event)"
-                (changeauctiontype)="onChangeauctiontype($event)" (changeSteps)="onChangeSteps($event)"
-                *ngIf="activeStep === 2">
-
-                <div *ngIf="auctionDetails.Status == 'Rejected'"
-                    class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
-                    <div class="alert-wrapper">
-                        <div class="alert-body">
-                            <i class="alert-icon">
-                                <span class="icon-filled-wrong"></span>
-                            </i>
-                            <div class="alert-content">
-                                <p class="text-14">{{auctionDetails.RejectNotes}}</p>
-                            </div>
-                        </div>
-                        <div class="alert-action">
-                            <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert"
-                                aria-label="Close">
-                                <span class="icon-close"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </app-auction-product>
+                [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" [statusOfAuction]="statusOfAuction"
+                (productCreateResp)="onProductCreateResp($event)" (changeauctiontype)="onChangeauctiontype($event)"
+                (changeSteps)="onChangeSteps($event)" *ngIf="activeStep === 2"></app-auction-product>
             <!-- <app-auction-committee-members [activeStep]="activeStep" (changeSteps)="onChangeSteps($event)" *ngIf="activeStep === 3"></app-auction-committee-members> -->
             <app-auction-order-summary [activeStep]="activeStep" [ObjectId]="ObjectId" [DraftId]="DraftId"
-                [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" (changeSteps)="onChangeSteps($event)"
-                *ngIf="activeStep === 3">
-
-                <div *ngIf="auctionDetails.Status == 'Rejected'"
-                    class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
-                    <div class="alert-wrapper">
-                        <div class="alert-body">
-                            <i class="alert-icon">
-                                <span class="icon-filled-wrong"></span>
-                            </i>
-                            <div class="alert-content">
-                                <p class="text-14">{{auctionDetails.RejectNotes}}</p>
-                            </div>
-                        </div>
-                        <div class="alert-action">
-                            <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert"
-                                aria-label="Close">
-                                <span class="icon-close"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </app-auction-order-summary>
+                [ViewMode]="ViewMode" [auctionStatus]="auctionStatus" [statusOfAuction]="statusOfAuction"
+                (changeSteps)="onChangeSteps($event)" *ngIf="activeStep === 3"></app-auction-order-summary>
         </div>
     </div>
 </div>

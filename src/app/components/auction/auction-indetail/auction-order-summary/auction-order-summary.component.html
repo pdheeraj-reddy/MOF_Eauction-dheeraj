@@ -52,7 +52,26 @@
     </div>
 </div>
 <div *ngIf="!showLoader" class="order-summary-form">
-    <ng-content></ng-content>
+
+    <div *ngIf="statusOfAuction == 'Rejected'" class="alert alert-outline alert-danger alert-dismissible fade show"
+        role="alert">
+        <div class="alert-wrapper">
+            <div class="alert-body">
+                <i class="alert-icon">
+                    <span class="icon-filled-wrong"></span>
+                </i>
+                <div class="alert-content">
+                    <p class="text-14">{{auctionDetails.RejectNotes}}</p>
+                </div>
+            </div>
+            <div class="alert-action">
+                <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12 col-md-12">
             <ul class="nav et-tabs et-tabs-filled nav-pills" id="pills-tab" role="tablist">
