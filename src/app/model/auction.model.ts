@@ -21,7 +21,7 @@ export class AuctionBasicMaster {
     auctionEndTimeSufix: string;
     startAuction: string;
     auctionAnncStartDate: string;
-    auctionAnncEndDate: string;
+    bidOpeningTime: string;
     startPrice: string;
     lowBidValue: string;
     gnteePercentage: string;

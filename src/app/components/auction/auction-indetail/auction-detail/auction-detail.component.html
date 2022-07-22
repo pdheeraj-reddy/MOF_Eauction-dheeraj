@@ -422,11 +422,11 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp13' |
                                     translate }}</span></label>
-                            <input type="text" onkeydown="event.preventDefault()" id="auctionAnncEndDate"
-                                formControlName="auctionAnncEndDate"
-                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionAnncEndDate')"
-                                class="form-control calendar-control calendar-both-control" [required]="true" />
+                            <input type="text" onkeydown="event.preventDefault()" id="bidOpeningTime"
+                                formControlName="bidOpeningTime"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp13' | translate }}"
+                                (change)="onChangeDateTime($event, 'bidOpeningTime')" class="form-control time-control"
+                                [required]="true" />
                             <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
                                 | translate }}</div>
                         </div>

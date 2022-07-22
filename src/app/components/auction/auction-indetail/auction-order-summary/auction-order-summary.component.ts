@@ -281,10 +281,9 @@ export class AuctionOrderSummaryComponent implements OnInit {
         'YYYY-MM-DD'
       )
       : '';
-    this.auctionItem.auctionAnncEndDate = serverObj.d.results[0].ZzAnncEndD
-      ? moment(serverObj.d.results[0].ZzAnncEndD, 'DD.MM.YYYY').format(
-        'YYYY-MM-DD'
-      )
+    this.auctionItem.bidOpeningTime = serverObj.d.results[0].ZzAnncSrtT
+      ? moment(serverObj.d.results[0].ZzAnncSrtT, 'HH:mm:ss'
+      ).format('A')
       : '';
     this.auctionItem.startPrice = serverObj.d.results[0].ZzBidSrtPrice;
     this.auctionItem.lowBidValue = serverObj.d.results[0].ZzLowBidVl;
