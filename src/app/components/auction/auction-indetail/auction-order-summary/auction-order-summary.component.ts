@@ -141,7 +141,10 @@ export class AuctionOrderSummaryComponent implements OnInit {
           console.log('getAuctionDetails Resp ', auctionDetailsResp.body);
           this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
           this.auctionDetailsResp = auctionDetailsResp.body.d.results[0];
+          console.log("🚀🚀 ~~ this.auctionItem from backend", this.auctionDetailsResp);
           this.auctionItem = await this.mappingObjForEdit(auctionDetailsResp.body);
+          console.log("🚀🚀 ~~ this.auctionItem", this.auctionItem);
+
           this.auctionDetails = auctionDetailsResp.body.d.results[0];
           await this.mappingObjForProducts(auctionDetailsResp.body.d.results[0]);
           console.log('YY', this.auctionItem);
@@ -281,9 +284,10 @@ export class AuctionOrderSummaryComponent implements OnInit {
         'YYYY-MM-DD'
       )
       : '';
+
     this.auctionItem.bidOpeningTime = serverObj.d.results[0].ZzAnncSrtT
       ? moment(serverObj.d.results[0].ZzAnncSrtT, 'HH:mm:ss'
-      ).format('A')
+      ).format('hh:mm A')
       : '';
     this.auctionItem.startPrice = serverObj.d.results[0].ZzBidSrtPrice;
     this.auctionItem.lowBidValue = serverObj.d.results[0].ZzLowBidVl;

@@ -113,9 +113,9 @@ export class InterconversionService {
         'YYYY-MM-DD'
       )
       : '';
-    auctionDetails.auctionAnncEndDate = serverObj.ZzAnncEndD
-      ? moment(serverObj.ZzAnncEndD, 'DD.MM.YYYY').format(
-        'YYYY-MM-DD'
+    auctionDetails.bidOpeningTime = serverObj.ZzAnncSrtT
+      ? moment(serverObj.ZzAnncSrtT, 'HH:mm:ss').format(
+        'hh:mm A'
       )
       : '';
     auctionDetails.startPrice = serverObj.ZzBidSrtPrice;
