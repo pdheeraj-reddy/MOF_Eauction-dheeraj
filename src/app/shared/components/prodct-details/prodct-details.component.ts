@@ -37,6 +37,7 @@ export class ProdctDetailsComponent implements OnInit {
   invalidQty: boolean = false;
   showError: boolean = false;
   indexError = -1;
+  isTotalValid: boolean = false;
   isPriceError: boolean = false;
   isPriceSuccess: boolean = false;
   isPriceNull: boolean = false;
@@ -89,27 +90,42 @@ export class ProdctDetailsComponent implements OnInit {
       this.inputFieldElementFocus.nativeElement.select();
       // this.showConfim = false;
     } else if (!this.inputMode) {
-      let product = this.preAuctionData?.listtoproductnav?.results;
-      let flag = false;
-      this.isPriceNull = false;
-      product.forEach((element: any) => {
-        if (element.ZzPdtEstPricePc == null) {
-          this.isPriceNull = true;
-        }
-      });
-
-      if (!this.isPriceNull) {
+      if (this.productValue > 0) {
+        let product = this.preAuctionData?.listtoproductnav?.results;
+        let flag = false;
+        this.isPriceNull = false;
         product.forEach((element: any) => {
-          if (element.ZzPdtEstPricePc == 0) {
-            flag = true;
+          if (element.ZzPdtEstPricePc == null) {
+            this.isPriceNull = true;
           }
         });
-      }
 
-      if (flag) {
-        this.isPriceError = true;
-      } else if (!this.isPriceNull) {
-        this.showConfim = true;
+        if (!this.isPriceNull) {
+          product.forEach((element: any) => {
+            if (element.ZzPdtEstPricePc == 0) {
+              flag = true;
+            }
+          });
+        }
+
+        if (flag) {
+          this.isPriceError = true;
+        } else if (!this.isPriceNull) {
+          this.showConfim = true;
+        }
+      } else {
+        this.isTotalValid = true;
+        setTimeout(() => {
+          this.isTotalValid = false;
+        }, 5000);
+        let product = this.preAuctionData?.listtoproductnav?.results;
+        let flag = false;
+        this.isPriceNull = false;
+        product.forEach((element: any) => {
+          if (element.ZzPdtEstPricePc == null) {
+            this.isPriceNull = true;
+          }
+        });
       }
 
     }
@@ -156,11 +172,11 @@ export class ProdctDetailsComponent implements OnInit {
   editPriceInPopup(index: any, product: any) {
     let index_temp = parseInt(product.ZzProductNo);
     const sendProduct = this.auctionProducts.filter((obj) => {
-      if(obj.productNo == index_temp){
+      if (obj.productNo == index_temp) {
         return obj;
       }
     });
-      const dialogRef = this.dialog.open(ViewProductDetailComponent, {
+    const dialogRef = this.dialog.open(ViewProductDetailComponent, {
       disableClose: true,
       height: '90%',
       width: '90%',
@@ -467,28 +483,45 @@ export class ProdctDetailsComponent implements OnInit {
       this.inputFieldElementFocus.nativeElement.focus();
       this.inputFieldElementFocus.nativeElement.select();
     } else if (!this.inputMode) {
-      let product = this.preAuctionData?.listtoproductnav?.results;
-      let flag = false;
-      this.isPriceNull = false;
-      product.forEach((element: any) => {
-        if (element.ZzPdtEstPricePc == null) {
-          this.isPriceNull = true;
-        }
-      });
-
-      if (!this.isPriceNull) {
+      if (this.productValue > 0) {
+        this.isTotalValid = false;
+        let product = this.preAuctionData?.listtoproductnav?.results;
+        let flag = false;
+        this.isPriceNull = false;
         product.forEach((element: any) => {
-          if (element.ZzPdtEstPricePc == 0) {
-            flag = true;
+          if (element.ZzPdtEstPricePc == null) {
+            this.isPriceNull = true;
+          }
+        });
+
+        if (!this.isPriceNull) {
+          product.forEach((element: any) => {
+            if (element.ZzPdtEstPricePc == 0) {
+              flag = true;
+            }
+          });
+        }
+
+        if (flag) {
+          this.isPriceError = true;
+        } else if (!this.isPriceNull) {
+          this.isPriceSuccess = true;
+        }
+      } else {
+        this.isTotalValid = true;
+        setTimeout(() => {
+          this.isTotalValid = false;
+        }, 5000);
+        let product = this.preAuctionData?.listtoproductnav?.results;
+        let flag = false;
+        this.isPriceNull = false;
+        product.forEach((element: any) => {
+          if (element.ZzPdtEstPricePc == null) {
+            this.isPriceNull = true;
           }
         });
       }
 
-      if (flag) {
-        this.isPriceError = true;
-      } else if (!this.isPriceNull) {
-        this.isPriceSuccess = true;
-      }
     } else {
       this.isPriceSuccess = true;
     }

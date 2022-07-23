@@ -169,7 +169,10 @@
                     <td width="260px" class="font-weight-bold color-darkgreen"
                         *ngIf="(loggedUserRole.isPricingHead || loggedUserRole.isPricingMember)&& (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices' )">
                         {{"auctionModerator.am-detail.product-details.estimatedValue" | translate}}<br /> {{productValue
-                        | number}} {{"auctionModerator.am-detail.product-details.currency" | translate}}
+                        | number}} {{"auctionModerator.am-detail.product-details.currency" | translate}} <br>
+                        <div *ngIf="isTotalValid" class="invalid-feedback d-block">{{
+                            'auctionMember.bid-value.overall_failure_mssg' | translate }}
+                        </div>
                     </td>
                     <td></td>
                 </tr>
