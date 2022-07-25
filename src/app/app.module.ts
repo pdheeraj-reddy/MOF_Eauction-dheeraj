@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 // Auth module
 import { AuthService } from './service/auth.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 import { DatePipe } from '@angular/common';
 // Datepicker module
@@ -88,6 +88,7 @@ import { EnvService } from './env.service';
 import { AlertModalComponent } from './shared/components/alert-modal/alert-modal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { AppGuard } from './guard/app.guard';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -181,7 +182,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CookieService,
     AuthService,
     AuctionHeadDetailPageComponent,
-    AuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,

@@ -4,7 +4,7 @@ import { AuctionComponent } from './components/auction/auction-indetail/auction.
 import { TenderComponent } from './tender/tender.component';
 import { AuctionListsComponent } from './components/auction/auction-lists/auction-lists.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guard/auth.guard';
 import { AuctionModeratorComponent } from './modules/auctionModerator/auction-moderator.component';
 import { AmDetailPageComponent } from './modules/auctionModerator/am-detail-page/am-detail-page.component';
 import { AucModLandingPageComponent } from './modules/auctionModerator/auc-mod-landing-page/auc-mod-landing-page.component';
@@ -20,6 +20,7 @@ import { AuctionCommiteeDetailPageComponent } from './modules/auction-commitee/a
 import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/auction-commitee-open-offers/auction-commitee-open-offers.component';
 
 import { AuctionSliderComponent } from './common/components/auction-slider/auction-slider.component';
+import { AppGuard } from './guard/app.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/auctionlist', pathMatch: 'full' },
   { path: 'tender', component: TenderComponent },
@@ -27,7 +28,7 @@ const routes: Routes = [
   // { path:'**', redirectTo:'/dashboard' },
   // { path:'**', redirectTo:'/auctionlist' },
   // { path:'auctionlist', component:AuctionListsComponent },
-  { path: 'auctionlist', component: AuctionListsComponent, canActivate: [AuthGuard] },
+  { path: 'auctionlist', component: AuctionListsComponent, canActivate: [AuthGuard, AppGuard] },
   { path: 'auction', component: AuctionComponent, canActivate: [AuthGuard] },
   { path: 'auction/:ObjectId/:DraftId/:ViewMode', component: AuctionComponent, canActivate: [AuthGuard] },
   { path: 'tender', component: TenderComponent },
@@ -126,16 +127,27 @@ const routes: Routes = [
       },
     ],
   },
-  // {
-  //   path: 'bidder',
-  //   // canActivate: [AuthGuard],
-  //   loadChildren: () => import('./components/sprint3/am-auction.module').then(m => m.AmAuctionModule)
-  // },
-  { path: 'bidder', loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule) },
-  // { path: 'auction-list', loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule) },
-  { path: 'auctions', loadChildren: () => import('./components/sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule) },
-  { path: 'auction-committee-head', loadChildren: () => import('./components/sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule) },
-  { path: 'auction-details/:auctionId', loadChildren: () => import('./components/sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule) },
+
+  {
+    path: 'bidder',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule)
+  },
+  {
+    path: 'auctions',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./components/sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule)
+  },
+  {
+    path: 'auction-committee-head',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./components/sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule)
+  },
+  {
+    path: 'auction-details/:auctionId',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./components/sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule)
+  },
 ];
 
 @NgModule({
