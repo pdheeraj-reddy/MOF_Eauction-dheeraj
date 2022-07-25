@@ -124,9 +124,15 @@
         </app-auction-prmy-award>
         <!-- End -->
 
+        <!--============Final Awarding card ============-->
         <app-auction-final-award [finalaward]="finalAwardingData" [fbgaDoc]="fbgaDoc"
             *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA Approval' && role.auctionMod">
         </app-auction-final-award>
+        <!-- End -->
+
+        <!--============ Open offers card ============-->
+        <app-open-offers-card *ngIf="role.auctionCommitteeHead"></app-open-offers-card>
+        <!-- End -->
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
 
@@ -237,8 +243,8 @@
                         <div class="w-75">
                             <app-auction-countdown-timer-head *ngIf="upcomingAuction.auctionStatus"
                                 [auctionStatus]="upcomingAuction.auctionStatus"
-                                [auctionStartDate]="upcomingAuction?.auction_start_date"
-                                [auctionEndDate]="upcomingAuction?.auction_end_date" class="d-block"
+                                [auctionStartDate]="upcomingAuction.auction_start_date"
+                                [auctionEndDate]="upcomingAuction.auction_end_date" class="d-block"
                                 style="width: 200px;">
                             </app-auction-countdown-timer-head>
                         </div>
@@ -474,13 +480,13 @@
                             </div>
                             <!-- <p class="text-12 text-center">10 of 23</p> -->
 
-                            <p class="text-primary font-weight-bold text-22">{{upcomingAuction?.auctionnote1}}</p>
+                            <p class="text-primary font-weight-bold text-22">{{upcomingAuction.auctionnote1}}</p>
 
-                            <p class="text-16 text-muted">{{upcomingAuction?.auctionnote2}}</p>
+                            <p class="text-16 text-muted">{{upcomingAuction.auctionnote2}}</p>
 
                             <p class="text-14 text-black d-flex">
                                 <span class="icon-all-tenders text-primary font-weight-bold text-20"></span>&nbsp;
-                                <span class="mx-1">{{upcomingAuction?.productCount | number}}</span>
+                                <span class="mx-1">{{upcomingAuction.productCount | number}}</span>
                                 <span>{{ 'bidderAuctionDetails.Product' | translate }}</span>
                             </p>
 
@@ -488,14 +494,14 @@
                                 <span class="icon-calendar text-primary font-weight-bold text-20"></span>
                                 &nbsp;
                                 {{'bidderAuctionDetails.AuctionStarts' | translate }}
-                                {{upcomingAuction?.auctionStartsdate}} ∙
-                                {{upcomingAuction?.auctionStartstime}}
-                                {{upcomingAuction?.auctionStartstimeSufix}}
+                                {{upcomingAuction.auctionStartsdate}} ∙
+                                {{upcomingAuction.auctionStartstime}}
+                                {{upcomingAuction.auctionStartstimeSufix}}
                             </p>
 
                             <p class="text-14 text-black">
                                 <span class="icon-pin text-primary font-weight-bold text-20"></span>&nbsp;&nbsp;
-                                {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction?.biddingStatus}}
+                                {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction.biddingStatus}}
                             </p>
                             <div class="et-accordion">
                                 <div class="card" style="border: none; margin: 2%;">
