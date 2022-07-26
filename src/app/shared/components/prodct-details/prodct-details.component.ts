@@ -531,7 +531,12 @@ export class ProdctDetailsComponent implements OnInit {
 
   sendPricingValuesFinal() {
     this.isPriceError = false;
-    this.isPriceSuccess = true;
+    if (this.loggedUserRole.isPricingHead) {
+      this.showConfim = true;
+    } else if (this.loggedUserRole.isPricingMember) {
+      this.isPriceSuccess = true;
+    }
+    
   }
 
   rejectPrices() {
