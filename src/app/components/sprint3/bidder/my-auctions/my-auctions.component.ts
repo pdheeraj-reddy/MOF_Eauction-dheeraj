@@ -59,12 +59,12 @@ export class MyAuctionsComponent implements OnInit {
 
   public mapping(serverObj: any) {
     let resultSet: any = [];
-    this.totcntforall = serverObj.d.results[0].TotAll;
-    this.totcntforongoing = serverObj.d.results[0].TotOngoing;
-    this.totcntforupcomming = serverObj.d.results[0].TotPublished;
-    this.totcntforundergear = serverObj.d.results[0].TotPendingRw;
-    this.totcntforcancelled = serverObj.d.results[0].TotCompleted;
-    serverObj.d.results[0].page1tolistnav.results.forEach((result: any) => {
+    this.totcntforall = serverObj.d.results[0]?.TotAll;
+    this.totcntforongoing = serverObj.d.results[0]?.TotOngoing;
+    this.totcntforupcomming = serverObj.d.results[0]?.TotPublished;
+    this.totcntforundergear = serverObj.d.results[0]?.TotPendingRw;
+    this.totcntforcancelled = serverObj.d.results[0]?.TotCompleted;
+    serverObj.d.results[0]?.page1tolistnav.results.forEach((result: any) => {
       const items = {
         ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
         DraftId: result['DraftId'] ? result['DraftId'] : '0',
@@ -143,7 +143,7 @@ export class MyAuctionsComponent implements OnInit {
       if (res) {
         this.myAuctionListData = this.mapping(res.body);
         this.PaginationServc.setPagerValues(
-          +res.body.d.results[0].TotEle,
+          +res.body.d.results[0]?.TotEle,
           10,
           +pageNoVal
         );

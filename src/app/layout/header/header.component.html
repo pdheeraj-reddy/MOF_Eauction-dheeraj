@@ -13,12 +13,23 @@
                         <!-- <span class="text-10 text-secondary-orange sub-logo">حكومة | Gov</span> -->
                     </a>
                     <div class="main-nav">
-                        <ul *ngIf="!loggedUserRole.isAuctionModerator && !loggedUserRole.isBidder">
+                        <ul
+                            *ngIf="!loggedUserRole.isAuctionModerator && !loggedUserRole.isBidder && !loggedUserRole.isSalesHead">
                             <li class="nav-item mx-2">
                                 <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link font-medium" href="">{{ 'header.main-menu2' | translate }}</a>
+                            </li>
+                        </ul>
+                        <ul *ngIf="loggedUserRole.isSalesHead">
+                            <li class="nav-item mx-2">
+                                <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link font-medium" [routerLink]="['/auction-committee-head/am-auction']"
+                                    routerLinkActive="router-link-active">{{
+                                    'menu.auction' | translate }}</a>
                             </li>
                         </ul>
                         <ul *ngIf="loggedUserRole.isAuctionModerator">

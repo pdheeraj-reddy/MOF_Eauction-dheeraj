@@ -100,7 +100,8 @@ export class AuctionDetailsComponent implements OnInit {
   selectedProduct: any;
   finalAwardingData: { bidValue: any; bidderName: any; bidderNo: any; pdfData: any; auctionId: any; };
   @ViewChild('imageSlide', { read: ElementRef }) public imageSlide: ElementRef<any>;
-  constructor(private route: ActivatedRoute, public datepipe: DatePipe,
+  constructor(
+    private route: ActivatedRoute, public datepipe: DatePipe,
     private mapsAPILoader: MapsAPILoader,
     private http: HttpClient,
     public PaginationServc: PaginationSortingService,
@@ -113,10 +114,11 @@ export class AuctionDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.auctionSev.getLoggedUserRole();
-    this.role.auctionMod = this.currentUser.isAuctionModerator;
-    this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
+    // this.role.auctionMod = this.currentUser.isAuctionModerator;
+    // this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
+    // this.role.bidder = this.currentUser.isBidder;
+    this.role.auctionCommitteeHead = true;
     // Need role for bidder -- (Change to true if you want to check for bidder)
-    // this.role.bidder = true;
     console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 107 ~ this.currentUser", this.currentUser);
     this.currentLang = localStorage.getItem('lang_pref');
     if (this.currentLang == 'en') {
@@ -281,8 +283,10 @@ export class AuctionDetailsComponent implements OnInit {
           this.downloadImages(element);
         })
       }
-      console.log("🚀 ~ this.auctionAttachment.forEach ~ this.filenetImagesLst", this.filenetImagesLst)
-
+      if (this.filenetImagesLst.length == 0) {
+        this.showLoaderMainImage = false;
+        this.showLoaderSubImage = false;
+      }
       if (this.upcomingAuction?.biddingStatus) {
         if (this.upcomingAuction?.biddingStatus == 'C') {
           this.upcomingAuction.biddingStatus = 'Closed';

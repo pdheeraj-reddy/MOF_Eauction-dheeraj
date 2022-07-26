@@ -9,7 +9,7 @@ import { SendInvoiceComponent } from './send-invoice/send-invoice.component';
 const routes: Routes = [
   { path: '', component: AmAuctionComponent },
   { path: 'offer-report', component: BillOffferReportComponent },
-  { path: 'send-invoice', component: SendInvoiceComponent },
+  { path: 'send-invoice/:auctionId', component: SendInvoiceComponent },
   { path: 'pdf-template', component: BillPdfTemplateComponent },
   { path: 'pdf-product', component: BillPdfProductComponent },
 ];
