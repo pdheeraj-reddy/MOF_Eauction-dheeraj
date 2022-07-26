@@ -125,6 +125,7 @@
         "grid-previous": "السابق",
         "grid-next": "التالي",
         "page-validerror": "مطلوب",
+        "greater-then-zero": "يجب أن يكون أكبر من 0",
         "page-validnumericerror": "يجب أن تكون رقمية فقط",
         "formDate-plch": "يوم  -  شهر  -  سنة",
         "not-avail": "لا تنفع",

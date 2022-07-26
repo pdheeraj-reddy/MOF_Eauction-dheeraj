@@ -125,6 +125,7 @@
         "grid-previous": "Previous",
         "grid-next": "Next",
         "page-validerror": "is required",
+        "greater-then-zero" : "should be greater then 0",
         "page-validnumericerror": "should be only numeric",
         "formDate-plch": "year - month - day",
         "not-avail": "not avail",

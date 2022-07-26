@@ -22,6 +22,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   @Output() stepperEvent1 = new EventEmitter();
   @Output() stepperEvent = new EventEmitter();
   showSuccessPopup = false;
+  showCancelPopup = false;
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
@@ -118,7 +119,18 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this.showConfirm = true;
     }
   }
-
+  checkData(){
+    if(
+      this.committeeChairData || 
+      this.committeeSecData ||
+      this.committeeMem1Data || 
+      this.committeeMem2Data ||
+      this.committeeMem3Data ||
+      this.committeeMem4Data 
+      ){
+        this.showCancelPopup = true;
+      }
+  }
   cancelMember() {
     this.committeeChairData = undefined
     this.committeeMem1Data = undefined
@@ -144,6 +156,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
 
     this.auctionServc.unsaved = false;
     // this.ngOnInit();
+    this.router.navigate(['/auctionlist']);
   }
 
   assignPricingCommittee() {

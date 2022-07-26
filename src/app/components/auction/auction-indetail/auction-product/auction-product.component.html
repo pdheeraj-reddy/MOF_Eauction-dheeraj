@@ -727,6 +727,8 @@
                                                     <div *ngIf="invalidImageSize">{{'message.alert_maxfilesize' |
                                                         translate}}
                                                     </div>
+                                                    <div *ngIf="invalidImageType">{{'message.alert_validfile' | translate}}
+                                                    </div>
                                                 </div>
                                                 <div *ngIf="onAddProductSubmitted && productImages.errors"
                                                     class="invalid-feedback">
@@ -878,6 +880,8 @@
                                                 <div class="oneventinvalid-feedback">
                                                     <div *ngIf="invalidFileSize">{{'message.alert_maxfilesize' |
                                                         translate}}
+                                                    </div>
+                                                    <div *ngIf="invalidFileType">{{'message.alert_validfile' | translate}}
                                                     </div>
                                                 </div>
                                                 <div *ngIf="onAddProductSubmitted && productFiles.errors"

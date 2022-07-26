@@ -46,6 +46,7 @@ export class RejectAuctionPopupComponent implements OnInit {
 
   approveOrRejectAuction(action: any) {
     this.submitForm = true;
+    this.rejectionReason = this.rejectionReason.trim();
     if (!this.rejectionReason) return;
     this.showSubmitBtnLoader = true;
     this.preAuctionData.ActionTaken = action;

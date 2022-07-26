@@ -47,6 +47,7 @@ export class AuctionDetailComponent implements OnInit {
   showAlertModal: boolean = false;
   activeFileDownloadIndex = -1;
   columnLst = ['index', 'name'];
+  startValError : boolean = false;
   // Dropdown Values
   // dropValBeneCategories: any = ['category 1', 'category 2', 'category 3', 'category 4'];
   dropValProducts: any = [
@@ -650,7 +651,7 @@ export class AuctionDetailComponent implements OnInit {
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
     var ext = file[index]['name'].match(/\.(.+)$/)[1];
     if (ext.indexOf('.') === -1) {
-      this.invalidFileType = false;
+      // this.invalidFileType = false;
       if (!!this.acceptedExtensions.find(x => x === fileType)) {
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
@@ -842,6 +843,16 @@ export class AuctionDetailComponent implements OnInit {
     var byteString = btoa(file.filesrc);
     return byteString;
   }
+  checkStartValue(){
+    let startValue = this.basicFormGroup.controls['startPrice'].value;
+    console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 848 ~ startValue", startValue);
+    if(startValue < 0 || !startValue){
+      this.startValError = true;
+      return;
+    }else{
+      this.startValError = false;
+    }
+  }
 
   public onSubmit(submitSrc: string) {
     // this.showLoader = true;
@@ -851,7 +862,10 @@ export class AuctionDetailComponent implements OnInit {
     let anncStartDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
     // Need to validate bid opening time
     let bidOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
-
+    // let startValue = this.basicFormGroup.controls['startPrice'].value;
+    // console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 855 ~ startValue", startValue);
+    
+    
 
     if (startDate && endDate) {
       if ((moment(startDate).isAfter(endDate, 'day'))) {
@@ -973,7 +987,7 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.controls['startAuction'].clearValidators();
     this.basicFormGroup.controls['auctionAnncStartDate'].clearValidators();
     this.basicFormGroup.controls['bidOpeningTime'].clearValidators();
-    this.basicFormGroup.controls['startPrice'].clearValidators();
+    // this.basicFormGroup.controls['startPrice'].clearValidators();
     this.basicFormGroup.controls['lowBidValue'].clearValidators();
     this.basicFormGroup.controls['gnteePercentage'].clearValidators();
     this.basicFormGroup.controls['finalGntee'].clearValidators();
@@ -1232,6 +1246,7 @@ export class AuctionDetailComponent implements OnInit {
       this.basicFormGroup.controls['auctionEndDate'].setValidators([Validators.required]);
       this.basicFormGroup.controls['auctionStartTime'].setValidators([Validators.required]);
       this.basicFormGroup.controls['auctionEndTime'].setValidators([Validators.required]);
+      this.basicFormGroup.controls['startPrice'].setValidators(Validators.compose([Validators.required, Validators.min(1)]));
       this.basicFormGroup.controls['commissionType'].setValidators([Validators.required]);
       if (this.basicFormGroup.controls['auctionType'].value === 'Private') {
         this.basicFormGroup.controls['prevRefNo'].setValidators([Validators.required]);
@@ -1250,13 +1265,15 @@ export class AuctionDetailComponent implements OnInit {
       this.basicFormGroup.controls['auctionEndDate'].setValidators([Validators.required]);
       this.basicFormGroup.controls['auctionStartTime'].setValidators([Validators.required]);
       this.basicFormGroup.controls['auctionEndTime'].setValidators([Validators.required]);
+      this.basicFormGroup.controls['startPrice'].setValidators(Validators.compose([Validators.required, Validators.min(1)]));
+      // this.basicFormGroup.controls['startPrice'].setValidators([Validators.min(1)]);
       this.basicFormGroup.controls['commissionType'].setValidators([Validators.required]);
       this.basicFormGroup.controls['prevRefNo'].clearValidators();
     }
     this.basicFormGroup.controls['startAuction'].clearValidators();
     this.basicFormGroup.controls['auctionAnncStartDate'].clearValidators();
     this.basicFormGroup.controls['bidOpeningTime'].clearValidators();
-    this.basicFormGroup.controls['startPrice'].clearValidators();
+    // this.basicFormGroup.controls['startPrice'].clearValidators();
     this.basicFormGroup.controls['lowBidValue'].clearValidators();
     this.basicFormGroup.controls['gnteePercentage'].clearValidators();
     this.basicFormGroup.controls['finalGntee'].clearValidators();

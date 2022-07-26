@@ -25,6 +25,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   @Output()
   _3MembersAdded = false;
   showConfirm = false;
+  showCancelPopup = false;
   textDir = false;
   showSuccessPopup = false;
   preAuctionData: any;
@@ -116,15 +117,18 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.callstepper.emit();
   }
 
-  cancelPopup() {
-    this.cancelPopupVar = true;
+  checkData(){
+    if(
+      this.committeeChairData || 
+      this.committeeSecData ||
+      this.committeeMem1Data || 
+      this.committeeMem2Data ||
+      this.committeeMem3Data ||
+      this.committeeMem4Data 
+      ){
+        this.cancelPopupVar = true;
+      }
   }
-
-  closePopup() {
-    this.cancelPopupVar = false;
-  }
-
-
   cancelMember() {
     this.committeeChairData = undefined;
     this.committeeMem1Data = undefined;
@@ -144,6 +148,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.auctionServc.unsaved = false;
     // this.ngOnInit();
     this.cancelPopupVar = false;
+    this.router.navigate(['/auctionlist']);
   }
 
   checkMember() {

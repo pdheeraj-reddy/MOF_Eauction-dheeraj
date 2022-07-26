@@ -449,6 +449,14 @@
                             <input type="text" numeric formControlName="startPrice" min="1" step="any"
                                 class="form-control" placeholder="150,000" [required]="true" />
                         </div>
+                        <div *ngIf="submitted && form['startPrice'].errors" class="invalid-feedback">
+                            <div *ngIf="form['startPrice'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['startPrice'].errors['min']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
+                                'auctioncreate.greater-then-zero' | translate }}</div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group"

@@ -385,7 +385,7 @@
 
   <div *ngIf="!commiteeMemberData">
     <div>
-      <button (click)="cancelPopup()" class="btn btn-danger mt-5" _msthash="1893008" _msttexthash="94172">
+      <button (click)="checkData()" class="btn btn-danger mt-5" _msthash="1893008" _msttexthash="94172">
         {{"auctionModerator.am-detail.auction-committee.reject" | translate }} </button>&nbsp;
       <button (click)="checkMember()" class="btn btn-primary-light mt-5" _msthash="1893008" _msttexthash="94172"
         style="direction: ltr">
@@ -472,13 +472,13 @@
           {{"auctionModerator.am-detail.pricing-committee.reject-popup.title" |
           translate}}
         </h4>
-        <button type="button" (click)="closePopup()" class="modal-close btn-close btn-sm" data-dismiss="modal"
+        <button type="button" (click)="this.cancelPopupVar = false" class="modal-close btn-close btn-sm" data-dismiss="modal"
           aria-label="Close"><span class="icon-close"></span></button>
       </div>
       <div class="modal-body text-body text-16 mt-4 font-weight-500">
         {{"auctionModerator.am-detail.pricing-committee.reject-popup.subtitle" | translate}}</div>
       <div class="modal-footer mt-5" style="justify-content: end;">
-        <button type="button" (click)="closePopup()" class="btn btn-md btn-outline-light" data-dismiss="modal"
+        <button type="button" (click)="this.cancelPopupVar = false" class="btn btn-md btn-outline-light" data-dismiss="modal"
           aria-label="Close">
           {{"auctionModerator.am-detail.pricing-committee.reject-popup.back" | translate}} </button>
         <button type="button" (click)="cancelMember()" class="btn btn-danger btn-md" data-dismiss="modal"

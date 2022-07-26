@@ -320,7 +320,7 @@
   </div>
   <div>
     <div *ngIf="preAuctionData?.Status=='Pending Review'">
-      <button class="btn btn-danger mt-5" data-toggle="modal" data-target="#cancelMember" _msthash="1893008"
+      <button class="btn btn-danger mt-5" (click)="checkData()" _msthash="1893008"
         _msttexthash="94172">{{"auctionModerator.am-detail.pricing-committee.reject" |
         translate}}</button> &nbsp;
       <button class="btn btn-primary-light mt-5" (click)="checkMember()" _msthash="1893008" _msttexthash="94172"
@@ -393,8 +393,7 @@
 
 
 <!-- Cancel Model -->
-<div class="modal fade" id="cancelMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal show" *ngIf="showCancelPopup" [ngClass]="{ 'modal-show': showCancelPopup }">
 
   <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -403,13 +402,13 @@
           {{"auctionModerator.am-detail.pricing-committee.reject-popup.title" |
           translate}}
         </h4>
-        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"><span
+        <button type="button" class="modal-close btn-close btn-sm" (click)="this.showCancelPopup = false"><span
             class="icon-close"></span></button>
       </div>
       <div class="modal-body text-body text-16 mt-4 font-weight-500">
         {{"auctionModerator.am-detail.pricing-committee.reject-popup.subtitle" | translate}}</div>
       <div class="modal-footer mt-5" style="justify-content: end;">
-        <button type="button" class="btn btn-md btn-outline-light" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn btn-md btn-outline-light" (click)="this.showCancelPopup = false">
           {{"auctionModerator.am-detail.pricing-committee.reject-popup.back" | translate}} </button>
         <button type="button" (click)="cancelMember()" class="btn btn-danger btn-md" data-dismiss="modal"
           aria-label="Close">

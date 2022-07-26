@@ -70,7 +70,9 @@ export class AuctionProductComponent implements OnInit {
   isValidDeliveryDate: boolean = false;
   isValidPDeliveryDate: boolean = false;
   invalidImageSize: boolean = false;
+  invalidImageType: boolean = false;
   invalidFileSize: boolean = false;
+  invalidFileType: boolean = false;
   showDeleteSuccessfulModal: boolean = false;
   // -------------
 
@@ -671,7 +673,9 @@ export class AuctionProductComponent implements OnInit {
     // alert("Add +");
     this.invalidQty = false;
     this.invalidImageSize = false;
+    this.invalidImageType = false;
     this.invalidFileSize = false;
+    this.invalidFileType = false;
     this.submitted = true;
     this.showPopupLoader = false;
     this.validateFormControls("addProduct");
@@ -740,6 +744,7 @@ export class AuctionProductComponent implements OnInit {
   // }
   selectImages(e: any, dd: string): void {
     this.invalidImageSize = false;
+    this.invalidImageType = true;
     let filecount = e.target.files.length;
     if (e.target.files && filecount <= this.maxFileCount) {
       this.customLoopforImages(0, filecount, e.target.files);
@@ -750,6 +755,7 @@ export class AuctionProductComponent implements OnInit {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
     if (!!this.acceptedImagesExtensions.find(x => x === fileType)) {
+      this.invalidImageType = false;
       if (filesize <= 2097152) {
         if (this.productImages['controls'].length < this.maxFileCount) {
           // var fileupload: {[k: string]: any} = {};
@@ -770,6 +776,7 @@ export class AuctionProductComponent implements OnInit {
         }
       } else {
         this.invalidImageSize = true;
+        this.invalidImageType = false;
       }
     }
   }
@@ -784,8 +791,10 @@ export class AuctionProductComponent implements OnInit {
   }
 
   selectFiles(e: any, dd: string): void {
-    this.invalidImageSize = false;
+    // this.invalidImageSize = false;
+    // this.invalidImageType = true;
     this.invalidFileSize = false;
+    this.invalidFileType = true;
     let filecount = e.target.files.length;
     if (e.target.files && filecount <= this.maxFileCount) {
       this.customLoopforFiles(0, filecount, e.target.files);
@@ -796,6 +805,7 @@ export class AuctionProductComponent implements OnInit {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
     if (!!this.acceptedFilesExtensions.find(x => x === fileType)) {
+      this.invalidFileType = false;
       if (filesize <= 2097152) {
         if (this.productFiles['controls'].length < this.maxFileCount) {
           // var fileupload: {[k: string]: any} = {};
@@ -904,6 +914,7 @@ export class AuctionProductComponent implements OnInit {
 
   removeFile(file: any, index: number, currentPage: number) {
     this.invalidImageSize = false;
+    this.invalidImageType = false;
     if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
@@ -934,6 +945,7 @@ export class AuctionProductComponent implements OnInit {
 
   removeDoc(file: any, index: number, currentPage: number) {
     this.invalidFileSize = false;
+    this.invalidFileType = false;
     if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
@@ -966,7 +978,9 @@ export class AuctionProductComponent implements OnInit {
 
   public onAddProduct(submitSrc: string) {
     this.invalidImageSize = false;
+    this.invalidImageType = false;
     this.invalidFileSize = false;
+    this.invalidFileType = false;
     this.onAddProductSubmitted = true;
     if (this.addFormGroup.get('productSerialNumber')?.value < 1) {
       this.invalidQty = true;
