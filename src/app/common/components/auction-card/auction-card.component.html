@@ -1,9 +1,9 @@
 <div class="card">
 
     <div
-        [ngClass]="[auction.statuscode === 'Published' || auction.statuscode == 'Pending Paying' || auction.statuscode == 'Pending Selecting' ? 'status-code-pb' : auction.statuscode == 'Ongoing' ? 'status-code-rn' : auction.statuscode == 'Upcoming auction' ? 'status-code-up' : auction.statuscode == 'Awarded' ? 'status-code-ad' : auction.statuscode == 'Pending FBGA Approval' ||auction.statuscode == 'Pending FBGA' ||auction.statuscode == 'Pending Primary Awarding'? 'status-code-un' : '']">
-        {{auction.statuscount}}<span class="icon-eye-open" *ngIf="auction.statuscode=='Running Now'"></span>
-        {{auction.statuscode}}
+        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending FBGA' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
+        {{auction.statuscount}}<span class="icon-eye-open" *ngIf="auctionStatus=='Running Now'"></span>
+        {{auctionStatus | translate}}
     </div>
 
     <div *ngIf="showLoader" class="card-img-top pt-4">
@@ -77,7 +77,7 @@
             <div class="mt-5">
                 <a [routerLink]="['/auction-details', auction.ObjectId]" (click)="redirectToDetail(auction.ObjectId)"
                     class="btn btn-info font-weight-bold" style="width: 141px;"
-                    [ngClass]="[(auction.statuscode === 'Under Gear' || auction.statuscode === 'Awarded' || auction.statuscode === 'Canceled' ) ? 'notact-btn' : (auction.statuscode == 'Upcoming' || auction.statuscode == 'Ongoing') ? 'act-btn' :'']">
+                    [ngClass]="[(auctionStatus === 'Under Gear' || auctionStatus === 'Awarded' || auctionStatus === 'Canceled' ) ? 'notact-btn' : (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'act-btn' :'']">
                     {{ 'AuctionDetails' | translate }}
                 </a>
             </div>

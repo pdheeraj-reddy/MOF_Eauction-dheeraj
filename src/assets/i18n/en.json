@@ -9,6 +9,7 @@
     "Rejected Prices": "Rejected Prices",
     "Upcoming Auction": "Upcoming Auction",
     "Under Gear": "Under Gear",
+    "Upcoming": "Upcoming",
     "Ongoing": "Ongoing",
     "Terminated": "Terminated",
     "Pending FBGA Approval": "Pending FBGA Approval",
@@ -1027,7 +1028,7 @@
         "InvoiceCopy": "Invoice copy"
     },
     "bidderAuctions": {
-        "TrustServices": "Trust services",
+        "EtimadServices": "Etimad Services",
         "Auctions": "Auctions",
         "All": "All",
         "OngoingAuctions": "Ongoing",

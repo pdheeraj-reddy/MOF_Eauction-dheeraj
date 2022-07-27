@@ -1,7 +1,8 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item"><a [href]="getHomeUrl">{{ 'bidderAuctions.TrustServices' | translate }}</a></li>
+            <li class="breadcrumb-item"><a [href]="getHomeUrl">{{ 'bidderAuctions.EtimadServices' | translate }}</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
                 {{ 'bidderAuctions.Auctions' | translate }}
             </li>
@@ -122,9 +123,9 @@
 
         <div class="col-auto justify-content-end">
             <button (click)="toggleFilter()"
-                class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm"
-                style="color:#32ad71" [ngClass]="{ 'filter-active': showFilterForm }" type="button"
-                id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm text-success"
+                [ngClass]="{ 'filter-active': showFilterForm }" type="button" id="dropdownMenuButton"
+                aria-haspopup="true" aria-expanded="false">
                 <span class="text-14 icon-filters"></span>
             </button>
         </div>
@@ -206,7 +207,7 @@
         </form>
     </div>
     <div>
-        <div class="card-grp">
+        <div class="card-grp mt-4">
             <ng-container *ngIf="!showPageLoader && showLoader">
                 <div class="alert-body text-center mt-5"><i class="alert-icon">
                         <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">

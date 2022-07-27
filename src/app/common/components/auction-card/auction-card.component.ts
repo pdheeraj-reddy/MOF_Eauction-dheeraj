@@ -18,6 +18,7 @@ export class AuctionCardComponent implements OnInit {
   @Input() auction: any;
   auctionImg: any;
   source: any = '';
+  auctionStatus: any = '';
   showLoader: boolean = false;
   constructor(
     public translate: TranslateService,
@@ -28,6 +29,14 @@ export class AuctionCardComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+
+    console.log("🚀🚀 ~~ this.auction", this.auction);
+    if (this.auction.statuscode == 'Published') {
+      this.auctionStatus = 'Upcoming'
+    } else {
+      this.auctionStatus = this.auction.statuscode;
+    }
+
     if (this.auction.imgsrc) {
       this.showLoader = true;
       this.downloadImages(this.auction.imgsrc);

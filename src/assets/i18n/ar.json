@@ -9,6 +9,13 @@
     "Rejected Prices": "معاد لتعديل التسعير",
     "Upcoming Auction": "المزاد القادم",
     "Under Gear": "تحت العتاد",
+    "Upcoming": "القادمة",
+    "Ongoing": "جاري التنفيذ",
+    "Terminated": "تم إنهاؤه",
+    "Pending FBGA Approval": "في انتظار موافقة FBGA",
+    "Pending FBGA": "في انتظار FBGA",
+    "Pending Primary Awarding": "معلقة المنح الابتدائية",
+    "Pending Selecting": "في انتظار التحديد",
     "Running Now": "يعمل الآن",
     "Cancelled": "ألغيت",
     "Awarded": "منحت",
@@ -694,10 +701,10 @@
         "bcrumb2": "المزادات",
         "pageTitle": "المزادات",
         "tab1": "الجميع",
-        "tab2": "المزاد الجاري",
-        "tab3": "المزاد القادم",
-        "tab4": "تحت العتاد",
-        "tab5": "المزاد المنتهي",
+        "tab2": "مزادات جارية ",
+        "tab3": "مزادات قادمة",
+        "tab4": "تحت الترسية",
+        "tab5": "مزادات منتهية",
         "filter": "فلاتر",
         "status": "حالة",
         "type": "يكتب",
@@ -768,7 +775,7 @@
         }
     },
     "offerReport": {
-        "bcrumb1": "Trust services",
+        "bcrumb1": "خدمات اعتماد",
         "bcrumb2": "Auctions",
         "pageTitle": "Auction Details"
     },
@@ -1018,7 +1025,7 @@
         "SendTheFinalGuarantee": "Send the final guarantee"
     },
     "bidderAuctions": {
-        "TrustServices": "خدمات اعتماد",
+        "EtimadServices": "خدمات اعتماد",
         "Auctions": "المزادات",
         "All": "الكل",
         "OngoingAuctions": "مزادات جارية",
