@@ -112,7 +112,7 @@
         </app-auction-fbga>
         <!-- End -->
 
-        <!--============ Send Invoice card ============-->
+        <!--============ Pay Invoice card ============-->
         <app-auction-pay-invoice *ngIf="role.bidder && this.status.pendingPaying && response.ZzBidderSts == 'N'"
             [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
@@ -206,7 +206,7 @@
                             <label class="input-target d-flex" for="checkbox5">
                                 <span>
                                     <span class="icon-information"></span><br>
-                                    {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
+                                    Offer Reports
                                 </span>
                             </label>
                         </div>
