@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import jwt_decode from 'jwt-decode';
 import { EnvService } from 'src/app/env.service';
 import { BidderService } from './bidder.service';
@@ -16,7 +14,6 @@ export class AucModeratorService {
   constructor(
     private http: HttpClient,
     private envService: EnvService,
-    private cookieService: CookieService,
     private bidder: BidderService,
   ) { }
 
@@ -28,7 +25,7 @@ export class AucModeratorService {
     }
   }
 
-  postAppporRej(data: any , action?:any): Observable<any> {
+  postAppporRej(data: any, action?: any): Observable<any> {
 
 
     const httpOptions = {
@@ -60,7 +57,7 @@ export class AucModeratorService {
 
     return this.http.get<any>(
       this.envService.environment.apiLatestBid +
-      "" + ObjectId + "/bidders?pageNumber=" + PageNo 
+      "" + ObjectId + "/bidders?pageNumber=" + PageNo
       , httpOptions);
 
 

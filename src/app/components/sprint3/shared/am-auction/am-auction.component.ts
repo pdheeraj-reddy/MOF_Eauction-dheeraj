@@ -108,6 +108,8 @@ export class AmAuctionComponent implements OnInit {
       this.showPageLoader = false;
 
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
+      console.log('this.bidderService.XCSRFToken: ', this.bidderService.XCSRFToken);
+      localStorage.setItem('x-csrf-token', this.bidderService.XCSRFToken)
       this.auctionListData = this.mapping(res.body);
       console.log("🚀🚀 ~~ this.auctionListData", this.mapping(res.body));
 

@@ -18,7 +18,9 @@
     "apiLatestBid": "/internal/v1/e-auction/e-bidder/",
     "apiBidderParticipationAuctions": "/internal/v1/e-auction/e-bidder/bidders",
     "apiBidderParticipantsBids": "/internal/v1/e-auction/e-bidder/bidders",
-    "apiFinalInvoiceReport":"/internal/v1/e-auction/e-bidder/bidders",
+    "apiFinalInvoiceReport": "/internal/v1/e-auction/e-bidder/bidders",
     "apiOfferReport": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/bids",
-    "apiSendInvoice": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/awardedBidderInvoices"
+    "apiSendInvoice": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/awardedBidderInvoices",
+    "apiOpenOfferReport": "internal/v1/e-auction/e-bidder/bidders/BidderreportSet",
+    "apiOpenOfferStatus": "internal/v1/e-auction/e-bidder/bidders"
 }
