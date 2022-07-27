@@ -131,7 +131,7 @@
         <!-- End -->
 
         <!--============ Open offers card ============-->
-        <app-open-offers-card *ngIf="role.auctionCommitteeHead && upcomingAuction?.auctionStatus=='Primary Awarding'"></app-open-offers-card>
+        <app-open-offers-card *ngIf="role.auctionCommitteeHead && upcomingAuction?.auctionStatus=='Pending Selecting'"></app-open-offers-card>
         <!-- End -->
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
@@ -264,9 +264,8 @@
                     <div class="mt-4" style="display: flex;">
 
                         <!--================ Latest offer send card ================-->
-                        <div style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'"
-                            *ngIf="role.auctionMod && !status.published">
-                            <app-latest-offers-sent [aucId]="auctionId" pageno="1" *ngIf="role.auctionMod">
+                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published" style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
+                            <app-latest-offers-sent [aucId]="auctionId" pageno="1">
                             </app-latest-offers-sent>
                         </div>
                         <!-- End -->
