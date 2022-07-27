@@ -114,12 +114,15 @@ export class AuctionDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.auctionSev.getLoggedUserRole();
-    // this.role.auctionMod = this.currentUser.isAuctionModerator;
-    // this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
-    // this.role.bidder = this.currentUser.isBidder;
-    this.role.auctionCommitteeHead = true;
+    this.role.auctionMod = this.currentUser.isAuctionModerator;
+    this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
+    this.role.bidder = this.currentUser.isBidder;
+    // if(this.role.bidder){
+    //   this.role.auctionCommitteeHead = 
+    // }
+    // this.role.auctionCommitteeHead = true;
     // Need role for bidder -- (Change to true if you want to check for bidder)
-    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 107 ~ this.currentUser", this.currentUser);
+    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 107 ~ this.role", this.role);
     this.currentLang = localStorage.getItem('lang_pref');
     if (this.currentLang == 'en') {
       this.textDir = true;
