@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { BidderService } from '../../services/bidder.service';
+import { CommitteeHeadService } from '../../services/committee-head.service';
+import * as moment from 'moment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-open-offers',
@@ -12,23 +15,32 @@ import { BidderService } from '../../services/bidder.service';
 export class OpenOffersComponent implements OnInit {
   openofferListData: any;
   pagelimit: number = 10;
-
+  showLoader: boolean = false;
   auctionId: string = '';
   offervalue: string;
   facilityname: string;
   commercialNo: string;
-  //filter Form controls
+  rejectReason: string;
   showFilterForm: boolean = false;
   dropValStatus: any = [];
   dropValType: any = [];
-
+  selectedData: any;
   filterFormGroup: FormGroup;
-
+  showModal = {
+    acceptOffer: false,
+    acceptOfferSuccess: false,
+    rejectOffer: false,
+    rejectOfferSuccess: false,
+    esitimationOffer: false,
+    esitimationOfferSuccess: false,
+  }
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     public PaginationServc: PaginationSortingService,
     public bidderService: BidderService,
+    public committeeHeadService: CommitteeHeadService,
+    public location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -43,10 +55,13 @@ export class OpenOffersComponent implements OnInit {
       pageLimit: this.pagelimit
     };
     const filters = {
-      status: this.filterFormGroup.controls['status'].value ? this.filterFormGroup.controls['status'].value : '',
-      type: this.filterFormGroup.controls['type'].value ? this.filterFormGroup.controls['type'].value : '',
+      Status: this.filterFormGroup.controls['status'].value ? this.filterFormGroup.controls['status'].value : '',
+      BidType: this.filterFormGroup.controls['type'].value ? this.filterFormGroup.controls['type'].value : '',
     };
-    this.bidderService.getOfferList(page, filters, this.auctionId).subscribe((res: any) => {
+    this.showLoader = true;
+    this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
+      this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+      localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
       this.mapping(res.body);
     });
 
@@ -54,17 +69,18 @@ export class OpenOffersComponent implements OnInit {
 
   public mapping(serverObj: any) {
     if (serverObj.d.results?.length) {
-      let results = serverObj.d.results[0];
+      let results = serverObj.d.results;
       console.log('results: ', results);
       let resultSet: any = [];
-      if (results) {
+      if (results?.length) {
         results.forEach((result: any) => {
           const items = {
             serialNo: result['Sno'] ? result['Sno'] : '-',
             offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
+            BidderId: result['BidderId'] ? result['BidderId'] : null,
             primaryWarranty: '',
-            submissionDate: result['DtTime'] ? result['DtTime'] : '-',
-            submissionTime: result['DtTime'] ? result['DtTime'] : '-',
+            submissionDate: result['DtTime'] ? result['DtTime'].split(' ')[0] : '-',
+            submissionTime: result['DtTime'] ? result['DtTime'].split(' ')[1] : '-',
             facilityName: result['BidderName'] ? result['BidderName'] : '-',
             commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
             // auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : '',
@@ -72,7 +88,9 @@ export class OpenOffersComponent implements OnInit {
           resultSet.push(items);
         });
       }
+      this.showLoader = false;
       this.openofferListData = resultSet;
+      console.log('this.openofferListData: ', this.openofferListData);
     }
   }
 
@@ -95,10 +113,49 @@ export class OpenOffersComponent implements OnInit {
     // }
   }
 
+  checkOffer(data: any) {
+    this.offervalue = data.offerValue;
+    this.facilityname = data.facilityName;
+    this.commercialNo = data.commercialRegistrationNo;
+    const param = {
+      AucId: this.auctionId,
+      BidderId: data.BidderId,
+      ZzUserAction: "C"
+    }
+    this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      if (res.d.ZzUserAction === 'R') {
+        this.showModal.esitimationOffer = true;
+      } else {
+        this.showModal.acceptOffer = true;
+      }
+    });
+  }
+
   acceptOffer(data: any) {
     this.offervalue = data.offerValue;
     this.facilityname = data.facilityName;
     this.commercialNo = data.commercialRegistrationNo;
+    const param = {
+      AucId: this.auctionId,
+      BidderId: data.BidderId,
+      ZzUserAction: "A"
+    }
+    this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      this.showModal.acceptOfferSuccess = true;
+    });
+  }
+
+  rejectOffer(data: any) {
+    const param = {
+      AucId: this.auctionId,
+      BidderId: data.BidderId,
+      ZzUserAction: "R"
+    }
+    this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      this.rejectReason = '';
+      this.showModal.rejectOffer = false;
+      this.showModal.rejectOfferSuccess = true;
+    });
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
@@ -147,6 +204,10 @@ export class OpenOffersComponent implements OnInit {
     this.getOffersData(selectedPageNumber);
     window.scrollTo(0, 100);
     this.PaginationServc.resetSorting();
+  }
+
+  back() {
+    this.location.back();
   }
 
 }
