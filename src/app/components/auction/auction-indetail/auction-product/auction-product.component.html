@@ -1,4 +1,24 @@
 <div class="product-form">
+
+    <div *ngIf="statusOfAuction == 'Rejected' && !showLoader"
+        class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert-wrapper">
+            <div class="alert-body">
+                <i class="alert-icon">
+                    <span class="icon-filled-wrong"></span>
+                </i>
+                <div class="alert-content">
+                    <p class="text-14">{{auctionDetails.RejectNotes}}</p>
+                </div>
+            </div>
+            <div class="alert-action">
+                <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="py-3 mb-3">
         <h4>
             <!-- <ul class="list list-group list-group-horizontal float-left">
@@ -18,7 +38,8 @@
         <div class="card p-5 shadow-lg" *ngIf="showLoader">
             <div class="form-row">
                 <div class="col-12">
-                    <table id="inventoryAllocationTable" class="table table-bordered table-striped table-expanded table-hover">
+                    <table id="inventoryAllocationTable"
+                        class="table table-bordered table-striped table-expanded table-hover">
                         <td colspan="10" class="p-3 bg-white">
                             <div class="alert-body text-center"><i class="alert-icon">
                                     <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
@@ -86,14 +107,17 @@
                                                     *ngIf="form['sameLocNDate'].value"> {{
                                                     'auctioncreate.auctionproduct.section1_subheading1_opt1' | translate
                                                     }}</label>
-                                        <label class="custom-control-label" for="customSwitch1" *ngIf="!form['sameLocNDate'].value"> {{
+                                                <label class="custom-control-label" for="customSwitch1"
+                                                    *ngIf="!form['sameLocNDate'].value"> {{
                                                     'auctioncreate.auctionproduct.section1_subheading1_opt2' | translate
                                                     }}</label>
-                                        </span>
+                                            </span>
                                         </label>
                                     </div>
                                 </h2>
-                                <button class="btn btn-accordion-control" type="button" data-toggle="collapse" data-target="#localContentFirst" aria-expanded="true" aria-controls="localContentFirst">
+                                <button class="btn btn-accordion-control" type="button" data-toggle="collapse"
+                                    data-target="#localContentFirst" aria-expanded="true"
+                                    aria-controls="localContentFirst">
                                     <div class="collapsed-icon">
                                         <span class="icon-arrow-down"></span>
                                     </div>
@@ -107,22 +131,36 @@
                                                 <div class="form-group">
                                                     <label>{{ 'auctioncreate.auctionproduct.section1_formGrp2' |
                                                         translate }}</label>
-                                                    <input type="text" autocomplete="off" appDatePicker formControlName="deliveryDate" name="delivery-date" class="form-control calendar-control calendar-gregorian-control" placeholder="{{ 'auctioncreate.formDate-plch' | translate }}" (change)="changedatetime($event,'deliveryDate');"
-                                                    />
-                                                    <div *ngIf="submitted && locationForm['deliveryDate'].errors" class="invalid-feedback">
-                                                        <div *ngIf="locationForm['deliveryDate'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp2' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                    <input type="text" onkeydown="event.preventDefault()"
+                                                        autocomplete="off" appDatePicker formControlName="deliveryDate"
+                                                        name="delivery-date"
+                                                        class="form-control calendar-control calendar-gregorian-control"
+                                                        placeholder="{{ 'auctioncreate.formDate-plch' | translate }}"
+                                                        (change)="changedatetime($event,'deliveryDate');" />
+                                                    <div *ngIf="submitted && locationForm['deliveryDate'].errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="locationForm['deliveryDate'].errors['required']">{{
+                                                            'auctioncreate.auctionproduct.section1_formGrp2' | translate
+                                                            }} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                     </div>
-                                                    <div *ngIf="isValidDeliveryDate" class="invalid-feedback d-block">{{ 'message.failure_invalid_mindate' | translate }}</div>
+                                                    <div *ngIf="isValidDeliveryDate" class="invalid-feedback d-block">{{
+                                                        'message.failure_invalid_mindate' | translate }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <div class="form-group">
                                                     <label>{{ 'auctioncreate.auctionproduct.section1_formGrp3' |
                                                         translate }}</label>
-                                                    <input type="text" autocomplete="off" appTimePicker formControlName="deliveryTime" name="delivery-time" class="form-control time-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp3-plch' | translate }}" (click)="changedatetime($event,'deliveryTime');"
-                                                    />
-                                                    <div *ngIf="submitted && locationForm['deliveryTime'].errors" class="invalid-feedback">
-                                                        <div *ngIf="locationForm['deliveryTime'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp3' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                    <input type="text" onkeydown="event.preventDefault()"
+                                                        autocomplete="off" appTimePicker formControlName="deliveryTime"
+                                                        name="delivery-time" class="form-control time-control"
+                                                        placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp3-plch' | translate }}"
+                                                        (click)="changedatetime($event,'deliveryTime');" />
+                                                    <div *ngIf="submitted && locationForm['deliveryTime'].errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="locationForm['deliveryTime'].errors['required']">{{
+                                                            'auctioncreate.auctionproduct.section1_formGrp3' | translate
+                                                            }} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,8 +171,10 @@
                                                     <label>{{ 'auctioncreate.auctionproduct.section1_formGrp4' |
                                                         translate }}</label>
                                                     <div *ngIf="showGoogleMap">
-                                                        <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChooseLocation($event)">
-                                                            <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChoose">
+                                                        <agm-map [latitude]="lat" [longitude]="lng"
+                                                            (mapClick)="onChooseLocation($event)">
+                                                            <agm-marker [latitude]="lat" [longitude]="lng"
+                                                                *ngIf="locationChoose">
                                                             </agm-marker>
                                                         </agm-map>
                                                     </div>
@@ -143,19 +183,30 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-6 mb-3">
-                                                <label for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp41-plch'
+                                                <label
+                                                    for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp41-plch'
                                                     | translate}}</label>
-                                                <input type="text" digitOnly [decimal]="true" name="locLatitude" formControlName="locLatitude" class="form-control" placeholder="{{'auctioncreate.auctionproduct.section1_formGrp41-plch' | translate}}" id="validationCustom01" [required]="true" />
-                                                <div *ngIf="submitted && locationForm['locLatitude'].errors && locationForm['locLongitude'].errors" class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locLatitude'].errors['required'] && locationForm['locLongitude'].errors['required']">
-                                                        {{'auctioncreate.auctionproduct.section1_formGrp41' | translate}} {{ 'auctioncreate.page-validerror' | translate }}
+                                                <input type="text" digitOnly [decimal]="true" name="locLatitude"
+                                                    formControlName="locLatitude" class="form-control"
+                                                    placeholder="{{'auctioncreate.auctionproduct.section1_formGrp41-plch' | translate}}"
+                                                    id="validationCustom01" [required]="true" />
+                                                <div *ngIf="submitted && locationForm['locLatitude'].errors && locationForm['locLongitude'].errors"
+                                                    class="invalid-feedback">
+                                                    <div
+                                                        *ngIf="locationForm['locLatitude'].errors['required'] && locationForm['locLongitude'].errors['required']">
+                                                        {{'auctioncreate.auctionproduct.section1_formGrp41' |
+                                                        translate}} {{ 'auctioncreate.page-validerror' | translate }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp42-plch'
+                                                <label
+                                                    for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp42-plch'
                                                     | translate}}</label>
-                                                <input type="text" digitOnly [decimal]="true" name="locLongitude" formControlName="locLongitude" class="form-control" placeholder="{{'auctioncreate.auctionproduct.section1_formGrp42-plch' | translate}}" id="validationCustom01" [required]="true" />
+                                                <input type="text" digitOnly [decimal]="true" name="locLongitude"
+                                                    formControlName="locLongitude" class="form-control"
+                                                    placeholder="{{'auctioncreate.auctionproduct.section1_formGrp42-plch' | translate}}"
+                                                    id="validationCustom01" [required]="true" />
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -163,18 +214,29 @@
                                                 <label for="validationCustom01">{{
                                                     'auctioncreate.auctionproduct.section1_formGrp5' | translate
                                                     }}</label>
-                                                <input type="text" name="region" formControlName="locRegion" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp5' | translate }}" id="validationCustom01" [required]="true" />
-                                                <div *ngIf="submitted && locationForm['locRegion'].errors" class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locRegion'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp5' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                <input type="text" name="region" formControlName="locRegion"
+                                                    class="form-control"
+                                                    placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp5' | translate }}"
+                                                    id="validationCustom01" [required]="true" />
+                                                <div *ngIf="submitted && locationForm['locRegion'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="locationForm['locRegion'].errors['required']">{{
+                                                        'auctioncreate.auctionproduct.section1_formGrp5' | translate }}
+                                                        {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="validationCustom01">{{
                                                     'auctioncreate.auctionproduct.section1_formGrp6' | translate
                                                     }}</label>
-                                                <input type="text" name="city" formControlName="locCity" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp6' | translate }}" id="validationCustom01" [required]="true" />
-                                                <div *ngIf="submitted && locationForm['locCity'].errors" class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locCity'].errors['required']">City {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                <input type="text" name="city" formControlName="locCity"
+                                                    class="form-control"
+                                                    placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp6' | translate }}"
+                                                    id="validationCustom01" [required]="true" />
+                                                <div *ngIf="submitted && locationForm['locCity'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="locationForm['locCity'].errors['required']">City {{
+                                                        'auctioncreate.page-validerror' | translate }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -183,18 +245,30 @@
                                                 <label for="validationCustom01">{{
                                                     'auctioncreate.auctionproduct.section1_formGrp7' | translate
                                                     }}</label>
-                                                <input type="text" name="neighborhood" formControlName="locNeighborhood" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp7' | translate }}" id="validationCustom01" [required]="true" />
-                                                <div *ngIf="submitted && locationForm['locNeighborhood'].errors" class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locNeighborhood'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp7' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                <input type="text" name="neighborhood" formControlName="locNeighborhood"
+                                                    class="form-control"
+                                                    placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp7' | translate }}"
+                                                    id="validationCustom01" [required]="true" />
+                                                <div *ngIf="submitted && locationForm['locNeighborhood'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="locationForm['locNeighborhood'].errors['required']">{{
+                                                        'auctioncreate.auctionproduct.section1_formGrp7' | translate }}
+                                                        {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="validationCustom01">{{
                                                     'auctioncreate.auctionproduct.section1_formGrp8' | translate
                                                     }}</label>
-                                                <input type="text" name="street" formControlName="locStreet" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp8' | translate }}" id="validationCustom01" [required]="true" />
-                                                <div *ngIf="submitted && locationForm['locStreet'].errors" class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locStreet'].errors['required']">{{ 'auctioncreate.auctionproduct.section1_formGrp8' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                <input type="text" name="street" formControlName="locStreet"
+                                                    class="form-control"
+                                                    placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp8' | translate }}"
+                                                    id="validationCustom01" [required]="true" />
+                                                <div *ngIf="submitted && locationForm['locStreet'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="locationForm['locStreet'].errors['required']">{{
+                                                        'auctioncreate.auctionproduct.section1_formGrp8' | translate }}
+                                                        {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -204,12 +278,16 @@
                                                     <div class="border-bottom">
                                                         <label for="goverusermessage">{{
                                                             'auctioncreate.auctionproduct.section1_formGrp9' | translate
-                                                            }} </label> <span *ngIf="ViewMode != 'view'" class="float-left text-muted">{{
+                                                            }} </label> <span *ngIf="ViewMode != 'view'"
+                                                            class="float-left text-muted">{{
                                                             'auctioncreate.auctionproduct.section1_formGrp9-hint' |
                                                             translate }} <small>{{otherauction.value.length}}
                                                                 /{{maxChars}}</small> </span>
                                                     </div>
-                                                    <textarea class="form-control" name="notes" #otherauction [attr.maxlength]="maxChars" formControlName="notes" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp9-plch' | translate }}" rows="5"></textarea>
+                                                    <textarea class="form-control" name="notes" #otherauction
+                                                        [attr.maxlength]="maxChars" formControlName="notes"
+                                                        placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp9-plch' | translate }}"
+                                                        rows="5"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -226,36 +304,50 @@
                         <div class="card-body">
                             <div class="heading-without-border pt-0 pb-0 align-items-start">
                                 <h4 class="pb-3">{{ 'auctioncreate.auctionproduct.section1_formGrp10' | translate }}
-                                    <div class="text-16" *ngIf="submitted && ( atLeastOneRequired || auctionProducts.errors) && !(auctionProducts['controls'].length > 0)">
-                                        <div class="invalid-cust-feedback">{{ 'message.failure_atleastOne_product' | translate }} </div>
+                                    <div class="text-16"
+                                        *ngIf="submitted && ( atLeastOneRequired || auctionProducts.errors) && !(auctionProducts['controls'].length > 0)">
+                                        <div class="invalid-cust-feedback">{{ 'message.failure_atleastOne_product' |
+                                            translate }} </div>
                                     </div>
                                 </h4>
-                                <button *ngIf="ViewMode != 'view'" type="button" class="btn btn-primary-light btn-md" (click)="addproduct()" data-toggle="modal" data-target="#exampleModal" data-dismiss="alert " aria-label="Close "> <span class="icon-add mx-2"></span>{{
+                                <button *ngIf="ViewMode != 'view'" type="button" class="btn btn-primary-light btn-md"
+                                    (click)="addproduct()" data-toggle="modal" data-target="#exampleModal"
+                                    data-dismiss="alert " aria-label="Close "> <span class="icon-add mx-2"></span>{{
                                     'auctioncreate.auctionproduct.section1_formGrp11' | translate }}</button>
                             </div>
-                            <div *ngIf="auctionProducts['controls'].length > 0" class="card" [formGroup]="productsFormGroup">
-                                <table formGroupName="productFormGroup" id="inventoryAllocationTable" class="table table-bordered table-striped table-expanded table-hover">
+                            <div *ngIf="auctionProducts['controls'].length > 0" class="card"
+                                [formGroup]="productsFormGroup">
+                                <table formGroupName="productFormGroup" id="inventoryAllocationTable"
+                                    class="table table-bordered table-striped table-expanded table-hover">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(0, 'string')">
+                                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                                (click)="sortByTableHeaderId(0, 'string')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth1' |
                                                     translate }}</span>
-                                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                             </th>
-                                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(1, 'numeric')">
+                                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                                (click)="sortByTableHeaderId(1, 'numeric')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth2' |
                                                     translate }}</span>
-                                                <span class="arrow asc "><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                             </th>
-                                            <th class="btn-primary-light cursor-pointer" scope="col " (click)="sortByTableHeaderId(2, 'numeric')">
+                                            <th class="btn-primary-light cursor-pointer" scope="col "
+                                                (click)="sortByTableHeaderId(2, 'numeric')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth3' |
                                                     translate }}</span>
-                                                <span class="arrow asc "><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                                             </th>
-                                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                                (click)="sortByTableHeaderId(3, 'string')">
                                                 <span>{{ 'auctioncreate.auctionproduct.section1_formGrp12-taleth4' |
                                                     translate }}</span>
-                                                <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                                <span class="sort"><span class="sort-none"
+                                                        [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                                             </th>
                                             <th class="th-action" scope="col"></th>
                                         </tr>
@@ -263,18 +355,30 @@
                                     <tbody formArrayName="products">
                                         <ng-container *ngIf="auctionProducts['controls'].length > 0">
                                             <tr *ngFor="let code of auctionProducts.value; index as i">
-                                                <ng-container *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
+                                                <ng-container
+                                                    *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
                                                     <td width="170px" scope="row">{{code.productName}}</td>
                                                     <td width="160px">{{code.productSerialNumber}}</td>
-                                                    <td width="210px">{{code.productValue}}</td>
+                                                    <td width="220px">{{code.productValue}}</td>
                                                     <td width="160px">{{code.productCondition | translate }}</td>
                                                     <td>
-                                                        <div class="qq-btn-group">
-                                                            <button type="button" *ngIf="ViewMode != 'view'" (click)="editProduct(i)" data-toggle="modal" data-target="#exampleModal" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green " data-dismiss="alert " aria-label="Close ">
+                                                        <div class="qq-btn-group" style="min-width: 76px;">
+                                                            <button type="button" *ngIf="ViewMode != 'view'"
+                                                                (click)="editProduct(code)" data-toggle="modal"
+                                                                data-target="#exampleModal"
+                                                                class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green "
+                                                                data-dismiss="alert " aria-label="Close ">
                                                                 <span class="icon-edit"></span> </button>
-                                                            <button type="button" *ngIf="ViewMode == 'view'" (click)="editProduct(i)" data-toggle="modal" data-target="#exampleModal" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green " data-dismiss="alert " aria-label="Close ">
+                                                            <button type="button" *ngIf="ViewMode == 'view'"
+                                                                (click)="editProduct(code)" data-toggle="modal"
+                                                                data-target="#exampleModal"
+                                                                class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green "
+                                                                data-dismiss="alert " aria-label="Close ">
                                                                 <span class="icon-eye-open1"></span> </button>
-                                                            <button type="button" *ngIf="ViewMode != 'view'" (click)="removeProduct(i, pageRangeForProductAttach.currentPage, code)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red " data-dismiss="alert " aria-label="Close "> <span
+                                                            <button type="button" *ngIf="ViewMode != 'view'"
+                                                                (click)="removeProduct(i, pageRangeForProductAttach.currentPage, code)"
+                                                                class="qq-upload-cancel-selector btn btn-ghost fill-primary-red "
+                                                                data-dismiss="alert " aria-label="Close "> <span
                                                                     class="icon-delete"></span> </button>
                                                         </div>
                                                     </td>
@@ -287,9 +391,13 @@
                                     <tfoot>
                                         <tr class="table-borderless">
                                             <td width="170px"></td>
-                                            <td width="160px" class="font-medium color-darkgreen">{{ totalQty }} {{ 'auctioncreate.auctionproduct.section1_grid1-ft-text1' | translate }}
+                                            <td width="160px" class="font-medium color-darkgreen">{{ totalQty }} {{
+                                                'auctioncreate.auctionproduct.section1_grid1-ft-text1' | translate }}
                                             </td>
-                                            <td width="210px" class="font-medium color-darkgreen">{{ 'auctioncreate.auctionproduct.section1_grid1-ft-text2' | translate }}: {{ totalValue }} {{ 'auctioncreate.auctionproduct.section1_grid1-ft-text3' | translate }}
+                                            <td width="210px" class="font-medium color-darkgreen">{{
+                                                'auctioncreate.auctionproduct.section1_grid1-ft-text2' | translate }}:
+                                                {{ totalValue }} {{
+                                                'auctioncreate.auctionproduct.section1_grid1-ft-text3' | translate }}
                                             </td>
                                             <td width="160px"></td>
                                             <td class="th-action"></td>
@@ -301,16 +409,21 @@
                                 <div class="mb-5">
                                     <nav aria-label="..." class="nav-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item" [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === 1 }">
-                                                <a (click)="navigateToPage(pageRangeForProductAttach.currentPage -1, 'productAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                            <li class="page-item clickable" disabled
+                                                [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === 1 }">
+                                                <a (click)="navigateToPage(pageRangeForProductAttach.currentPage -1, 'productAttach')"
+                                                    class="page-link" aria-disabled="true">{{
                                                     'auctionlist.grid-previous' | translate }}</a>
                                             </li>
-                                            <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForProductAttach.currentPage === page }">
+                                            <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item"
+                                                [ngClass]="{ active: pageRangeForProductAttach.currentPage === page }">
                                                 <a (click)="navigateToPage(page, 'productAttach')" class="page-link"> {{
                                                     page }} </a>
                                             </li>
-                                            <li class="page-item" [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === pageRangeForProductAttach.totalPages }">
-                                                <a (click)="navigateToPage(pageRangeForProductAttach.currentPage + 1, 'productAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                            <li class="page-item clickable" disabled
+                                                [ngClass]="{ disabled: pageRangeForProductAttach.currentPage === pageRangeForProductAttach.totalPages }">
+                                                <a (click)="navigateToPage(pageRangeForProductAttach.currentPage + 1, 'productAttach')"
+                                                    class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -329,9 +442,11 @@
             <div class="pt-5">
                 <div class="form-row">
                     <div class="col-12">
-                        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
+                        <div
+                            class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
                             <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-                                <button (click)="back()" type="button" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+                                <button (click)="back()" type="button"
+                                    class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
                                     <span class="btn-text">{{ 'auctioncreate.auctionproduct.section1_formGrp16' |
                                         translate }}</span> <span class="v-divider"></span>
                                     <span class="icon icon-arrow-left"></span>
@@ -339,21 +454,26 @@
                             </div>
                             <div class="d-flex flex-column flex-md-row mb-5" *ngIf="ViewMode != 'view'">
                                 <!-- <button class="btn btn-danger btn-lg mx-0 mx-md-2" (click)="openConfirmCancelModal()">{{ 'auctioncreate.auctionproduct.section1_formGrp17' | translate }}</button> -->
-                                <button type="button" *ngIf="!showSaveasdraftBtnLoader" (click)="onSubmit('saveasdraft')" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> {{
+                                <button type="button" *ngIf="!showSaveasdraftBtnLoader"
+                                    (click)="onSubmit('saveasdraft')"
+                                    class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> {{
                                     'auctioncreate.auctionproduct.section1_formGrp18' | translate }} </button>
-                                <button type="button" *ngIf="showSaveasdraftBtnLoader" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                <button type="button" *ngIf="showSaveasdraftBtnLoader"
+                                    class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                     <span class="btn-text pr-3">
                                         <div class="spinner-border" role="status">
                                             <span class="sr-only">Loading...</span>
                                         </div>
                                     </span> {{ 'auctioncreate.auctionproduct.section1_formGrp18' | translate }}
                                 </button>
-                                <button type="button" *ngIf="!showSaveBtnLoader" (click)="onSubmit('save')" class="btn arrow-btn btn-primary-light btn-lg mx-0 ml-md-2 mt-2 mt-md-0">
+                                <button type="button" *ngIf="!showSaveBtnLoader" (click)="onSubmit('save')"
+                                    class="btn arrow-btn btn-primary-light btn-lg mx-0 ml-md-2 mt-2 mt-md-0">
                                     <span class="btn-text">{{ 'auctioncreate.auctionproduct.section1_formGrp19' |
                                         translate }}</span> <span class="v-divider"></span>
                                     <span class="icon icon-arrow-left"></span>
                                 </button>
-                                <button type="button" *ngIf="showSaveBtnLoader" class="btn arrow-btn btn-primary-light btn-lg mx-0 ml-md-2 mt-2 mt-md-0">
+                                <button type="button" *ngIf="showSaveBtnLoader"
+                                    class="btn arrow-btn btn-primary-light btn-lg mx-0 ml-md-2 mt-2 mt-md-0">
                                     <span class="btn-text pr-0">
                                         <div class="spinner-border spinner-border-light text-light" role="status">
                                             <span class="sr-only">Loading...</span>
@@ -371,12 +491,16 @@
         </form>
     </div>
 </div>
-<div class="modal fade" *ngIf="showProductModal" [ngClass]="{'modal-show': showProductModal}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" *ngIf="showProductModal" [ngClass]="{'modal-show': showProductModal}" id="exampleModal"
+    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false"
+    data-backdrop="static">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_title' | translate }}</h4>
-                <button type="button" (click)="closeProductModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title" id="exampleModalLabel">{{
+                    'auctioncreate.auctionproduct.auctionpopup.popup_title' | translate }}</h4>
+                <button type="button" (click)="closeProductModal('close')" class="modal-close btn-close btn-sm"
+                    data-dismiss="modal" aria-label="Close">
                     <span class="icon-close"></span>
                 </button>
             </div>
@@ -434,49 +558,70 @@
                         </div>
                     </div>
                 </div>
-                <form *ngIf="!showPopupLoader" class="needs-validation" [formGroup]="addFormGroup" [ngClass]="{'was-validated': onAddProductSubmitted}" novalidate>
+                <form *ngIf="!showPopupLoader" class="needs-validation" [formGroup]="addFormGroup"
+                    [ngClass]="{'was-validated': onAddProductSubmitted}" novalidate>
                     <div class="">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">{{
                                     'auctioncreate.auctionproduct.auctionpopup.popup_formGrp1' | translate }}</label>
-                                <input type="hidden" formControlName="editIndex" name="editIndex" class="form-control" />
-                                <input type="hidden" formControlName="productNo" name="productNo" class="form-control" />
-                                <input type="text" formControlName="productName" name="productName" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp1-plch' | translate }}" id="validationCustom01" [required]="true" />
-                                <div *ngIf="onAddProductSubmitted && addForm['productName'].errors" class="invalid-feedback">
-                                    <div *ngIf="addForm['productName'].errors['required']">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp1' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                <input type="hidden" formControlName="editIndex" name="editIndex"
+                                    class="form-control" />
+                                <input type="hidden" formControlName="productNo" name="productNo"
+                                    class="form-control" />
+                                <input type="text" formControlName="productName" name="productName" class="form-control"
+                                    placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp1-plch' | translate }}"
+                                    id="validationCustom01" [required]="true" />
+                                <div *ngIf="onAddProductSubmitted && addForm['productName'].errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="addForm['productName'].errors['required']">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp1' | translate }} {{
+                                        'auctioncreate.page-validerror' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom04">{{
                                     'auctioncreate.auctionproduct.auctionpopup.popup_formGrp2' | translate }}</label>
-                                <select class="form-control" formControlName="productCondition" id="validationCustom05" [required]="true" (change)="changeSelect($event, 'productCondition')">
+                                <select class="form-control" formControlName="productCondition" id="validationCustom05"
+                                    [required]="true" (change)="changeSelect($event, 'productCondition')">
                                     <option value="">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp2-plch' |
                                         translate }}</option>
                                     <option *ngFor="let product of dropValCategory" [value]="product">{{product |
                                         translate }}</option>
                                 </select>
                                 <!-- <input type="text" formControlName="productCondition" name="productCondition" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp2' | translate }}" id="validationCustom01" [required]="true" /> -->
-                                <div *ngIf="onAddProductSubmitted && addForm['productCondition'].errors" class="invalid-feedback">
-                                    <div *ngIf="addForm['productCondition'].errors['required']">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp2' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                <div *ngIf="onAddProductSubmitted && addForm['productCondition'].errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="addForm['productCondition'].errors['required']">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp2' | translate }} {{
+                                        'auctioncreate.page-validerror' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">{{
                                     'auctioncreate.auctionproduct.auctionpopup.popup_formGrp3' | translate }}</label>
-                                <input type="text" class="form-control" formControlName="productSKUNumber" name="SKUnumber" placeholder="UGG-BB-PUR-06" id="validationCustom01" [required]="true" />
-                                <div *ngIf="onAddProductSubmitted && addForm['productSKUNumber'].errors" class="invalid-feedback">
-                                    <div *ngIf="addForm['productSKUNumber'].errors['required']">SKU number {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                <input type="text" class="form-control" formControlName="productSKUNumber"
+                                    name="SKUnumber" placeholder="UGG-BB-PUR-06" id="validationCustom01"
+                                    [required]="true" />
+                                <div *ngIf="onAddProductSubmitted && addForm['productSKUNumber'].errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="addForm['productSKUNumber'].errors['required']">SKU number {{
+                                        'auctioncreate.page-validerror' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group number-control position-relative m-0">
                                     <label>{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate
                                         }}</label>
-                                    <input type="text" digitOnly [decimal]="true" class="form-control" formControlName="productSerialNumber" placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }}" id="validationCustom01" [required]="true" aria-label="Recipient's username"
+                                    <input type="text" digitOnly [decimal]="true" class="form-control"
+                                        formControlName="productSerialNumber"
+                                        placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }}"
+                                        id="validationCustom01" [required]="true" aria-label="Recipient's username"
                                         aria-describedby="basic-addon2" (change)="onChangeQuantity()" />
-                                    <div *ngIf="ViewMode != 'view'" class="IncDec-controls position-absolute " id="incDecControls">
-                                        <button class="btn btn-sm" (click)="onQuantityChange(false)">-</button><button class="btn btn-sm" (click)="onQuantityChange(true)">+</button>
+                                    <div *ngIf="ViewMode != 'view'" class="IncDec-controls position-absolute "
+                                        id="incDecControls">
+                                        <button class="btn btn-sm" (click)="onQuantityChange(false)">-</button><button
+                                            class="btn btn-sm" (click)="onQuantityChange(true)">+</button>
                                     </div>
                                 </div>
                                 <!-- <div class="form-group number-control position-relative">
@@ -488,21 +633,34 @@
                                         <button class="btn btn-sm">-</button><button class="btn btn-sm">+</button>
                                     </div>
                                 </div> -->
-                                <div *ngIf="onAddProductSubmitted && addForm['productSerialNumber'].errors" class="invalid-feedback">
-                                    <div *ngIf="addForm['productSerialNumber'].errors['required']">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
-                                    <div *ngIf="addForm['productSerialNumber'].errors['pattern']">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }} {{ 'auctioncreate.page-validnumericerror' | translate }}</div>
+                                <div *ngIf="onAddProductSubmitted && addForm['productSerialNumber'].errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="addForm['productSerialNumber'].errors['required']">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }} {{
+                                        'auctioncreate.page-validerror' | translate }}</div>
+                                    <div *ngIf="addForm['productSerialNumber'].errors['pattern']">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }} {{
+                                        'auctioncreate.page-validnumericerror' | translate }}</div>
                                 </div>
-                                <div *ngIf="invalidQty && !addForm['productSerialNumber'].errors" class="invalid-feedback d-block">{{ 'message.failure_invalid_minnumber' | translate }}
+                                <div *ngIf="invalidQty && !addForm['productSerialNumber'].errors"
+                                    class="invalid-feedback d-block">{{ 'message.failure_invalid_minnumber' | translate
+                                    }}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">{{
                                     'auctioncreate.auctionproduct.auctionpopup.popup_formGrp5' | translate }}</label>
-                                <input type="text" digitOnly [decimal]="true" class="form-control" formControlName="productValue" placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp5-plch' | translate }}" id="validationCustom01" [required]="true" (change)="onChangeQuantity()"
-                                />
-                                <div *ngIf="onAddProductSubmitted && addForm['productValue'].errors" class="invalid-feedback">
-                                    <div *ngIf="addForm['productValue'].errors['required']">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp5' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
-                                    <div *ngIf="addForm['productValue'].errors['pattern']">{{ 'message.failure_nonZero' | translate }}</div>
+                                <input type="text" digitOnly [decimal]="true" class="form-control"
+                                    formControlName="productValue"
+                                    placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp5-plch' | translate }}"
+                                    id="validationCustom01" [required]="true" (change)="onChangeQuantity()" />
+                                <div *ngIf="onAddProductSubmitted && addForm['productValue'].errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="addForm['productValue'].errors['required']">{{
+                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp5' | translate }} {{
+                                        'auctioncreate.page-validerror' | translate }}</div>
+                                    <div *ngIf="addForm['productValue'].errors['pattern']">{{ 'message.failure_nonZero'
+                                        | translate }}</div>
                                 </div>
                             </div>
                         </div>
@@ -515,17 +673,25 @@
                                             'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6-hint' | translate
                                             }} <small>{{specification.value.length}} /{{maxChars}}</small> </span>
                                     </div>
-                                    <textarea class="form-control" formControlName="productSpec" [attr.maxlength]="maxChars" name="specification" #specification placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6-plch' | translate }}" rows="5" [required]="true"></textarea>
-                                    <div *ngIf="onAddProductSubmitted && addForm['productSpec'].errors" class="invalid-feedback">
-                                        <div *ngIf="addForm['productSpec'].errors['required']">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                    <textarea class="form-control" formControlName="productSpec"
+                                        [attr.maxlength]="maxChars" name="specification" #specification
+                                        placeholder="{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6-plch' | translate }}"
+                                        rows="5" [required]="true"></textarea>
+                                    <div *ngIf="onAddProductSubmitted && addForm['productSpec'].errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="addForm['productSpec'].errors['required']">{{
+                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6' | translate }} {{
+                                            'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row pt-2">
                             <div class="col-12">
-                                <h4 class="pb-4 text-20">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7' | translate }}</h4>
-                                <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-label' | translate }}</h5>
+                                <h4 class="pb-4 text-20">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7' |
+                                    translate }}</h4>
+                                <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{
+                                    'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-label' | translate }}</h5>
                             </div>
                             <div class="container">
                                 <div id="fine-uploader-manual-trigger"></div>
@@ -533,11 +699,16 @@
                                     <div class="col-12">
                                         <div *ngIf="ViewMode != 'view'" class="file-container">
                                             <!-- ===================================== Fine Uploader Thumbnails template w/ customization  ================================= -->
-                                            <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
+                                            <div class="qq-uploader-selector qq-uploader"
+                                                qq-drop-area-text="Drop files here">
                                                 <div class="file-uploader-zone">
                                                     <div class="buttons">
                                                         <div class="uploader-button-caption">
-                                                            <input type="file" style="top: 0; left:0;" id="dropzone" class="" accept="video/mp4,.mov,image/jpg,image/jpeg,image/png" formArrayName="productImages" multiple (change)="selectImages($event, 'productImages')" />
+                                                            <input type="file" style="top: 0; left:0;" id="dropzone"
+                                                                class=""
+                                                                accept="video/mp4,.mov,image/jpg,image/jpeg,image/png"
+                                                                formArrayName="productImages" multiple
+                                                                (change)="selectImages($event, 'productImages')" />
                                                             <span class="icon-attachment mx-2"></span>
                                                             <span>{{
                                                                 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-fleplch1'
@@ -546,50 +717,83 @@
                                                                     'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-fleplch2'
                                                                     | translate }}</span>
                                                             </span>
-                                                            <p>{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-flecnd' | translate }}</p>
+                                                            <p>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-flecnd'
+                                                                | translate }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="oneventinvalid-feedback">
-                                                    <div *ngIf="invalidImageSize">{{'message.alert_maxfilesize' | translate}}
+                                                    <div *ngIf="invalidImageSize">{{'message.alert_maxfilesize' |
+                                                        translate}}
+                                                    </div>
+                                                    <div *ngIf="invalidImageType">{{'message.alert_validfile' | translate}}
                                                     </div>
                                                 </div>
-                                                <div *ngIf="onAddProductSubmitted && productImages.errors" class="invalid-feedback">
-                                                    <div *ngIf="productImages.errors['required']">Upload Product Pictures
+                                                <div *ngIf="onAddProductSubmitted && productImages.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="productImages.errors['required']">Upload Product
+                                                        Pictures
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="mt-3" *ngIf="productImages?.length">
-                                            <table class="table table-bordered table-striped table-expanded table-hover">
+                                            <table
+                                                class="table table-bordered table-striped table-expanded table-hover">
                                                 <thead>
                                                     <tr class="btn-primary-light">
-                                                        <th class="th-serials" scope="col">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' | translate }}</th>
-                                                        <th class="" scope="col">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' | translate }}</th>
+                                                        <th class="th-serials" scope="col"
+                                                            (click)="sortPictureByTableHeaderId(0, 'numeric')"><span>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
+                                                        </th>
+                                                        <th class="" scope="col"
+                                                            (click)="sortPictureByTableHeaderId(1, 'string')">
+                                                            <span>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
+                                                        </th>
                                                         <th class="th-action" scope="col"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody formArrayName="productImages">
                                                     <ng-container *ngIf="productImages.length > 0">
                                                         <tr *ngFor="let file of productImages.value;let index=index">
-                                                            <ng-container *ngIf="index >= pageRangeForProductPictureAttach.rangeStart && index <= pageRangeForProductPictureAttach.rangeEnd">
+                                                            <ng-container
+                                                                *ngIf="index >= pageRangeForProductPictureAttach.rangeStart && index <= pageRangeForProductPictureAttach.rangeEnd">
                                                                 <td>{{index+1}}</td>
                                                                 <td>
-                                                                    <div class="text-capitalize text-success"><span class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
+                                                                    <div class="text-capitalize text-success"><span
+                                                                            class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="qq-btn-group text-center">
 
-                                                                        <button *ngIf="!file.downloading" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(file,index,'Picture')" data-dismiss="alert" aria-label="VIew" data-toggle="modal" data-target="#viewAttachmentModal">
+                                                                        <button *ngIf="!file.downloading" type="button"
+                                                                            class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green"
+                                                                            (click)="viewAttachment(file,index,'Picture')"
+                                                                            data-dismiss="alert" aria-label="VIew"
+                                                                            data-toggle="modal"
+                                                                            data-target="#viewAttachmentModal">
                                                                             <img src="assets/icons/eye_open.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="ViewMode != 'view' && !file.downloading" type="button" (click)="removeFile(file, index, pageRangeForProductPictureAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
+                                                                        <button
+                                                                            *ngIf="ViewMode != 'view' && !file.downloading"
+                                                                            type="button"
+                                                                            (click)="removeFile(file, index, pageRangeForProductPictureAttach.currentPage)"
+                                                                            class="qq-upload-cancel-selector btn btn-ghost fill-primary-red"
+                                                                            data-dismiss="alert" aria-label="Delete">
                                                                             <img src="assets/icons/delete.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="file.downloading" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                                                        <button *ngIf="file.downloading" type="button"
+                                                                            class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                                                             <span class="btn-text pr-0">
                                                                                 <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                                                     role="status">
@@ -612,15 +816,22 @@
                                     <div class="mb-5">
                                         <nav aria-label="..." class="nav-pagination">
                                             <ul class="pagination">
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === 1 }">
-                                                    <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage -1, 'productPictureAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                                <li class="page-item clickable" disabled
+                                                    [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === 1 }">
+                                                    <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage -1, 'productPictureAttach')"
+                                                        class="page-link" aria-disabled="true">{{
                                                         'auctionlist.grid-previous' | translate }}</a>
                                                 </li>
-                                                <li *ngFor="let page of pageRangeForProductPictureAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForProductPictureAttach.currentPage === page }">
-                                                    <a (click)="navigateToPage(page, 'productPictureAttach')" class="page-link"> {{ page }} </a>
+                                                <li *ngFor="let page of pageRangeForProductPictureAttach.pages"
+                                                    class="page-item"
+                                                    [ngClass]="{ active: pageRangeForProductPictureAttach.currentPage === page }">
+                                                    <a (click)="navigateToPage(page, 'productPictureAttach')"
+                                                        class="page-link"> {{ page }} </a>
                                                 </li>
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === pageRangeForProductPictureAttach.totalPages }">
-                                                    <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage + 1, 'productPictureAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                                <li class="page-item clickable" disabled
+                                                    [ngClass]="{ disabled: pageRangeForProductPictureAttach.currentPage === pageRangeForProductPictureAttach.totalPages }">
+                                                    <a (click)="navigateToPage(pageRangeForProductPictureAttach.currentPage + 1, 'productPictureAttach')"
+                                                        class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -631,8 +842,10 @@
                         </div>
                         <div class="form-row pt-2">
                             <div class="col-12">
-                                <h4 class="pb-4 text-20">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp71' | translate }}</h4>
-                                <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp71-label' | translate }}
+                                <h4 class="pb-4 text-20">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp71'
+                                    | translate }}</h4>
+                                <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{
+                                    'auctioncreate.auctionproduct.auctionpopup.popup_formGrp71-label' | translate }}
                                 </h5>
                             </div>
                             <div class="container">
@@ -641,11 +854,15 @@
                                     <div class="col-12">
                                         <div *ngIf="ViewMode != 'view'" class="file-container">
                                             <!-- ===================================== Fine Uploader Thumbnails template w/ customization  ================================= -->
-                                            <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
+                                            <div class="qq-uploader-selector qq-uploader"
+                                                qq-drop-area-text="Drop files here">
                                                 <div class="file-uploader-zone">
                                                     <div class="buttons">
                                                         <div class="uploader-button-caption">
-                                                            <input type="file" style="top: 0; left: 0;" class="" id="dropzone" accept=".docx,.doc,application/pdf" formArrayName="productFiles" multiple (change)="selectFiles($event, 'productFiles')" />
+                                                            <input type="file" style="top: 0; left: 0;" class=""
+                                                                id="dropzone" accept=".docx,.doc,application/pdf"
+                                                                formArrayName="productFiles" multiple
+                                                                (change)="selectFiles($event, 'productFiles')" />
                                                             <span class="icon-attachment mx-2"></span>
                                                             <span>{{
                                                                 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-fleplch1'
@@ -654,49 +871,81 @@
                                                                     'auctioncreate.auctionproduct.auctionpopup.popup_formGrp7-fleplch2'
                                                                     | translate }}</span>
                                                             </span>
-                                                            <p>{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp71-flecnd' | translate }}</p>
+                                                            <p>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp71-flecnd'
+                                                                | translate }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="oneventinvalid-feedback">
-                                                    <div *ngIf="invalidFileSize">{{'message.alert_maxfilesize' | translate}}
+                                                    <div *ngIf="invalidFileSize">{{'message.alert_maxfilesize' |
+                                                        translate}}
+                                                    </div>
+                                                    <div *ngIf="invalidFileType">{{'message.alert_validfile' | translate}}
                                                     </div>
                                                 </div>
-                                                <div *ngIf="onAddProductSubmitted && productFiles.errors" class="invalid-feedback">
+                                                <div *ngIf="onAddProductSubmitted && productFiles.errors"
+                                                    class="invalid-feedback">
                                                     <div *ngIf="productFiles.errors['required']">Upload Product Pictures
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="mt-3" *ngIf="productFiles?.length">
-                                            <table class="table table-bordered table-striped table-expanded table-hover">
+                                            <table
+                                                class="table table-bordered table-striped table-expanded table-hover">
                                                 <thead>
                                                     <tr class="btn-primary-light">
-                                                        <th class="th-serials" scope="col">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' | translate }}</th>
-                                                        <th class="" scope="col">{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' | translate }}</th>
+                                                        <th class="th-serials" scope="col"
+                                                            (click)="sortAttachByTableHeaderId(0, 'numeric')"><span>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
+                                                        </th>
+                                                        <th class="" scope="col"
+                                                            (click)="sortAttachByTableHeaderId(1, 'string')"><span>{{
+                                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2'
+                                                                | translate }}</span>
+                                                            <span class="sort"><span class="sort-none"
+                                                                    [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
+                                                        </th>
                                                         <th class="th-action" scope="col"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody formArrayName="productFiles">
                                                     <ng-container *ngIf="productFiles.length > 0">
                                                         <tr *ngFor="let doc of productFiles.value;let index=index">
-                                                            <ng-container *ngIf="index >= pageRangeForProductFileAttach.rangeStart && index <= pageRangeForProductFileAttach.rangeEnd">
+                                                            <ng-container
+                                                                *ngIf="index >= pageRangeForProductFileAttach.rangeStart && index <= pageRangeForProductFileAttach.rangeEnd">
                                                                 <td>{{index+1}}</td>
                                                                 <td>
-                                                                    <div class="text-capitalize text-success"><span class="attach-icon icon-attachment mx-2"></span><span>{{doc.name}}</span>
+                                                                    <div class="text-capitalize text-success"><span
+                                                                            class="attach-icon icon-attachment mx-2"></span><span>{{doc.name}}</span>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="qq-btn- text-center">
-                                                                        <button *ngIf="!doc.downloading" type="button" class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green" (click)="viewAttachment(doc,index , 'File')" data-dismiss="alert" aria-label="VIew" data-toggle="modal" data-target="#viewAttachmentModal">
+                                                                        <button *ngIf="!doc.downloading" type="button"
+                                                                            class="qq-upload-retry-selector btn btn-ghost fill-primary-light-green"
+                                                                            (click)="viewAttachment(doc,index , 'File')"
+                                                                            data-dismiss="alert" aria-label="VIew"
+                                                                            data-toggle="modal"
+                                                                            data-target="#viewAttachmentModal">
                                                                             <img src="assets/icons/eye_open.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="ViewMode != 'view' && !doc.downloading" type="button" (click)="removeDoc(doc, index, pageRangeForProductFileAttach.currentPage)" class="qq-upload-cancel-selector btn btn-ghost fill-primary-red" data-dismiss="alert" aria-label="Delete">
+                                                                        <button
+                                                                            *ngIf="ViewMode != 'view' && !doc.downloading"
+                                                                            type="button"
+                                                                            (click)="removeDoc(doc, index, pageRangeForProductFileAttach.currentPage)"
+                                                                            class="qq-upload-cancel-selector btn btn-ghost fill-primary-red"
+                                                                            data-dismiss="alert" aria-label="Delete">
                                                                             <img src="assets/icons/delete.svg" alt=""
                                                                                 srcset="">
                                                                         </button>
-                                                                        <button *ngIf="doc.downloading" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                                                        <button *ngIf="doc.downloading" type="button"
+                                                                            class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green fill btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                                                             <span class="btn-text pr-0">
                                                                                 <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                                                     role="status">
@@ -719,15 +968,22 @@
                                     <div class="mb-5">
                                         <nav aria-label="..." class="nav-pagination">
                                             <ul class="pagination">
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === 1 }">
-                                                    <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage -1, 'productFileAttach')" class="page-link" tabindex="-1" aria-disabled="true">{{
+                                                <li class="page-item clickable" disabled
+                                                    [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === 1 }">
+                                                    <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage -1, 'productFileAttach')"
+                                                        class="page-link" aria-disabled="true">{{
                                                         'auctionlist.grid-previous' | translate }}</a>
                                                 </li>
-                                                <li *ngFor="let page of pageRangeForProductFileAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForProductFileAttach.currentPage === page }">
-                                                    <a (click)="navigateToPage(page, 'productFileAttach')" class="page-link"> {{ page }} </a>
+                                                <li *ngFor="let page of pageRangeForProductFileAttach.pages"
+                                                    class="page-item"
+                                                    [ngClass]="{ active: pageRangeForProductFileAttach.currentPage === page }">
+                                                    <a (click)="navigateToPage(page, 'productFileAttach')"
+                                                        class="page-link"> {{ page }} </a>
                                                 </li>
-                                                <li class="page-item" [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === pageRangeForProductFileAttach.totalPages }">
-                                                    <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage + 1, 'productFileAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                                <li class="page-item clickable" disabled
+                                                    [ngClass]="{ disabled: pageRangeForProductFileAttach.currentPage === pageRangeForProductFileAttach.totalPages }">
+                                                    <a (click)="navigateToPage(pageRangeForProductFileAttach.currentPage + 1, 'productFileAttach')"
+                                                        class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -740,9 +996,12 @@
                     <div formGroupName="location" class="" *ngIf="!isSameaddress">
                         <div class="card-header p-0 mx-2 mb-3">
                             <div class="row p-0 no-gutters justify-content-between">
-                                <p class="text-success">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp12' | translate}}
+                                <p class="text-success">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp12' |
+                                    translate}}
                                 </p>
-                                <button class="btn btn-accordion-control" type="button" data-toggle="collapse" data-target="#localContentPopupLocation" aria-expanded="true" aria-controls="localContentPopupLocation">
+                                <button class="btn btn-accordion-control" type="button" data-toggle="collapse"
+                                    data-target="#localContentPopupLocation" aria-expanded="true"
+                                    aria-controls="localContentPopupLocation">
                                     <div class="collapsed-icon">
                                         <span class="icon-arrow-down"></span>
                                     </div>
@@ -755,24 +1014,37 @@
                                     <div class="form-group">
                                         <label>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' |
                                             translate}}</label>
-                                        <input type="text" autocomplete="off" appDatePicker name="delivery-date" formControlName="deliveryDate" placeholder="{{ 'auctioncreate.formDate-plch' | translate }}" class="form-control calendar-control calendar-gregorian-control" [required]="true" (change)="productchangedatetime($event,'deliveryDate');"
-                                        />
+                                        <input type="text" onkeydown="event.preventDefault()" autocomplete="off"
+                                            appDatePicker name="delivery-date" formControlName="deliveryDate"
+                                            placeholder="{{ 'auctioncreate.formDate-plch' | translate }}"
+                                            class="form-control calendar-control calendar-gregorian-control"
+                                            [required]="true"
+                                            (change)="productchangedatetime($event,'deliveryDate');" />
                                     </div>
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryDate'].errors" class="invalid-feedback">
+                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryDate'].errors"
+                                        class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['deliveryDate'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' | translate}}
+                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
-                                    <div *ngIf="isValidPDeliveryDate" class="invalid-feedback d-block">{{ 'message.failure_invalid_mindate' | translate }}</div>
+                                    <div *ngIf="isValidPDeliveryDate" class="invalid-feedback d-block">{{
+                                        'message.failure_invalid_mindate' | translate }}</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' |
                                             translate}}</label>
-                                        <input type="text" autocomplete="off" appTimePicker formControlName="deliveryTime" name="delivery-time" class="form-control time-control" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11-plch' | translate}}" [required]="true"
+                                        <input type="text" onkeydown="event.preventDefault()" autocomplete="off"
+                                            appTimePicker formControlName="deliveryTime" name="delivery-time"
+                                            class="form-control time-control"
+                                            placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11-plch' | translate}}"
+                                            [required]="true"
                                             (change)="productchangedatetime($event,'deliveryTime');" />
-                                        <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryTime'].errors" class="invalid-feedback">
+                                        <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryTime'].errors"
+                                            class="invalid-feedback">
                                             <div *ngIf="addproductlocationForm['deliveryTime'].errors['required']">
-                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' |
+                                                translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -783,7 +1055,8 @@
                                         <label>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp12' |
                                             translate}}</label>
                                         <div *ngIf="showGoogleMap">
-                                            <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onaddProductChooseLocation($event)">
+                                            <agm-map [latitude]="lat" [longitude]="lng"
+                                                (mapClick)="onaddProductChooseLocation($event)">
                                                 <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="locationChoose">
                                                 </agm-marker>
                                             </agm-map>
@@ -793,71 +1066,110 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp41-plch'
+                                    <label
+                                        for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp41-plch'
                                         | translate}}</label>
-                                    <input type="text" digitOnly [decimal]="true" name="locLatitude" formControlName="locLatitude" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp41-plch' | translate }}" id="validationCustom01" [required]="true" />
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locLatitude'].errors && addproductlocationForm['locLongitude'].errors" class="invalid-feedback">
-                                        <div *ngIf="addproductlocationForm['locLatitude'].errors['required'] && addproductlocationForm['locLongitude'].errors['required']">
-                                            {{ 'auctioncreate.auctionproduct.section1_formGrp41' | translate }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                    <input type="text" digitOnly [decimal]="true" name="locLatitude"
+                                        formControlName="locLatitude" class="form-control"
+                                        placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp41-plch' | translate }}"
+                                        id="validationCustom01" [required]="true" />
+                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locLatitude'].errors && addproductlocationForm['locLongitude'].errors"
+                                        class="invalid-feedback">
+                                        <div
+                                            *ngIf="addproductlocationForm['locLatitude'].errors['required'] && addproductlocationForm['locLongitude'].errors['required']">
+                                            {{ 'auctioncreate.auctionproduct.section1_formGrp41' | translate }} {{
+                                            'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp42-plch'
+                                    <label
+                                        for="validationCustom01">{{'auctioncreate.auctionproduct.section1_formGrp42-plch'
                                         | translate}}</label>
-                                    <input type="text" digitOnly [decimal]="true" name="locLongitude" formControlName="locLongitude" class="form-control" placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp42-plch' | translate }}" id="validationCustom01" [required]="true" />
+                                    <input type="text" digitOnly [decimal]="true" name="locLongitude"
+                                        formControlName="locLongitude" class="form-control"
+                                        placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp42-plch' | translate }}"
+                                        id="validationCustom01" [required]="true" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13'
+                                    <label
+                                        for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13'
                                         | translate}}</label>
-                                    <input type="text" name="region" class="form-control" formControlName="locRegion" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13' | translate}}" id="validationCustom01" [required]="true" />
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locRegion'].errors" class="invalid-feedback">
+                                    <input type="text" name="region" class="form-control" formControlName="locRegion"
+                                        placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13' | translate}}"
+                                        id="validationCustom01" [required]="true" />
+                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locRegion'].errors"
+                                        class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locRegion'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13' | translate}}
+                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14'
+                                    <label
+                                        for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14'
                                         | translate}}</label>
-                                    <input type="text" formControlName="locCity" name="city" class="form-control" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14' | translate}}" id="validationCustom01" [required]="true" />
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locCity'].errors" class="invalid-feedback">
+                                    <input type="text" formControlName="locCity" name="city" class="form-control"
+                                        placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14' | translate}}"
+                                        id="validationCustom01" [required]="true" />
+                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locCity'].errors"
+                                        class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locCity'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14' | translate}}
+                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15'
+                                    <label
+                                        for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15'
                                         | translate}}</label>
-                                    <input type="text" formControlName="locNeighborhood" name="neighborhood" class="form-control" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15' | translate}}" id="validationCustom01" [required]="true" />
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locNeighborhood'].errors" class="invalid-feedback">
+                                    <input type="text" formControlName="locNeighborhood" name="neighborhood"
+                                        class="form-control"
+                                        placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15' | translate}}"
+                                        id="validationCustom01" [required]="true" />
+                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locNeighborhood'].errors"
+                                        class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locNeighborhood'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15' | translate}}
+                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16'
+                                    <label
+                                        for="validationCustom01">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16'
                                         | translate}}</label>
-                                    <input type="text" name="street" class="form-control" formControlName="locStreet" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' | translate}}" id="validationCustom01" [required]="true" />
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locStreet'].errors" class="invalid-feedback">
+                                    <input type="text" name="street" class="form-control" formControlName="locStreet"
+                                        placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' | translate}}"
+                                        id="validationCustom01" [required]="true" />
+                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['locStreet'].errors"
+                                        class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locStreet'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' | translate}}
+                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row pt-2">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group">
-                                        <div class="border-bottom"> <label for="goverusermessage">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17'
-                                                | translate}} </label> <span *ngIf="ViewMode != 'view'" class="float-left text-muted">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-hint'
+                                        <div class="border-bottom"> <label
+                                                for="goverusermessage">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17'
+                                                | translate}} </label> <span *ngIf="ViewMode != 'view'"
+                                                class="float-left text-muted">{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-hint'
                                                 | translate}} <small>{{notesVal.value.length}} /{{maxChars}}</small>
                                             </span> </div>
-                                        <textarea class="form-control" name="notes" formControlName="notes" #notesVal [attr.maxlength]="maxChars" placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-plch' | translate}} " rows="5"></textarea>
-                                        <div *ngIf="onAddProductSubmitted && addproductlocationForm['notes'].errors" class="invalid-feedback">
+                                        <textarea class="form-control" name="notes" formControlName="notes" #notesVal
+                                            [attr.maxlength]="maxChars"
+                                            placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp17-plch' | translate}} "
+                                            rows="5"></textarea>
+                                        <div *ngIf="onAddProductSubmitted && addproductlocationForm['notes'].errors"
+                                            class="invalid-feedback">
                                             <div *ngIf="addproductlocationForm['notes'].errors['required']">
-                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' | translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' |
+                                                translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -867,10 +1179,12 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-between" *ngIf="ViewMode != 'view'">
-                <button type="button" (click)="closeProductModal('close')" class="btn btn-outline-light btn-right btn-md" data-dismiss="modal" aria-label="Close">
+                <button type="button" (click)="closeProductModal('close')"
+                    class="btn btn-outline-light btn-right btn-md" data-dismiss="modal" aria-label="Close">
                     {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp18' | translate}} </button>
                 <!-- <button type="button" class="modal-close" *ngIf="!showAddProductBtnLoader" (click)="onAddProduct('save')" data-dismiss="modal" aria-label="Close" class="btn btn-primary-light btn-md"> <span class="icon-add"></span> {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp19' | translate}} </button> -->
-                <button type="button" class="btn btn-primary-light btn-md" (click)="onAddProduct('save')" data-dismiss="true" aria-label="Close">
+                <button type="button" class="btn btn-primary-light btn-md" (click)="onAddProduct('save')"
+                    data-dismiss="true" aria-label="Close">
                     <!-- <span class="btn-text pr-0" *ngIf="showAddProductBtnLoader">
                         <div class="spinner-border spinner-border-light text-light" role="status">
                             <span class="sr-only">Loading...</span>
@@ -885,7 +1199,8 @@
 </div>
 <!-- {{productsFormGroup.value | json}} -->
 <!-- image attachement view -->
-<div class="modal fade " *ngIf="showViewAttachmentsModal" id="viewAttachmentModal" tabindex="-1 " role="dialog " aria-labelledby="viewAttachmentModalLabel" aria-hidden="true ">
+<div class="modal fade " *ngIf="showViewAttachmentsModal" id="viewAttachmentModal" tabindex="-1 " role="dialog "
+    aria-labelledby="viewAttachmentModalLabel" aria-hidden="true ">
     <div class="modal-dialog modal-lg modal-dialog-centered " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -894,8 +1209,10 @@
                     <span class="icon-close "></span> </button>
             </div>
             <div class="modal-body m-0 ">
-                <img *ngIf="selectedFileFormat=='image' " [src]="selectedFileURL " class="img-fluid " alt=" " srcset=" ">
-                <video *ngIf="selectedFileFormat=='video' " [src]="selectedFileURL " class="img-fluid " controls></video>
+                <img *ngIf="selectedFileFormat=='image' " [src]="selectedFileURL " class="img-fluid " alt=" "
+                    srcset=" ">
+                <video *ngIf="selectedFileFormat=='video' " [src]="selectedFileURL " class="img-fluid "
+                    controls></video>
             </div>
         </div>
     </div>
@@ -942,18 +1259,21 @@
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{'modal-show': showSuccessfulModal}">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_draft_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_draft_title' | translate }} </h4>
             </div>
             <div class="modal-body">
                 <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{
                     'message.success_draft_para' | translate }} </label>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{
+            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')"
+                    class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{
                     'message.back_auctionRequest' | translate }} </button> </div>
         </div>
     </div>
@@ -961,20 +1281,24 @@
 <div class="modal show" *ngIf="showConfirmCancelModal" [ngClass]="{'modal-show': showConfirmCancelModal}">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
-            <button type="button" (click)="closeConfirmCancelModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeConfirmCancelModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <div class="modal-header justify-content-left">
-                <h4 class="modal-title text-24 font-regular text-danger" id="exampleModalLabel"> {{ 'message.confirm_cancel_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-danger" id="exampleModalLabel"> {{
+                    'message.confirm_cancel_title' | translate }} </h4>
             </div>
             <div class="modal-body">
                 <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{
                     'message.confirm_cancel_para' | translate }} </label>
             </div>
             <div class="modal-footer justify-content-left">
-                <button type="button" (click)="closeConfirmCancelModal('close')" class="btn btn-outline-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'auctioncreate.auctionproduct.section1_formGrp16' |
+                <button type="button" (click)="closeConfirmCancelModal('close')" class="btn btn-outline-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'auctioncreate.auctionproduct.section1_formGrp16' |
                     translate }} </button>
-                <button type="button" (click)="closeConfirmCancelModal('success')" class="btn btn-danger btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.confirm_auctionRequest' | translate }}
+                <button type="button" (click)="closeConfirmCancelModal('success')" class="btn btn-danger btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.confirm_auctionRequest' | translate }}
                 </button>
             </div>
         </div>
@@ -983,14 +1307,18 @@
 <div class="modal show" *ngIf="showCancelSuccessfulModal" [ngClass]="{'modal-show': showCancelSuccessfulModal}">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeCancelSuccessfulModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeCancelSuccessfulModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_cancel_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_cancel_title' | translate }} </h4>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeCancelSuccessfulModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
+            <div class="modal-footer justify-content-center"> <button type="button"
+                    (click)="closeCancelSuccessfulModal('success')" class="btn btn-primary-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
             </div>
         </div>
     </div>
@@ -998,7 +1326,8 @@
 <div class="modal show" *ngIf="showAlertModal" [ngClass]="{'modal-show': showAlertModal}">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeAlertModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeAlertModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-alert-warning text-danger text-40 mb-4"></span>
@@ -1012,14 +1341,18 @@
 <div class="modal show" *ngIf="showDeleteSuccessfulModal" [ngClass]="{'modal-show': showDeleteSuccessfulModal}">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">
-            <button type="button" (click)="closeDeleteSuccessfulModal('close')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="closeDeleteSuccessfulModal('close')" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
             <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
-                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{ 'message.success_attach_title' | translate }} </h4>
+                <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
+                    'message.success_attach_title' | translate }} </h4>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeDeleteSuccessfulModal('success')" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
+            <div class="modal-footer justify-content-center"> <button type="button"
+                    (click)="closeDeleteSuccessfulModal('success')" class="btn btn-primary-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{ 'message.back_auctionRequest' | translate }} </button>
             </div>
         </div>
     </div>

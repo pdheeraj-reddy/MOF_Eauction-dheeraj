@@ -6,9 +6,7 @@ import { AuthService } from "src/app/service/auth.service";
 
 
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class HeadGuard implements CanActivate {
 
     constructor(

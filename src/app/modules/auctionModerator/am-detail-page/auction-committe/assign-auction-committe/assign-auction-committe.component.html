@@ -54,7 +54,7 @@
 <div class="card flex-card" *ngIf="!showPageLoader">
   <!-- Committee Chairman -->
   <button *ngIf="!committeeChairSelected" class="add-btn"
-    (click)="openAddChairDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')">
+    (click)="openAddChairDialog('Add Committee Head', 'ZEAUCTION_SALCOMM_CHAIRMAN')">
     <div class="card flex-card-item">
       <div class="card-body">
         <div style="
@@ -63,8 +63,8 @@
                 align-items: center;
                 margin-top: 18%;
               ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card1-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card1-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -76,7 +76,7 @@
         style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
         <img src="assets\icons\User.svg" alt="User icon" />
         <p>{{ "auctionModerator.am-detail.auction-committee.card1-head2" | translate }}</p>
-        <button (click)="openAddChairDialog('Add Committee Chair', 'ZEAUCTION_SALCOMM_CHAIRMAN')"
+        <button (click)="openAddChairDialog('Add Committee Head', 'ZEAUCTION_SALCOMM_CHAIRMAN')"
           *ngIf="isPendingPublish" class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;">
           <span class="icon-edit"></span></button>
       </div>
@@ -105,8 +105,9 @@
               align-items: center;
               margin-top: 18%;
             ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card2-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p [ngStyle]="{'width': textDir ? '213px' : ''}" class="mt-2">{{
+            "auctionModerator.am-detail.auction-committee.card2-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -150,8 +151,8 @@
               align-items: center;
               margin-top: 18%;
             ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -203,8 +204,8 @@
                 align-items: center;
                 margin-top: 18%;
               ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
 
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
@@ -258,8 +259,8 @@
                 align-items: center;
                 margin-top: 18%;
               ">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -301,8 +302,8 @@
     <div class="card-body-data">
       <div
         style="display: flex; justify-content: space-around; align-items: center;  padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
-        <img src="assets\icons\User.svg" alt="User icon" />
-        <p>{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
+        <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+        <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head2" | translate }}</p>
         <button (click)="openEditMem4Dialog('Add Committee Member', 'ZEAUCTION_SALCOMM_MEMBER',i)"
           *ngIf="isPendingPublish" class="card flex-card-item last-card-data"
           class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px">
@@ -329,8 +330,8 @@
     <div [ngClass]="{'last-card': !add4Mem}" class="card flex-card-item">
       <div class="card-body">
         <div style=" display: flex; justify-content: space-around; align-items: center; margin-top: 18%;">
-          <img src="assets\icons\User.svg" alt="User icon" />
-          <p>{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
+          <img src="assets\icons\User.svg" alt="User icon" />&nbsp;
+          <p class="mt-2">{{ "auctionModerator.am-detail.auction-committee.card3-head1" | translate }}</p>
         </div>
         <img src="assets\icons\plus.svg" alt="Add icon" style="padding-bottom: 40px" />
       </div>
@@ -384,8 +385,7 @@
 
   <div *ngIf="!commiteeMemberData">
     <div>
-      <button (click)="cancelMember()" class="btn btn-danger mt-5" _msthash="1893008" _msttexthash="94172"
-        style="direction: ltr">
+      <button (click)="checkData()" class="btn btn-danger mt-5" _msthash="1893008" _msttexthash="94172">
         {{"auctionModerator.am-detail.auction-committee.reject" | translate }} </button>&nbsp;
       <button (click)="checkMember()" class="btn btn-primary-light mt-5" _msthash="1893008" _msttexthash="94172"
         style="direction: ltr">
@@ -426,12 +426,12 @@
           style="color: #414042; font-size: 16px;">{{"auctionModerator.am-detail.auction-committee.popup1-subtitle" |
           translate}}</label></div>
       <div class="modal-footer" style="justify-content: end;">
-        <button type="button" (click)="assignAuctionCommittee()" class="btn btn-primary-light btn-md"
-          data-dismiss="modal" aria-label="Close">
-          {{"auctionModerator.am-detail.pricing-committee.popup1-accept" | translate}} </button>
         <button type="button" (click)="closeConfirm()" class="btn btn-md" data-dismiss="modal" aria-label="Close"
           style="border: 1px solid #cccccc; border-radius: 5px;">
           {{"auctionModerator.am-detail.pricing-committee.back_btn" | translate}} </button>
+        <button type="button" (click)="assignAuctionCommittee()" class="btn btn-primary-light btn-md"
+          data-dismiss="modal" aria-label="Close">
+          {{"auctionModerator.am-detail.pricing-committee.popup1-accept" | translate}} </button>
       </div>
     </div>
   </div>
@@ -456,9 +456,36 @@
           style="color: #414042; font-size: 16px; text-align: center;">{{"auctionModerator.am-detail.auction-committee.popup2-subtitle"
           | translate}}</label></div>
       <div class="modal-footer" style="justify-content: end;">
-        <button type="button" (click)="goBacktoList()" class="btn btn-primary-light btn-md" data-dismiss="modal"
-          aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.popup2-accept" | translate}}</button>
+        <button type="button" (click)="closeSuccess()" class="btn btn-primary-light btn-md" data-dismiss="modal"
+          aria-label="Close">{{"auctionModerator.am-detail.pricing-committee.accept-publish" | translate}}</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Cancel Model -->
+<div class="modal show" *ngIf="cancelPopupVar" [ngClass]="{ 'modal-show': cancelPopupVar }">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-danger" id="exampleModalLabel">
+          {{"auctionModerator.am-detail.pricing-committee.reject-popup.title" |
+          translate}}
+        </h4>
+        <button type="button" (click)="this.cancelPopupVar = false" class="modal-close btn-close btn-sm" data-dismiss="modal"
+          aria-label="Close"><span class="icon-close"></span></button>
+      </div>
+      <div class="modal-body text-body text-16 mt-4 font-weight-500">
+        {{"auctionModerator.am-detail.pricing-committee.reject-popup.subtitle" | translate}}</div>
+      <div class="modal-footer mt-5" style="justify-content: end;">
+        <button type="button" (click)="this.cancelPopupVar = false" class="btn btn-md btn-outline-light" data-dismiss="modal"
+          aria-label="Close">
+          {{"auctionModerator.am-detail.pricing-committee.reject-popup.back" | translate}} </button>
+        <button type="button" (click)="cancelMember()" class="btn btn-danger btn-md" data-dismiss="modal"
+          aria-label="Close">
+          {{"auctionModerator.am-detail.pricing-committee.reject-popup.reject" | translate}} </button>
+      </div>
+    </div>
+  </div>
+
 </div>

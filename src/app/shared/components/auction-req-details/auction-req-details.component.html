@@ -132,8 +132,10 @@
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp7" | translate }}</label>
                                 <div class="text-success">
                                     <span>{{ auctionItem.auctionStartDate }}</span>
-                                    <ul *ngIf="auctionItem.auctionStartTime" class="list list-primary-bullets d-inline-block">
-                                        <li class="text-muted"> {{ auctionItem.auctionStartTime }} {{ auctionItem.auctionStartTimeSufix | translate }} </li>
+                                    <ul *ngIf="auctionItem.auctionStartTime"
+                                        class="list list-primary-bullets d-inline-block">
+                                        <li class="text-muted"> {{ auctionItem.auctionStartTime }} {{
+                                            auctionItem.auctionStartTimeSufix | translate }} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -143,8 +145,10 @@
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp8" | translate }}</label>
                                 <div class="text-success">
                                     <span>{{ auctionItem.auctionEndDate }}</span>
-                                    <ul *ngIf="auctionItem.auctionEndTime" class="list list-primary-bullets d-inline-block">
-                                        <li class="text-muted"> {{ auctionItem.auctionEndTime }} {{ auctionItem.auctionStartTimeSufix | translate }} </li>
+                                    <ul *ngIf="auctionItem.auctionEndTime"
+                                        class="list list-primary-bullets d-inline-block">
+                                        <li class="text-muted"> {{ auctionItem.auctionEndTime }} {{
+                                            auctionItem.auctionStartTimeSufix | translate }} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -169,7 +173,7 @@
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp13" | translate }}</label>
                                 <div class="text-success">
-                                    <span>{{ auctionItem.auctionAnncEndDate }}</span>
+                                    <span>{{ auctionItem.bidOpeningTime }}</span>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +196,8 @@
                                 <div class="text-success"> {{ auctionItem.startPrice }} </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3" *ngIf=" !( auctionItem.auctionType === 'Public' &&auctionItem.auctionSubType === 'Closed' ) ">
+                        <div class="col-md-4 mb-3"
+                            *ngIf=" !( auctionItem.auctionType === 'Public' &&auctionItem.auctionSubType === 'Closed' ) ">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp16" | translate }}</label>
                                 <div class="text-success"> {{ auctionItem.lowBidValue }} </div>
@@ -233,16 +238,20 @@
                     </div>
                     <div class="row">
                         <div class="col-12 mt-3" *ngIf="auctionItem.auctionAttachement?.length">
-                            <table id="auctionAttachment" class="table table-bordered table-striped table-expanded table-hover">
+                            <table id="auctionAttachment"
+                                class="table table-bordered table-striped table-expanded table-hover">
                                 <thead>
                                     <tr class="btn-primary-light">
-                                        <th class="th-serials" scope="col" (click)="sortByTableHeaderId(0, 'string')"><span>{{
-                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' |
-                                            translate }}</span><span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
+                                        <th class="th-serials" scope="col" (click)="sortByTableHeaderId(0, 'numeric')">
+                                            <span>{{
+                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' |
+                                                translate }}</span><span class="sort"><span class="sort-none"
+                                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                         </th>
                                         <th class="" scope="col" (click)="sortByTableHeaderId(1, 'string')"><span>{{
-                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' |
-                                            translate }}</span><span class="sort"><span class="sort-none" [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
+                                                'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' |
+                                                translate }}</span><span class="sort"><span class="sort-none"
+                                                    [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                         </th>
                                         <th class="th-action" scope="col"></th>
                                     </tr>
@@ -250,10 +259,12 @@
                                 <tbody>
                                     <ng-container *ngIf="auctionItem.auctionAttachement.length > 0">
                                         <tr *ngFor="let file of auctionItem.auctionAttachement;let index=index">
-                                            <ng-container *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
-                                                <td>{{index+1}}</td>
+                                            <ng-container
+                                                *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
+                                                <td>{{file.index+1}}</td>
                                                 <td>
-                                                    <div class="text-capitalize text-success"><span class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
+                                                    <div class="text-capitalize text-success"><span
+                                                            class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
@@ -262,16 +273,22 @@
                                                             <img src="assets/icons/eye_open.svg" alt="" srcset="">
                                                         </button>
                                                     </div> -->
-                                                    <div *ngIf="activeIndex != index" class="qq-btn-group d-flex justify-content-end">
-                                                        <a *ngIf="!file.downloading && (file.MIMEType != 'application/pdf') && (file.MIMEType != 'application/msword') && (file.MIMEType != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')" (click)="viewAttachment(file, index, 'view')"
+                                                    <div *ngIf="activeIndex != index"
+                                                        class="qq-btn-group d-flex justify-content-end">
+                                                        <a *ngIf="!file.downloading && (file.MIMEType != 'application/pdf') && (file.MIMEType != 'application/msword') && (file.MIMEType != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')"
+                                                            (click)="viewAttachment(file, index, 'view')"
                                                             class="btn btn-ghost btn-sm fill-primary-light-green">
                                                             <span class="icon-eye-open"></span>
                                                         </a>
-                                                        <a *ngIf="!file.downloading" (click)="viewAttachment(file, index, 'download')" class="btn btn-ghost btn-sm fill-primary-light-green mx-3">
+                                                        <a *ngIf="!file.downloading"
+                                                            (click)="viewAttachment(file, index, 'download')"
+                                                            class="btn btn-ghost btn-sm fill-primary-light-green mx-3">
                                                             <span class="icon-download"></span>
                                                         </a>
 
-                                                        <button *ngIf="file.downloading" type="button" class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg" style="height: 100%; width: 100%;">
+                                                        <button *ngIf="file.downloading" type="button"
+                                                            class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg"
+                                                            style="height: 100%; width: 100%;">
                                                             <span class="btn-text pr-0">
                                                                 <div class="spinner-border spinner-border-light-green icon-spinner text-light"
                                                                     role="status">
@@ -287,20 +304,26 @@
                                     </ng-container>
                                 </tbody>
                             </table>
-                            <div *ngIf="auctionItem.auctionAttachement.length > 10" class="mt-4 row justify-content-end">
+                            <div *ngIf="auctionItem.auctionAttachement.length > 10"
+                                class="mt-4 row justify-content-end">
                                 <div class="mb-5">
                                     <nav aria-label="..." class="nav-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
-                                                <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')" class="page-link" aria-disabled="true">{{
+                                            <li class="page-item clickable" disabled
+                                                [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
+                                                <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')"
+                                                    class="page-link" aria-disabled="true">{{
                                                     'auctionlist.grid-previous' | translate }}</a>
                                             </li>
-                                            <li *ngFor="let page of pageRangeForAttach.pages" class="page-item" [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
+                                            <li *ngFor="let page of pageRangeForAttach.pages" class="page-item"
+                                                [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
                                                 <a (click)="navigateToPage(page, 'auctionAttach')" class="page-link"> {{
                                                     page }} </a>
                                             </li>
-                                            <li class="page-item clickable" disabled [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
-                                                <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                            <li class="page-item clickable" disabled
+                                                [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
+                                                <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')"
+                                                    class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                             </li>
                                         </ul>
                                     </nav>

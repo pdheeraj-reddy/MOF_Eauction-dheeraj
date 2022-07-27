@@ -6,7 +6,9 @@ import { AuthService } from "src/app/service/auth.service";
 
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ModeratorGuard implements CanActivate {
 
     constructor(

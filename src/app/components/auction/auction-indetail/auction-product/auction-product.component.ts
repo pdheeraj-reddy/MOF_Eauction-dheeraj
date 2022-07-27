@@ -24,6 +24,7 @@ export class AuctionProductComponent implements OnInit {
   @Output() changeSteps = new EventEmitter<number>();
   // AUCTION edit start
   @Input() auctionStatus: String;
+  @Input() statusOfAuction: string;
   @Output() productCreateResp = new EventEmitter<any>();
   @Output() changeauctiontype = new EventEmitter<string>();
   // AUCTION edit end
@@ -44,7 +45,9 @@ export class AuctionProductComponent implements OnInit {
   totalValue: number = 0;
   activePictureIndex = -1;
   activeFileIndex = -1;
-
+  columnLst = ['productName', 'productSerialNumber', 'productValue', 'productCondition'];
+  columnPicList = ['index', 'name'];
+  columnFileList = ['index', 'name'];
   // ------- product file attachment --------
   // ------- file validation         --------
   maxFileCount: Number = 30;
@@ -67,7 +70,9 @@ export class AuctionProductComponent implements OnInit {
   isValidDeliveryDate: boolean = false;
   isValidPDeliveryDate: boolean = false;
   invalidImageSize: boolean = false;
+  invalidImageType: boolean = false;
   invalidFileSize: boolean = false;
+  invalidFileType: boolean = false;
   showDeleteSuccessfulModal: boolean = false;
   // -------------
 
@@ -324,6 +329,7 @@ export class AuctionProductComponent implements OnInit {
                 el.ZzProductNo.trim() == pItem.ZzProductNo.trim();
             });
             if (productImagesArray.length > 0) {
+              // let i = 0;
               productImagesArray.forEach((value: any) => {
                 value.name = value.FileName + value.FileExt;
                 var imageupload = {
@@ -334,11 +340,14 @@ export class AuctionProductComponent implements OnInit {
                   "FilenetId": value.FilenetId,
                   "MIMEType": value.MIMEType,
                   downloading: false,
+                  // index: i,
                 };
+                // i++;
                 productImages.push(new FormControl(imageupload));
               });
             }
             if (productFilesArray.length > 0) {
+              // let i = 0;
               productFilesArray.forEach((value: any) => {
                 value.name = value.FileName + value.FileExt;
                 var fileupload = {
@@ -349,7 +358,9 @@ export class AuctionProductComponent implements OnInit {
                   "FilenetId": value.FilenetId,
                   "MIMEType": value.MIMEType,
                   downloading: false,
+                  // index: i,
                 };
+                // i++;
                 productFiles.push(new FormControl(fileupload));
               });
             }
@@ -636,6 +647,10 @@ export class AuctionProductComponent implements OnInit {
     return this.productsFormGroup.controls['productFormGroup'].get('products') as FormArray;
   }
 
+  set auctionProducts(value) {
+    this.productsFormGroup.controls['productFormGroup'].get('products')!.setValue(value);
+  }
+
   get auctionLocation(): FormGroup {
     return this.productsFormGroup.get('locationFormGroup') as FormGroup;
   }
@@ -658,7 +673,9 @@ export class AuctionProductComponent implements OnInit {
     // alert("Add +");
     this.invalidQty = false;
     this.invalidImageSize = false;
+    this.invalidImageType = false;
     this.invalidFileSize = false;
+    this.invalidFileType = false;
     this.submitted = true;
     this.showPopupLoader = false;
     this.validateFormControls("addProduct");
@@ -727,6 +744,7 @@ export class AuctionProductComponent implements OnInit {
   // }
   selectImages(e: any, dd: string): void {
     this.invalidImageSize = false;
+    this.invalidImageType = true;
     let filecount = e.target.files.length;
     if (e.target.files && filecount <= this.maxFileCount) {
       this.customLoopforImages(0, filecount, e.target.files);
@@ -737,6 +755,7 @@ export class AuctionProductComponent implements OnInit {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
     if (!!this.acceptedImagesExtensions.find(x => x === fileType)) {
+      this.invalidImageType = false;
       if (filesize <= 2097152) {
         if (this.productImages['controls'].length < this.maxFileCount) {
           // var fileupload: {[k: string]: any} = {};
@@ -757,6 +776,7 @@ export class AuctionProductComponent implements OnInit {
         }
       } else {
         this.invalidImageSize = true;
+        this.invalidImageType = false;
       }
     }
   }
@@ -771,8 +791,10 @@ export class AuctionProductComponent implements OnInit {
   }
 
   selectFiles(e: any, dd: string): void {
-    this.invalidImageSize = false;
+    // this.invalidImageSize = false;
+    // this.invalidImageType = true;
     this.invalidFileSize = false;
+    this.invalidFileType = true;
     let filecount = e.target.files.length;
     if (e.target.files && filecount <= this.maxFileCount) {
       this.customLoopforFiles(0, filecount, e.target.files);
@@ -783,6 +805,7 @@ export class AuctionProductComponent implements OnInit {
     let filesize = file[index]['size'];
     const fileType = file[index]['name'].split(".").pop()?.toLowerCase();
     if (!!this.acceptedFilesExtensions.find(x => x === fileType)) {
+      this.invalidFileType = false;
       if (filesize <= 2097152) {
         if (this.productFiles['controls'].length < this.maxFileCount) {
           // var fileupload: {[k: string]: any} = {};
@@ -891,6 +914,7 @@ export class AuctionProductComponent implements OnInit {
 
   removeFile(file: any, index: number, currentPage: number) {
     this.invalidImageSize = false;
+    this.invalidImageType = false;
     if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
@@ -900,7 +924,7 @@ export class AuctionProductComponent implements OnInit {
         this.files.splice(index, 1);
         this.productImages.removeAt(index);
         if (this.files.length % 10 === 0) {
-          this.navigateToPage(currentPage-1, 'productPictureAttach');
+          this.navigateToPage(currentPage - 1, 'productPictureAttach');
         } else {
           this.navigateToPage(currentPage, 'productPictureAttach');
         }
@@ -912,7 +936,7 @@ export class AuctionProductComponent implements OnInit {
       this.files.splice(index, 1);
       this.productImages.removeAt(index);
       if (this.files.length % 10 === 0) {
-        this.navigateToPage(currentPage-1, 'productPictureAttach');
+        this.navigateToPage(currentPage - 1, 'productPictureAttach');
       } else {
         this.navigateToPage(currentPage, 'productPictureAttach');
       }
@@ -921,6 +945,7 @@ export class AuctionProductComponent implements OnInit {
 
   removeDoc(file: any, index: number, currentPage: number) {
     this.invalidFileSize = false;
+    this.invalidFileType = false;
     if (file.FilenetId) {
       // this.showAlertModal = true;
       this.showPopupLoader = true;
@@ -930,7 +955,7 @@ export class AuctionProductComponent implements OnInit {
         this.files.splice(index, 1);
         this.productFiles.removeAt(index);
         if (this.files.length % 10 === 0) {
-          this.navigateToPage(currentPage-1, 'productFileAttach');
+          this.navigateToPage(currentPage - 1, 'productFileAttach');
         } else {
           this.navigateToPage(currentPage, 'productFileAttach');
         }
@@ -942,7 +967,7 @@ export class AuctionProductComponent implements OnInit {
       this.files.splice(index, 1);
       this.productFiles.removeAt(index);
       if (this.files.length % 10 === 0) {
-        this.navigateToPage(currentPage-1, 'productFileAttach');
+        this.navigateToPage(currentPage - 1, 'productFileAttach');
       } else {
         this.navigateToPage(currentPage, 'productFileAttach');
       }
@@ -953,7 +978,9 @@ export class AuctionProductComponent implements OnInit {
 
   public onAddProduct(submitSrc: string) {
     this.invalidImageSize = false;
+    this.invalidImageType = false;
     this.invalidFileSize = false;
+    this.invalidFileType = false;
     this.onAddProductSubmitted = true;
     if (this.addFormGroup.get('productSerialNumber')?.value < 1) {
       this.invalidQty = true;
@@ -1171,7 +1198,13 @@ export class AuctionProductComponent implements OnInit {
 
   // edit Product
 
-  editProduct(index: number) {
+  editProduct(item: any) {
+    let index: number = 0;
+    this.auctionProducts.controls.forEach((element, i) => {
+      if (element.value == item) {
+        index = i;
+      }
+    });
     this.invalidQty = false;
     this.showProductModal = true;
     const editdata = this.auctionProducts.controls[index].value;
@@ -1481,7 +1514,7 @@ export class AuctionProductComponent implements OnInit {
       ZzAucEndDt: this.auctionDetails.ZzAucEndDt,
       ZzStartMethod: this.auctionDetails.ZzStartMethod,
       ZzAnncSrtD: this.auctionDetails.ZzAnncSrtD,
-      ZzAnncEndD: this.auctionDetails.ZzAnncSrtD,
+      ZzAnncSrtT: this.auctionDetails.ZzAnncSrtT,
       ZzBidSrtPrice: this.auctionDetails.ZzBidSrtPrice,
       ZzLowBidVl: this.auctionDetails.ZzLowBidVl,
       ZzIbgaPercent: this.auctionDetails.ZzIbgaPercent,
@@ -1558,7 +1591,7 @@ export class AuctionProductComponent implements OnInit {
       ZzAucEndDt: this.auctionDetails.ZzAucEndDt,
       ZzStartMethod: this.auctionDetails.ZzStartMethod,
       ZzAnncSrtD: this.auctionDetails.ZzAnncSrtD,
-      ZzAnncEndD: this.auctionDetails.ZzAnncSrtD,
+      ZzAnncSrtT: this.auctionDetails.ZzAnncSrtT,
       ZzBidSrtPrice: this.auctionDetails.ZzBidSrtPrice,
       ZzLowBidVl: this.auctionDetails.ZzLowBidVl,
       ZzIbgaPercent: this.auctionDetails.ZzIbgaPercent,
@@ -1620,9 +1653,33 @@ export class AuctionProductComponent implements OnInit {
     }
   }
 
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
   // sorting
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    const tableData = this.PaginationServc.sortAllTableData(this.auctionProducts.value, this.columnLst[columnId]);
+  }
+
+  sortPictureByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    const tableData = this.PaginationServc.sortAllTableData(this.productImages.value, this.columnPicList[columnId]);
+  }
+
+  sortAttachByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    // this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    const tableData = this.PaginationServc.sortAllTableData(this.productFiles.value, this.columnFileList[columnId]);
   }
 
   formatDate(date: any) {

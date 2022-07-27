@@ -53,6 +53,9 @@
     "EAuction_PricingCommitteeChairman": "Pricing Commitee Head",
     "ZEAUCTION_PRICECOMM_HEAD": "Commitee Head",
     "ZEAUCTION_PRICECOMM_SECRETARY": "Commitee Secretary",
+    "ZEAUCTION_SALCOMM_CHAIRMAN": "Commitee Head",
+    "ZEAUCTION_SALCOMM_SECRETARY": "Commitee Secretary",
+    "ZEAUCTION_SALCOMM_MEMBER": "Committee Member",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
@@ -129,6 +132,7 @@
         "grid-previous": "Previous",
         "grid-next": "Next",
         "page-validerror": "is required",
+        "greater-then-zero": "should be greater then 0",
         "page-validnumericerror": "should be only numeric",
         "formDate-plch": "year - month - day",
         "not-avail": "not avail",
@@ -273,6 +277,9 @@
                 "popup_formGrp17-hint": "Letter",
                 "popup_formGrp18": "Cancellation",
                 "popup_formGrp19": "Add Product"
+            },
+            "delivery": {
+                "title": "Delivery Address"
             }
         }
     },
@@ -379,7 +386,7 @@
             "showProduct-accept_btn": "Accept Request",
             "auction-publish": {
                 "back_btn": "Back",
-                "accept_btn": "Announcement of the Auction on the Platform"
+                "accept_btn": "Publish the Auction on the platform"
             },
             "reject-popup": {
                 "title": "Confirm reject of the auction request",
@@ -455,7 +462,7 @@
                 "currency": "SAR",
                 "sendQuotes": "Send Pricing Values",
                 "back_btn": "Back",
-                "reject_btn": "Denial of Pricing",
+                "reject_btn": "Refuse Pricing",
                 "accept_btn": "Accept Pricing"
             },
             "pricing-committee": {
@@ -480,10 +487,17 @@
                 "accept": "Send Pricing",
                 "popup1-title": "Confirmation of sending a pricing request ?",
                 "popup1-subtitle": "Upon confirmation, the auction will be sent to Pricing Committee member for pricing.",
-                "popup1-accept": "Post Confirm",
+                "popup1-accept": "Confirm",
                 "popup2-title": "The request has been successfully sent to the pricing committee",
                 "popup2-subtitle": "After pricing the products by the committee, the request will be returned to appoint the auction committee and publish the auction.",
-                "popup2-accept": "Back to Auction Requests"
+                "popup2-accept": "Back to Auction Requests",
+                "accept-publish": "Confirm",
+                "reject-popup": {
+                    "title": "Are you sure about canceling?",
+                    "subtitle": "Upon confirmation, all data entered and saved will be cancelled.",
+                    "reject": "Confirm and return to auction requests",
+                    "back": "Back"
+                }
             },
             "auction-committee": {
                 "tab1": "Auction Details",
@@ -527,7 +541,7 @@
         "publish-popup": {
             "title1": "Confirmation of Auction Announcement?",
             "subtitle1": "Upon confirmation, the auction announcement will be approved and published in the Electronic Auction. ",
-            "confirm": "Confirmation of Publication",
+            "confirm": "Confirm Publish",
             "back": "Back",
             "title2": "The auction was successfully announced.",
             "subtitle2": "You can follow the auction status from the auction page",
@@ -580,7 +594,7 @@
             "tab2": "Product Details",
             "tab3": "Pricing Committee Members",
             "tab4": "Auction Committee Members",
-            "Price_adjustment": "Price adjustment"
+            "Price_adjustment": "Edit Price"
         }
     },
     "bidderAuctionDetails": {
@@ -810,8 +824,54 @@
         "bid-value": {
             "head": "General information about the order",
             "subHead": "Product Pricing",
-            "phold": "Total estimated value of products",
-            "save": "Save"
+            "heading": "Total estimated value of products",
+            "phold": "Enter estimated value of products",
+            "save": "Save",
+            "failure_mssg": "Please enter a valid amount",
+            "overall_failure_mssg": "Please enter correct estimated amount",
+            "popup_label": "Estimated Value of the Product",
+            "popup_save": "Save Value",
+            "popup_phold": "Enter the estimated value of the product"
+        },
+        "confirmation-popup": {
+            "title": "Confirm sending product pricing?",
+            "subtitle": "Upon confirmation, the auction application will be approved and sent for approval.",
+            "accept": "Confirmation of Publication",
+            "back": "Back"
+        },
+        "successful-popup": {
+            "title": "Pricing was sent successfully",
+            "subtitle": "The request was successfully sent",
+            "accept": "Back to Auction Requests"
+        },
+        "error-popup": {
+            "subtitle": "Please note that one of the estimated values is equal to 0. Do you want to continue?",
+            "accept": "Confirm"
+        },
+        "accept-popup": {
+            "title": " Confirmation of acceptance of pricing request?",
+            "subtitle": "Upon confirmation, the pricing request will be approved and sent to the head of the government authority.",
+            "accept": "Accept Request",
+            "back": "Back"
+        },
+        "accept-success": {
+            "title": "The application was successfully accepted",
+            "subtitle": "The application was successfully sent to the head of the authority to complete the auction approval",
+            "accept": "Back to Auction Requests"
+        },
+        "reject-popup": {
+            "title": "Confirmation of rejection of the request?",
+            "subtitle": "Are you sure to send the rejection request?",
+            "reason-label": "Please enter the reason",
+            "section2-validation": "the reason is required",
+            "letter": "Letter",
+            "phold": "Text..",
+            "cancel": "Cancel"
+        },
+        "reject-success": {
+            "title": "The application was successfully rejected",
+            "subtitle": "The rejection of the application has been successfully sent and will reach the member of the pricing committee to re-edit.",
+            "accept": "Back to Auction Requests"
         }
     },
     "auctionCommittee": {

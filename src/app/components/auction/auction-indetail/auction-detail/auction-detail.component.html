@@ -1,4 +1,24 @@
 <div class="auction-form">
+
+    <div *ngIf="statusOfAuction == 'Rejected' && !showLoader"
+        class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert-wrapper">
+            <div class="alert-body">
+                <i class="alert-icon">
+                    <span class="icon-filled-wrong"></span>
+                </i>
+                <div class="alert-content">
+                    <p class="text-14">{{auctionDetails.RejectNotes}}</p>
+                </div>
+            </div>
+            <div class="alert-action">
+                <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="py-3 mb-3">
         <h4>
             <!-- <ul class="list list-group list-group-horizontal float-left">
@@ -299,7 +319,8 @@
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker (click)="makeConsole('enter')" (keydown.esc)="makeConsole('esc')" (keydown.alt)="makeConsole('alt')" (keydown.tab)="makeConsole('tab')" -->
                             <!-- <input type="text" id="auctionStartDate" formControlName="auctionStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'Public'"> -->
-                            <input type="text" id="auctionStartDate" formControlName="auctionStartDate"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionStartDate"
+                                formControlName="auctionStartDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                                 (change)="onChangeDateTime($event, 'auctionStartDate')"
                                 class="form-control calendar-control calendar-both-control"
@@ -315,7 +336,8 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp8' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionEndDate" class="form-control calendar-control calendar-gregorian-control" placeholder="day-month-year" [required]="form['auctionType'].value === 'Public'" /> -->
-                            <input type="text" id="auctionEndDate" formControlName="auctionEndDate"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionEndDate"
+                                formControlName="auctionEndDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                                 (change)="onChangeDateTime($event, 'auctionEndDate')"
                                 class="form-control calendar-control calendar-both-control"
@@ -334,7 +356,8 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp9' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionStartTime" class="time-control form-control" placeholder="Auction start time" [required]="form['auctionType'].value === 'Public'" (click)="changetime($event,'auctionStartTime');" /> -->
-                            <input type="text" id="auctionStartTime" formControlName="auctionStartTime"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionStartTime"
+                                formControlName="auctionStartTime"
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }}"
                                 (change)="onChangeDateTime($event, 'auctionStartTime')"
                                 class="form-control time-control" [required]="form['auctionType'].value === 'Public'" />
@@ -349,7 +372,8 @@
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp10' |
                                     translate }}</span></label>
                             <!-- <input type="text" formControlName="auctionEndTime" class="time-control form-control" placeholder="Auction end time" [required]="form['auctionType'].value === 'Public'" (click)="changetime($event,'auctionEndTime');" /> -->
-                            <input type="text" id="auctionEndTime" formControlName="auctionEndTime"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionEndTime"
+                                formControlName="auctionEndTime"
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }}"
                                 (change)="onChangeDateTime($event, 'auctionEndTime')" class="form-control time-control"
                                 [required]="form['auctionType'].value === 'Public'" />
@@ -385,7 +409,8 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp12' |
                                     translate }}</span></label>
-                            <input type="text" id="auctionAnncStartDate" formControlName="auctionAnncStartDate"
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionAnncStartDate"
+                                formControlName="auctionAnncStartDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                                 (change)="onChangeDateTime($event, 'auctionAnncStartDate')"
                                 class="form-control calendar-control calendar-both-control" [required]="true" />
@@ -397,12 +422,14 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group"> <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp13' |
                                     translate }}</span></label>
-                            <input type="text" id="auctionAnncEndDate" formControlName="auctionAnncEndDate"
-                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionAnncEndDate')"
-                                class="form-control calendar-control calendar-both-control" [required]="true" />
-                            <div *ngIf="isValidAnncEDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
-                                | translate }}</div>
+                            <input type="text" onkeydown="event.preventDefault()" id="bidOpeningTime"
+                                formControlName="bidOpeningTime"
+                                placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp13' | translate }}"
+                                (change)="onChangeDateTime($event, 'bidOpeningTime')" class="form-control time-control"
+                                [required]="true" />
+                            <div *ngIf="isBidOpeningTime" class="invalid-feedback">{{
+                                'auctioncreate.auctiondetails.section1_formGrp13' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -421,6 +448,14 @@
                             </label>
                             <input type="text" numeric formControlName="startPrice" min="1" step="any"
                                 class="form-control" placeholder="150,000" [required]="true" />
+                        </div>
+                        <div *ngIf="submitted && form['startPrice'].errors" class="invalid-feedback">
+                            <div *ngIf="form['startPrice'].errors['required']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
+                                'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="form['startPrice'].errors['min']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
+                                'auctioncreate.greater-then-zero' | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -548,13 +583,18 @@
                         <table class="table table-bordered table-striped table-expanded table-hover">
                             <thead>
                                 <tr class="btn-primary-light">
-                                    <th class="th-serials" scope="col">{{
-                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' | translate
-                                        }}
+                                    <th class="th-serials" style="width: 13%;" scope="col"
+                                        (click)="sortByTableHeaderId(0, 'numeric')">
+                                        <span>{{ 'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth1' |
+                                            translate }}
+                                        </span><span class="sort"><span class="sort-none"
+                                                [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                     </th>
-                                    <th class="" scope="col">{{
-                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' | translate
-                                        }}
+                                    <th class="" scope="col" (click)="sortByTableHeaderId(1, 'string')"><span>{{
+                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp8-taleth2' |
+                                            translate }}
+                                        </span><span class="sort"><span class="sort-none"
+                                                [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                     </th>
                                     <th class="th-action" scope="col"></th>
                                 </tr>
@@ -605,10 +645,10 @@
                             <div class="mb-5">
                                 <nav aria-label="..." class="nav-pagination">
                                     <ul class="pagination">
-                                        <li class="page-item"
+                                        <li class="page-item clickable" disabled
                                             [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
                                             <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')"
-                                                class="page-link" tabindex="-1" aria-disabled="true">{{
+                                                class="page-link" aria-disabled="true">{{
                                                 'auctionlist.grid-previous' | translate }}</a>
                                         </li>
                                         <li *ngFor="let page of pageRangeForAttach.pages" class="page-item"
@@ -616,7 +656,7 @@
                                             <a (click)="navigateToPage(page, 'auctionAttach')" class="page-link"> {{
                                                 page }} </a>
                                         </li>
-                                        <li class="page-item"
+                                        <li class="page-item clickable" disabled
                                             [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
                                             <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')"
                                                 class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>

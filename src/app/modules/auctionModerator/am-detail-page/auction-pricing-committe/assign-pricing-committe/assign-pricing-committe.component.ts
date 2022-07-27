@@ -22,9 +22,11 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   @Output() stepperEvent1 = new EventEmitter();
   @Output() stepperEvent = new EventEmitter();
   showSuccessPopup = false;
+  showCancelPopup = false;
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
+  textDir: boolean = false;
   popupTitle: any = '';
   committeeMemberList: any = [];
   existingCommitteSecList: any = [];
@@ -117,7 +119,18 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this.showConfirm = true;
     }
   }
-
+  checkData(){
+    if(
+      this.committeeChairData || 
+      this.committeeSecData ||
+      this.committeeMem1Data || 
+      this.committeeMem2Data ||
+      this.committeeMem3Data ||
+      this.committeeMem4Data 
+      ){
+        this.showCancelPopup = true;
+      }
+  }
   cancelMember() {
     this.committeeChairData = undefined
     this.committeeMem1Data = undefined
@@ -143,9 +156,11 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
 
     this.auctionServc.unsaved = false;
     // this.ngOnInit();
+    this.router.navigate(['/auctionlist']);
   }
 
   assignPricingCommittee() {
+    this.showPageLoader = true;
     this.showConfirm = false;
     console.log(this.preAuctionData);
     this.preAuctionData;
@@ -157,7 +172,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this.committeeMem3Data == undefined
     ) {
       console.log(this.committeeChairData);
-      alert('Enter Required fields');
+      // alert('Enter Required fields');
       return;
     } else {
       console.log(this.committeeChairData);
@@ -173,8 +188,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           temp.push(element);
         });
       }
-      console.log("🚀 ~ assignPricingCommittee ~ temp", temp)
-      console.log("🚀 ~ assignPricingCommittee ~ temp", this.addcommitteeMemberList)
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: 'A',
@@ -191,11 +204,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
             // alert('Updated Successfully');
             this.showSuccessPopup = true;
             this.auctionServc.unsaved = false;
+            this.showPageLoader = false;
             console.log(res);
             this.getPreAuctionData();
           },
           (error) => {
             // alert('Error Updating');
+            this.showPageLoader = false;
             console.log('approveOrRejectAuction RespError : ', error);
           }
         );
@@ -704,6 +719,16 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     console.log(this.preAuctionData);
     this.getPreAuctionData();
   }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
+  }
+
   getPreAuctionData() {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(

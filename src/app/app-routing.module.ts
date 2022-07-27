@@ -21,6 +21,9 @@ import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/a
 
 import { AuctionSliderComponent } from './common/components/auction-slider/auction-slider.component';
 import { AppGuard } from './guard/app.guard';
+import { ModeratorGuard } from './guard/moderator.guard';
+import { MemberGuard } from './guard/member.guard';
+import { HeadGuard } from './guard/head.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/auctionlist', pathMatch: 'full' },
   { path: 'tender', component: TenderComponent },
@@ -37,17 +40,17 @@ const routes: Routes = [
   {
     path: 'auctionModerator',
     component: AuctionModeratorComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ModeratorGuard],
     children: [
       {
         path: 'landingPage',
         component: AucModLandingPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, ModeratorGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AmDetailPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, ModeratorGuard],
       },
       {
         path: '',
@@ -59,17 +62,17 @@ const routes: Routes = [
   {
     path: 'auctionMember',
     component: AuctionMemberComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, MemberGuard],
     children: [
       {
         path: 'landingPage',
         component: AucMemLandingPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, MemberGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AucMemDetailPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, MemberGuard],
       },
       {
         path: '',
@@ -81,17 +84,17 @@ const routes: Routes = [
   {
     path: 'auctionHead',
     component: AuctionHeadComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, HeadGuard],
     children: [
       {
         path: 'landingPage',
         component: AuctionHeadLandingPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, HeadGuard],
       },
       {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AuctionHeadDetailPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, HeadGuard],
       },
       {
         path: '',

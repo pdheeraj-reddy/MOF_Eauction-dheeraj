@@ -25,12 +25,15 @@ export class AssignAuctionCommitteComponent implements OnInit {
   @Output()
   _3MembersAdded = false;
   showConfirm = false;
+  showCancelPopup = false;
+  textDir = false;
   showSuccessPopup = false;
   preAuctionData: any;
   popupTitle: any = '';
   committeeMemberList: any = [];
 
   commiteeMemberData = false;
+  cancelPopupVar = false;
   add4Mem: boolean = false;
   list: any = [];
   myControl = new FormControl();
@@ -114,7 +117,18 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.callstepper.emit();
   }
 
-
+  checkData(){
+    if(
+      this.committeeChairData || 
+      this.committeeSecData ||
+      this.committeeMem1Data || 
+      this.committeeMem2Data ||
+      this.committeeMem3Data ||
+      this.committeeMem4Data 
+      ){
+        this.cancelPopupVar = true;
+      }
+  }
   cancelMember() {
     this.committeeChairData = undefined;
     this.committeeMem1Data = undefined;
@@ -133,6 +147,8 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.add4Mem = false;
     this.auctionServc.unsaved = false;
     // this.ngOnInit();
+    this.cancelPopupVar = false;
+    this.router.navigate(['/auctionlist']);
   }
 
   checkMember() {
@@ -158,6 +174,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     }
   }
   assignAuctionCommittee() {
+    this.showPageLoader = true;
     this.showConfirm = false;
     console.log(this.preAuctionData);
     this.preAuctionData;
@@ -209,12 +226,14 @@ export class AssignAuctionCommitteComponent implements OnInit {
         })
         .subscribe(
           (res: any) => {
+            this.showPageLoader = false;
             this.showSuccessPopup = true;
             this.getPreAuctionData();
             console.log(res);
           },
           (error) => {
-            alert("Internal server error!");
+            this.showPageLoader = false;
+            // alert("Internal server error!");
             console.log('approveOrRejectAuction RespError : ', error);
           }
         );
@@ -695,6 +714,16 @@ export class AssignAuctionCommitteComponent implements OnInit {
       map((value) => this._filter(value))
     );
   }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
+  }
+
   async goBack() {
     this.stepperEvent1.emit();
     // this.router.navigateByUrl('/');
@@ -704,12 +733,11 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
         let temp = res.body.d.results[0];
         console.log(temp);
-        this.isPendingPublish = this.preAuctionData.Status == 'Pending to Publish' ? true : false;
+        this.isPendingPublish = this.preAuctionData.CommitteeAssigned == 'X' ? false : true;
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;
           console.log(data.length);

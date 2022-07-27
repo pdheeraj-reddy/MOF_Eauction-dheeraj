@@ -27,7 +27,7 @@ export class AuctionReqDetailsComponent implements OnInit {
   auctionDetailsSubscription$: Subscription;
   pageRangeForAttach: any;
   activeIndex = -1;
-
+  columnLst = ['index', 'name'];
   showViewAttachmentsModal: boolean = false;
   selectedFileFormat: any;
   selectedFileURL: any;
@@ -73,7 +73,6 @@ export class AuctionReqDetailsComponent implements OnInit {
           this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp);
           this.navigateToPage(1, 'auctionAttach');
           this.auctionDetails = auctionDetailsResp.body.d.results[0];
-          console.log('YY', this.auctionItem);
           // Load until data loads then slowly load images
           this.showLoader = false;
         },
@@ -104,12 +103,10 @@ export class AuctionReqDetailsComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId(
-      'auctionAttachment',
-      columnId,
-      sortType,
-      dateFormat
-    );
+    // this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.auctionItem.auctionAttachement, this.columnLst[columnId]);
+    console.log("🚀 ~ sortByTableHeaderId ~ this.auctionItem.auctionAttachement", this.auctionItem.auctionAttachement)
   }
 
   getPreAuctionData() {
@@ -245,13 +242,13 @@ export class AuctionReqDetailsComponent implements OnInit {
     }
   }
 
-  isSorting(columnId: number){
+  isSorting(columnId: number) {
     return this.PaginationServc.columnId !== columnId;
   }
-  isSortAsc(columnId: number){
+  isSortAsc(columnId: number) {
     return this.PaginationServc.isSortAsc(columnId);
   }
-  isSorDesc(columnId: number){
+  isSorDesc(columnId: number) {
     return this.PaginationServc.isSortDesc(columnId);
   }
 

@@ -6,10 +6,8 @@ import { AuthService } from "src/app/service/auth.service";
 
 
 
-@Injectable({
-    providedIn: 'root'
-})
-export class HeadGuard implements CanActivate {
+@Injectable()
+export class ModeratorGuard implements CanActivate {
 
     constructor(
         private _authService: AuthService,
@@ -23,7 +21,7 @@ export class HeadGuard implements CanActivate {
 
         if (this._authService.loggedIn()) {
             const currentUserRole = this.auctionServc.getLoggedUserRole();
-            if (currentUserRole?.isPricingHead) {
+            if (currentUserRole?.isAuctionModerator) {
                 return true;
             } else {
                 window.alert("Access Denied");

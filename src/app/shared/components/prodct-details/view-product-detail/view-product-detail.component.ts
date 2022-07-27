@@ -39,7 +39,7 @@ export class ViewProductDetailComponent implements OnInit {
   fetchPicture: boolean = true;
   showVideo: boolean = true;
   pageRangeForAttach: any;
-
+  columnLst = ['index', 'name'];
 
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -84,7 +84,6 @@ export class ViewProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
-    console.log(localStorage.getItem('lang_pref'))
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
     }
@@ -97,6 +96,7 @@ export class ViewProductDetailComponent implements OnInit {
     //   this.fullImage = this.slidesStore[0].src;
     // }
     this.viewproduct = this.dialogData.viewproduct;
+    console.log("🚀🚀 ~~ this.viewproduct", this.viewproduct);
     this.navigateToPage(1, 'auctionAttach');
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;
@@ -113,21 +113,22 @@ export class ViewProductDetailComponent implements OnInit {
       }
     }
 
+    if (this.viewproduct?.productFiles.length) {
+      this.viewproduct?.productFiles.forEach((element: any, index: number) => {
+        element.index = index;
+      });
+    }
+
     this.product = this.dialogData.productDetails;
-    console.log('viewproduct ', this.viewproduct);
     this.index = this.dialogData.index;
     this.isBidUpdate = this.dialogData.isBidUpdate;
     this.price = this.product?.['ZzPdtEstPricePc'];
-    console.log('haro', this.dialogData.status);
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId(
-      'auctionAttachment',
-      columnId,
-      sortType,
-      dateFormat
-    );
+    // this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.viewproduct.productFiles, (this.columnLst[columnId]));
   }
 
   isSorting(columnId: number) {
@@ -164,7 +165,6 @@ export class ViewProductDetailComponent implements OnInit {
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
     const downloadLink = document.createElement("a");
-    console.log('linkSource: ', linkSource);
     downloadLink.href = base64Data;
     downloadLink.target = '_blank';
     downloadLink.download = fileName;
@@ -190,9 +190,7 @@ export class ViewProductDetailComponent implements OnInit {
         async (downloadAuctionImagesResp: any) => {
 
           let filenetId = index.FilenetId;
-          console.log(index.FilenetId, "FILENETID");
           const fileResp = downloadAuctionImagesResp.d;
-          // console.log(fileResp.FileContent);
           var byteString = atob(
             atob(fileResp.FileContent).split(',')[1]
           );
@@ -227,7 +225,6 @@ export class ViewProductDetailComponent implements OnInit {
           this.showLoader = false;
         },
         (error) => {
-          // this.showLoader = false;
           console.log('downloadAuctionImages RespError : ', error);
         }
       );
@@ -254,19 +251,15 @@ export class ViewProductDetailComponent implements OnInit {
       file.downloading = true;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
-          console.log(downloadAuctionImagesResp);
           const fileResp = downloadAuctionImagesResp.d;
           var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-          console.log('asdasd', byteString.split(',')[1]);
           var ab = new ArrayBuffer(byteString.length);
           var ia = new Uint8Array(ab);
           for (var i = 0; i < byteString.length; i++) {
             ia[i] = byteString.charCodeAt(i);
           }
           const blob = new Blob([ab], { type: file.MIMEType });
-          console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
-          console.log('fileURL', fileURL);
           var newWin: any;
           if (option == 'view') {
             newWin = window.open(fileURL, '_blank');
@@ -298,7 +291,6 @@ export class ViewProductDetailComponent implements OnInit {
       }
       const blob = new Blob([ab], { type: file.type });
 
-      console.log('fileURL', blob);
       let fileURL = window.URL.createObjectURL(blob);
       if (
         file.type.indexOf('image') > -1 ||
@@ -307,7 +299,6 @@ export class ViewProductDetailComponent implements OnInit {
         fileType === 'doc' ||
         fileType === 'pdf'
       ) {
-        console.log('fileURL', fileURL);
         window.open(fileURL, '_blank');
       }
     }

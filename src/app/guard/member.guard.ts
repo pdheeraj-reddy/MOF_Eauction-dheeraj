@@ -6,7 +6,9 @@ import { AuthService } from "src/app/service/auth.service";
 
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MemberGuard implements CanActivate {
 
     constructor(

@@ -179,7 +179,7 @@
                 <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
                     'auctionlist.filter-title' | translate }}</h3>
                 <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
-                    (click)="toggleFilter()">
+                    (click)="toggleFilter(); getAuctionList(1);">
                     <span class="icon-close"></span>
                 </button>
             </div>
@@ -224,7 +224,7 @@
                             class="form-control calendar-control calendar-both-control" />
                         <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
                     </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All'">
+                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All' || selectedTab==='' || showStatusFilter">
                         <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
                             (change)="changeSelect($event, 'auctionStatus')" [required]="true">
@@ -239,8 +239,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md"
-                    (click)="resetFilter()"> {{ 'auctionlist.filter-btn2' | translate }} </button>
-                <button type="button" class="btn btn-primary-light btn-md" (click)="getAuctionList(1)"> {{
+                    (click)="isFilterSearch = true; isSearch=true; showStatusFilter=true; resetFilter()"> {{
+                    'auctionlist.filter-btn2' | translate }} </button>
+                <button type="button" class="btn btn-primary-light btn-md"
+                    (click)="isFilterSearch = true; getAuctionList(1);"> {{
                     'auctionlist.filter-btn1' | translate }} </button>
             </div>
         </form>
@@ -252,40 +254,46 @@
                     class="table table-bordered table-striped table-expanded table-hover">
                     <thead class="thead-dark">
                         <tr class="">
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy( 'ObjectId')">
+                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ObjectId', 0)">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col1' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy( 'Description')">
+                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Description', 1)">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col2' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy( 'BidType')">
+                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('BidType', 2)">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col3' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy( 'ZzAucSrtDt')">
+                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucSrtDt', 3)">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col4' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy( 'ZzAucEndDt')">
+                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucEndDt', 4)">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col5' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy( 'Status')">
+                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Status', 5)">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col6' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(5), 'sort-asc': isSortAsc(5), 'sort-desc': isSorDesc(5) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light" scope="col"></th>

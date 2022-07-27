@@ -26,6 +26,7 @@ export class ProductDetailPopupComponent implements OnInit {
   textDir = 'ltr';
   showLoader: boolean = false;
   fetchPicture: boolean = true;
+  showVideo: boolean = true;
 
 
   constructor(
@@ -37,7 +38,7 @@ export class ProductDetailPopupComponent implements OnInit {
   ) { }
 
   customOptions: OwlOptions = {
-    items: 4,
+    items: 3,
     autoHeight: true,
     autoWidth: true,
     loop: false,
@@ -55,11 +56,14 @@ export class ProductDetailPopupComponent implements OnInit {
   }
 
   viewItem(a: any) {
+    this.showVideo = false;
     this.fullImage = {
       src: a.src,
       type: a.type
     }
-    console.log(this.fullImage)
+    setTimeout(() => {
+      this.showVideo = true;
+    });
   }
 
   ngOnInit(): void {

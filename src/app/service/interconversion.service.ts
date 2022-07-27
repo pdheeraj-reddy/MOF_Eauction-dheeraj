@@ -113,9 +113,9 @@ export class InterconversionService {
         'YYYY-MM-DD'
       )
       : '';
-    auctionDetails.auctionAnncEndDate = serverObj.ZzAnncEndD
-      ? moment(serverObj.ZzAnncEndD, 'DD.MM.YYYY').format(
-        'YYYY-MM-DD'
+    auctionDetails.bidOpeningTime = serverObj.ZzAnncSrtT
+      ? moment(serverObj.ZzAnncSrtT, 'HH:mm:ss').format(
+        'hh:mm A'
       )
       : '';
     auctionDetails.startPrice = serverObj.ZzBidSrtPrice;
@@ -128,6 +128,7 @@ export class InterconversionService {
 
     if (serverObj.listtoattachnav['results']) {
       console.log("att data form API", serverObj.listtoattachnav['results']);
+      let i = 0;
       serverObj.listtoattachnav['results'].forEach(
         (value: any, index: any, array: any) => {
           if (value.ObjectType == '/AuctionDocuments') {
@@ -139,7 +140,9 @@ export class InterconversionService {
               FilenetId: value.FilenetId,
               MIMEType: value.MIMEType,
               downloading: false,
+              index: i
             };
+            i++;
             auctionDetails.auctionAttachement.push(fileupload);
           }
           if (value.ObjectType == '/AuctionProductImages') {
@@ -151,8 +154,10 @@ export class InterconversionService {
               FilenetId: value.FilenetId,
               MIMEType: value.MIMEType,
               downloading: false,
+              index: i
             };
           }
+
         }
       );
     }

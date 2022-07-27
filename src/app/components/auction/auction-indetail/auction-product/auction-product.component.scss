@@ -18,10 +18,11 @@
     outline: none;
     opacity: 0;
 }
-.icon-spinner{
-  width: 18px;
-  height: 18px;
-  font-size: x-small;
+
+.icon-spinner {
+    width: 18px;
+    height: 18px;
+    font-size: x-small;
 }
 
 
@@ -45,4 +46,8 @@ agm-map {
 .modal-backdrop.show {
     opacity: .3;
     display: none !important;
+}
+
+.clickable:not(:disabled) {
+    color: #32AD71;
 }
