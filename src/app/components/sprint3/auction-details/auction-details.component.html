@@ -98,14 +98,16 @@
         <!-- ==========End======= -->
 
         <!--============= Auction Participation card =============-->
-        <app-auction-participation *ngIf="response && role.bidder && upcomingAuction?.auctionStatus=='Published'"
+        <app-auction-participation *ngIf="response && role.bidder && this.status.published"
             [response]="response" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
         </app-auction-participation>
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="role.bidder && upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M' 
-        || upcomingAuction?.auctionStatus=='Pending FBGA Approval' && response.ZzBidderSts == 'F' "
+        <app-auction-fbga *ngIf="role.bidder && (this.status.pendingFbga && response.ZzBidderSts == 'M') 
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'F')
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'G')
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'J')"
             [bidderStatus]="response.ZzBidderSts" [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc"
             (showError)="showError($event)">
         </app-auction-fbga>
@@ -113,25 +115,25 @@
 
         <!--============ Send Invoice card ============-->
         <app-auction-pay-invoice
-            *ngIf="role.bidder && upcomingAuction?.auctionStatus=='Pending Paying' && response.ZzBidderSts == 'N'"
+            *ngIf="role.bidder && this.status.pendingPaying && response.ZzBidderSts == 'N'"
             [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
         <!-- End -->
 
         <!--============ Pending primary awarding card ============-->
-        <app-auction-prmy-award *ngIf="role.auctionMod && upcomingAuction?.auctionStatus=='Pending Primary Awarding'"
+        <app-auction-prmy-award *ngIf="role.auctionMod && this.status.pendingPrimaryAwarding"
             [prmyaward]="primaryAwardingData" [ibgaDoc]="ibgaDoc">
         </app-auction-prmy-award>
         <!-- End -->
 
         <!--============Final Awarding card ============-->
         <app-auction-final-award [finalaward]="finalAwardingData" [fbgaDoc]="fbgaDoc"
-            *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA Approval' && role.auctionMod">
+            *ngIf="role.auctionMod && this.status.pendingFbgaApproval">
         </app-auction-final-award>
         <!-- End -->
 
         <!--============ Open offers card ============-->
-        <app-open-offers-card *ngIf="role.auctionCommitteeHead && upcomingAuction?.auctionStatus=='Pending Selecting'"></app-open-offers-card>
+        <app-open-offers-card *ngIf="role.auctionCommitteeHead && this.status.pendingSelecting"></app-open-offers-card>
         <!-- End -->
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
@@ -269,13 +271,14 @@
                             </app-latest-offers-sent>
                         </div>
                         <!-- End -->
+
                         <div [ngClass]="{
                             'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
                             'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',
-                            'left-right-card-en-disable': textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'),
-                            'left-right-card-ar-disable': !textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M') 
+                            'left-right-card-en-disable': textDir && response.ZzBidderSts != 'P',
+                            'left-right-card-ar-disable': !textDir && response.ZzBidderSts != 'P' 
                         }"
-                            *ngIf="role.bidder && upcomingAuction.auctionStatus=='Ongoing' || upcomingAuction.auctionStatus=='Pending Selecting' || upcomingAuction.auctionStatus=='Pending FBGA'">
+                            *ngIf="role.bidder && !this.status.published">
 
                             <!--============= Send offer card =============-->
                             <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'P'" [disable]="false"
@@ -284,7 +287,7 @@
                             </app-send-bidding-offer>
                             <!-- End -->
 
-                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'"
+                            <app-send-bidding-offer *ngIf="response.ZzBidderSts != 'P'"
                                 [ibgaDoc]="ibgaDoc" [disable]="true" [auctionId]="auctionId"
                                 [totalBookValue]="response.ZzPbEstPrice" (showError)="showError($event)">
                             </app-send-bidding-offer>
@@ -1228,7 +1231,7 @@
                 </div>
             </div>
 
-            <div *ngIf="editmode3"
+        <div *ngIf="editmode3"
         style="width: 69%; margin-left: 25px; margin-right: 25px; border: #cac1c1 1px solid; border-radius: 7px;">
         <div style="padding: 30px">
             <div style="display: flex;">
@@ -1490,7 +1493,7 @@
 
             </div>
         </div>
-    </div>
+        </div>
 
             <!-- Auction instruction ends here -->
         </div>

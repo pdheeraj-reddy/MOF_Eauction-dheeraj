@@ -46,7 +46,11 @@ export class AuctionFbgaComponent implements OnInit {
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
     console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.fbgaDoc); 
-    if(this.bidderStatus == "F"){
+    if(this.bidderStatus == "M" || this.bidderStatus == "J"){
+      this.disable = false;
+      this.disableBtn = false;
+      this.disableInput = false;
+    }else{
       this.disable = true;
       this.disableBtn = true;
       this.disableInput = true;

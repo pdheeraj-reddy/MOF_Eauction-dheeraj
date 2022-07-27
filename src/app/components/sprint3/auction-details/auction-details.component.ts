@@ -31,7 +31,7 @@ export class AuctionDetailsComponent implements OnInit {
   auctionId: string
   editmode1: boolean = true;
   editmode2: boolean = false;
-  editmode3: boolean = true;
+  editmode3: boolean = false;
 
   offerReport: OfferReport = new OfferReport();
 
