@@ -1,7 +1,7 @@
-<div class="card">
+<div class="card mb-4">
 
     <div
-        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending FBGA' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
+        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
         {{auction.statuscount}}<span class="icon-eye-open" *ngIf="auctionStatus=='Running Now'"></span>
         {{auctionStatus | translate}}
     </div>
@@ -56,8 +56,8 @@
     <img *ngIf="!showLoader" src="{{auctionImg}}" onerror="this.onerror=null;this.src='assets/icons/logo-mini.svg';"
         class="card-img-top" alt="...">
 
-    <div class="card-body">
-        <h5 class="card-title">{{auction.title}}</h5>
+    <div class="card-body" style="padding: 20px !important;">
+        <h5 class="card-title mt-4">{{auction.title}}</h5>
         <p class="card-text" data-toggle="tooltip" data-placement="top" title="{{auction.description}}">
             {{auction.description}} </p>
         <div class="text-body text-18 mt-4">

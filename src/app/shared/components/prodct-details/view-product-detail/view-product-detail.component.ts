@@ -40,6 +40,8 @@ export class ViewProductDetailComponent implements OnInit {
   showVideo: boolean = true;
   pageRangeForAttach: any;
   columnLst = ['index', 'name'];
+  longitude: any = '';
+  lattitude: any = '';
 
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -96,7 +98,8 @@ export class ViewProductDetailComponent implements OnInit {
     //   this.fullImage = this.slidesStore[0].src;
     // }
     this.viewproduct = this.dialogData.viewproduct;
-    console.log("🚀🚀 ~~ this.viewproduct", this.viewproduct);
+    this.longitude = this.viewproduct.location.locLongitude.split(',')[0];
+    this.lattitude = this.viewproduct.location.locLatitude.split(',')[1];
     this.navigateToPage(1, 'auctionAttach');
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;

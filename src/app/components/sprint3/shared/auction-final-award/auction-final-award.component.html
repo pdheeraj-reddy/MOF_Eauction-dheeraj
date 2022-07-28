@@ -3,10 +3,8 @@
   <!--=================== Yellow box to show auction status ===================-->
   <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
     <div class="mx-3">
-      <p class="text-18 text-secondary font-weight-bold">الترسية المبدئية</p>
-      <p class="text-12 text-secondary">
-        تم ترسية هذا العرض من قبل لجنة المزاد، الرجاء اعتماد الترسية المبدئية
-      </p>
+      <p class="text-18 text-secondary font-weight-bold">{{ "amauctiondetails.final-award.head" | translate }}</p>
+      <p class="text-12 text-secondary">{{ "amauctiondetails.final-award.sub-head" | translate }}</p>
     </div>
   </div>
   <!-- End -->
@@ -28,18 +26,19 @@
         </p>
         <p class="text-16 text-dark mb-2">No. {{finalaward.bidderNo}} </p>
         <!-- BidCrNumber -->
-        <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')" class="text-primary tex-14" style="text-decoration: none;">
+        <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')" class="text-primary tex-14"
+          style="text-decoration: none;">
           <span class="text-16 icon-download"></span>
           &nbsp;
           <span style="text-decoration: underline;">Final Warranty</span>
         </a>
         <div *ngIf="showAttachLoader">
-          <div class="spinner-border text-primary" style="font-size: 12px;width: 20px !important;height: 20px !important;"
-          role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-        &nbsp;
-        <span style="text-decoration: underline;">Primary Warranty</span>
+          <div class="spinner-border text-primary"
+            style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          &nbsp;
+          <span style="text-decoration: underline;">Primary Warranty</span>
         </div>
       </div>
     </div>
@@ -52,12 +51,16 @@
           <span style="text-decoration: underline;">Auction report and bid submitted BidOfferPDF</span>
         </a>
       </div>
-      <div class="mt-3">
+      <div *ngIf="!finalDone" class="mt-3">
         <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">Refusal to be
           awarded</button>
         &nbsp;&nbsp;
         <button class="btn btn-primary-light btn-md" (click)="this.showConfirmationAccept = true">Final award
           approval</button>
+      </div>
+      <div class="mt-3" *ngIf="finalDone">
+        <button class="btn btn-primary-light btn-md" [ngStyle]="{ float: btnFloat }" (click)="goToInvoice()">Send
+          Invoice</button>
       </div>
     </div>
   </div>
@@ -125,7 +128,7 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false">
+        <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false; gotoList()">
           Back to Auction Requests
         </button>
       </div>
@@ -195,7 +198,7 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessReject = false">
+        <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessReject = false; gotoList()">
           Back to Auctions
         </button>
       </div>

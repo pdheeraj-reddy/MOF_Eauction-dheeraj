@@ -961,7 +961,11 @@
     "amauctiondetails": {
         "bcrumb1": "Trust services",
         "bcrumb2": "Auctions",
-        "pageTitle": "Auction Details"
+        "pageTitle": "Auction Details",
+        "final-award": {
+            "head": "Final Gear",
+            "sub-head": "The final guarantee has been attached by the bidder, please approve the final award and send the invoice."
+        }
     },
     "sendOffer": {
         "bcrumb1": "Trust services",

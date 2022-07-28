@@ -265,8 +265,8 @@
 </div>
 
 <!-- Delivery Details -->
-<div *ngIf="loggedUserRole.isPricingHead || loggedUserRole.isPricingMember" class="m-4"
-    [ngStyle]="{ direction: textDir }">
+<div *ngIf="loggedUserRole.isPricingHead || loggedUserRole.isPricingMember || loggedUserRole.isAuctionModerator"
+    class="m-4" [ngStyle]="{ direction: textDir }">
     <div class="mt-4">
         <label for="goverusermessage">{{ "auctioncreate.auctionproduct.delivery.title" | translate }}</label>
     </div>
@@ -277,12 +277,12 @@
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp41-plch" |
                     translate }}</label>
-                <div class="text-success"> {{ viewproduct.location.locLatitude }} </div>
+                <div class="text-success"> {{ lattitude }} </div>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp42-plch" |
                     translate }}</label>
-                <div class="text-success"> {{ viewproduct.location.locLongitude }}</div>
+                <div class="text-success"> {{ longitude }}</div>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp5" |
@@ -310,7 +310,7 @@
             </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" style="overflow-wrap: break-word;">
             <div class="col mb-3">
                 <label for="validationCustom01">{{ "auctioncreate.auctionproduct.section1_formGrp9" |
                     translate }}</label>

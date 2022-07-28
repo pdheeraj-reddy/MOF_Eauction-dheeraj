@@ -4,6 +4,7 @@ import { InvoiceForSend } from 'src/app/model/auction.model';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-send-invoice',
@@ -27,13 +28,14 @@ export class SendInvoiceComponent implements OnInit {
     public moderatorService: AucModeratorService,
     private router: Router,
     private route: ActivatedRoute,
+    private _location: Location
   ) {
     this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
   }
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
-    this.getInvoice(1);
+    // this.getInvoice(1);
   }
 
   ngDoCheck() {
@@ -115,7 +117,11 @@ export class SendInvoiceComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/auctions');
+  }
+
+  goToAuctionDetails() {
+    this._location.back();
   }
 
   closeSuccess() {
