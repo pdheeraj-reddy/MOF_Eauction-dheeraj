@@ -5,6 +5,8 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
 import { Location } from '@angular/common';
+import * as moment from 'moment-mini';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-send-invoice',
@@ -21,6 +23,19 @@ export class SendInvoiceComponent implements OnInit {
   auctionId: string = '';
   showSuccessPopup: boolean = false;
   invoiceSent: boolean = false;
+  invoiceData: any = [];
+  auctionStartDate: any;
+  auctionStartTime: any;
+  auctionStartSuffix: any;
+  offerDate: any;
+  offerTime: any;
+  offerSuffix: any;
+  deliveryDate: any;
+  gearPrice: number = 0;
+  questRate: number = 0;
+  vat: number = 0;
+  totalValue: number = 0;
+  pageRangeForProductAttach: any;
   invoiceForSend: InvoiceForSend = new InvoiceForSend();
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -28,9 +43,14 @@ export class SendInvoiceComponent implements OnInit {
     public moderatorService: AucModeratorService,
     private router: Router,
     private route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    public envService: EnvService
   ) {
     this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
+  }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
   }
 
   ngOnInit(): void {
@@ -71,55 +91,35 @@ export class SendInvoiceComponent implements OnInit {
 
   getInvoice() {
     this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
-      console.log("🚀🚀 ~~ res", res);
+      this.showLoader = false;
+      this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
+      localStorage.setItem('x-csrf-token', this.moderatorService.XCSRFToken);
+      this.invoiceData = res.body.d.results[0];
+      this.auctionStartDate = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[0], 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.auctionStartTime = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('hh:mm');
+      this.auctionStartSuffix = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('A');
+      this.offerDate = moment(this.invoiceData?.OfferDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.offerTime = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('hh:mm');
+      this.offerSuffix = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('A');
+      this.deliveryDate = moment(this.invoiceData?.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+
+      let bidderValue = parseFloat(this.invoiceData?.BidderValue);
+      let quest = parseFloat(this.invoiceData?.ZzCommPercent);
+
+      this.gearPrice = bidderValue;
+      this.questRate = (bidderValue * quest) / 100;
+      this.vat = (bidderValue * 15) / 100;
+      this.totalValue = this.gearPrice + this.questRate + this.vat;
 
     });
   }
 
-  public mapping(serverObj: any) {
-    if (serverObj.d.results?.length) {
-      this.invoiceForSend = {
-        auctionReferenceNo: serverObj.d.results[0].auctionReferenceNo,
-        auctionDate: serverObj.d.results[0].auctionDate,
-        auctionTime: serverObj.d.results[0].auctionTime,
-        productsType: serverObj.d.results[0].productsType,
-        offerAwardDate: serverObj.d.results[0].offerAwardDate,
-        offerAwardTime: serverObj.d.results[0].offerAwardTime,
-        facilityName: serverObj.d.results[0].facilityName,
-        entityName: serverObj.d.results[0].entityName,
-        commercialRegNo: serverObj.d.results[0].commercialRegNo,
-        entityNo: serverObj.d.results[0].entityNo,
-        deliveryDate: serverObj.d.results[0].deliveryDate,
-        region: serverObj.d.results[0].region,
-        city: serverObj.d.results[0].city,
-        district: serverObj.d.results[0].district,
-        street: serverObj.d.results[0].street,
-        otherNotes: serverObj.d.results[0].otherNotes,
-        productGrandTotal: {
-          gearPrice: serverObj.d.results[0].gearPrice,
-          questRate: serverObj.d.results[0].questRate,
-          valueAddTax: serverObj.d.results[0].valueAddTax,
-          totalInvPrice: serverObj.d.results[0].totalInvPrice,
-        },
-        productDetails: []
-      };
-      if (serverObj.d.results[0].product_detail) {
-        serverObj.d.results[0].product_detail.forEach((result: any) => {
-          const items = {
-            referenceno: result['ObjectId'] ? result['ObjectId'] : '',
-            productname: result['productname'] ? result['productname'] : '',
-            SKUNumber: result['sku_number'] ? result['sku_number'] : '',
-          }
-          this.invoiceForSend.productDetails?.push(items);
-        });
-      }
-    }
-  }
 
   sendInvoice() {
     this.moderatorService.sendInvoice(this.auctionId, "").subscribe((res: any) => {
-      this.showSuccessPopup = true;
-      console.log("🚀🚀 ~~ res", res);
+      if (res['d']['Msgty'] === 'S') {
+        this.showSuccessPopup = true;
+      }
     })
   }
 
@@ -135,6 +135,21 @@ export class SendInvoiceComponent implements OnInit {
     this.showSuccessPopup = false;
     this.ngOnInit();
     this.invoiceSent = true;
+  }
+
+  navigateToPage(pageNoVal: number) {
+    this.PaginationServc.setPagerValues(
+      this.invoiceData?.invoicetoprodnav.results.length,
+      10,
+      pageNoVal
+    );
+    this.pageRangeForProductAttach = {
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 10),
+      rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal - 1) * 10) + 9,
+      pages: this.PaginationServc.pages,
+      currentPage: this.PaginationServc.currentPage,
+      totalPages: this.PaginationServc.totalPages,
+    }
   }
 
 

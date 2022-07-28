@@ -106,10 +106,10 @@
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="role.bidder && (this.status.pendingFbga && response.ZzBidderSts == 'M') 
+        <app-auction-fbga *ngIf="role.bidder && ((this.status.pendingFbga && response.ZzBidderSts == 'M') 
         || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'F')
         || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'G')
-        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'J')" [bidderStatus]="response.ZzBidderSts"
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'J'))" [bidderStatus]="response.ZzBidderSts"
             [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc" (showError)="showError($event)">
         </app-auction-fbga>
         <!-- End -->

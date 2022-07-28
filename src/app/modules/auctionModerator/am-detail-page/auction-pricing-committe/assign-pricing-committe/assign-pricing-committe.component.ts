@@ -119,17 +119,17 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this.showConfirm = true;
     }
   }
-  checkData(){
-    if(
-      this.committeeChairData || 
+  checkData() {
+    if (
+      this.committeeChairData ||
       this.committeeSecData ||
-      this.committeeMem1Data || 
+      this.committeeMem1Data ||
       this.committeeMem2Data ||
       this.committeeMem3Data ||
-      this.committeeMem4Data 
-      ){
-        this.showCancelPopup = true;
-      }
+      this.committeeMem4Data
+    ) {
+      this.showCancelPopup = true;
+    }
   }
   cancelMember() {
     this.committeeChairData = undefined
@@ -155,8 +155,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     this.add4Mem = false;
 
     this.auctionServc.unsaved = false;
+    this.showCancelPopup = false;
     // this.ngOnInit();
-    this.router.navigate(['/auctionlist']);
+    // this.router.navigate(['/auctionlist']);
   }
 
   assignPricingCommittee() {

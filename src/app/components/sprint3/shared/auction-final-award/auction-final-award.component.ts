@@ -24,7 +24,6 @@ export class AuctionFinalAwardComponent implements OnInit {
   showSuccessReject: boolean = false;
   showLoader: boolean = false;
   btnFloat: any = '';
-  finalDone: boolean = false;
   sendInvoice = false;
 
 
@@ -66,7 +65,7 @@ export class AuctionFinalAwardComponent implements OnInit {
         this.showLoader = false;
         this.showConfirmationAccept = false;
         this.showSuccessAccept = true;
-        this.finalDone = true;
+        this.sendInvoice = true;
       }
     }));
   }

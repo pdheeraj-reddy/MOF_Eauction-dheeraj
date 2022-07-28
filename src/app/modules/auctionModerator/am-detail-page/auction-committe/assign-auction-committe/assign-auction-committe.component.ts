@@ -117,17 +117,17 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.callstepper.emit();
   }
 
-  checkData(){
-    if(
-      this.committeeChairData || 
+  checkData() {
+    if (
+      this.committeeChairData ||
       this.committeeSecData ||
-      this.committeeMem1Data || 
+      this.committeeMem1Data ||
       this.committeeMem2Data ||
       this.committeeMem3Data ||
-      this.committeeMem4Data 
-      ){
-        this.cancelPopupVar = true;
-      }
+      this.committeeMem4Data
+    ) {
+      this.cancelPopupVar = true;
+    }
   }
   cancelMember() {
     this.committeeChairData = undefined;
@@ -148,7 +148,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
     this.auctionServc.unsaved = false;
     // this.ngOnInit();
     this.cancelPopupVar = false;
-    this.router.navigate(['/auctionlist']);
+    // this.router.navigate(['/auctionlist']);
   }
 
   checkMember() {

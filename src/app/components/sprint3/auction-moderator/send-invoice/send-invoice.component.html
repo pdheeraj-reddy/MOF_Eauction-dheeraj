@@ -1,11 +1,11 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item"><a href="#">{{'auctionCommittee.ac-detail.bcrumb1' |
+            <li class="breadcrumb-item"><a [href]="getHomeUrl">{{'auctionCommittee.ac-detail.bcrumb1' |
                     translate}}</a></li>
-            <li class="breadcrumb-item"><a href="#">{{'auctionCommittee.ac-detail.bcrumb2' |
+            <li class="breadcrumb-item"><a href="/auctions">{{'auctionCommittee.ac-detail.bcrumb2' |
                     translate}}</a></li>
-            <li class="breadcrumb-item"><a href="#">{{'auctionCommittee.ac-detail.bcrumb3' |
+            <li class="breadcrumb-item"><a (click)="goToAuctionDetails()">{{'auctionCommittee.ac-detail.bcrumb3' |
                     translate}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">
                 {{'bidderAuctions.payment_bill' | translate}}</li>
@@ -33,7 +33,61 @@
 
     <div class="border rounded" style="width: 896px; background-color: #FFFFFF;">
 
-        <div style="margin: 6%;">
+        <div class="card p-5 shadow-lg" *ngIf="showLoader">
+            <div class="form-row">
+                <div class="col-12">
+                    <table class="table">
+                        <td colspan="10" class="p-3 bg-white">
+                            <div class="alert-body text-center">
+                                <i class="alert-icon">
+                                    <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                                        <g fill-rule="nonzero" fill="#32AD71">
+                                            <path
+                                                d="M32 11.871c-1.755 0-3.097-1.342-3.097-3.097V3.097C28.903 1.342 30.245 0 32 0s3.097 1.342 3.097 3.097v5.677c0 1.652-1.342 3.097-3.097 3.097z" />
+                                            <path
+                                                d="M32 64c-1.755 0-3.097-1.342-3.097-3.097v-5.677c0-1.755 1.342-3.097 3.097-3.097s3.097 1.342 3.097 3.097v5.677C35.097 62.658 33.755 64 32 64z"
+                                                opacity=".4" />
+                                            <path
+                                                d="M46.452 60.077c-1.033 0-2.065-.516-2.684-1.548l-2.787-4.852c-.826-1.445-.31-3.406 1.135-4.232 1.445-.826 3.407-.31 4.232 1.136l2.787 4.851c.826 1.445.31 3.407-1.135 4.233a2.913 2.913 0 01-1.548.412z"
+                                                opacity=".5" />
+                                            <path
+                                                d="M11.871 23.432a2.913 2.913 0 01-1.548-.413L5.47 20.232C4.026 19.406 3.51 17.445 4.335 16c.826-1.445 2.788-1.961 4.233-1.135l4.851 2.787c1.446.825 1.962 2.787 1.136 4.232-.62 1.032-1.652 1.548-2.684 1.548z"
+                                                opacity=".05" />
+                                            <path
+                                                d="M57.084 49.548a2.913 2.913 0 01-1.549-.413l-4.954-2.787c-1.446-.825-1.962-2.787-1.136-4.232.826-1.445 2.787-1.961 4.232-1.135l4.852 2.787c1.445.826 1.961 2.787 1.136 4.232-.517 1.032-1.549 1.548-2.581 1.548z"
+                                                opacity=".6" />
+                                            <path
+                                                d="M8.774 35.097H3.097C1.342 35.097 0 33.755 0 32s1.342-3.097 3.097-3.097h5.677c1.755 0 3.097 1.342 3.097 3.097s-1.445 3.097-3.097 3.097z"
+                                                opacity=".1" />
+                                            <path
+                                                d="M60.903 35.097h-5.677c-1.755 0-3.097-1.342-3.097-3.097s1.342-3.097 3.097-3.097h5.677C62.658 28.903 64 30.245 64 32s-1.342 3.097-3.097 3.097z"
+                                                opacity=".7" />
+                                            <path
+                                                d="M6.916 49.548c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.406 1.136-4.232l4.851-2.787c1.446-.826 3.407-.31 4.233 1.135.825 1.445.31 3.407-1.136 4.232l-4.851 2.787c-.413.31-.93.413-1.549.413z"
+                                                opacity=".2" />
+                                            <path
+                                                d="M52.129 23.432c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.407 1.136-4.232l4.851-2.787c1.445-.826 3.407-.31 4.233 1.135.825 1.445.31 3.406-1.136 4.232l-4.852 2.787a2.913 2.913 0 01-1.548.413z"
+                                                opacity=".8" />
+                                            <path
+                                                d="M17.548 60.077A2.913 2.913 0 0116 59.665c-1.445-.826-1.961-2.788-1.135-4.233l2.787-4.851c.825-1.446 2.787-1.962 4.232-1.136 1.445.826 1.961 2.787 1.135 4.232l-2.787 4.852c-.62 1.032-1.651 1.548-2.684 1.548z"
+                                                opacity=".3" />
+                                            <path
+                                                d="M43.665 14.968a2.913 2.913 0 01-1.549-.413c-1.445-.826-1.961-2.787-1.135-4.232l2.787-4.852C44.594 4.026 46.555 3.51 48 4.335c1.445.826 1.961 2.788 1.135 4.233l-2.787 4.851c-.619.93-1.651 1.549-2.683 1.549z"
+                                                opacity=".9" />
+                                        </g>
+                                    </svg>
+                                </i>
+                                <div class="alert-content">
+                                    <h5 class="text-black-50">Loading</h5>
+                                </div>
+                            </div>
+                        </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin: 6%;" *ngIf="!showLoader">
             <p class="text-primary text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}</p>
             <br>
             <div class="form-field">
@@ -43,22 +97,17 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.AuctionReferenceNumber' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.auctionReferenceNo}}</div>
+                                    <div class="text-primary">{{invoiceData?.ObjectId}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.AuctionStartDateandTime' | translate}}</label>
-                                    <div class="row text-primary">
-                                        <span class="col-md-6">{{invoiceForSend.auctionDate}}</span>
-
-                                        <ul class="col list list-primary-bullets d-inline-block"
-                                            style="margin-right: -22px; margin-left: -22px;">
-                                            <li class="text-muted">
-                                                <span
-                                                    style="margin-left: -10px; margin-right: -10px;">{{invoiceForSend.auctionTime}}</span>
-
-                                            </li>
+                                    <div class="text-primary">
+                                        <span>{{ auctionStartDate }}</span>
+                                        <ul class="list list-primary-bullets d-inline-block">
+                                            <li class="text-muted"> {{auctionStartTime}} {{auctionStartSuffix |
+                                                translate}} </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -67,7 +116,7 @@
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.ProductsType' | translate}}</label>
                                     <div class="text-primary">
-                                        {{invoiceForSend.productsType}}
+                                        {{invoiceData?.ZzAucProduct}}
                                     </div>
                                 </div>
                             </div>
@@ -77,15 +126,10 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label> {{'bidderFinalInvoice.OfferAwardDate' | translate}}</label>
-                                    <div class="row text-primary">
-                                        <span class="col-md-6">{{invoiceForSend.offerAwardDate}}</span>
-
-                                        <ul class="col list list-primary-bullets d-inline-block"
-                                            style="margin-right: -22px; margin-left: -22px;">
-                                            <li class="text-muted">
-                                                <span
-                                                    style="margin-left: -10px; margin-right: -10px;">{{invoiceForSend.offerAwardTime}}</span>
-
+                                    <div class="text-primary">
+                                        <span>{{ offerDate }}</span>
+                                        <ul class="list list-primary-bullets d-inline-block">
+                                            <li class="text-muted"> {{ offerTime }} {{offerSuffix | translate}}
                                             </li>
                                         </ul>
                                     </div>
@@ -102,7 +146,7 @@
                                 <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.FacilityName' | translate}}</label>
-                                        <div class="text-primary">{{invoiceForSend.facilityName}}</div>
+                                        <div class="text-primary">{{invoiceData?.BidderName}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +154,7 @@
                                 <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.CommercialRegistrationNo' | translate}}</label>
-                                        <div class="text-primary">{{invoiceForSend.commercialRegNo}}</div>
+                                        <div class="text-primary">{{invoiceData?.CrNumber}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -120,18 +164,18 @@
                             <p class="text-primary font-weight-bold text-18">
                                 {{'bidderFinalInvoice.BillerData' | translate}}</p>
                             <div class="form-row mt-4">
-                                <div class="col-md-4 mb-3">
+                                <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.EntityName' | translate}}</label>
-                                        <div class="text-primary">{{invoiceForSend.entityName}}</div>
+                                        <div class="text-primary">{{invoiceData?.ZzAgencyName}}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row mt-4">
-                                <div class="col-md-4 mb-3">
+                                <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.EntityNo' | translate}}</label>
-                                        <div class="text-primary">{{invoiceForSend.entityNo}}</div>
+                                        <div class="text-primary">{{invoiceData?.ZzAgencyId}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +190,7 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.DeliveryDate' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.deliveryDate}}</div>
+                                    <div class="text-primary">{{deliveryDate}}</div>
                                 </div>
                             </div>
                         </div>
@@ -155,19 +199,19 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.Region' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.region}}</div>
+                                    <div class="text-primary">{{invoiceData?.ZzRegion}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.City' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.city}}</div>
+                                    <div class="text-primary">{{invoiceData?.ZzCity}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.District' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.district}}</div>
+                                    <div class="text-primary">{{invoiceData?.ZzNeighbourhood}}</div>
                                 </div>
                             </div>
                         </div>
@@ -176,13 +220,13 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.Street' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.street}}</div>
+                                    <div class="text-primary">{{invoiceData?.ZzStreet}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.OtherNotes' | translate}}</label>
-                                    <div class="text-primary">{{invoiceForSend.otherNotes}}</div>
+                                    <div class="text-primary">{{invoiceData?.ZzPdOthrNts}}</div>
                                 </div>
                             </div>
                         </div>
@@ -213,87 +257,94 @@
                                 <span>{{'bidderFinalInvoice.SKU_Number' | translate}}</span>
                             </div>
                         </th>
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
+                                <span>{{'bidderFinalInvoice.DeliveryAdd' | translate}}</span>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngIf="invoiceForSend.productDetails">
-                        <ng-container *ngIf="invoiceForSend.productDetails.length > 0">
-                            <tr *ngFor="let rowItem of invoiceForSend.productDetails;index as i">
-                                <td>{{rowItem.referenceno}}</td>
-                                <td>{{rowItem.productname}}</td>
-                                <td>{{rowItem.SKUNumber}}</td>
-                            </tr>
-
-                        </ng-container>
+                    <ng-container *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
+                        <tr *ngFor="let rowItem of invoiceData?.invoicetoprodnav.results; index as i;">
+                            <!-- <ng-container *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd"> -->
+                            <td>{{i+1}}</td>
+                            <td>{{rowItem.Description}}</td>
+                            <td>{{rowItem.ZzProductSku}}</td>
+                            <td>{{rowItem.ZzRegion}}, {{rowItem.ZzCity}}, {{rowItem.ZzNeighbourhood}},
+                                {{rowItem.ZzStreet}}</td>
+                            <!-- </ng-container> -->
+                        </tr>
                     </ng-container>
-                    <ng-container *ngIf="invoiceForSend.productGrandTotal">
+                    <ng-container *ngIf="invoiceData?.BidderValue">
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice' |
                                     translate}}</span>
-                                <span [ngStyle]="{float: textFloat}"
-                                    class="text-success">{{invoiceForSend.productGrandTotal.gearPrice}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate' |
                                     translate}}</span>
-                                <span [ngStyle]="{float: textFloat}"
-                                    class="text-success">{{invoiceForSend.productGrandTotal.questRate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
                                     | translate}}</span>
-                                <span [ngStyle]="{float: textFloat}"
-                                    class="text-success">{{invoiceForSend.productGrandTotal.valueAddTax}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <span
                                     class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
                                     | translate}}</span>
-                                <span [ngStyle]="{float: textFloat}"
-                                    class="text-success">{{invoiceForSend.productGrandTotal.totalInvPrice}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
                             </td>
                         </tr>
                     </ng-container>
                 </tbody>
             </table>
 
-            <ng-container *ngIf="invoiceForSend.productDetails">
-                <div class="mt-4 row margin-auto" *ngIf="invoiceForSend.productDetails.length > 0">
-                    <div class="mb-5">
-                        <!-- <nav aria-label="..." class="nav-pagination">
-
-                            <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
-                                
-                                <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                                    <a (click)="getServerData(PaginationServc.currentPage)" class="page-link"
-                                        tabindex="-1" aria-disabled="true">{{ 'auctionlist.grid-previous' | translate
-                                        }}</a>
-                                </li>
-                                <li *ngFor="let page of PaginationServc.pages" class="page-item"
-                                    [ngClass]="{ active: PaginationServc.currentPage === page }">
-                                    <a (click)="getServerData(page + 1)" class="page-link">
-                                        {{ page }}
-                                    </a>
-                                </li>
-                                <li class="page-item"
-                                    [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                                    <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
-                                        'auctionlist.grid-next' | translate }}</a>
-                                </li>
-                            </ul>
-                        </nav> -->
-                    </div>
+            <!-- <div class="mt-4 row justify-content-end" *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
+                <div class="mb-5">
+                    <nav aria-label="..." class="nav-pagination">
+                        <ul class="pagination">
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{disabled: pageRangeForProductAttach.currentPage===1}">
+                                <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage - 1 ) "
+                                    class="page-link" aria-disabled="true">{{"auctionlist.grid-previous" |
+                                    translate}}</a>
+                            </li>
+                            <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item"
+                                [ngClass]="{active: pageRangeForProductAttach.currentPage===page}">
+                                <a (click)="navigateToPage(page)" class="page-link">{{page}}</a>
+                            </li>
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{disabled: pageRangeForProductAttach.currentPage===pageRangeForProductAttach.totalPages}">
+                                <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage + 1 ) "
+                                    class="page-link">{{"auctionlist.grid-next" | translate}}</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </ng-container>
+            </div> -->
 
         </div>
+
+
 
     </div>
 

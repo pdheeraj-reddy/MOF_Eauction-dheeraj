@@ -73,7 +73,7 @@ export class AucModeratorService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId) + "&$format=json", httpOptions);
+    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId), httpOptions);
   }
 
   sendInvoice(auctionId?: any, bidderId?: any): Observable<any> {

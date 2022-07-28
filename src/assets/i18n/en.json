@@ -496,7 +496,7 @@
                 "reject-popup": {
                     "title": "Are you sure about canceling?",
                     "subtitle": "Upon confirmation, all data entered and saved will be cancelled.",
-                    "reject": "Confirm and return to auction requests",
+                    "reject": "Confirm",
                     "back": "Back"
                 }
             },
@@ -899,7 +899,7 @@
         "second": "Second",
         "detail_btn": "Auction Details",
         "ac-detail": {
-            "bcrumb1": "Accreditation Services",
+            "bcrumb1": "Etimad Services",
             "bcrumb2": "Auctions",
             "bcrumb3": "Auction Details",
             "pageTitle": "Auction Details",
@@ -1009,6 +1009,7 @@
         "EntityNo": "Entity No.",
         "DeliveryData": "Delivery Data",
         "DeliveryDate": "Delivery date",
+        "DeliveryAdd": "Delivery Address",
         "Region": "Region",
         "City": "City",
         "District": "District",

@@ -21,3 +21,7 @@ html[dir='rtl'] .close-button {
     top: 85px;
     color: #32ad71;
 }
+
+.clickable:not(:disabled) {
+    color: #32AD71;
+}
