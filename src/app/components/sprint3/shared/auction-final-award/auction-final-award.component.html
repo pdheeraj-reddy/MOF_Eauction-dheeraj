@@ -51,14 +51,14 @@
           <span style="text-decoration: underline;">Auction report and bid submitted BidOfferPDF</span>
         </a>
       </div>
-      <div *ngIf="!finalDone" class="mt-3">
+      <div *ngIf="!sendInvoice" class="mt-3">
         <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">Refusal to be
           awarded</button>
         &nbsp;&nbsp;
         <button class="btn btn-primary-light btn-md" (click)="this.showConfirmationAccept = true">Final award
           approval</button>
       </div>
-      <div class="mt-3" *ngIf="finalDone">
+      <div class="mt-3" *ngIf="sendInvoice">
         <button class="btn btn-primary-light btn-md" [ngStyle]="{ float: btnFloat }" (click)="goToInvoice()">Send
           Invoice</button>
       </div>

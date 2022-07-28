@@ -267,12 +267,10 @@
             <ng-container *ngIf="invoiceForSend.productDetails">
                 <div class="mt-4 row margin-auto" *ngIf="invoiceForSend.productDetails.length > 0">
                     <div class="mb-5">
-                        <nav aria-label="..." class="nav-pagination">
+                        <!-- <nav aria-label="..." class="nav-pagination">
 
                             <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
-                                <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                                <a (click)="getServerData(1)" class="page-link" href="#">Last</a>
-                            </li> -->
+                                
                                 <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
                                     <a (click)="getServerData(PaginationServc.currentPage)" class="page-link"
                                         tabindex="-1" aria-disabled="true">{{ 'auctionlist.grid-previous' | translate
@@ -289,11 +287,8 @@
                                     <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
                                         'auctionlist.grid-next' | translate }}</a>
                                 </li>
-                                <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                                <a (click)="getServerData(PaginationServc.currentPage + 1)" class="page-link" href="#">Last</a>
-                            </li> -->
                             </ul>
-                        </nav>
+                        </nav> -->
                     </div>
                 </div>
             </ng-container>

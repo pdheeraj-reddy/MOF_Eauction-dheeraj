@@ -63,6 +63,19 @@ export class AucModeratorService {
 
   }
 
+  getSendInvoice(auctionId: string) {
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch',
+        'X_User_Role': 'AuctionManager',
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId) + "&$format=json", httpOptions);
+  }
+
   sendInvoice(auctionId?: any, bidderId?: any): Observable<any> {
     let invoiceDetails = {
       "AucId": auctionId,

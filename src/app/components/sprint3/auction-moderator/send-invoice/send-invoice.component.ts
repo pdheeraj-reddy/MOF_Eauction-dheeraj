@@ -35,7 +35,7 @@ export class SendInvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
-    // this.getInvoice(1);
+    this.getInvoice();
   }
 
   ngDoCheck() {
@@ -47,26 +47,33 @@ export class SendInvoiceComponent implements OnInit {
     }
   }
 
-  getInvoice(pageNumber?: number) {
-    this.showLoader = true;
-    const pageNoVal = '' + pageNumber;
-    const page = {
-      pageNumber: pageNumber,
-      pageLimit: this.pagelimit
-    };
-    // Service call
-    this.bidderService.getSendInvoice(this.auctionId).subscribe((res: any) => {
+  // getInvoice(pageNumber?: number) {
+  //   this.showLoader = true;
+  //   const pageNoVal = '' + pageNumber;
+  //   const page = {
+  //     pageNumber: pageNumber,
+  //     pageLimit: this.pagelimit
+  //   };
+  //   // Service call
+  //   this.bidderService.getSendInvoice(this.auctionId).subscribe((res: any) => {
+  //     console.log("🚀🚀 ~~ res", res);
+  //     this.showLoader = false;
+  //     this.PaginationServc.setPagerValues(+res.body.d.results[0].TotEle, 10, +pageNoVal);
+  //     localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
+  //     this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
+  //     this.mapping(res.body);
+  //   }, (error: any) => {
+  //     this.showLoader = false;
+  //     console.log('getInvoice RespError : ', error);
+  //   });
+  //   // this.mapping(res.body);
+  // }
+
+  getInvoice() {
+    this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
       console.log("🚀🚀 ~~ res", res);
-      this.showLoader = false;
-      this.PaginationServc.setPagerValues(+res.body.d.results[0].TotEle, 10, +pageNoVal);
-      localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-      this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
-      this.mapping(res.body);
-    }, (error: any) => {
-      this.showLoader = false;
-      console.log('getInvoice RespError : ', error);
+
     });
-    // this.mapping(res.body);
   }
 
   public mapping(serverObj: any) {
@@ -110,7 +117,7 @@ export class SendInvoiceComponent implements OnInit {
   }
 
   sendInvoice() {
-    this.moderatorService.sendInvoice(this.auctionId, "1000306470").subscribe((res: any) => {
+    this.moderatorService.sendInvoice(this.auctionId, "").subscribe((res: any) => {
       this.showSuccessPopup = true;
       console.log("🚀🚀 ~~ res", res);
     })
@@ -132,16 +139,16 @@ export class SendInvoiceComponent implements OnInit {
 
 
   /** Populating the table */
-  public getServerData(selectedPageNumber: number) {
+  // public getServerData(selectedPageNumber: number) {
 
-    if (selectedPageNumber <= 2) {
-      selectedPageNumber = 1;
-    } else {
-      selectedPageNumber = selectedPageNumber - 1;
-    }
-    this.selectedPageNumber = selectedPageNumber;
+  //   if (selectedPageNumber <= 2) {
+  //     selectedPageNumber = 1;
+  //   } else {
+  //     selectedPageNumber = selectedPageNumber - 1;
+  //   }
+  //   this.selectedPageNumber = selectedPageNumber;
 
-    this.getInvoice(selectedPageNumber);
-    this.PaginationServc.resetSorting();
-  }
+  //   this.getInvoice(selectedPageNumber);
+  //   this.PaginationServc.resetSorting();
+  // }
 }

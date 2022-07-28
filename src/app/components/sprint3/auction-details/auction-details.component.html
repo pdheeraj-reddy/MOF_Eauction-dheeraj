@@ -1,8 +1,10 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{ 'TrustServices' | translate }}</a></li>
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="#">{{ 'bidderAuctionDetails.Auctions' |
+            <li class="breadcrumb-item" style="font-size: 14px;"><a [href]="getHomeUrl">{{ 'TrustServices' | translate
+                    }}</a></li>
+            <li class="breadcrumb-item" style="font-size: 14px;"><a href="/auctions">{{ 'bidderAuctionDetails.Auctions'
+                    |
                     translate }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ 'bidderAuctionDetails.AuctionDetails' | translate
                 }}</li>
@@ -125,8 +127,8 @@
         <!-- End -->
 
         <!--============Final Awarding card ============-->
-        <app-auction-final-award [finalaward]="finalAwardingData" [fbgaDoc]="fbgaDoc"
-            *ngIf="role.auctionMod && this.status.pendingFbgaApproval">
+        <app-auction-final-award [finalaward]="finalAwardingData" [fbgaDoc]="fbgaDoc" [auctionId]="auctionId"
+            [statusData]="statusData" *ngIf="role.auctionMod && this.status.pendingFbgaApproval">
         </app-auction-final-award>
         <!-- End -->
 

@@ -12,6 +12,7 @@ export class AuctionFinalAwardComponent implements OnInit {
   @Input() finalaward: any;
   @Input() fbgaDoc: any;
   @Input() auctionId: any;
+  @Input() statusData: any;
 
   closeResult: string;
   modalOptions: NgbModalOptions;
@@ -24,6 +25,7 @@ export class AuctionFinalAwardComponent implements OnInit {
   showLoader: boolean = false;
   btnFloat: any = '';
   finalDone: boolean = false;
+  sendInvoice = false;
 
 
   @ViewChild("showSuccessfulModal") modalContentApp: TemplateRef<any>;
@@ -39,8 +41,17 @@ export class AuctionFinalAwardComponent implements OnInit {
     else {
       this.btnFloat = 'left';
     }
-    // this.finalaward
-    console.log("🎯TC🎯 ~ file: auction-final-award.component.ts ~ line 32 ~ this.finalaward", this.finalaward);
+
+    let bidStatus = this.statusData.ZzBidderSts;
+    if (bidStatus == 'G') {
+      this.sendInvoice = true;
+    }
+    else {
+      this.sendInvoice = false;
+    }
+
+
+    console.log("🚀🚀 ~~ this.statusData", this.statusData.ZzBidderSts);
   }
   approve() {
     this.showLoader = true;

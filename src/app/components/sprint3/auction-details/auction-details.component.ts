@@ -37,8 +37,8 @@ export class AuctionDetailsComponent implements OnInit {
 
   filterFormGroup: FormGroup;
 
-   //filter Form controls
-   showFilterForm: boolean = false;
+  //filter Form controls
+  showFilterForm: boolean = false;
 
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
@@ -104,6 +104,7 @@ export class AuctionDetailsComponent implements OnInit {
   showFileError: boolean = false;
 
   slidesStore: any = [];
+  statusData: any = [];
   fullImage: any;
   filenetImagesLst: any = [];
   showLoaderMainImage: boolean = true;
@@ -134,8 +135,13 @@ export class AuctionDetailsComponent implements OnInit {
     private bidderService: BidderService,
     private modService: AucModeratorService,
     private sanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   ngOnInit(): void {
     this.currentUser = this.auctionSev.getLoggedUserRole();
@@ -378,6 +384,7 @@ export class AuctionDetailsComponent implements OnInit {
     // // // console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
     let productList = auctionDetailList.listtoproductnav.results[0];
     console.log(serverObj.d.results[0], "sd");
+    this.statusData = serverObj.d.results[0];
     let resultSet: any = [];
     this.upcomingAuction = {
       referenceId: auctionDetailList.ObjectId,
@@ -579,7 +586,7 @@ export class AuctionDetailsComponent implements OnInit {
       this.editmode2 = false;
       this.editmode3 = true;
     }
-    
+
   }
 
   /** Populating the table */
