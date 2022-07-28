@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { AmAuctionComponent } from './am-auction/am-auction.component';
 import { ProductDetailPopupComponent } from './product-detail-popup/product-detail-popup.component';
 import { OpenOffersCardComponent } from './open-offers-card/open-offers-card.component';
+import { OfferReportComponent } from './offer-report/offer-report.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { OpenOffersCardComponent } from './open-offers-card/open-offers-card.com
         AuctionFinalAwardComponent,
         AmAuctionComponent,
         ProductDetailPopupComponent,
-        OpenOffersCardComponent
+        OpenOffersCardComponent,
+        OfferReportComponent
     ],
     imports: [
         CommonModule,
@@ -62,7 +64,8 @@ import { OpenOffersCardComponent } from './open-offers-card/open-offers-card.com
         CarouselModule,
         EAucCommonModule,
         AmAuctionComponent,
-        OpenOffersCardComponent
+        OpenOffersCardComponent,
+        OfferReportComponent
     ]
 })
 export class SharedModule { }

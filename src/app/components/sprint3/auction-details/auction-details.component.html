@@ -98,40 +98,40 @@
         <!-- ==========End======= -->
 
         <!--============= Auction Participation card =============-->
-        <app-auction-participation *ngIf="response && role.bidder && upcomingAuction?.auctionStatus=='Published'"
-            [response]="response" [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
+        <app-auction-participation *ngIf="response && role.bidder && this.status.published" [response]="response"
+            [AuctionId]="upcomingAuction.referenceId" [upcomingAuction]="upcomingAuction">
         </app-auction-participation>
         <!-- End -->
 
         <!--============ Send FBGA card ============-->
-        <app-auction-fbga *ngIf="role.bidder && upcomingAuction?.auctionStatus=='Pending FBGA' && response.ZzBidderSts == 'M' 
-        || upcomingAuction?.auctionStatus=='Pending FBGA Approval' && response.ZzBidderSts == 'F' "
-            [bidderStatus]="response.ZzBidderSts" [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc"
-            (showError)="showError($event)">
+        <app-auction-fbga *ngIf="role.bidder && (this.status.pendingFbga && response.ZzBidderSts == 'M') 
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'F')
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'G')
+        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'J')" [bidderStatus]="response.ZzBidderSts"
+            [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc" (showError)="showError($event)">
         </app-auction-fbga>
         <!-- End -->
 
-        <!--============ Send Invoice card ============-->
-        <app-auction-pay-invoice
-            *ngIf="role.bidder && upcomingAuction?.auctionStatus=='Pending Paying' && response.ZzBidderSts == 'N'"
+        <!--============ Pay Invoice card ============-->
+        <app-auction-pay-invoice *ngIf="role.bidder && this.status.pendingPaying && response.ZzBidderSts == 'N'"
             [upcomingAuction]="upcomingAuction">
         </app-auction-pay-invoice>
         <!-- End -->
 
         <!--============ Pending primary awarding card ============-->
-        <app-auction-prmy-award *ngIf="role.auctionMod && upcomingAuction?.auctionStatus=='Pending Primary Awarding'"
+        <app-auction-prmy-award *ngIf="role.auctionMod && this.status.pendingPrimaryAwarding"
             [prmyaward]="primaryAwardingData" [ibgaDoc]="ibgaDoc">
         </app-auction-prmy-award>
         <!-- End -->
 
         <!--============Final Awarding card ============-->
         <app-auction-final-award [finalaward]="finalAwardingData" [fbgaDoc]="fbgaDoc"
-            *ngIf="upcomingAuction?.auctionStatus=='Pending FBGA Approval' && role.auctionMod">
+            *ngIf="role.auctionMod && this.status.pendingFbgaApproval">
         </app-auction-final-award>
         <!-- End -->
 
         <!--============ Open offers card ============-->
-        <app-open-offers-card *ngIf="role.auctionCommitteeHead && upcomingAuction?.auctionStatus=='Pending Selecting'"></app-open-offers-card>
+        <app-open-offers-card *ngIf="role.auctionCommitteeHead && this.status.pendingSelecting"></app-open-offers-card>
         <!-- End -->
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
@@ -149,6 +149,7 @@
 
                     <!--============== Radio Button group 1 ==============-->
                     <div class="btn-group m-3 d-flex flex-wrap">
+                        <!--============== Card 1 ==============-->
                         <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionDetail')"
                             style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox1" name="sampleCheckbox" checked="checked">
@@ -159,7 +160,9 @@
                                 </span>
                             </label>
                         </div>&nbsp;&nbsp;
+                        <!-- End -->
 
+                        <!--============== Card 2 ==============-->
                         <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionInstruction')"
                             style="width: 118px;height: 118px;">
                             <input type="radio" id="checkbox2" name="sampleCheckbox">
@@ -170,12 +173,10 @@
                                 </span>
                             </label>
                         </div>
+                        <!-- End -->
 
-                    </div>
-                    <!-- End -->
-                    <!--============== Radio Button group 2 ==============-->
-                    <div class="btn-group m-3 d-flex flex-wrap">
-                        <div class="etimad-option etimad-option-xs" style="width: 118.8px;height: 118.8px;">
+                        <!--============== Card 3 ==============-->
+                        <div class="etimad-option etimad-option-xs mt-2" style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox3" name="sampleCheckbox" disabled>
                             <label class="input-target d-flex" for="checkbox3">
                                 <span>
@@ -184,7 +185,10 @@
                                 </span>
                             </label>
                         </div>&nbsp;&nbsp;
-                        <div class="etimad-option etimad-option-xs" style="width: 118px;height: 118px;">
+                        <!-- End -->
+
+                        <!--============== Card 4 ==============-->
+                        <div class="etimad-option etimad-option-xs mt-2" style="width: 118px;height: 118px;">
                             <input type="radio" id="checkbox4" name="sampleCheckbox" disabled>
                             <label class="input-target d-flex" for="checkbox4">
                                 <span>
@@ -193,20 +197,21 @@
                                 </span>
                             </label>
                         </div>
+                        <!-- End -->
 
-                    </div>
-                    <!-- End -->
-                    <!--============== Radio Button group 3 ==============-->
-                    <div class="btn-group m-3 d-flex flex-wrap">
-                        <div class="etimad-option etimad-option-xs" style="width: 118.8px;height: 118.8px;">
-                            <input type="radio" id="checkbox5" name="sampleCheckbox" disabled>
+                        <!--============== Card 5 ==============-->
+                        <div class="etimad-option etimad-option-xs mt-2" style="width: 118.8px;height: 118.8px;"
+                            (click)="auctionSettings('offerreport')">
+                            <input type="radio" id="checkbox5" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
                                 <span>
                                     <span class="icon-information"></span><br>
-                                    {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
+                                    Offer Reports
                                 </span>
                             </label>
                         </div>
+                        <!-- End -->
+
                     </div>
                     <!-- End -->
                 </div>
@@ -264,18 +269,19 @@
                     <div class="mt-4" style="display: flex;">
 
                         <!--================ Latest offer send card ================-->
-                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published" style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
+                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published"
+                            style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
                             <app-latest-offers-sent [aucId]="auctionId" pageno="1">
                             </app-latest-offers-sent>
                         </div>
                         <!-- End -->
+
                         <div [ngClass]="{
                             'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
                             'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',
-                            'left-right-card-en-disable': textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'),
-                            'left-right-card-ar-disable': !textDir && (response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M') 
-                        }"
-                            *ngIf="role.bidder && upcomingAuction.auctionStatus=='Ongoing' || upcomingAuction.auctionStatus=='Pending Selecting' || upcomingAuction.auctionStatus=='Pending FBGA'">
+                            'left-right-card-en-disable': textDir && response.ZzBidderSts != 'P',
+                            'left-right-card-ar-disable': !textDir && response.ZzBidderSts != 'P' 
+                        }" *ngIf="role.bidder && !this.status.published">
 
                             <!--============= Send offer card =============-->
                             <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'P'" [disable]="false"
@@ -284,9 +290,9 @@
                             </app-send-bidding-offer>
                             <!-- End -->
 
-                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'B' || response.ZzBidderSts == 'M'"
-                                [ibgaDoc]="ibgaDoc" [disable]="true" [auctionId]="auctionId"
-                                [totalBookValue]="response.ZzPbEstPrice" (showError)="showError($event)">
+                            <app-send-bidding-offer *ngIf="response.ZzBidderSts != 'P'" [ibgaDoc]="ibgaDoc"
+                                [disable]="true" [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
+                                (showError)="showError($event)">
                             </app-send-bidding-offer>
                         </div>
 
@@ -1227,8 +1233,13 @@
 
                 </div>
             </div>
-
             <!-- Auction instruction ends here -->
+
+            <!--================= Offer Reports =================-->
+            <div *ngIf="editmode3" class="card" style="width: 73%;">
+                <app-offer-report></app-offer-report>
+            </div>
+            <!-- End -->
         </div>
     </div>
 </div>

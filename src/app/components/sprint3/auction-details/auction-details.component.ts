@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
-import { UpcomingAuction } from "src/app/model/auction.model";
+import { OfferReport, UpcomingAuction } from "src/app/model/auction.model";
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { EnvService } from 'src/app/env.service';
@@ -15,6 +15,7 @@ import { AucModeratorService } from '../services/auc-moderator.service';
 import { AuctionService } from 'src/app/service/auction.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductDetailPopupComponent } from '../shared/product-detail-popup/product-detail-popup.component';
+import { FormGroup } from '@angular/forms';
 
 declare var $: any;
 
@@ -30,6 +31,14 @@ export class AuctionDetailsComponent implements OnInit {
   auctionId: string
   editmode1: boolean = true;
   editmode2: boolean = false;
+  editmode3: boolean = false;
+
+  offerReport: OfferReport = new OfferReport();
+
+  filterFormGroup: FormGroup;
+
+   //filter Form controls
+   showFilterForm: boolean = false;
 
   response: any;
   upcomingAuction: UpcomingAuction = new UpcomingAuction();
@@ -69,6 +78,22 @@ export class AuctionDetailsComponent implements OnInit {
     terminated: false
   }
   products: any[] = [];
+  dropValProducts = [
+    { code: "Public", disp: "Public" },
+    { code: "Private", disp: "Private" }
+  ];
+  dropValStatus = [
+    { code: "Published", disp: "Published" },
+    { code: "Ongoing", disp: "Ongoing" },
+    { code: "Pending Selecting", disp: "Pending Selecting" },
+    { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
+    { code: "Pending FBGA", disp: "Pending FBGA" },
+    { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+    { code: "Awarded", disp: "Awarded" },
+    { code: "Terminated", disp: "Terminated" },
+  ];;
+
+  offerListData: any;
 
 
   // Added by Mohammed Salick
@@ -325,6 +350,30 @@ export class AuctionDetailsComponent implements OnInit {
     }, 1000);
   }
   public mapping(serverObj: any) {
+    this.offerReport = {
+      auctionSetting: {
+        bitsNo: serverObj.d.results[0].bitsNo,
+        participants: serverObj.d.results[0].participants,
+      },
+      auctionReport: serverObj.d.results[0].auctionReport,
+      offerList: []
+    };
+    if (serverObj.d.results[0].offer_report) {
+      serverObj.d.results[0].offer_report.forEach((result: any) => {
+        let date = result['submission_date'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
+        const items = {
+          referenceNo: result['ObjectId'] ? result['ObjectId'] : '',
+          offervalue: result['offervalue'] ? result['offervalue'] : '',
+          filename: result['filename'] ? result['filename'] : '',
+          fileurl: result['fileurl'] ? result['fileurl'] : '',
+          submission_date: this.datepipe.transform(date, 'yyyy-MM-dd'),
+          submission_time: this.timeTransform(result['submission_date']),
+          facility_name: result['facility_name'] ? result['facility_name'] : '',
+          commercialRegNo: result['commercialRegNo'] ? result['commercialRegNo'] : '',
+        }
+        this.offerReport.offerList?.push(items);
+      });
+    }
     let auctionDetailList = serverObj.d.results[0];
     // // // console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
     let productList = auctionDetailList.listtoproductnav.results[0];
@@ -519,10 +568,18 @@ export class AuctionDetailsComponent implements OnInit {
     if (type == "auctionDetail") {
       this.editmode1 = true;
       this.editmode2 = false;
+      this.editmode3 = false;
     } else if (type == "auctionInstruction") {
       this.editmode1 = false;
       this.editmode2 = true;
+      this.editmode3 = false;
     }
+    else if (type == "offerreport") {
+      this.editmode1 = false;
+      this.editmode2 = false;
+      this.editmode3 = true;
+    }
+    
   }
 
   /** Populating the table */
@@ -540,6 +597,60 @@ export class AuctionDetailsComponent implements OnInit {
   }
   participation() {
 
+  }
+
+  resetFilter() {
+    this.filterFormGroup.controls['auctionStatus'].setValue('');
+    this.filterFormGroup.controls['auctionType'].setValue('');
+    this.filterFormGroup.controls['myAuction'].setValue('');
+  }
+  getOfferList(pageNumber?: number) {
+    this.showLoader = true;
+    const page = {
+      pageNumber: pageNumber,
+      pageLimit: this.pagelimit
+    };
+
+
+    let filters = {
+      Status: this.filterFormGroup.controls['auctionStatus'].value ? this.filterFormGroup.controls['auctionStatus'].value : '',
+      BidType: this.filterFormGroup.controls['auctionType'].value ? (this.filterFormGroup.controls['auctionType'].value === 'Public' ? 'O' : 'C') : '',
+      myAuction: this.filterFormGroup.controls['myAuction'].value ? this.filterFormGroup.controls['myAuction'].value : '',
+    };
+    this.bidderService.getOfferList(page, filters, '9700000300').subscribe((res: any) => {
+      this.showLoader = false;
+
+      localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
+      this.offerListData = this.mapping(res.body);
+
+    }, (error) => {
+      this.showLoader = false;
+      console.log('getOfferList RespError : ', error);
+    });
+    // this.mapping(res.body);
+  }
+
+  public toggleFilter() {
+    console.log("toggleFilter");
+    this.showFilterForm = !this.showFilterForm;
+  }
+
+  changeCheckbox(e: any, dd: string) {
+    if (e.target.checked) {
+      this.filterFormGroup.controls[dd].setValue(e.target.value, {
+        onlySelf: true
+      })
+    } else {
+      this.filterFormGroup.controls[dd].setValue('', {
+        onlySelf: true
+      })
+    }
+  }
+
+  changeSelect(e: any, dd: string) {
+    this.filterFormGroup.controls[dd].setValue(e.target.value, {
+      onlySelf: true
+    })
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
