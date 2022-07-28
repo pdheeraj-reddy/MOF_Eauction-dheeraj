@@ -75,40 +75,46 @@
         <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
             <thead class="thead-dark">
                 <tr class="">
-                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(0, 'string')">
                         <div class="table-header-cell">
                             <span>#</span>
-                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
+                        </div>
+                    </th>
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ "auctionCommittee.ac-openOffers.th2" | translate }}</span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                         </div>
                     </th>
                     <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
                         <div class="table-header-cell">
-                            <span>{{ "auctionCommittee.ac-openOffers.th2" | translate }}</span>
-                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{ "auctionCommittee.ac-openOffers.th3" | translate }}</span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                         </div>
                     </th>
                     <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
                         <div class="table-header-cell">
-                            <span>{{ "auctionCommittee.ac-openOffers.th3" | translate }}</span>
-                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span>{{ "auctionCommittee.ac-openOffers.th4" | translate }}</span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                         </div>
                     </th>
                     <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(4, 'string')">
                         <div class="table-header-cell">
-                            <span>{{ "auctionCommittee.ac-openOffers.th4" | translate }}</span>
-                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
-                        </div>
-                    </th>
-                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'string')">
-                        <div class="table-header-cell">
                             <span>{{ "auctionCommittee.ac-openOffers.th5" | translate }}</span>
-                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
                         </div>
                     </th>
-                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(6, 'string')">
+                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'numeric')">
                         <div class="table-header-cell">
                             <span>{{ "auctionCommittee.ac-openOffers.th6" | translate }}</span>
-                            <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(5), 'sort-asc': isSortAsc(5), 'sort-desc': isSorDesc(5) }"></span></span>
                         </div>
                     </th>
                     <th class="btn-primary-light" style="width: 17%;" scope="col"></th>
@@ -182,45 +188,88 @@
                 </ng-container>
                 <ng-container *ngIf="openofferListData?.length > 0">
                     <tr *ngFor="let rowItem of openofferListData;index as i">
-                        <td>{{rowItem.serialNo}}</td>
-                        <td>{{rowItem.offerValue}}</td>
-                        <td><span class="d-inline-block text-truncate" style="max-width: 200px;"><a
-                                    (click)="viewAttachment()"
-                                    class="btn btn-ghost btn-sm fill-primary-light-green"><span
-                                        class="icon-Group-3319"></span></a> &nbsp; <a
-                                    style="text-decoration: underline; color: #32AD71;">{{rowItem.primaryWarranty}}</a></span>
-                        </td>
-                        <td>{{ rowItem.submissionDate}} <br>
-                            <p style="color: #9D9D9D;">{{ rowItem.submissionTime }}</p>
-                        </td>
-                        <td>{{ rowItem.facilityName }}</td>
-                        <td>{{ rowItem.commercialRegistrationNo }}</td>
-                        <td>
-                            <ng-container *ngIf="i==0">
-                                <div style="display: flex;">
-                                    <button class="btn btn-danger btn-sm" type="button"
-                                        (click)="showModal.rejectOffer = true;selectedData = rowItem;">{{
-                                        "auctionCommittee.ac-openOffers.reject" |
-                                        translate }}</button> &nbsp; &nbsp;
-                                    <button class="btn btn-primary-light btn-sm" type="button"
-                                        (click)="checkOffer(rowItem);selectedData = rowItem;" data-toggle="modal"
-                                        data-target="#showSuccessfulModal"> {{ "auctionCommittee.ac-openOffers.accept" |
-                                        translate }}</button>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="i>0">
-                                <button class="btn btn-primary-light btn-sm" disabled>{{
-                                    "auctionCommittee.ac-openOffers.reject" | translate }}</button> &nbsp; &nbsp;
-                                <button class="btn btn-primary-light btn-sm" disabled>{{
-                                    "auctionCommittee.ac-openOffers.accept" | translate }}</button>
-                            </ng-container>
-                        </td>
+                        <ng-container *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
+                            <td>{{rowItem.serialNo}}</td>
+                            <td>{{rowItem.offerValue}}</td>
+                            <td>
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    <a *ngIf="rowItem.PdfContent && !rowItem.downloadingAttachmet"
+                                        (click)="viewAttachment(rowItem)"
+                                        class="btn btn-ghost btn-sm fill-primary-light-green">
+                                        <span class="icon-Group-3319"></span>
+                                    </a>
+                                    <button *ngIf="rowItem.downloadingAttachmet" type="button"
+                                        class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg">
+                                        <span class="btn-text pr-0">
+                                            <div class="spinner-border spinner-border-light-green icon-spinner text-light"
+                                                role="status">
+                                            </div>
+                                        </span>
+                                    </button>
+                                    &nbsp;
+                                    <a style="text-decoration: underline; color: #32AD71;">{{rowItem.FileName}}</a>
+                                </span>
+                            </td>
+                            <td>{{ rowItem.submissionDate}} <br>
+                                <p style="color: #9D9D9D;">{{ rowItem.submissionTime }}</p>
+                            </td>
+                            <td>{{ rowItem.facilityName }}</td>
+                            <td>{{ rowItem.commercialRegistrationNo }}</td>
+                            <td>
+                                <ng-container *ngIf="i==0">
+                                    <div style="display: flex;">
+                                        <button class="btn btn-danger btn-sm" type="button"
+                                            (click)="showModal.rejectOffer = true;selectedData = rowItem;">{{
+                                            "auctionCommittee.ac-openOffers.reject" |
+                                            translate }}</button> &nbsp; &nbsp;
+                                        <button class="btn btn-primary-light btn-sm" type="button"
+                                            (click)="checkOffer(rowItem);selectedData = rowItem;" data-toggle="modal"
+                                            data-target="#showSuccessfulModal"> {{
+                                            "auctionCommittee.ac-openOffers.accept" |
+                                            translate }}</button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="i>0">
+                                    <div style="display: flex;">
+                                        <button class="btn btn-primary-light btn-sm" disabled>{{
+                                            "auctionCommittee.ac-openOffers.reject" | translate }}</button> &nbsp;
+                                        &nbsp;
+                                        <button class="btn btn-primary-light btn-sm" disabled>{{
+                                            "auctionCommittee.ac-openOffers.accept" | translate }}</button>
+                                    </div>
+                                </ng-container>
+                            </td>
+                        </ng-container>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
     </div>
-    <div class="mt-4 row justify-content-end" *ngIf="openofferListData?.length > 0">
+    <div *ngIf="openofferListData?.length > 0" class="mt-4 row justify-content-end">
+        <div class="mb-5">
+            <nav aria-label="..." class="nav-pagination">
+                <ul class="pagination">
+                    <li class="page-item clickable" disabled
+                        [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
+                        <a (click)="navigateToPage(pageRangeForAttach.currentPage -1)" class="page-link"
+                            aria-disabled="true">{{
+                            'auctionlist.grid-previous' | translate }}</a>
+                    </li>
+                    <li *ngFor="let page of pageRangeForAttach.pages" class="page-item"
+                        [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
+                        <a (click)="navigateToPage(page)" class="page-link"> {{
+                            page }} </a>
+                    </li>
+                    <li class="page-item clickable" disabled
+                        [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
+                        <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1)" class="page-link">{{
+                            'auctionlist.grid-next' | translate }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- <div class="mt-4 row justify-content-end">
         <div class="mb-5">
             <nav aria-label="..." class="nav-pagination">
                 <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
@@ -241,194 +290,208 @@
                     </li>
                 </ul>
             </nav>
-        </div>
-    </div>
-    <br><br><br><br>
-    <!-- Successful modal first -->
-    <div style="margin:auto;" class="modal show" *ngIf="showModal.acceptOffer"
-        [ngClass]="{ 'modal-show': showModal.acceptOffer }" id="showSuccessfulModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" style="width: 100%; height: 100%;">
-                <div class="" style="display: flex; margin-top: 10px;">
-                    <div style="width: 400px; text-align: left;">
-                        <p
-                            style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
-                            Adoption of awarding offer No. 1?</p>
-                    </div>
-                    <div style="margin-left: 110px;">
-                        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal"
-                            aria-label="Close" (click)="showModal.acceptOffer = false">
-                            <span class="icon-close"></span>
-                        </button>
-                    </div>
-                </div>
-                <div style="width: 470px; margin-top: 10px; text-align: left;">
+        </div> -->
+</div>
+<br><br><br><br>
+<!-- Successful modal first -->
+<div style="margin:auto;" class="modal show" *ngIf="showModal.acceptOffer"
+    [ngClass]="{ 'modal-show': showModal.acceptOffer }" id="showSuccessfulModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width: 100%; height: 100%;">
+            <div class="" style="display: flex; margin-top: 10px;">
+                <div style="width: 400px; text-align: left;">
                     <p
-                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                        Upon confirmation, the initial award will be approved and sent for final approval</p>
-                </div>
-                <div style="margin-top: 10px; display: flex;">
-                    <div style="width: 50%; text-align: left;">
-                        <p style="color: #117ABE;">Offer value</p>
-                        <p style="color: #08594D; margin-top: -10px;">{{offervalue}}</p>
-                    </div>
-                    <div style="width: 36%; text-align: left;">
-                        <p style="color: #117ABE;">Facility name</p>
-                        <p style="color: #08594D; margin-top: -10px;">{{facilityname}}</p>
-                    </div>
-                </div>
-                <div style="margin-top: 10px; display: flex;">
-                    <div style="width: 42%; text-align: left;">
-                        <p style="color: #117ABE;">Commercial Registration No</p>
-                        <p style="color: #08594D; margin-top: -10px;">{{commercialNo}}</p>
-                    </div>
-                </div>
-                <div style="display: flex;justify-content: end;">
-                    <button (click)="showModal.acceptOffer = false" data-dismiss="modal"
-                        style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">
-                        Reference</button>
-                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal"
-                        aria-label="Close" (click)="acceptOffer(selectedData)"
-                        style="height:45px; width: 120px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
-                        Gear adoption</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- success modal confirmation -->
-    <div style="margin:auto;" class="modal show" *ngIf="showModal.acceptOfferSuccess" id="secondPopup"
-        [ngClass]="{ 'modal-show': showModal.acceptOfferSuccess }" tabindex="-2" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="card shadow-lg result result-success" style="align-items: center;">
-                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                    aria-label="Close" (click)="showModal.acceptOfferSuccess = false">
-                    <span class="icon-close"></span>
-                </button>
-                <div class="alert-body">
-                    <i class="alert-icon">
-                        <span class="icon-alert-success"></span>
-                    </i>
-                    <div class="alert-content">
-                        <h4>The award has been successfully approved</h4>
-                        <p style="color: #414042;"> The initial award will be sent for final approval with a report <br>
-                            Auction and all bids submitted </p>
-                    </div>
-                </div>
-                <div class="alert-action">
-                    <button type="button" (click)="back()" class="btn btn-primary-light"> Back to auctions </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- offer less than estimated price -->
-    <div style="margin:auto;" class="modal show" *ngIf="showModal.esitimationOffer"
-        [ngClass]="{ 'modal-show': showModal.esitimationOffer }" id="notSuccessModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" style="width: 100%; height: 100%;">
-                <div class="" style="display: flex; margin-top: 10px;">
-                    <div style="width: 400px; text-align: left;">
-                        <p
-                            style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
-                            This offer cannot be awarded.</p>
-                    </div>
-                    <div style="margin-left: 110px;">
-                        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal"
-                            aria-label="Close" (click)="showModal.esitimationOffer = false">
-                            <span class="icon-close"></span>
-                        </button>
-                    </div>
-                </div>
-                <br>
-                <div
-                    style="width: 470px; margin-top: 10px; text-align: left; background-color: #F8FCFA; width: 100%; padding: 25px;">
-                    <p
-                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                        This offer cannot be chosen as the offered price is less than the price estimated by the pricing
-                        committee and according to the auction instructions: If the minimum estimated price for the
-                        products is not achieved, the auction will not be awarded.</p>
-                </div>
-                <br><br>
-                <div style="display: flex;justify-content: end;">
-                    <button (click)="showModal.esitimationOffer = false"
-                        style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Cancel</button>
-                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal"
-                        aria-label="Close" (click)="rejectOffer(selectedData)"
-                        style="height:45px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
-                        Confirm that the auction was not awarded</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Reject popup -->
-    <div style="margin:auto;" class="modal show" *ngIf="showModal.rejectOffer"
-        [ngClass]="{ 'modal-show': showModal.rejectOffer }" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" style="width: 100%; height: 100%;">
-                <div class="" style="display: flex; margin-top: 10px;">
-                    <div style="width: 650px; text-align: left;">
-                        <p
-                            style="font-family:DIN Next LT Arabic Regular; color: #F66F5B; font-size: 22px; line-height: 26px; font-weight: bold;">
-                            Upon confirmation, the bidder will be crossed off the list.</p>
-                    </div>
-                    <div style="margin-left: 25px;">
-                        <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal"
-                            aria-label="Close" (click)="showModal.rejectOffer = false">
-                            <span class="icon-close"></span>
-                        </button>
-                    </div>
-                </div>
-                <div style="width: 470px; margin-top: 10px; text-align: left; width: 100%;">
-                    <p
-                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                        Are you sure of the rejection of the award?</p>
-                </div>
-                <br>
-                <div style="display: flex;">
-                    <p style="color: #117ABE;">Please enter the reason for rejection</p>
-                    <p style="margin-left: 265px; color: #cac1c1;">Letter {{rejectReason?.length || 0}}/250</p>
+                        style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
+                        {{'open_offer.adoption_of_awarding' | translate}}</p>
                 </div>
                 <div>
-                    <textarea [(ngModel)]="rejectReason"
-                        style="width: 100%; height: 130px;border: none;  border-bottom: 1px solid #cac1c1; border-top: 1px solid #cac1c1; padding: 10px;"
-                        maxlength="250" name="" id="" cols="30" rows="10"
-                        placeholder="the reason of refuse.."></textarea>
-                </div>
-                <br><br>
-                <div style="display: flex;justify-content: end;">
-                    <button (click)="showModal.rejectOffer = false;"
-                        style="background-color: white; color: #cac1c1; border: #cac1c1 1px solid; border-radius: 4px; width: 100px; height: 50px;">Cancellation</button>
-                    <button class="btn btn-primary-light-green btn-md" (click)="rejectOffer(selectedData)"
-                        [disabled]="!rejectReason"
-                        style="background-color: #F66F5B; color: #FFFFFF; border: none; border-radius: 4px; width: 160px; height: 50px; margin-left: 20px;margin-right: 20px;">Rejection
-                        confirmation</button>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                        (click)="showModal.acceptOffer = false">
+                        <span class="icon-close"></span>
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Rejection confirmation -->
-    <div style="margin:auto;" class="modal show" [ngClass]="{ 'modal-show': showModal.rejectOfferSuccess }"
-        *ngIf="showModal.rejectOfferSuccess">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="card shadow-lg result result-success" style="align-items: center; width: 100%;">
-                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                    aria-label="Close" (click)="showModal.rejectOfferSuccess = false">
-                    <span class="icon-close"></span>
+            <div style=" margin-top: 10px;">
+                <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                    {{'open_offer.upon_confirmation' | translate}}</p>
+            </div>
+            <div style="margin-top: 10px; display: flex;">
+                <div style="width: 50%;">
+                    <p style="color: #117ABE;">{{'auctionCommittee.ac-openOffers.th2' | translate}}</p>
+                    <p style="color: #08594D; margin-top: -10px;">{{offervalue}}</p>
+                </div>
+                <div style="width: 36%;">
+                    <p style="color: #117ABE;">{{'auctionCommittee.ac-openOffers.th5' | translate}}</p>
+                    <p style="color: #08594D; margin-top: -10px;">{{facilityname}}</p>
+                </div>
+            </div>
+            <div style="margin-top: 10px; display: flex;">
+                <div style="width: 42%;">
+                    <p style="color: #117ABE;">{{'auctionCommittee.ac-openOffers.th6' | translate}}</p>
+                    <p style="color: #08594D; margin-top: -10px;">{{commercialNo}}</p>
+                </div>
+            </div>
+            <div style="display: flex;justify-content: end;">
+                <button (click)="showModal.acceptOffer = false" data-dismiss="modal"
+                    style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">
+                    {{'bidderSendOffer.Cancellation' | translate}}
                 </button>
-                <div class="alert-body">
-                    <i class="alert-icon">
-                        <span class="icon-alert-success"></span>
-                    </i>
-                    <div class="alert-content">
-                        <h4>Rejection sent successfully</h4>
+                <button type="button"
+                    style="height:45px; width: 120px; margin-left: 20px;margin-right: 20px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;"
+                    class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg">
+                    <span class="btn-text pr-0">
+                        <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status">
+                        </div>
+                    </span>
+                </button>
+                <button type="button" *ngIf="!spinner" class="btn btn-primary-light-green btn-md" data-dismiss="modal"
+                    aria-label="Close" (click)="acceptOffer(selectedData)"
+                    style="height:45px; width: 120px; margin-left: 20px;margin-right: 20px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                    <div *ngIf="spinner" class="spinner-border spinner-border-light-green icon-spinner text-light"
+                        role="status">
                     </div>
-                </div>
-                <div class="alert-action">
-                    <button type="button" (click)="back()" class="btn btn-primary-light"> Back to auctions </button>
-                </div>
+                    {{'open_offer.gear_adoption' | translate}}
+                </button>
             </div>
         </div>
     </div>
+</div>
+<!-- success modal confirmation -->
+<div style="margin:auto;" class="modal show" *ngIf="showModal.acceptOfferSuccess" id="secondPopup"
+    [ngClass]="{ 'modal-show': showModal.acceptOfferSuccess }" tabindex="-2" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="card shadow-lg result result-success" style="align-items: center;">
+            <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
+                aria-label="Close" (click)="showModal.acceptOfferSuccess = false">
+                <span class="icon-close"></span>
+            </button>
+            <div class="alert-body">
+                <i class="alert-icon">
+                    <span class="icon-alert-success"></span>
+                </i>
+                <div class="alert-content">
+                    <h4>{{'open_offer.the_award_has_been_successfully_approved' | translate}}</h4>
+                    <p style="color: #414042;">
+                        {{'open_offer.the_initial_award' | translate}} <br>
+                        {{'open_offer.auction_and_all_bids_submitted' | translate}} </p>
+                </div>
+            </div>
+            <div class="alert-action">
+                <button type="button" (click)="back()" class="btn btn-primary-light">
+                    {{'bidderSendOffer.BackToAuctions' | translate}} </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- offer less than estimated price -->
+<div style="margin:auto;" class="modal show" *ngIf="showModal.esitimationOffer"
+    [ngClass]="{ 'modal-show': showModal.esitimationOffer }" id="notSuccessModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width: 100%; height: 100%;">
+            <div class="" style="display: flex; margin-top: 10px;">
+                <div>
+                    <p
+                        style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
+                        {{'open_offer.this_offer_cannot_be_awarded' | translate}}</p>
+                </div>
+                <div>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                        (click)="showModal.esitimationOffer = false">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+            <br>
+            <div style="width: 470px; margin-top: 10px;  background-color: #F8FCFA; width: 100%; padding: 25px;">
+                <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                    {{'open_offer.less_than_estimation' | translate}}</p>
+            </div>
+            <br><br>
+            <div style="display: flex;justify-content: end;">
+                <button (click)="showModal.esitimationOffer = false"
+                    style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">
+                    {{'bidderSendOffer.Cancellation' | translate}}</button>
+                <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close"
+                    (click)="rejectOffer(selectedData)"
+                    style="height:45px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                    {{'open_offer.confirm_that_the_auction_was_not_awarded' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Reject popup -->
+<div style="margin:auto;" class="modal show" *ngIf="showModal.rejectOffer"
+    [ngClass]="{ 'modal-show': showModal.rejectOffer }" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width: 100%; height: 100%;">
+            <div class="" style="display: flex; margin-top: 10px;">
+                <div>
+                    <p
+                        style="font-family:DIN Next LT Arabic Regular; color: #F66F5B; font-size: 22px; line-height: 26px; font-weight: bold;">
+                        {{'open_offer.reject_confirmation' | translate}}</p>
+                </div>
+                <div style="margin-left: 25px;">
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                        (click)="showModal.rejectOffer = false">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+            <div style="margin-top: 10px;width: 100%;">
+                <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                    {{'open_offer.are_you_sure_of_the_rejection_of_the_award' | translate}}</p>
+            </div>
+            <br>
+            <div style="display: flex;justify-content: space-between;">
+                <p style="color: #117ABE;">{{'open_offer.rejection_reason' | translate}}</p>
+                <p style="color: #cac1c1;">{{'auctionMember.reject-popup.letter' | translate}}
+                    {{rejectReason?.length || 0}}/250</p>
+            </div>
+            <div>
+                <textarea [(ngModel)]="rejectReason"
+                    style="width: 100%; height: 130px;border: none;  border-bottom: 1px solid #cac1c1; border-top: 1px solid #cac1c1; padding: 10px;"
+                    maxlength="250" name="" id="" cols="30" rows="10"
+                    placeholder="{{'open_offer.refuse_reason_placeholder' | translate}}"></textarea>
+            </div>
+            <br><br>
+            <div style="display: flex;justify-content: end;">
+                <button (click)="showModal.rejectOffer = false;"
+                    style="background-color: white; color: #cac1c1; border: #cac1c1 1px solid; border-radius: 4px; width: 100px; height: 50px;">
+                    {{'bidderSendOffer.Cancellation' | translate}}</button>
+                <button class="btn btn-primary-light-green btn-md" (click)="rejectOffer(selectedData)"
+                    [disabled]="!rejectReason"
+                    style="background-color: #F66F5B; color: #FFFFFF; border: none; border-radius: 4px; width: 160px; height: 50px; margin-left: 20px;margin-right: 20px;">
+                    {{'open_offer.rejection_confirmation' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Rejection confirmation -->
+<div style="margin:auto;" class="modal show" [ngClass]="{ 'modal-show': showModal.rejectOfferSuccess }"
+    *ngIf="showModal.rejectOfferSuccess">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="card shadow-lg result result-success" style="align-items: center; width: 100%;">
+            <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
+                aria-label="Close" (click)="showModal.rejectOfferSuccess = false">
+                <span class="icon-close"></span>
+            </button>
+            <div class="alert-body">
+                <i class="alert-icon">
+                    <span class="icon-alert-success"></span>
+                </i>
+                <div class="alert-content">
+                    <h4>{{'open_offer.rejection_sent_successfully' | translate}}</h4>
+                </div>
+            </div>
+            <div class="alert-action">
+                <button type="button" (click)="back()" class="btn btn-primary-light">
+                    {{'bidderSendOffer.BackToAuctions' | translate}} </button>
+            </div>
+        </div>
+    </div>
+</div>

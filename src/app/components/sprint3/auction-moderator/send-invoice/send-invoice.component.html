@@ -267,13 +267,14 @@
                 <tbody>
                     <ng-container *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
                         <tr *ngFor="let rowItem of invoiceData?.invoicetoprodnav.results; index as i;">
-                            <!-- <ng-container *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd"> -->
-                            <td>{{i+1}}</td>
-                            <td>{{rowItem.Description}}</td>
-                            <td>{{rowItem.ZzProductSku}}</td>
-                            <td>{{rowItem.ZzRegion}}, {{rowItem.ZzCity}}, {{rowItem.ZzNeighbourhood}},
-                                {{rowItem.ZzStreet}}</td>
-                            <!-- </ng-container> -->
+                            <ng-container
+                                *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
+                                <td>{{i+1}}</td>
+                                <td>{{rowItem.Description}}</td>
+                                <td>{{rowItem.ZzProductSku}}</td>
+                                <td>{{rowItem.ZzRegion}}, {{rowItem.ZzCity}}, {{rowItem.ZzNeighbourhood}},
+                                    {{rowItem.ZzStreet}}</td>
+                            </ng-container>
                         </tr>
                     </ng-container>
                     <ng-container *ngIf="invoiceData?.BidderValue">
@@ -318,7 +319,7 @@
                 </tbody>
             </table>
 
-            <!-- <div class="mt-4 row justify-content-end" *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
+            <div class="mt-4 row justify-content-end" *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
                 <div class="mb-5">
                     <nav aria-label="..." class="nav-pagination">
                         <ul class="pagination">
@@ -340,7 +341,7 @@
                         </ul>
                     </nav>
                 </div>
-            </div> -->
+            </div>
 
         </div>
 

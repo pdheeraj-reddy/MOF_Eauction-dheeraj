@@ -110,6 +110,7 @@ export class SendInvoiceComponent implements OnInit {
       this.questRate = (bidderValue * quest) / 100;
       this.vat = (bidderValue * 15) / 100;
       this.totalValue = this.gearPrice + this.questRate + this.vat;
+      this.navigateToPage(1)
 
     });
   }
@@ -140,12 +141,12 @@ export class SendInvoiceComponent implements OnInit {
   navigateToPage(pageNoVal: number) {
     this.PaginationServc.setPagerValues(
       this.invoiceData?.invoicetoprodnav.results.length,
-      10,
+      this.pagelimit,
       pageNoVal
     );
     this.pageRangeForProductAttach = {
-      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * 10),
-      rangeEnd: pageNoVal == 1 ? 9 : ((pageNoVal - 1) * 10) + 9,
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
+      rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
       pages: this.PaginationServc.pages,
       currentPage: this.PaginationServc.currentPage,
       totalPages: this.PaginationServc.totalPages,

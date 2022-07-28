@@ -38,4 +38,17 @@ export class CommitteeHeadService {
     return this.http.post<any>(this.envService.environment.apiOpenOfferStatus
       , JSON.stringify(data), httpOptions);
   }
+
+  downloadAuctionImages(fileId: any): Observable<any> {
+    const httpOptions = {
+      headers: {
+        'X-CSRF-TOKEN': this.XCSRFToken as string
+      },
+      params: {
+      }
+    };
+    return this.http.get<any>(
+      this.envService.environment.apiFilenetURL + '/' + fileId
+      , httpOptions);
+  }
 }

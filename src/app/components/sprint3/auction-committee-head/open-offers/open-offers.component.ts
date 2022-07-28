@@ -6,6 +6,7 @@ import { BidderService } from '../../services/bidder.service';
 import { CommitteeHeadService } from '../../services/committee-head.service';
 import * as moment from 'moment';
 import { Location } from '@angular/common';
+import { AuctionService } from 'src/app/service/auction.service';
 
 @Component({
   selector: 'app-open-offers',
@@ -14,7 +15,7 @@ import { Location } from '@angular/common';
 })
 export class OpenOffersComponent implements OnInit {
   openofferListData: any;
-  pagelimit: number = 10;
+  pagelimit: number = 5;
   showLoader: boolean = false;
   auctionId: string = '';
   offervalue: string;
@@ -34,6 +35,9 @@ export class OpenOffersComponent implements OnInit {
     esitimationOffer: false,
     esitimationOfferSuccess: false,
   }
+  spinner: boolean = false;
+  columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo'];
+  pageRangeForAttach: any;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -41,11 +45,13 @@ export class OpenOffersComponent implements OnInit {
     public bidderService: BidderService,
     public committeeHeadService: CommitteeHeadService,
     public location: Location,
+    public auctionServc: AuctionService,
   ) { }
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     this.filterForm();
+
     this.getOffersData(1);
   }
 
@@ -78,11 +84,13 @@ export class OpenOffersComponent implements OnInit {
             serialNo: result['Sno'] ? result['Sno'] : '-',
             offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
             BidderId: result['BidderId'] ? result['BidderId'] : null,
-            primaryWarranty: '',
+            PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
             submissionDate: result['DtTime'] ? result['DtTime'].split(' ')[0] : '-',
             submissionTime: result['DtTime'] ? result['DtTime'].split(' ')[1] : '-',
             facilityName: result['BidderName'] ? result['BidderName'] : '-',
+            FileName: result['FileName'] ? result['FileName'] : '',
             commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
+            downloadingAttachmet: false
             // auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : '',
           };
           resultSet.push(items);
@@ -90,11 +98,42 @@ export class OpenOffersComponent implements OnInit {
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
+      this.navigateToPage(1);
       console.log('this.openofferListData: ', this.openofferListData);
     }
   }
 
-  viewAttachment() {
+  viewAttachment(file: any) {
+    if (file.PdfContent) {
+      file.downloadingAttachmet = true;
+      this.committeeHeadService.downloadAuctionImages(file.PdfContent).subscribe((downloadAuctionImagesResp: any) => {
+        console.log(downloadAuctionImagesResp);
+        const fileResp = downloadAuctionImagesResp.d;
+        var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
+        console.log('asdasd', byteString.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([ab], { type: 'application/pdf' });
+        let fileURL = window.URL.createObjectURL(blob);
+        console.log('fileURL ', fileURL);
+        var newWin: any;
+        newWin = window.open(fileURL, '_blank');
+        // newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
+        if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined')) {
+          alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+        }
+        file.downloadingAttachmet = false;
+        // window.open(fileContent, "_blank");
+      },
+        (error) => {
+          file.downloadingAttachmet = false;
+          console.log('downloadAuctionImages RespError : ', error);
+        }
+      );
+    }
     // console.log(file);
     // console.log(file.type);
     // const fileType = file.name.split(".").pop()?.toLowerCase();
@@ -122,7 +161,9 @@ export class OpenOffersComponent implements OnInit {
       BidderId: data.BidderId,
       ZzUserAction: "C"
     }
+    this.spinner = true;
     this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      this.spinner = false;
       if (res.d.ZzUserAction === 'R') {
         this.showModal.esitimationOffer = true;
       } else {
@@ -140,8 +181,11 @@ export class OpenOffersComponent implements OnInit {
       BidderId: data.BidderId,
       ZzUserAction: "A"
     }
+    this.spinner = true;
     this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      this.showModal.acceptOffer = false;
       this.showModal.acceptOfferSuccess = true;
+      this.spinner = false;
     });
   }
 
@@ -156,10 +200,6 @@ export class OpenOffersComponent implements OnInit {
       this.showModal.rejectOffer = false;
       this.showModal.rejectOfferSuccess = true;
     });
-  }
-
-  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
 
   // -------------------------------------- filter code --------------------------------
@@ -208,6 +248,32 @@ export class OpenOffersComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.openofferListData, this.columnLst[columnId]);
+  }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
+  navigateToPage(pageNoVal: number) {
+    this.PaginationServc.setPagerValues(this.openofferListData.length, this.pagelimit, pageNoVal);
+    this.pageRangeForAttach = {
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
+      rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
+      pages: this.PaginationServc.pages,
+      currentPage: this.PaginationServc.currentPage,
+      totalPages: this.PaginationServc.totalPages,
+    }
   }
 
 }

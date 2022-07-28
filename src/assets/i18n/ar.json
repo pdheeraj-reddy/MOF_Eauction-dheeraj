@@ -1068,5 +1068,22 @@
         "my_auction": " مزاداتي",
         "invitation": "دعوات المزاد",
         "my_invoices": "الفواتير"
+    },
+    "open_offer": {
+        "adoption_of_awarding": "اعتماد ترسية العرض رقم 1؟",
+        "upon_confirmation": "عند التأكيد سيتم اعتماد الترسية المبدئية وإرسالها للإعتماد النهائي",
+        "gear_adoption": "اعتماد الترسية",
+        "the_award_has_been_successfully_approved": "تم اعتماد الترسية بنجاح",
+        "the_initial_award": "سوف يتم إرسال الترسية المبدئية للإعتماد النهائي مع تقرير",
+        "auction_and_all_bids_submitted": "المزاد وجميع العروض المقدمة",
+        "this_offer_cannot_be_awarded.": "لايمكن ترسية هذا العرض. ",
+        "less_than_estimation": "لا يمكن اختيار هذا العرض حيث ان السعر المقدم اقل من السعر المقدر من لجنة التسعير وحسب تعليمات المزاد: في حال عدم تحقيق الحد الأدنى للسعر التقديري للمنتجات لا يتم ترسية المزاد.",
+        "confirm_that_the_auction_was_not_awarded": "تأكيد عدم ترسية المزاد",
+        "reject_confirmation": "هل انت متاكد من رفض الترسية؟ ",
+        "are_you_sure_of_the_rejection_of_the_award": "عند التأكيد سوف يتم شطب مقدم العرض من القائمة.",
+        "rejection_reason": "سبب الرفض",
+        "rejection_confirmation": "تأكيد الرفض",
+        "rejection_sent_successfully": "تم إرسال الرفض بنجاح ",
+        "refuse_reason_placeholder": "الرجاء إدخال سبب الرفض…"
     }
 }
