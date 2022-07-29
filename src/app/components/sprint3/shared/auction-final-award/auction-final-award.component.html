@@ -38,7 +38,7 @@
             <span class="sr-only">Loading...</span>
           </div>
           &nbsp;
-          <span style="text-decoration: underline;">Primary Warranty</span>
+          <span style="text-decoration: underline;">{{'auctionCommittee.ac-openOffers.th3'}}</span>
         </div>
       </div>
     </div>
@@ -48,19 +48,24 @@
         <a (click)="downloadPDF()" class="text-primary tex-14" style="text-decoration: none;">
           <span class="text-16 icon-download"></span>
           &nbsp;
-          <span style="text-decoration: underline;">Auction report and bid submitted BidOfferPDF</span>
+          <span style="text-decoration: underline;">
+            {{'sprint3_auction_detail.auction_report_and_bid_submitted'}}
+          </span>
         </a>
       </div>
       <div *ngIf="!sendInvoice" class="mt-3">
-        <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">Refusal to be
-          awarded</button>
+        <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">
+          Refusal to be awarded
+        </button>
         &nbsp;&nbsp;
-        <button class="btn btn-primary-light btn-md" (click)="this.showConfirmationAccept = true">Final award
-          approval</button>
+        <button class="btn btn-primary-light btn-md" (click)="this.showConfirmationAccept = true">
+          Final award approval
+        </button>
       </div>
       <div class="mt-3" *ngIf="sendInvoice">
-        <button class="btn btn-primary-light btn-md" [ngStyle]="{ float: btnFloat }" (click)="goToInvoice()">Send
-          Invoice</button>
+        <button class="btn btn-primary-light btn-md" [ngStyle]="{ float: btnFloat }" (click)="goToInvoice()">
+          {{'bidderSendInvoice.send_invoice'}}
+        </button>
       </div>
     </div>
   </div>

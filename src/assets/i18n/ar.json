@@ -1085,5 +1085,13 @@
         "rejection_confirmation": "تأكيد الرفض",
         "rejection_sent_successfully": "تم إرسال الرفض بنجاح ",
         "refuse_reason_placeholder": "الرجاء إدخال سبب الرفض…"
+    },
+    "sprint3_auction_detail": {
+        "your_bid_has_been_awarded!": "تمت الترسية على عرضك!",
+        "please_attach_the_final_guarantee": "الرجاء إرفق الضمان النهائيلإعتماد الترسية المبدئية",
+        "please_issue_and_attach": "الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك",
+        "issuance_of_the_final_guarantee": "إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد",
+        "send_the_final_guarantee": "إرسال الضمان النهائي",
+        "auction_report_and_bid_submitted": "تقرير المزاد والعطاء المقدم PDF"
     }
 }

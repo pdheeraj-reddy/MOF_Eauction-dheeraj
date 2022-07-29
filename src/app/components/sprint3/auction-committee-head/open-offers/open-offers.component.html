@@ -33,41 +33,48 @@
             </button>
         </div>
     </div>
-    <div class="modal-content p-4 shadow-lg border" *ngIf="showFilterForm">
-        <form [formGroup]="filterFormGroup">
-            <div class="modal-header">
-                <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">FILTERS</h3>
-                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
-                    (click)="toggleFilter()">
-                    <span class="icon-close"></span>
-                </button>
-            </div>
-            <div class="modal-body mb-3">
-                <div class="col-12 row pr-0">
-                    <div class="col-md-4 mb-2">
-                        <label class="d-flex" for="validationCustom01">Status</label>
-                        <select formControlName="status" class="form-control" id="validationCustom01"
-                            (change)="changeSelect($event, 'status')" [required]="true">
-                            <option selected disabled value="">Select</option>
-                            <option *ngFor="let status of dropValStatus" [ngValue]="status">{{status}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <label class="d-flex" for="validationCustom02">Type</label>
-                        <select formControlName="type" class="form-control" id="validationCustom02"
-                            (change)="changeSelect($event, 'type')">
-                            <option selected disabled value="">Select</option>
-                            <option *ngFor="let type of dropValType" [ngValue]="type">{{type}}</option>
-                        </select>
-                    </div>
+    <div class="modal-content p-4 mt-2 shadow-lg border" *ngIf="showFilterForm">
+        <div class="modal-header">
+            <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
+                'auctionlist.filter-title' | translate }}</h3>
+            <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                (click)="toggleFilter();">
+                <span class="icon-close"></span>
+            </button>
+        </div>
+        <div class="modal-body mb-3">
+            <div class="col-12 row pr-0">
+                <div class="col-md-4 mb-3">
+                    <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th2' | translate
+                        }}</label>
+                    <input type="text" class="form-control" [(ngModel)]="filterModel.offer_value"
+                        placeholder="{{ 'auctionCommittee.ac-openOffers.th2' | translate }}" id="validationCustom01" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">{{ 'auctionCommittee.ac-openOffers.th5' | translate }}</label>
+                    <input type="text" [(ngModel)]="filterModel.facility_name" class="form-control"
+                        placeholder="{{ 'auctionCommittee.ac-openOffers.th5' | translate }}" id="validationCustom01" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">{{ 'auctionCommittee.ac-openOffers.th6' | translate }}</label>
+                    <input type="text" [(ngModel)]="filterModel.commercial_ref" class="form-control"
+                        placeholder="{{ 'auctionCommittee.ac-openOffers.th6' | translate }}" id="validationCustom01" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th4' |
+                        translate }}</label>
+                    <input type="text" id="submission_date" [(ngModel)]="filterModel.submission_date"
+                        placeholder="{{ 'auctionCommittee.ac-openOffers.th4' | translate }}"
+                        (change)="onChangeDate($event)" class="form-control calendar-control
+                            calendar-both-control" />
                 </div>
             </div>
-            <div class="modal-footer">
-                <button (click)="resetFilter()" type="button" data-dismiss="modal" aria-label="Close"
-                    class="btn btn-outline-light btn-md">Reset</button>
-                <button (click)="applyFilter()" type="button" class="btn btn-primary-light btn-md">Apply</button>
-            </div>
-        </form>
+        </div>
+        <div class="modal-footer">
+            <button (click)="resetFilter()" type="button" data-dismiss="modal" aria-label="Close"
+                class="btn btn-outline-light btn-md">Reset</button>
+            <button (click)="applyFilter()" type="button" class="btn btn-primary-light btn-md">Apply</button>
+        </div>
     </div>
     <!-- Block level -->
     <!-- Inline level -->

@@ -2,9 +2,10 @@
     <!--=================== Yellow box to show auction status ===================-->
     <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
         <div class="mx-3">
-            <p class="text-18 text-warning font-weight-bold">تمت الترسية على عرضك!</p>
+            <p class="text-18 text-warning font-weight-bold">{{'sprint3_auction_detail.your_bid_has_been_awarded' |
+                translate}}</p>
             <p class="text-12 text-warning">
-                الرجاء إرفق الضمان النهائيلإعتماد الترسية المبدئية
+                {{'sprint3_auction_detail.please_attach_the_final_guarantee'}}
             </p>
         </div>
     </div>
@@ -48,10 +49,12 @@
                                         class="btn btn-sm btn-ghost fill-primary-light-green">
                                         <span class="icon-eye-open"></span>
                                     </a>
-                                    <a *ngIf="disableInput" (click)="openFile(files[0],'download')" class="btn btn-sm btn-ghost fill-primary-light-green">
+                                    <a *ngIf="disableInput" (click)="openFile(files[0],'download')"
+                                        class="btn btn-sm btn-ghost fill-primary-light-green">
                                         <span class="icon-download"></span>
                                     </a>
-                                    <a *ngIf="!disableInput" (click)="removeFile()" class="btn btn-sm btn-ghost fill-primary-light-green">
+                                    <a *ngIf="!disableInput" (click)="removeFile()"
+                                        class="btn btn-sm btn-ghost fill-primary-light-green">
                                         <span class="icon-delete text-danger"></span>
                                     </a>
                                 </div>
@@ -106,8 +109,8 @@
             <!--===== End =========-->
             <div>
                 <p class="text-primary text-14 m-0">
-                    الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك
-                    إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد
+                    {{'sprint3_auction_detail.please_issue_and_attach'}}
+                    {{'sprint3_auction_detail.issuance_of_the_final_guarantee'}}
                     <a class="text-info text-14" style="text-decoration: underline">اضغط هنا</a>
                 </p>
             </div>
@@ -116,7 +119,7 @@
 
         <!--=================== Participation Button ===================-->
         <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()" [disabled]="disableBtn">
-            إرسال الضمان النهائي
+            {{'sprint3_auction_detail.send_the_final_guarantee'}}
         </button>
         <!-- End -->
     </div>

@@ -7,7 +7,8 @@ import { CommitteeHeadService } from '../../services/committee-head.service';
 import * as moment from 'moment';
 import { Location } from '@angular/common';
 import { AuctionService } from 'src/app/service/auction.service';
-
+import { TranslateService } from '@ngx-translate/core';
+declare var $: any;
 @Component({
   selector: 'app-open-offers',
   templateUrl: './open-offers.component.html',
@@ -15,6 +16,7 @@ import { AuctionService } from 'src/app/service/auction.service';
 })
 export class OpenOffersComponent implements OnInit {
   openofferListData: any;
+  copyOpenofferListData: any;
   pagelimit: number = 5;
   showLoader: boolean = false;
   auctionId: string = '';
@@ -26,7 +28,12 @@ export class OpenOffersComponent implements OnInit {
   dropValStatus: any = [];
   dropValType: any = [];
   selectedData: any;
-  filterFormGroup: FormGroup;
+  filterModel = {
+    offer_value: '',
+    facility_name: '',
+    submission_date: '',
+    commercial_ref: '',
+  }
   showModal = {
     acceptOffer: false,
     acceptOfferSuccess: false,
@@ -46,23 +53,19 @@ export class OpenOffersComponent implements OnInit {
     public committeeHeadService: CommitteeHeadService,
     public location: Location,
     public auctionServc: AuctionService,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
-    this.filterForm();
-
     this.getOffersData(1);
+    this.refreshCalendarCntrl()
   }
 
   getOffersData(pageNumber: number) {
     const page = {
       pageNumber: pageNumber,
       pageLimit: this.pagelimit
-    };
-    const filters = {
-      Status: this.filterFormGroup.controls['status'].value ? this.filterFormGroup.controls['status'].value : '',
-      BidType: this.filterFormGroup.controls['type'].value ? this.filterFormGroup.controls['type'].value : '',
     };
     this.showLoader = true;
     this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
@@ -98,6 +101,7 @@ export class OpenOffersComponent implements OnInit {
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
+      this.copyOpenofferListData = resultSet;
       this.navigateToPage(1);
       console.log('this.openofferListData: ', this.openofferListData);
     }
@@ -204,34 +208,56 @@ export class OpenOffersComponent implements OnInit {
 
   // -------------------------------------- filter code --------------------------------
 
-  filterForm() {
-    this.filterFormGroup = this.formBuilder.group({
-      status: new FormControl(''),
-      type: new FormControl(''),
-    });
-  }
+
   public toggleFilter() {
     this.resetFilter();
     this.showFilterForm = !this.showFilterForm;
   }
 
   resetFilter() {
-    this.filterFormGroup.controls['status'].setValue('');
-    this.filterFormGroup.controls['type'].setValue('');
+    this.filterModel = {
+      offer_value: '',
+      facility_name: '',
+      submission_date: '',
+      commercial_ref: '',
+    }
+    this.refreshCalendarCntrl()
+    this.openofferListData = this.copyOpenofferListData;
   }
 
   applyFilter() {
-    this.filterFormGroup.controls['status'].setValue('');
-    this.filterFormGroup.controls['type'].setValue('');
-    this.getOffersData(1);
+    this.openofferListData = this.copyOpenofferListData;
+    if (this.filterModel.offer_value) {
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        if (i.offerValue.toLowerCase().indexOf(this.filterModel.offer_value.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.facility_name) {
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        console.log(i.facilityName, this.filterModel.facility_name)
+        if (i.facilityName.toLowerCase().indexOf(this.filterModel.facility_name.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.commercial_ref) {
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        if (i.BidderId.toLowerCase().indexOf(this.filterModel.commercial_ref.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.submission_date) {
+      console.log('this.filterModel: ', this.filterModel);
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        if (i.submissionDate?.split('.')[0] === this.filterModel.submission_date?.split('-')[2]) return true;
+        return false;
+      })
+    }
   }
 
   changeSelect(e: any, dd: string) {
     console.log('changeSelect');
     console.log(e.target.value);
-    this.filterFormGroup.controls[dd].setValue(e.target.value, {
-      onlySelf: true,
-    });
   }
 
   public getServerData(selectedPageNumber: number) {
@@ -274,6 +300,32 @@ export class OpenOffersComponent implements OnInit {
       currentPage: this.PaginationServc.currentPage,
       totalPages: this.PaginationServc.totalPages,
     }
+  }
+
+  onChangeDate($event: any) {
+    this.filterModel.submission_date = $event.target.value;
+  }
+
+  refreshCalendarCntrl() {
+    let lang = this.translate.currentLang;
+    setTimeout(() => {
+      $("#submission_date").unbind().removeData();
+      $("#submission_date").hijriDatePicker({
+        hijri: false,
+        locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
+        format: "YYYY-MM-DD",
+        showSwitcher: false,
+        icons: {
+          previous: '<span class="icon-keyboard_arrow_left"></span>',
+          next: '<span class="icon-keyboard_arrow_right"></span>',
+        },
+      });
+      $("#submission_date").on('dp.change', function (arg: any) {
+        const v = new Event('change');
+        const e = document.querySelector("#submission_date");
+        e?.dispatchEvent(v);
+      });
+    }, 100);
   }
 
 }
