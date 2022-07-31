@@ -1072,5 +1072,30 @@
         "my_auction": "My Auction",
         "invitation": "Invitation",
         "my_invoices": "My Invoices"
+    },
+    "open_offer": {
+        "adoption_of_awarding": "Adoption of awarding offer No. 1?",
+        "upon_confirmation": "Upon confirmation, the initial award will be approved and sent for final approval",
+        "gear_adoption": "Gear adoption",
+        "the_award_has_been_successfully_approved": "The award has been successfully approved",
+        "the_initial_award": "The initial award will be sent for final approval with a report",
+        "auction_and_all_bids_submitted": "Auction and all bids submitted",
+        "this_offer_cannot_be_awarded.": "This offer cannot be awarded.",
+        "less_than_estimation": "This offer cannot be chosen as the offered price is less than the price estimated by the pricing committee and according to the auction instructions: If the minimum estimated price for the products is not achieved, the auction will not be awarded.",
+        "confirm_that_the_auction_was_not_awarded": "Confirm that the auction was not awarded",
+        "reject_confirmation": " Upon confirmation, the bidder will be crossed off the list.",
+        "are_you_sure_of_the_rejection_of_the_award": "Are you sure of the rejection of the award?",
+        "rejection_reason": "Please enter the reason for rejection",
+        "rejection_confirmation": "Rejection confirmation",
+        "rejection_sent_successfully": "Rejection sent successfully",
+        "refuse_reason_placeholder": "the reason of refuse.."
+    },
+    "sprint3_auction_detail": {
+        "your_bid_has_been_awarded!": "Your bid has been awarded!",
+        "please_attach_the_final_guarantee": "Please attach the final guarantee to approve the initial award",
+        "please_issue_and_attach": "Please issue and attach the final warranty within 15 days of awarding. you can",
+        "issuance_of_the_final_guarantee": "Issuance of the guarantee through the bank guarantee service of the Etimad platform",
+        "send_the_final_guarantee": "Send the final guarantee",
+        "auction_report_and_bid_submitted": "Auction report and bid submitted BidOffer PDF"
     }
 }
