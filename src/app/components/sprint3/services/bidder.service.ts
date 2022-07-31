@@ -93,7 +93,7 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(participationDetails), httpOptions);
   }
-  submitBid(auctionId?: any, bidAmt?:any): Observable<any> {
+  submitBid(auctionId?: any, bidAmt?: any): Observable<any> {
     let bidDetails = {
       "AucId": auctionId,
       "BidderValue": bidAmt,
@@ -112,7 +112,7 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(bidDetails), httpOptions);
   }
-  uploadFile(file:any){
+  uploadFile(file: any) {
     const httpOptions = {
       headers: {
         'X-CSRF-TOKEN': this.XCSRFToken as string,
@@ -121,7 +121,7 @@ export class BidderService {
       }
     };
     return this.http.post<any>(this.envService.environment.apiFilenetURL
-      ,JSON.stringify(file),httpOptions);
+      , JSON.stringify(file), httpOptions);
   }
   submitFbga(auctionId?: any): Observable<any> {
     let bidDetails = {
@@ -141,7 +141,7 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(bidDetails), httpOptions);
   }
-  getInvoiceDetails(auctionId : any){
+  getInvoiceDetails(auctionId: any) {
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
@@ -229,5 +229,17 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId) + "&$format=json", httpOptions);
+  }
+
+  downloadInvoice(auctionId: string) {
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch'
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId), httpOptions);
   }
 }

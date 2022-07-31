@@ -15,7 +15,8 @@
 
         <div class="col-md-12">
             <div class="heading">
-                <h1 class="text-20 text-primary font-weight-medium">{{ 'bidderFinalInvoice.InvoiceDetails' | translate }}</h1>
+                <h1 class="text-20 text-primary font-weight-medium">{{ 'bidderFinalInvoice.InvoiceDetails' | translate
+                    }}</h1>
             </div>
         </div>
 
@@ -26,27 +27,49 @@
                     <div style="margin-top: 25px;
                     margin-left: 15px;
                     margin-right: 15px;">
-                        <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{ 'bidderFinalInvoice.AuctionData' | translate }}</p>
+                        <div style="display:flex;justify-content: space-between;">
+                            <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{
+                                'bidderFinalInvoice.AuctionData' | translate }}</p>
+                            <p style="color: #005B4D; font-size: 18px; font-weight: bold;">
+                                <a (click)="downloadInvoice()">Download Invoice</a>
+                            </p>
+                        </div>
                         <br>
                         <div style="display: flex;">
                             <div style="width: 35%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.AuctionReferenceNumber' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{
+                                    'bidderFinalInvoice.AuctionReferenceNumber' | translate }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.auctionReferenceNo}}</p>
                             </div>
                             <div style="width: 35%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.AuctionStartDateandTime' | translate }}</p>
-                                <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.auctionDate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;<span *ngIf="invoiceForSend.auctionTimeSufix"  style="color: #cac1c1;">{{invoiceForSend.auctionTime}} {{ invoiceForSend.auctionTimeSufix | translate }}</span></p>
+                                <p style="color: #117ABE; font-size: 15px;">{{
+                                    'bidderFinalInvoice.AuctionStartDateandTime' | translate }}</p>
+                                <p style="color: #005B4E; font-size: 17px;">
+                                    {{invoiceForSend.auctionDate}}&nbsp;&nbsp;<span
+                                        style="font-size: 6px; color: #32AD71;"
+                                        class="icon-fiber_manual_record"></span>&nbsp;&nbsp;<span
+                                        *ngIf="invoiceForSend.auctionTimeSufix"
+                                        style="color: #cac1c1;">{{invoiceForSend.auctionTime}} {{
+                                        invoiceForSend.auctionTimeSufix | translate }}</span></p>
                             </div>
                             <div style="width: 30%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.ProductsType' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.ProductsType' |
+                                    translate }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.productsType}}</p>
                             </div>
                         </div>
                         <br>
                         <div style="display: flex;">
                             <div style="width: 35%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.OfferAwardDate' | translate }}</p>
-                                <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.offerAwardDate}}&nbsp;&nbsp;<span style="font-size: 6px; color: #32AD71;" class="icon-fiber_manual_record"></span>&nbsp;&nbsp;<span *ngIf="invoiceForSend.offerAwardTimeSufix" style="color: #cac1c1;">{{invoiceForSend.offerAwardTime}} {{ invoiceForSend.offerAwardTimeSufix | translate }}</span></p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.OfferAwardDate' |
+                                    translate }}</p>
+                                <p style="color: #005B4E; font-size: 17px;">
+                                    {{invoiceForSend.offerAwardDate}}&nbsp;&nbsp;<span
+                                        style="font-size: 6px; color: #32AD71;"
+                                        class="icon-fiber_manual_record"></span>&nbsp;&nbsp;<span
+                                        *ngIf="invoiceForSend.offerAwardTimeSufix"
+                                        style="color: #cac1c1;">{{invoiceForSend.offerAwardTime}} {{
+                                        invoiceForSend.offerAwardTimeSufix | translate }}</span></p>
                             </div>
                         </div>
                         <hr>
@@ -55,29 +78,35 @@
                         <div style="display: flex;">
 
                             <div style="width: 50%;">
-                                <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{ 'bidderFinalInvoice.BillHolderInformation' | translate }}</p>
+                                <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{
+                                    'bidderFinalInvoice.BillHolderInformation' | translate }}</p>
                                 <br>
                                 <div>
-                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.FacilityName' | translate }}</p>
+                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.FacilityName' |
+                                        translate }}</p>
                                     <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.facilityName}}</p>
                                 </div>
                                 <br>
                                 <div>
-                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.CommercialRegistrationNo' | translate }}</p>
+                                    <p style="color: #117ABE; font-size: 15px;">{{
+                                        'bidderFinalInvoice.CommercialRegistrationNo' | translate }}</p>
                                     <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.commercialRegNo}}</p>
                                 </div>
                             </div>
 
                             <div style="width: 50%;">
-                                <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{ 'bidderFinalInvoice.BillerData' | translate }}</p>
+                                <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{
+                                    'bidderFinalInvoice.BillerData' | translate }}</p>
                                 <br>
                                 <div>
-                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.EntityName' | translate }}</p>
+                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.EntityName' |
+                                        translate }}</p>
                                     <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.entityName}}</p>
                                 </div>
                                 <br>
                                 <div>
-                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.EntityNo' | translate }}</p>
+                                    <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.EntityNo' |
+                                        translate }}</p>
                                     <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.entityNo}}</p>
                                 </div>
                             </div>
@@ -87,61 +116,72 @@
 
                         <br>
 
-                        <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{ 'bidderFinalInvoice.DeliveryData' | translate }}</p>
+                        <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{
+                            'bidderFinalInvoice.DeliveryData' | translate }}</p>
                         <br>
                         <div>
                             <div style="width: 40%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.DeliveryDate' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.DeliveryDate' |
+                                    translate }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.deliveryDate}}</p>
                             </div>
                         </div>
                         <br>
                         <div style="display: flex;">
                             <div style="width: 40%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.Region' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.Region' | translate
+                                    }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.region}}</p>
                             </div>
                             <div style="width: 35%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.City' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.City' | translate }}
+                                </p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.city}}</p>
                             </div>
                             <div style="width: 25%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.District' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.District' | translate
+                                    }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.district}}</p>
                             </div>
                         </div>
                         <br>
                         <div style="display: flex;">
                             <div style="width: 40%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.Street' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.Street' | translate
+                                    }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.street}}</p>
                             </div>
                             <div style="width: 35%;">
-                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.OtherNotes' | translate }}</p>
+                                <p style="color: #117ABE; font-size: 15px;">{{ 'bidderFinalInvoice.OtherNotes' |
+                                    translate }}</p>
                                 <p style="color: #005B4E; font-size: 17px;">{{invoiceForSend.otherNotes}}</p>
                             </div>
                         </div>
                         <hr>
                         <br>
 
-                        <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{ 'bidderFinalInvoice.TableOfProductsAndPrices' | translate }}</p>
+                        <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{
+                            'bidderFinalInvoice.TableOfProductsAndPrices' | translate }}</p>
 
                         <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th style="width: 12%;" class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                                    <th style="width: 12%;" class="btn-primary-light" scope="col"
+                                        (click)="sortByTableHeaderId(1, 'string')">
                                         <div style=" padding-left: 10px;" class="table-header-cell">
                                             <span>#</span>
                                             <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                         </div>
                                     </th>
-                                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                                    <th class="btn-primary-light" scope="col"
+                                        (click)="sortByTableHeaderId(2, 'string')">
                                         <div style=" padding-left: 10px;" class="table-header-cell">
                                             <span>{{ 'bidderFinalInvoice.ProductName' | translate }}</span>
                                             <span class="arrow asc"><span class="icon-unfold_more"></span></span>
                                         </div>
                                     </th>
-                                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
+                                    <th class="btn-primary-light" scope="col"
+                                        (click)="sortByTableHeaderId(3, 'string')">
                                         <div style=" padding-left: 10px;" class="table-header-cell">
                                             <span>{{ 'bidderFinalInvoice.SKU_Number' | translate }}</span>
                                             <span class="arrow asc"><span class="icon-unfold_more"></span></span>
@@ -164,22 +204,30 @@
                                 <ng-container *ngIf="invoiceForSend.productGrandTotal">
                                     <tr>
                                         <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                            {{ 'bidderFinalInvoice.GearPrice' | translate }}<span style="color: #32AD71; margin-left: 78%;">{{invoiceForSend.productGrandTotal.gearPrice}} {{ 'bidderFinalInvoice.SAR' | translate }}</span>
+                                            {{ 'bidderFinalInvoice.GearPrice' | translate }}<span
+                                                style="color: #32AD71; margin-left: 78%;">{{invoiceForSend.productGrandTotal.gearPrice}}
+                                                {{ 'bidderFinalInvoice.SAR' | translate }}</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                            2.5% {{ 'bidderFinalInvoice.QuestRate' | translate }}<span style="color: #32AD71; margin-left: 74%;">{{invoiceForSend.productGrandTotal.questRate}} {{ 'bidderFinalInvoice.SAR' | translate }}</span>
+                                            2.5% {{ 'bidderFinalInvoice.QuestRate' | translate }}<span
+                                                style="color: #32AD71; margin-left: 74%;">{{invoiceForSend.productGrandTotal.questRate}}
+                                                {{ 'bidderFinalInvoice.SAR' | translate }}</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                            {{ 'bidderFinalInvoice.ValueAddedTax' | translate }}<span style="color: #32AD71; margin-left: 74%;">{{invoiceForSend.productGrandTotal.valueAddTax}} {{ 'bidderFinalInvoice.SAR' | translate }}</span>
+                                            {{ 'bidderFinalInvoice.ValueAddedTax' | translate }}<span
+                                                style="color: #32AD71; margin-left: 74%;">{{invoiceForSend.productGrandTotal.valueAddTax}}
+                                                {{ 'bidderFinalInvoice.SAR' | translate }}</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="color: #005B4D; font-weight: bold;">
-                                            {{ 'bidderFinalInvoice.TotalInvoicePrice' | translate }}<span style="color: #32AD71; margin-left: 72%;">{{invoiceForSend.productGrandTotal.totalInvPrice}} {{ 'bidderFinalInvoice.SAR' | translate }}</span>
+                                            {{ 'bidderFinalInvoice.TotalInvoicePrice' | translate }}<span
+                                                style="color: #32AD71; margin-left: 72%;">{{invoiceForSend.productGrandTotal.totalInvPrice}}
+                                                {{ 'bidderFinalInvoice.SAR' | translate }}</span>
                                         </td>
                                     </tr>
                                 </ng-container>
@@ -191,20 +239,27 @@
                                 <div class="mb-5">
                                     <nav aria-label="..." class="nav-pagination">
 
-                                        <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
+                                        <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0"
+                                            class="pagination">
                                             <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
                                 <a (click)="getServerData(1)" class="page-link" href="#">Last</a>
                             </li> -->
-                                            <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                                                <a (click)="getServerData(PaginationServc.currentPage)" class="page-link" tabindex="-1" aria-disabled="true">{{ 'auctionlist.grid-previous' | translate }}</a>
+                                            <li class="page-item"
+                                                [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
+                                                <a (click)="getServerData(PaginationServc.currentPage)"
+                                                    class="page-link" tabindex="-1" aria-disabled="true">{{
+                                                    'auctionlist.grid-previous' | translate }}</a>
                                             </li>
-                                            <li *ngFor="let page of PaginationServc.pages" class="page-item" [ngClass]="{ active: PaginationServc.currentPage === page }">
+                                            <li *ngFor="let page of PaginationServc.pages" class="page-item"
+                                                [ngClass]="{ active: PaginationServc.currentPage === page }">
                                                 <a (click)="getServerData(page + 1)" class="page-link">
-                                    {{ page }}
-                                </a>
+                                                    {{ page }}
+                                                </a>
                                             </li>
-                                            <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                                                <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                            <li class="page-item"
+                                                [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
+                                                <a (click)="getServerData(PaginationServc.currentPage + 2)"
+                                                    class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                             </li>
                                             <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
                                 <a (click)="getServerData(PaginationServc.currentPage + 1)" class="page-link" href="#">Last</a>
@@ -224,47 +279,55 @@
                     <h3 style="margin-top: 50px;">{{ 'bidderFinalInvoice.PayTheBill' | translate }}</h3>
                     <div class="card">
                         <div class="card-body">
-        
+
                             <div style="display: flex;justify-content: space-between;">
                                 <p class="card-text">
                                     {{ 'bidderFinalInvoice.AwardCanceled' | translate }}
                                 </p>
                                 <div>
-                                    <a href="" style="text-decoration: underline; margin-right: 5px;color: #08594D;font-size: 14px;">
+                                    <a href=""
+                                        style="text-decoration: underline; margin-right: 5px;color: #08594D;font-size: 14px;">
                                         {{ 'bidderFinalInvoice.InvoiceCopy' | translate }}
                                     </a>
                                     <span class="icon-download"></span>
                                 </div>
                             </div>
-        
+
                             <div style="display: flex;justify-content: space-around;">
-                                <button class="tab-btn card" [ngClass]="{'card-active': card}" (click)="switchPaymentToSADAD()">
-                                        <div class="card-body" style="width: 100%;">
-                                            <p style="font-size: 16px;margin-bottom: 0;">{{ 'bidderFinalInvoice.PaymentBySADAD' | translate }}</p>
-                                        </div>
-                                </button>
-        
-                                <button class="tab-btn card" [ngClass]="{'card-active': !card}" (click)="switchPaymentToCard()">
+                                <button class="tab-btn card" [ngClass]="{'card-active': card}"
+                                    (click)="switchPaymentToSADAD()">
                                     <div class="card-body" style="width: 100%;">
-                                        <div style="display: flex;justify-content: center; margin-bottom: 10px;">
-                                            <p style="font-size: 16px;margin-bottom: 0;padding-right: 15px;">{{ 'bidderFinalInvoice.CardPayment' | translate }}</p>
-                                            <span class="icon-payment-plan"></span>
-                                        </div>
-                                        <p style="font-size: 14px;margin-bottom: 0;">{{ 'bidderFinalInvoice.Almost' | translate }}</p>
+                                        <p style="font-size: 16px;margin-bottom: 0;">{{
+                                            'bidderFinalInvoice.PaymentBySADAD' | translate }}</p>
                                     </div>
                                 </button>
-        
-        
-        
+
+                                <button class="tab-btn card" [ngClass]="{'card-active': !card}"
+                                    (click)="switchPaymentToCard()">
+                                    <div class="card-body" style="width: 100%;">
+                                        <div style="display: flex;justify-content: center; margin-bottom: 10px;">
+                                            <p style="font-size: 16px;margin-bottom: 0;padding-right: 15px;">{{
+                                                'bidderFinalInvoice.CardPayment' | translate }}</p>
+                                            <span class="icon-payment-plan"></span>
+                                        </div>
+                                        <p style="font-size: 14px;margin-bottom: 0;">{{ 'bidderFinalInvoice.Almost' |
+                                            translate }}</p>
+                                    </div>
+                                </button>
+
+
+
                             </div>
-        
+
                         </div>
                     </div>
-        
-                    <div class="btn-submit-grp" >
+
+                    <div class="btn-submit-grp">
                         <div>
-                            <button class="btn btn-outline-primary-light btn-md">{{ 'bidderFinalInvoice.Cancellation' | translate }}</button>
-                            <button class="btn btn-primary-light btn-md" style="margin-left: 10px;">{{ 'bidderFinalInvoice.PaymentConfirmation' | translate }}</button>
+                            <button class="btn btn-outline-primary-light btn-md">{{ 'bidderFinalInvoice.Cancellation' |
+                                translate }}</button>
+                            <button class="btn btn-primary-light btn-md" style="margin-left: 10px;">{{
+                                'bidderFinalInvoice.PaymentConfirmation' | translate }}</button>
                         </div>
                     </div>
                 </div>
@@ -272,13 +335,14 @@
                 <div class="col-12" *ngIf=" userRole === 'EAuction_AuctionManager'">
                     <div class="btn-submit-grp">
                         <div>
-                            <button class="btn btn-outline-primary-light btn-md" data-toggle="modal" data-target="#confirmAprModal" >Send Invoice</button>
+                            <button class="btn btn-outline-primary-light btn-md" data-toggle="modal"
+                                data-target="#confirmAprModal">Send Invoice</button>
                             <button class="btn btn-primary-light btn-md" style="margin-left: 10px;">Back</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
 
 
 
@@ -286,103 +350,67 @@
     </div>
 </div>
 
- <!-- Model to confirm Approval -->
- <div
- class="modal fade"
- id="confirmAprModal"
- tabindex="-1"
- role="dialog"
- aria-labelledby="exampleModalLabel"
- aria-hidden="true"
->
- <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-   <div class="modal-content">
-     <div class="modal-header">
-       <h4 class="modal-title" id="exampleModalLabel">
-         Approval of final award and send the invoice?
-       </h4>
-       <button
-         type="button"
-         class="modal-close btn-close btn-sm"
-         data-dismiss="modal"
-         aria-label="Close"
-       >
-         <span class="icon-close"></span>
-       </button>
-     </div>
-     <div class="modal-body">
-       <label for="confirmation" style="color: #414042; font-size: 16px"
-   >When the award is approved, the invoice will be sent to complete the tear-down by the bidder</label
-       >
-     </div>
-     <div class="modal-footer" style="justify-content: end">
-       <button
-         type="button"
-         class="btn btn-primary-light btn-md"
-         data-dismiss="modal"
-         (click)="sendInv()"
-       >
-         Send Invoice
-       </button>
-       <button
-         type="button"
-         class="btn btn-md"
-         data-dismiss="modal"
-         aria-label="Close"
-         style="border: 1px solid #cccccc; border-radius: 5px"
-       >
-         Back
-       </button>
-     </div>
-   </div>
- </div>
+<!-- Model to confirm Approval -->
+<div class="modal fade" id="confirmAprModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    Approval of final award and send the invoice?
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px">When the award is approved, the
+                    invoice will be sent to complete the tear-down by the bidder</label>
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" (click)="sendInv()">
+                    Send Invoice
+                </button>
+                <button type="button" class="btn btn-md" data-dismiss="modal" aria-label="Close"
+                    style="border: 1px solid #cccccc; border-radius: 5px">
+                    Back
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Model to show confirmed (Successful)  Approval-->
 <ng-template #showSuccessfulModal let-modal>
 
- <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-   <div class="modal-content" style="align-items: center;">
-     <button
-       style="position: absolute;left: 90%;"
-       type="button"
-       class="modal-close btn-close btn-sm"
-       data-dismiss="modal"
-       aria-label="Close"
-     >
-       <span class="icon-close"></span>
-     </button>
-     <span class="icon-check"></span>
-     <div class="modal-header">
-       <div class="status-success-icon">
-         <div style="display: flex;">
-           <div class="circle"></div>
-           
-         </div>
-         <h4
-           class="modal-title"
-           id="exampleModalLabel"
-           style="text-align: center"
-         >
-           Invoice sent successfully
-         </h4>
-       </div>
-     </div>
-     <div class="modal-body">
-       <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;"
-         > You will receive an email when the payment is completed and the auctions are awarded
-         </label>
-     </div>
-     <div class="modal-footer" style="justify-content: end">
-       <button
-         type="button"
-         class="btn btn-primary-light btn-md"
-         data-dismiss="modal"
-         aria-label="Close"
-       >
-       Back to Auctions
-       </button>
-     </div>
-   </div>
- </div>
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="align-items: center;">
+            <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
+                data-dismiss="modal" aria-label="Close">
+                <span class="icon-close"></span>
+            </button>
+            <span class="icon-check"></span>
+            <div class="modal-header">
+                <div class="status-success-icon">
+                    <div style="display: flex;">
+                        <div class="circle"></div>
+
+                    </div>
+                    <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                        Invoice sent successfully
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;"> You will receive
+                    an email when the payment is completed and the auctions are awarded
+                </label>
+            </div>
+            <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+                    Back to Auctions
+                </button>
+            </div>
+        </div>
+    </div>
 </ng-template>
