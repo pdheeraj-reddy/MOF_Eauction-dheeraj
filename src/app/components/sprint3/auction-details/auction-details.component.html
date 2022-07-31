@@ -1,9 +1,12 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item" style="font-size: 14px;"><a [href]="getHomeUrl">{{ 'TrustServices' | translate
+            <li class="breadcrumb-item" style="font-size: 14px;"><a [href]="getHomeUrl">{{
+                    'auctionCommittee.ac-detail.bcrumb1' |
+                    translate
                     }}</a></li>
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="/auctions">{{ 'bidderAuctionDetails.Auctions'
+            <li class="breadcrumb-item" style="font-size: 14px;"><a href="/auctions">{{
+                    'auctionCommittee.ac-detail.bcrumb2'
                     |
                     translate }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ 'bidderAuctionDetails.AuctionDetails' | translate
@@ -155,10 +158,12 @@
                         <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionDetail')"
                             style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox1" name="sampleCheckbox" checked="checked">
-                            <label class="input-target d-flex" for="checkbox1">
+                            <label class="input-target d-flex text-18" for="checkbox1">
                                 <span>
-                                    <span class="icon-information"></span><br>
-                                    {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' | translate }}
+                                    <span><img src="/assets/icons/auction.svg" alt=""></span><br>
+                                    <span>{{ 'bidderAuctionDetails.auction-settings.AuctionDetails' |
+                                        translate
+                                        }}</span>
                                 </span>
                             </label>
                         </div>&nbsp;&nbsp;
@@ -183,7 +188,7 @@
                             <label class="input-target d-flex" for="checkbox3">
                                 <span>
                                     <span class="icon-users"></span><br>
-                                    {{'auctionCommittee.ac-detail.tab4'}}
+                                    {{'auctionCommittee.ac-detail.tab4' | translate}}
                                 </span>
                             </label>
                         </div>&nbsp;&nbsp;
@@ -195,7 +200,7 @@
                             <label class="input-target d-flex" for="checkbox4">
                                 <span>
                                     <span class="icon-users"></span><br>
-                                    {{'auctionCommittee.ac-detail.tab3'}}
+                                    {{'auctionCommittee.ac-detail.tab3' | translate}}
                                 </span>
                             </label>
                         </div>
@@ -207,8 +212,8 @@
                             <input type="radio" id="checkbox5" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
                                 <span>
-                                    <span class="icon-information"></span><br>
-                                    {{'auctionCommittee.ac-detail.tab5'}}
+                                    <span><img src="/assets/icons/offer-report.svg" alt=""></span><br>
+                                    {{'auctionCommittee.ac-detail.tab5' | translate}}
                                 </span>
                             </label>
                         </div>
@@ -225,7 +230,8 @@
                         <p class="text-dark text-16 m-0">
                             {{ 'bidderAuctionDetails.auction-settings.ManagingAuctions'| translate }}
                         </p>
-                        <a href="" class="text-info text-14" style="text-decoration:underline;">
+                        <a href="https://portal.etimad.sa/ar-sa/aboutetimad/contactus" target="_blank"
+                            class="text-info text-14" style="text-decoration:underline;">
                             {{'bidderAuctionDetails.auction-settings.PressHere' | translate }}
                         </a>
                         <hr>
@@ -316,14 +322,14 @@
                                                 <div *ngIf="fullImage">
                                                     <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'"
                                                         class="img-fluid bg-dark" [src]="fullImage.src"
-                                                        style="width: -webkit-fill-available;" />
+                                                        style="width: -webkit-fill-available; height: 400px;" />
                                                     <div style="min-height:400px;max-height: 400px;" class="full-video"
                                                         *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime')">
                                                         <video
                                                             *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime') && showVideo"
                                                             autoplay controls class="img-fluid bg-dark" width="600">
                                                             <source [src]="fullImage.src" type="video/mp4"
-                                                                style="width: -webkit-fill-available;">
+                                                                style="width: -webkit-fill-available; height: 400px;">
                                                             Your browser does not support HTML video.
                                                         </video>
                                                     </div>
@@ -381,7 +387,7 @@
 
                                             <div class="thumbs-container bottom">
                                                 <div id="prev-btn" class="prev" (click)="scrollImageSlider('left')">
-                                                    <i class="icon-keyboard_arrow_left"></i>
+                                                    <i class="icon-arrow_left"></i>
                                                 </div>
 
                                                 <ul class="thumbs">
@@ -469,7 +475,7 @@
                                                 </ul>
 
                                                 <div id="next-btn" class="next" (click)="scrollImageSlider('right')">
-                                                    <i class="icon-keyboard_arrow_right"></i>
+                                                    <i class="icon-arrow_right"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -504,12 +510,13 @@
                                 {{'bidderAuctionDetails.AuctionStarts' | translate }}
                                 {{upcomingAuction.auctionStartsdate}} ∙
                                 {{upcomingAuction.auctionStartstime}}
-                                {{upcomingAuction.auctionStartstimeSufix}}
+                                {{ auctionStartSuffix | translate}}
                             </p>
 
                             <p class="text-14 text-black">
-                                <span class="icon-pin text-primary font-weight-bold text-20"></span>&nbsp;&nbsp;
-                                {{'bidderAuctionDetails.BiddingIs' | translate }} {{upcomingAuction.biddingStatus}}
+                                <span class="text-primary font-weight-bold text-20"><img src="/assets/icons/auction.svg"
+                                        alt=""></span>&nbsp;&nbsp;
+                                {{'bidderAuctionDetails.BiddingIs' | translate }} {{auctionBiddingStatus | translate}}
                             </p>
                             <div class="et-accordion">
                                 <div class="card" style="border: none; margin: 2%;">
@@ -586,7 +593,7 @@
                                                                         <li class="text-muted">
                                                                             <span
                                                                                 style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.end_biddingtime}}
-                                                                                {{upcomingAuction.important_info?.end_biddingtimeSufix}}</span>
+                                                                                {{ endBiddingSuffix | translate}}</span>
 
                                                                         </li>
                                                                     </ul>
@@ -609,7 +616,7 @@
                                                                         <li class="text-muted">
                                                                             <span
                                                                                 style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.open_biddingtime}}
-                                                                                {{upcomingAuction.important_info?.open_biddingtimeSufix}}</span>
+                                                                                {{ openBidSuffix | translate}}</span>
 
                                                                         </li>
                                                                     </ul>
@@ -700,7 +707,7 @@
                                                                 <li class="text-muted">
                                                                     <span
                                                                         style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.end_biddingtime}}
-                                                                        {{upcomingAuction.important_info?.end_biddingtimeSufix}}</span>
+                                                                        {{endBiddingSuffix | translate}}</span>
 
                                                                 </li>
                                                             </ul>
@@ -721,7 +728,7 @@
                                                                 <li class="text-muted">
                                                                     <span
                                                                         style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.open_biddingtime}}
-                                                                        {{upcomingAuction.important_info?.open_biddingtimeSufix}}</span>
+                                                                        {{ openBidSuffix | translate}}</span>
 
                                                                 </li>
                                                             </ul>
@@ -782,7 +789,7 @@
                                                         translate
                                                         }}</label>
                                                     <div class="text-success">
-                                                        {{upcomingAuction.auction_detail?.auctionType}} </div>
+                                                        {{auctionType | translate}} </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">{{
@@ -790,7 +797,7 @@
                                                         translate
                                                         }}</label>
                                                     <div class="text-success">
-                                                        {{upcomingAuction.auction_detail?.BiddingMethod}} </div>
+                                                        {{auctionBiddingMethod | translate}} </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -863,7 +870,7 @@
                                                                 <li class="text-muted">
                                                                     <span
                                                                         style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.auction_detail?.auctionStartTime}}
-                                                                        {{upcomingAuction.auction_detail?.biddingBeginstimeSufix}}</span>
+                                                                        {{bidBegginingSuffix | translate}}</span>
 
                                                                 </li>
                                                             </ul>
@@ -882,7 +889,7 @@
                                                                 <li class="text-muted">
                                                                     <span
                                                                         style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.auction_detail?.auctionEndTime}}
-                                                                        {{upcomingAuction.auction_detail?.end_biddingtimeSufix}}</span>
+                                                                        {{impEndBidSuffix | translate}}</span>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -895,7 +902,7 @@
                                                             |
                                                             translate }}</label>
                                                         <div class="text-success">
-                                                            {{upcomingAuction.auction_detail?.startAuction}} </div>
+                                                            {{startAuctionMethod | translate}} </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -912,7 +919,7 @@
                                                                 <li class="text-muted">
                                                                     <span
                                                                         style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.auction_detail?.auctionAnncStartTime}}
-                                                                        {{upcomingAuction.auction_detail?.biddingBeginstimeSufix}}</span>
+                                                                        {{ bidBegginingSuffix | translate}}</span>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -1001,18 +1008,18 @@
                                                         <thead>
                                                             <tr class="btn-primary-light">
                                                                 <th class="th-serials" scope="col"
-                                                                    (click)="sortByTableHeaderId(0, 'string')">
-                                                                    <span>{{
-                                                                        'bidderAuctionDetails.auction-details.Attached'
-                                                                        |
-                                                                        translate }}</span><span class="sort"><span
+                                                                    (click)="sortByTableHeaderId(0, 'numeric')">
+                                                                    <span>{{'bidderAuctionDetails.auction-details.Attached'
+                                                                        | translate }}</span><span class="sort"><span
+                                                                            class="sort-none"
                                                                             [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                                                 </th>
-                                                                <th class="" scope="col"><span>{{
+                                                                <th class="" scope="col"
+                                                                    (click)="sortByTableHeaderId(1, 'string')"><span>{{
                                                                         'bidderAuctionDetails.auction-details.AttachmentName'
-                                                                        |
-                                                                        translate }}</span><span class="sort"><span
-                                                                            class="sort-none"></span></span>
+                                                                        | translate }}</span><span class="sort"><span
+                                                                            class="sort-none"
+                                                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                                                 </th>
                                                                 <th class="th-action" scope="col"></th>
                                                             </tr>
@@ -1053,8 +1060,9 @@
                                                             <ng-container>
                                                                 <tr
                                                                     *ngFor="let file of transformedAttachment; let index=index">
-                                                                    <ng-container>
-                                                                        <td>{{index+1}}</td>
+                                                                    <ng-container
+                                                                        *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
+                                                                        <td>{{file.index+1}}</td>
                                                                         <td>
                                                                             <div class="text-capitalize text-success">
                                                                                 <span
@@ -1095,30 +1103,34 @@
                                                             </ng-container>
                                                         </tbody>
                                                     </table>
-                                                    <!-- <div *ngIf="auctionItem.auctionAttachement.length > 10" class="mt-4 row justify-content-end">
+                                                    <div *ngIf="transformedAttachment.length > 10"
+                                                        class="mt-4 row justify-content-end">
                                                         <div class="mb-5">
                                                             <nav aria-label="..." class="nav-pagination">
                                                                 <ul class="pagination">
                                                                     <li class="page-item clickable" disabled
                                                                         [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
-                                                                        <a (click)="navigateToPage(pageRangeForAttach.currentPage -1, 'auctionAttach')"
+                                                                        <a (click)="navigateToPage(pageRangeForAttach.currentPage -1)"
                                                                             class="page-link" aria-disabled="true">{{
-                                                                            'auctionlist.grid-previous' | translate }}</a>
+                                                                            'auctionlist.grid-previous' | translate
+                                                                            }}</a>
                                                                     </li>
-                                                                    <li *ngFor="let page of pageRangeForAttach.pages" class="page-item"
-                                                                        [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
-                                                                        <a (click)="navigateToPage(page, 'auctionAttach')" class="page-link"> {{
-                                                                            page }} </a>
+                                                                    <li *ngFor="let page of pageRangeForAttach.pages"
+                                                                        class="page-item"
+                                                                        [ngClass]="{active: pageRangeForAttach.currentPage===page}">
+                                                                        <a (click)="navigateToPage(page)"
+                                                                            class="page-link">{{page}}</a>
                                                                     </li>
                                                                     <li class="page-item clickable" disabled
                                                                         [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
-                                                                        <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1, 'auctionAttach')"
-                                                                            class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
+                                                                        <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1)"
+                                                                            class="page-link">{{ 'auctionlist.grid-next'
+                                                                            | translate }}</a>
                                                                     </li>
                                                                 </ul>
                                                             </nav>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

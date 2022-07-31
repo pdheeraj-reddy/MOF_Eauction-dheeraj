@@ -59,6 +59,15 @@ export class AuctionDetailsComponent implements OnInit {
   transformedAttachment: any = [];
   textDir: boolean;
   currentLang: any;
+  auctionBiddingStatus: any;
+  auctionBiddingMethod: any;
+  startAuctionMethod: any;
+  auctionType: any;
+  bidBegginingSuffix: any;
+  endBiddingSuffix: any;
+  openBidSuffix: any;
+  impEndBidSuffix: any;
+  auctionStartSuffix: any;
   // User role
   role = {
     bidder: false,
@@ -78,6 +87,7 @@ export class AuctionDetailsComponent implements OnInit {
     terminated: false
   }
   products: any[] = [];
+  columnLst = ['index', 'name'];
   dropValProducts = [
     { code: "Public", disp: "Public" },
     { code: "Private", disp: "Private" }
@@ -102,6 +112,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   userRole: any;
   showFileError: boolean = false;
+  pageRangeForAttach: any;
 
   slidesStore: any = [];
   statusData: any = [];
@@ -165,6 +176,7 @@ export class AuctionDetailsComponent implements OnInit {
     console.log("this.auctionId", this.auctionId);
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
+
 
     // this.getupcomingAuctionList(1);
   }
@@ -295,6 +307,7 @@ export class AuctionDetailsComponent implements OnInit {
       // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 105 ~ this.upcomingAuction", this.auctionAttachment);
 
       if (this.auctionAttachment) {
+        let i = 0;
         this.auctionAttachment.forEach((value: any) => {
           const fileupload = {
             name: value.FileName + '.' + value.FileExt,
@@ -304,8 +317,10 @@ export class AuctionDetailsComponent implements OnInit {
             FilenetId: value.FilenetId,
             MIMEType: value.MIMEType,
             downloading: false,
+            index: i++
           };
           this.transformedAttachment.push(fileupload);
+          this.navigateToPage(1);
           if (value.ObjectType == '/AuctionProductImages') {
             const isExist = this.filenetImagesLst.filter((x: any) => x.ZzProductNo === value.ZzProductNo);
             if (isExist.length == 0) {
@@ -323,31 +338,39 @@ export class AuctionDetailsComponent implements OnInit {
       }
       if (this.upcomingAuction?.biddingStatus) {
         if (this.upcomingAuction?.biddingStatus == 'C') {
-          this.upcomingAuction.biddingStatus = 'Closed';
+          this.auctionBiddingStatus = 'Closed';
         }
         else if (this.upcomingAuction?.biddingStatus == 'D') {
-          this.upcomingAuction.biddingStatus = 'Direct';
+          this.auctionBiddingStatus = 'Direct';
         }
       }
 
       if (this.upcomingAuction.auction_detail?.BiddingMethod) {
         if (this.upcomingAuction.auction_detail?.BiddingMethod == 'C') {
-          this.upcomingAuction.auction_detail.BiddingMethod = 'Closed';
+          this.auctionBiddingMethod = 'Closed';
         }
         else if (this.upcomingAuction.auction_detail?.BiddingMethod == 'D') {
-          this.upcomingAuction.auction_detail.BiddingMethod = 'Direct';
+          this.auctionBiddingMethod = 'Direct';
         }
       }
 
       if (this.upcomingAuction.auction_detail?.startAuction) {
         if (this.upcomingAuction.auction_detail?.startAuction == 'T') {
-          this.upcomingAuction.auction_detail.startAuction = 'Automatic';
+          this.startAuctionMethod = 'Automatic';
         }
         else if (this.upcomingAuction.auction_detail?.startAuction == 'M') {
-          this.upcomingAuction.auction_detail.startAuction = 'Manual';
+          this.startAuctionMethod = 'Manual';
         }
       }
+
+      this.auctionType = this.upcomingAuction.auction_detail?.auctionType;
+      this.bidBegginingSuffix = this.upcomingAuction.auction_detail?.biddingBeginstimeSufix;
+      this.endBiddingSuffix = this.upcomingAuction.important_info?.end_biddingtimeSufix;
+      this.openBidSuffix = this.upcomingAuction.important_info?.open_biddingtimeSufix;
+      this.impEndBidSuffix = this.upcomingAuction.auction_detail?.end_biddingtimeSufix;
+      this.auctionStartSuffix = this.upcomingAuction.auctionStartstimeSufix;
     });
+
   }
   refreshCalendarCntrl() {
     setTimeout(() => {
@@ -661,7 +684,8 @@ export class AuctionDetailsComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.transformedAttachment, this.columnLst[columnId]);
   }
   isSorting(columnId: number) {
     return this.PaginationServc.columnId !== columnId;
@@ -887,4 +911,24 @@ export class AuctionDetailsComponent implements OnInit {
       this.imageSlide.nativeElement.scrollTo({ left: (this.imageSlide.nativeElement.scrollLeft + 150), behavior: 'smooth' });
     }
   }
+
+
+  navigateToPage(pageNoVal: number) {
+    this.PaginationServc.setPagerValues(
+      this.transformedAttachment.length,
+      this.pagelimit,
+      pageNoVal
+    );
+    this.pageRangeForAttach = {
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
+      rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
+      pages: this.PaginationServc.pages,
+      currentPage: this.PaginationServc.currentPage,
+      totalPages: this.PaginationServc.totalPages,
+    }
+
+
+  }
 }
+
+

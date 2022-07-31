@@ -183,24 +183,7 @@
     background-color: #ffff;
 }
 
-.page-item {
-    color: #ffff;
-}
 
-.page-link {
-    color: #ffff;
-    background-color: transparent;
-}
-
-.page-link:hover {
-    background-color: #ffff;
-    color: #32ad71;
-}
-
-.page-item .dot-link:hover {
-    background-color: #ffff;
-    color: #32ad71;
-}
 
 .point-circle {
     display: flex;
@@ -333,6 +316,7 @@
 ::ng-deep .etimad-option {
     margin-left: 0 !important;
     margin-right: 0 !important;
+    background-color: #f9fcfa !important;
     // padding: 0 !important;
 }
 
@@ -423,6 +407,10 @@ ul.thumbs {
     ::-webkit-scrollbar {
         display: none;
     }
+}
+
+.clickable:not(:disabled) {
+    color: #32AD71;
 }
 
 // }
