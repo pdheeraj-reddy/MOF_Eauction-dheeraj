@@ -159,11 +159,12 @@ export class AuctionDetailsComponent implements OnInit {
     this.role.auctionMod = this.currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
     this.role.bidder = this.currentUser.isBidder;
-    // if(this.role.bidder){
-    //   this.role.auctionCommitteeHead = 
-    // }
-    // this.role.auctionCommitteeHead = true;
-    // Need role for bidder -- (Change to true if you want to check for bidder)
+    // To by pass the bidder role (Below if should be removed if we get the bidder with correct role)
+    if(this.role.bidder){
+      this.role.auctionCommitteeHead = false;
+      this.role.auctionMod = false;
+    }
+    // End
     console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 107 ~ this.role", this.role);
     this.currentLang = localStorage.getItem('lang_pref');
     if (this.currentLang == 'en') {
