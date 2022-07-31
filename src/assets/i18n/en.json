@@ -62,7 +62,8 @@
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
     "header": {
         "main-menu1": "Auctions",
-        "main-menu2": "Online Auction Requests"
+        "main-menu2": "Online Auction Requests",
+        "logout":"Log out"
     },
     "common": {
         "ftrtext-copyright": "All rights reserved to the Ministry of Finance",
@@ -882,8 +883,8 @@
         "tab1": "All",
         "tab2": "Ongoing Auction",
         "tab3": "Upcoming Auction",
-        "tab4": "Under Gear",
-        "tab5": "Ended Auction",
+        "tab4": "Pending Selecting",
+        "tab5": "Closed Auctions",
         "filter": "FILTERS",
         "status": "Status",
         "type": "Type",
@@ -1048,7 +1049,7 @@
         "Auction-formDate-pholder": "day - month - year",
         "AuctionEndDate": "Auction end date",
         "filter-title": "Filter",
-        "filter-btn1": "Filter",
+        "filter-btn1": "Search",
         "filter-btn2": "Reset",
         "filter-actionname-pholder": "Enter the Auction Name",
         "grid-previous": "Previous",

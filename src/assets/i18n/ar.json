@@ -9,7 +9,7 @@
     "Rejected Prices": "معاد لتعديل التسعير",
     "Upcoming Auction": "المزاد القادم",
     "Under Gear": "تحت العتاد",
-    "Upcoming": "القادمة",
+    "Upcoming": "مزاد قادم",
     "Ongoing": "جاري التنفيذ",
     "Terminated": "تم إنهاؤه",
     "Pending FBGA Approval": "في انتظار موافقة FBGA",
@@ -61,7 +61,8 @@
     "changes_not_saved": "قد لا يتم حفظ التغييرات التي قمت بإجرائها. هل ما زلت تريد التنقل؟",
     "header": {
         "main-menu1": "المزادات",
-        "main-menu2": "طلبات المزاد الالكتروني"
+        "main-menu2": "طلبات المزاد الالكتروني",
+        "logout": "تسجيل خروج"
     },
     "common": {
         "ftrtext-copyright": "جميع الحقوق محفوظة للوزارة المالية",
@@ -700,8 +701,8 @@
         "bcrumb1": "خدمات اعتماد",
         "bcrumb2": "المزادات",
         "pageTitle": "المزادات",
-        "tab1": "الجميع",
-        "tab2": "مزادات جارية ",
+        "tab1": "الكل",
+        "tab2": "مزادات جارية",
         "tab3": "مزادات قادمة",
         "tab4": "تحت الترسية",
         "tab5": "مزادات منتهية",
@@ -1044,9 +1045,9 @@
         "AuctionStartDate": "Auction start date",
         "Auction-formDate-pholder": "day - month - year",
         "AuctionEndDate": "Auction end date",
-        "filter-title": "Filter",
-        "filter-btn1": "Filter",
-        "filter-btn2": "Reset",
+        "filter-title": "البحث",
+        "filter-btn1": "بحث",
+        "filter-btn2": "إعادة تعيين",
         "filter-actionname-pholder": "Enter the Auction Name",
         "grid-previous": "Previous",
         "grid-next": "Next One",
