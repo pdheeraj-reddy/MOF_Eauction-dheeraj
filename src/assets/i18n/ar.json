@@ -9,7 +9,7 @@
     "Rejected Prices": "معاد لتعديل التسعير",
     "Upcoming Auction": "المزاد القادم",
     "Under Gear": "تحت العتاد",
-    "Upcoming": "القادمة",
+    "Upcoming": "مزاد قادم",
     "Ongoing": "جاري التنفيذ",
     "Terminated": "تم إنهاؤه",
     "Pending FBGA Approval": "في انتظار موافقة FBGA",
@@ -61,7 +61,8 @@
     "changes_not_saved": "قد لا يتم حفظ التغييرات التي قمت بإجرائها. هل ما زلت تريد التنقل؟",
     "header": {
         "main-menu1": "المزادات",
-        "main-menu2": "طلبات المزاد الالكتروني"
+        "main-menu2": "طلبات المزاد الالكتروني",
+        "logout": "تسجيل خروج"
     },
     "common": {
         "ftrtext-copyright": "جميع الحقوق محفوظة للوزارة المالية",
@@ -700,8 +701,8 @@
         "bcrumb1": "خدمات اعتماد",
         "bcrumb2": "المزادات",
         "pageTitle": "المزادات",
-        "tab1": "الجميع",
-        "tab2": "مزادات جارية ",
+        "tab1": "الكل",
+        "tab2": "مزادات جارية",
         "tab3": "مزادات قادمة",
         "tab4": "تحت الترسية",
         "tab5": "مزادات منتهية",
@@ -1044,9 +1045,9 @@
         "AuctionStartDate": "Auction start date",
         "Auction-formDate-pholder": "day - month - year",
         "AuctionEndDate": "Auction end date",
-        "filter-title": "Filter",
-        "filter-btn1": "Filter",
-        "filter-btn2": "Reset",
+        "filter-title": "البحث",
+        "filter-btn1": "بحث",
+        "filter-btn2": "إعادة تعيين",
         "filter-actionname-pholder": "Enter the Auction Name",
         "grid-previous": "Previous",
         "grid-next": "Next One",
@@ -1068,30 +1069,5 @@
         "my_auction": " مزاداتي",
         "invitation": "دعوات المزاد",
         "my_invoices": "الفواتير"
-    },
-    "open_offer": {
-        "adoption_of_awarding": "اعتماد ترسية العرض رقم 1؟",
-        "upon_confirmation": "عند التأكيد سيتم اعتماد الترسية المبدئية وإرسالها للإعتماد النهائي",
-        "gear_adoption": "اعتماد الترسية",
-        "the_award_has_been_successfully_approved": "تم اعتماد الترسية بنجاح",
-        "the_initial_award": "سوف يتم إرسال الترسية المبدئية للإعتماد النهائي مع تقرير",
-        "auction_and_all_bids_submitted": "المزاد وجميع العروض المقدمة",
-        "this_offer_cannot_be_awarded.": "لايمكن ترسية هذا العرض. ",
-        "less_than_estimation": "لا يمكن اختيار هذا العرض حيث ان السعر المقدم اقل من السعر المقدر من لجنة التسعير وحسب تعليمات المزاد: في حال عدم تحقيق الحد الأدنى للسعر التقديري للمنتجات لا يتم ترسية المزاد.",
-        "confirm_that_the_auction_was_not_awarded": "تأكيد عدم ترسية المزاد",
-        "reject_confirmation": "هل انت متاكد من رفض الترسية؟ ",
-        "are_you_sure_of_the_rejection_of_the_award": "عند التأكيد سوف يتم شطب مقدم العرض من القائمة.",
-        "rejection_reason": "سبب الرفض",
-        "rejection_confirmation": "تأكيد الرفض",
-        "rejection_sent_successfully": "تم إرسال الرفض بنجاح ",
-        "refuse_reason_placeholder": "الرجاء إدخال سبب الرفض…"
-    },
-    "sprint3_auction_detail": {
-        "your_bid_has_been_awarded!": "تمت الترسية على عرضك!",
-        "please_attach_the_final_guarantee": "الرجاء إرفق الضمان النهائيلإعتماد الترسية المبدئية",
-        "please_issue_and_attach": "الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك",
-        "issuance_of_the_final_guarantee": "إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد",
-        "send_the_final_guarantee": "إرسال الضمان النهائي",
-        "auction_report_and_bid_submitted": "تقرير المزاد والعطاء المقدم PDF"
     }
 }
