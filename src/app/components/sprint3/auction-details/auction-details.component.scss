@@ -388,18 +388,23 @@ ul.thumbs {
 }
 
 .prev {
-    left: 0;
+    left: 10px;
     position: absolute;
+    z-index: 999;
 }
 
 .next {
-    right: 0;
+    right: 10px;
     position: absolute;
+    z-index: 999;
 }
 
 .thumbs {
     display: flex;
     align-items: center;
+    left: 0 !important;
+    right: 0 !important;
+    // background: gray !important;
 }
 
 .opacity-0-5 {

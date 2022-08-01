@@ -162,21 +162,24 @@ ul.thumbs {
 .next {
     height: unset;
     padding: 0;
+    z-index: 999;
+    position: absolute;
 }
 
 .prev {
-    left: 0;
-    position: absolute;
+    left: 10px;
 }
 
 .next {
-    right: 0;
-    position: absolute;
+    right: 10px;
 }
 
 .thumbs {
     display: flex;
     align-items: center;
+    left: 0 !important;
+    right: 0 !important;
+    // background: gray !important;
 }
 
 .opacity-0-5 {

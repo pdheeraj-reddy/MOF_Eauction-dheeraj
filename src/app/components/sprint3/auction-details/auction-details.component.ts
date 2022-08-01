@@ -121,7 +121,7 @@ export class AuctionDetailsComponent implements OnInit {
   fullImage: any;
   filenetImagesLst: any = [];
   showLoaderMainImage: boolean = true;
-  showLoaderSubImage: boolean = true;
+  showLoaderSubImage: boolean = false;
   showVideo: boolean = true;
   customOptions: OwlOptions = {
     items: 4,
@@ -300,6 +300,7 @@ export class AuctionDetailsComponent implements OnInit {
         // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 246 ~ this.products", this.products);
         // console.log(this.products)
       });
+      console.log('this.filenetImagesLst: ', this.products);
 
       this.auctionAttachment = this.upcomingAuction.auction_detail?.auctionAttachement;
       // console.log("🚀 ~ this.bidderService.getAuctionDetail ~ this.auctionAttachment", this.auctionAttachment)
@@ -331,10 +332,12 @@ export class AuctionDetailsComponent implements OnInit {
             }
           }
         });
+        console.log('this.filenetImagesLst: ', this.filenetImagesLst);
         this.filenetImagesLst.forEach((element: any) => {
           this.downloadImages(element);
         })
       }
+
       if (this.filenetImagesLst.length == 0) {
         this.showLoaderMainImage = false;
         this.showLoaderSubImage = false;
@@ -858,16 +861,19 @@ export class AuctionDetailsComponent implements OnInit {
       });
       console.log("auctionAttachment this.slidesStore", this.slidesStore)
       if (this.slidesStore.length == this.filenetImagesLst.length) {
+        this.manageEmptyImageProduct();
         this.showLoaderSubImage = false;
       }
 
       if (this.slidesStore.length == 1) {
         this.fullImage = {
+          id: this.slidesStore[0].id,
           src: this.slidesStore[0].src,
           type: this.slidesStore[0].type
         }
         this.selectedProduct = this.slidesStore[0].id;
         // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 697 ~ this.selectedProduct", this.selectedProduct);
+        this.showLoaderSubImage = true;
         this.showLoaderMainImage = false;
       }
     },
@@ -877,11 +883,28 @@ export class AuctionDetailsComponent implements OnInit {
     );
   }
 
+  manageEmptyImageProduct() {
+    this.products.forEach(product => {
+      const isExist = this.slidesStore.filter((x: any) => x.id === product.productNo);
+      if (isExist.length == 0) {
+        this.slidesStore.push({
+          id: product.productNo,
+          src: 'assets/icons/no-image.svg',
+          alt: 'test',
+          title: 'hello world',
+          type: 'image/png'
+        })
+      }
+    });
+    console.log('this.slidesStore: ', this.slidesStore);
+    console.log('this.slidesStore: ', this.products);
+  }
+
   viewItem(a: any) {
-    // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 612 ~ a", a);
     this.selectedProduct = a.id;
     this.showVideo = false;
     this.fullImage = {
+      id: a.id,
       src: a.src,
       type: a.type
     }

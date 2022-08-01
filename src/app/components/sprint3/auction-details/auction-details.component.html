@@ -391,7 +391,7 @@
 
                                             <div class="thumbs-container bottom">
                                                 <div id="prev-btn" class="prev" (click)="scrollImageSlider('left')">
-                                                    <i class="icon-arrow_left"></i>
+                                                    <i class="icon-arrow_left" style="color:white"></i>
                                                 </div>
 
                                                 <ul class="thumbs">
@@ -402,11 +402,11 @@
                                                     <div style="display:flex;overflow-x: auto;overflow-y: hidden;"
                                                         #imageSlide>
                                                         <ng-container *ngFor="let slide of slidesStore">
-                                                            <div [id]="slide.id" class="p-1 opacity-0-5"
-                                                                [ngClass]="{'opacity-1': slide.src == fullImage.src}">
+                                                            <div [id]="slide.id" class="opacity-0-5"
+                                                                [ngClass]="{'opacity-1': slide.id == fullImage.id}">
                                                                 <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
                                                                 <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'"
-                                                                    class="img-fluid rounded" [src]="slide.src"
+                                                                    class="img-fluid" [src]="slide.src"
                                                                     style="width:70px;height: 50px;min-width:70px;"
                                                                     [alt]="slide.alt" [title]="slide.title" width="70px"
                                                                     (click)="viewItem(slide)" />
@@ -479,7 +479,7 @@
                                                 </ul>
 
                                                 <div id="next-btn" class="next" (click)="scrollImageSlider('right')">
-                                                    <i class="icon-arrow_right"></i>
+                                                    <i class="icon-arrow_right" style="color:white"></i>
                                                 </div>
                                             </div>
                                         </div>
