@@ -12,6 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AuctionCountdownTimerComponent implements OnInit {
 
   @Input() timestamp: number;
+  @Input() showText : string;
 
   constructor() { }
 
