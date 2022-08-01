@@ -5,7 +5,7 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { BidderService } from '../../services/bidder.service';
 import { CommitteeHeadService } from '../../services/committee-head.service';
 import * as moment from 'moment';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { AuctionService } from 'src/app/service/auction.service';
 import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
@@ -46,7 +46,6 @@ export class OpenOffersComponent implements OnInit {
   columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo'];
   pageRangeForAttach: any;
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     public PaginationServc: PaginationSortingService,
     public bidderService: BidderService,
@@ -54,26 +53,22 @@ export class OpenOffersComponent implements OnInit {
     public location: Location,
     public auctionServc: AuctionService,
     public translate: TranslateService,
+    public datepipe: DatePipe,
   ) { }
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
-    this.getOffersData(1);
+    this.getOffersData();
     this.refreshCalendarCntrl()
   }
 
-  getOffersData(pageNumber: number) {
-    const page = {
-      pageNumber: pageNumber,
-      pageLimit: this.pagelimit
-    };
+  getOffersData() {
     this.showLoader = true;
     this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
       this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
       localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
       this.mapping(res.body);
     });
-
   }
 
   public mapping(serverObj: any) {
@@ -83,13 +78,14 @@ export class OpenOffersComponent implements OnInit {
       let resultSet: any = [];
       if (results?.length) {
         results.forEach((result: any) => {
+          let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
           const items = {
             serialNo: result['Sno'] ? result['Sno'] : '-',
             offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
             BidderId: result['BidderId'] ? result['BidderId'] : null,
             PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
-            submissionDate: result['DtTime'] ? result['DtTime'].split(' ')[0] : '-',
-            submissionTime: result['DtTime'] ? result['DtTime'].split(' ')[1] : '-',
+            submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
+            submissionTime: this.timeTransform(result['DtTime']),
             facilityName: result['BidderName'] ? result['BidderName'] : '-',
             FileName: result['FileName'] ? result['FileName'] : '',
             commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
@@ -105,6 +101,18 @@ export class OpenOffersComponent implements OnInit {
       this.navigateToPage(1);
       console.log('this.openofferListData: ', this.openofferListData);
     }
+  }
+
+  timeTransform(time: any) {
+    var d = new Date(time.replace(/(\d{2}).(\d{2}).(\d{4})/, "$2/$1/$3"));
+    let hour: any = d.getHours();
+    let min: any = d.getMinutes()
+    let part = hour >= 12 ? 'pm' : 'am';
+    hour = hour % 12;
+    hour = hour ? hour : 12; // the hour '0' should be '12'
+    min = min < 10 ? '0' + min : min;
+    var strTime = hour + ':' + min + ' ' + part;
+    return strTime;
   }
 
   viewAttachment(file: any) {
@@ -138,22 +146,6 @@ export class OpenOffersComponent implements OnInit {
         }
       );
     }
-    // console.log(file);
-    // console.log(file.type);
-    // const fileType = file.name.split(".").pop()?.toLowerCase();
-    // var byteString = atob(file.filesrc['0'].split(',')[1]);
-    // var ab = new ArrayBuffer(byteString.length);
-    // var ia = new Uint8Array(ab);
-    // for (var i = 0; i < byteString.length; i++) {
-    //     ia[i] = byteString.charCodeAt(i);
-    // }
-    // const blob = new Blob([ab], { type: file.type });
-    // let fileURL = window.URL.createObjectURL(blob);
-    // if((file.type.indexOf('image')> -1) || (file.type.indexOf('video')> -1) || fileType === 'docx' || fileType === 'doc'|| fileType === 'pdf'){
-    //   console.log();
-    //   this.showViewAttachmentsModal = false;
-    //   window.open(fileURL, '_blank');
-    // }
   }
 
   checkOffer(data: any) {
@@ -258,18 +250,6 @@ export class OpenOffersComponent implements OnInit {
   changeSelect(e: any, dd: string) {
     console.log('changeSelect');
     console.log(e.target.value);
-  }
-
-  public getServerData(selectedPageNumber: number) {
-
-    if (selectedPageNumber <= 2) {
-      selectedPageNumber = 1;
-    } else {
-      selectedPageNumber = selectedPageNumber - 1;
-    }
-    this.getOffersData(selectedPageNumber);
-    window.scrollTo(0, 100);
-    this.PaginationServc.resetSorting();
   }
 
   back() {

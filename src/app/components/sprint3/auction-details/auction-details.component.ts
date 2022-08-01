@@ -653,7 +653,7 @@ export class AuctionDetailsComponent implements OnInit {
       BidType: this.filterFormGroup.controls['auctionType'].value ? (this.filterFormGroup.controls['auctionType'].value === 'Public' ? 'O' : 'C') : '',
       myAuction: this.filterFormGroup.controls['myAuction'].value ? this.filterFormGroup.controls['myAuction'].value : '',
     };
-    this.bidderService.getOfferList(page, filters, '9700000300').subscribe((res: any) => {
+    this.bidderService.getOfferList(this.auctionId).subscribe((res: any) => {
       this.showLoader = false;
 
       localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));

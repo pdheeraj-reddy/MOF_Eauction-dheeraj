@@ -1,24 +1,25 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { OfferReport } from 'src/app/model/auction.model';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { BidderService } from '../../services/bidder.service';
-
+import { CommitteeHeadService } from '../../services/committee-head.service';
+declare var $: any;
 @Component({
   selector: 'app-offer-report',
   templateUrl: './offer-report.component.html',
   styleUrls: ['./offer-report.component.scss']
 })
 export class OfferReportComponent implements OnInit {
-  editmode1: boolean = false;
-  editmode2: boolean = false;
-  editmode3: boolean = true;
-  editmode4: boolean = false;
 
+  @Input() auctionId: string;
+
+  openofferListData: any;
+  copyOpenofferListData: any;
   showLoader: boolean = true;
-
+  auctionReport: any;
   offerListData: any;
   selectedPageNumber: number;
   pagelimit: number = 10;
@@ -29,68 +30,72 @@ export class OfferReportComponent implements OnInit {
   //filter Form controls
   showFilterForm: boolean = false;
   dropValType: any = [];
-  dropValProducts = [
-    { code: "Public", disp: "Public" },
-    { code: "Private", disp: "Private" }
-  ];
-  dropValStatus = [
-    { code: "Published", disp: "Published" },
-    { code: "Ongoing", disp: "Ongoing" },
-    { code: "Pending Selecting", disp: "Pending Selecting" },
-    { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
-    { code: "Pending FBGA", disp: "Pending FBGA" },
-    { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
-    { code: "Awarded", disp: "Awarded" },
-    { code: "Terminated", disp: "Terminated" },
-  ];;
-  offerReport: OfferReport = new OfferReport();
   filterFormGroup: FormGroup;
+  filterModel = {
+    offer_value: '',
+    facility_name: '',
+    submission_date: '',
+    commercial_ref: '',
+  }
+  spinner: boolean = false;
+  columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo'];
+  pageRangeForAttach: any;
   constructor(
     public datepipe: DatePipe,
     private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService,
     public translate: TranslateService,
     public bidderService: BidderService,
+    public committeeHeadService: CommitteeHeadService,
   ) { }
 
   ngOnInit(): void {
-    this.defineForm();
-    this.getOfferList(1);
+    this.getOffersData();
+    this.refreshCalendarCntrl()
   }
-  defineForm() {
-    this.filterFormGroup = this.formBuilder.group({
-      auctionStatus: new FormControl(''),
-      auctionType: new FormControl(''),
-      myAuction: new FormControl(''),
+
+
+  getOffersData() {
+    this.showLoader = true;
+    this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
+      this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+      localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
+      this.mapping(res.body);
     });
   }
+
   public mapping(serverObj: any) {
-    this.offerReport = {
-      auctionSetting: {
-        bitsNo: serverObj.d.results[0].bitsNo,
-        participants: serverObj.d.results[0].participants,
-      },
-      auctionReport: serverObj.d.results[0].auctionReport,
-      offerList: []
-    };
-    if (serverObj.d.results[0].offer_report) {
-      serverObj.d.results[0].offer_report.forEach((result: any) => {
-        let date = result['submission_date'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
-        const items = {
-          referenceNo: result['ObjectId'] ? result['ObjectId'] : '',
-          offervalue: result['offervalue'] ? result['offervalue'] : '',
-          filename: result['filename'] ? result['filename'] : '',
-          fileurl: result['fileurl'] ? result['fileurl'] : '',
-          submission_date: this.datepipe.transform(date, 'yyyy-MM-dd'),
-          submission_time: this.timeTransform(result['submission_date']),
-          facility_name: result['facility_name'] ? result['facility_name'] : '',
-          commercialRegNo: result['commercialRegNo'] ? result['commercialRegNo'] : '',
-        }
-        this.offerReport.offerList?.push(items);
-      });
+    if (serverObj.d.results?.length) {
+      let results = serverObj.d.results;
+      console.log('results: ', results);
+      let resultSet: any = [];
+      if (results?.length) {
+        results.forEach((result: any) => {
+          let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
+          const items = {
+            serialNo: result['Sno'] ? result['Sno'] : '-',
+            offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
+            BidderId: result['BidderId'] ? result['BidderId'] : null,
+            PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
+            submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
+            submissionTime: this.timeTransform(result['DtTime']),
+            facilityName: result['BidderName'] ? result['BidderName'] : '-',
+            FileName: result['FileName'] ? result['FileName'] : '',
+            commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
+            downloadingAttachmet: false
+          };
+          resultSet.push(items);
+        });
+      }
+      this.showLoader = false;
+      this.openofferListData = resultSet;
+      this.copyOpenofferListData = resultSet;
+      this.navigateToPage(1);
+      console.log('this.openofferListData: ', this.openofferListData);
     }
-    console.log(this.offerReport);
   }
+
+
   timeTransform(time: any) {
     var d = new Date(time.replace(/(\d{2}).(\d{2}).(\d{4})/, "$2/$1/$3"));
     let hour: any = d.getHours();
@@ -102,52 +107,6 @@ export class OfferReportComponent implements OnInit {
     var strTime = hour + ':' + min + ' ' + part;
     return strTime;
   }
-  getOfferList(pageNumber?: number) {
-    this.showLoader = true;
-    const page = {
-      pageNumber: pageNumber,
-      pageLimit: this.pagelimit
-    };
-    let filters = {
-      Status: this.filterFormGroup.controls['auctionStatus'].value ? this.filterFormGroup.controls['auctionStatus'].value : '',
-      BidType: this.filterFormGroup.controls['auctionType'].value ? (this.filterFormGroup.controls['auctionType'].value === 'Public' ? 'O' : 'C') : '',
-      myAuction: this.filterFormGroup.controls['myAuction'].value ? this.filterFormGroup.controls['myAuction'].value : '',
-    };
-    this.bidderService.getOfferList(page, filters, '9700000300').subscribe((res: any) => {
-      this.showLoader = false;
-
-      localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-      this.offerListData = this.mapping(res.body);
-
-    }, (error) => {
-      this.showLoader = false;
-      console.log('getOfferList RespError : ', error);
-    });
-    // this.mapping(res.body);
-  }
-  auctionSettings(type: string) {
-    if (type == "auctionDetail") {
-      this.editmode1 = true;
-      this.editmode2 = false;
-      this.editmode3 = false;
-      this.editmode4 = false;
-    } else if (type == 'auctionInstruction') {
-      this.editmode1 = false;
-      this.editmode2 = true;
-      this.editmode3 = false;
-      this.editmode4 = false;
-    } else if (type == 'auctionCommittee') {
-      this.editmode1 = false;
-      this.editmode2 = false;
-      this.editmode3 = false;
-      this.editmode4 = true;
-    } else {
-      this.editmode1 = false;
-      this.editmode2 = false;
-      this.editmode3 = true;
-      this.editmode4 = false;
-    }
-  }
 
   // download report
   downloadReport(data: any) {
@@ -156,25 +115,39 @@ export class OfferReportComponent implements OnInit {
     const url = window.URL.createObjectURL(blob);
     window.open(url);
   }
-  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
-  }
 
-  /** Populating the table */
-  public getServerData(selectedPageNumber: number) {
-
-    if (selectedPageNumber <= 2) {
-      selectedPageNumber = 1;
-    } else {
-      selectedPageNumber = selectedPageNumber - 1;
+  viewAttachment(file: any) {
+    if (file.PdfContent) {
+      file.downloadingAttachmet = true;
+      this.committeeHeadService.downloadAuctionImages(file.PdfContent).subscribe((downloadAuctionImagesResp: any) => {
+        console.log(downloadAuctionImagesResp);
+        const fileResp = downloadAuctionImagesResp.d;
+        var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
+        console.log('asdasd', byteString.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([ab], { type: 'application/pdf' });
+        let fileURL = window.URL.createObjectURL(blob);
+        console.log('fileURL ', fileURL);
+        var newWin: any;
+        newWin = window.open(fileURL, '_blank');
+        // newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
+        if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined')) {
+          alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+        }
+        file.downloadingAttachmet = false;
+        // window.open(fileContent, "_blank");
+      },
+        (error) => {
+          file.downloadingAttachmet = false;
+          console.log('downloadAuctionImages RespError : ', error);
+        }
+      );
     }
-    this.selectedPageNumber = selectedPageNumber;
-
-    this.getOfferList(selectedPageNumber);
-    this.PaginationServc.resetSorting();
   }
-
-  // -------------------------------------- filter code -------------------------------- 
 
 
   public toggleFilter() {
@@ -182,39 +155,96 @@ export class OfferReportComponent implements OnInit {
     this.showFilterForm = !this.showFilterForm;
   }
 
-  applyFilter() {
-    this.filterFormGroup.controls['status'].setValue('');
-    this.filterFormGroup.controls['type'].setValue('');
-    this.filterFormGroup.controls['myAuction'].setValue('');
-    this.getOfferList(1);
-  }
-
-  get form(): { [key: string]: AbstractControl } {
-    return this.filterFormGroup.controls;
-  }
-
-
   resetFilter() {
-    this.filterFormGroup.controls['auctionStatus'].setValue('');
-    this.filterFormGroup.controls['auctionType'].setValue('');
-    this.filterFormGroup.controls['myAuction'].setValue('');
+    this.filterModel = {
+      offer_value: '',
+      facility_name: '',
+      submission_date: '',
+      commercial_ref: '',
+    }
+    this.refreshCalendarCntrl()
+    this.openofferListData = this.copyOpenofferListData;
   }
 
-  changeCheckbox(e: any, dd: string) {
-    if (e.target.checked) {
-      this.filterFormGroup.controls[dd].setValue(e.target.value, {
-        onlySelf: true
+  applyFilter() {
+    this.openofferListData = this.copyOpenofferListData;
+    if (this.filterModel.offer_value) {
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        if (i.offerValue.toLowerCase().indexOf(this.filterModel.offer_value.toLowerCase()) > -1) return true;
+        return false;
       })
-    } else {
-      this.filterFormGroup.controls[dd].setValue('', {
-        onlySelf: true
+    }
+    if (this.filterModel.facility_name) {
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        console.log(i.facilityName, this.filterModel.facility_name)
+        if (i.facilityName.toLowerCase().indexOf(this.filterModel.facility_name.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.commercial_ref) {
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        if (i.BidderId.toLowerCase().indexOf(this.filterModel.commercial_ref.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.submission_date) {
+      console.log('this.filterModel: ', this.filterModel);
+      this.openofferListData = this.openofferListData.filter((i: any) => {
+        if (i.submissionDate?.split('.')[0] === this.filterModel.submission_date?.split('-')[2]) return true;
+        return false;
       })
     }
   }
 
-  changeSelect(e: any, dd: string) {
-    this.filterFormGroup.controls[dd].setValue(e.target.value, {
-      onlySelf: true
-    })
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.openofferListData, this.columnLst[columnId]);
+  }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
+  }
+
+  navigateToPage(pageNoVal: number) {
+    this.PaginationServc.setPagerValues(this.openofferListData.length, this.pagelimit, pageNoVal);
+    this.pageRangeForAttach = {
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
+      rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
+      pages: this.PaginationServc.pages,
+      currentPage: this.PaginationServc.currentPage,
+      totalPages: this.PaginationServc.totalPages,
+    }
+  }
+
+  onChangeDate($event: any) {
+    this.filterModel.submission_date = $event.target.value;
+  }
+
+  refreshCalendarCntrl() {
+    let lang = this.translate.currentLang;
+    setTimeout(() => {
+      $("#submission_date").unbind().removeData();
+      $("#submission_date").hijriDatePicker({
+        hijri: false,
+        locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
+        format: "YYYY-MM-DD",
+        showSwitcher: false,
+        icons: {
+          previous: '<span class="icon-keyboard_arrow_left"></span>',
+          next: '<span class="icon-keyboard_arrow_right"></span>',
+        },
+      });
+      $("#submission_date").on('dp.change', function (arg: any) {
+        const v = new Event('change');
+        const e = document.querySelector("#submission_date");
+        e?.dispatchEvent(v);
+      });
+    }, 100);
   }
 } 

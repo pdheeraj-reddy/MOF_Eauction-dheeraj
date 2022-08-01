@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {
   MatDialog,
@@ -26,11 +26,11 @@ export class ProductDetailPopupComponent implements OnInit {
   fullImage: any;
   textDir = 'ltr';
   showLoader: boolean = false;
-  fetchPicture: boolean = true;
+  fetchPicture: boolean = false;
   pageRangeForAttach: any;
   activeIndex = -1;
   showVideo: boolean = true;
-
+  @ViewChild('imageSlide', { read: ElementRef }) public imageSlide: ElementRef<any>;
   constructor(
     public dialogRef: MatDialogRef<ProductDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
@@ -184,17 +184,16 @@ export class ProductDetailPopupComponent implements OnInit {
             type: index.MIMEType
           });
 
-          if (this.slidesStore.length == this.viewproduct.productImages.length) {
-            this.fetchPicture = false;
-          }
-
           if (this.slidesStore.length == 1) {
             this.fullImage = {
               src: this.slidesStore[0].src,
               type: this.slidesStore[0].type
             }
+            this.fetchPicture = true;
           }
-
+          if (this.slidesStore.length == this.viewproduct.productImages.length) {
+            this.fetchPicture = false;
+          }
           this.showLoader = false;
         },
         (error) => {
@@ -269,6 +268,14 @@ export class ProductDetailPopupComponent implements OnInit {
         console.log('fileURL', fileURL);
         window.open(fileURL, '_blank');
       }
+    }
+  }
+
+  scrollImageSlider(side: string) {
+    if (side == 'left') {
+      this.imageSlide.nativeElement.scrollTo({ left: (this.imageSlide.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+    } else if (side == 'right') {
+      this.imageSlide.nativeElement.scrollTo({ left: (this.imageSlide.nativeElement.scrollLeft + 150), behavior: 'smooth' });
     }
   }
 }

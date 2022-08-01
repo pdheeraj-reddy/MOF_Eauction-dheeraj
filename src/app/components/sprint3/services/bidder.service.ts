@@ -199,23 +199,17 @@ export class BidderService {
     return this.http.get<any>(this.envService.environment.apiBidderMyInvoices + "&$format=json", httpOptions)
   }
 
-  getOfferList(page: any, filters: any, auctionId: string): Observable<any> {
-    const pageLimit = page.pageLimit ? page.pageLimit : '10';
-    const pageNumber = page.pageNumber;
-    let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '');
+  getOfferList(auctionId: string): Observable<any> {
     const httpOptions = {
       headers: {
-        'x-csrf-token': 'fetch',
-        'X_User_Role': 'AuctionManager',
+        'x-csrf-token': 'fetch'
       },
       params: {
       },
       observe: 'response' as 'body'
     };
     return this.http.get<any>(
-      this.envService.environment.apiOfferReport.replace('{auctionId}', auctionId) +
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "'" + $filters + ")&$format=json"
-      , httpOptions);
+      this.envService.environment.apiOfferReport.replace('{auctionId}', auctionId), httpOptions);
   }
 
   getSendInvoice(auctionId: string) {
