@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SecurityContext, NgZone } from '@angular/core
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import * as moment from 'moment';
 import { BidderService } from 'src/app/components/sprint3/services/bidder.service';
 
 /**
@@ -42,6 +43,13 @@ export class AuctionCardComponent implements OnInit {
       this.downloadImages(this.auction.imgsrc);
     } else {
       this.auctionImg = 'assets/icons/logo-mini.svg'
+    }
+    if(this.auction.auctiontime){
+      var timeString = moment(this.auction.auctiontime).format('HH:mm:ss');
+      var H = +timeString.substr(0, 2);
+      var h = H % 12 || 12;
+      var ampm = (H < 12 || H === 24) ? " AM" : " PM";
+      this.auction.auctiontime = h + timeString.substr(2, 3) + ampm;
     }
   }
 
