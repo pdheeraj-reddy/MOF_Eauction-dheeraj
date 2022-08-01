@@ -522,9 +522,11 @@
                                         src="/assets/icons/auction-primary.svg" alt=""></span>&nbsp;&nbsp;
                                 {{'bidderAuctionDetails.BiddingIs' | translate }} {{auctionBiddingStatus | translate}}
                             </p>
-                            <!-- <div class="et-accordion">
-                                <div class="card" style="border: none; margin: 2%;">
-                                    <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
+                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published"
+                                class="et-accordion">
+                                <div class="card" style="border: none;">
+                                    <div class="card-header mt-4"
+                                        style="border-bottom: 1px solid #e3e3e3; border-radius: 0; padding: 0px !important; padding-left: 5px !important; padding-right: 5px !important; padding-bottom: 10px !important;"
                                         data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
                                         aria-controls="localContentFirst2">
                                         <h2 class="mb-0 text-body">{{'bidderAuctionDetails.ImportantInformation' |
@@ -538,10 +540,9 @@
                                             </div>
                                         </button>
                                     </div>
-                                    
-                                    <div *ngIf="role.auctionMod" class="collapse" id="localContentFirst2"
-                                        style="border-top: none;">
-                                        <div class="card-body">
+
+                                    <div class="collapse" id="localContentFirst2" style="border-top: none;">
+                                        <div class="card-body" style="padding: 0px; margin-top: 20px;">
                                             <div class="form-field">
                                                 <form class="needs-validation" novalidate>
                                                     <div class="form-row">
@@ -583,14 +584,14 @@
 
                                                     <div class="form-row">
                                                         <div *ngIf="upcomingAuction.important_info?.end_biddingdate"
-                                                            class="col-md-4 mb-3">
+                                                            class="col mb-3">
                                                             <div class="form-group">
                                                                 <label>{{ 'bidderAuctionDetails.EndOfBidding' |
                                                                     translate
                                                                     }}</label>
                                                                 <div class="row text-success">
                                                                     <span
-                                                                        class="col-md-6">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;
+                                                                        class="col-md-6">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">
@@ -606,14 +607,14 @@
                                                         </div>
 
                                                         <div *ngIf="upcomingAuction.important_info?.open_biddingdate"
-                                                            class="col-md-4 mb-3">
+                                                            class="col mb-3">
                                                             <div class="form-group">
                                                                 <label>{{ 'bidderAuctionDetails.BidOpeningDate' |
                                                                     translate
                                                                     }}</label>
                                                                 <div class="row text-success">
                                                                     <span
-                                                                        class="col-md-6">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;
+                                                                        class="col-md-6">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">
@@ -636,7 +637,7 @@
                                     </div>
                                 </div>
 
-                            </div> -->
+                            </div>
                         </div>
 
 
@@ -644,7 +645,8 @@
                     </div>
 
 
-                    <div *ngIf="!role.auctionMod" class="et-accordion">
+                    <div *ngIf="!((role.auctionMod || role.auctionCommitteeHead) && !status.published)"
+                        class="et-accordion">
                         <div class="card" style="border: none; margin: 2%;">
                             <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
                                 data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
