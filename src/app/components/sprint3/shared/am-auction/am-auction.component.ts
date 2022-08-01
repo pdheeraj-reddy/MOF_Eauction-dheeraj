@@ -145,14 +145,25 @@ export class AmAuctionComponent implements OnInit {
         imgsrc: result['ZzPrevAucId2'] ? result['ZzPrevAucId2'] : '',
         statuscode: result['Status'] ? result['Status'] : '',
         product: result['ZzTotPdt'] ? parseInt(result['ZzTotPdt']) : '',
-        auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'], 'YYYY-MM-DD').format('YYYY-MM-DD') : '' : '',
-        auctiontime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'], 'YYYY-MM-DD').format('YYYY-MM-DD HH:mm:ss') : '' : '',
-        auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? new Date(result['ZzAucEndDt']).getTime() : '' : '',
+        auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctiontime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? this.convert(result['ZzAucSrtDt']) : '' : '',
+        auctionenddate : result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctionendtime : result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? this.convert(result['ZzAucEndDt']) : '' : '',
         auctiontimeSufix: 'evening',
       }
       resultSet.push(items);
     });
+
     return resultSet;
+  } 
+  /** Convert the date into Date object */
+  convert(hms:any){
+    const date = hms.split(" ")[0];
+    const Time = hms.split(" ")[1];
+    const [day,month,year] = date.split(".");
+    const [hours, minutes, seconds] = Time.split(':');
+    const time = new Date(year,month,day,hours,minutes,seconds,0);
+    return time;
   }
 
   /** Populating the table pagination */

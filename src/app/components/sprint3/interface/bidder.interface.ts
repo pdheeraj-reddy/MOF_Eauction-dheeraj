@@ -7,7 +7,8 @@ export interface AuctionList {
     statuscode: string;
     product: string | number;
     auctiontimeSufix: string;
-    auctiondate: string;
-    auctiontime: string | Date | Moment;
-    auctionenddate: string | number;
+    auctiondate: string | Date | Moment;
+    auctionenddate: string | Date | Moment;
+    auctiontime : string | Date | Moment;
+    auctionendtime : string | Date | Moment;
 }

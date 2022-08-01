@@ -68,7 +68,7 @@
             <span class="icon-calendar text-primary font-weight-bold"></span>
             <span class="mx-3"> {{auction.auctiondate | date:'dd-MM-yyyy'}} </span>∙ &nbsp;
             <span *ngIf="auction.auctiontime">
-                {{auction.auctiontime | date:'h:mm a'}}
+                {{auction.auctiontime}}
             </span>
         </div>
         <div style="display: flex;">
