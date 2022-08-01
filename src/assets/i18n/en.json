@@ -30,6 +30,7 @@
     "Closed": "Closed",
     "Direct": "Direct",
     "To me": "Automatic",
+    "Automatic": "Automatic",
     "AM": "AM",
     "PM": "PM",
     "New": "New",
@@ -63,7 +64,7 @@
     "header": {
         "main-menu1": "Auctions",
         "main-menu2": "Online Auction Requests",
-        "logout":"Log out"
+        "logout": "Log out"
     },
     "common": {
         "ftrtext-copyright": "All rights reserved to the Ministry of Finance",

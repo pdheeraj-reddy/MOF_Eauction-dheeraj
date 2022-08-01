@@ -324,6 +324,25 @@
     padding: 0 !important;
 }
 
+::ng-deep .etimad-option .input-target {
+    border: none !important;
+    border-radius: 5px !important;
+    color: #414042 !important;
+}
+
+::ng-deep .etimad-option input:checked~.input-target {
+    border: #32AD71 2px solid !important;
+    border-radius: 5px !important;
+}
+
+::ng-deep .etimad-option .input-target span {
+    color: #414042 !important;
+}
+
+::ng-deep .etimad-option input:checked~.input-target span {
+    color: #32AD71 !important;
+}
+
 .carousel-wrapper {
     width: 1000px;
     margin: auto;

@@ -62,12 +62,14 @@ export class AuctionDetailsComponent implements OnInit {
   auctionBiddingStatus: any;
   auctionBiddingMethod: any;
   startAuctionMethod: any;
+  commissionRateValue: any = '';
   auctionType: any;
   bidBegginingSuffix: any;
   endBiddingSuffix: any;
   openBidSuffix: any;
   impEndBidSuffix: any;
   auctionStartSuffix: any;
+  nextFinancial: any;
   // User role
   role = {
     bidder: false,
@@ -160,7 +162,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
     this.role.bidder = this.currentUser.isBidder;
     // To by pass the bidder role (Below if should be removed if we get the bidder with correct role)
-    if(this.role.bidder){
+    if (this.role.bidder) {
       this.role.auctionCommitteeHead = false;
       this.role.auctionMod = false;
     }
@@ -370,6 +372,9 @@ export class AuctionDetailsComponent implements OnInit {
       this.openBidSuffix = this.upcomingAuction.important_info?.open_biddingtimeSufix;
       this.impEndBidSuffix = this.upcomingAuction.auction_detail?.end_biddingtimeSufix;
       this.auctionStartSuffix = this.upcomingAuction.auctionStartstimeSufix;
+      this.nextFinancial = this.upcomingAuction.auction_detail?.commissionType;
+      this.commissionRateValue = this.upcomingAuction.important_info?.commissionRate;
+
     });
 
   }

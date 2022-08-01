@@ -159,11 +159,13 @@
                             style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox1" name="sampleCheckbox" checked="checked">
                             <label class="input-target d-flex text-18" for="checkbox1">
-                                <span>
-                                    <span><img src="/assets/icons/auction.svg" alt=""></span><br>
-                                    <span>{{ 'bidderAuctionDetails.auction-settings.AuctionDetails' |
-                                        translate
-                                        }}</span>
+                                <span style="font-size: 14px;">
+                                    <span>
+                                        <img *ngIf="editmode1" src="/assets/icons/auction-success.svg" alt="">
+                                        <img *ngIf="!editmode1" src="/assets/icons/auction.svg" alt=""></span><br><br>
+                                    {{ 'bidderAuctionDetails.auction-settings.AuctionDetails' |
+                                    translate
+                                    }}
                                 </span>
                             </label>
                         </div>&nbsp;&nbsp;
@@ -174,8 +176,8 @@
                             style="width: 118px;height: 118px;">
                             <input type="radio" id="checkbox2" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox2">
-                                <span>
-                                    <span class="icon-pin"></span><br>
+                                <span style="font-size: 14px;">
+                                    <span class="icon-pin"></span><br><br>
                                     {{ 'bidderAuctionDetails.auction-settings.AuctionInstructions' | translate }}
                                 </span>
                             </label>
@@ -186,8 +188,8 @@
                         <div class="etimad-option etimad-option-xs mt-2" style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox3" name="sampleCheckbox" disabled>
                             <label class="input-target d-flex" for="checkbox3">
-                                <span>
-                                    <span class="icon-users"></span><br>
+                                <span style="font-size: 14px;">
+                                    <span class="icon-users"></span><br><br>
                                     {{'auctionCommittee.ac-detail.tab4' | translate}}
                                 </span>
                             </label>
@@ -198,8 +200,8 @@
                         <div class="etimad-option etimad-option-xs mt-2" style="width: 118px;height: 118px;">
                             <input type="radio" id="checkbox4" name="sampleCheckbox" disabled>
                             <label class="input-target d-flex" for="checkbox4">
-                                <span>
-                                    <span class="icon-users"></span><br>
+                                <span style="font-size: 14px;">
+                                    <span class="icon-users"></span><br><br>
                                     {{'auctionCommittee.ac-detail.tab3' | translate}}
                                 </span>
                             </label>
@@ -211,8 +213,10 @@
                             (click)="auctionSettings('offerreport')">
                             <input type="radio" id="checkbox5" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
-                                <span>
-                                    <span><img src="/assets/icons/offer-report.svg" alt=""></span><br>
+                                <span style="font-size: 14px;">
+                                    <span><img *ngIf="!editmode3" src="/assets/icons/offer-report.svg" alt="">
+                                        <img *ngIf="editmode3" src="/assets/icons/offer-report-success.svg"
+                                            alt=""></span><br><br>
                                     {{'auctionCommittee.ac-detail.tab5' | translate}}
                                 </span>
                             </label>
@@ -514,11 +518,11 @@
                             </p>
 
                             <p class="text-14 text-black">
-                                <span class="text-primary font-weight-bold text-20"><img src="/assets/icons/auction.svg"
-                                        alt=""></span>&nbsp;&nbsp;
+                                <span class="text-primary font-weight-bold text-20"><img
+                                        src="/assets/icons/auction-primary.svg" alt=""></span>&nbsp;&nbsp;
                                 {{'bidderAuctionDetails.BiddingIs' | translate }} {{auctionBiddingStatus | translate}}
                             </p>
-                            <div class="et-accordion">
+                            <!-- <div class="et-accordion">
                                 <div class="card" style="border: none; margin: 2%;">
                                     <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
                                         data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
@@ -534,7 +538,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <!--========================= Shows Important information of the auction (Auction Mod)  =========================-->
+                                    
                                     <div *ngIf="role.auctionMod" class="collapse" id="localContentFirst2"
                                         style="border-top: none;">
                                         <div class="card-body">
@@ -630,10 +634,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End -->
                                 </div>
 
-                            </div>
+                            </div> -->
                         </div>
 
 
@@ -687,7 +690,7 @@
                                                         <label>{{ 'bidderAuctionDetails.CommissionRate' | translate
                                                             }}</label>
                                                         <div class="text-success">
-                                                            {{upcomingAuction.important_info?.commissionRate}}%
+                                                            {{commissionRateValue | number}} %
                                                         </div>
                                                     </div>
                                                 </div>
@@ -965,7 +968,7 @@
                                                             'bidderAuctionDetails.auction-details.CommissionType' |
                                                             translate }}</label>
                                                         <div class="text-success">
-                                                            {{upcomingAuction.auction_detail?.commissionType}}
+                                                            {{ nextFinancial | translate }}
                                                         </div>
                                                     </div>
                                                 </div>
