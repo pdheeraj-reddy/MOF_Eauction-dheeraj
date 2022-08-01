@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-open-offers-card',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./open-offers-card.component.scss']
 })
 export class OpenOffersCardComponent implements OnInit {
+  @Input() auctionId :any;
+  @Input() importantInfo :any;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log("🎯TC🎯 ~ file: open-offers-card.component.ts ~ line 16 ~ this.importantInfo", this.importantInfo);
   }
 
 }

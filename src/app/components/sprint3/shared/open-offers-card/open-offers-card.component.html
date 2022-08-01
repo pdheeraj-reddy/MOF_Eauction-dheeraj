@@ -1,43 +1,41 @@
 <div class="card flex-row">
 
-    <!--=================== Yellow box to show auction status ===================-->
-    <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
-      <div class="mx-3">
-        <p class="text-18 font-weight-bold" style="color: #F9B122;">الترسية المبدئية</p>
-        <p class="text-12" style="color: #F9B122;">
-          تم ترسية هذا العرض من قبل لجنة المزاد، الرجاء اعتماد الترسية المبدئية
-        </p>
-      </div>
-    </div>
-    <!-- End -->
-  
-    <div class="vr-line"></div>
-  
-    <div class="d-flex justify-content-between mx-4 w-75">
-      <div class="d-flex flex-column justify-content-center" style="max-width: 440px">
-        <div class="card-body">
-          <p class="card-text text-12 text-info">
-            تاريخ فتح العروض
-          </p>
-          <p class="text-16 text-dark mb-2">No.  </p>
-        </div>
-      </div>
-  
-      <div class="top-card-right-right">
-        <div>
-          <!-- <a (click)="downloadPDF()" class="text-primary tex-14" style="text-decoration: none;">
-            <span class="text-16 icon-download"></span>
-            &nbsp;
-            <span style="text-decoration: underline;">Auction report and bid submitted BidOfferPDF</span>
-          </a> -->
-        </div>
-        <!-- <div class="mt-3">
-          <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">Refusal to be
-            awarded</button>
-          &nbsp;&nbsp;
-          <button class="btn btn-primary-light btn-md" (click)="this.showConfirmationAccept = true">Initial award
-            approval</button>
-        </div> -->
-      </div>
+  <!--=================== Yellow box to show auction status ===================-->
+  <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
+    <div class="mx-3">
+      <p class="text-18 font-weight-bold" style="color: #F9B122;">هذا المزاد تحت الترسية</p>
+      <p class="text-12" style="color: #F9B122;">
+        الرجاء فتح العروض واعتماد الترسية المبدئية.
+      </p>
     </div>
   </div>
+  <!-- End -->
+
+  <div class="vr-line"></div>
+
+  <div class="d-flex justify-content-between mx-4 w-75">
+    <div class="d-flex flex-column justify-content-center" style="width: 35%;">
+      <div class="card-body">
+        <p class="card-text text-12 text-info">
+          تاريخ فتح العروض
+        </p>
+        <div class="row text-success">
+          <span class="col-md-6">{{importantInfo.open_biddingdate}}</span>&nbsp;
+
+          <ul class="col list list-primary-bullets d-inline-block">
+            <li class="text-muted">
+              <span style="margin-left: -10px; margin-right: -10px;">{{importantInfo.open_biddingtime}}
+                {{ importantInfo.open_biddingtimeSufix | translate}}</span>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <button [routerLink]="['../../auction-committee-head/open-offers', auctionId]"
+        class="btn btn-primary-light btn-md d-flex" style="min-width: 220px;">فتح العروض</button>
+    </div>
+  </div>
+</div>
