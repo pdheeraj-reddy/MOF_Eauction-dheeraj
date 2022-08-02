@@ -28,9 +28,11 @@ export class NoOfParticipantsBidsComponent implements OnInit {
   getParticipants(){
     this.api.getNoOfParticipants(this.auctionId, this.auctionStatus).subscribe((res:any)=>{
       console.log(res.body.d);
-      this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
-      this.noBids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
-
+      if(this.auctionStatus == "Published"){
+        this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
+      }else{
+        this.noBids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
+      }
       setTimeout(() => {
         // console.log(5);
          this.getParticipants()
