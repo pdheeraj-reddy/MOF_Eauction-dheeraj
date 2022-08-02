@@ -25,3 +25,9 @@ html[dir='rtl'] .close-button {
 .clickable:not(:disabled) {
     color: #32AD71;
 }
+
+.center-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

@@ -223,12 +223,12 @@
                             <td>{{ rowItem.facilityName }}</td>
                             <td>{{ rowItem.commercialRegistrationNo }}</td>
                             <td>
-                                <ng-container *ngIf="i==0">
+                                <ng-container *ngIf="rowItem.selected">
                                     <div style="display: flex;">
                                         <button class="btn btn-danger btn-sm" type="button"
-                                            (click)="showModal.rejectOffer = true;selectedData = rowItem;">{{
-                                            "auctionCommittee.ac-openOffers.reject" |
-                                            translate }}</button> &nbsp; &nbsp;
+                                            (click)="showModal.rejectOffer = true;selectedData = rowItem;">
+                                            {{ "auctionCommittee.ac-openOffers.reject" | translate }}
+                                        </button> &nbsp; &nbsp;
                                         <button class="btn btn-primary-light btn-sm" type="button"
                                             (click)="checkOffer(rowItem);selectedData = rowItem;" data-toggle="modal"
                                             data-target="#showSuccessfulModal"> {{
@@ -236,7 +236,7 @@
                                             translate }}</button>
                                     </div>
                                 </ng-container>
-                                <ng-container *ngIf="i>0">
+                                <ng-container *ngIf="!rowItem.selected">
                                     <div style="display: flex;">
                                         <button class="btn btn-primary-light btn-sm" disabled>{{
                                             "auctionCommittee.ac-openOffers.reject" | translate }}</button> &nbsp;
@@ -322,11 +322,12 @@
                     style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">
                     {{'bidderSendOffer.Cancellation' | translate}}
                 </button>
-                <button type="button"
-                    style="height:45px; width: 120px; margin-left: 20px;margin-right: 20px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;"
+                <button type="button" *ngIf="spinner"
+                    style="height:45px; width: 120px; margin-left: 20px;margin-right: 20px; background-color: white;  font-weight: bold; outline: none; border: none; border-radius: 4px;"
                     class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg">
                     <span class="btn-text pr-0">
-                        <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status">
+                        <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status"
+                            style="color: white;">
                         </div>
                     </span>
                 </button>
@@ -347,9 +348,9 @@
     [ngClass]="{ 'modal-show': showModal.acceptOfferSuccess }" tabindex="-2" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="card shadow-lg result result-success" style="align-items: center;">
-            <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                aria-label="Close" (click)="showModal.acceptOfferSuccess = false">
+        <div class="modal-content card shadow-lg result result-success" style="align-items: center;">
+            <button style="position: absolute;left: 90%;" data-dismiss="modal" type="button"
+                class="modal-close btn-close btn-sm" aria-label="Close" (click)="showModal.acceptOfferSuccess = false">
                 <span class="icon-close"></span>
             </button>
             <div class="alert-body">
@@ -364,7 +365,8 @@
                 </div>
             </div>
             <div class="alert-action">
-                <button type="button" (click)="back()" class="btn btn-primary-light">
+                <button type="button" (click)="showModal.acceptOfferSuccess = false" data-dismiss="modal"
+                    class="btn btn-primary-light">
                     {{'bidderSendOffer.BackToAuctions' | translate}} </button>
             </div>
         </div>
@@ -457,14 +459,15 @@
     </div>
 </div>
 <!-- Rejection confirmation -->
-<div style="margin:auto;" class="modal show" [ngClass]="{ 'modal-show': showModal.rejectOfferSuccess }"
-    *ngIf="showModal.rejectOfferSuccess">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="card shadow-lg result result-success" style="align-items: center; width: 100%;">
+<div style="margin:auto;" class="modal show" role="dialog" aria-hidden="true"
+    [ngClass]="{ 'modal-show': showModal.rejectOfferSuccess }" *ngIf="showModal.rejectOfferSuccess">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content card shadow-lg result result-success" style="align-items: center; width: 100%;">
             <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                aria-label="Close" (click)="showModal.rejectOfferSuccess = false">
+                aria-label="Close" data-dismiss="modal" (click)="showModal.rejectOfferSuccess = false">
                 <span class="icon-close"></span>
             </button>
+
             <div class="alert-body">
                 <i class="alert-icon">
                     <span class="icon-alert-success"></span>
@@ -474,7 +477,7 @@
                 </div>
             </div>
             <div class="alert-action">
-                <button type="button" (click)="back()" class="btn btn-primary-light">
+                <button type="button" (click)="showModal.rejectOfferSuccess = false" class="btn btn-primary-light">
                     {{'bidderSendOffer.BackToAuctions' | translate}} </button>
             </div>
         </div>

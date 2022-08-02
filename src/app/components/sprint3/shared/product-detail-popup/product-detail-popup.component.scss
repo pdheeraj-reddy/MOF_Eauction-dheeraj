@@ -207,3 +207,25 @@ ul.thumbs {
         display: none;
     }
 }
+
+.blank-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+
+    .product-name {
+        font-size: 22px;
+        line-height: 24px;
+        color: #005B4E;
+    }
+
+    .no-image {
+        font-size: 14px;
+        line-height: 16px;
+        color: #A7A9AC;
+    }
+}

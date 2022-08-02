@@ -22,6 +22,7 @@ export class SendInvoiceComponent implements OnInit {
   textFloat: string = '';
   auctionId: string = '';
   showSuccessPopup: boolean = false;
+  downloadingInvoice: boolean = false;
   invoiceSent: boolean = false;
   invoiceData: any = [];
   auctionStartDate: any;
@@ -156,17 +157,19 @@ export class SendInvoiceComponent implements OnInit {
   }
 
 
-  /** Populating the table */
-  // public getServerData(selectedPageNumber: number) {
+  downloadInvoice() {
+    this.downloadingInvoice = true;
+    this.bidderService.downloadInvoice(this.auctionId).subscribe((result) => {
+      const data = result.body.d.results[0];
+      console.log('data: ', data);
+      const linkSource = 'data:application/pdf;base64,' + data.PdfContent;
+      const downloadLink = document.createElement("a");
+      const fileName = data.ObjectId + ".pdf";
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      this.downloadingInvoice = false;
+      downloadLink.click();
+    });
+  }
 
-  //   if (selectedPageNumber <= 2) {
-  //     selectedPageNumber = 1;
-  //   } else {
-  //     selectedPageNumber = selectedPageNumber - 1;
-  //   }
-  //   this.selectedPageNumber = selectedPageNumber;
-
-  //   this.getInvoice(selectedPageNumber);
-  //   this.PaginationServc.resetSorting();
-  // }
 }

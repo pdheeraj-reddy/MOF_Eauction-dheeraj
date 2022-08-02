@@ -88,7 +88,20 @@
         </div>
 
         <div style="margin: 6%;" *ngIf="!showLoader">
-            <p class="text-primary text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}</p>
+            <div style="display:flex;justify-content: space-between;">
+                <div>
+                    <p class="text-primary text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}
+                    </p>
+                </div>
+                <div class="center-icon" (click)="downloadInvoice()">
+                    <p class="text-primary text-18 font-weight-bold">{{'sprint3_auction_detail.download_invoice' |
+                        translate}}</p>
+                    <img class="mr-1 ml-1" *ngIf="!downloadingInvoice" [src]="'assets/icons/download.svg'">
+                    <div *ngIf="downloadingInvoice"
+                        class="spinner-border spinner-border-light-green icon-spinner text-light">
+                    </div>
+                </div>
+            </div>
             <br>
             <div class="form-field">
                 <form class="needs-validation" novalidate>

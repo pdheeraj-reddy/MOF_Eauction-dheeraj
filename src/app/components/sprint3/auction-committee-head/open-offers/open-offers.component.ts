@@ -17,7 +17,7 @@ declare var $: any;
 export class OpenOffersComponent implements OnInit {
   openofferListData: any;
   copyOpenofferListData: any;
-  pagelimit: number = 5;
+  pagelimit: number = 4;
   showLoader: boolean = false;
   auctionId: string = '';
   offervalue: string;
@@ -89,11 +89,13 @@ export class OpenOffersComponent implements OnInit {
             facilityName: result['BidderName'] ? result['BidderName'] : '-',
             FileName: result['FileName'] ? result['FileName'] : '',
             commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
-            downloadingAttachmet: false
+            downloadingAttachmet: false,
+            selected: false,
             // auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : '',
           };
           resultSet.push(items);
         });
+        if (resultSet?.length > 0) resultSet[0].selected = true;
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
@@ -179,6 +181,7 @@ export class OpenOffersComponent implements OnInit {
     }
     this.spinner = true;
     this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      data.selected = false;
       this.showModal.acceptOffer = false;
       this.showModal.acceptOfferSuccess = true;
       this.spinner = false;
@@ -193,6 +196,12 @@ export class OpenOffersComponent implements OnInit {
     }
     this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
       this.rejectReason = '';
+      data.selected = false;
+      const foundIndex = this.openofferListData.findIndex((i: any) => i.Sno == data.Sno)
+      if (foundIndex > -1 && foundIndex < this.openofferListData.length) {
+        this.openofferListData[foundIndex + 1].selected = true;
+        this.copyOpenofferListData = this.openofferListData
+      }
       this.showModal.rejectOffer = false;
       this.showModal.rejectOfferSuccess = true;
     });
@@ -245,6 +254,7 @@ export class OpenOffersComponent implements OnInit {
         return false;
       })
     }
+    this.navigateToPage(1)
   }
 
   changeSelect(e: any, dd: string) {

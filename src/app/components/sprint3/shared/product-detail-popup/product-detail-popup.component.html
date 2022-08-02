@@ -61,8 +61,6 @@
             </div>
         </div>
         <div>
-            <!-- <img [src]="fullImage" class="img-fluid" alt="No Images to show" /> -->
-            <!-- <div *ngIf="fullImage"> -->
             <img *ngIf="fullImage?.type == 'image/jpeg' || fullImage?.type == 'image/png'" class="img-fluid bg-dark"
                 [src]="fullImage?.src" />
             <div style="min-height:450px"
@@ -73,7 +71,6 @@
                     Your browser does not support HTML video.
                 </video>
             </div>
-            <!-- </div> -->
             <div class="thumbs-container bottom" *ngIf="!showLoader">
                 <div id="prev-btn" class="prev" (click)="scrollImageSlider('left')">
                     <i class="icon-arrow_left" style="color:white"></i>
@@ -157,7 +154,14 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!showLoader && slidesStore.length < 1">{{"common.no_picture" | translate }}</div>
+        <div *ngIf="!showLoader && slidesStore.length < 1">
+            <div class="blank-image">
+                <img class="img-fluid" [src]="'assets/icons/no-image.svg'" />
+                <p class="no-image">
+                    {{'sprint3_auction_detail.no_product_picture' | translate }}
+                </p>
+            </div>
+        </div>
     </div>
     <div class="col-md-6">
         <div class="product-full-summary-form">

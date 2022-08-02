@@ -851,30 +851,31 @@ export class AuctionDetailsComponent implements OnInit {
       }
       const blob = new Blob([ab], { type: item.MIMEType });
       var base64String = await this.convertBlobToBase64(blob);
-
+      const product: any = this.products.filter(i => i.productNo == item.ZzProductNo)
       this.slidesStore.push({
         id: item.ZzProductNo,
         src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
-        alt: 'test',
-        title: 'hello world',
+        alt: product[0]!.productName,
+        title: product[0]!.productName,
+        blankImage: false,
         type: item.MIMEType
       });
-      console.log("auctionAttachment this.slidesStore", this.slidesStore)
-      if (this.slidesStore.length == this.filenetImagesLst.length) {
-        this.manageEmptyImageProduct();
-        this.showLoaderSubImage = false;
-      }
 
       if (this.slidesStore.length == 1) {
         this.fullImage = {
           id: this.slidesStore[0].id,
           src: this.slidesStore[0].src,
-          type: this.slidesStore[0].type
+          type: this.slidesStore[0].type,
+          blankImage: false,
+          title: this.slidesStore[0].title,
         }
         this.selectedProduct = this.slidesStore[0].id;
-        // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 697 ~ this.selectedProduct", this.selectedProduct);
         this.showLoaderSubImage = true;
         this.showLoaderMainImage = false;
+      }
+      if (this.slidesStore.length == this.filenetImagesLst.length) {
+        this.manageEmptyImageProduct();
+        this.showLoaderSubImage = false;
       }
     },
       (error) => {
@@ -891,7 +892,8 @@ export class AuctionDetailsComponent implements OnInit {
           id: product.productNo,
           src: 'assets/icons/no-image.svg',
           alt: 'test',
-          title: 'hello world',
+          blankImage: true,
+          title: product.productName,
           type: 'image/png'
         })
       }
@@ -906,7 +908,9 @@ export class AuctionDetailsComponent implements OnInit {
     this.fullImage = {
       id: a.id,
       src: a.src,
-      type: a.type
+      type: a.type,
+      blankImage: a.blankImage,
+      title: a.title,
     }
     setTimeout(() => {
       this.showVideo = true;
