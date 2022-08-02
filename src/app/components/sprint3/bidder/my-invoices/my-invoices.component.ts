@@ -153,7 +153,6 @@ export class MyInvoicesComponent implements OnInit {
   }
 
   getInvoiceList(pageNumber?: number, sortBy?: string, sorttype?: string) {
-    const pageNoVal = '' + pageNumber;
     const page = {
       pageNumber: pageNumber,
       pageLimit: this.pagelimit
@@ -175,9 +174,6 @@ export class MyInvoicesComponent implements OnInit {
     if (sortBy && sorttype) {
       filters.Msgty = sorttype + ' ' + sortBy;
     }
-
-
-
     console.log(filters, "filters");
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
@@ -186,53 +182,17 @@ export class MyInvoicesComponent implements OnInit {
       this.showLoader = false;
       this.invoiceListData = this.mapping(res);
     });
-    // this.http.get<any>(this.envService.environment.apiBidderMyInvoices 
-    //   // "?$expand=page1tolistnav" + 
-    //   // "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
-    //   ,{responseType: 'json'}).subscribe(res=>{
-    //     this.showLoader = false;
-
-    // //   this.PaginationServc.setPagerValues(
-    // //     +res.body.d.results[0].TotEle,
-    // //     10,
-    // //     +pageNoVal
-    // //   );
-
-    // //   const csrfToken = localStorage.getItem("x-csrf-token");    
-    // //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   console.log(res,"f");
-    //   this.invoiceListData = this.mapping(res);
-    // }, (error) => {
-    //     this.showLoader = false;
-    //     console.log('getAuctionList RespError : ', error);
-    //   });
-    // this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
-    //   this.showLoader = false;
-
-    //   this.PaginationServc.setPagerValues(
-    //     +res.body.d.results[0].TotEle,
-    //     10,
-    //     +pageNoVal
-    //   );
-
-    //   const csrfToken = localStorage.getItem("x-csrf-token");
-    //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   this.auctionListData = this.mapping(res.body);
-
-    // }, (error) => {
-    //   this.showLoader = false;
-    //   console.log('getInvoiceList RespError : ', error);
-    // });
   }
 
-  sortBy(sortBy?: string) {
+  sortBy(sortBy?: string, columnId?: number) {
+    columnId = columnId ? columnId : 0;
     var foundIndex = this.sortCol.findIndex((el: { col: any; }) => el.col === sortBy);
+    this.sortByTableHeaderId(columnId, 'string');
     this.sortCol[foundIndex].sType = this.sortCol[foundIndex].sType === 'A' ? 'D' : 'A';
     this.getInvoiceList(1, sortBy, this.sortCol[foundIndex].sType);
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-
     this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
 
@@ -289,7 +249,16 @@ export class MyInvoicesComponent implements OnInit {
     this.filterFormGroup.controls['auctionStartDate'].setValue('');
     this.filterFormGroup.controls['auctionEndDate'].setValue('');
     this.refreshCalendarCntrl();
-    this.getInvoiceList(1);
+  }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
   }
 
 

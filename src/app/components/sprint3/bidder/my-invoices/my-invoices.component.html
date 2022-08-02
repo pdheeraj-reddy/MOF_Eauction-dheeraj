@@ -136,32 +136,37 @@
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ObjectId')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.TheadInvoiceReferenceNumber' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucSrtDt')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThInvoiceIssueDate' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Description')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThAmountOfTheInvoice' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('BidType')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThEntityName' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Status')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThInvoicePaymentStatusFinalWarranty' | translate
                                         }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light" scope="col"></th>

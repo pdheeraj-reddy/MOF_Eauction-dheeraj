@@ -186,6 +186,7 @@ export class BidderService {
       "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + " and Status eq " + "'" + status + "'" + filters + ")&$format=json", httpOptions)
 
   }
+
   getMyInvoiceList(): Observable<any> {
     const httpOptions = {
       headers: {
