@@ -94,9 +94,10 @@
                     </p>
                 </div>
                 <div class="center-icon" (click)="downloadInvoice()">
-                    <p class="text-primary text-18 font-weight-bold">{{'sprint3_auction_detail.download_invoice' |
-                        translate}}</p>
-                    <img class="mr-1 ml-1" *ngIf="!downloadingInvoice" [src]="'assets/icons/download.svg'">
+                    <a class="text-primary text-18 font-weight-bold mt-2">{{'sprint3_auction_detail.download_invoice' |
+                        translate}} <img class="mx-2" *ngIf="!downloadingInvoice"
+                            [src]="'assets/icons/download.svg'"></a>
+
                     <div *ngIf="downloadingInvoice"
                         class="spinner-border spinner-border-light-green icon-spinner text-light">
                     </div>

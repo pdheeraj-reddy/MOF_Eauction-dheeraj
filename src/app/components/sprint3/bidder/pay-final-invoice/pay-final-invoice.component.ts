@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import { EnvService } from 'src/app/env.service';
 import { InvoiceForSend } from 'src/app/model/auction.model';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { environment } from 'src/environments/environment';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-pay-final-invoice',
@@ -26,6 +29,26 @@ export class PayFinalInvoiceComponent implements OnInit {
   invoiceForSend: InvoiceForSend = new InvoiceForSend();
   card: boolean;
   auctionId: any;
+  invoiceData: any = [];
+  showLoader: boolean = true;
+  textFloat: string = '';
+  textDir: any = '';
+  showSuccessPopup: boolean = false;
+  downloadingInvoice: boolean = false;
+  invoiceSent: boolean = false;
+  auctionStartDate: any;
+  auctionStartTime: any;
+  auctionStartSuffix: any;
+  offerDate: any;
+  offerTime: any;
+  offerSuffix: any;
+  deliveryDate: any;
+  gearPrice: number = 0;
+  questRate: number = 0;
+  vat: number = 0;
+  totalValue: number = 0;
+  pageRangeForProductAttach: any;
+  bidderId: any;
 
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -33,14 +56,23 @@ export class PayFinalInvoiceComponent implements OnInit {
     private http: HttpClient,
     private api: AucModeratorService,
     private modalService: NgbModal,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    public envService: EnvService,
+    private moderatorService: AucModeratorService,
+    private clipboard: Clipboard,
+    private clipboardApi: ClipboardService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     this.card = true;
-    this.getInvoiceDetails();
+    this.getInvoice();
     // this.getAuctionList(1);
     this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
     if (this.userRole) {
@@ -49,10 +81,61 @@ export class PayFinalInvoiceComponent implements OnInit {
     console.log(this.userRole);
   }
 
-  getInvoiceDetails() {
-    this.bidderService.getInvoiceDetails(this.auctionId).subscribe((res: any) => {
-      console.log("🎯TC🎯 ~ file: pay-final-invoice.component.ts ~ line 93 ~ res", res);
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textFloat = 'left';
+      this.textDir = 'rtl';
+    }
+    else {
+      this.textFloat = 'right';
+      this.textDir = 'ltr';
+    }
+  }
+
+
+  copyText() { this.clipboardApi.copyFromContent("this.content") }
+
+
+  getInvoice() {
+    this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
+      this.showLoader = false;
+      this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
+      localStorage.setItem('x-csrf-token', this.moderatorService.XCSRFToken);
+      this.invoiceData = res.body.d.results[0];
+      this.auctionStartDate = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[0], 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.auctionStartTime = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('hh:mm');
+      this.auctionStartSuffix = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('A');
+      this.offerDate = moment(this.invoiceData?.OfferDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.offerTime = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('hh:mm');
+      this.offerSuffix = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('A');
+      this.deliveryDate = moment(this.invoiceData?.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.bidderId = res.body.d.results[0].BidderId;
+
+      let bidderValue = parseFloat(this.invoiceData?.BidderValue);
+      let quest = parseFloat(this.invoiceData?.ZzCommPercent);
+
+      this.gearPrice = bidderValue;
+      this.questRate = (bidderValue * quest) / 100;
+      this.vat = (bidderValue * 15) / 100;
+      this.totalValue = this.gearPrice + this.questRate + this.vat;
+      this.navigateToPage(1);
+
     });
+  }
+
+  navigateToPage(pageNoVal: number) {
+    this.PaginationServc.setPagerValues(
+      this.invoiceData?.invoicetoprodnav.results.length,
+      this.pagelimit,
+      pageNoVal
+    );
+    this.pageRangeForProductAttach = {
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
+      rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
+      pages: this.PaginationServc.pages,
+      currentPage: this.PaginationServc.currentPage,
+      totalPages: this.PaginationServc.totalPages,
+    }
   }
 
   sendInv() {

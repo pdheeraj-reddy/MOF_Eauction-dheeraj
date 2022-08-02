@@ -1038,7 +1038,22 @@
         "Almost": "Almost",
         "Cancellation": "Cancellation",
         "PaymentConfirmation": "Payment confirmation",
-        "InvoiceCopy": "Invoice copy"
+        "InvoiceCopy": "Invoice copy",
+        "payBill": "Pay the bill",
+        "payDetails": "A payment invoice has been issued to pay the auction dues, please complete the payment and you will then receive an email to confirm the payment. The award will be canceled if the bill is not paid within 30 days of the award.",
+        "invoiceStatus": "Invoice Status",
+        "invoiceValue": "Invoice Value",
+        "awardDate": "Award Date",
+        "paymentOptions": "Payment Options",
+        "paymentViaSadad": "Payment via SADAD service",
+        "payViaCard": "Pay via Card",
+        "almost": "almost",
+        "popup-head": "Payment via SADAD service",
+        "invoiceNumber": "Invoice Number",
+        "paymentDeadline": "Payment Deadline",
+        "billerName": "Biller Name and Code",
+        "accept_btn": "Invoice Details",
+        "back_btn": "Back to Auction details"
     },
     "bidderAuctions": {
         "EtimadServices": "Etimad Services",

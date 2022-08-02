@@ -1,23 +1,36 @@
 .content-area {
-    margin: 0 10%;
-    width: 100%;
-  }
-  .tab-btn {
-    width: 40%;
-    background: none;
-  }
-  .tab-btn:focus {
-    outline: none;
-    border: 2px solid #32ad71;
-  }
-  .card-active {
-    outline: none;
-    border: 2px solid #32ad71;
-    color: #005b4e;
-  }
-  .btn-submit-grp {
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  
+  margin: 0 10%;
+  width: 100%;
+}
+
+.tab-btn {
+  width: 40%;
+  background: none;
+}
+
+.tab-btn:focus {
+  outline: none;
+  border: 2px solid #32ad71;
+}
+
+.card-active {
+  outline: none;
+  border: 2px solid #32ad71;
+  color: #005b4e;
+}
+
+.btn-submit-grp {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+::ng-deep .etimad-option input:checked~.input-target span {
+  color: #005B4E;
+}
+
+
+// ::ng-deep .etimad-option .input-target span {
+//   color: #414042;
+// }

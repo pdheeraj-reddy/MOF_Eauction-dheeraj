@@ -21,11 +21,12 @@ import { AuctionComponent } from './components/auction/auction-indetail/auction.
 import { TenderComponent } from './tender/tender.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuctionListsComponent } from './components/auction/auction-lists/auction-lists.component';
+import { ClipboardModule } from 'ngx-clipboard';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS,
-  HttpClientXsrfModule,
+  HttpClientXsrfModule
 } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { HeaderComponent } from './layout/header/header.component';
@@ -154,6 +155,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     EAucCommonModule,
+    ClipboardModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-CSRF-TOKEN',

@@ -855,7 +855,22 @@
         "Almost": "قريباً",
         "Cancellation": "إلغاء",
         "PaymentConfirmation": "تأكيد الدفع",
-        "InvoiceCopy": "نسخة الفاتورة"
+        "InvoiceCopy": "نسخة الفاتورة",
+        "payBill": "دفع الفاتورة",
+        "payDetails": "تم إصدار فاتورة سداد لدفع مستحقات المزاد، الرجاء إتمام الدفع وسوف يصلك بعد ذلك بريد إلكتروني لتأكيد عملية السداد. سيتم الغاء الترسية في حال لم يتم دفع الفاتورة خلال 30 يوم من الترسية.",
+        "invoiceStatus": "حالة الفاتورة",
+        "invoiceValue": "قيمة الفاتورة",
+        "awardDate": "تاريخ الترسية",
+        "paymentOptions": "خيارات الدفع",
+        "paymentViaSadad": "الدفع عن طريقة خدمة سداد",
+        "payViaCard": "الدفع عن طريق البطاقة",
+        "almost": "قريباً",
+        "popup-head": "الدفع عن طريقة خدمة سداد",
+        "invoiceNumber": "رقم الفاتورة",
+        "paymentDeadline": "آخر موعد للسداد",
+        "billerName": "اسم ورمز المفوتر",
+        "accept_btn": "تفاصيل الفاتورة",
+        "back_btn": "العودة إلى تفاصيل المزاد"
     },
     "bidderAuctionDetails": {
         "Auctions": "المزادات",

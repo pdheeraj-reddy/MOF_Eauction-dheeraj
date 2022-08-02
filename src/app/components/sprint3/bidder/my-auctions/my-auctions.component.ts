@@ -60,9 +60,9 @@ export class MyAuctionsComponent implements OnInit {
   public mapping(serverObj: any) {
     let resultSet: any = [];
     this.totcntforall = serverObj.d.results[0]?.TotAll;
-    this.totcntforongoing = serverObj.d.results[0]?.TotOngoing;
+    this.totcntforongoing = serverObj.d.results[0]?.TotPublishedOngoing;
     this.totcntforupcomming = serverObj.d.results[0]?.TotPublished;
-    this.totcntforundergear = serverObj.d.results[0]?.TotPendingRw;
+    this.totcntforundergear = serverObj.d.results[0]?.TotPendSelect;
     this.totcntforcancelled = serverObj.d.results[0]?.TotCompleted;
     serverObj.d.results[0]?.page1tolistnav.results.forEach((result: any) => {
       const items = {

@@ -1,16 +1,449 @@
 <div class="col-12 mt-1">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item"><a href="#">Trust Services</a></li>
-            <li class="breadcrumb-item"><a href="#">Invoices</a></li>
+            <li class="breadcrumb-item"><a [href]="getHomeUrl">{{'auctionCommittee.ac-detail.bcrumb1' |
+                    translate}}</a></li>
+            <li class="breadcrumb-item"><a href="/bidder/my-invoices">{{ 'bidderMyInvoices.Invoices' | translate }}</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
-                Invoice details
+                {{ 'bidderFinalInvoice.InvoiceDetails' | translate
+                }}
             </li>
         </ol>
     </nav>
 </div>
 
-<div class="col-12">
+<div class="col-12 border-bottom pb-2 mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-20 text-primary font-weight-500">{{'bidderFinalInvoice.InvoiceDetails' | translate}}</h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="mt-5 mb-4 pb-2" style=" width: 896px; padding-left: 10%; padding-right: 10%;">
+    <p class="text-success text-24 font-weight-bold">{{'bidderFinalInvoice.payBill' |
+        translate}}</p>
+</div>
+
+
+<div class="" style="padding-left: 10%; padding-right: 10%;">
+
+    <div class="border rounded" style="width: 896px; background-color: #FFFFFF;">
+        <div style="margin: 6%;" *ngIf="!showLoader">
+            <p class="text-16 text-body">{{'bidderFinalInvoice.payDetails' | translate}}</p>
+
+            <div class="form-row" style="margin-top: 40px;">
+                <div class="col-md-4 mb-3" style="padding-left: 4px; padding-right: 4px;">
+                    <div class="form-group">
+                        <label>{{'bidderFinalInvoice.invoiceStatus' | translate}}</label>
+                        <div *ngIf="invoiceData.InvoiceStatus == 'Awaiting Payment'" class="px-2 py-1"
+                            style="background-color: #FFCE4C; color: #FFFFFF; width: fit-content; border-radius: 10px;">
+                            {{invoiceData.InvoiceStatus | translate}}
+                        </div>
+                        <div *ngIf="invoiceData.InvoiceStatus == 'Paid'" class="px-2 py-1"
+                            style="background-color: #32AD71; color: #FFFFFF; width: fit-content; border-radius: 10px;">
+                            {{invoiceData.InvoiceStatus | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label>{{'bidderFinalInvoice.invoiceValue' | translate}}</label>
+                        <div class="text-primary">{{totalValue | number:
+                            '1.0-2'}} {{'bidderFinalInvoice.SAR' | translate}}</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label>{{'bidderFinalInvoice.awardDate' | translate}}</label>
+                        <div class="text-primary">
+                            {{ offerDate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <label *ngIf="invoiceData.InvoiceStatus == 'Awaiting Payment'"
+                class="mt-4">{{'bidderFinalInvoice.paymentOptions' | translate}}</label>
+
+            <div *ngIf="invoiceData.InvoiceStatus == 'Awaiting Payment'"
+                class="d-flex mt-2 flex-wrap flex-md-nowrap mb-5">
+                <div class="etimad-option mb-4 mb-md-0" style="height: 128px;">
+                    <input type="radio" id="checkbox01" name="sampleRadio" checked="checked" data-toggle="modal"
+                        data-target="#paymentModal">
+                    <label class="input-target" for="checkbox01">
+                        <span class="option-icon">
+                            <img src="./assets/icons/sadad.svg" alt="alt image">
+                        </span>
+                        <span class="text-16 mx-1">{{'bidderFinalInvoice.paymentViaSadad' |
+                            translate}}</span>
+                        <span class="icon-arrow-left mx-4 mt-1" style="font-size: 10px;"></span>
+                    </label>
+                </div>
+
+                <div class="etimad-option" style="height: 128px;">
+                    <input type="radio" id="checkbox02" name="sampleRadio">
+                    <label class="input-target" for="checkbox02">
+                        <span class="option-icon">
+                            <img src="./assets/icons/banking-card.svg" alt="alt image">
+                        </span>
+                        <span class="text-16 mx-1">{{'bidderFinalInvoice.paymentViaSadad' |
+                            translate}} {{'bidderFinalInvoice.almost' |
+                            translate}}</span>
+                        <span class="icon-arrow-left mx-3 mt-1" style="font-size: 10px;"></span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 mb-4 pb-2" style=" width: 896px; padding-left: 10%; padding-right: 10%;">
+    <p class="text-success text-24 font-weight-bold">{{'bidderFinalInvoice.InvoiceInformation' |
+        translate}}</p>
+</div>
+
+
+<div class="" style="padding-left: 10%; padding-right: 10%;">
+
+    <div class="border rounded" style="width: 896px; background-color: #FFFFFF;">
+
+        <div class="card p-5 shadow-lg" *ngIf="showLoader">
+            <div class="form-row">
+                <div class="col-12">
+                    <table class="table">
+                        <td colspan="10" class="p-3 bg-white">
+                            <div class="alert-body text-center">
+                                <i class="alert-icon">
+                                    <svg class="et-spinner" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                                        <g fill-rule="nonzero" fill="#32AD71">
+                                            <path
+                                                d="M32 11.871c-1.755 0-3.097-1.342-3.097-3.097V3.097C28.903 1.342 30.245 0 32 0s3.097 1.342 3.097 3.097v5.677c0 1.652-1.342 3.097-3.097 3.097z" />
+                                            <path
+                                                d="M32 64c-1.755 0-3.097-1.342-3.097-3.097v-5.677c0-1.755 1.342-3.097 3.097-3.097s3.097 1.342 3.097 3.097v5.677C35.097 62.658 33.755 64 32 64z"
+                                                opacity=".4" />
+                                            <path
+                                                d="M46.452 60.077c-1.033 0-2.065-.516-2.684-1.548l-2.787-4.852c-.826-1.445-.31-3.406 1.135-4.232 1.445-.826 3.407-.31 4.232 1.136l2.787 4.851c.826 1.445.31 3.407-1.135 4.233a2.913 2.913 0 01-1.548.412z"
+                                                opacity=".5" />
+                                            <path
+                                                d="M11.871 23.432a2.913 2.913 0 01-1.548-.413L5.47 20.232C4.026 19.406 3.51 17.445 4.335 16c.826-1.445 2.788-1.961 4.233-1.135l4.851 2.787c1.446.825 1.962 2.787 1.136 4.232-.62 1.032-1.652 1.548-2.684 1.548z"
+                                                opacity=".05" />
+                                            <path
+                                                d="M57.084 49.548a2.913 2.913 0 01-1.549-.413l-4.954-2.787c-1.446-.825-1.962-2.787-1.136-4.232.826-1.445 2.787-1.961 4.232-1.135l4.852 2.787c1.445.826 1.961 2.787 1.136 4.232-.517 1.032-1.549 1.548-2.581 1.548z"
+                                                opacity=".6" />
+                                            <path
+                                                d="M8.774 35.097H3.097C1.342 35.097 0 33.755 0 32s1.342-3.097 3.097-3.097h5.677c1.755 0 3.097 1.342 3.097 3.097s-1.445 3.097-3.097 3.097z"
+                                                opacity=".1" />
+                                            <path
+                                                d="M60.903 35.097h-5.677c-1.755 0-3.097-1.342-3.097-3.097s1.342-3.097 3.097-3.097h5.677C62.658 28.903 64 30.245 64 32s-1.342 3.097-3.097 3.097z"
+                                                opacity=".7" />
+                                            <path
+                                                d="M6.916 49.548c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.406 1.136-4.232l4.851-2.787c1.446-.826 3.407-.31 4.233 1.135.825 1.445.31 3.407-1.136 4.232l-4.851 2.787c-.413.31-.93.413-1.549.413z"
+                                                opacity=".2" />
+                                            <path
+                                                d="M52.129 23.432c-1.032 0-2.064-.516-2.684-1.548-.826-1.445-.31-3.407 1.136-4.232l4.851-2.787c1.445-.826 3.407-.31 4.233 1.135.825 1.445.31 3.406-1.136 4.232l-4.852 2.787a2.913 2.913 0 01-1.548.413z"
+                                                opacity=".8" />
+                                            <path
+                                                d="M17.548 60.077A2.913 2.913 0 0116 59.665c-1.445-.826-1.961-2.788-1.135-4.233l2.787-4.851c.825-1.446 2.787-1.962 4.232-1.136 1.445.826 1.961 2.787 1.135 4.232l-2.787 4.852c-.62 1.032-1.651 1.548-2.684 1.548z"
+                                                opacity=".3" />
+                                            <path
+                                                d="M43.665 14.968a2.913 2.913 0 01-1.549-.413c-1.445-.826-1.961-2.787-1.135-4.232l2.787-4.852C44.594 4.026 46.555 3.51 48 4.335c1.445.826 1.961 2.788 1.135 4.233l-2.787 4.851c-.619.93-1.651 1.549-2.683 1.549z"
+                                                opacity=".9" />
+                                        </g>
+                                    </svg>
+                                </i>
+                                <div class="alert-content">
+                                    <h5 class="text-black-50">Loading</h5>
+                                </div>
+                            </div>
+                        </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin: 6%;" *ngIf="!showLoader">
+            <div style="display:flex;justify-content: space-between;">
+                <div>
+                    <p class="text-primary text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}
+                    </p>
+                </div>
+                <div class="center-icon" (click)="downloadInvoice()">
+                    <a class="text-primary text-18 font-weight-bold mt-2">{{'sprint3_auction_detail.download_invoice' |
+                        translate}} <img class="mx-2" *ngIf="!downloadingInvoice"
+                            [src]="'assets/icons/download.svg'"></a>
+
+                    <div *ngIf="downloadingInvoice"
+                        class="spinner-border spinner-border-light-green icon-spinner text-light">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-field">
+                <form class="needs-validation" novalidate>
+                    <div class="border-bottom">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.AuctionReferenceNumber' | translate}}</label>
+                                    <div class="text-primary">{{invoiceData?.ObjectId}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.AuctionStartDateandTime' | translate}}</label>
+                                    <div class="text-primary">
+                                        <span>{{ auctionStartDate }}</span>
+                                        <ul class="list list-primary-bullets d-inline-block">
+                                            <li class="text-muted"> {{auctionStartTime}} {{auctionStartSuffix |
+                                                translate}} </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.ProductsType' | translate}}</label>
+                                    <div class="text-primary">
+                                        {{invoiceData?.ZzAucProduct}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label> {{'bidderFinalInvoice.OfferAwardDate' | translate}}</label>
+                                    <div class="text-primary">
+                                        <span>{{ offerDate }}</span>
+                                        <ul class="list list-primary-bullets d-inline-block">
+                                            <li class="text-muted"> {{ offerTime }} {{offerSuffix | translate}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-bottom d-flex mt-4">
+                        <div class="w-50">
+                            <p class="text-primary font-weight-bold text-18">
+                                {{'bidderFinalInvoice.BillHolderInformation' | translate}}</p>
+                            <div class="form-row mt-4">
+                                <div class="col mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.FacilityName' | translate}}</label>
+                                        <div class="text-primary">{{invoiceData?.BidderName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mt-4">
+                                <div class="col mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.CommercialRegistrationNo' | translate}}</label>
+                                        <div class="text-primary">{{invoiceData?.CrNumber}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-50">
+                            <p class="text-primary font-weight-bold text-18">
+                                {{'bidderFinalInvoice.BillerData' | translate}}</p>
+                            <div class="form-row mt-4">
+                                <div class="col mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.EntityName' | translate}}</label>
+                                        <div class="text-primary">{{invoiceData?.ZzAgencyName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mt-4">
+                                <div class="col mb-3">
+                                    <div class="form-group">
+                                        <label>{{'bidderFinalInvoice.EntityNo' | translate}}</label>
+                                        <div class="text-primary">{{invoiceData?.ZzAgencyId}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-bottom mt-4 mb-4">
+                        <p class="text-primary font-weight-bold text-18 mb-4">
+                            {{'bidderFinalInvoice.DeliveryData' | translate}}</p>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.DeliveryDate' | translate}}</label>
+                                    <div class="text-primary">{{deliveryDate}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.Region' | translate}}</label>
+                                    <div class="text-primary">{{invoiceData?.ZzRegion}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.City' | translate}}</label>
+                                    <div class="text-primary">{{invoiceData?.ZzCity}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.District' | translate}}</label>
+                                    <div class="text-primary">{{invoiceData?.ZzNeighbourhood}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.Street' | translate}}</label>
+                                    <div class="text-primary">{{invoiceData?.ZzStreet}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>{{'bidderFinalInvoice.OtherNotes' | translate}}</label>
+                                    <div class="text-primary">{{invoiceData?.ZzPdOthrNts}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <p class="text-primary text-18 font-weight-bold">
+                {{'bidderFinalInvoice.TableOfProductsAndPrices' | translate}}</p>
+
+            <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
+                                <span>#</span>
+                            </div>
+                        </th>
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
+                                <span>{{'bidderFinalInvoice.ProductName' | translate}}</span>
+                            </div>
+                        </th>
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
+                                <span>{{'bidderFinalInvoice.SKU_Number' | translate}}</span>
+                            </div>
+                        </th>
+                        <th class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
+                                <span>{{'bidderFinalInvoice.DeliveryAdd' | translate}}</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
+                        <tr *ngFor="let rowItem of invoiceData?.invoicetoprodnav.results; index as i;">
+                            <ng-container
+                                *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
+                                <td>{{i+1}}</td>
+                                <td>{{rowItem.Description}}</td>
+                                <td>{{rowItem.ZzProductSku}}</td>
+                                <td>{{rowItem.ZzRegion}}, {{rowItem.ZzCity}}, {{rowItem.ZzNeighbourhood}},
+                                    {{rowItem.ZzStreet}}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="invoiceData?.BidderValue">
+                        <tr>
+                            <td colspan="4">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice' |
+                                    translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate' |
+                                    translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                    | translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <span
+                                    class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                    | translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+            <div class="mt-4 row justify-content-end" *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
+                <div class="mb-5">
+                    <nav aria-label="..." class="nav-pagination">
+                        <ul class="pagination">
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{disabled: pageRangeForProductAttach.currentPage===1}">
+                                <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage - 1 ) "
+                                    class="page-link" aria-disabled="true">{{"auctionlist.grid-previous" |
+                                    translate}}</a>
+                            </li>
+                            <li *ngFor="let page of pageRangeForProductAttach.pages" class="page-item"
+                                [ngClass]="{active: pageRangeForProductAttach.currentPage===page}">
+                                <a (click)="navigateToPage(page)" class="page-link">{{page}}</a>
+                            </li>
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{disabled: pageRangeForProductAttach.currentPage===pageRangeForProductAttach.totalPages}">
+                                <a (click)=" navigateToPage( pageRangeForProductAttach.currentPage + 1 ) "
+                                    class="page-link">{{"auctionlist.grid-next" | translate}}</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<!-- <div class="col-12">
     <div class="row">
 
         <div class="col-md-12">
@@ -30,9 +463,6 @@
                         <div style="display:flex;justify-content: space-between;">
                             <p style="color: #005B4D; font-size: 18px; font-weight: bold;">{{
                                 'bidderFinalInvoice.AuctionData' | translate }}</p>
-                            <!-- <p style="color: #005B4D; font-size: 18px; font-weight: bold;">
-                                <a (click)="downloadInvoice()">Download Invoice</a>
-                            </p> -->
                         </div>
                         <br>
                         <div style="display: flex;">
@@ -241,9 +671,6 @@
 
                                         <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0"
                                             class="pagination">
-                                            <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                                <a (click)="getServerData(1)" class="page-link" href="#">Last</a>
-                            </li> -->
                                             <li class="page-item"
                                                 [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
                                                 <a (click)="getServerData(PaginationServc.currentPage)"
@@ -261,9 +688,6 @@
                                                 <a (click)="getServerData(PaginationServc.currentPage + 2)"
                                                     class="page-link">{{ 'auctionlist.grid-next' | translate }}</a>
                                             </li>
-                                            <!-- <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                                <a (click)="getServerData(PaginationServc.currentPage + 1)" class="page-link" href="#">Last</a>
-                            </li> -->
                                         </ul>
                                     </nav>
                                 </div>
@@ -348,10 +772,10 @@
 
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Model to confirm Approval -->
-<div class="modal fade" id="confirmAprModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- <div class="modal fade" id="confirmAprModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -378,10 +802,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Model to show confirmed (Successful)  Approval-->
-<ng-template #showSuccessfulModal let-modal>
+<!-- <ng-template #showSuccessfulModal let-modal>
+    
 
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" style="align-items: center;">
@@ -413,4 +838,53 @@
             </div>
         </div>
     </div>
-</ng-template>
+</ng-template> -->
+
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title text-success text-24" id="exampleModalLabel">{{'bidderFinalInvoice.popup-head' |
+                    translate}}</p>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color: #F9FCFA; padding: 7%;">
+                <div class="row">
+                    <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.invoiceNumber' | translate}}</div>
+                    <div class="col text-primary d-flex">
+                        <a (click)="copyText()"><span class="icon-copy text-primary"></span></a>
+                        <span class="mx-2">9999999999999</span>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.invoiceValue' | translate}}</div>
+                    <div class="col text-primary">{{totalValue | number:
+                        '1.0-2'}} {{'bidderFinalInvoice.SAR' | translate}}</div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.paymentDeadline' | translate}}</div>
+                    <div class="col text-primary">Date yet to know</div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.billerName' | translate}}</div>
+                    <div class="col text-primary">Date yet to know</div>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <button [routerLink]="['/bidder/pay-final-invoice',  auctionId]" data-dismiss="modal" aria-label="Close"
+                    type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary-light btn-lg">
+                    {{'bidderFinalInvoice.accept_btn' | translate}}
+                </button>
+                <button [routerLink]="['/auction-details', auctionId]" data-dismiss="modal" aria-label="Close"
+                    type="button" class="btn btn-lg" style="background-color: #117ABE; color: #FFFFFF;">
+                    {{'bidderFinalInvoice.back_btn' | translate}}
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
