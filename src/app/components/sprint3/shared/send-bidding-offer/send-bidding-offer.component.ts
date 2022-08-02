@@ -43,7 +43,7 @@ export class SendBiddingOfferComponent implements OnInit {
   fileToUpload: any;
   showSuccessfulModal: boolean = false;
   showLoader: boolean = false;
-  showAttachLoader : boolean = false;
+  showAttachLoader: boolean = false;
 
   constructor(private bidderService: BidderService) { }
 

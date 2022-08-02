@@ -70,9 +70,10 @@
   </div>
   <br>
 
-  <p *ngIf="amountValidation" class="text-danger text-12">{{'message.alert_validAmount' | translate}}</p>
 
-  <div class="d-flex" style="width: 98%; border: 1px solid #32AD71; border-radius: 5px; height: 50px;" role="group"
+
+  <div *ngIf="!amountValidation" class="d-flex"
+    style="width: 98%; border: 1px solid #32AD71; border-radius: 5px; height: 50px;" role="group"
     aria-label="Basic example">
     <div style="width: 15%; align-items: center;">
       <button type="button"
@@ -90,12 +91,40 @@
         aria-describedby="basic-addon2" />
     </div>
     <div style="width: 15%;">
-      <button type="button" style="width: 100%;border-radius: 5px; height: 100%; border: none; outline: none; background-color: white;"
+      <button type="button"
+        style="width: 100%;border-radius: 5px; height: 100%; border: none; outline: none; background-color: white;"
         (click)="incAmt()">
         <span class="icon-plus text-success"></span>
       </button>
     </div>
   </div>
+  <div *ngIf="amountValidation" class="d-flex"
+    style="width: 98%; border: 1px solid #F66F5B; border-radius: 5px; height: 50px;" role="group"
+    aria-label="Basic example">
+    <div style="width: 15%; align-items: center;">
+      <button type="button"
+        style="width: 100%; height: 100%;border-radius: 5px; color: #32AD71; border: none; outline: none; background-color: white;"
+        (click)="decAmt()">
+        <span class="icon-negative" style="font-size: 27px;">--</span>
+      </button>
+    </div>
+
+
+    <div class="" style="border-left: 1px solid #F66F5B; border-right: 1px solid #F66F5B; width: 70%;">
+      <input type="text" digitOnly class="amt-input"
+        style="height: 100%; width: 100%; border:none; text-align: center; color: #F66F5B; font-size: 25px;"
+        placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" (blur)="resetAmount()" appComma
+        aria-describedby="basic-addon2" />
+    </div>
+    <div style="width: 15%;">
+      <button type="button"
+        style="width: 100%;border-radius: 5px; height: 100%; border: none; outline: none; background-color: white;"
+        (click)="incAmt()">
+        <span class="icon-plus text-success"></span>
+      </button>
+    </div>
+  </div>
+  <p *ngIf="amountValidation" class="text-danger text-12">{{'message.alert_validAmount' | translate}}</p>
   <p class="text-muted text-10" style="text-align: center;">{{ 'bidderSendOffer.SAR' | translate }}</p>
 
   <div style="border-bottom: 1px solid #B4B4B4;">
@@ -163,7 +192,8 @@
             <div *ngIf="showAttachLoader">
               <label class="text-body text-14">{{ibgaDoc[0].FileLength/1024 | number: '1.0-0'}} kb</label>
               <button class="btn btn-ghost btn-md fill-primary-light-green">
-                <div class="spinner-border text-primary" style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
+                <div class="spinner-border text-primary"
+                  style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
               </button>
@@ -202,7 +232,8 @@
         aria-describedby="basic-addon2" />
     </div>
     <div style="width: 15%;">
-      <button type="button" disabled style="width: 100%;border-radius: 5px;color: #b1b1b1; height: 100%; border: none; outline: none; background-color:#F9FCFA">
+      <button type="button" disabled
+        style="width: 100%;border-radius: 5px;color: #b1b1b1; height: 100%; border: none; outline: none; background-color:#F9FCFA">
         <span class="icon-plus"></span>
       </button>
     </div>
@@ -224,7 +255,8 @@
     <p class="text-body text-12">{{totalOfferPrice | number}} {{ 'bidderSendOffer.SAR' | translate }}</p>
   </div>
 
-  <button disabled  class="btn btn-lg mt-4" style="width: 100%;color: #ffff !important;background-color: #818181 !important;">{{
+  <button disabled class="btn btn-lg mt-4"
+    style="width: 100%;color: #ffff !important;background-color: #818181 !important;">{{
     'bidderSendOffer.SendOffer' | translate }}</button>
 
 </div>
@@ -232,67 +264,67 @@
 
 <!--=================== Confirmatiom model  ===================-->
 <div class="modal show" *ngIf="showConfirmation" id="confirmMemberModal" [ngClass]="{ 'modal-show': showConfirmation }">
-<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLabel">
-                {{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}
-            </h4>
-            <button type="button" class="modal-close btn-close btn-sm" (click)="showConfirmation=false">
-                <span class="icon-close"></span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <label for="confirmation" style="color: #414042; font-size: 16px">{{
-                'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
-        </div>
-        <div class="modal-footer" style="justify-content: end">
-            <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
-                (click)="sendBidOffer()">
-                <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-                &nbsp;
-                {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
-            </button>
-            <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmation=false">
-                {{'bidderAuctionDetails.auction-popup.Cancellation' | translate }}
-            </button>
-        </div>
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">
+          {{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}
+        </h4>
+        <button type="button" class="modal-close btn-close btn-sm" (click)="showConfirmation=false">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="confirmation" style="color: #414042; font-size: 16px">{{
+          'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
+      </div>
+      <div class="modal-footer" style="justify-content: end">
+        <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
+          (click)="sendBidOffer()">
+          <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          &nbsp;
+          {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
+        </button>
+        <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmation=false">
+          {{'bidderAuctionDetails.auction-popup.Cancellation' | translate }}
+        </button>
+      </div>
     </div>
-</div>
+  </div>
 </div>
 <!-- End -->
 
 <!--=================== Successful model  ===================-->
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
-<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
-        <button (click)="showSuccessfulModal=false"type="button" class="modal-close btn-close btn-sm">
-            <span class="icon-close"></span>
+      <button (click)="showSuccessfulModal=false" type="button" class="modal-close btn-close btn-sm">
+        <span class="icon-close"></span>
+      </button>
+      <span class="icon-check"></span>
+      <div class="modal-header">
+        <div class="status-success-icon">
+          <div style="display: flex;">
+            <div class="circle"></div>
+          </div>
+          <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+            {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
+          </h4>
+        </div>
+      </div>
+      <div class="modal-body">
+        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+          {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
+        </label>
+      </div>
+      <div class="modal-footer" style="justify-content: end">
+        <button type="button" (click)="showSuccessfulModal=false" class="btn btn-primary-light btn-md">
+          {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
         </button>
-        <span class="icon-check"></span>
-        <div class="modal-header">
-            <div class="status-success-icon">
-                <div style="display: flex;">
-                    <div class="circle"></div>
-                </div>
-                <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-                    {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
-                </h4>
-            </div>
-        </div>
-        <div class="modal-body">
-            <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
-                {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
-            </label>
-        </div>
-        <div class="modal-footer" style="justify-content: end">
-            <button type="button" (click)="showSuccessfulModal=false" class="btn btn-primary-light btn-md">
-                {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
-            </button>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>
 <!-- End -->
