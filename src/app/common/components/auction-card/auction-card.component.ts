@@ -34,7 +34,7 @@ export class AuctionCardComponent implements OnInit {
 
   async ngOnInit() {
 
-    console.log("🚀🚀 ~~ this.auction", this.auction);
+    // console.log("🚀🚀 ~~ this.auction", this.auction);
     if (this.auction.statuscode == 'Published') {
       this.auctionStatus = 'Upcoming'
     } else {
@@ -56,7 +56,7 @@ export class AuctionCardComponent implements OnInit {
     }
     this.auctionStartDateTime = moment(this.auction.auctiontime).format('DD.MM.YYYY HH:mm:ss');
     this.auctionEndDateTime = moment(this.auction.auctionendtime).format('DD.MM.YYYY HH:mm:ss');
-    console.log("🎯TC🎯 ~ file: auction-card.component.ts ~ line 56 ~ this.auction.auctionendtime", this.auction.auctionendtime);
+    // console.log("🎯TC🎯 ~ file: auction-card.component.ts ~ line 56 ~ this.auction.auctionendtime", this.auction.auctionendtime);
     
   }
 

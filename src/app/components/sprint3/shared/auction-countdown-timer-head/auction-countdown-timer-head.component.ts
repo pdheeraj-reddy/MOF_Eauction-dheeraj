@@ -20,7 +20,10 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
   label: string = ''
 
   ngOnInit(): void {
-    console.log("Auction Start date",this.auctionStartDate);
+    // console.log("🎯TC🎯 ~ file: auction-countdown-timer-head.component.ts ~ line 24 ~ this.auctionEndDate", this.auctionEndDate);
+    // console.log("🎯TC🎯 ~ file: auction-countdown-timer-head.component.ts ~ line 24 ~ this.auctionStartDate", this.auctionStartDate);
+    this.auctionStartDate = this.convert(this.auctionStartDate);
+    this.auctionEndDate = this.convert(this.auctionEndDate);
     let dateStr;
 
     if (this.auctionStatus == "Upcoming") {
@@ -68,5 +71,15 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
       }
     }, 1000);
   }
-
+  /** Convert the date into Date object */
+  convert(hms:any){
+    const date = hms.split(" ")[0];
+    const Time = hms.split(" ")[1];
+    const [day,month,year] = date.split(".");
+    const [hours, minutes, seconds] = Time.split(':');
+    var time = new Date(year,Number(month)-1,day,hours,minutes,seconds);
+    time.setMinutes(time.getMinutes()-150);
+    const arbDate = moment(time).format("DD.MM.YYYY HH:mm:ss");
+    return arbDate;
+  }
 }

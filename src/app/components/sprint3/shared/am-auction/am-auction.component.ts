@@ -111,7 +111,7 @@ export class AmAuctionComponent implements OnInit {
       console.log('this.bidderService.XCSRFToken: ', this.bidderService.XCSRFToken);
       localStorage.setItem('x-csrf-token', this.bidderService.XCSRFToken)
       this.auctionListData = this.mapping(res.body);
-      console.log("🚀🚀 ~~ this.auctionListData", this.mapping(res.body));
+      console.log("🚀🚀 ~~ this.auctionListData", this.auctionListData);
 
       if (res.body.d.results && res.body.d.results.length > 0) {
         this.PaginationServc.setPagerValues(
@@ -158,11 +158,14 @@ export class AmAuctionComponent implements OnInit {
   } 
   /** Convert the date into Date object */
   convert(hms:any){
+    console.log("🎯TC🎯 ~ file: am-auction.component.ts ~ line 162 ~ hms", hms);
     const date = hms.split(" ")[0];
     const Time = hms.split(" ")[1];
     const [day,month,year] = date.split(".");
     const [hours, minutes, seconds] = Time.split(':');
-    const time = new Date(year,month,day,hours,minutes,seconds,0);
+    var time = new Date(year,Number(month)-1,day,hours,minutes,seconds);
+    time.setMinutes(time.getMinutes()-150);
+    console.log("🎯TC🎯 ~ file: am-auction.component.ts ~ line 169 ~ time", time);
     return time;
   }
 

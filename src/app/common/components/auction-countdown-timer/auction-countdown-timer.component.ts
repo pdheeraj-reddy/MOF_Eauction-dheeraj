@@ -24,7 +24,7 @@ export class AuctionCountdownTimerComponent implements OnInit {
   timestamp : any;
 
   ngOnInit(): void {
-    console.log("🎯TC🎯 ~ file: auction-countdown-timer.component.ts ~ line 28 ~ this.date", this.date);
+    // console.log("🎯TC🎯 ~ file: auction-countdown-timer.component.ts ~ line 28 ~ this.date", this.date);
     let dateStr = this.date;
     let timestamp: number = 0;
     if (dateStr) {
