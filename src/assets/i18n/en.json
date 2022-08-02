@@ -736,6 +736,7 @@
         "AmountOfTheInvoice": "Amount of the invoice",
         "EntityName": "Entity Name",
         "InvoicePaymentStatus": "Invoice payment status and final warranty",
+        "InvoiceStatus": "Invoice Payment Status",
         "filter-btn1": "Filter",
         "filter-btn2": "Reset",
         "TheadInvoiceReferenceNumber": "Invoice reference number",
@@ -997,6 +998,8 @@
     "Accurate": "Accurate",
     "Second": "Second",
     "Product": "products",
+    "Awaiting Payment": "Awaiting Payment",
+    "Paid": "Paid",
     "TrustServices": "Trust services",
     "bidderFinalInvoice": {
         "InvoiceDetails": "Invoice Details",

@@ -25,7 +25,7 @@ export class MyInvoicesComponent implements OnInit {
   totcntforpaid: number;
   selectedTab: string = 'All';
   showLoader: boolean = false;
-  dropValStatus: any = ["Awaiting", "Paid"];
+  dropValStatus: any = ["Awaiting Payment", "Paid"];
   // Form controls
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
@@ -61,12 +61,19 @@ export class MyInvoicesComponent implements OnInit {
         ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
         DraftId: result['DraftId'] ? result['DraftId'] : '0',
         referenceno: result['ObjectId'] ? result['ObjectId'] : '',
-        invoiceAmt: result['ZzinvAmt'] ? result['ZzinvAmt'] : '',
-        entityName: result['ZZentName'] ? result['ZZentName'] : '',
-        auctionStatus: result['Status'] ? result['Status'] : '',
-        auctionStartDate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        auctionStartTime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-        auctionStartTimeSufix: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+        invoiceAmt: result['BidderValue'] ? result['BidderValue'] : '',
+        entityName: result['ZzAgencyName'] ? result['ZzAgencyName'] : '',
+        auctionStatus: result['InvoiceStatus'] ? result['InvoiceStatus'] : '',
+        auctionStartDate: result['OfferDate'] ? result['OfferDate'] !== 0 ? moment(result['OfferDate'], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctionStartTime: result['OfferTime'] ? result['OfferTime'] !== 0 ? moment(result['OfferTime'], 'HH:mm:ss').format('hh:mm') : '' : '',
+        auctionStartTimeSufix: result['OfferTime'] ? result['OfferTime'] !== 0 ? moment(result['OfferTime'], 'HH:mm:ss').format('A') : '' : '',
+      }
+      console.log("AUCTION", items.auctionStatus)
+      if (items.auctionStatus == 'N') {
+        items.auctionStatus = 'Awaiting Payment';
+      }
+      else {
+        items.auctionStatus = 'Paid';
       }
       resultSet.push(items);
     });

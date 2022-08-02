@@ -816,6 +816,8 @@
     "Accurate": "دقيقة",
     "Second": "ثانية",
     "Product": "منتج",
+    "Awaiting Payment": "بإنتظار الدفع",
+    "Paid": "مدفوعة",
     "bidderFinalInvoice": {
         "InvoiceDetails": "تفاصيل الفاتورة",
         "InvoiceInformation": "معلومات الفاتورة",
@@ -991,6 +993,7 @@
         "AmountOfTheInvoice": "مبلغ الفاتورة",
         "EntityName": "اسم الجهة",
         "InvoicePaymentStatusFinalWarranty": "حالة دفع الفاتورة والضمان النهائي",
+        "InvoiceStatus": "حالة دفع الفاتورة",
         "filter-btn1": "بحث",
         "filter-btn2": "إعادة تعيين",
         "TheadInvoiceReferenceNumber": "الرقم المرجعي للفاتورة",
