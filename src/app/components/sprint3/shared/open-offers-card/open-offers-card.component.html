@@ -3,9 +3,8 @@
   <!--=================== Yellow box to show auction status ===================-->
   <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
     <div class="mx-3">
-      <p class="text-18 font-weight-bold" style="color: #F9B122;">هذا المزاد تحت الترسية</p>
-      <p class="text-12" style="color: #F9B122;">
-        الرجاء فتح العروض واعتماد الترسية المبدئية.
+      <p class="text-18 font-weight-bold" style="color: #F9B122;">{{ 'open_offer.card.head' | translate }}</p>
+      <p class="text-12" style="color: #F9B122;">{{ 'open_offer.card.subhead' | translate }}
       </p>
     </div>
   </div>
@@ -17,7 +16,7 @@
     <div class="d-flex flex-column justify-content-center" style="width: 35%;">
       <div class="card-body">
         <p class="card-text text-12 text-info">
-          تاريخ فتح العروض
+          {{ 'open_offer.card.time' | translate }}
         </p>
         <div class="row text-success">
           <span class="col-md-6">{{importantInfo.open_biddingdate}}</span>&nbsp;
@@ -35,7 +34,8 @@
 
     <div class="d-flex align-items-center">
       <button [routerLink]="['../../auction-committee-head/open-offers', auctionId]"
-        class="btn btn-primary-light btn-md d-flex" style="min-width: 220px;">فتح العروض</button>
+        class="btn btn-primary-light btn-md d-flex" style="min-width: 220px;">{{ 'open_offer.card.accept_btn' |
+        translate }}</button>
     </div>
   </div>
 </div>

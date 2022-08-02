@@ -756,7 +756,8 @@
             "more": "للمساعدة أو الدعم في إدارة المزادات",
             "clickHere": "انقر هنا",
             "bids": "عدد العطاءات",
-            "participant": "مشاركون"
+            "participant": "مشاركون",
+            "noBidMssg": "لم يتم تقديم أي عروض"
         },
         "ac-openOffers": {
             "bcrumb1": "خدمات الاعتماد",
@@ -808,7 +809,7 @@
         "content2": "مشارك"
     },
     "AuctionDetails": "تفاصيل المزاد",
-    "EndsThrough": "ينتهي خلال:",
+    "Ends Through": "ينتهي خلال",
     "Starts During": "يبدأ خلال",
     "Day": "يوم",
     "Hour": "ساعة",
@@ -996,7 +997,9 @@
         "ThInvoiceIssueDate": "تاريخ إصدار الفاتورة",
         "ThAmountOfTheInvoice": "مبلغ الفاتورة",
         "ThEntityName": "اسم الجهة",
-        "ThInvoicePaymentStatusFinalWarranty": "حالة دفع الفاتورة والضمان النهائي"
+        "ThInvoicePaymentStatusFinalWarranty": "حالة دفع الفاتورة والضمان النهائي",
+        "grid-previous": "سابق",
+        "grid-next": "التالي"
     },
     "bidderSendOffer": {
         "LatestOffersSent": "آخر العروض المرسلة",
@@ -1060,11 +1063,34 @@
     },
     "bidderSendInvoice": {
         "send_invoice": "إرسال الفاتورة",
+        "reject_btn": "رفض الترسية ",
+        "accept_btn": "اعتماد الترسية النهائية",
         "reference": "رجوع",
+        "final_warranty": " الضمان النهائي",
+        "no": "رقم",
         "approval_of_the_final_award_title": "اعتماد الترسية النهائية وإرسال الفاتورة؟",
         "approval_of_the_final_award_desc": "عند اعتماد الترسية إرسال الفاتورة لإتمام الدفع من قبل المزايد، سوف يتم ترسية المزاد تلقائياً.",
         "invoice_sent_successfully": "تم إرسال الفاتورة بنجاح",
         "you_will_receive_invoice": "سوف تصلك رسالة بالبريد الإلكتروني عند إتمام الدفع وترسية المزاد.  "
+    },
+    "fbga_approval": {
+        "popup1": {
+            "head": "تأكيد اعتماد ترسية المزاد؟",
+            "subhead": "عند اعتماد الترسية سيتم إرسال الفاتورة لإتمام الدفع من قبل المزايد، و ترسية المزاد تلقائياً عند إتمام الدفع. ",
+            "confirm_btn": "ترسية المزاد",
+            "back_btn": "إلغاء"
+        },
+        "popup2": {
+            "head": "هل انت متاكد من رفض الترسية؟",
+            "subhead": "تم ترسية هذا العرض من قبل لجنة المزاد، وفي حال رفض الترسية سوف يترتب عليه الغاء المزاد ولن تتم الترسية. ",
+            "reject_btn": "تأكيد رفض الترسية والغاء المزاد",
+            "back_btn": "إلغاء"
+        },
+        "popup3": {
+            "head": "تم رفض الترسية والغاء المزاد بنجاح",
+            "subhead": "تم الغاء المزاد نظراً لعدم ترسية العرض الذي تم ترشيحه من قبل لجنة المزاد.",
+            "confirm_btn": "العودة إلى المزادات"
+        }
     },
     "menu": {
         "auction": "هيدر المزايد",
@@ -1087,7 +1113,13 @@
         "rejection_reason": "سبب الرفض",
         "rejection_confirmation": "تأكيد الرفض",
         "rejection_sent_successfully": "تم إرسال الرفض بنجاح ",
-        "refuse_reason_placeholder": "الرجاء إدخال سبب الرفض…"
+        "refuse_reason_placeholder": "الرجاء إدخال سبب الرفض…",
+        "card": {
+            "head": "هذا المزاد تحت الترسية ",
+            "subhead": "الرجاء فتح العروض واعتماد الترسية المبدئية.",
+            "time": "تاريخ فتح العروض",
+            "accept_btn": "فتح العروض"
+        }
     },
     "sprint3_auction_detail": {
         "your_bid_has_been_awarded!": "تمت الترسية على عرضك!",
@@ -1095,6 +1127,7 @@
         "please_issue_and_attach": "الرجاء إصدار الضمان النهائي وإرفاقه خلال 15 يوم من الترسية. بإمكانك",
         "issuance_of_the_final_guarantee": "إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد",
         "send_the_final_guarantee": "إرسال الضمان النهائي",
-        "auction_report_and_bid_submitted": "تقرير المزاد والعطاء المقدم PDF"
+        "auction_report_and_bid_submitted": "تقرير المزاد والعطاء المقدم PDF",
+        "bidderReport": "تقرير المزاد والعروض المقدمة"
     }
 }

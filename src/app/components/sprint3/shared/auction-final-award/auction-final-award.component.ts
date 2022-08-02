@@ -64,7 +64,8 @@ export class AuctionFinalAwardComponent implements OnInit {
       if (res['d']['Msgty'] === 'S') {
         this.showLoader = false;
         this.showConfirmationAccept = false;
-        this.showSuccessAccept = true;
+        this.router.navigateByUrl('auctions/send-invoice/' + this.auctionId)
+        // this.showSuccessAccept = true;
         this.sendInvoice = true;
       }
     }));

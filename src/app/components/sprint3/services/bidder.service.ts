@@ -170,7 +170,7 @@ export class BidderService {
       "?auctionId=" + auctionId + "&status=" + auctionStatus, httpOptions)
 
   }
-  getMyAuctionsList(filters: any, pageLimit: any, pageNumber?: number): Observable<any> {
+  getMyAuctionsList(filters: any, pageLimit: any, status: string, pageNumber?: number): Observable<any> {
 
     const httpOptions = {
       headers: {
@@ -183,7 +183,7 @@ export class BidderService {
     };
     return this.http.get<any>(this.envService.environment.apiBidderMyAuctions +
       "?$expand=page1tolistnav" +
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + filters + ")&$format=json", httpOptions)
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + " and Status eq " + "'" + status + "'" + filters + ")&$format=json", httpOptions)
 
   }
   getMyInvoiceList(): Observable<any> {
@@ -196,7 +196,7 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiBidderMyInvoices + "&$format=json", httpOptions)
+    return this.http.get<any>(this.envService.environment.apiBidderMyInvoices, httpOptions)
   }
 
   getOfferList(auctionId: string): Observable<any> {

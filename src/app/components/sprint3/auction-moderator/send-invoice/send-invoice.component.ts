@@ -36,6 +36,7 @@ export class SendInvoiceComponent implements OnInit {
   vat: number = 0;
   totalValue: number = 0;
   pageRangeForProductAttach: any;
+  bidderId: any;
   invoiceForSend: InvoiceForSend = new InvoiceForSend();
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -102,6 +103,7 @@ export class SendInvoiceComponent implements OnInit {
       this.offerTime = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('hh:mm');
       this.offerSuffix = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('A');
       this.deliveryDate = moment(this.invoiceData?.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.bidderId = res.body.d.results[0].BidderId;
 
       let bidderValue = parseFloat(this.invoiceData?.BidderValue);
       let quest = parseFloat(this.invoiceData?.ZzCommPercent);
@@ -117,7 +119,7 @@ export class SendInvoiceComponent implements OnInit {
 
 
   sendInvoice() {
-    this.moderatorService.sendInvoice(this.auctionId, "").subscribe((res: any) => {
+    this.moderatorService.sendInvoice(this.auctionId, this.bidderId).subscribe((res: any) => {
       if (res['d']['Msgty'] === 'S') {
         this.showSuccessPopup = true;
       }

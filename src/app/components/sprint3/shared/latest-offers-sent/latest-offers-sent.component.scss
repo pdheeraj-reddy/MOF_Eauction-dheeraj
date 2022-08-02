@@ -192,11 +192,21 @@
     color: #28ab6d;
     font-size: 30px;
 }
-.card-en{
+
+.card-en {
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-.card-ar{
+
+.card-ar {
     border-top-right-radius: 0px;
     border-bottom-left-radius: 0px;
+}
+
+.noOffer {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    display: flex;
+    font-size: 21px;
 }

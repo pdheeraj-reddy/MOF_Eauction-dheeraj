@@ -138,7 +138,7 @@ export class MyAuctionsComponent implements OnInit {
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
 
-    this.bidderSer.getMyAuctionsList($filters, pageLimit, pageNumber).subscribe((res: any) => {
+    this.bidderSer.getMyAuctionsList($filters, pageLimit, this.selectedTab, pageNumber).subscribe((res: any) => {
       this.showLoader = false;
       if (res) {
         this.myAuctionListData = this.mapping(res.body);

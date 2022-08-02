@@ -742,7 +742,9 @@
         "ThInvoiceIssueDate": "Invoice issue date",
         "ThAmountOfTheInvoice": "Amount of the invoice",
         "ThEntityName": "Entity Name",
-        "ThInvoicePaymentStatusFinalWarranty": "Invoice payment status and final warranty"
+        "ThInvoicePaymentStatusFinalWarranty": "Invoice payment status and final warranty",
+        "grid-previous": "Previous",
+        "grid-next": "Next"
     },
     "bidderSendOffer": {
         "LatestOffersSent": "Latest offers sent",
@@ -935,7 +937,8 @@
             "more": "For help or support in managing auctions",
             "clickHere": "Click here",
             "bids": "Number of bids",
-            "participant": "Participants"
+            "participant": "Participants",
+            "noBidMssg": "No offers have been made"
         },
         "ac-openOffers": {
             "bcrumb1": "Accreditation Services",
@@ -987,7 +990,7 @@
         "content2": "participants"
     },
     "AuctionDetails": "Auction Details",
-    "EndsThrough": "Ends Through",
+    "Ends Through": "Ends Through",
     "Starts During": "Starts During",
     "Day": "Day",
     "Hour": "Hour",
@@ -1062,11 +1065,34 @@
     },
     "bidderSendInvoice": {
         "send_invoice": "Send Invoice",
+        "reject_btn": "Refusal to be awarded",
+        "accept_btn": "Final Award Approval",
+        "final_warranty": "Final Warranty",
+        "no": "No.",
         "reference": "Back",
         "approval_of_the_final_award_title": "Approval of the final award and send the invoice ?",
         "approval_of_the_final_award_desc": "When the award is approved and the invoice is sent to complete the payment by the bidder, the auction will be awarded automatically.",
         "invoice_sent_successfully": "Invoice sent successfully",
         "you_will_receive_invoice": "You will receive an email when payment has been completed and the auction has been awarded."
+    },
+    "fbga_approval": {
+        "popup1": {
+            "head": "Confirmation of Auction Awarding Approval?",
+            "subhead": "Upon approval of the award, an invoice will be sent to complete the payment by the bidder, and the auction will be awarded automatically upon completion of the payment.",
+            "confirm_btn": "Auction Award",
+            "back_btn": "Back"
+        },
+        "popup2": {
+            "head": "Are you sure of the rejection of the award?",
+            "subhead": "This offer has been awarded by the auction committee, and if the award is rejected, it will result in the auction being canceled and the awarding will not take place.",
+            "reject_btn": "Confirmation of rejection of the award and cancellation of the auction",
+            "back_btn": "Back"
+        },
+        "popup3": {
+            "head": "The award has been rejected and the auction has been successfully cancelled",
+            "subhead": "Auction has been canceled due to the previously submitted bid not being awarded by Auction Committee.",
+            "confirm_btn": "Back to Auction Requests"
+        }
     },
     "menu": {
         "auction": "Auction",
@@ -1089,7 +1115,13 @@
         "rejection_reason": "Please enter the reason for rejection",
         "rejection_confirmation": "Rejection confirmation",
         "rejection_sent_successfully": "Rejection sent successfully",
-        "refuse_reason_placeholder": "the reason of refuse.."
+        "refuse_reason_placeholder": "the reason of refuse..",
+        "card": {
+            "head": "This auction is under bid",
+            "subhead": "Please open offers and approve the initial award.",
+            "time": "Bid Opening Date",
+            "accept_btn": "Open Offers"
+        }
     },
     "sprint3_auction_detail": {
         "your_bid_has_been_awarded!": "Your bid has been awarded!",
@@ -1097,6 +1129,7 @@
         "please_issue_and_attach": "Please issue and attach the final warranty within 15 days of awarding. you can",
         "issuance_of_the_final_guarantee": "Issuance of the guarantee through the bank guarantee service of the Etimad platform",
         "send_the_final_guarantee": "Send the final guarantee",
-        "auction_report_and_bid_submitted": "Auction report and bid submitted BidOffer PDF"
+        "auction_report_and_bid_submitted": "Auction report and bid submitted BidOffer PDF",
+        "bidderReport": "Auction report and bids submitted"
     }
 }

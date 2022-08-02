@@ -17,20 +17,21 @@
         <div class="d-flex" style="align-items: center;">
           <span class="text-30 icon-alert-success font-weight-bold"></span>
           &nbsp;&nbsp;
-          <h5 class="text-30 text-success font-weight-bold">{{finalaward.bidValue | number}} SAR</h5>
+          <h5 class="text-30 text-success font-weight-bold">{{finalaward.bidValue | number}} {{ 'bidderFinalInvoice.SAR'
+            | translate}}</h5>
           <!-- BidOfferValue -->
         </div>
         <p class="card-text" class=" text-16 text-dark mt-3">
           <!-- BidSupplierName -->
           {{finalaward.bidderName}}
         </p>
-        <p class="text-16 text-dark mb-2">No. {{finalaward.bidderNo}} </p>
+        <p class="text-16 text-dark mb-2">{{ 'bidderSendInvoice.no' | translate }} {{finalaward.bidderNo}} </p>
         <!-- BidCrNumber -->
         <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')" class="text-primary tex-14"
           style="text-decoration: none;">
           <span class="text-16 icon-download"></span>
           &nbsp;
-          <span style="text-decoration: underline;">Final Warranty</span>
+          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' | translate}}</span>
         </a>
         <div *ngIf="showAttachLoader">
           <div class="spinner-border text-primary"
@@ -45,26 +46,27 @@
 
     <div class="top-card-right-right">
       <div>
-        <a (click)="downloadPDF()" class="text-primary tex-14" style="text-decoration: none;">
-          <span class="text-16 icon-download"></span>
-          &nbsp;
-          <span style="text-decoration: underline;">
-            {{'sprint3_auction_detail.auction_report_and_bid_submitted'}}
-          </span>
+        <a (click)="downloadPDF()" class="text-primary text-14 justify-content-end" style="text-decoration: none;">
+
+
+          <span style="text-decoration: underline; font-weight: 500;">
+            {{ 'sprint3_auction_detail.bidderReport' | translate }}
+          </span>&nbsp;
+          <span class="text-16 icon-download font-weight-500"></span>
         </a>
       </div>
       <div *ngIf="!sendInvoice" class="mt-3">
         <button class="btn btn-danger btn-md" (click)="this.showConfirmationReject = true">
-          Refusal to be awarded
+          {{'bidderSendInvoice.reject_btn' | translate}}
         </button>
         &nbsp;&nbsp;
         <button class="btn btn-primary-light btn-md" (click)="this.showConfirmationAccept = true">
-          Final award approval
+          {{'bidderSendInvoice.accept_btn' | translate}}
         </button>
       </div>
       <div class="mt-3" *ngIf="sendInvoice">
         <button class="btn btn-primary-light btn-md" [ngStyle]="{ float: btnFloat }" (click)="goToInvoice()">
-          {{'bidderSendInvoice.send_invoice'}}
+          {{'bidderSendInvoice.send_invoice' | translate}}
         </button>
       </div>
     </div>
@@ -75,10 +77,10 @@
 <!-- Model to confirm Approval -->
 <div class="modal show" *ngIf="showConfirmationAccept" [ngClass]="{ 'modal-show': showConfirmationAccept }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content w-75">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">
-          Confirmation of Auction Awarding Approval?
+          {{ 'fbga_approval.popup1.head' | translate }}
         </h4>
         <button type="button" class="modal-close btn-close btn-sm" (click)="this.showConfirmationAccept = false">
           <span class="icon-close"></span>
@@ -86,15 +88,15 @@
       </div>
       <div class="modal-body">
         <label for="confirmation" style="color: #414042; font-size: 16px">
-          Upon confirmation, the accreditation will be sent to the desired committee
+          {{ 'fbga_approval.popup1.subhead' | translate }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
         <button type="button" (click)="this.showConfirmationAccept = false" class="btn btn-outline-light btn-md">
-          Back
+          {{ 'fbga_approval.popup1.back_btn' | translate }}
         </button>
         <button type="button" class="btn btn-primary-light btn-md" (click)="approve()">
-          Auction Award
+          {{ 'fbga_approval.popup1.confirm_btn' | translate }}
           &nbsp;
           <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light text-14"
             style="width: 20px;height: 20px;" role="status">
@@ -144,27 +146,26 @@
 <!-- Model to confirm Rejection -->
 <div class="modal show" *ngIf="showConfirmationReject" [ngClass]="{ 'modal-show': showConfirmationReject }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="width: 74%;">
       <div class="modal-header">
         <h4 class="modal-title text-danger" id="exampleModalLabel">
-          Are you sure of the rejection of the award?
+          {{ 'fbga_approval.popup2.head' | translate }}
         </h4>
         <button type="button" class="modal-close btn-close btn-sm" (click)="this.showConfirmationReject = false">
           <span class="icon-close"></span>
         </button>
       </div>
       <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px"> This offer has been awarded by the auction
-          committee, and in the event of rejection of the award, it will result
-          in the auction being canceled and the awarding will not take place.
+        <label for="confirmation" style="color: #414042; font-size: 16px"> {{ 'fbga_approval.popup2.subhead' | translate
+          }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end ">
         <button type="button" class="btn btn-outline-light btn-md" (click)="this.showConfirmationReject = false">
-          Back
+          {{ 'fbga_approval.popup2.back_btn' | translate }}
         </button>
         <button type="button" class="btn btn-danger btn-md" data-dismiss="modal" (click)="reject()">
-          Reject Award
+          {{ 'fbga_approval.popup2.reject_btn' | translate }}
           &nbsp;
           <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light text-14"
             style="width: 20px;height: 20px;" role="status">
@@ -180,7 +181,7 @@
 <!-- Model to show confirmed (Successful)  Rejection-->
 <div class="modal show" *ngIf="showSuccessReject" [ngClass]="{ 'modal-show': showSuccessReject }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content" style="align-items: center;">
+    <div class="modal-content" style="align-items: center; width: 85%;">
       <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
         (click)="this.showSuccessReject = false">
         <span class="icon-close"></span>
@@ -192,19 +193,19 @@
             <div class="circle"></div>
 
           </div>
-          <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-            The award has been rejected and the auction has been successfully cancelled
+          <h4 class="modal-title" id="exampleModalLabel" style="text-align: center; margin-top: 30px;">
+            {{ 'fbga_approval.popup3.head' | translate }}
           </h4>
         </div>
       </div>
       <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The auction was cancelled
-          due to the failure to award the bid that was nominated by the auction committee
+        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{
+          'fbga_approval.popup3.subhead' | translate }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessReject = false; gotoList()">
-          Back to Auctions
+          {{ 'fbga_approval.popup3.confirm_btn' | translate }}
         </button>
       </div>
     </div>
