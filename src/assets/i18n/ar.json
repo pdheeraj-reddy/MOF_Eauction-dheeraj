@@ -1131,6 +1131,8 @@
         "issuance_of_the_final_guarantee": "إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد",
         "send_the_final_guarantee": "إرسال الضمان النهائي",
         "auction_report_and_bid_submitted": "تقرير المزاد والعطاء المقدم PDF",
-        "bidderReport": "تقرير المزاد والعروض المقدمة"
+        "bidderReport": "تقرير المزاد والعروض المقدمة",
+        "no_product_picture": "لايوجد صورة للمنتج.",
+        "download_invoice": "نسخة الفاتورة"
     }
 }

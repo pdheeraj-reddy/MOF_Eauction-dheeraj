@@ -1133,6 +1133,8 @@
         "issuance_of_the_final_guarantee": "Issuance of the guarantee through the bank guarantee service of the Etimad platform",
         "send_the_final_guarantee": "Send the final guarantee",
         "auction_report_and_bid_submitted": "Auction report and bid submitted BidOffer PDF",
-        "bidderReport": "Auction report and bids submitted"
+        "bidderReport": "Auction report and bids submitted",
+        "no_product_picture": "There is no product picture",
+        "download_invoice": "Download invoice"
     }
 }
