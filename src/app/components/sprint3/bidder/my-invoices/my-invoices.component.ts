@@ -18,6 +18,7 @@ declare var $: any;
 export class MyInvoicesComponent implements OnInit {
 
   invoiceListData: any;
+  copyInvoiceListData: any;
   selectedPageNumber: number;
   pagelimit: number = 10;
   totcntforall: number;
@@ -30,16 +31,14 @@ export class MyInvoicesComponent implements OnInit {
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
   lang: string;
-  sortCol: any = [
-    { col: 'ObjectId', 'sType': 'D' },
-    { col: 'offerdate', 'sType': 'D' },
-    { col: 'Description', 'sType': 'D' },
-    { col: 'ZzagencyName', 'sType': 'D' },
-    { col: 'entityName', 'sType': 'D' },
-    { col: 'paymentStatus', 'sType': 'D' },
-  ];
-
-
+  filterModel = {
+    referenceno: '',
+    amount: '',
+    issue_date: '',
+    status: '',
+  }
+  pageRangeForAttach: any;
+  columnLst = ['referenceno', 'auctionStartDate', 'invoiceAmt', 'entityName', 'auctionStatus'];
   constructor(
     private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService,
@@ -50,6 +49,27 @@ export class MyInvoicesComponent implements OnInit {
     private envService: EnvService,
     private bidderService: BidderService,
   ) { }
+
+
+
+  ngOnInit(): void {
+    this.lang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.lang = event.lang;
+    });
+    this.filterForm();
+    this.getInvoiceList();
+  }
+
+  getInvoiceList() {
+    this.showLoader = true;
+    this.bidderService.getMyInvoiceList().subscribe((res: any) => {
+      this.showLoader = false;
+      this.invoiceListData = this.mapping(res);
+      this.copyInvoiceListData = this.invoiceListData;
+      this.navigateToPage(1)
+    });
+  }
 
   public mapping(serverObj: any) {
     let resultSet: any = [];
@@ -80,25 +100,11 @@ export class MyInvoicesComponent implements OnInit {
     return resultSet;
   }
 
-  ngOnInit(): void {
-    this.lang = this.translate.currentLang;
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.lang = event.lang;
-    });
-    this.filterForm();
-    this.getInvoiceList(1);
-  }
-
-  ngOnChanges() {
-    console.log('currentLang ', this.translate.currentLang);
-  }
-
   refreshCalendarCntrl() {
     let lang = this.translate.currentLang;
     setTimeout(() => {
-      $("#auctionStartDate").unbind().removeData();
-      $("#auctionEndDate").unbind().removeData();
-      $("#auctionStartDate").hijriDatePicker({
+      $("#invoice_date").unbind().removeData();
+      $("#invoice_date").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
         format: "YYYY-MM-DD",
@@ -108,41 +114,19 @@ export class MyInvoicesComponent implements OnInit {
           next: '<span class="icon-keyboard_arrow_right"></span>',
         },
       });
-      $("#auctionEndDate").hijriDatePicker({
-        hijri: false,
-        locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
-        format: "YYYY-MM-DD",
-        showSwitcher: false,
-        icons: {
-          previous: '<span class="icon-keyboard_arrow_left"></span>',
-          next: '<span class="icon-keyboard_arrow_right"></span>',
-        },
-      });
-      $("#auctionStartDate").on('dp.change', function (arg: any) {
+      $("#invoice_date").on('dp.change', function (arg: any) {
         const v = new Event('change');
-        const e = document.querySelector("#auctionStartDate");
-        e?.dispatchEvent(v);
-      });
-      $("#auctionEndDate").on('dp.change', function (arg: any) {
-        const v = new Event('change');
-        const e = document.querySelector("#auctionEndDate");
+        const e = document.querySelector("#invoice_date");
         e?.dispatchEvent(v);
       });
     }, 100);
   }
 
-  onChangeStartDate($event: any) {
-    this.filterFormGroup.controls['auctionStartDate'].setValue($event.target.value);
-  }
-
-  onChangeEndDate($event: any) {
-    this.filterFormGroup.controls['auctionEndDate'].setValue($event.target.value);
-  }
 
   onTabSelection(value: string) {
     this.filterFormGroup.controls['auctionStatus'].enable();
     this.selectedTab = value;
-    this.getInvoiceList(1);
+    this.getInvoiceList();
 
     this.resetFilter();
     this.showFilterForm = false;
@@ -152,89 +136,6 @@ export class MyInvoicesComponent implements OnInit {
     }
   }
 
-  getInvoiceList(pageNumber?: number, sortBy?: string, sorttype?: string) {
-    const pageNoVal = '' + pageNumber;
-    const page = {
-      pageNumber: pageNumber,
-      pageLimit: this.pagelimit
-    };
-    const filters = {
-      Status: this.selectedTab,
-      ObjectId: this.filterFormGroup.controls['prevRefNo'].value ? this.filterFormGroup.controls['prevRefNo'].value : '',
-      Description: this.filterFormGroup.controls['auctionName'].value ? this.filterFormGroup.controls['auctionName'].value : '',
-      BidType: this.filterFormGroup.controls['auctionType'].value ? (this.filterFormGroup.controls['auctionType'].value === 'Public' ? 'O' : 'C') : '',
-      StartDate: this.filterFormGroup.controls['auctionStartDate'].value ? moment(this.filterFormGroup.controls['auctionStartDate'].value, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-      EndDate: this.filterFormGroup.controls['auctionEndDate'].value ? moment(this.filterFormGroup.controls['auctionEndDate'].value, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
-      Message: '',
-      Msgty: ''
-    };
-    if (this.selectedTab === 'All' && this.filterFormGroup.controls['auctionStatus'].value !== '') {
-      filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
-      filters.Message = 'F';
-    }
-    if (sortBy && sorttype) {
-      filters.Msgty = sorttype + ' ' + sortBy;
-    }
-
-
-
-    console.log(filters, "filters");
-    const pageLimit = page.pageLimit ? page.pageLimit : '10';
-    let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
-    this.showLoader = true;
-    this.bidderService.getMyInvoiceList().subscribe((res: any) => {
-      this.showLoader = false;
-      this.invoiceListData = this.mapping(res);
-    });
-    // this.http.get<any>(this.envService.environment.apiBidderMyInvoices 
-    //   // "?$expand=page1tolistnav" + 
-    //   // "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'A'" + $filters + ")&$format=json" 
-    //   ,{responseType: 'json'}).subscribe(res=>{
-    //     this.showLoader = false;
-
-    // //   this.PaginationServc.setPagerValues(
-    // //     +res.body.d.results[0].TotEle,
-    // //     10,
-    // //     +pageNoVal
-    // //   );
-
-    // //   const csrfToken = localStorage.getItem("x-csrf-token");    
-    // //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   console.log(res,"f");
-    //   this.invoiceListData = this.mapping(res);
-    // }, (error) => {
-    //     this.showLoader = false;
-    //     console.log('getAuctionList RespError : ', error);
-    //   });
-    // this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
-    //   this.showLoader = false;
-
-    //   this.PaginationServc.setPagerValues(
-    //     +res.body.d.results[0].TotEle,
-    //     10,
-    //     +pageNoVal
-    //   );
-
-    //   const csrfToken = localStorage.getItem("x-csrf-token");
-    //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   this.auctionListData = this.mapping(res.body);
-
-    // }, (error) => {
-    //   this.showLoader = false;
-    //   console.log('getInvoiceList RespError : ', error);
-    // });
-  }
-
-  sortBy(sortBy?: string) {
-    var foundIndex = this.sortCol.findIndex((el: { col: any; }) => el.col === sortBy);
-    this.sortCol[foundIndex].sType = this.sortCol[foundIndex].sType === 'A' ? 'D' : 'A';
-    this.getInvoiceList(1, sortBy, this.sortCol[foundIndex].sType);
-  }
-
-  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
-  }
 
   filterForm() {
     this.filterFormGroup = this.formBuilder.group({
@@ -263,33 +164,75 @@ export class MyInvoicesComponent implements OnInit {
     this.refreshCalendarCntrl();
   }
 
-  setFilter() {
-
+  applyFilter() {
+    this.invoiceListData = this.copyInvoiceListData;
+    if (this.filterModel.amount) {
+      this.invoiceListData = this.invoiceListData.filter((i: any) => {
+        if (i.invoiceAmt.toLowerCase().indexOf(this.filterModel.amount.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.status) {
+      this.invoiceListData = this.invoiceListData.filter((i: any) => {
+        if (i.auctionStatus.toLowerCase().indexOf(this.filterModel.status.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.referenceno) {
+      this.invoiceListData = this.invoiceListData.filter((i: any) => {
+        if (i.BidderId.toLowerCase().indexOf(this.filterModel.referenceno.toLowerCase()) > -1) return true;
+        return false;
+      })
+    }
+    if (this.filterModel.issue_date) {
+      console.log('this.filterModel: ', this.filterModel);
+      this.invoiceListData = this.invoiceListData.filter((i: any) => {
+        if (i.auctionStartDate?.split('.')[0] === this.filterModel.issue_date?.split('-')[2]) return true;
+        return false;
+      })
+    }
+    this.navigateToPage(1)
   }
 
-  /** Populating the table */
-  public getServerData(selectedPageNumber: number) {
-
-    if (selectedPageNumber <= 2) {
-      selectedPageNumber = 1;
-    } else {
-      selectedPageNumber = selectedPageNumber - 1;
-    }
-    this.selectedPageNumber = selectedPageNumber;
-
-    this.getInvoiceList(selectedPageNumber);
-    this.PaginationServc.resetSorting();
+  onChangeDate($event: any) {
+    this.filterModel.issue_date = $event.target.value;
   }
 
   resetFilter() {
-    this.filterFormGroup.controls['prevRefNo'].setValue('');
-    this.filterFormGroup.controls['auctionName'].setValue('');
-    this.filterFormGroup.controls['auctionType'].setValue('');
-    this.filterFormGroup.controls['auctionStatus'].setValue('');
-    this.filterFormGroup.controls['auctionStartDate'].setValue('');
-    this.filterFormGroup.controls['auctionEndDate'].setValue('');
-    this.refreshCalendarCntrl();
-    this.getInvoiceList(1);
+    this.filterModel = {
+      referenceno: '',
+      amount: '',
+      issue_date: '',
+      status: '',
+    }
+    this.refreshCalendarCntrl()
+    this.invoiceListData = this.copyInvoiceListData;
+  }
+
+  navigateToPage(pageNoVal: number) {
+    this.PaginationServc.setPagerValues(this.invoiceListData.length, this.pagelimit, pageNoVal);
+    this.pageRangeForAttach = {
+      rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
+      rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
+      pages: this.PaginationServc.pages,
+      currentPage: this.PaginationServc.currentPage,
+      totalPages: this.PaginationServc.totalPages,
+    }
+  }
+
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.invoiceListData, this.columnLst[columnId]);
+  }
+
+  isSorting(columnId: number) {
+    return this.PaginationServc.columnId !== columnId;
+  }
+  isSortAsc(columnId: number) {
+    return this.PaginationServc.isSortAsc(columnId);
+  }
+  isSorDesc(columnId: number) {
+    return this.PaginationServc.isSortDesc(columnId);
   }
 
 

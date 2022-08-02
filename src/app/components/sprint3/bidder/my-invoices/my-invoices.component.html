@@ -69,62 +69,56 @@
         </div>
     </div>
     <div class="modal-content p-4 shadow-lg border mt-4" *ngIf="showFilterForm">
-        <form [formGroup]="filterFormGroup">
-            <div class="modal-header">
-                <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
-                    'bidderMyInvoices.filter-title' | translate }}</h3>
-                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
-                    (click)="toggleFilter()">
-                    <span class="icon-close"></span>
-                </button>
-            </div>
-            <div class="modal-body mb-3">
-                <div class="col-12 row pr-0">
-                    <div class="col-md-4 mb-3">
-                        <label class="d-flex" for="validationCustom02">{{ 'bidderMyInvoices.InvoiceReferenceNumber' |
-                            translate }}</label>
-                        <input type="text" maxlength="10" formControlName="prevRefNo" class="form-control"
-                            placeholder="{{ 'bidderMyInvoices.InvoiceReferenceNumberPholder' | translate }}"
-                            id="validationCustom01" [required]="true" />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="validationCustom01">{{ 'bidderMyInvoices.AmountOfTheInvoice' | translate }}</label>
-                        <input type="text" formControlName="auctionName" class="form-control"
-                            placeholder="{{ 'bidderMyInvoices.AmountOfTheInvoice' | translate }}"
-                            id="validationCustom01" [required]="true" />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="d-flex" for="validationCustom02">{{ 'bidderMyInvoices.InvoiceIssueDate' |
-                            translate }}</label>
-                        <input type="text" id="auctionStartDate" formControlName="auctionStartDate"
-                            placeholder="{{ 'bidderMyInvoices.Invoice-formDate-pholder' | translate }}"
-                            (change)="onChangeStartDate($event)"
-                            class="form-control calendar-control calendar-both-control" />
-                        <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="{{ 'bidderMyInvoices.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
-                    </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab === 'All'">
-                        <label for="validationCustom04">{{ 'bidderMyInvoices.ThInvoicePaymentStatusFinalWarranty' |
-                            translate
-                            }}</label>
-                        <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
-                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
-                            <option value="">{{ 'bidderMyInvoices.InvoiceStatus' | translate }} </option>
-                            <option *ngFor="let status of dropValStatus">{{status | translate }}</option>
-                        </select>
-                    </div>
+        <div class="modal-header">
+            <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
+                'bidderMyInvoices.filter-title' | translate }}</h3>
+            <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                (click)="toggleFilter()">
+                <span class="icon-close"></span>
+            </button>
+        </div>
+        <div class="modal-body mb-3">
+            <div class="col-12 row pr-0">
+                <div class="col-md-4 mb-3">
+                    <label class="d-flex" for="validationCustom02">{{ 'bidderMyInvoices.InvoiceReferenceNumber' |
+                        translate }}</label>
+                    <input type="text" maxlength="10" [(ngModel)]="filterModel.referenceno" class="form-control"
+                        placeholder="{{ 'bidderMyInvoices.InvoiceReferenceNumberPholder' | translate }}"
+                        id="validationCustom01" />
                 </div>
-                <!-- {{filterFormGroup.value | json}} -->
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">{{ 'bidderMyInvoices.AmountOfTheInvoice' | translate }}</label>
+                    <input type="number" [(ngModel)]="filterModel.amount" class="form-control"
+                        placeholder="{{ 'bidderMyInvoices.AmountOfTheInvoice' | translate }}" id="validationCustom01" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="d-flex" for="validationCustom02">{{ 'bidderMyInvoices.InvoiceIssueDate' |
+                        translate }}</label>
+                    <input type="text" id="invoice_date" [(ngModel)]="filterModel.issue_date"
+                        placeholder="{{ 'bidderMyInvoices.Invoice-formDate-pholder' | translate }}"
+                        (change)="onChangeDate($event)" class="form-control calendar-control calendar-both-control" />
+                </div>
+                <div class="col-md-4 mb-3" *ngIf="selectedTab === 'All'">
+                    <label for="validationCustom04">{{ 'bidderMyInvoices.ThInvoicePaymentStatusFinalWarranty' |
+                        translate
+                        }}</label>
+                    <select class="form-control" id="validationCustom04" [(ngModel)]="filterModel.status">
+                        <option value="">{{ 'bidderMyInvoices.InvoiceStatus' | translate }} </option>
+                        <option *ngFor="let status of dropValStatus">{{status | translate }}</option>
+                    </select>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md "
-                    (click)="resetFilter()">
-                    {{ 'bidderMyInvoices.filter-btn2' | translate }}
-                </button>
-                <button type="button" class="btn btn-primary-light btn-md" (click)="getInvoiceList(1)">
-                    {{ 'bidderMyInvoices.filter-btn1' | translate }}
-                </button>
-            </div>
-        </form>
+            <!-- {{filterFormGroup.value | json}} -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md "
+                (click)="resetFilter()">
+                {{ 'bidderMyInvoices.filter-btn2' | translate }}
+            </button>
+            <button type="button" class="btn btn-primary-light btn-md" (click)="getInvoiceList()">
+                {{ 'bidderMyInvoices.filter-btn1' | translate }}
+            </button>
+        </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-12">
@@ -133,35 +127,45 @@
                     class="table table-bordered table-striped table-expanded table-hover">
                     <thead class="thead-dark">
                         <tr class="">
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ObjectId')">
+                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                (click)="sortByTableHeaderId(0, 'string')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.TheadInvoiceReferenceNumber' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucSrtDt')">
+                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                (click)="sortByTableHeaderId(1, 'string')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThInvoiceIssueDate' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Description')">
+                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                (click)="sortByTableHeaderId(2, 'numeric')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThAmountOfTheInvoice' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('BidType')">
+                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                (click)="sortByTableHeaderId(3, 'string')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThEntityName' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                                 </div>
                             </th>
-                            <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Status')">
+                            <th class="btn-primary-light cursor-pointer" scope="col"
+                                (click)="sortByTableHeaderId(4, 'string')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyInvoices.ThInvoicePaymentStatusFinalWarranty' | translate
                                         }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light" scope="col"></th>
@@ -236,67 +240,69 @@
                             </td>
                         </tr>
                         <ng-container *ngIf="!showLoader && invoiceListData?.length > 0">
-                            <tr *ngFor="let rowItem of invoiceListData"
+                            <tr *ngFor="let rowItem of invoiceListData;index as i"
                                 [ngClass]="lang == 'en' ? 'text-left' : 'text-right'">
-                                <td scope="row">{{rowItem.referenceno}}</td>
-                                <td>
-                                    <div class="pt-1 text-14">{{ rowItem.auctionStartDate }}
-                                        <div class="text-14 color-lightGrey">{{ rowItem.auctionStartTime }} {{
-                                            rowItem.auctionStartTimeSufix | translate }}</div>
-                                    </div>
-                                </td>
-                                <td>{{ rowItem.invoiceAmt }} {{ 'bidderFinalInvoice.SAR' | translate }}</td>
-                                <td>{{ rowItem.entityName | translate }} </td>
-                                <td>
-                                    <div
-                                        [ngClass]="[rowItem.auctionStatus === 'Awaiting Payment' ? 'status status-o status-o-warning-2' : 'status status-o status-o-success-3'  ]">
-                                        <br>
-                                    </div>
-                                    {{ rowItem.auctionStatus | translate }}
-                                </td>
-                                <td width="20px">
-                                    <!-- <a *ngIf="rowItem.auctionStatus === 'Pending Review'" [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'view']" class="btn btn-ghost btn-sm fill-primary-light-green">
+                                <ng-container
+                                    *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
+                                    <td scope="row">{{rowItem.referenceno}}</td>
+                                    <td>
+                                        <div class="pt-1 text-14">{{ rowItem.auctionStartDate }}
+                                            <div class="text-14 color-lightGrey">{{ rowItem.auctionStartTime }} {{
+                                                rowItem.auctionStartTimeSufix | translate }}</div>
+                                        </div>
+                                    </td>
+                                    <td>{{ rowItem.invoiceAmt }} {{ 'bidderFinalInvoice.SAR' | translate }}</td>
+                                    <td>{{ rowItem.entityName | translate }} </td>
+                                    <td>
+                                        <div
+                                            [ngClass]="[rowItem.auctionStatus === 'Awaiting Payment' ? 'status status-o status-o-warning-2' : 'status status-o status-o-success-3'  ]">
+                                            <br>
+                                        </div>
+                                        {{ rowItem.auctionStatus | translate }}
+                                    </td>
+                                    <td width="20px">
+                                        <!-- <a *ngIf="rowItem.auctionStatus === 'Pending Review'" [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'view']" class="btn btn-ghost btn-sm fill-primary-light-green">
                                         <span class="icon-eye-open"></span>
                                     </a> -->
-                                    <a [routerLink]="['/bidder/pay-final-invoice',  rowItem.ObjectId]"
-                                        class="btn btn-ghost btn-sm fill-primary-light-green">
-                                        <span class="icon-eye-open"></span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item"
-                                            [routerLink]="['/auctions/1/final-invoice', rowItem.ObjectId]">{{
-                                            'bidderMyInvoices.grid1-btn3' | translate }}</a>
-                                        <!-- <a class="dropdown-item text-danger">{{ 'bidderMyInvoices.grid1-btn2' | translate }}</a> -->
-                                    </div>
-                                </td>
+                                        <a [routerLink]="['/bidder/pay-final-invoice',  rowItem.ObjectId]"
+                                            class="btn btn-ghost btn-sm fill-primary-light-green">
+                                            <span class="icon-eye-open"></span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                                [routerLink]="['/auctions/1/final-invoice', rowItem.ObjectId]">{{
+                                                'bidderMyInvoices.grid1-btn3' | translate }}</a>
+                                            <!-- <a class="dropdown-item text-danger">{{ 'bidderMyInvoices.grid1-btn2' | translate }}</a> -->
+                                        </div>
+                                    </td>
+                                </ng-container>
                             </tr>
                         </ng-container>
                     </tbody>
                 </table>
             </div>
-            <div class="mt-4 row justify-content-end" *ngIf="invoiceListData?.length > 0">
+            <div *ngIf="invoiceListData?.length > 0" class="mt-4 row justify-content-end">
                 <div class="mb-5">
-
                     <nav aria-label="..." class="nav-pagination">
-                        <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
-                            <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                                <a (click)="getServerData(PaginationServc.currentPage)" class="page-link" tabindex="-1"
-                                    aria-disabled="true">{{ 'bidderMyInvoices.grid-previous' | translate }}</a>
+                        <ul class="pagination">
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
+                                <a (click)="navigateToPage(pageRangeForAttach.currentPage -1)" class="page-link"
+                                    aria-disabled="true">{{
+                                    'auctionlist.grid-previous' | translate }}</a>
                             </li>
-                            <li *ngFor="let page of PaginationServc.pages" class="page-item"
-                                [ngClass]="{ active: PaginationServc.currentPage === page }">
-                                <a (click)="getServerData(page + 1)" class="page-link">
-                                    {{ page }}
-                                </a>
+                            <li *ngFor="let page of pageRangeForAttach.pages" class="page-item"
+                                [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
+                                <a (click)="navigateToPage(page)" class="page-link"> {{
+                                    page }} </a>
                             </li>
-                            <li class="page-item"
-                                [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                                <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
-                                    'bidderMyInvoices.grid-next' | translate }}</a>
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
+                                <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1)" class="page-link">{{
+                                    'auctionlist.grid-next' | translate }}</a>
                             </li>
                         </ul>
                     </nav>
-                    <!--Pagination End-->
                 </div>
             </div>
         </div>

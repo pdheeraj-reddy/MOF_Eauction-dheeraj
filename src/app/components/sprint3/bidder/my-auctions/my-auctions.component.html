@@ -164,44 +164,51 @@
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ObjectId')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyAuctions.ThAuctionReferenceNumber' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Description')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyAuctions.ThAuctionName' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('BidType')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyAuctions.ThAuctionType' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(2), 'sort-asc': isSortAsc(2), 'sort-desc': isSorDesc(2) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('Status')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyAuctions.AuctionStatus' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucEndDt')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyAuctions.AuctionEndDate' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(4), 'sort-asc': isSortAsc(4), 'sort-desc': isSorDesc(4) }"></span></span>
                                 </div>
                             </th>
                             <!-- <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucSrtDt')">
                                 <div class="table-header-cell">
                                     <span>{{ 'auctionlist.grid1-col4' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                                 </div>
                             </th> -->
 
                             <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortBy('ZzAucSrtDt')">
                                 <div class="table-header-cell">
                                     <span>{{ 'bidderMyAuctions.DisplayCase' | translate }}</span>
-                                    <span class="arrow asc"><span class="icon-unfold_more"></span></span>
+                                    <span class="sort"><span class="sort-none"
+                                            [ngClass]="{ 'sort-none': isSorting(5), 'sort-asc': isSortAsc(5), 'sort-desc': isSorDesc(5) }"></span></span>
                                 </div>
                             </th>
                             <th class="btn-primary-light" scope="col"></th>

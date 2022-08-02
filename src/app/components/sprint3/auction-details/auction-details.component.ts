@@ -331,6 +331,7 @@ export class AuctionDetailsComponent implements OnInit {
       }
 
       if (this.filenetImagesLst.length == 0) {
+        this.manageEmptyImageProduct();
         this.showLoaderMainImage = false;
         this.showLoaderSubImage = false;
       }
@@ -887,6 +888,16 @@ export class AuctionDetailsComponent implements OnInit {
         })
       }
     });
+    if (this.slidesStore.length == 1) {
+      this.fullImage = {
+        id: this.slidesStore[0].id,
+        src: this.slidesStore[0].src,
+        type: this.slidesStore[0].type,
+        blankImage: this.slidesStore[0].blankImage,
+        title: this.slidesStore[0].title,
+      }
+      this.selectedProduct = this.slidesStore[0].id;
+    }
     console.log('this.slidesStore: ', this.slidesStore);
     console.log('this.slidesStore: ', this.products);
   }
