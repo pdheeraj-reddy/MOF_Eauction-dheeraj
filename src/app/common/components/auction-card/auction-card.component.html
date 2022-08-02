@@ -66,15 +66,17 @@
         </div>
         <div class="text-body text-18 d-flex mt-3" *ngIf=" auction.auctiondate">
             <span class="icon-calendar text-primary font-weight-bold"></span>
-            <span class="mx-3"> {{auction.auctiondate | date:'dd-MM-yyyy'}} </span>∙ &nbsp;
+            <span class="mx-3"> {{auction.auctiondate | date:'YYYY-MM-dd'}} </span>∙ &nbsp;
             <span *ngIf="auction.auctiontime">
-                {{auction.auctiontime}}
+                {{auctionStartTime}}
             </span>
         </div>
         <div style="display: flex;">
-            <app-auction-countdown-timer *ngIf="auction.statuscode == 'Upcoming'" [timestamp]="auction.auctionenddate" showText="Starts In" class="mt-3" style="width: 90%;">
-            </app-auction-countdown-timer> 
-            <app-auction-countdown-timer *ngIf="auction.statuscode != 'Ongoing'" [timestamp]="auction.auctionenddate" showText="Ends In" class="mt-3" style="width: 90%;">
+            <app-auction-countdown-timer *ngIf="auction.statuscode == 'Upcoming'" [date]="auctionStartDateTime"
+                showText="Starts In" class="mt-3" style="width: 90%;">
+            </app-auction-countdown-timer>
+            <app-auction-countdown-timer *ngIf="auction.statuscode != 'Upcoming'" [date]="auctionEndDateTime"
+                showText="Ends In" class="mt-3" style="width: 90%;">
             </app-auction-countdown-timer>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
             <div class="mt-5">

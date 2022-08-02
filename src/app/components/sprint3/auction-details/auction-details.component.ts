@@ -161,12 +161,6 @@ export class AuctionDetailsComponent implements OnInit {
     this.role.auctionMod = this.currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
     this.role.bidder = this.currentUser.isBidder;
-    // To by pass the bidder role (Below should be removed if we get the bidder with correct role)
-    if (this.role.bidder) {
-      this.role.auctionCommitteeHead = false;
-      this.role.auctionMod = false;
-    }
-    // End
     console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 107 ~ this.role", this.role);
     this.currentLang = localStorage.getItem('lang_pref');
     if (this.currentLang == 'en') {
@@ -189,7 +183,6 @@ export class AuctionDetailsComponent implements OnInit {
       if (newLang == 'ar') {
         this.currentLang = newLang;
         this.textDir = false;
-        // // // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 72 ~ textDir", this.textDir);
       }
       else {
         this.textDir = true;
@@ -257,7 +250,6 @@ export class AuctionDetailsComponent implements OnInit {
                 productFiles.push(fileupload);
               });
               // console.log(productFiles, "Product files")
-              // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 206 ~ productFiles", productFiles);
             }
           }
         }
@@ -413,7 +405,6 @@ export class AuctionDetailsComponent implements OnInit {
       });
     }
     let auctionDetailList = serverObj.d.results[0];
-    // // // console.log("🚀🚀 ~~ auctionDetailList", auctionDetailList);
     let productList = auctionDetailList.listtoproductnav.results[0];
     console.log(serverObj.d.results[0], "sd");
     this.statusData = serverObj.d.results[0];
@@ -751,7 +742,6 @@ export class AuctionDetailsComponent implements OnInit {
 
   viewAttachment(file: any, index: number, option: string) {
 
-    // // // console.log("🚀🚀 ~~ auctionDetails", this.upcomingAuction.auction_detail?.auctionAttachement);
     if (file.FilenetId) {
       console.log("🚀🚀 ~~ file.FilenetId", file.FilenetId);
       file.downloading = true;
@@ -837,7 +827,6 @@ export class AuctionDetailsComponent implements OnInit {
 
 
   downloadImages(item: any) {
-    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 663 ~ item", item);
 
     this.bidderService.downloadAuctionImages(item.FilenetId).subscribe(async (downloadAuctionImagesResp: any) => {
       const fileResp = downloadAuctionImagesResp.d;

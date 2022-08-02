@@ -21,6 +21,9 @@ export class AuctionCardComponent implements OnInit {
   source: any = '';
   auctionStatus: any = '';
   showLoader: boolean = false;
+  auctionStartTime : any;
+  auctionStartDateTime : string;
+  auctionEndDateTime : string;
   constructor(
     public translate: TranslateService,
     public bidderService: BidderService,
@@ -49,8 +52,12 @@ export class AuctionCardComponent implements OnInit {
       var H = +timeString.substr(0, 2);
       var h = H % 12 || 12;
       var ampm = (H < 12 || H === 24) ? " AM" : " PM";
-      this.auction.auctiontime = h + timeString.substr(2, 3) + ampm;
+      this.auctionStartTime = h + timeString.substr(2, 3) + ampm;
     }
+    this.auctionStartDateTime = moment(this.auction.auctiontime).format('DD.MM.YYYY HH:mm:ss');
+    this.auctionEndDateTime = moment(this.auction.auctionendtime).format('DD.MM.YYYY HH:mm:ss');
+    console.log("🎯TC🎯 ~ file: auction-card.component.ts ~ line 56 ~ this.auction.auctionendtime", this.auction.auctionendtime);
+    
   }
 
   convertBlobToBase64 = (blob: any) =>
