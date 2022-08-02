@@ -40,8 +40,12 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     // console.log(dateStr);
     const timeout = setInterval(() => {
       // get total seconds between the times
+      // var date = new Date(Date.now());
+      // date.setMinutes(date.getMinutes()-150);
       var delta = (timestamp - Date.now()) / 1000;
-      // console.log(delta);
+
+      // console.log(delta + 600000); 
+      // delta +=7200;
       if (delta > 0) {
         // calculate (and subtract) whole days
         const days = Math.floor(delta / 86400);
@@ -78,7 +82,7 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     const [day,month,year] = date.split(".");
     const [hours, minutes, seconds] = Time.split(':');
     var time = new Date(year,Number(month)-1,day,hours,minutes,seconds);
-    time.setMinutes(time.getMinutes()-150);
+    // time.setMinutes(time.getMinutes()+150);
     const arbDate = moment(time).format("DD.MM.YYYY HH:mm:ss");
     return arbDate;
   }

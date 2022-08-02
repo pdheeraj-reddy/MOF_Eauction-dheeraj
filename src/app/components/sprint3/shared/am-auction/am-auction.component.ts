@@ -164,7 +164,7 @@ export class AmAuctionComponent implements OnInit {
     const [day,month,year] = date.split(".");
     const [hours, minutes, seconds] = Time.split(':');
     var time = new Date(year,Number(month)-1,day,hours,minutes,seconds);
-    time.setMinutes(time.getMinutes()-150);
+    // time.setMinutes(time.getMinutes()+150);
     console.log("🎯TC🎯 ~ file: am-auction.component.ts ~ line 169 ~ time", time);
     return time;
   }
