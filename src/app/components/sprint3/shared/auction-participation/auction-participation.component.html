@@ -36,7 +36,8 @@
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center" (click)="showConfirmationModal = true">
+        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center"
+            (click)="showConfirmationModal = true">
             {{'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
         </button>
         <!-- End -->
@@ -61,10 +62,9 @@
                         'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
                 </div>
                 <div class="modal-footer" style="justify-content: end">
-                    <button type="button" class="btn btn-primary-light btn-md"
-                        (click)="submitparticipation()">
+                    <button type="button" class="btn btn-primary-light btn-md" (click)="submitparticipation()">
                         <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
-                          <span class="sr-only">Loading...</span>
+                            <span class="sr-only">Loading...</span>
                         </div>
                         &nbsp;
                         {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
@@ -102,7 +102,7 @@
                     </label>
                 </div>
                 <div class="modal-footer" style="justify-content: end">
-                    <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md">
+                    <button type="button" [routerLink]="['/auctions']" class="btn btn-primary-light btn-md">
                         {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
                     </button>
                 </div>

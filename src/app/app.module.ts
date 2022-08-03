@@ -21,7 +21,6 @@ import { AuctionComponent } from './components/auction/auction-indetail/auction.
 import { TenderComponent } from './tender/tender.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuctionListsComponent } from './components/auction/auction-lists/auction-lists.component';
-import { ClipboardModule } from 'ngx-clipboard';
 import {
   HttpClient,
   HttpClientModule,
@@ -155,7 +154,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     EAucCommonModule,
-    ClipboardModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-CSRF-TOKEN',
