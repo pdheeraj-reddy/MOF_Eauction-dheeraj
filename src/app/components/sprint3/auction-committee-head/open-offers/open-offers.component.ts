@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
@@ -54,6 +54,7 @@ export class OpenOffersComponent implements OnInit {
     public auctionServc: AuctionService,
     public translate: TranslateService,
     public datepipe: DatePipe,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -89,13 +90,20 @@ export class OpenOffersComponent implements OnInit {
             facilityName: result['BidderName'] ? result['BidderName'] : '-',
             FileName: result['FileName'] ? result['FileName'] : '',
             commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
+            ZzBidderSts: result['ZzBidderSts'] ? result['ZzBidderSts'] : '',
             downloadingAttachmet: false,
             selected: false,
             // auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : '',
           };
           resultSet.push(items);
         });
-        if (resultSet?.length > 0) resultSet[0].selected = true;
+        for (let i = 0; i < resultSet.length; i++) {
+          if (resultSet[i].ZzBidderSts == 'B') {
+            resultSet[i].selected = true;
+            break;
+          }
+        }
+        // if (resultSet?.length > 0) resultSet[0].selected = true;
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
@@ -316,6 +324,12 @@ export class OpenOffersComponent implements OnInit {
         e?.dispatchEvent(v);
       });
     }, 100);
+  }
+
+  backToAuctionDetail() {
+    this.showModal.acceptOfferSuccess = false;
+    this.showModal.rejectOfferSuccess = false;
+    this.router.navigate(['/auction-details/' + this.auctionId])
   }
 
 }

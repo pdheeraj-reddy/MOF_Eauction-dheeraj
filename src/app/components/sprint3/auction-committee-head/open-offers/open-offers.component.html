@@ -365,7 +365,7 @@
                 </div>
             </div>
             <div class="alert-action">
-                <button type="button" (click)="showModal.acceptOfferSuccess = false" data-dismiss="modal"
+                <button type="button" (click)="backToAuctionDetail()" data-dismiss="modal"
                     class="btn btn-primary-light">
                     {{'bidderSendOffer.BackToAuctions' | translate}} </button>
             </div>
@@ -477,7 +477,7 @@
                 </div>
             </div>
             <div class="alert-action">
-                <button type="button" (click)="showModal.rejectOfferSuccess = false" class="btn btn-primary-light">
+                <button type="button" (click)="backToAuctionDetail()" class="btn btn-primary-light">
                     {{'bidderSendOffer.BackToAuctions' | translate}} </button>
             </div>
         </div>
