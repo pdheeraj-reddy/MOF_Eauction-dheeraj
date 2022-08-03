@@ -36,7 +36,7 @@ export class PaginationSortingService {
     this.pageSize = pageSize;
     this.setPage(pageNumber);
     this.setPager();
-    this.resetSorting();
+    // this.resetSorting();
   }
 
   setPager() {
