@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { BidderService } from 'src/app/components/sprint3/services/bidder.service';
+import { AuctionService } from 'src/app/service/auction.service';
 
 /**
  * auction-card.ts
@@ -24,17 +25,26 @@ export class AuctionCardComponent implements OnInit {
   auctionStartTime : any;
   auctionStartDateTime : string;
   auctionEndDateTime : string;
+  /**User roles */
+  role = {
+    bidder: false,
+    auctionMod: false,
+    auctionCommitteeHead: false
+  }
   constructor(
     public translate: TranslateService,
     public bidderService: BidderService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private auctionSev: AuctionService,
   ) { }
 
   async ngOnInit() {
-
-    // console.log("🚀🚀 ~~ this.auction", this.auction);
+    let currentUser = this.auctionSev.getLoggedUserRole();
+    this.role.auctionMod = currentUser.isAuctionModerator;
+    this.role.auctionCommitteeHead = currentUser.isSalesHead;
+    this.role.bidder = currentUser.isBidder;
     if (this.auction.statuscode == 'Published') {
       this.auctionStatus = 'Upcoming'
     } else {

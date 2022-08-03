@@ -66,7 +66,7 @@
         </div>
     </div>
     <div *ngIf="!showPageLoader" class="row justify-content-between no-gutters">
-        <div class="col-md-9 justify-content-start">
+        <div class="col-md-10 justify-content-start">
             <div class=" row no-gutters">
                 <div class="col-12">
                     <div class="card">
@@ -122,7 +122,7 @@
         </div>
 
         <div class="col-auto justify-content-end">
-            <button (click)="toggleFilter()"
+            <button (click)="toggleFilter()" style="height: 48px; width: 48px;"
                 class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm text-success"
                 [ngClass]="{ 'filter-active': showFilterForm }" type="button" id="dropdownMenuButton"
                 aria-haspopup="true" aria-expanded="false">
@@ -150,17 +150,21 @@
                             placeholder="{{ 'auctionlist.filter-refno-pholder' | translate }}" id="validationCustom01"
                             [required]="true" />
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="validationCustom01">{{ 'auctionlist.filter-actionname' | translate }}</label>
-                        <input type="text" formControlName="auctionName" class="form-control"
-                            placeholder="{{ 'auctionlist.filter-actionname-pholder' | translate }}"
-                            id="validationCustom01" [required]="true" />
+                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All'">
+                        <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
+                        <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
+                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
+                            <option value="">{{ 'Auction Status' | translate }} </option>
+                            <option [value]="status.code" *ngFor="let status of dropValStatus">{{status.disp |
+                                translate
+                                }}</option>
+                        </select>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="validationCustom04">{{ 'auctionlist.filter-auctiontype' | translate }}</label>
-                        <select class="form-control" id="validationCustom04" formControlName="auctionType"
-                            (change)="changeSelect($event, 'auctionType')" [required]="true">
-                            <option value="">{{ 'Auction Type' | translate }} </option>
+                        <label for="validationCustom04">{{ 'bidderAuctions.BiddingMethod' | translate }}</label>
+                        <select class="form-control" id="validationCustom04" formControlName="biddingMethod"
+                            (change)="changeSelect($event, 'biddingMethod')" [required]="true">
+                            <option value="">{{ 'bidderAuctions.BiddingMethod' | translate }} </option>
                             <option [value]="product.code" *ngFor="let product of dropValProducts">{{product.disp |
                                 translate }}</option>
                         </select>
@@ -182,22 +186,12 @@
                             class="form-control calendar-control calendar-both-control" />
                         <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
                     </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All'">
-                        <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
-                        <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
-                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
-                            <option value="">{{ 'Auction Status' | translate }} </option>
-                            <option [value]="status.code" *ngFor="let status of dropValStatus">{{status.disp |
-                                translate
-                                }}</option>
-                        </select>
-                    </div>
                 </div>
                 <!-- {{filterFormGroup.value | json}} -->
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md "
-                    (click)="resetFilter()">
+                <button type="button" data-dismiss="modal" aria-label="Close"
+                    class="btn btn-outline-secondary-blue btn-md " (click)="resetFilter()">
                     {{ 'bidderAuctions.filter-btn2' | translate }}
                 </button>
                 <button type="button" class="btn btn-primary-light btn-md" (click)="getAuctionList(1)">
@@ -251,47 +245,59 @@
             <ng-container *ngIf="!showLoader && auctionListData!.length> 0">
                 <app-auction-card [auction]="rowItem" *ngFor="let rowItem of auctionListData"></app-auction-card>
             </ng-container>
-            <ng-container *ngIf="!showPageLoader &&!showLoader && auctionListData!.length == 0">
-                <div class="alert-body text-center mt-5"><i class="alert-icon"><svg width="48" height="48"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g fill="#CCC" fill-rule="nonzero">
-                                <path
-                                    d="M46.884 15.272L24.513 8.087a1.545 1.545 0 00-1.005-.006L1.113 15.273A1.606 1.606 0 000 16.802v21.35a2.4 2.4 0 001.618 2.268l21.592 7.445a2.365 2.365 0 001.57 0l21.6-7.447A2.4 2.4 0 0048 38.153V16.802c0-.698-.451-1.316-1.116-1.53zM23.2
-                            9.862v10.94a.8.8 0 001.6 0V9.86l21.6 6.935V16.808h-.005L24 24.001 1.605 16.795 23.2 9.861zM1.6 38.151V18.488l21.6 6.938v20.744l-21.058-7.26a.8.8 0 01-.542-.756zm44.26.757l-21.06 7.26V25.426l21.6-6.938v19.666a.8.8 0 01-.54.756z">
-                                </path>
-                                <path
-                                    d="M20.246 26.289l-14.87-4.88a1.538 1.538 0 00-1.399.231c-.404.3-.643.78-.644 1.291v13.563c0 .682.424 1.289 1.055 1.511l14.87 5.24c.478.17 1.007.091 1.42-.21.411-.3.656-.785.655-1.302V27.816a1.592
-                            1.592 0 00-1.087-1.527zM4.9 28.353l14.87 4.88v3.74l-14.87-4.878v-3.742zm14.87-.537v3.742l-14.87-4.879v-3.748l14.87 4.885zm-14.87 8.678v-2.72l14.87 4.88v3.079l-14.87-5.24zM44.023 21.64a1.546 1.546 0 00-1.4-.231l-14.87 4.879a1.592 1.592 0 00-1.086
-                            1.53v13.916c0 .517.245 1.002.657 1.302.412.3.94.378 1.418.21l14.87-5.24a1.598 1.598 0 001.055-1.51V22.932a1.62 1.62 0 00-.644-1.294zm-.922 1.293v5.565l-3.932 1.288a2.326 2.326 0 00-1.546 2.27 1.595 1.595 0 01-1.122 1.53c-.664.2-1.378-.07-1.755-.663a2.166
-                            2.166 0 00-2.53-.867l-3.984 1.305v-5.544l14.87-4.884zm-14.87 18.801V35.04l4.462-1.458a.645.645 0 01.738.207 3.098 3.098 0 003.519 1.327c1.33-.404 2.242-1.656 2.238-3.076a.728.728 0 01.458-.73l3.455-1.133v6.32l-14.87 5.237zM24 6.667c.368 0 .667-.373.667-.834v-5C24.667.373
-                            24.368 0 24 0c-.368 0-.667.373-.667.833v5c0 .46.299.834.667.834zM12.484 7.539a.786.786 0 001.073.373.85.85 0 00.359-1.118l-2.4-5a.786.786 0 00-1.073-.373.85.85 0 00-.359 1.119l2.4 4.999zM34.44 7.911c.192.1.413.116.615.046a.81.81 0 00.463-.423l2.398-4.995a.85.85
-                            0 00-.359-1.118.785.785 0 00-1.072.373L34.087 6.79a.864.864 0 00-.047.637c.066.21.21.385.4.484z">
-                                </path>
-                            </g>
-                        </svg></i>
-                    <div class="alert-content">
-                        <h5 class="text-black-50">{{ 'common.msg-nodata' | translate }}</h5>
-                    </div>
+            <!--============= No data available card =============-->
+            <div class="card mb-4 w-100" *ngIf="!showPageLoader &&!showLoader && auctionListData!.length == 0">
+                <div class="card-body">
+                    <ng-container>
+                        <div class="alert-body text-center mt-5 mb-5">
+                            <i class="alert-icon">
+                                <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+                                    <g fill="#CCC" fill-rule="nonzero">
+                                        <path
+                                            d="M46.884 15.272L24.513 8.087a1.545 1.545 0 00-1.005-.006L1.113 15.273A1.606 1.606 0 000 16.802v21.35a2.4 2.4 0 001.618 2.268l21.592 7.445a2.365 2.365 0 001.57 0l21.6-7.447A2.4 2.4 0 0048 38.153V16.802c0-.698-.451-1.316-1.116-1.53zM23.2
+                                    9.862v10.94a.8.8 0 001.6 0V9.86l21.6 6.935V16.808h-.005L24 24.001 1.605 16.795 23.2 9.861zM1.6 38.151V18.488l21.6 6.938v20.744l-21.058-7.26a.8.8 0 01-.542-.756zm44.26.757l-21.06 7.26V25.426l21.6-6.938v19.666a.8.8 0 01-.54.756z">
+                                        </path>
+                                        <path
+                                            d="M20.246 26.289l-14.87-4.88a1.538 1.538 0 00-1.399.231c-.404.3-.643.78-.644 1.291v13.563c0 .682.424 1.289 1.055 1.511l14.87 5.24c.478.17 1.007.091 1.42-.21.411-.3.656-.785.655-1.302V27.816a1.592
+                                    1.592 0 00-1.087-1.527zM4.9 28.353l14.87 4.88v3.74l-14.87-4.878v-3.742zm14.87-.537v3.742l-14.87-4.879v-3.748l14.87 4.885zm-14.87 8.678v-2.72l14.87 4.88v3.079l-14.87-5.24zM44.023 21.64a1.546 1.546 0 00-1.4-.231l-14.87 4.879a1.592 1.592 0 00-1.086
+                                    1.53v13.916c0 .517.245 1.002.657 1.302.412.3.94.378 1.418.21l14.87-5.24a1.598 1.598 0 001.055-1.51V22.932a1.62 1.62 0 00-.644-1.294zm-.922 1.293v5.565l-3.932 1.288a2.326 2.326 0 00-1.546 2.27 1.595 1.595 0 01-1.122 1.53c-.664.2-1.378-.07-1.755-.663a2.166
+                                    2.166 0 00-2.53-.867l-3.984 1.305v-5.544l14.87-4.884zm-14.87 18.801V35.04l4.462-1.458a.645.645 0 01.738.207 3.098 3.098 0 003.519 1.327c1.33-.404 2.242-1.656 2.238-3.076a.728.728 0 01.458-.73l3.455-1.133v6.32l-14.87 5.237zM24 6.667c.368 0 .667-.373.667-.834v-5C24.667.373
+                                    24.368 0 24 0c-.368 0-.667.373-.667.833v5c0 .46.299.834.667.834zM12.484 7.539a.786.786 0 001.073.373.85.85 0 00.359-1.118l-2.4-5a.786.786 0 00-1.073-.373.85.85 0 00-.359 1.119l2.4 4.999zM34.44 7.911c.192.1.413.116.615.046a.81.81 0 00.463-.423l2.398-4.995a.85.85
+                                    0 00-.359-1.118.785.785 0 00-1.072.373L34.087 6.79a.864.864 0 00-.047.637c.066.21.21.385.4.484z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </i>
+                            <div class="alert-content">
+                                <h5 class="text-black-50">{{ 'common.msg-nodata' | translate }}</h5>
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
-            </ng-container>
+            </div>
+
+            <!-- End -->
         </div>
-        <div class="mt-4 row justify-content-end" *ngIf="auctionListData!.length > 0">
+        <div class="mt-4 row justify-content-end"
+            *ngIf="auctionListData!.length > 0 && PaginationServc.pages.length > 6 && showPagination">
             <div class="mb-5">
                 <nav aria-label="..." class="nav-pagination">
                     <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
                         <li class="page-item clickable" disabled
-                            [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                            <a (click)="getServerData(PaginationServc.currentPage)" class="page-link"
-                                aria-disabled="true">{{
+                            [ngClass]="{ disabled: PaginationServc.currentPage === 1 || showLoader}">
+                            <a (click)="getServerData(PaginationServc.currentPage);this.showPagination = true;"
+                                class="page-link" aria-disabled="true">{{
                                 'auctionlist.grid-previous' | translate }}</a>
                         </li>
                         <li *ngFor="let page of PaginationServc.pages" class="page-item"
                             [ngClass]="{ active: PaginationServc.currentPage === page }">
-                            <a (click)="getServerData(page + 1)" class="page-link"> {{ page }} </a>
+                            <a (click)="getServerData(page + 1);this.showPagination = true;" class="page-link"
+                                [ngClass]="{diabled : showLoader}"> {{ page }} </a>
                         </li>
                         <li class="page-item clickable" disabled
-                            [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                            <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
+                            [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages || showLoader}">
+                            <a (click)="getServerData(PaginationServc.currentPage + 2);this.showPagination = true;"
+                                class="page-link">{{
                                 'auctionlist.grid-next' | translate }}</a>
                         </li>
                     </ul>

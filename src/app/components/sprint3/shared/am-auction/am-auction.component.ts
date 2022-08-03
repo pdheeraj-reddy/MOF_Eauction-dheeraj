@@ -27,8 +27,8 @@ export class AmAuctionComponent implements OnInit {
   }
   showLoader: boolean = false;
   dropValProducts = [
-    { code: "Public", disp: "Public" },
-    { code: "Private", disp: "Private" }
+    { code: "Open", disp: "Open" },
+    { code: "Closed", disp: "Closed" }
   ];
   dropValStatus = [
     { code: "Published", disp: "Published" },
@@ -41,6 +41,7 @@ export class AmAuctionComponent implements OnInit {
     { code: "Terminated", disp: "Terminated" },
   ];;
   showPageLoader: boolean = false;
+  showPagination : boolean = false;
   selectedTab: string = 'All';
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
@@ -68,7 +69,7 @@ export class AmAuctionComponent implements OnInit {
 
   defineForm() {
     this.filterFormGroup = this.formBuilder.group({
-      auctionType: new FormControl(''),
+      biddingMethod: new FormControl(''),
       auctionStatus: new FormControl(''),
       prevRefNo: new FormControl(''),
       auctionName: new FormControl(''),
@@ -80,6 +81,7 @@ export class AmAuctionComponent implements OnInit {
 
   getAuctionList(pageNumber?: number, sortBy?: string, sorttype?: string) {
     this.showLoader = true;
+    this.showPagination = false;
     const pageNoVal = '' + pageNumber;
     const page = {
       pageNumber: pageNumber,
@@ -89,7 +91,7 @@ export class AmAuctionComponent implements OnInit {
       Status: this.selectedTab,
       ObjectId: this.filterFormGroup.controls['prevRefNo'].value ? this.filterFormGroup.controls['prevRefNo'].value : '',
       Description: this.filterFormGroup.controls['auctionName'].value ? this.filterFormGroup.controls['auctionName'].value : '',
-      BidType: this.filterFormGroup.controls['auctionType'].value ? (this.filterFormGroup.controls['auctionType'].value === 'Public' ? 'O' : 'C') : '',
+      BidMethod: this.filterFormGroup.controls['biddingMethod'].value ? (this.filterFormGroup.controls['biddingMethod'].value === 'Closed' ? 'C' : 'D') : '',
       StartDate: this.filterFormGroup.controls['auctionStartDate'].value ? moment(this.filterFormGroup.controls['auctionStartDate'].value, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
       EndDate: this.filterFormGroup.controls['auctionEndDate'].value ? moment(this.filterFormGroup.controls['auctionEndDate'].value, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
       Message: '',
@@ -106,6 +108,7 @@ export class AmAuctionComponent implements OnInit {
     this.bidderService.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
+      this.showPagination = true;
 
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
       console.log('this.bidderService.XCSRFToken: ', this.bidderService.XCSRFToken);
@@ -200,7 +203,9 @@ export class AmAuctionComponent implements OnInit {
   }
 
   public toggleFilter() {
-    this.resetFilter();
+    if(this.showFilterForm){
+      this.resetFilter();
+    }
     this.showFilterForm = !this.showFilterForm;
     this.refreshCalendarCntrl();
   }
@@ -254,6 +259,7 @@ export class AmAuctionComponent implements OnInit {
   // filter tab selection event
 
   onTabSelection(value: string) {
+    this.showPagination = false;
     this.filterFormGroup.controls['auctionStatus'].enable();
     this.selectedTab = value;
     // this.getAuctionList(1);
@@ -296,13 +302,22 @@ export class AmAuctionComponent implements OnInit {
   }
 
   resetFilter() {
+    if(
+      this.filterFormGroup.controls['prevRefNo'].value != '' || 
+      this.filterFormGroup.controls['auctionName'].value != '' ||
+      this.filterFormGroup.controls['biddingMethod'].value != '' ||
+      this.filterFormGroup.controls['auctionStatus'].value != '' ||
+      this.filterFormGroup.controls['auctionStartDate'].value != '' ||
+      this.filterFormGroup.controls['auctionEndDate'].value != ''
+    ){
     this.filterFormGroup.controls['prevRefNo'].setValue('');
     this.filterFormGroup.controls['auctionName'].setValue('');
-    this.filterFormGroup.controls['auctionType'].setValue('');
+    this.filterFormGroup.controls['biddingMethod'].setValue('');
     this.filterFormGroup.controls['auctionStatus'].setValue('');
     this.filterFormGroup.controls['auctionStartDate'].setValue('');
     this.filterFormGroup.controls['auctionEndDate'].setValue('');
+    // this.getAuctionList(1);
     this.refreshCalendarCntrl();
   }
-
+  }
 }

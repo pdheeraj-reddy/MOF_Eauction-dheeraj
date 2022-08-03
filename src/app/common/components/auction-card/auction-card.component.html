@@ -2,7 +2,6 @@
 
     <div
         [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
-        {{auction.statuscount}}<span class="icon-eye-open" *ngIf="auctionStatus=='Running Now'"></span>
         {{auctionStatus | translate}}
     </div>
 
@@ -80,11 +79,18 @@
             </app-auction-countdown-timer>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
             <div class="mt-5">
-                <a [routerLink]="['/auction-details', auction.ObjectId]" (click)="redirectToDetail(auction.ObjectId)"
-                    class="btn btn-info font-weight-bold" style="width: 141px;"
-                    [ngClass]="[(auctionStatus === 'Under Gear' || auctionStatus === 'Awarded' || auctionStatus === 'Canceled' ) ? 'notact-btn' : (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'act-btn' :'']">
+                <button *ngIf="role.bidder" (click)="redirectToDetail(auction.ObjectId)" style="width: 125px;"
+                    [ngClass]="[role.bidder ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : '']">
                     {{ 'AuctionDetails' | translate }}
-                </a>
+                </button>
+                <button *ngIf="role.auctionCommitteeHead" (click)="redirectToDetail(auction.ObjectId)" style="width: 125px;"
+                    [ngClass]="[role.auctionCommitteeHead ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : 'font-weight-bold']">
+                    {{ 'AuctionDetails' | translate }}
+                </button>
+                <button *ngIf="role.auctionMod" (click)="redirectToDetail(auction.ObjectId)" style="width: 125px;"
+                    [ngClass]="[role.auctionMod ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : '']">
+                    {{ 'AuctionDetails' | translate }}
+                </button>
             </div>
         </div>
     </div>
