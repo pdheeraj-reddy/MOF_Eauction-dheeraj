@@ -2,10 +2,8 @@
     <!--=================== Yellow box to show auction status ===================-->
     <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
         <div class="mx-3">
-            <p class="text-18 text-warning font-weight-bold">بإنتظار الدفع</p>
-            <p class="text-12 text-warning">
-                الرجاء دفع الفاتورة لإعتماد الترسية النهائية.
-            </p>
+            <p class="text-18 text-warning font-weight-bold">{{ 'payInvoice.head' | translate }}</p>
+            <p class="text-12 text-warning">{{ 'payInvoice.sub_head' | translate }}</p>
         </div>
     </div>
     <!-- End -->
@@ -17,8 +15,7 @@
         <!--=================== Description ===================-->
         <div class="d-flex flex-column justify-content-center m-4" style="max-width: 440px">
             <div>
-                <p class="text-info text-12 ">سيتم الغاء الترسية في حال لم يتم دفع الفاتورة خلال 30 يوم من الترسية.
-                </p>
+                <p class="text-primary text-14 ">{{ 'payInvoice.label' | translate }}</p>
             </div>
         </div>
         <!-- End -->
@@ -26,7 +23,7 @@
         <!--=================== Participation Button ===================-->
         <button class="btn btn-primary-light btn-md align-self-center" style="min-width: 200px;"
             [routerLink]="['/bidder/pay-final-invoice',auctionId]">
-            دفع الفاتورة
+            {{ 'payInvoice.pay_btn' | translate }}
         </button>
         <!-- End -->
     </div>

@@ -124,6 +124,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.bidderTab.my_auction = true;
       } else if (this.url.includes('bidder/my-invoices')) {
         this.bidderTab.my_invoices = true;
+      } else if (this.url.includes('bidder/pay-final-invoice')) {
+        this.bidderTab.my_invoices = true;
       } else if (this.url.includes('bidder/invitation')) {
         this.bidderTab.invitation = true;
       } else if (this.url.includes('auction-details')) {

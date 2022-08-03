@@ -103,8 +103,11 @@ export class SendInvoiceComponent implements OnInit {
       this.offerDate = moment(this.invoiceData?.OfferDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
       this.offerTime = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('hh:mm');
       this.offerSuffix = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('A');
-      this.deliveryDate = moment(this.invoiceData?.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.deliveryDate = moment(this.invoiceData?.DelivDate, 'YYYYMMDD').format('YYYY-MM-DD');
       this.bidderId = res.body.d.results[0].BidderId;
+      this.invoiceData?.invoicetoprodnav.results.forEach((res: any) => {
+        res.DelivDate = moment(res.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      });
 
       let bidderValue = parseFloat(this.invoiceData?.BidderValue);
       let quest = parseFloat(this.invoiceData?.ZzCommPercent);

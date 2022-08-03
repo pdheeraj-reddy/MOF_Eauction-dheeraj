@@ -16,6 +16,7 @@
     "Pending FBGA": "في انتظار FBGA",
     "Pending Primary Awarding": "معلقة المنح الابتدائية",
     "Pending Selecting": "في انتظار التحديد",
+    "Pending Paying": "تحت الترسية",
     "Running Now": "يعمل الآن",
     "Cancelled": "ألغيت",
     "Awarded": "منحت",
@@ -870,7 +871,8 @@
         "paymentDeadline": "آخر موعد للسداد",
         "billerName": "اسم ورمز المفوتر",
         "accept_btn": "تفاصيل الفاتورة",
-        "back_btn": "العودة إلى تفاصيل المزاد"
+        "back_btn": "العودة إلى تفاصيل المزاد",
+        "copied": "نسخ"
     },
     "bidderAuctionDetails": {
         "Auctions": "المزادات",
@@ -1149,5 +1151,11 @@
         "bidderReport": "تقرير المزاد والعروض المقدمة",
         "no_product_picture": "لايوجد صورة للمنتج.",
         "download_invoice": "نسخة الفاتورة"
+    },
+    "payInvoice": {
+        "head": "بإنتظار الدفع",
+        "sub_head": "الرجاء دفع الفاتورة لإعتماد الترسية النهائية. ",
+        "label": "سيتم الغاء الترسية في حال لم يتم دفع الفاتورة خلال 30 يوم من الترسية.",
+        "pay_btn": "دفع الفاتورة"
     }
 }

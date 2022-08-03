@@ -16,6 +16,7 @@
     "Pending FBGA": "Pending FBGA",
     "Pending Primary Awarding": "Pending Primary Awarding",
     "Pending Selecting": "Pending Selecting",
+    "Pending Paying": "Pending Paying",
     "Running Now": "Running Now",
     "Cancelled": "Cancelled",
     "Awarded": "Awarded",
@@ -1053,7 +1054,8 @@
         "paymentDeadline": "Payment Deadline",
         "billerName": "Biller Name and Code",
         "accept_btn": "Invoice Details",
-        "back_btn": "Back to Auction details"
+        "back_btn": "Back to Auction details",
+        "copied": "Copied"
     },
     "bidderAuctions": {
         "EtimadServices": "Etimad Services",
@@ -1151,5 +1153,11 @@
         "bidderReport": "Auction report and bids submitted",
         "no_product_picture": "There is no product picture",
         "download_invoice": "Download invoice"
+    },
+    "payInvoice": {
+        "head": "Awaiting Payment",
+        "sub_head": "Please pay the invoice to approve the final award.",
+        "label": "The award will be canceled if the bill is not paid within 30 days of the award.",
+        "pay_btn": "Pay Bill"
     }
 }

@@ -49,6 +49,7 @@ export class PayFinalInvoiceComponent implements OnInit {
   totalValue: number = 0;
   pageRangeForProductAttach: any;
   bidderId: any;
+  paymentDeadline: any;
 
   constructor(
     public PaginationServc: PaginationSortingService,
@@ -96,6 +97,7 @@ export class PayFinalInvoiceComponent implements OnInit {
   copyText() { this.clipboardApi.copyFromContent("this.content") }
 
 
+
   getInvoice() {
     this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
       this.showLoader = false;
@@ -108,8 +110,12 @@ export class PayFinalInvoiceComponent implements OnInit {
       this.offerDate = moment(this.invoiceData?.OfferDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
       this.offerTime = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('hh:mm');
       this.offerSuffix = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('A');
-      this.deliveryDate = moment(this.invoiceData?.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.deliveryDate = moment(this.invoiceData?.DelivDate, 'YYYYMMDD').format('YYYY-MM-DD');
+      this.paymentDeadline = moment(this.invoiceData?.PaymentDeadLine, 'DD.MM.YYYY').format('YYYY-MM-DD');
       this.bidderId = res.body.d.results[0].BidderId;
+      this.invoiceData?.invoicetoprodnav.results.forEach((res: any) => {
+        res.DelivDate = moment(res.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+      });
 
       let bidderValue = parseFloat(this.invoiceData?.BidderValue);
       let quest = parseFloat(this.invoiceData?.ZzCommPercent);

@@ -230,7 +230,7 @@
                         </div>
                     </div>
 
-                    <div class="border-bottom d-flex mt-4">
+                    <div class="border-bottom d-flex mt-4 mb-4">
                         <div class="w-50">
                             <p class="text-primary font-weight-bold text-18">
                                 {{'bidderFinalInvoice.BillHolderInformation' | translate}}</p>
@@ -274,7 +274,7 @@
                         </div>
                     </div>
 
-                    <div class="border-bottom mt-4 mb-4">
+                    <div *ngIf="invoiceData?.SameAddress == 'Y'" class="border-bottom mt-4 mb-4">
                         <p class="text-primary font-weight-bold text-18 mb-4">
                             {{'bidderFinalInvoice.DeliveryData' | translate}}</p>
 
@@ -282,7 +282,7 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.DeliveryDate' | translate}}</label>
-                                    <div class="text-primary">{{deliveryDate}}</div>
+                                    <div class="text-primary">{{ deliveryDate }}</div>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +349,12 @@
                                 <span>{{'bidderFinalInvoice.SKU_Number' | translate}}</span>
                             </div>
                         </th>
-                        <th class="btn-primary-light" scope="col">
+                        <th *ngIf="invoiceData?.SameAddress == 'N'" class="btn-primary-light" scope="col">
+                            <div class="table-header-cell">
+                                <span>{{'bidderFinalInvoice.DeliveryDate' | translate}}</span>
+                            </div>
+                        </th>
+                        <th *ngIf="invoiceData?.SameAddress == 'N'" class="btn-primary-light" scope="col">
                             <div class="table-header-cell">
                                 <span>{{'bidderFinalInvoice.DeliveryAdd' | translate}}</span>
                             </div>
@@ -364,49 +369,98 @@
                                 <td>{{i+1}}</td>
                                 <td>{{rowItem.Description}}</td>
                                 <td>{{rowItem.ZzProductSku}}</td>
-                                <td>{{rowItem.ZzRegion}}, {{rowItem.ZzCity}}, {{rowItem.ZzNeighbourhood}},
+                                <td *ngIf="invoiceData?.SameAddress == 'N'">{{rowItem.DelivDate}}</td>
+                                <td *ngIf="invoiceData?.SameAddress == 'N'">{{rowItem.ZzRegion}}, {{rowItem.ZzCity}},
+                                    {{rowItem.ZzNeighbourhood}},
                                     {{rowItem.ZzStreet}}</td>
                             </ng-container>
                         </tr>
                     </ng-container>
                     <ng-container *ngIf="invoiceData?.BidderValue">
-                        <tr>
-                            <td colspan="4">
-                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice' |
-                                    translate}}</span>
-                                <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
-                                    '1.0-2'}}
-                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate' |
-                                    translate}}</span>
-                                <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
-                                    '1.0-2'}}
-                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
-                                    | translate}}</span>
-                                <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
-                                    '1.0-2'}}
-                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <span
-                                    class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
-                                    | translate}}</span>
-                                <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
-                                    '1.0-2'}}
-                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
-                            </td>
-                        </tr>
+                        <ng-container *ngIf="invoiceData?.SameAddress == 'N'">
+                            <tr>
+                                <td colspan="5">
+                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
+                                        |
+                                        translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
+                                        |
+                                        translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <span
+                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                        | translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <span
+                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                        | translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngIf="invoiceData?.SameAddress == 'Y'">
+                            <tr>
+                                <td colspan="3">
+                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
+                                        |
+                                        translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
+                                        |
+                                        translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <span
+                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                        | translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <span
+                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                        | translate}}</span>
+                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
+                                        '1.0-2'}}
+                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
+                                </td>
+                            </tr>
+                        </ng-container>
                     </ng-container>
                 </tbody>
             </table>
@@ -856,8 +910,10 @@
                 <div class="row">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.invoiceNumber' | translate}}</div>
                     <div class="col text-primary d-flex">
-                        <a (click)="copyText()"><span class="icon-copy text-primary"></span></a>
-                        <span class="mx-2">9999999999999</span>
+                        <span class="icon-copy text-primary" style="cursor: pointer;" data-toggle="tooltip"
+                            data-placement="bottom" title="{{'bidderFinalInvoice.copied' | translate}}"
+                            (click)="copyText()"></span>
+                        <span class="mx-2">{{ invoiceData?.InvoiceNumber }}</span>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -867,11 +923,11 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.paymentDeadline' | translate}}</div>
-                    <div class="col text-primary">Date yet to know</div>
+                    <div class="col text-primary">{{ paymentDeadline }}</div>
                 </div>
                 <div class="row mt-4">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.billerName' | translate}}</div>
-                    <div class="col text-primary">Date yet to know</div>
+                    <div class="col text-primary">Yet to know</div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
