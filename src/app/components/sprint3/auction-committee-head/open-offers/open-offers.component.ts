@@ -231,7 +231,7 @@ export class OpenOffersComponent implements OnInit {
       commercial_ref: '',
     }
     this.refreshCalendarCntrl()
-    this.openofferListData = this.copyOpenofferListData;
+    // this.openofferListData = this.copyOpenofferListData;
   }
 
   applyFilter() {

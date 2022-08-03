@@ -29,7 +29,7 @@
     "Add Committee Member": "إضافة عضو اللجنه",
     "Add Committee Secretary": "إضافة سكرتير اللجنة",
     "Closed": "مغلقه",
-    "Open" : "مفتوح",
+    "Open": "مفتوح",
     "Direct": "مباشر",
     "To me": "آلي",
     "Automatic": "آلي",
@@ -762,7 +762,7 @@
             "noBidMssg": "لم يتم تقديم أي عروض"
         },
         "ac-openOffers": {
-            "bcrumb1": "خدمات الاعتماد",
+            "bcrumb1": "خدمات اعتماد",
             "bcrumb2": "المزادات",
             "bcrumb3": "تفاصيل المزاد",
             "bcrumb4": "فتح العروض",
@@ -1034,6 +1034,7 @@
         "AddedTaxValue": "قيمة الضريبة المضافة",
         "TotalOfferPrice": "اجمالي سعر العرض",
         "SendOffer": "إرسال العرض",
+        "SentOffer": "تقديم عرض",
         "ConfirmationBidSubmission": "تأكيد تقديم العرض؟",
         "BidSubmissionDescription": "عند التأكيد يوف يتم إرسال عرضك للجنة المزاد. ولن تستطيع تعديل او إلغاء العرض بعد إرساله.",
         "SubmitOffer": "إرسال العرض",

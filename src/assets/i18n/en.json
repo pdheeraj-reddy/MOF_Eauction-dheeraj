@@ -700,7 +700,7 @@
         }
     },
     "bidderMyAuctions": {
-        "TrustServices": "Trust services",
+        "TrustServices": "Etimad Services",
         "MyAuctions": "My Auctions",
         "All": "All",
         "OngoingAuctions": "Ongoing",
@@ -724,7 +724,7 @@
         "DisplayCase": "Display Case"
     },
     "bidderMyInvoices": {
-        "TrustServices": "Trust services",
+        "TrustServices": "Etimad Services",
         "Invoices": "Invoices",
         "InvoicesTitle": "Invoices",
         "All": "All",
@@ -761,6 +761,7 @@
         "AddedTaxValue": "Added tax value",
         "TotalOfferPrice": "Total offer price",
         "SendOffer": "Send offer",
+        "SentOffer": "Offer Sent",
         "ConfirmationBidSubmission": "Confirmation of bid submission?",
         "BidSubmissionDescription": "Upon confirmation, your bid will be sent to the auction committee. You will not be able to modify or cancel the offer after it has been sent.",
         "SubmitOffer": "Post confirmation",
@@ -944,7 +945,7 @@
             "noBidMssg": "No offers have been made"
         },
         "ac-openOffers": {
-            "bcrumb1": "Accreditation Services",
+            "bcrumb1": "Etimad Services",
             "bcrumb2": "Auctions",
             "bcrumb3": "Auction Details",
             "bcrumb4": "Open Offers",

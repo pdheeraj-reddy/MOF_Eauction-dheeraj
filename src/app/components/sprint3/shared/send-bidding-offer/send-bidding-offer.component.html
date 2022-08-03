@@ -18,7 +18,7 @@
   <!-- ============= File upload area and view area ===============-->
   <div class="mt-4">
 
-    <p *ngIf="invalidFileType" class="text-danger text-12">{{'message.alert_validfile' | translate}}</p>
+    <!-- <p *ngIf="invalidFileType" class="text-danger text-12">{{'message.alert_validfile' | translate}}</p> -->
     <p *ngIf="invalidFileSize" class="text-danger text-12">{{'message.alert_maxfilesize' | translate}}</p>
     <p *ngIf="invalidFileCount" class="text-danger text-12">{{'message.alert_validCount' | translate}}</p>
     <div *ngIf="!checkFile()" class="file-uploader-zone">
@@ -257,7 +257,7 @@
 
   <button disabled class="btn btn-lg mt-4"
     style="width: 100%;color: #ffff !important;background-color: #818181 !important;">{{
-    'bidderSendOffer.SendOffer' | translate }}</button>
+    'bidderSendOffer.SentOffer' | translate }}</button>
 
 </div>
 <!-- End -->

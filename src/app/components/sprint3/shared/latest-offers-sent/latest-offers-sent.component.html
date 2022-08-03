@@ -11,13 +11,14 @@
         <p class="text-22">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
 
 
-        <div class="list-card" *ngFor="let b of biddet">
-            <div class="text-body" style="display: flex;justify-content: space-between;">
+        <div class="list-card" style="height: 80px;" *ngFor="let b of biddet">
+            <div class="text-body"
+                style="display: flex;justify-content: space-between; height: 100%; align-items: center;">
                 <p style="margin: 0;">{{ b.BidderName }}</p>
                 <p style="margin: 0;">#{{ b.SlNo }}</p>
             </div>
-            <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;">{{ getsince(b.BidSubmitOn,b.BidSubmitAt)
-                }}</p>
+            <!-- <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;">{{ getsince(b.BidSubmitOn,b.BidSubmitAt)
+                }}</p> -->
         </div>
         <div *ngIf="!biddet" class="list-card">
             <div class="text-body" style="display: flex;justify-content: space-between;">
