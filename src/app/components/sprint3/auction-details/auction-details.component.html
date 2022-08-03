@@ -400,26 +400,24 @@
                                                 </div>
                                             </div>
 
-                                            <div class="thumbs-container bottom">
+                                            <div class="thumbs-container bottom" *ngIf="!showLoaderMainImage">
                                                 <div id="prev-btn" class="prev" (click)="scrollImageSlider('left')">
-                                                    <i class="icon-arrow_left" style="color:white"></i>
+                                                    <i class="icon-arrow_left"></i>
                                                 </div>
 
                                                 <ul class="thumbs">
-                                                    <div style="display:flex;overflow-x: auto;overflow-y: hidden;"
-                                                        #imageSlide>
+                                                    <div style="" class="gallery-container" #imageSlide>
                                                         <ng-container *ngFor="let slide of slidesStore">
-                                                            <div [id]="slide.id" class="opacity-0-5"
+                                                            <div class="opacity-0-5 image-box"
                                                                 [ngClass]="{'opacity-1': slide.id == fullImage.id}">
-                                                                <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
-                                                                <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'"
+                                                                <img *ngIf="slide?.type == 'image/jpeg' || slide?.type == 'image/png'"
                                                                     class="img-fluid" [src]="slide.src"
-                                                                    style="width:70px;height: 100%; min-width:70px;"
+                                                                    style="width:70px;height: 45px; min-width:70px;"
                                                                     [alt]="slide.alt" [title]="slide.title" width="70px"
                                                                     (click)="viewItem(slide)" />
                                                                 <video
                                                                     *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
-                                                                    style="width:70px;height: 100%;" id="video1"
+                                                                    style="width:70px;height: 45px;" id="video1"
                                                                     width="50" (click)="viewItem(slide)">
                                                                     <source [src]="slide.src" type="video/mp4">
                                                                     Your browser does not support HTML video.
@@ -482,7 +480,7 @@
                                                 </ul>
 
                                                 <div id="next-btn" class="next" (click)="scrollImageSlider('right')">
-                                                    <i class="icon-arrow_right" style="color:white"></i>
+                                                    <i class="icon-arrow_right"></i>
                                                 </div>
                                             </div>
                                         </div>

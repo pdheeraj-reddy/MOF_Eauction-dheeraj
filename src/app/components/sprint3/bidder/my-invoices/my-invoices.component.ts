@@ -20,7 +20,7 @@ export class MyInvoicesComponent implements OnInit {
   invoiceListData: any;
   copyInvoiceListData: any;
   selectedPageNumber: number;
-  pagelimit: number = 10;
+  pagelimit: number = 4;
   totcntforall: number;
   totcntforawaiting: number;
   totcntforpaid: number;
@@ -42,11 +42,7 @@ export class MyInvoicesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService,
-    private cookieService: CookieService,
-    private csrfTokenExtractor: HttpXsrfTokenExtractor,
-    private http: HttpClient,
     public translate: TranslateService,
-    private envService: EnvService,
     private bidderService: BidderService,
   ) { }
 
@@ -126,14 +122,20 @@ export class MyInvoicesComponent implements OnInit {
   onTabSelection(value: string) {
     this.filterFormGroup.controls['auctionStatus'].enable();
     this.selectedTab = value;
-    this.getInvoiceList();
-
     this.resetFilter();
+
+    if (value === 'All') {
+      this.invoiceListData = this.copyInvoiceListData;
+    } else {
+      this.invoiceListData = this.copyInvoiceListData.filter((invoice: any) => invoice.auctionStatus == value)
+    }
+
     this.showFilterForm = false;
     if (value !== 'All') {
       this.filterFormGroup.controls['auctionStatus'].setValue(value);
       this.filterFormGroup.controls['auctionStatus'].disable();
     }
+    this.navigateToPage(1);
   }
 
 
@@ -168,7 +170,7 @@ export class MyInvoicesComponent implements OnInit {
     this.invoiceListData = this.copyInvoiceListData;
     if (this.filterModel.amount) {
       this.invoiceListData = this.invoiceListData.filter((i: any) => {
-        if (i.invoiceAmt.toLowerCase().indexOf(this.filterModel.amount.toLowerCase()) > -1) return true;
+        if (i.invoiceAmt.toLowerCase().indexOf(this.filterModel.amount) > -1) return true;
         return false;
       })
     }
@@ -180,14 +182,14 @@ export class MyInvoicesComponent implements OnInit {
     }
     if (this.filterModel.referenceno) {
       this.invoiceListData = this.invoiceListData.filter((i: any) => {
-        if (i.BidderId.toLowerCase().indexOf(this.filterModel.referenceno.toLowerCase()) > -1) return true;
+        if (i.referenceno.toLowerCase().indexOf(this.filterModel.referenceno.toLowerCase()) > -1) return true;
         return false;
       })
     }
     if (this.filterModel.issue_date) {
       console.log('this.filterModel: ', this.filterModel);
       this.invoiceListData = this.invoiceListData.filter((i: any) => {
-        if (i.auctionStartDate?.split('.')[0] === this.filterModel.issue_date?.split('-')[2]) return true;
+        if (i.auctionStartDate === this.filterModel.issue_date) return true;
         return false;
       })
     }

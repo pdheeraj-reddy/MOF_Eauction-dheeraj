@@ -183,7 +183,7 @@ export class BidderService {
     };
     return this.http.get<any>(this.envService.environment.apiBidderMyAuctions +
       "?$expand=page1tolistnav" +
-      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + " and Status eq " + "'" + status + "'" + filters + ")&$format=json", httpOptions)
+      "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + filters + ")&$format=json", httpOptions)
 
   }
 

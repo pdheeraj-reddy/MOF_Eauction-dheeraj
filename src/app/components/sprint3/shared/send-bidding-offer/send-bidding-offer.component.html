@@ -173,12 +173,12 @@
           <div class="file-download file-download-sm">
             <h3 style="width: 125px !important;">
               <label class="text-success text-15" for="" data-toggle="tooltip" data-placement="top"
-                title="{{ibgaDoc[0].FileName}}.{{ibgaDoc[0].FileExt}}">{{ibgaDoc[0].FileName}}.{{ibgaDoc[0].FileExt}}</label>
+                title="{{ibgaDoc[0]?.FileName}}.{{ibgaDoc[0]?.FileExt}}">{{ibgaDoc[0]?.FileName}}.{{ibgaDoc[0]?.FileExt}}</label>
             </h3>&nbsp;&nbsp;
 
             <!--============== Without loader ==============-->
             <div *ngIf="!showAttachLoader" class="download-file-information">
-              <label class="text-body text-14">{{ibgaDoc[0].FileLength/1024 | number: '1.0-0'}} kb</label>
+              <label class="text-body text-14">{{ibgaDoc[0]?.FileLength/1024 | number: '1.0-0'}} kb</label>
               <a (click)="openFile(ibgaDoc[0], 'view')" class="btn btn-sm btn-ghost m-0 fill-primary-light-green">
                 <span class="icon-eye-open"></span>
               </a>

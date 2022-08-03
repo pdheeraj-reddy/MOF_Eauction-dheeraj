@@ -29,6 +29,8 @@ export class MyAuctionsComponent implements OnInit {
   totcntforcancelled: number;
   selectedTab: string = 'All';
   showLoader: boolean = false;
+  isFilterSearch: boolean = false;
+  isSearch: boolean = false;
   dropValProducts: any = ['Public', 'Private'];
   dropValStatus: any = ["Published", "Ongoing", "Pending Selecting", "Pending Primary Awarding", "Pending FBGA", "Pending FBGA Approval", "Awarded", "Terminated"];
   // Form controls
@@ -55,13 +57,15 @@ export class MyAuctionsComponent implements OnInit {
     public translate: TranslateService,
     private envService: EnvService,
     private bidderSer: BidderService
-  ) { }
+  ) {
+    PaginationServc.reset();
+  }
 
   public mapping(serverObj: any) {
     let resultSet: any = [];
     this.totcntforall = serverObj.d.results[0]?.TotAll;
     this.totcntforongoing = serverObj.d.results[0]?.TotPublishedOngoing;
-    this.totcntforupcomming = serverObj.d.results[0]?.TotPublished;
+    this.totcntforupcomming = serverObj.d.results[0]?.TotPublish;
     this.totcntforundergear = serverObj.d.results[0]?.TotPendSelect;
     this.totcntforcancelled = serverObj.d.results[0]?.TotCompleted;
     serverObj.d.results[0]?.page1tolistnav.results.forEach((result: any) => {
@@ -113,7 +117,7 @@ export class MyAuctionsComponent implements OnInit {
       pageLimit: this.pagelimit
     };
     const filters = {
-      Status: this.selectedTab ? ((this.selectedTab == "Upcoming") ? "Published" : (this.selectedTab == "All") ? "" : this.selectedTab) : "",
+      Status: this.selectedTab,
       ObjectId: this.filterFormGroup.controls['prevRefNo'].value ? this.filterFormGroup.controls['prevRefNo'].value : '',
       Description: this.filterFormGroup.controls['auctionName'].value ? this.filterFormGroup.controls['auctionName'].value : '',
       BidType: this.filterFormGroup.controls['auctionType'].value ? (this.filterFormGroup.controls['auctionType'].value === 'Public' ? 'O' : 'C') : '',
@@ -122,84 +126,51 @@ export class MyAuctionsComponent implements OnInit {
       Message: '',
       Msgty: ''
     };
-    if ((this.selectedTab === 'All' || this.selectedTab === 'Pending Selecting' || this.selectedTab === 'Closed') && this.filterFormGroup.controls['auctionStatus'].value !== '') {
+    if (this.isFilterSearch) {
       filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
-      filters.Message = 'F';
+      // filters.Message = 'F';
+      if (filters.ObjectId || filters.Description || filters.BidType || filters.EndDate || filters.StartDate) {
+        if (this.selectedTab == 'All' || this.selectedTab == '') {
+          filters.Status = 'All';
+        } else {
+          filters.Status = this.selectedTab;
+        }
+      } else {
+        if (this.filterFormGroup.controls['auctionStatus'].value) {
+          filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
+        } else {
+          filters.Status = this.selectedTab ?? '';
+        }
+      }
     }
+    // if ((this.selectedTab === 'All' || this.selectedTab === 'Pending Selecting' || this.selectedTab === 'Closed') && this.filterFormGroup.controls['auctionStatus'].value !== '') {
+    //   filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
+    //   filters.Message = 'F';
+    // }
+
+    if (this.isSearch) {
+      filters.Status = 'All';
+      this.selectedTab = 'All';
+      this.isSearch = false;
+    }
+
     if (sortBy && sorttype) {
       filters.Msgty = sorttype + ' ' + sortBy;
     }
 
-    console.log(filters, "filters");
+    console.log('filters: ', filters);
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
-    let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '');
-
+    let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '') + (filters.Msgty !== '' ? " and Msgty eq '" + filters.Msgty + "'" : '');
     this.bidderSer.getMyAuctionsList($filters, pageLimit, this.selectedTab, pageNumber).subscribe((res: any) => {
       this.showLoader = false;
+      this.isFilterSearch = false;
       if (res) {
         this.myAuctionListData = this.mapping(res.body);
-        this.PaginationServc.setPagerValues(
-          +res.body.d.results[0]?.TotEle,
-          10,
-          +pageNoVal
-        );
-
+        this.PaginationServc.setPagerValues(+res.body.d.results[0]?.TotEle, 10, +pageNoVal);
       }
     }, (error) => {
       this.showLoader = false;
-
     })
-
-
-    // this.http.get<any>(this.envService.environment.apiBidderMyAuctions+ 
-    //   "?$expand=page1tolistnav" + 
-    //   "&$filter=(PageLimit eq '" + pageLimit + "' and PageNo eq '" + pageNumber + "' and ScreenNav eq 'M'" + $filters + ")&$format=json" 
-    //   ,{responseType: 'json'}).subscribe(res=>{
-    //     this.showLoader = false;
-
-    // //   this.PaginationServc.setPagerValues(
-    // //     +res.body.d.results[0].TotEle,
-    // //     10,
-    // //     +pageNoVal
-    // //   );
-
-    // //   const csrfToken = localStorage.getItem("x-csrf-token");    
-    // //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   console.log(res,"f");
-    //   this.myAuctionListData = this.mapping(res);
-    // }, (error) => {
-    //     this.showLoader = false;
-    //     console.log('getAuctionList RespError : ', error);
-    //   });
-    // this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
-    //   this.showLoader = false;
-
-    //   this.PaginationServc.setPagerValues(
-    //     +res.body.d.results[0].TotEle,
-    //     10,
-    //     +pageNoVal
-    //   );
-
-    //   const csrfToken = localStorage.getItem("x-csrf-token");
-    //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   this.auctionListData = this.mapping(res.body);
-
-    // }, (error) => {
-    //   this.showLoader = false;
-    //   console.log('getAuctionList RespError : ', error);
-    // });
-  }
-
-  sortBy(sortBy?: string, columnId?: number) {
-    columnId = columnId ? columnId : 0;
-    var foundIndex = this.sortCol.findIndex((el: { col: any; }) => el.col === sortBy);
-    this.sortByTableHeaderId(columnId, 'string');
-    this.sortCol[foundIndex].sType = this.sortCol[foundIndex].sType === 'A' ? 'D' : 'A';
-    this.getMyAuctionList(1, sortBy, this.sortCol[foundIndex].sType);
-  }
-
-  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
 
   refreshCalendarCntrl() {
@@ -261,6 +232,7 @@ export class MyAuctionsComponent implements OnInit {
     this.filterFormGroup.controls[dd].setValue(e.target.value, {
       onlySelf: true
     })
+    this.isSearch = false;
   }
 
   toggleFilter() {
@@ -316,6 +288,18 @@ export class MyAuctionsComponent implements OnInit {
     this.filterFormGroup.controls['auctionStartDate'].setValue('');
     this.filterFormGroup.controls['auctionEndDate'].setValue('');
     this.refreshCalendarCntrl();
+  }
+
+  sortBy(sortBy?: string, columnId?: number) {
+    columnId = columnId ? columnId : 0;
+    var foundIndex = this.sortCol.findIndex((el: { col: any; }) => el.col === sortBy);
+    this.sortByTableHeaderId(columnId, 'string');
+    this.sortCol[foundIndex].sType = this.sortCol[foundIndex].sType === 'A' ? 'D' : 'A';
+    this.getMyAuctionList(1, sortBy, this.sortCol[foundIndex].sType);
+  }
+
+  sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
+    this.PaginationServc.sortByTableHeaderId('inventoryAllocationTable', columnId, sortType, dateFormat);
   }
 
   isSorting(columnId: number) {
