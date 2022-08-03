@@ -630,7 +630,7 @@
         "auction-popup": {
             "ConfirmationOfParticipation": "Confirmation of participation in the auction?",
             "UponConformation": "Upon confirmation your information will be registered as an auction participant.",
-            "Cancellation": "Cancellation",
+            "Cancellation": "Back",
             "SubscriptionConfirmation": "Subscription confirmation",
             "SubscriptionConfirmedSuccessfully": "Subscription has been confirmed successfully",
             "ReceiveEmail": "You will receive an email when the auction starts",

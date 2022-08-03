@@ -363,7 +363,6 @@ export class AuctionListsComponent implements OnInit {
     return this.PaginationServc.isSortDesc(columnId);
   }
 
-
   sortBy(sortBy?: string, columnId?: number) {
     columnId = columnId ? columnId : 0;
     var foundIndex = this.sortCol.findIndex((el: { col: any; }) => el.col === sortBy);

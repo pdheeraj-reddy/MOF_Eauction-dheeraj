@@ -9,8 +9,6 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { environment } from 'src/environments/environment';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
-import { Clipboard } from '@angular/cdk/clipboard';
-import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-pay-final-invoice',
@@ -61,8 +59,6 @@ export class PayFinalInvoiceComponent implements OnInit {
     private router: Router,
     public envService: EnvService,
     private moderatorService: AucModeratorService,
-    private clipboard: Clipboard,
-    private clipboardApi: ClipboardService
   ) { }
 
   public get getHomeUrl() {
@@ -94,10 +90,6 @@ export class PayFinalInvoiceComponent implements OnInit {
   }
 
 
-  copyText() { this.clipboardApi.copyFromContent("this.content") }
-
-
-
   getInvoice() {
     this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
       this.showLoader = false;
@@ -127,6 +119,11 @@ export class PayFinalInvoiceComponent implements OnInit {
       this.navigateToPage(1);
 
     });
+  }
+
+
+  copyToClipboard(str: string) {
+    navigator.clipboard.writeText(str);
   }
 
   navigateToPage(pageNoVal: number) {

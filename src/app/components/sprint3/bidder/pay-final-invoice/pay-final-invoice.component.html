@@ -912,7 +912,7 @@
                     <div class="col text-primary d-flex">
                         <span class="icon-copy text-primary" style="cursor: pointer;" data-toggle="tooltip"
                             data-placement="bottom" title="{{'bidderFinalInvoice.copied' | translate}}"
-                            (click)="copyText()"></span>
+                            (click)="copyToClipboard(invoiceData?.InvoiceNumber)"></span>
                         <span class="mx-2">{{ invoiceData?.InvoiceNumber }}</span>
                     </div>
                 </div>
@@ -927,7 +927,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.billerName' | translate}}</div>
-                    <div class="col text-primary">Yet to know</div>
+                    <div class="col text-primary">{{ invoiceData?.BillerName}} - {{ invoiceData?.BillerCode }}</div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">

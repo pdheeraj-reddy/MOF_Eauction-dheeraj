@@ -110,6 +110,7 @@ export class SendBiddingOfferComponent implements OnInit {
     if (ext.indexOf('.') === -1) {
       // this.invalidFileType = false;
       if (!!this.acceptedExtensions.find(x => x === fileType)) {
+        this.showError.emit(false);
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
           this.invalidFileType = false;
@@ -138,6 +139,8 @@ export class SendBiddingOfferComponent implements OnInit {
             }, 3000);
           }
         }
+      } else {
+        this.showError.emit(true);
       }
     }
   }

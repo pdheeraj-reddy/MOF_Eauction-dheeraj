@@ -229,3 +229,17 @@ ul.thumbs {
         color: #A7A9AC;
     }
 }
+
+.gallery-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+
+    .image-box {
+        border-right: 1px solid #b1b1b1;
+        padding: 1px;
+    }
+}
