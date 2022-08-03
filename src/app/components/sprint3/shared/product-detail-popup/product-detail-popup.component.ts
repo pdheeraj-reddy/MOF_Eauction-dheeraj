@@ -20,7 +20,7 @@ export interface DialogData {
   styleUrls: ['./product-detail-popup.component.scss']
 })
 export class ProductDetailPopupComponent implements OnInit {
-
+  columnLst = ['index', 'name'];
   slidesStore: any = [];
   viewproduct: any;
   fullImage: any;
@@ -66,12 +66,8 @@ export class ProductDetailPopupComponent implements OnInit {
     });
   }
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    this.PaginationServc.sortByTableHeaderId(
-      'auctionAttachment',
-      columnId,
-      sortType,
-      dateFormat
-    );
+    this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
+    this.PaginationServc.sortAllTableData(this.viewproduct.productFiles, this.columnLst[columnId]);
   }
 
   isSorting(columnId: number) {
@@ -110,6 +106,9 @@ export class ProductDetailPopupComponent implements OnInit {
         this.fetchPicture = false;
       }
     }
+    this.viewproduct?.productFiles.forEach((element: any, i: number) => {
+      element.index = i;
+    });
     this.navigateToPage(1, 'auctionAttach');
 
     // if (this.slidesStore.length > 0) {

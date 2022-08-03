@@ -305,17 +305,19 @@ export class AuctionDetailsComponent implements OnInit {
       if (this.auctionAttachment) {
         let i = 0;
         this.auctionAttachment.forEach((value: any) => {
-          const fileupload = {
-            name: value.FileName + '.' + value.FileExt,
-            size: '',
-            type: '',
-            filesrc: '',
-            FilenetId: value.FilenetId,
-            MIMEType: value.MIMEType,
-            downloading: false,
-            index: i++
-          };
-          this.transformedAttachment.push(fileupload);
+          if (value.ObjectType == '/AuctionDocuments') {
+            const fileupload = {
+              name: value.FileName + '.' + value.FileExt,
+              size: '',
+              type: '',
+              filesrc: '',
+              FilenetId: value.FilenetId,
+              MIMEType: value.MIMEType,
+              downloading: false,
+              index: i++
+            };
+            this.transformedAttachment.push(fileupload);
+          }
           this.navigateToPage(1);
           if (value.ObjectType == '/AuctionProductImages') {
             const isExist = this.filenetImagesLst.filter((x: any) => x.ZzProductNo === value.ZzProductNo);
@@ -888,7 +890,7 @@ export class AuctionDetailsComponent implements OnInit {
         })
       }
     });
-    if (this.slidesStore.length == 1) {
+    if (this.slidesStore.length > 0) {
       this.fullImage = {
         id: this.slidesStore[0].id,
         src: this.slidesStore[0].src,
@@ -898,8 +900,7 @@ export class AuctionDetailsComponent implements OnInit {
       }
       this.selectedProduct = this.slidesStore[0].id;
     }
-    console.log('this.slidesStore: ', this.slidesStore);
-    console.log('this.slidesStore: ', this.products);
+    console.log(this.fullImage, 'this.slidesStore: ', this.slidesStore);
   }
 
   viewItem(a: any) {
