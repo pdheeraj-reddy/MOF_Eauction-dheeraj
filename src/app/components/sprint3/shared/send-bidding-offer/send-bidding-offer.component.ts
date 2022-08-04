@@ -16,6 +16,7 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() auctionId: any;
   @Input() disable: any;
   @Input() ibgaDoc: any;
+  @Input() notParticipated: any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -51,6 +52,9 @@ export class SendBiddingOfferComponent implements OnInit {
     // this.amount = 30005;
     this.minAmount = this.totalBookValue;
     console.log(this.ibgaDoc);
+    if(this.notParticipated){
+      this.totalBookValue = 0;
+    }
 
     // this.minAmount = 10;
     // this.totalBookValue = 10;

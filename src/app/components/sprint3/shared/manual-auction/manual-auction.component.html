@@ -1,0 +1,74 @@
+<div class="card flex-row">
+
+    <!--=================== Blue box to show auction status ===================-->
+    <div class="d-flex flex-column justify-content-center custom-bg-info" style="min-height: 130px; width: 30%;">
+        <div class="mx-3">
+            <p class="text-18 text-info font-weight-bold">{{ 'bidderAuctionDetails.ManualAuction' | translate }}
+            </p>
+            <p class="text-12 text-info">{{ 'bidderAuctionDetails.ManualAuctionDesp' | translate }}</p>
+        </div>
+    </div>
+    <!-- End -->
+
+    <div class="vr-line"></div>
+
+    <!--============ Shows auction start date and time and Participation Button ============-->
+    <div class="d-flex justify-content-between mx-4 w-75">
+
+        <!--=================== Shows auction start date and time ===================-->
+        <div class="d-flex flex-column justify-content-center">
+            <p class="text-info text-12">{{ 'bidderAuctionDetails.AuctionStartDate' | translate }}</p>
+            <div>
+                <span class="text-primary">{{upcomingAuction.auctionStartsdate}}</span>
+                <ul class="list list-primary-bullets d-inline-block">
+                    <li class="text-muted"> {{upcomingAuction.auctionStartstime}}
+                        {{upcomingAuction.auction_start_timeSufix | translate}} </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End -->
+
+        <!--=================== Participation Button ===================-->
+        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center"
+            (click)="showConfirmationModal = true">
+            {{'bidderAuctionDetails.ManualAuctionBtn' | translate }}
+        </button>
+        <!-- End -->
+
+    </div>
+    <!-- End -->
+
+    <!--=================== Confirmatiom model  ===================-->
+    <div class="modal show" *ngIf="showConfirmationModal" [ngClass]="{ 'modal-show': showConfirmationModal }">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">
+                        {{ 'bidderAuctionDetails.manualAuction-popup.ConfirmationOfManualAuctionStart' | translate }}
+                    </h4>
+                    <button (click)="showConfirmationModal = false" type="button" class="modal-close btn-close btn-sm">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="confirmation" style="color: #414042; font-size: 16px">{{
+                        'bidderAuctionDetails.manualAuction-popup.DetailsOfManualAuctionStart' | translate }}</label>
+                </div>
+                <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-primary-light btn-md" (click)="startManualAuction()">
+                        <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        &nbsp;
+                        {{"bidderAuctionDetails.manualAuction-popup.acceptBtn" | translate}}
+                    </button>
+                    <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmationModal = false">
+                        {{'bidderAuctionDetails.manualAuction-popup.cancelBtn' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+
+</div>

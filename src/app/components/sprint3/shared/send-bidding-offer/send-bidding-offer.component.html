@@ -1,5 +1,5 @@
 <!--=============== Enabled card area ===============-->
-<div *ngIf="!disable" class="card-body">
+<div *ngIf="!disable && !notParticipated" class="card-body">
   <h2 class="text-21 text-primary mx-1">{{ 'bidderSendOffer.LatestOffersSent' | translate }}</h2>
 
   <div class="left-right-card-title mt-4">
@@ -149,7 +149,7 @@
 <!-- End -->
 
 <!--=============== Diabled card area ===============-->
-<div *ngIf="disable" class="card-body">
+<div *ngIf="disable && !notParticipated" class="card-body">
   <h2 class="text-21 text-dark mx-1">{{ 'bidderSendOffer.LatestOffersSent' | translate }}</h2>
 
   <div class="left-right-card-title mt-4">
@@ -258,6 +258,96 @@
   <button disabled class="btn btn-lg mt-4"
     style="width: 100%;color: #ffff !important;background-color: #818181 !important;">{{
     'bidderSendOffer.SentOffer' | translate }}</button>
+
+</div>
+<!-- End -->
+
+<!--=============== Diabled card area ===============-->
+<div *ngIf="notParticipated" class="card-body">
+  <h2 class="text-21 text-dark mx-1">{{ 'bidderSendOffer.LatestOffersSent' | translate }}</h2>
+
+  <div class="left-right-card-title mt-4">
+    <div class="point-circle-disable">
+      <p class="text-align-center mb-0 text-18 font-weight-bold text-muted">1</p>
+    </div>
+    <h5 class="text-dark text-16 mt-2 mx-2">{{ 'bidderSendOffer.AttachThePrimaryWarranty' | translate }}</h5>
+  </div>
+
+  <div class="mt-4">
+    <p class="text-dark text-16 m-0">{{ 'bidderSendOffer.ForHelpSupportManagingAuctions' | translate}}
+      <a href="#" class="text-muted text-15" style="text-decoration: underline;">{{ 'bidderSendOffer.ClickHere' |
+        translate}}</a>
+    </p>
+  </div>
+  <!-- ============= File upload area and view area ===============-->
+  <div class="mt-4">
+    <div class="file-uploader-zone" style="border: 2px dashed #626262 !important; color: #626262 !important;">
+      <div class="buttons">
+        <div class="uploader-button-caption d-flex px-4" style="justify-content: space-evenly;">
+          <span class="icon-attachment mx-1" style="font-size: 20px;"></span>
+          <label class="text-14 text-body" style="margin-top: 9px;">{{ 'bidderSendOffer.NoFileUpload' |
+            translate }}</label>
+          <input accept=".docx,.doc,application/pdf,image/jpg,image/jpeg,image/png"
+            qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" disabled
+            title="file input" multiple="" type="file" name="qqfile"
+            style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--===== End =========-->
+
+  <div class="left-right-card-title mt-4">
+    <div class="point-circle-disable">
+      <p class="text-align-center mb-0 text-18 font-weight-bold text-muted">2</p>
+    </div>
+    <h5 class="text-dark text-16 mt-2 mx-2">{{ 'bidderSendOffer.AddYourOffer' | translate }}</h5>
+  </div>
+  <br>
+  <div class="d-flex" style="width: 98%; border: 1px solid #b1b1b1; border-radius: 5px; height: 50px;" role="group"
+    aria-label="Basic example">
+    <div style="width: 15%; align-items: center;">
+      <button type="button" disabled
+        style="width: 100%; height: 100%; color: #b1b1b1;border-radius: 5px; border: none; outline: none; background-color:#F9FCFA">
+        <img src="assets/icons/minus-disabled.svg" alt="">
+      </button>
+    </div>
+
+
+    <div class="" style="border-left: 1px solid #b1b1b1; border-right: 1px solid #b1b1b1; width: 70%;">
+      <input type="text" class="amt-input" disabled="true"
+        style="height: 100%; width: 100%; border:none; text-align: center; color: #b1b1b1 ; font-size: 25px; background-color:#F9FCFA"
+        placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" (blur)="resetAmount()" appComma
+        aria-describedby="basic-addon2" />
+    </div>
+    <div style="width: 15%;">
+      <button type="button" disabled
+        style="width: 100%;border-radius: 5px;color: #b1b1b1; height: 100%; border: none; outline: none; background-color:#F9FCFA">
+        <span class="icon-plus"></span>
+      </button>
+    </div>
+  </div>
+  <p class="text-muted text-10" style="text-align: center;">{{ 'bidderSendOffer.SAR' | translate }}</p>
+
+  <div style="border-bottom: 1px solid #B4B4B4;">
+    <div style="display: flex;justify-content: space-between;">
+      <p class="text-body text-12">{{ 'bidderSendOffer.PersuitRate' | translate }} 2.5%</p>
+      <p class="text-body text-12">{{persuitRate}} {{ 'bidderSendOffer.SAR' | translate }}</p>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+      <p class="text-body text-12">{{ 'bidderSendOffer.AddedTaxValue' | translate }}:</p>
+      <p class="text-body text-12">{{addedTaxValue}} {{ 'bidderSendOffer.SAR' | translate }}</p>
+    </div>
+  </div>
+  <div class="d-flex mt-4" style="justify-content: space-between;">
+    <p class="text-body text-12">{{ 'bidderSendOffer.TotalOfferPrice' | translate }}</p>
+    <p class="text-body text-12">{{totalOfferPrice | number}} {{ 'bidderSendOffer.SAR' | translate }}</p>
+  </div>
+
+  <button disabled class="btn btn-lg mt-4"
+    style="width: 100%;color: #ffff !important;background-color: #818181 !important;">{{
+    'bidderSendOffer.NoOfferMade' | translate }}</button>
 
 </div>
 <!-- End -->

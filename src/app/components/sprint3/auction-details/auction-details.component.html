@@ -112,7 +112,7 @@
         <app-auction-fbga *ngIf="role.bidder && ((this.status.pendingFbga && response.ZzBidderSts == 'M') 
         || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'F')
         || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'G')
-        || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'J'))" [bidderStatus]="response.ZzBidderSts"
+        || (this.status.pendingFbga && response.ZzBidderSts == 'J'))" [bidderStatus]="response.ZzBidderSts"
             [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc" (showError)="showError($event)">
         </app-auction-fbga>
         <!-- End -->
@@ -138,6 +138,10 @@
         <!--============ Open offers card ============-->
         <app-open-offers-card [auctionId]="auctionId" [importantInfo]="upcomingAuction.important_info"
             *ngIf="role.auctionCommitteeHead && this.status.pendingSelecting"></app-open-offers-card>
+        <!-- End -->
+
+        <!--============ Manual Auction card ============-->
+        <app-manual-auction *ngIf="role.auctionMod && upcomingAuction && status.published && startAuctionMethod == 'Manual'" [upcomingAuction]="upcomingAuction"></app-manual-auction>
         <!-- End -->
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
@@ -257,6 +261,25 @@
             <!-- Auction Details start -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div *ngIf="editmode1" style="width: 72%; float: right;">
+                <!-- =================This is to show error message if bidder is not participated ================= -->
+                <div *ngIf="role.bidder && response.ZzBidderSts == '' && !status.published" class="alert alert-outline alert-info alert-dismissible fade show" role="alert">
+                    <div class="alert-wrapper">
+                        <div class="alert-body">
+                            <i class="alert-icon">
+                                <span class="icon-filled-information"></span>
+                            </i>
+                            <div class="alert-content">
+                                <p>{{"message.alert_bider_participate" | translate}}</p>
+                            </div>
+                        </div>
+                        <div class="alert-action">
+                            <button type="button" class="close pt-0" data-dismiss="alert" aria-label="Close">
+                                <span class="icon-close"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ==========End======= -->
                 <div class="card">
                     <div class="d-flex align-items-center mt-3">
 
@@ -295,21 +318,16 @@
                         <div [ngClass]="{
                             'left-right-card-en': textDir && response.ZzBidderSts == 'P', 
                             'left-right-card-ar': !textDir && response.ZzBidderSts == 'P',
-                            'left-right-card-en-disable': textDir && response.ZzBidderSts != 'P',
-                            'left-right-card-ar-disable': !textDir && response.ZzBidderSts != 'P' 
-                        }" *ngIf="role.bidder && !this.status.published">
+                            'left-right-card-en-disable': textDir && (response.ZzBidderSts != 'P' || (response.ZzBidderSts == 'P' && !status.ongoing)),
+                            'left-right-card-ar-disable': !textDir && (response.ZzBidderSts != 'P' || (response.ZzBidderSts == 'P' && !status.ongoing)) 
+                        }" *ngIf="role.bidder && response.ZzBidderSts != '' && !this.status.published">
 
                             <!--============= Send offer card =============-->
-                            <app-send-bidding-offer *ngIf="response.ZzBidderSts == 'P'" [disable]="false"
-                                [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
+                            <app-send-bidding-offer *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published" [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)"
+                                [auctionId]="auctionId" [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzPbEstPrice" [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
-
-                            <app-send-bidding-offer *ngIf="response.ZzBidderSts != 'P'" [ibgaDoc]="ibgaDoc"
-                                [disable]="true" [auctionId]="auctionId" [totalBookValue]="response.ZzPbEstPrice"
-                                (showError)="showError($event)">
-                            </app-send-bidding-offer>
                         </div>
 
                         &nbsp; &nbsp; &nbsp;
@@ -1271,4 +1289,4 @@
             <!-- End -->
         </div>
     </div>
-</div>
+</div>  

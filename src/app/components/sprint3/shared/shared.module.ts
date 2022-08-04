@@ -19,6 +19,7 @@ import { AmAuctionComponent } from './am-auction/am-auction.component';
 import { ProductDetailPopupComponent } from './product-detail-popup/product-detail-popup.component';
 import { OpenOffersCardComponent } from './open-offers-card/open-offers-card.component';
 import { OfferReportComponent } from './offer-report/offer-report.component';
+import { ManualAuctionComponent } from './manual-auction/manual-auction.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { OfferReportComponent } from './offer-report/offer-report.component';
         AmAuctionComponent,
         ProductDetailPopupComponent,
         OpenOffersCardComponent,
-        OfferReportComponent
+        OfferReportComponent,
+        ManualAuctionComponent
     ],
     imports: [
         CommonModule,
@@ -65,7 +67,8 @@ import { OfferReportComponent } from './offer-report/offer-report.component';
         EAucCommonModule,
         AmAuctionComponent,
         OpenOffersCardComponent,
-        OfferReportComponent
+        OfferReportComponent,
+        ManualAuctionComponent
     ]
 })
 export class SharedModule { }
