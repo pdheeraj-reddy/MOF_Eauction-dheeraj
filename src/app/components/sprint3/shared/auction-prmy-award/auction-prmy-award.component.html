@@ -68,26 +68,27 @@
 
 <!-- Model to confirm Approval -->
 <div class="modal show" *ngIf="showConfirmationAccept" [ngClass]="{ 'modal-show': showConfirmationAccept }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">
-          Confirmation of Auction Awarding Approval?
+          {{ 'am-primary-awarding.popup3.head' | translate }}
         </h4>
         <button type="button" class="modal-close btn-close btn-sm" (click)="this.showConfirmationAccept = false">
           <span class="icon-close"></span>
         </button>
       </div>
       <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px">Upon confirmation, the accreditation will be
-          sent to the desired committee</label>
+        <label for="confirmation" style="color: #414042; font-size: 16px">
+          {{ 'am-primary-awarding.popup3.subhead' | translate }}
+        </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
         <button type="button" (click)="this.showConfirmationAccept = false" class="btn btn-outline-light btn-md">
-          Back
+          {{ 'am-primary-awarding.popup3.back_btn' | translate }}
         </button>
         <button type="button" class="btn btn-primary-light btn-md" (click)="approve()">
-          Auction Award
+          {{ 'am-primary-awarding.popup3.accept_btn' | translate }}
           <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light text-14"
             style="width: 20px;height: 20px;" role="status">
             <span class="sr-only">Loading...</span>
@@ -101,7 +102,7 @@
 <!-- Model to show confirmed (Successful)  Approval-->
 <div class="modal show" *ngIf="showSuccessAccept" [ngClass]="{ 'modal-show': showSuccessAccept }">
 
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
       <button (click)="this.showSuccessAccept = false" style="position: absolute;left: 90%;" type="button"
         class="modal-close btn-close btn-sm">
@@ -115,18 +116,18 @@
 
           </div>
           <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-            The award has been successfully approved
+            {{'am-primary-awarding.popup4.head' | translate }}
           </h4>
         </div>
       </div>
       <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The award has been
-          successfully approved
+        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+          {{'am-primary-awarding.popup4.subhead' | translate }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false">
-          Back to Auction Requests
+          {{'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>
     </div>
@@ -135,28 +136,27 @@
 
 <!-- Model to confirm Rejection -->
 <div class="modal show" *ngIf="showConfirmationReject" [ngClass]="{ 'modal-show': showConfirmationReject }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-danger" id="exampleModalLabel">
-          Are you sure of the rejection of the award?
+          {{ 'am-primary-awarding.popup1.head' | translate }}
         </h4>
         <button type="button" class="modal-close btn-close btn-sm" (click)="this.showConfirmationReject = false">
           <span class="icon-close"></span>
         </button>
       </div>
       <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px"> This offer has been awarded by the auction
-          committee, and in the event of rejection of the award, it will result
-          in the auction being canceled and the awarding will not take place.
+        <label for="confirmation" class="text-body text-16">
+          {{ 'am-primary-awarding.popup1.subhead' | translate }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end ">
         <button type="button" class="btn btn-outline-light btn-md" (click)="this.showConfirmationReject = false">
-          Back
+          {{ 'am-primary-awarding.popup1.back_btn' | translate }}
         </button>
         <button type="button" class="btn btn-danger btn-md" data-dismiss="modal" (click)="reject()">
-          Reject Award
+          {{ 'am-primary-awarding.popup1.reject_btn' | translate }}
           <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light text-14"
             style="width: 20px;height: 20px;" role="status">
             <span class="sr-only">Loading...</span>
@@ -170,7 +170,7 @@
 
 <!-- Model to show confirmed (Successful)  Rejection-->
 <div class="modal show" *ngIf="showSuccessReject" [ngClass]="{ 'modal-show': showSuccessReject }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
       <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
         data-dismiss="modal" aria-label="Close">
@@ -184,18 +184,18 @@
 
           </div>
           <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-            The award has been rejected and the auction has been successfully cancelled
+            {{ 'am-primary-awarding.popup2.head' | translate }}
           </h4>
         </div>
       </div>
       <div class="modal-body">
-        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The auction was cancelled
-          due to the failure to award the bid that was nominated by the auction committee
+        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+          {{ 'am-primary-awarding.popup2.subhead' | translate }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
-          Back to Auctions
+          {{ 'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>
     </div>
