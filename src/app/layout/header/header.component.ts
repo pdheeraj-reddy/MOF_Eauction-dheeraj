@@ -98,7 +98,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (!this.loggedUserRole) {
       this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     }
-    console.log("🚀 ~ manageTab ~ this.loggedUserRole", this.loggedUserRole)
     if (this.loggedUserRole.isAuctionModerator) {
       this.auctionModerator = {
         auction: false,
@@ -130,8 +129,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.bidderTab.invitation = true;
       } else if (this.url.includes('auction-details')) {
         this.bidderTab.auction = true;
+      } else if (this.url.includes('bidder')) {
+        this.bidderTab.auction = true;
       }
-      console.log("🚀 ~ manageTab ~ this.bidderTab", this.bidderTab)
     }
   }
 

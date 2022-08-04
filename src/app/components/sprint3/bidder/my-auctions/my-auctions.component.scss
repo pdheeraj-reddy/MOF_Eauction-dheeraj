@@ -31,3 +31,8 @@
 .clickable:not(:disabled) {
     color: #32AD71;
 }
+
+.status-neutral-4,
+.status-o-neutral-4:before {
+    background-color: #737272;
+}

@@ -60,6 +60,9 @@
     "ZEAUCTION_SALCOMM_CHAIRMAN": "Commitee Head",
     "ZEAUCTION_SALCOMM_SECRETARY": "Commitee Secretary",
     "ZEAUCTION_SALCOMM_MEMBER": "Committee Member",
+    "Offer Made": "Offer Submitted",
+    "No Offer": "No Offer Made",
+    "No Award": "Not Awarded",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
@@ -1173,8 +1176,37 @@
         "popup1": {
             "head": "Are you sure of the rejection of the award?",
             "subhead": "This offer has been awarded by the auction committee, and if the award is rejected, it will result in the auction being canceled and the awarding will not take place.",
-            "back": "Back",
+            "back_btn": "Back",
             "reject_btn": "Confirmation of rejection of the award and cancellation of the auction"
+        },
+        "popup2": {
+            "head": "The award has been rejected and the auction has been successfully cancelled",
+            "subhead": "Auction has been canceled due to the previously submitted bid not being awarded by Auction Committee.",
+            "back_btn": "Back to Auctions"
+        },
+        "popup3": {
+            "head": "Confirmation of Auction Awarding Approval?",
+            "subhead": "Upon approval of the award, an invoice will be sent to complete the payment by the bidder, and the auction will be awarded automatically upon completion of the payment.",
+            "back_btn": "Back",
+            "accept_btn": "Auction Award"
+        },
+        "popup4": {
+            "head": "The award successfully approved",
+            "subhead": "The award has been successfully approved"
         }
+    },
+    "send-fbga": {
+        "popup1_head": "Confirm sending final guarantee?",
+        "popup1_subhead": "Please make sure to attach the correct guarantee, as after confirming its sending, it cannot be modified.",
+        "popup1_accept": "Send Warranty",
+        "popup2_head": "Warranty sent successfully",
+        "popup2_subhead": "You will receive an email when the guarantee is approved and the auction is awarded.",
+        "back_btn": "Back to Auctions"
+    },
+    "my_auction": {
+        "offer_submitted": "Offer Submitted",
+        "no_ofer_made": "No Offer Made",
+        "not_awarded": "Not Awarded",
+        "awarded": "Awarded"
     }
 }

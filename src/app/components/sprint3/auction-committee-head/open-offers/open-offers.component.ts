@@ -85,23 +85,24 @@ export class OpenOffersComponent implements OnInit {
       let resultSet: any = [];
       if (results?.length) {
         results.forEach((result: any) => {
-          let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
-          const items = {
-            serialNo: result['Sno'] ? result['Sno'] : '-',
-            offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
-            BidderId: result['BidderId'] ? result['BidderId'] : null,
-            PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
-            submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
-            submissionTime: this.timeTransform(result['DtTime']),
-            facilityName: result['BidderName'] ? result['BidderName'] : '-',
-            FileName: result['FileName'] ? result['FileName'] : '',
-            commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
-            ZzBidderSts: result['ZzBidderSts'] ? result['ZzBidderSts'] : '',
-            downloadingAttachmet: false,
-            selected: false,
-            // auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : '',
-          };
-          resultSet.push(items);
+          if (result.BidderId) {
+            let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
+            const items = {
+              serialNo: result['Sno'] ? result['Sno'] : '-',
+              offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
+              BidderId: result['BidderId'] ? result['BidderId'] : null,
+              PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
+              submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
+              submissionTime: this.timeTransform(result['DtTime']),
+              facilityName: result['BidderName'] ? result['BidderName'] : '-',
+              FileName: result['FileName'] ? result['FileName'] : '',
+              commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
+              ZzBidderSts: result['ZzBidderSts'] ? result['ZzBidderSts'] : '',
+              downloadingAttachmet: false,
+              selected: false,
+            };
+            resultSet.push(items);
+          }
         });
         for (let i = 0; i < resultSet.length; i++) {
           if (resultSet[i].ZzBidderSts == 'B') {

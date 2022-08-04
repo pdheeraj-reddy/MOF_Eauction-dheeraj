@@ -3,8 +3,8 @@
   <!--=================== Yellow box to show auction status ===================-->
   <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
     <div class="mx-3">
-      <p class="text-18 text-secondary font-weight-bold">{{ "amauctiondetails.final-award.head" | translate }}</p>
-      <p class="text-12 text-secondary">{{ "amauctiondetails.final-award.sub-head" | translate }}</p>
+      <p class="text-18 text-warning font-weight-bold">{{ "amauctiondetails.final-award.head" | translate }}</p>
+      <p class="text-12 text-warning">{{ "amauctiondetails.final-award.sub-head" | translate }}</p>
     </div>
   </div>
   <!-- End -->
@@ -27,11 +27,12 @@
         </p>
         <p class="text-16 text-dark mb-2">{{ 'bidderSendInvoice.no' | translate }} {{finalaward.bidderNo}} </p>
         <!-- BidCrNumber -->
-        <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')" class="text-primary tex-14"
-          style="text-decoration: none;">
+        <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')"
+          class="text-primary text-14 font-weight-bold d-flex" style="text-decoration: none;">
+
+          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' |
+            translate}}</span>&nbsp;&nbsp;
           <span class="text-16 icon-download"></span>
-          &nbsp;
-          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' | translate}}</span>
         </a>
         <div *ngIf="showAttachLoader">
           <div class="spinner-border text-primary"
@@ -46,13 +47,14 @@
 
     <div class="top-card-right-right">
       <div>
-        <a (click)="downloadPDF()" class="text-primary text-14 justify-content-end" style="text-decoration: none;">
+        <a (click)="downloadPDF()" class="text-primary text-14 d-flex font-weight-bold"
+          style="text-decoration: none; justify-content: end;">
 
 
-          <span style="text-decoration: underline; font-weight: 500;">
+          <span style="text-decoration: underline;">
             {{ 'sprint3_auction_detail.bidderReport' | translate }}
-          </span>&nbsp;
-          <span class="text-16 icon-download font-weight-500"></span>
+          </span>&nbsp;&nbsp;
+          <span class="text-16 icon-download"></span>
         </a>
       </div>
       <div *ngIf="!sendInvoice" class="mt-3">
