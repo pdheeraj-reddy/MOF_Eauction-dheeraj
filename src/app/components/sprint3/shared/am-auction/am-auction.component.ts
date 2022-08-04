@@ -41,7 +41,7 @@ export class AmAuctionComponent implements OnInit {
     { code: "Terminated", disp: "Terminated" },
   ];;
   showPageLoader: boolean = false;
-  showPagination : boolean = false;
+  showPagination: boolean = false;
   selectedTab: string = 'All';
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
@@ -150,25 +150,23 @@ export class AmAuctionComponent implements OnInit {
         product: result['ZzTotPdt'] ? parseInt(result['ZzTotPdt']) : '',
         auctiondate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
         auctiontime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? this.convert(result['ZzAucSrtDt']) : '' : '',
-        auctionenddate : result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        auctionendtime : result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? this.convert(result['ZzAucEndDt']) : '' : '',
+        auctionenddate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctionendtime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? this.convert(result['ZzAucEndDt']) : '' : '',
         auctiontimeSufix: 'evening',
       }
       resultSet.push(items);
     });
 
     return resultSet;
-  } 
+  }
   /** Convert the date into Date object */
-  convert(hms:any){
-    console.log("🎯TC🎯 ~ file: am-auction.component.ts ~ line 162 ~ hms", hms);
+  convert(hms: any) {
     const date = hms.split(" ")[0];
     const Time = hms.split(" ")[1];
-    const [day,month,year] = date.split(".");
+    const [day, month, year] = date.split(".");
     const [hours, minutes, seconds] = Time.split(':');
-    var time = new Date(year,Number(month)-1,day,hours,minutes,seconds);
+    var time = new Date(year, Number(month) - 1, day, hours, minutes, seconds);
     // time.setMinutes(time.getMinutes()+150);
-    console.log("🎯TC🎯 ~ file: am-auction.component.ts ~ line 169 ~ time", time);
     return time;
   }
 
@@ -203,7 +201,7 @@ export class AmAuctionComponent implements OnInit {
   }
 
   public toggleFilter() {
-    if(this.showFilterForm){
+    if (this.showFilterForm) {
       this.resetFilter();
     }
     this.showFilterForm = !this.showFilterForm;
@@ -302,22 +300,22 @@ export class AmAuctionComponent implements OnInit {
   }
 
   resetFilter() {
-    if(
-      this.filterFormGroup.controls['prevRefNo'].value != '' || 
+    if (
+      this.filterFormGroup.controls['prevRefNo'].value != '' ||
       this.filterFormGroup.controls['auctionName'].value != '' ||
       this.filterFormGroup.controls['biddingMethod'].value != '' ||
       this.filterFormGroup.controls['auctionStatus'].value != '' ||
       this.filterFormGroup.controls['auctionStartDate'].value != '' ||
       this.filterFormGroup.controls['auctionEndDate'].value != ''
-    ){
-    this.filterFormGroup.controls['prevRefNo'].setValue('');
-    this.filterFormGroup.controls['auctionName'].setValue('');
-    this.filterFormGroup.controls['biddingMethod'].setValue('');
-    this.filterFormGroup.controls['auctionStatus'].setValue('');
-    this.filterFormGroup.controls['auctionStartDate'].setValue('');
-    this.filterFormGroup.controls['auctionEndDate'].setValue('');
-    // this.getAuctionList(1);
-    this.refreshCalendarCntrl();
-  }
+    ) {
+      this.filterFormGroup.controls['prevRefNo'].setValue('');
+      this.filterFormGroup.controls['auctionName'].setValue('');
+      this.filterFormGroup.controls['biddingMethod'].setValue('');
+      this.filterFormGroup.controls['auctionStatus'].setValue('');
+      this.filterFormGroup.controls['auctionStartDate'].setValue('');
+      this.filterFormGroup.controls['auctionEndDate'].setValue('');
+      // this.getAuctionList(1);
+      this.refreshCalendarCntrl();
+    }
   }
 }

@@ -199,9 +199,9 @@
                             <td>{{rowItem.serialNo}}</td>
                             <td>{{rowItem.offerValue}}</td>
                             <td>
-                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;"
+                                    (click)="viewAttachment(rowItem)">
                                     <a *ngIf="rowItem.PdfContent && !rowItem.downloadingAttachmet"
-                                        (click)="viewAttachment(rowItem)"
                                         class="btn btn-ghost btn-sm fill-primary-light-green">
                                         <span class="icon-Group-3319"></span>
                                     </a>

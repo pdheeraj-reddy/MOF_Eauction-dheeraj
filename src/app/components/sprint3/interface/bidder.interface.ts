@@ -5,10 +5,11 @@ export interface AuctionList {
     description: string;
     imgsrc: string;
     statuscode: string;
+    bidderStatus?: string;
     product: string | number;
     auctiontimeSufix: string;
     auctiondate: string | Date | Moment;
     auctionenddate: string | Date | Moment;
-    auctiontime : string | Date | Moment;
-    auctionendtime : string | Date | Moment;
+    auctiontime: string | Date | Moment;
+    auctionendtime: string | Date | Moment;
 }

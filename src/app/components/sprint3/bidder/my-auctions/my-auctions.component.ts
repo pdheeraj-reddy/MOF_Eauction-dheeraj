@@ -18,7 +18,13 @@ declare var $: any;
   styleUrls: ['./my-auctions.component.scss']
 })
 export class MyAuctionsComponent implements OnInit {
-
+  totalCounts = {
+    total_offer_made: 0,
+    total_no_offer: 0,
+    total_not_awarded: 0,
+    total_awarded: 0,
+    total_all: 0
+  }
   myAuctionListData: any;
   selectedPageNumber: number;
   pagelimit: number = 10;
@@ -32,7 +38,17 @@ export class MyAuctionsComponent implements OnInit {
   isFilterSearch: boolean = false;
   isSearch: boolean = false;
   dropValProducts: any = ['Public', 'Private'];
-  dropValStatus: any = ["Published", "Ongoing", "Pending Selecting", "Pending Primary Awarding", "Pending FBGA", "Pending FBGA Approval", "Awarded", "Terminated"];
+  dropValStatus = [
+    { code: "Published", disp: "Upcoming", },
+    { code: "Ongoing", disp: "Ongoing" },
+    { code: "Pending Selecting", disp: "Pending Selecting" },
+    { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
+    { code: "Pending FBGA", disp: "Pending FBGA" },
+    { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+    { code: "Awarded", disp: "Awarded" },
+    { code: "Terminated", disp: "Terminated" },
+  ];
+  dropValDisplayCase: any = ["Offer Made", "No Offer", "No Award", "Awarded"];
   // Form controls
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
@@ -65,44 +81,6 @@ export class MyAuctionsComponent implements OnInit {
     return this.envService.environment.idmHomeUrl;
   }
 
-  public mapping(serverObj: any) {
-    let resultSet: any = [];
-    this.totcntforall = serverObj.d.results[0]?.TotAll;
-    this.totcntforongoing = serverObj.d.results[0]?.TotPublishedOngoing;
-    this.totcntforupcomming = serverObj.d.results[0]?.TotPublish;
-    this.totcntforundergear = serverObj.d.results[0]?.TotPendSelect;
-    this.totcntforcancelled = serverObj.d.results[0]?.TotCompleted;
-    serverObj.d.results[0]?.page1tolistnav.results.forEach((result: any) => {
-      const items = {
-        ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
-        DraftId: result['DraftId'] ? result['DraftId'] : '0',
-        referenceno: result['ObjectId'] ? result['ObjectId'] : '',
-        auctionName: result['Description'] ? result['Description'] : '',
-        auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : this.getAuctionTypeDesc('C'), // Hardcoded due to DB inconsist
-        auctionStatus: result['Status'] ? getStatusText(result['Status']) : '',
-        bgaValues: result['Description'] ? result['Description'] : '',
-        auctionStartDate: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        auctionStartTime: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-        auctionStartTimeSufix: result['ZzAucSrtDt'] ? result['ZzAucSrtDt'] !== 0 ? moment(result['ZzAucSrtDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
-        agencyName: result['Description'] ? result['Description'] : '',
-        autionEndDate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        auctionEndTime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
-        auctionEndTimeSufix: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
-      }
-      resultSet.push(items);
-    });
-    return resultSet;
-  }
-
-  public getAuctionTypeDesc(type: string) {
-    if (type === 'O') {
-      return 'Public';
-    } else if (type === 'C') {
-      return 'Private';
-    } else {
-      return '';
-    }
-  }
   ngOnInit(): void {
     this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -120,7 +98,7 @@ export class MyAuctionsComponent implements OnInit {
       pageNumber: pageNumber,
       pageLimit: this.pagelimit
     };
-    const filters = {
+    let filters = {
       Status: this.selectedTab,
       ObjectId: this.filterFormGroup.controls['prevRefNo'].value ? this.filterFormGroup.controls['prevRefNo'].value : '',
       Description: this.filterFormGroup.controls['auctionName'].value ? this.filterFormGroup.controls['auctionName'].value : '',
@@ -139,18 +117,12 @@ export class MyAuctionsComponent implements OnInit {
         } else {
           filters.Status = this.selectedTab;
         }
-      } else {
-        if (this.filterFormGroup.controls['auctionStatus'].value) {
-          filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
-        } else {
-          filters.Status = this.selectedTab ?? '';
-        }
+      } else if (this.filterFormGroup.controls['auctionStatus'].value) {
+        filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
+      } else if (this.filterFormGroup.controls['displayCase'].value) {
+        filters.Status = this.filterFormGroup.controls['displayCase'].value;
       }
     }
-    // if ((this.selectedTab === 'All' || this.selectedTab === 'Pending Selecting' || this.selectedTab === 'Closed') && this.filterFormGroup.controls['auctionStatus'].value !== '') {
-    //   filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
-    //   filters.Message = 'F';
-    // }
 
     if (this.isSearch) {
       filters.Status = 'All';
@@ -161,10 +133,11 @@ export class MyAuctionsComponent implements OnInit {
     if (sortBy && sorttype) {
       filters.Msgty = sorttype + ' ' + sortBy;
     }
+    filters.Status = filters.Status ? filters.Status : this.selectedTab;
 
     console.log('filters: ', filters);
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
-    let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '') + (filters.Msgty !== '' ? " and Msgty eq '" + filters.Msgty + "'" : '');
+    let $filters = (filters.Status ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message ? " and Message eq '" + filters.Message + "'" : '') + (filters.Msgty ? " and Msgty eq '" + filters.Msgty + "'" : '');
     this.bidderSer.getMyAuctionsList($filters, pageLimit, this.selectedTab, pageNumber).subscribe((res: any) => {
       this.showLoader = false;
       this.isFilterSearch = false;
@@ -175,6 +148,43 @@ export class MyAuctionsComponent implements OnInit {
     }, (error) => {
       this.showLoader = false;
     })
+  }
+
+  public mapping(serverObj: any) {
+    if (!serverObj.d.results?.length) return [];
+    let resultSet: any = [];
+    this.totalCounts = {
+      total_offer_made: serverObj.d.results[0].TotOffer,
+      total_no_offer: serverObj.d.results[0].TotNoOffer,
+      total_not_awarded: serverObj.d.results[0].TotNoAward,
+      total_awarded: serverObj.d.results[0].TotAward,
+      total_all: serverObj.d.results[0].TotAll
+    }
+    if (!serverObj.d.results[0].page1tolistnav?.results?.length) return [];
+    serverObj.d.results[0]?.page1tolistnav.results.forEach((result: any) => {
+      const items = {
+        referenceno: result['ObjectId'] ? result['ObjectId'] : '',
+        auctionName: result['Description'] ? result['Description'] : '',
+        auctionType: result['BidType'] ? this.getAuctionTypeDesc(result['BidType']) : this.getAuctionTypeDesc('C'), // Hardcoded due to DB inconsist
+        auctionStatus: result['Status'] ? this.getAuctionStatus(result['Status']) : '',
+        bidderStatus: result['BidderStatus'] ?? '',
+        autionEndDate: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        auctionEndTime: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+        auctionEndTimeSufix: result['ZzAucEndDt'] ? result['ZzAucEndDt'] !== 0 ? moment(result['ZzAucEndDt'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
+      }
+      resultSet.push(items);
+    });
+    return resultSet;
+  }
+
+  public getAuctionTypeDesc(type: string) {
+    if (type === 'O') {
+      return 'Public';
+    } else if (type === 'C') {
+      return 'Private';
+    } else {
+      return '';
+    }
   }
 
   refreshCalendarCntrl() {
@@ -221,6 +231,7 @@ export class MyAuctionsComponent implements OnInit {
     this.filterFormGroup = this.formBuilder.group({
       auctionType: new FormControl(''),
       auctionStatus: new FormControl(''),
+      displayCase: new FormControl(''),
       prevRefNo: new FormControl(''),
       auctionName: new FormControl(''),
       auctionStartDate: new FormControl(''),
@@ -289,6 +300,7 @@ export class MyAuctionsComponent implements OnInit {
     this.filterFormGroup.controls['auctionName'].setValue('');
     this.filterFormGroup.controls['auctionType'].setValue('');
     this.filterFormGroup.controls['auctionStatus'].setValue('');
+    this.filterFormGroup.controls['displayCase'].setValue('');
     this.filterFormGroup.controls['auctionStartDate'].setValue('');
     this.filterFormGroup.controls['auctionEndDate'].setValue('');
     this.refreshCalendarCntrl();
@@ -314,6 +326,16 @@ export class MyAuctionsComponent implements OnInit {
   }
   isSorDesc(columnId: number) {
     return this.PaginationServc.isSortDesc(columnId);
+  }
+
+  getAuctionStatus(status: string) {
+    let returnStatus = '';
+    if (status.toLowerCase() === 'published') {
+      returnStatus = 'Upcoming';
+    } else {
+      returnStatus = status;
+    }
+    return returnStatus
   }
 
 }

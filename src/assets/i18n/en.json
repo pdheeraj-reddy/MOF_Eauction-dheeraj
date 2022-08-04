@@ -60,6 +60,9 @@
     "ZEAUCTION_SALCOMM_CHAIRMAN": "Commitee Head",
     "ZEAUCTION_SALCOMM_SECRETARY": "Commitee Secretary",
     "ZEAUCTION_SALCOMM_MEMBER": "Committee Member",
+    "Offer Made": "Offer Submitted",
+    "No Offer": "No Offer Made",
+    "No Award": "Not Awarded",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
@@ -1199,5 +1202,11 @@
         "popup2_head": "Warranty sent successfully",
         "popup2_subhead": "You will receive an email when the guarantee is approved and the auction is awarded.",
         "back_btn": "Back to Auctions"
+    },
+    "my_auction": {
+        "offer_submitted": "Offer Submitted",
+        "no_ofer_made": "No Offer Made",
+        "not_awarded": "Not Awarded",
+        "awarded": "Awarded"
     }
 }

@@ -24,6 +24,9 @@ import { AppGuard } from './guard/app.guard';
 import { ModeratorGuard } from './guard/moderator.guard';
 import { MemberGuard } from './guard/member.guard';
 import { HeadGuard } from './guard/head.guard';
+import { BidderGuard } from './guard/bidder.guard';
+import { AuctionCommiteeGuardGuard } from './guard/auction-commitee-head.guard';
+import { MarketerGuard } from './guard/marketer.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/auctionlist', pathMatch: 'full' },
   { path: 'tender', component: TenderComponent },
@@ -33,7 +36,7 @@ const routes: Routes = [
   // { path:'auctionlist', component:AuctionListsComponent },
   { path: 'auctionlist', component: AuctionListsComponent, canActivate: [AuthGuard, AppGuard] },
   { path: 'auction', component: AuctionComponent, canActivate: [AuthGuard] },
-  { path: 'auction/:ObjectId/:DraftId/:ViewMode', component: AuctionComponent, canActivate: [AuthGuard] },
+  { path: 'auction/:ObjectId/:DraftId/:ViewMode', component: AuctionComponent, canActivate: [AuthGuard, MarketerGuard] },
   { path: 'tender', component: TenderComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'slider', component: AuctionSliderComponent },
@@ -133,17 +136,17 @@ const routes: Routes = [
 
   {
     path: 'bidder',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, BidderGuard],
     loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule)
   },
   {
     path: 'auctions',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ModeratorGuard],
     loadChildren: () => import('./components/sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule)
   },
   {
     path: 'auction-committee-head',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuctionCommiteeGuardGuard],
     loadChildren: () => import('./components/sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule)
   },
   {

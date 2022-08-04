@@ -59,6 +59,9 @@
     "ZEAUCTION_SALCOMM_CHAIRMAN": "رئيس اللجنه",
     "ZEAUCTION_SALCOMM_SECRETARY": "سكرتير اللجنه",
     "ZEAUCTION_SALCOMM_MEMBER": "عضو اللجنة",
+    "Offer Made": "تم تقديم العرض",
+    "No Offer": "لم يتم تقديم عرض",
+    "No Award": "لم تتم الترسية",
     "Enter the total estimated value of the products": "إدخال إجمالي القيمة التقديرية للمنتجات",
     "Enter the estimated value for each product separately": "إدخال القيمة التقديرية لكل منتج على حدة",
     "changes_not_saved": "قد لا يتم حفظ التغييرات التي قمت بإجرائها. هل ما زلت تريد التنقل؟",
@@ -1197,5 +1200,11 @@
         "popup2_head": "تم إرسال الضمان بنجاح",
         "popup2_subhead": "سوف تصلك رسالة بالبريد الإلكتروني عند اعتماد الضمان وترسية المزاد. ",
         "back_btn": "العودة إلى المزادات"
+    },
+    "my_auction": {
+        "offer_submitted": "تم تقديم العرض",
+        "no_ofer_made": "لم يتم تقديم عرض",
+        "not_awarded": "لم تتم الترسية",
+        "awarded": "تمت الترسية"
     }
 }
