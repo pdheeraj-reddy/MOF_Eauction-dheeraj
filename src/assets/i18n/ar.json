@@ -316,7 +316,7 @@
         "alert_validAmount": "يجب أن يكون العرض المقدم أكبر من سعر بدأ المزاد",
         "alert_validCount": "الرجاء تحميل ملف واحد",
         "alert_upload": "الصيغة التي تم رفعها غير مدعومة، الرجاء رفع ملف يدعم الصيغ التالية: PNG, JPG, DOCX, DOC, PDF",
-        "alert_bider_participate":"انتهى وقت التسجيل في المزاد، نأسف لعدم استطاعتك بالمشاركة وتقديم اي عروض."
+        "alert_bider_participate": "انتهى وقت التسجيل في المزاد، نأسف لعدم استطاعتك بالمشاركة وتقديم اي عروض."
     },
     "OK": "نعم",
     "ServiceUnavailable": "الخدمة غير متوفرة",
@@ -884,9 +884,9 @@
         "AuctionDetails": "تفاصيل المزاد",
         "ThisAuctionIsComing": "هذا المزاد قادم",
         "YouCanRegisterYourEntry": "يمكنك تسجيل اشتراكك حتى يحين وقت المزاد.",
-        "ManualAuction":"تفعيل المزاد",
-        "ManualAuctionDesp":"هذا المزاد يتطلب تفعيل يدوي",
-        "ManualAuctionBtn":"تفعيل المزاد",
+        "ManualAuction": "تفعيل المزاد",
+        "ManualAuctionDesp": "هذا المزاد يتطلب تفعيل يدوي",
+        "ManualAuctionBtn": "تفعيل المزاد",
         "AuctionStartDate": "تاريخ بداية المزاد",
         "ParticipateInTheAuction": "المشاركة في المزاد",
         "Product": "منتج",
@@ -916,11 +916,11 @@
             "ReceiveEmail": "سوف تصلك رسالة بالبريد الإلكتروني عند بدء المزاد",
             "BackToAuctions": "العودة إلى المزادات"
         },
-        "manualAuction-popup" :{
+        "manualAuction-popup": {
             "ConfirmationOfManualAuctionStart": "هل أنت متاكد من تفعيل المزاد؟",
-            "DetailsOfManualAuctionStart":"عند التأكيد سيتم تفعيل المزاد واستقبال العروض من المشاركين.",
-            "cancelBtn":"إلغاء",
-            "acceptBtn":"تفعيل المزاد"
+            "DetailsOfManualAuctionStart": "عند التأكيد سيتم تفعيل المزاد واستقبال العروض من المشاركين.",
+            "cancelBtn": "إلغاء",
+            "acceptBtn": "تفعيل المزاد"
         },
         "auction-settings": {
             "You-can-manage-the-auction": "يمكنك إدارة المزاد من هذه القائمة",

@@ -93,7 +93,8 @@ export class OpenOffersComponent implements OnInit {
               BidderId: result['BidderId'] ? result['BidderId'] : null,
               PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
               submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
-              submissionTime: this.timeTransform(result['DtTime']),
+              submissionTime: result['DtTime'] ? result['DtTime'] !== 0 ? moment(result['DtTime'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+              submissionTimeSuffix: result['DtTime'] ? result['DtTime'] !== 0 ? moment(result['DtTime'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
               facilityName: result['BidderName'] ? result['BidderName'] : '-',
               FileName: result['FileName'] ? result['FileName'] : '',
               commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
@@ -183,6 +184,10 @@ export class OpenOffersComponent implements OnInit {
         this.showModal.acceptOffer = true;
       }
     });
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
   acceptOffer(data: any) {

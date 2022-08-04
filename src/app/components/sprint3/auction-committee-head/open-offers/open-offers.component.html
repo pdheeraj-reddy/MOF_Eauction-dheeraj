@@ -64,7 +64,7 @@
                     <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th4' |
                         translate }}</label>
                     <input type="text" id="submission_date" [(ngModel)]="filterModel.submission_date"
-                        placeholder="{{ 'auctionCommittee.ac-openOffers.th4' | translate }}"
+                        placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                         (change)="onChangeDate($event)" class="form-control calendar-control
                             calendar-both-control" />
                 </div>
@@ -72,8 +72,9 @@
         </div>
         <div class="modal-footer">
             <button (click)="resetFilter()" type="button" data-dismiss="modal" aria-label="Close"
-                class="btn btn-outline-light btn-md">Reset</button>
-            <button (click)="applyFilter()" type="button" class="btn btn-primary-light btn-md">Apply</button>
+                class="btn btn-outline-info btn-md">{{ 'auctionlist.filter-btn2' | translate }}</button>
+            <button (click)="applyFilter()" type="button" class="btn btn-primary-light btn-md">{{
+                'auctionlist.filter-btn1' | translate }}</button>
         </div>
     </div>
     <!-- Block level -->
@@ -217,8 +218,13 @@
                                     <a style="text-decoration: underline; color: #32AD71;">{{rowItem.FileName}}</a>
                                 </span>
                             </td>
-                            <td>{{ rowItem.submissionDate}} <br>
-                                <p style="color: #9D9D9D;">{{ rowItem.submissionTime }}</p>
+                            <td>
+                                <!-- {{ rowItem.submissionDate}} <br>
+                                <p style="color: #9D9D9D;">{{ rowItem.submissionTime }}</p> -->
+                                <div class="pt-1 text-14">{{ rowItem.submissionDate }}
+                                    <div class="text-14 color-lightGrey">{{ rowItem.submissionTime }} {{
+                                        rowItem.submissionTimeSuffix | translate }}</div>
+                                </div>
                             </td>
                             <td>{{ rowItem.facilityName }}</td>
                             <td>{{ rowItem.commercialRegistrationNo }}</td>
@@ -282,72 +288,66 @@
 <div style="margin:auto;" class="modal show" *ngIf="showModal.acceptOffer"
     [ngClass]="{ 'modal-show': showModal.acceptOffer }" id="showSuccessfulModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="width: 100%; height: 100%;">
-            <div class="" style="display: flex; margin-top: 10px;">
-                <div style="width: 400px; text-align: left;">
-                    <p
-                        style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
-                        {{'open_offer.adoption_of_awarding' | translate}}</p>
-                </div>
-                <div>
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
-                        (click)="showModal.acceptOffer = false">
-                        <span class="icon-close"></span>
-                    </button>
-                </div>
-            </div>
-            <div style=" margin-top: 10px;">
-                <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                    {{'open_offer.upon_confirmation' | translate}}</p>
-            </div>
-            <div style="margin-top: 10px; display: flex;">
-                <div style="width: 50%;">
-                    <p style="color: #117ABE;">{{'auctionCommittee.ac-openOffers.th2' | translate}}</p>
-                    <p style="color: #08594D; margin-top: -10px;">{{offervalue}}</p>
-                </div>
-                <div style="width: 36%;">
-                    <p style="color: #117ABE;">{{'auctionCommittee.ac-openOffers.th5' | translate}}</p>
-                    <p style="color: #08594D; margin-top: -10px;">{{facilityname}}</p>
-                </div>
-            </div>
-            <div style="margin-top: 10px; display: flex;">
-                <div style="width: 42%;">
-                    <p style="color: #117ABE;">{{'auctionCommittee.ac-openOffers.th6' | translate}}</p>
-                    <p style="color: #08594D; margin-top: -10px;">{{commercialNo}}</p>
-                </div>
-            </div>
-            <div style="display: flex;justify-content: end;">
-                <button (click)="showModal.acceptOffer = false" data-dismiss="modal"
-                    style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">
-                    {{'bidderSendOffer.Cancellation' | translate}}
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-success" id="exampleModalLabel">
+                    {{'open_offer.adoption_of_awarding' | translate}}
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                    (click)="showModal.acceptOffer = false">
+                    <span class="icon-close"></span>
                 </button>
-                <button type="button" *ngIf="spinner"
-                    style="height:45px; width: 120px; margin-left: 20px;margin-right: 20px; background-color: white;  font-weight: bold; outline: none; border: none; border-radius: 4px;"
-                    class=" qq-upload-retry-selector btn btn-ghost btn-primary-light-green btn-lg">
-                    <span class="btn-text pr-0">
-                        <div class="spinner-border spinner-border-light-green icon-spinner text-light" role="status"
-                            style="color: white;">
-                        </div>
-                    </span>
-                </button>
-                <button type="button" *ngIf="!spinner" class="btn btn-primary-light-green btn-md" data-dismiss="modal"
-                    aria-label="Close" (click)="acceptOffer(selectedData)"
-                    style="height:45px; width: 120px; margin-left: 20px;margin-right: 20px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
-                    <div *ngIf="spinner" class="spinner-border spinner-border-light-green icon-spinner text-light"
-                        role="status">
+            </div>
+
+            <div class="modal-body">
+                <div class="text-16 text-body">
+                    {{'open_offer.upon_confirmation' | translate}}
+                </div>
+
+                <div class="form-row mt-4">
+                    <div class="col mb-3 pl-0 pr-0">
+                        <label for="validationCustom01">
+                            {{'auctionCommittee.ac-openOffers.th2' | translate}}
+                        </label>
+                        <div class="text-primary"> {{offervalue}} </div>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">
+                            {{'auctionCommittee.ac-openOffers.th5' | translate}}
+                        </label>
+                        <div class="text-primary"> {{facilityname}} </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col pl-0 pr-0 mb-3">
+                        <label for="validationCustom01">
+                            {{'auctionCommittee.ac-openOffers.th6' | translate}}
+                        </label>
+                        <div class="text-primary"> {{commercialNo}} </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="justify-content: end">
+                <button class="btn btn-md btn-outline-light" (click)="showModal.acceptOffer = false">
+                    {{'bidderSendOffer.Cancellation' | translate}}</button>
+                <button class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
+                    (click)="acceptOffer(selectedData)">
                     {{'open_offer.gear_adoption' | translate}}
                 </button>
             </div>
+
         </div>
     </div>
 </div>
+
 <!-- success modal confirmation -->
 <div style="margin:auto;" class="modal show" *ngIf="showModal.acceptOfferSuccess" id="secondPopup"
     [ngClass]="{ 'modal-show': showModal.acceptOfferSuccess }" tabindex="-2" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content card shadow-lg result result-success" style="align-items: center;">
             <button style="position: absolute;left: 90%;" data-dismiss="modal" type="button"
                 class="modal-close btn-close btn-sm" aria-label="Close" (click)="showModal.acceptOfferSuccess = false">
@@ -414,44 +414,39 @@
     [ngClass]="{ 'modal-show': showModal.rejectOffer }" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="width: 100%; height: 100%;">
-            <div class="" style="display: flex; margin-top: 10px;">
-                <div>
-                    <p
-                        style="font-family:DIN Next LT Arabic Regular; color: #F66F5B; font-size: 22px; line-height: 26px; font-weight: bold;">
-                        {{'open_offer.reject_confirmation' | translate}}</p>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title denial-model text-danger" id="exampleModalLabel">
+                    {{'open_offer.reject_confirmation' | translate}}
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                    (click)="showModal.rejectOffer = false">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body text-20 text-body">
+                    {{'open_offer.are_you_sure_of_the_rejection_of_the_award' | translate}}
                 </div>
-                <div style="margin-left: 25px;">
-                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
-                        (click)="showModal.rejectOffer = false">
-                        <span class="icon-close"></span>
-                    </button>
+
+                <div class="row mt-4">
+                    <div class="form-group col w-100">
+                        <div class="border-bottom color-grey"> <label for="goverusermessage">
+                                {{'open_offer.rejection_reason' | translate}}
+                            </label> <span class="float-left text-muted">{{ 'auctionMember.reject-popup.letter' |
+                                translate
+                                }}&nbsp;<small id="charNum">{{rejectReason?.length || 0}}/250</small></span>
+                        </div>
+                        <textarea [(ngModel)]="rejectReason" class="form-control text-success" maxlength="250"
+                            placeholder="{{'open_offer.refuse_reason_placeholder' | translate}}" rows="4"></textarea>
+
+                    </div>
                 </div>
             </div>
-            <div style="margin-top: 10px;width: 100%;">
-                <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                    {{'open_offer.are_you_sure_of_the_rejection_of_the_award' | translate}}</p>
-            </div>
-            <br>
-            <div style="display: flex;justify-content: space-between;">
-                <p style="color: #117ABE;">{{'open_offer.rejection_reason' | translate}}</p>
-                <p style="color: #cac1c1;">{{'auctionMember.reject-popup.letter' | translate}}
-                    {{rejectReason?.length || 0}}/250</p>
-            </div>
-            <div>
-                <textarea [(ngModel)]="rejectReason"
-                    style="width: 100%; height: 130px;border: none;  border-bottom: 1px solid #cac1c1; border-top: 1px solid #cac1c1; padding: 10px;"
-                    maxlength="250" name="" id="" cols="30" rows="10"
-                    placeholder="{{'open_offer.refuse_reason_placeholder' | translate}}"></textarea>
-            </div>
-            <br><br>
-            <div style="display: flex;justify-content: end;">
-                <button (click)="showModal.rejectOffer = false;"
-                    style="background-color: white; color: #cac1c1; border: #cac1c1 1px solid; border-radius: 4px; width: 100px; height: 50px;">
+            <div class="modal-footer" style="justify-content: end">
+                <button class="btn btn-md btn-outline-light" (click)="showModal.rejectOffer = false;">
                     {{'bidderSendOffer.Cancellation' | translate}}</button>
-                <button class="btn btn-primary-light-green btn-md" (click)="rejectOffer(selectedData)"
-                    [disabled]="!rejectReason"
-                    style="background-color: #F66F5B; color: #FFFFFF; border: none; border-radius: 4px; width: 160px; height: 50px; margin-left: 20px;margin-right: 20px;">
+                <button class="btn btn-danger btn-md" (click)="rejectOffer(selectedData)" [disabled]="!rejectReason">
                     {{'open_offer.rejection_confirmation' | translate}}
                 </button>
             </div>
@@ -461,10 +456,11 @@
 <!-- Rejection confirmation -->
 <div style="margin:auto;" class="modal show" role="dialog" aria-hidden="true"
     [ngClass]="{ 'modal-show': showModal.rejectOfferSuccess }" *ngIf="showModal.rejectOfferSuccess">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content card shadow-lg result result-success" style="align-items: center; width: 100%;">
-            <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-                aria-label="Close" data-dismiss="modal" (click)="showModal.rejectOfferSuccess = false">
+            <button style="position: absolute;left: 90%; outline: none;" type="button"
+                class="modal-close btn-close btn-sm" aria-label="Close" data-dismiss="modal"
+                (click)="showModal.rejectOfferSuccess = false">
                 <span class="icon-close"></span>
             </button>
 
