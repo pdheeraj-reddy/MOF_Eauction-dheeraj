@@ -316,7 +316,8 @@
         "alert_validfile": "The file type not allowed",
         "alert_validAmount": "The bid must be greater than the starting price of the auction",
         "alert_validCount": "Please upload single file",
-        "alert_upload": "The uploaded format is not supported, please upload a file that supports the following formats: PNG, JPG, DOCX, DOC, PDF"
+        "alert_upload": "The uploaded format is not supported, please upload a file that supports the following formats: PNG, JPG, DOCX, DOC, PDF",
+        "alert_bider_participate":"The time to register for the auction has expired, we regret that you are unable to participate and submit any bids."
     },
     "OK": "OK",
     "ServiceUnavailable": "Service Unavailable",
@@ -610,6 +611,9 @@
         "AuctionDetails": "Auction Details",
         "ThisAuctionIsComing": "This auction is coming",
         "YouCanRegisterYourEntry": "You can register your entry until it's auction time.",
+        "ManualAuction":"Activate the auction",
+        "ManualAuctionDesp":"This auction requires manual activation.",
+        "ManualAuctionBtn":"Activate the auction",
         "AuctionStartDate": "Auction start date",
         "ParticipateInTheAuction": "Participate in the auction",
         "Product": "products",
@@ -638,6 +642,12 @@
             "SubscriptionConfirmedSuccessfully": "Subscription has been confirmed successfully",
             "ReceiveEmail": "You will receive an email when the auction starts",
             "BackToAuctions": "Back to auctions"
+        },
+        "manualAuction-popup" :{
+            "ConfirmationOfManualAuctionStart": "Are you sure activate the acution? ",
+            "DetailsOfManualAuctionStart":"Upon confirmation, the auction will be activated and offers will be received from participants.",
+            "cancelBtn":"Cancel",
+            "acceptBtn":"Activate the auction"
         },
         "auction-settings": {
             "You-can-manage-the-auction": "You can manage the auction from this menu",
@@ -765,6 +775,8 @@
         "TotalOfferPrice": "Total offer price",
         "SendOffer": "Send offer",
         "SentOffer": "Offer Sent",
+        "NoOfferMade":"No offer has been made",
+        "NoFileUpload":"Upload a file",
         "ConfirmationBidSubmission": "Confirmation of bid submission?",
         "BidSubmissionDescription": "Upon confirmation, your bid will be sent to the auction committee. You will not be able to modify or cancel the offer after it has been sent.",
         "SubmitOffer": "Post confirmation",
