@@ -55,10 +55,14 @@ export class MyAuctionsComponent implements OnInit {
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
     private http: HttpClient,
     public translate: TranslateService,
-    private envService: EnvService,
+    public envService: EnvService,
     private bidderSer: BidderService
   ) {
     PaginationServc.reset();
+  }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
   }
 
   public mapping(serverObj: any) {

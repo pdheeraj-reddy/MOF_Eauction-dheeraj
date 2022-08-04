@@ -5,7 +5,7 @@
             <p class="text-18 text-warning font-weight-bold">{{'sprint3_auction_detail.your_bid_has_been_awarded' |
                 translate}}</p>
             <p class="text-12 text-warning">
-                {{'sprint3_auction_detail.please_attach_the_final_guarantee'}}
+                {{'sprint3_auction_detail.please_attach_the_final_guarantee' | translate}}
             </p>
         </div>
     </div>
@@ -19,9 +19,9 @@
         <div class="d-flex flex-column justify-content-center m-4" style="max-width: 440px">
             <!-- ============= File upload area and view area ===============-->
             <div *ngIf="!disable">
-                <div *ngIf="!checkFile()" class="file-uploader-zone mt-0 p-0">
+                <div *ngIf="!checkFile()" class="file-uploader-zone mt-0 p-0" style="max-width: 80%;">
                     <div class="buttons">
-                        <div class="uploader-button-caption d-flex px-4">
+                        <div class="uploader-button-caption d-flex px-4 py-2" style="justify-content: center;">
                             <span class="icon-attachment mx-1" style="font-size: 20px;"></span>
                             <label class="text-14 font-weight-bold" style="margin-top: 9px;">{{
                                 'bidderSendOffer.UploadFileFormat' |
@@ -109,9 +109,10 @@
             <!--===== End =========-->
             <div>
                 <p class="text-primary text-14 m-0">
-                    {{'sprint3_auction_detail.please_issue_and_attach'}}
-                    {{'sprint3_auction_detail.issuance_of_the_final_guarantee'}}
-                    <a class="text-info text-14" style="text-decoration: underline">اضغط هنا</a>
+                    {{'sprint3_auction_detail.please_issue_and_attach' | translate}}<br>
+                    {{'sprint3_auction_detail.issuance_of_the_final_guarantee' | translate}}
+                    <a class="text-info text-14"
+                        style="text-decoration: underline">{{'sprint3_auction_detail.press_here' | translate}}</a>
                 </p>
             </div>
         </div>
@@ -119,7 +120,7 @@
 
         <!--=================== Participation Button ===================-->
         <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()" [disabled]="disableBtn">
-            {{'sprint3_auction_detail.send_the_final_guarantee'}}
+            {{'sprint3_auction_detail.send_the_final_guarantee' | translate}}
         </button>
         <!-- End -->
     </div>

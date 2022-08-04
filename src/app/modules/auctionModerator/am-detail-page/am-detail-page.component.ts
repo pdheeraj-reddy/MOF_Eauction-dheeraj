@@ -10,6 +10,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AuctionService } from 'src/app/service/auction.service';
 import { AlertModalComponent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-am-detail-page',
@@ -48,7 +49,12 @@ export class AmDetailPageComponent implements OnInit {
     public auctionServc: AuctionService,
     public dialog: MatDialog,
     public router: Router,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {

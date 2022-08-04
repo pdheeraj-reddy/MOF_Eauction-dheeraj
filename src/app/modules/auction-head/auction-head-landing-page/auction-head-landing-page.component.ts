@@ -16,6 +16,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 declare var $: any;
 import { Moment } from 'moment-mini';
 import * as moment from 'moment-mini';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-auction-head-landing-page',
@@ -59,8 +60,13 @@ export class AuctionHeadLandingPageComponent implements OnInit, AfterViewInit {
     public auctionServc: AuctionModeratorService,
     private cookieService: CookieService,
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   public mapping(serverObj: any) {
     console.log(serverObj);

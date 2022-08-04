@@ -313,7 +313,7 @@
                         </div>
 
                         &nbsp; &nbsp; &nbsp;
-                        <div class="left-left-card"
+                        <div class="left-left-card" style="margin-inline-end: 14px;"
                             [ngClass]="{'flex-fill': upcomingAuction.auctionStatus == 'Published' || response.ZzBidderSts ==''}">
                             <div style="position: relative; margin-top: 5px;">
 
@@ -321,12 +321,13 @@
 
                                     <ng-container>
                                         <div id="slideshow">
-                                            <div style="width: 100%; min-height: 400px;position: relative;"
-                                                class="mb-4">
+                                            <div style="width: 100%; min-height: 400px; position: relative;"
+                                                class="rounded"
+                                                [ngClass]="fullImage.blankImage ? 'blankImage-border' : 'fullImage-border'">
                                                 <div *ngIf="fullImage">
                                                     <div *ngIf="!fullImage.blankImage">
                                                         <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'"
-                                                            class="img-fluid bg-dark" [src]="fullImage.src"
+                                                            class="img-fluid bg-dark rounded" [src]="fullImage.src"
                                                             style="width: -webkit-fill-available; height: 400px;" />
                                                         <div style="min-height:400px;max-height: 400px;"
                                                             class="full-video"
@@ -334,7 +335,7 @@
                                                             <video
                                                                 *ngIf="(fullImage.type =='video/mp4' || fullImage.type == 'video/quicktime') && showVideo"
                                                                 autoplay controls class="img-fluid bg-dark" width="600"
-                                                                style="height: 400px;">
+                                                                style="height: 400px; border-radius: 5px;">
                                                                 <source [src]="fullImage.src" type="video/mp4"
                                                                     style="width: -webkit-fill-available; height: 400px;">
                                                                 Your browser does not support HTML video.
@@ -400,13 +401,13 @@
                                                 </div>
                                             </div>
 
-                                            <div class="thumbs-container bottom" *ngIf="!showLoaderMainImage">
+                                            <div class="thumbs-container" *ngIf="!showLoaderMainImage">
                                                 <div id="prev-btn" class="prev" (click)="scrollImageSlider('left')">
-                                                    <i class="icon-arrow_left"></i>
+                                                    <i class="icon-arrow_left" style="color: #FFFFFF;"></i>
                                                 </div>
 
                                                 <ul class="thumbs">
-                                                    <div style="" class="gallery-container" #imageSlide>
+                                                    <div class="gallery-container" #imageSlide>
                                                         <ng-container *ngFor="let slide of slidesStore">
                                                             <div class="opacity-0-5 image-box"
                                                                 [ngClass]="{'opacity-1': slide.id == fullImage.id}">
@@ -480,7 +481,7 @@
                                                 </ul>
 
                                                 <div id="next-btn" class="next" (click)="scrollImageSlider('right')">
-                                                    <i class="icon-arrow_right"></i>
+                                                    <i class="icon-arrow_right" style="color: #FFFFFF;"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -512,7 +513,7 @@
                             <p class="text-16 text-muted">{{upcomingAuction.auctionnote2}}</p>
 
                             <p class="text-14 text-black d-flex">
-                                <span class="icon-all-tenders text-primary font-weight-bold text-20"></span>&nbsp;
+                                <img src="assets/icons/product-layers.png" alt="">&nbsp;
                                 <span class="mx-1">{{upcomingAuction.productCount | number}}</span>
                                 <span>{{ 'bidderAuctionDetails.Product' | translate }}</span>
                             </p>

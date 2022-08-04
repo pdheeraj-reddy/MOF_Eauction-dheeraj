@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Moment } from 'moment-mini';
 import * as moment from 'moment-mini';
+import { EnvService } from 'src/app/env.service';
 declare var $: any;
 
 @Component({
@@ -60,8 +61,13 @@ export class AucMemLandingPageComponent implements OnInit, AfterViewInit {
     public auctionServc: AuctionModeratorService,
     private cookieService: CookieService,
     private csrfTokenExtractor: HttpXsrfTokenExtractor,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   public mapping(serverObj: any) {
     console.log(serverObj);

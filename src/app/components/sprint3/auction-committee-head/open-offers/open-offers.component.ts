@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { DatePipe, Location } from '@angular/common';
 import { AuctionService } from 'src/app/service/auction.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EnvService } from 'src/app/env.service';
 declare var $: any;
 @Component({
   selector: 'app-open-offers',
@@ -55,7 +56,12 @@ export class OpenOffersComponent implements OnInit {
     public translate: TranslateService,
     public datepipe: DatePipe,
     public router: Router,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';

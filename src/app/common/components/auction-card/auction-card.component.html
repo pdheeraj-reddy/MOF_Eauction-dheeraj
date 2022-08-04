@@ -60,7 +60,7 @@
         <p class="card-text" data-toggle="tooltip" data-placement="top" title="{{auction.description}}">
             {{auction.description}} </p>
         <div class="text-body text-18 mt-4">
-            <img src="assets/icons/layers.png" alt="" width="20px">
+            <img src="assets/icons/product-layers.png" alt="">
             <span class="mx-2"> {{auction.product}} {{ 'Product' | translate }}</span>
         </div>
         <div class="text-body text-18 d-flex mt-3" *ngIf=" auction.auctiondate">
@@ -83,7 +83,8 @@
                     [ngClass]="[role.bidder ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : '']">
                     {{ 'AuctionDetails' | translate }}
                 </button>
-                <button *ngIf="role.auctionCommitteeHead" (click)="redirectToDetail(auction.ObjectId)" style="width: 125px;"
+                <button *ngIf="role.auctionCommitteeHead" (click)="redirectToDetail(auction.ObjectId)"
+                    style="width: 125px;"
                     [ngClass]="[role.auctionCommitteeHead ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : 'font-weight-bold']">
                     {{ 'AuctionDetails' | translate }}
                 </button>

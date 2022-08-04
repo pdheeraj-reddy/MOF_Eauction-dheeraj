@@ -3,6 +3,7 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModeratorService } from 'src/app/core/services/auctionModertor/auction-moderator.service';
 import { AuctionService } from 'src/app/service/auction.service';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-auction-head-detail-page',
@@ -28,8 +29,13 @@ export class AuctionHeadDetailPageComponent implements OnInit {
     private _AuctionService: AuctionModeratorService,
     public auctionServc: AuctionService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {

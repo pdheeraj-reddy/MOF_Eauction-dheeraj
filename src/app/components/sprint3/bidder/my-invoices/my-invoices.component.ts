@@ -44,7 +44,12 @@ export class MyInvoicesComponent implements OnInit {
     public PaginationServc: PaginationSortingService,
     public translate: TranslateService,
     private bidderService: BidderService,
+    public envService: EnvService
   ) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
 
 

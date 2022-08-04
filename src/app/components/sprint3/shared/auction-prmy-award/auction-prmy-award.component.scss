@@ -29,7 +29,7 @@
 }
 
 .top-card-right-right {
-    margin-right: 20px;
+    // margin-right: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -194,29 +194,35 @@
     color: #28ab6d;
     font-size: 30px;
 }
+
 // <--=========== Newly added SCSS - Required ===========-->
-.custom-bg-yellow{
+.custom-bg-yellow {
     background-color: #FEF7E8;
 }
-.vr-line{
+
+.vr-line {
     width: 1px;
-    background-color:#F9B122;
+    background-color: #F9B122;
 }
+
 .status-success-icon {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
+
 .circle {
     width: 96px;
     height: 96px;
     background: #f9fcfa;
     border-radius: 50%;
 }
+
 .icon-check {
     position: absolute;
     font-size: 30px;
     top: 85px;
     color: #32ad71;
 }
+
 // End
