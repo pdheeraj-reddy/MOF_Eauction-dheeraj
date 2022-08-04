@@ -296,4 +296,7 @@ export class SendBiddingOfferComponent implements OnInit {
       console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 226 ~ resData", resData);
     });
   }
+  reloadPage(){
+    window.location.reload();
+  }
 }

@@ -104,7 +104,7 @@
 
   <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
-      <button (click)="this.showSuccessAccept = false" style="position: absolute;left: 90%;" type="button"
+      <button (click)="this.showSuccessAccept = false; reloadPage()" style="position: absolute;left: 90%;" type="button"
         class="modal-close btn-close btn-sm">
         <span class="icon-close"></span>
       </button>
@@ -173,7 +173,7 @@
   <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
       <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-        data-dismiss="modal" aria-label="Close">
+        (click)="this.showSuccessReject = false; reloadPage()">
         <span class="icon-close"></span>
       </button>
       <span class="icon-check"></span>

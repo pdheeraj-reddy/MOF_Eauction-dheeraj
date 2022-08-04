@@ -30,17 +30,16 @@
         <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')"
           class="text-primary text-14 font-weight-bold d-flex" style="text-decoration: none;">
 
-          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' |
-            translate}}</span>&nbsp;&nbsp;
+          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' | translate}}</span>&nbsp;&nbsp;
           <span class="text-16 icon-download"></span>
         </a>
         <div *ngIf="showAttachLoader">
+          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' | translate}}</span>
+          &nbsp;
           <div class="spinner-border text-primary"
             style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
             <span class="sr-only">Loading...</span>
           </div>
-          &nbsp;
-          <span style="text-decoration: underline;">{{'auctionCommittee.ac-openOffers.th3'}}</span>
         </div>
       </div>
     </div>
@@ -78,8 +77,8 @@
 
 <!-- Model to confirm Approval -->
 <div class="modal show" *ngIf="showConfirmationAccept" [ngClass]="{ 'modal-show': showConfirmationAccept }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content w-75">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">
           {{ 'fbga_approval.popup1.head' | translate }}
@@ -113,9 +112,9 @@
 <!-- Model to show confirmed (Successful)  Approval-->
 <div class="modal show" *ngIf="showSuccessAccept" [ngClass]="{ 'modal-show': showSuccessAccept }">
 
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
-      <button (click)="this.showSuccessAccept = false" style="position: absolute;left: 90%;" type="button"
+      <button (click)="this.showSuccessAccept = false; reloadPage()" style="position: absolute;left: 90%;" type="button"
         class="modal-close btn-close btn-sm">
         <span class="icon-close"></span>
       </button>
@@ -147,8 +146,8 @@
 
 <!-- Model to confirm Rejection -->
 <div class="modal show" *ngIf="showConfirmationReject" [ngClass]="{ 'modal-show': showConfirmationReject }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content" style="width: 74%;">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-danger" id="exampleModalLabel">
           {{ 'fbga_approval.popup2.head' | translate }}
@@ -182,10 +181,10 @@
 
 <!-- Model to show confirmed (Successful)  Rejection-->
 <div class="modal show" *ngIf="showSuccessReject" [ngClass]="{ 'modal-show': showSuccessReject }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content" style="align-items: center; width: 85%;">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content" style="align-items: center;">
       <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
-        (click)="this.showSuccessReject = false">
+        (click)="this.showSuccessReject = false; reloadPage()">
         <span class="icon-close"></span>
       </button>
       <span class="icon-check"></span>

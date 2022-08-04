@@ -89,7 +89,7 @@ export class AuctionFinalAwardComponent implements OnInit {
   }
 
   goToInvoice() {
-    this.router.navigateByUrl('auctions/send-invoice/' + this.auctionId)
+    this.router.navigateByUrl('auctions/send-invoice/' + this.auctionId, {state : this.statusData});
   }
 
   ngDoCheck() {
@@ -161,5 +161,8 @@ export class AuctionFinalAwardComponent implements OnInit {
     downloadLink.target = '_blank';
     downloadLink.download = fileName;
     downloadLink.click();
+  }
+  reloadPage(){
+    window.location.reload();
   }
 }

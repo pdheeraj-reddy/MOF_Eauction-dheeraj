@@ -26,6 +26,7 @@ export class AuctionFbgaComponent implements OnInit {
 
   acceptedFiles = [
     'image/png',
+    'image/jpeg',
     'application/pdf',
     'application/msword',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -249,5 +250,8 @@ export class AuctionFbgaComponent implements OnInit {
   }
   removeFile() {
     this.files.pop();
+  }
+  reloadPage(){
+    window.location.reload();
   }
 }

@@ -390,7 +390,7 @@
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
-      <button (click)="showSuccessfulModal=false" type="button" class="modal-close btn-close btn-sm">
+      <button (click)="showSuccessfulModal=false; reloadPage()"e="button" class="modal-close btn-close btn-sm">
         <span class="icon-close"></span>
       </button>
       <span class="icon-check"></span>

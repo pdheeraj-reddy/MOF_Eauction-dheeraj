@@ -117,4 +117,7 @@ export class AuctionPrmyAwardComponent implements OnInit {
     downloadLink.download = fileName;
     downloadLink.click();
   }
+  reloadPage(){
+    window.location.reload();
+  }
 }
