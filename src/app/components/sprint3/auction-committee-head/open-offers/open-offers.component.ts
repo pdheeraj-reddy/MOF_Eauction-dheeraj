@@ -9,6 +9,7 @@ import { DatePipe, Location } from '@angular/common';
 import { AuctionService } from 'src/app/service/auction.service';
 import { TranslateService } from '@ngx-translate/core';
 import { EnvService } from 'src/app/env.service';
+import { sha1 } from '@angular/compiler/src/i18n/digest';
 declare var $: any;
 @Component({
   selector: 'app-open-offers',
@@ -41,7 +42,7 @@ export class OpenOffersComponent implements OnInit {
     rejectOffer: false,
     rejectOfferSuccess: false,
     esitimationOffer: false,
-    esitimationOfferSuccess: false,
+    estimationOfferSuccess: false,
   }
   spinner: boolean = false;
   columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo'];
@@ -178,7 +179,7 @@ export class OpenOffersComponent implements OnInit {
     this.spinner = true;
     this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
       this.spinner = false;
-      if (res.d.ZzUserAction === 'R') {
+      if (res.d.ZzUserAction === 'T') {
         this.showModal.esitimationOffer = true;
       } else {
         this.showModal.acceptOffer = true;
@@ -204,6 +205,24 @@ export class OpenOffersComponent implements OnInit {
       data.selected = false;
       this.showModal.acceptOffer = false;
       this.showModal.acceptOfferSuccess = true;
+      this.spinner = false;
+    });
+  }
+
+  terminateOffer(data: any) {
+    this.offervalue = data.offerValue;
+    this.facilityname = data.facilityName;
+    this.commercialNo = data.commercialRegistrationNo;
+    const param = {
+      AucId: this.auctionId,
+      BidderId: data.BidderId,
+      ZzUserAction: "A"
+    }
+    this.spinner = true;
+    this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
+      data.selected = false;
+      this.showModal.acceptOffer = false;
+      this.showModal.estimationOfferSuccess = true;
       this.spinner = false;
     });
   }
@@ -341,6 +360,7 @@ export class OpenOffersComponent implements OnInit {
   backToAuctionDetail() {
     this.showModal.acceptOfferSuccess = false;
     this.showModal.rejectOfferSuccess = false;
+    this.showModal.estimationOfferSuccess = false;
     this.router.navigate(['/auction-details/' + this.auctionId])
   }
 
