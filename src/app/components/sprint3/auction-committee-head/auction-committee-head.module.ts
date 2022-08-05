@@ -15,7 +15,7 @@ import { OpenOffersComponent } from './open-offers/open-offers.component';
   imports: [
     CommonModule,
     AuctionCommitteeHeadRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AuctionCommitteeHeadModule { }

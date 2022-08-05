@@ -38,11 +38,10 @@ export class OfferReportComponent implements OnInit {
     commercial_ref: '',
   }
   spinner: boolean = false;
-  columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo'];
+  columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo', 'bidderStatus'];
   pageRangeForAttach: any;
   constructor(
     public datepipe: DatePipe,
-    private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService,
     public translate: TranslateService,
     public bidderService: BidderService,
@@ -82,6 +81,7 @@ export class OfferReportComponent implements OnInit {
               submissionTime: this.timeTransform(result['DtTime']),
               facilityName: result['BidderName'] ? result['BidderName'] : '-',
               FileName: result['FileName'] ? result['FileName'] : '',
+              bidderStatus: result['bidderStatus'] ? result['bidderStatus'] : '',
               commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
               downloadingAttachmet: false
             };
@@ -190,9 +190,8 @@ export class OfferReportComponent implements OnInit {
       })
     }
     if (this.filterModel.submission_date) {
-      console.log('this.filterModel: ', this.filterModel);
       this.openofferListData = this.openofferListData.filter((i: any) => {
-        if (i.submissionDate?.split('.')[0] === this.filterModel.submission_date?.split('-')[2]) return true;
+        if (i.submissionDate === this.filterModel.submission_date) return true;
         return false;
       })
     }

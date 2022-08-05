@@ -5,10 +5,10 @@
                 'auctionSettings.tab5' | translate }}</p>
         </div>
         <div style="display: flex; align-items: center;">
-            <div style="display: flex;align-items: center;">
+            <div style="display: flex;align-items: center;cursor: pointer;" (click)="downloadReport(openofferListData)">
                 <p style="color:#08594D; font-weight:bold; font-size:16px; text-decoration:underline;">
                     {{ 'bidderAuctions.auction_report_and_bids_submitted' | translate }}</p> &nbsp; &nbsp;
-                <span (click)="downloadReport(auctionReport)" class="icon-download"></span>
+                <span class="icon-download"></span>
             </div>
 
             <div class="col-auto justify-content-end">
@@ -41,6 +41,14 @@
                         placeholder="{{ 'auctionCommittee.ac-openOffers.th2' | translate }}" id="validationCustom01" />
                 </div>
                 <div class="col-md-4 mb-3">
+                    <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th4' |
+                        translate }}</label>
+                    <input type="text" id="submission_date" [(ngModel)]="filterModel.submission_date"
+                        placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                        (change)="onChangeDate($event)" class="form-control calendar-control
+                                            calendar-both-control" />
+                </div>
+                <div class="col-md-4 mb-3">
                     <label for="validationCustom01">{{ 'auctionCommittee.ac-openOffers.th5' | translate }}</label>
                     <input type="text" [(ngModel)]="filterModel.facility_name" class="form-control"
                         placeholder="{{ 'auctionCommittee.ac-openOffers.th5' | translate }}" id="validationCustom01" />
@@ -49,14 +57,6 @@
                     <label for="validationCustom01">{{ 'auctionCommittee.ac-openOffers.th6' | translate }}</label>
                     <input type="text" [(ngModel)]="filterModel.commercial_ref" class="form-control"
                         placeholder="{{ 'auctionCommittee.ac-openOffers.th6' | translate }}" id="validationCustom01" />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th4' |
-                        translate }}</label>
-                    <input type="text" id="submission_date" [(ngModel)]="filterModel.submission_date"
-                        placeholder="{{ 'auctionCommittee.ac-openOffers.th4' | translate }}"
-                        (change)="onChangeDate($event)" class="form-control calendar-control
-                                        calendar-both-control" />
                 </div>
             </div>
         </div>
@@ -114,7 +114,13 @@
                                     [ngClass]="{ 'sort-none': isSorting(5), 'sort-asc': isSortAsc(5), 'sort-desc': isSorDesc(5) }"></span></span>
                         </div>
                     </th>
-                    <th class="btn-primary-light" style="width: 17%;" scope="col"></th>
+                    <th class="btn-primary-light cursor-pointer" scope="col" (click)="sortByTableHeaderId(6, 'string')">
+                        <div class="table-header-cell">
+                            <span>{{ 'bidderMyAuctions.DisplayCase' | translate }}</span>
+                            <span class="sort"><span class="sort-none"
+                                    [ngClass]="{ 'sort-none': isSorting(5), 'sort-asc': isSortAsc(5), 'sort-desc': isSorDesc(5) }"></span></span>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody style="color: #414042;">
@@ -214,6 +220,13 @@
                             <td>{{ rowItem.facilityName }}</td>
                             <td>{{ rowItem.commercialRegistrationNo }}</td>
                             <td>
+                                <div class="status status-o" *ngIf="rowItem.bidderStatus"
+                                    [ngClass]="[rowItem.bidderStatus === 'Awarded' ? 'status-o-success-2' : rowItem.bidderStatus === 'Offer Made' ? 'status-o-warning-2' :  rowItem.bidderStatus === 'No Offer' ? 'status-o-important-2' : 'status-o-neutral-4']">
+                                    <br>
+                                </div>
+                                {{ rowItem.bidderStatus | translate }}
+                            </td>
+                            <!-- <td>
                                 <ng-container *ngIf="i==0">
                                     <div>
                                         <span style="font-size: 6px; color: #32AD71;"
@@ -226,7 +239,7 @@
                                             class="icon-fiber_manual_record"></span>&nbsp;unberthed
                                     </div>
                                 </ng-container>
-                            </td>
+                            </td> -->
                         </ng-container>
                     </tr>
                 </ng-container>

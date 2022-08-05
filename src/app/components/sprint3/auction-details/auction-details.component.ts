@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { OfferReport, UpcomingAuction } from "src/app/model/auction.model";
 import { HttpClient } from "@angular/common/http";
@@ -149,7 +149,8 @@ export class AuctionDetailsComponent implements OnInit {
     private modService: AucModeratorService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    public envService: EnvService
+    public envService: EnvService,
+    public router: Router,
   ) { }
 
   public get getHomeUrl() {
@@ -924,7 +925,7 @@ export class AuctionDetailsComponent implements OnInit {
   }
   openProductPopup() {
     let productData = this.products.filter((attach) => attach.productNo == this.selectedProduct);
-    // console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 726 ~ this.selectedProduct", productData);
+    console.log("🎯TC🎯 ~ file: auction-details.component.ts ~ line 726 ~ this.selectedProduct", productData);
     const dialogRef = this.dialog.open(ProductDetailPopupComponent, {
       height: '90%',
       width: '90%',
@@ -960,8 +961,16 @@ export class AuctionDetailsComponent implements OnInit {
       currentPage: this.PaginationServc.currentPage,
       totalPages: this.PaginationServc.totalPages,
     }
+  }
 
-
+  goToLandingPage() {
+    if (this.role.auctionMod) {
+      this.router.navigate(['/auctions'])
+    } else if (this.role.auctionCommitteeHead) {
+      this.router.navigate(['/auction-committee-head'])
+    } else if (this.role.bidder) {
+      this.router.navigate(['/bidder'])
+    }
   }
 }
 

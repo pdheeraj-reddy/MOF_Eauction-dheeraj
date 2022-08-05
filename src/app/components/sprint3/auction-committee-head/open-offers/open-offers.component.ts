@@ -287,7 +287,6 @@ export class OpenOffersComponent implements OnInit {
       })
     }
     if (this.filterModel.submission_date) {
-      console.log('this.filterModel: ', this.filterModel);
       this.openofferListData = this.openofferListData.filter((i: any) => {
         if (i.submissionDate === this.filterModel.submission_date) return true;
         return false;
