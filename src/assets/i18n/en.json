@@ -654,7 +654,7 @@
             "AuctionDetails": "Auction Details",
             "AuctionInstructions": "Auction Instructions",
             "ManagingAuctions": "For help or support in managing auctions",
-            "PressHere": "Press here",
+            "PressHere": "Click Here",
             "NumberOfBids": "Number of bids",
             "Participants": "Participants"
         },
@@ -774,7 +774,7 @@
         "AddedTaxValue": "Added tax value",
         "TotalOfferPrice": "Total offer price",
         "SendOffer": "Send offer",
-        "SentOffer": "Offer Sent",
+        "SentOffer": "Offer",
         "NoOfferMade": "No offer has been made",
         "NoFileUpload": "Upload a file",
         "ConfirmationBidSubmission": "Confirmation of bid submission?",
@@ -1010,6 +1010,7 @@
     },
     "AuctionDetails": "Auction Details",
     "Ends Through": "Ends Through",
+    "Ends In": "Ends In",
     "Starts During": "Starts During",
     "Day": "Day",
     "Hour": "Hour",
@@ -1098,7 +1099,7 @@
         "Reset": "Reset",
         "Research": "Apply",
         "payment_bill": "Payment Bill",
-        "auction_report_and_bids_submitted": "Auction report and bids submitted"
+        "auction_report_and_bids_submitted": "Auction & Offers Report"
     },
     "bidderSendInvoice": {
         "send_invoice": "Send Invoice",

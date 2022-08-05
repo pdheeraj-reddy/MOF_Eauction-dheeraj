@@ -1,15 +1,16 @@
 .status-code-up {
-    width: fit-content;
-    min-width: 120px;
-    border-radius: 1px;
-    background-color: #e7f1f8;
-    font-size: 16px;
-    color: #117abe;
-    text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 5px 5px 5px 5px;
+  width: fit-content;
+  min-width: 120px;
+  border-radius: 1px;
+  background-color: #e7f1f8;
+  font-size: 16px;
+  color: #117abe;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px 5px 5px 5px;
 }
+
 .status-code-rn {
   border-radius: 1px;
   background-color: #f66f5b;
@@ -22,11 +23,25 @@
   margin-left: 10px;
   padding: 5px 5px 5px 5px;
 }
+
 .status-code-un {
   border-radius: 1px;
   font-size: 16px;
   background-color: #fef7e8;
   color: #f9b122;
+  text-align: center;
+  width: fit-content;
+  min-width: 120px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 5px 5px 5px 5px;
+}
+
+.status-code-can {
+  border-radius: 1px;
+  font-size: 16px;
+  background-color: #fdefed;
+  color: #f66f5b;
   text-align: center;
   width: fit-content;
   min-width: 120px;

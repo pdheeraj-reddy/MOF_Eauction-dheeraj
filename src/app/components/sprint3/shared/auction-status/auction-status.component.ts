@@ -20,6 +20,9 @@ export class AuctionStatusComponent implements OnInit {
       // Has to be changed 
       this.showEye = true;
     }
+    if (this.status == 'Cancelled') {
+      this.status = 'Terminated';
+    }
   }
 
 }

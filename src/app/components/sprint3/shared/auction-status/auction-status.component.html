@@ -1,4 +1,4 @@
 <div
-    [ngClass]="[status == 'Ongoing' ? 'status-code-rn' : status == 'Upcoming' ? 'status-code-up' : status == 'Awarded' ? 'status-code-ad' : status == 'Cancelled' ? 'status-code-can' : 'status-code-un']">
+    [ngClass]="[status == 'Ongoing' ? 'status-code-rn' : status == 'Upcoming' ? 'status-code-up' : status == 'Awarded' ? 'status-code-ad' : status == 'Terminated' ? 'status-code-can' : 'status-code-un']">
     <span>{{status | translate}}</span>
 </div>
