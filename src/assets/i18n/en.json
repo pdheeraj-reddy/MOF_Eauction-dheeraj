@@ -1009,9 +1009,8 @@
         "content2": "participants"
     },
     "AuctionDetails": "Auction Details",
-    "Ends Through": "Ends Through",
     "Ends In": "Ends In",
-    "Starts During": "Starts During",
+    "Starts In": "Starts During",
     "Day": "Day",
     "Hour": "Hour",
     "Accurate": "Accurate",
