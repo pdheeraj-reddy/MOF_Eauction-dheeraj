@@ -415,7 +415,7 @@
         <div class="modal-content card shadow-lg result result-success" style="align-items: center;">
             <button style="position: absolute;left: 90%;" data-dismiss="modal" type="button"
                 class="modal-close btn-close btn-sm" aria-label="Close"
-                (click)="showModal.estimationOfferSuccess = false">
+                (click)="showModal.estimationOfferSuccess = false; reloadPage();">
                 <span class="icon-close"></span>
             </button>
             <div class="alert-body">

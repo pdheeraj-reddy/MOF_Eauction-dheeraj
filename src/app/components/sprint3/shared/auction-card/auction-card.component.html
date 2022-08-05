@@ -1,7 +1,7 @@
 <div class="card mb-4">
 
     <div
-        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
+        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Terminated' ? 'status-code-can' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
         {{auctionStatus | translate}}
     </div>
 

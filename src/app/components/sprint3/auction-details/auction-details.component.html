@@ -184,7 +184,10 @@
                             <input type="radio" id="checkbox2" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox2">
                                 <span style="font-size: 14px;">
-                                    <span class="icon-pin"></span><br><br>
+                                    <span>
+                                        <img *ngIf="editmode2" src="/assets/icons/pin-shapes.svg" alt="">
+                                        <img *ngIf="!editmode2" src="/assets/icons/pin-shapes-disabled.svg" alt="">
+                                    </span><br><br>
                                     {{ 'bidderAuctionDetails.auction-settings.AuctionInstructions' | translate }}
                                 </span>
                             </label>
@@ -197,11 +200,14 @@
                             <input type="radio" id="checkbox3" name="sampleCheckbox" disabled>
                             <label class="input-target d-flex" for="checkbox3">
                                 <span style="font-size: 14px;">
-                                    <span class="icon-users"></span><br><br>
+                                    <span>
+                                        <img src="/assets/icons/Users-shapes.svg" alt="">
+                                    </span><br><br>
                                     {{'auctionCommittee.ac-detail.tab4' | translate}}
                                 </span>
                             </label>
-                        </div>&nbsp;&nbsp;
+                        </div>
+                        <div *ngIf="role.auctionMod">&nbsp;&nbsp;</div>
                         <!-- End -->
 
                         <!--============== Card 4 ==============-->
@@ -210,18 +216,21 @@
                             <input type="radio" id="checkbox4" name="sampleCheckbox" disabled>
                             <label class="input-target d-flex" for="checkbox4">
                                 <span style="font-size: 14px;">
-                                    <span class="icon-users"></span><br><br>
+                                    <span>
+                                        <img src="/assets/icons/Users-shapes.svg" alt="">
+                                    </span><br><br>
                                     {{'auctionCommittee.ac-detail.tab3' | translate}}
                                 </span>
                             </label>
                         </div>
+                        <div *ngIf="role.auctionCommitteeHead">&nbsp;&nbsp;</div>
                         <!-- End -->
 
                         <!--============== Card 5 ==============-->
                         <div *ngIf="role.auctionCommitteeHead || role.auctionMod"
-                            class="etimad-option etimad-option-xs mt-2" style="width: 118.8px;height: 118.8px;"
-                            (click)="auctionSettings('offerreport')">
-                            <input type="radio" id="checkbox5" name="sampleCheckbox">
+                            class="etimad-option etimad-option-xs mt-2" style="width: 118.8px;height: 118.8px;">
+                            <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
+                                id="checkbox5" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
                                 <span style="font-size: 14px;">
                                     <span><img *ngIf="!editmode3" src="/assets/icons/offer-report.svg" alt="">
@@ -329,7 +338,7 @@
                             <app-send-bidding-offer
                                 *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published"
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
-                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzPbEstPrice"
+                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
@@ -1208,7 +1217,7 @@
 
                     <p class="text-14 text-dark">
                         {{'bidderAuctionDetails.auction-instruction.instructionsList2' | translate }}
-                        <a href="" class="text-info" style="text-decoration: underline;">
+                        <a href="" class="text-info" style="text-decoration: underline; color: #1DA3DF;">
                             {{'bidderAuctionDetails.auction-instruction.instructionsList2-link' | translate }}
                         </a>
                     </p>
