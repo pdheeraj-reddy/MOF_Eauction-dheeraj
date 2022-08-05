@@ -22,9 +22,10 @@ export class AuctionCardComponent implements OnInit {
   source: any = '';
   auctionStatus: any = '';
   showLoader: boolean = false;
-  auctionStartTime : any;
-  auctionStartDateTime : string;
-  auctionEndDateTime : string;
+  auctionStartTime: any;
+  auctionStartDateTime: string;
+  auctionEndDateTime: string;
+  auctionTimeSufix: string;
   /**User roles */
   role = {
     bidder: false,
@@ -57,17 +58,18 @@ export class AuctionCardComponent implements OnInit {
     } else {
       this.auctionImg = 'assets/icons/logo-mini.svg'
     }
-    if(this.auction.auctiontime){
+    if (this.auction.auctiontime) {
       var timeString = moment(this.auction.auctiontime).format('HH:mm:ss');
       var H = +timeString.substr(0, 2);
       var h = H % 12 || 12;
       var ampm = (H < 12 || H === 24) ? " AM" : " PM";
-      this.auctionStartTime = h + timeString.substr(2, 3) + ampm;
+      this.auctionStartTime = h + timeString.substr(2, 3);
     }
     this.auctionStartDateTime = moment(this.auction.auctiontime).format('DD.MM.YYYY HH:mm:ss');
     this.auctionEndDateTime = moment(this.auction.auctionendtime).format('DD.MM.YYYY HH:mm:ss');
+    this.auctionTimeSufix = this.auction.auctiontime ? moment(this.auction.auctiontime).format('A') : '';
     // console.log("🎯TC🎯 ~ file: auction-card.component.ts ~ line 56 ~ this.auction.auctionendtime", this.auction.auctionendtime);
-    
+
   }
 
   convertBlobToBase64 = (blob: any) =>

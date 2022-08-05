@@ -20,6 +20,8 @@ import { ProductDetailPopupComponent } from './product-detail-popup/product-deta
 import { OpenOffersCardComponent } from './open-offers-card/open-offers-card.component';
 import { OfferReportComponent } from './offer-report/offer-report.component';
 import { ManualAuctionComponent } from './manual-auction/manual-auction.component';
+import { AuctionCountdownTimerComponent } from './auction-countdown-timer/auction-countdown-timer.component';
+import { AuctionCardComponent } from './auction-card/auction-card.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { ManualAuctionComponent } from './manual-auction/manual-auction.componen
         ProductDetailPopupComponent,
         OpenOffersCardComponent,
         OfferReportComponent,
-        ManualAuctionComponent
+        ManualAuctionComponent,
+        AuctionCountdownTimerComponent,
+        AuctionCardComponent,
     ],
     imports: [
         CommonModule,
@@ -68,7 +72,9 @@ import { ManualAuctionComponent } from './manual-auction/manual-auction.componen
         AmAuctionComponent,
         OpenOffersCardComponent,
         OfferReportComponent,
-        ManualAuctionComponent
+        ManualAuctionComponent,
+        AuctionCountdownTimerComponent,
+        AuctionCardComponent,
     ]
 })
 export class SharedModule { }

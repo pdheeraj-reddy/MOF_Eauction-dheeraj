@@ -79,18 +79,22 @@
                 <ul class="thumbs">
                     <div class="gallery-container" #imageSlide>
                         <ng-container *ngFor="let slide of slidesStore">
-                            <div [id]="slide.id" class="opacity-0-5 image-box"
-                                [ngClass]="{'opacity-1': slide.src == fullImage.src}">
-                                <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
-                                <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'" class="img-fluid"
-                                    [src]="slide.src" style="width:85px;height: 75px;min-width:85px;border-radius: 0px;"
-                                    [alt]="slide.alt" [title]="slide.title" width="70px" (click)="viewItem(slide)" />
-                                <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
-                                    style="width:85px;height: 75px;" id="video1" width="85px" height="85px"
-                                    (click)="viewItem(slide)">
-                                    <source [src]="slide.src" type="video/mp4">
-                                    Your browser does not support HTML video.
-                                </video>
+                            <div>
+                                <div [id]="slide.id" class="opacity-0-5 image-box"
+                                    [ngClass]="{'opacity-1': slide.src == fullImage.src}">
+                                    <!-- <img class="img-fluid rounded" [src]="slide.src" [alt]="slide.alt" [title]="slide.title" (click)="viewItem(slide)" /> -->
+                                    <img *ngIf="slide.type == 'image/jpeg' || slide.type == 'image/png'"
+                                        class="img-fluid" [src]="slide.src"
+                                        style="width:85px;height: 75px;min-width:85px;border-radius: 0px;"
+                                        [alt]="slide.alt" [title]="slide.title" width="70px"
+                                        (click)="viewItem(slide)" />
+                                    <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
+                                        style="width:85px;height: 75px;" id="video1" width="85px" height="85px"
+                                        (click)="viewItem(slide)">
+                                        <source [src]="slide.src" type="video/mp4">
+                                        Your browser does not support HTML video.
+                                    </video>
+                                </div>
                             </div>
                         </ng-container>
 

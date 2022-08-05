@@ -164,6 +164,7 @@ ul.thumbs {
     padding: 0;
     z-index: 999;
     position: absolute;
+    min-width: 0px !important;
 }
 
 .prev {
@@ -184,10 +185,12 @@ ul.thumbs {
 
 .opacity-0-5 {
     opacity: 0.5;
+    background: #414042;
 }
 
 .opacity-1 {
     opacity: 1;
+    background: transparent;
 }
 
 ::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
@@ -241,5 +244,6 @@ ul.thumbs {
     .image-box {
         border-right: 1px solid #b1b1b1;
         padding: 1px;
+        height: 75px;
     }
 }

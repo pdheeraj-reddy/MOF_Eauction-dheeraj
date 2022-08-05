@@ -9,8 +9,6 @@ import { TranslateModule } from '@ngx-translate/core';
 // Common module
 import { NumericDirective } from './directives/positive-numeric.directive';
 import { CurrencyDirective } from './directives/currency.directive';
-import { AuctionCountdownTimerComponent } from './components/auction-countdown-timer/auction-countdown-timer.component';
-import { AuctionCardComponent } from './components/auction-card/auction-card.component';
 import { TimePickerDirective } from './directives/time-picker.directive';
 import { DatePickerDirective } from './directives/date-picker.directive';
 import { AuctionSliderComponent } from './components/auction-slider/auction-slider.component';
@@ -22,8 +20,6 @@ import { CommaDirective } from './directives/comma.directive';
     NumericDirective,
     DigitOnlyDirective,
     CurrencyDirective,
-    AuctionCountdownTimerComponent,
-    AuctionCardComponent,
     TimePickerDirective,
     DatePickerDirective,
     AuctionSliderComponent,
@@ -39,8 +35,6 @@ import { CommaDirective } from './directives/comma.directive';
     NumericDirective,
     DigitOnlyDirective,
     CurrencyDirective,
-    AuctionCountdownTimerComponent,
-    AuctionCardComponent,
     TimePickerDirective,
     DatePickerDirective,
     CommaDirective

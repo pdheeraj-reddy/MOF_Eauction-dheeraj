@@ -206,6 +206,9 @@ export class AmAuctionComponent implements OnInit {
     }
     this.showFilterForm = !this.showFilterForm;
     this.refreshCalendarCntrl();
+    if (!this.showFilterForm) {
+      this.getAuctionList(1);
+    }
   }
 
   refreshCalendarCntrl() {

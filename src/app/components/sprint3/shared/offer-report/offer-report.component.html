@@ -1,27 +1,28 @@
 <div style="padding: 30px">
-    <div style="display: flex;">
-        <div style="width: 50%;">
+    <div style="display: flex;justify-content: space-between;">
+        <div>
             <p style="color:#005B4E; font-size: 21px; line-height: 31px; font-weight: bold;">{{
                 'auctionSettings.tab5' | translate }}</p>
         </div>
+        <div style="display: flex; align-items: center;">
+            <div style="display: flex;align-items: center;">
+                <p style="color:#08594D; font-weight:bold; font-size:16px; text-decoration:underline;">
+                    {{ 'bidderAuctions.auction_report_and_bids_submitted' | translate }}</p> &nbsp; &nbsp;
+                <span (click)="downloadReport(auctionReport)" class="icon-download"></span>
+            </div>
 
-        <div style="display: flex;">
-            <p style="color:#08594D; font-weight:bold; font-size:16px; text-decoration:underline;">
-                {{ 'bidderAuctions.auction_report_and_bids_submitted' | translate }}</p> &nbsp; &nbsp;
-            <span (click)="downloadReport(auctionReport)" class="icon-download"></span>
-        </div>
-
-
-        <div class="dropdown dropdown-filters-container d-inline" style="margin-left: 20px; margin-top: -10px;">
-            <button (click)="toggleFilter()" style="height: 50px; width: 50px;"
-                class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm"
-                type="button" id="dropdownMenuButton">
-                <span class="text-14 icon-filters"></span>
-            </button>
+            <div class="col-auto justify-content-end">
+                <button (click)="toggleFilter()" style="height: 48px; width: 48px;"
+                    class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm text-success"
+                    [ngClass]="{ 'filter-active': showFilterForm }" type="button" id="dropdownMenuButton"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="text-14 icon-filters"></span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="modal-content p-4 shadow-lg border" *ngIf="showFilterForm">
+    <div class="modal-content p-4 shadow-lg border mt-3" *ngIf="showFilterForm">
         <div class="modal-header">
             <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
                 'auctionlist.filter-title' | translate }}</h3>

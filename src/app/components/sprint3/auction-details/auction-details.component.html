@@ -5,7 +5,7 @@
                     'auctionCommittee.ac-detail.bcrumb1' |
                     translate
                     }}</a></li>
-            <li class="breadcrumb-item" style="font-size: 14px;"><a href="/auctions">{{
+            <li class="breadcrumb-item" style="font-size: 14px;"><a routerLink="/auctions">{{
                     'auctionCommittee.ac-detail.bcrumb2'
                     |
                     translate }}</a></li>
@@ -141,7 +141,9 @@
         <!-- End -->
 
         <!--============ Manual Auction card ============-->
-        <app-manual-auction *ngIf="role.auctionMod && upcomingAuction && status.published && startAuctionMethod == 'Manual'" [upcomingAuction]="upcomingAuction"></app-manual-auction>
+        <app-manual-auction
+            *ngIf="role.auctionMod && upcomingAuction && status.published && startAuctionMethod == 'Manual'"
+            [upcomingAuction]="upcomingAuction"></app-manual-auction>
         <!-- End -->
 
         <div class="d-flex mt-4" style="justify-content: space-around;">
@@ -262,7 +264,8 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div *ngIf="editmode1" style="width: 72%; float: right;">
                 <!-- =================This is to show error message if bidder is not participated ================= -->
-                <div *ngIf="role.bidder && response.ZzBidderSts == '' && !status.published" class="alert alert-outline alert-info alert-dismissible fade show" role="alert">
+                <div *ngIf="role.bidder && response.ZzBidderSts == '' && !status.published"
+                    class="alert alert-outline alert-info alert-dismissible fade show" role="alert">
                     <div class="alert-wrapper">
                         <div class="alert-body">
                             <i class="alert-icon">
@@ -323,8 +326,11 @@
                         }" *ngIf="role.bidder && response.ZzBidderSts != '' && !this.status.published">
 
                             <!--============= Send offer card =============-->
-                            <app-send-bidding-offer *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published" [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)"
-                                [auctionId]="auctionId" [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzPbEstPrice" [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
+                            <app-send-bidding-offer
+                                *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published"
+                                [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
+                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzPbEstPrice"
+                                [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
@@ -334,14 +340,12 @@
                         <div class="left-left-card" style="margin-inline-end: 14px;"
                             [ngClass]="{'flex-fill': upcomingAuction.auctionStatus == 'Published' || response.ZzBidderSts ==''}">
                             <div style="position: relative; margin-top: 5px;">
-
                                 <div id="">
-
                                     <ng-container>
                                         <div id="slideshow">
                                             <div style="width: 100%; min-height: 400px; position: relative;"
                                                 class="rounded"
-                                                [ngClass]="fullImage.blankImage ? 'blankImage-border' : 'fullImage-border'">
+                                                [ngClass]="fullImage?.blankImage ? 'blankImage-border' : 'fullImage-border'">
                                                 <div *ngIf="fullImage">
                                                     <div *ngIf="!fullImage.blankImage">
                                                         <img *ngIf="fullImage.type == 'image/jpeg' || fullImage.type == 'image/png'"
@@ -427,23 +431,24 @@
                                                 <ul class="thumbs">
                                                     <div class="gallery-container" #imageSlide>
                                                         <ng-container *ngFor="let slide of slidesStore">
-                                                            <div class="opacity-0-5 image-box"
-                                                                [ngClass]="{'opacity-1': slide.id == fullImage.id}">
-                                                                <img *ngIf="slide?.type == 'image/jpeg' || slide?.type == 'image/png'"
-                                                                    class="img-fluid" [src]="slide.src"
-                                                                    style="width:70px;height: 45px; min-width:70px;"
-                                                                    [alt]="slide.alt" [title]="slide.title" width="70px"
-                                                                    (click)="viewItem(slide)" />
-                                                                <video
-                                                                    *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
-                                                                    style="width:70px;height: 45px;" id="video1"
-                                                                    width="50" (click)="viewItem(slide)">
-                                                                    <source [src]="slide.src" type="video/mp4">
-                                                                    Your browser does not support HTML video.
-                                                                </video>
+                                                            <div>
+                                                                <div class="opacity-0-5 image-box"
+                                                                    [ngClass]="{'opacity-1': slide.id == fullImage.id}">
+                                                                    <img *ngIf="slide?.type == 'image/jpeg' || slide?.type == 'image/png'"
+                                                                        class="img-fluid" [src]="slide.src"
+                                                                        style="width:70px;height: 45px; min-width:70px;"
+                                                                        [alt]="slide.alt" [title]="slide.title"
+                                                                        width="70px" (click)="viewItem(slide)" />
+                                                                    <video
+                                                                        *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
+                                                                        style="width:70px;height: 45px;" id="video1"
+                                                                        width="50" (click)="viewItem(slide)">
+                                                                        <source [src]="slide.src" type="video/mp4">
+                                                                        Your browser does not support HTML video.
+                                                                    </video>
+                                                                </div>
                                                             </div>
                                                         </ng-container>
-
                                                         <ng-container *ngIf="showLoaderSubImage">
                                                             <div class="col-md-2">
                                                                 <div class="form-row">
@@ -1289,4 +1294,4 @@
             <!-- End -->
         </div>
     </div>
-</div>  
+</div>
