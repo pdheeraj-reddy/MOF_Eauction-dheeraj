@@ -56,7 +56,7 @@ export class SendBiddingOfferComponent implements OnInit {
     if(this.notParticipated){
       this.totalBookValue = 0;
     }
-    if(this.disable){
+    if(this.disable && !this.notParticipated){
       this.totalBookValue = this.bidValue;
     }
 

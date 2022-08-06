@@ -126,7 +126,7 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false">
+        <button type="button" [routerLink]="'/auctions'" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false">
           {{'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>
@@ -194,7 +194,7 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+        <button type="button" [routerLink]="'/auctions'" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
           {{ 'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>
