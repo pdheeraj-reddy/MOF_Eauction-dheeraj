@@ -17,6 +17,7 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() disable: any;
   @Input() ibgaDoc: any;
   @Input() notParticipated: any;
+  @Input() bidValue:any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -55,6 +56,9 @@ export class SendBiddingOfferComponent implements OnInit {
     if(this.notParticipated){
       this.totalBookValue = 0;
     }
+    if(this.disable){
+      this.totalBookValue = this.bidValue;
+    }
 
     // this.minAmount = 10;
     // this.totalBookValue = 10;
@@ -88,7 +92,7 @@ export class SendBiddingOfferComponent implements OnInit {
   calc() {
     this.persuitRate = Math.round(2.5 * this.totalBookValue) / 100;
     this.addedTaxValue = Math.round(8 * this.totalBookValue) / 100;
-    this.totalOfferPrice += this.persuitRate + this.addedTaxValue;
+    this.totalOfferPrice += this.persuitRate + this.addedTaxValue + Number(this.totalBookValue);
   }
   selectFiles(e: any, dd: string): void {
     this.invalidFileType = true;

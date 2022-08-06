@@ -338,7 +338,7 @@
                             <app-send-bidding-offer
                                 *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published"
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
-                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
+                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice" [bidValue]="response.ZzPbEstPrice"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
