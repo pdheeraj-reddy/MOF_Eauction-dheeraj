@@ -26,7 +26,7 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     this.auctionEndDate = this.convert(this.auctionEndDate);
     let dateStr;
 
-    if (this.auctionStatus == "Upcoming") {
+    if (this.auctionStatus == "Published") {
       this.label = 'Starts In';
       dateStr = this.auctionStartDate;
     } else {

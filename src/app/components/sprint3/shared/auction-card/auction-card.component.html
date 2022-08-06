@@ -71,10 +71,10 @@
             </span>
         </div>
         <div style="display: flex;">
-            <app-auction-countdown-timer *ngIf="auction.statuscode == 'Upcoming'" [date]="auctionStartDateTime"
+            <app-auction-countdown-timer *ngIf="auction.statuscode == 'Published'" [date]="auctionStartDateTime"
                 showText="Starts In" class="mt-3" style="width: 90%;">
             </app-auction-countdown-timer>
-            <app-auction-countdown-timer *ngIf="auction.statuscode != 'Upcoming'" [date]="auctionEndDateTime"
+            <app-auction-countdown-timer *ngIf="auction.statuscode != 'Published'" [date]="auctionEndDateTime"
                 showText="Ends In" class="mt-3" style="width: 90%;">
             </app-auction-countdown-timer>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
