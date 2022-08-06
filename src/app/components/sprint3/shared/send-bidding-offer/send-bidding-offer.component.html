@@ -288,8 +288,8 @@
           <label class="text-14 text-body" style="margin-top: 9px;">{{ 'bidderSendOffer.NoFileUpload' |
             translate }}</label>
           <input accept=".docx,.doc,application/pdf,image/jpg,image/jpeg,image/png"
-            qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" disabled
-            title="file input" multiple="" type="file" name="qqfile"
+            qq-button-id="2ff16990-f1ca-4038-9656-00f140864b80" disabled title="file input" multiple="" type="file"
+            name="qqfile"
             style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0; height: 100%;">
 
         </div>
@@ -390,7 +390,7 @@
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
-      <button (click)="showSuccessfulModal=false; reloadPage()"e="button" class="modal-close btn-close btn-sm">
+      <button (click)="showSuccessfulModal=false; reloadPage()" e="button" class="modal-close btn-close btn-sm">
         <span class="icon-close"></span>
       </button>
       <span class="icon-check"></span>
@@ -410,7 +410,8 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" (click)="showSuccessfulModal=false" class="btn btn-primary-light btn-md">
+        <button type="button" [routerLink]="['/auctions']" (click)="showSuccessfulModal=false"
+          class="btn btn-primary-light btn-md">
           {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
         </button>
       </div>

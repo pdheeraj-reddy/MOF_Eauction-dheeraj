@@ -162,7 +162,7 @@
                     <!--============== Radio Button group 1 ==============-->
                     <div class="btn-group m-3 d-flex flex-wrap">
                         <!--============== Card 1 ==============-->
-                        <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionDetail')"
+                        <div class="etimad-option etimad-option-xs rounded" (click)="auctionSettings('auctionDetail')"
                             style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox1" name="sampleCheckbox" checked="checked">
                             <label class="input-target d-flex text-18" for="checkbox1">
@@ -179,8 +179,8 @@
                         <!-- End -->
 
                         <!--============== Card 2 ==============-->
-                        <div class="etimad-option etimad-option-xs" (click)="auctionSettings('auctionInstruction')"
-                            style="width: 118px;height: 118px;">
+                        <div class="etimad-option etimad-option-xs rounded"
+                            (click)="auctionSettings('auctionInstruction')" style="width: 118px;height: 118px;">
                             <input type="radio" id="checkbox2" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox2">
                                 <span style="font-size: 14px;">
@@ -195,11 +195,11 @@
                         <!-- End -->
 
                         <!--============== Card 3 ==============-->
-                        <div *ngIf="role.auctionMod" class="etimad-option etimad-option-xs mt-2"
-                            style="width: 118.8px;height: 118.8px;">
+                        <div *ngIf="role.auctionMod" class="etimad-option etimad-option-xs mt-2 rounded"
+                            style="width: 118.8px;height: 118.8px; background-color: #F5F5F5 !important;">
                             <input type="radio" id="checkbox3" name="sampleCheckbox" disabled>
-                            <label class="input-target d-flex" for="checkbox3">
-                                <span style="font-size: 14px;">
+                            <label class="d-flex" for="checkbox3">
+                                <span style="font-size: 14px;  color: #CCCCCC;">
                                     <span>
                                         <img src="/assets/icons/Users-shapes.svg" alt="">
                                     </span><br><br>
@@ -212,10 +212,11 @@
 
                         <!--============== Card 4 ==============-->
                         <div *ngIf="role.auctionCommitteeHead || role.auctionMod"
-                            class="etimad-option etimad-option-xs mt-2" style="width: 118px;height: 118px;">
+                            class="etimad-option etimad-option-xs mt-2 rounded"
+                            style="width: 118px;height: 118px; background-color: #F5F5F5 !important;">
                             <input type="radio" id="checkbox4" name="sampleCheckbox" disabled>
-                            <label class="input-target d-flex" for="checkbox4">
-                                <span style="font-size: 14px;">
+                            <label class="d-flex" for="checkbox4">
+                                <span style="font-size: 14px;  color: #CCCCCC;">
                                     <span>
                                         <img src="/assets/icons/Users-shapes.svg" alt="">
                                     </span><br><br>
@@ -227,8 +228,8 @@
                         <!-- End -->
 
                         <!--============== Card 5 ==============-->
-                        <div *ngIf="role.auctionCommitteeHead || role.auctionMod"
-                            class="etimad-option etimad-option-xs mt-2" style="width: 118.8px;height: 118.8px;">
+                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && status.awarded"
+                            class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118.8px;height: 118.8px;">
                             <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
                                 id="checkbox5" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
@@ -236,6 +237,21 @@
                                     <span><img *ngIf="!editmode3" src="/assets/icons/offer-report.svg" alt="">
                                         <img *ngIf="editmode3" src="/assets/icons/offer-report-success.svg"
                                             alt=""></span><br><br>
+                                    {{'auctionCommittee.ac-detail.tab5' | translate}}
+                                </span>
+                            </label>
+                        </div>
+
+                        <!-- disabled offer report -->
+
+                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && !status.awarded"
+                            class="etimad-option etimad-option-xs mt-2 rounded"
+                            style="width: 118.8px;height: 118.8px; background-color: #F5F5F5 !important;">
+                            <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
+                                id="checkbox5" name="sampleCheckbox">
+                            <label class="d-flex" for="checkbox5">
+                                <span style="font-size: 14px; color: #CCCCCC;">
+                                    <span><img src="/assets/icons/offer-report-disabled.svg" alt=""></span><br><br>
                                     {{'auctionCommittee.ac-detail.tab5' | translate}}
                                 </span>
                             </label>
@@ -554,7 +570,7 @@
                                 <span class="icon-calendar text-primary font-weight-bold text-20"></span>
                                 &nbsp;
                                 {{'bidderAuctionDetails.AuctionStarts' | translate }}
-                                {{upcomingAuction.auctionStartsdate}} ∙
+                                {{upcomingAuction.auctionStartsdate}} &nbsp; ∙
                                 {{upcomingAuction.auctionStartstime}}
                                 {{ auctionStartSuffix | translate}}
                             </p>
@@ -632,14 +648,13 @@
                                                                     translate
                                                                     }}</label>
                                                                 <div class="row text-success">
-                                                                    <span
-                                                                        class="col-md-6">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
+                                                                    <span class="col-md-6"
+                                                                        style="max-width: 49% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">
                                                                         <li class="text-muted">
-                                                                            <span
-                                                                                style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.end_biddingtime}}
+                                                                            <span>{{upcomingAuction.important_info?.end_biddingtime}}
                                                                                 {{ endBiddingSuffix | translate}}</span>
 
                                                                         </li>
@@ -655,14 +670,13 @@
                                                                     translate
                                                                     }}</label>
                                                                 <div class="row text-success">
-                                                                    <span
-                                                                        class="col-md-6">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
+                                                                    <span class="col-md-6"
+                                                                        style="max-width: 49% !important;">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">
                                                                         <li class="text-muted">
-                                                                            <span
-                                                                                style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.open_biddingtime}}
+                                                                            <span>{{upcomingAuction.important_info?.open_biddingtime}}
                                                                                 {{ openBidSuffix | translate}}</span>
 
                                                                         </li>
@@ -747,13 +761,12 @@
                                                         <label>{{ 'bidderAuctionDetails.EndOfBidding' | translate
                                                             }}</label>
                                                         <div class="row text-success">
-                                                            <span
-                                                                class="col-md-6">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;
+                                                            <span class="col-md-6"
+                                                                style="max-width: 47% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;
 
                                                             <ul class="col list list-primary-bullets d-inline-block">
                                                                 <li class="text-muted">
-                                                                    <span
-                                                                        style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.end_biddingtime}}
+                                                                    <span>{{upcomingAuction.important_info?.end_biddingtime}}
                                                                         {{endBiddingSuffix | translate}}</span>
 
                                                                 </li>
@@ -768,13 +781,12 @@
                                                         <label>{{ 'bidderAuctionDetails.BidOpeningDate' | translate
                                                             }}</label>
                                                         <div class="row text-success">
-                                                            <span
-                                                                class="col-md-6">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;
+                                                            <span class="col-md-6"
+                                                                style="max-width: 47% !important;">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;
 
                                                             <ul class="col list list-primary-bullets d-inline-block">
                                                                 <li class="text-muted">
-                                                                    <span
-                                                                        style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.important_info?.open_biddingtime}}
+                                                                    <span>{{upcomingAuction.important_info?.open_biddingtime}}
                                                                         {{ openBidSuffix | translate}}</span>
 
                                                                 </li>
@@ -792,8 +804,6 @@
                         </div>
 
                     </div>
-
-                    <br>
 
                 </div>
                 <br>
@@ -910,13 +920,12 @@
                                                             'bidderAuctionDetails.auction-details.BiddingBegins' |
                                                             translate }}</label>
                                                         <div class="row text-success">
-                                                            <span
-                                                                class="col-md-6">{{upcomingAuction.auction_detail?.auctionStartDate}}</span>
+                                                            <span class="col-md-6"
+                                                                style="max-width: 45% !important;">{{upcomingAuction.auction_detail?.auctionStartDate}}</span>
 
                                                             <ul class="col list list-primary-bullets d-inline-block">
                                                                 <li class="text-muted">
-                                                                    <span
-                                                                        style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.auction_detail?.auctionStartTime}}
+                                                                    <span>{{upcomingAuction.auction_detail?.auctionStartTime}}
                                                                         {{bidBegginingSuffix | translate}}</span>
 
                                                                 </li>
@@ -930,12 +939,11 @@
                                                             'bidderAuctionDetails.auction-details.EndOfBidding' |
                                                             translate }}</label>
                                                         <div class="row text-success">
-                                                            <span
-                                                                class="col-md-6">{{upcomingAuction.auction_detail?.auctionEndDate}}</span>
+                                                            <span class="col-md-6"
+                                                                style="max-width: 45% !important;">{{upcomingAuction.auction_detail?.auctionEndDate}}</span>
                                                             <ul class="col list list-primary-bullets d-inline-block">
                                                                 <li class="text-muted">
-                                                                    <span
-                                                                        style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.auction_detail?.auctionEndTime}}
+                                                                    <span>{{upcomingAuction.auction_detail?.auctionEndTime}}
                                                                         {{impEndBidSuffix | translate}}</span>
                                                                 </li>
                                                             </ul>
@@ -960,12 +968,11 @@
                                                             "bidderAuctionDetails.auction-details.BidOpeningDate" |
                                                             translate }}</label>
                                                         <div class="row text-success">
-                                                            <span
-                                                                class="col-md-6">{{upcomingAuction.auction_detail?.auctionAnncStartDate}}</span>
+                                                            <span class="col-md-6"
+                                                                style="max-width: 45% !important;">{{upcomingAuction.auction_detail?.auctionAnncStartDate}}</span>
                                                             <ul class="col list list-primary-bullets d-inline-block">
                                                                 <li class="text-muted">
-                                                                    <span
-                                                                        style="margin-left: -10px; margin-right: -10px;">{{upcomingAuction.auction_detail?.auctionAnncStartTime}}
+                                                                    <span>{{upcomingAuction.auction_detail?.auctionAnncStartTime}}
                                                                         {{ bidBegginingSuffix | translate}}</span>
                                                                 </li>
                                                             </ul>

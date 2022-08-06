@@ -105,6 +105,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
       if (this.url.includes('auctionlist')) {
         this.auctionModerator.auction_request = true;
+      } else if (this.url.includes('auctionModerator')) {
+        this.auctionModerator.auction_request = true;
       } else if (this.url.includes('auctions')) {
         this.auctionModerator.auction = true;
       } else if (this.url.includes('auction-details')) {
