@@ -489,3 +489,7 @@ ul.thumbs {
 .fullImage-border {
     border: none;
 }
+
+.list-primary-bullets li:before {
+    font-size: 10px !important;
+}
