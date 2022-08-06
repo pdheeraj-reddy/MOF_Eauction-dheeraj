@@ -228,6 +228,10 @@ export class OpenOffersComponent implements OnInit {
   }
 
   rejectOffer(data: any) {
+    if(this.rejectReason.trim().length <= 0){
+      this.rejectReason = '';
+      return;
+    }
     const param = {
       AucId: this.auctionId,
       BidderId: data.BidderId,
