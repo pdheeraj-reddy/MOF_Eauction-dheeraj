@@ -27,13 +27,22 @@ export class AuctionCountdownTimerComponent implements OnInit {
     // console.log("🎯TC🎯 ~ file: auction-countdown-timer.component.ts ~ line 28 ~ this.date", this.date);
     let dateStr = this.date;
     let timestamp: number = 0;
+    
     if (dateStr) {
       timestamp = Number(moment(dateStr, 'DD.MM.YYYY HH:mm:ss').format('x'));
     }
     // console.log(dateStr);
     const timeout = setInterval(() => {
+      /** Get Riyadh Time  */
+      let d = new Date();
+      let local = d.getTime();
+      let offset = d.getTimezoneOffset() * (60 * 1000);
+      let utc = new Date(local + offset);
+      let riyadh = new Date(utc.getTime() + (3 * 60 * 60 * 1000));
+      // End
+      
       // get total seconds between the times
-      var delta = (timestamp - Date.now()) / 1000;
+      var delta = (timestamp - Number(moment(riyadh,'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
       // console.log(delta);
       if (delta > 0) {
         // calculate (and subtract) whole days

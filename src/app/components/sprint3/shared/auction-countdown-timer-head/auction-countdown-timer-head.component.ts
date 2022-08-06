@@ -39,10 +39,19 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     }
     // console.log(dateStr);
     const timeout = setInterval(() => {
+
+      /** Get Riyadh Time  */
+      let d = new Date();
+      let local = d.getTime();
+      let offset = d.getTimezoneOffset() * (60 * 1000);
+      let utc = new Date(local + offset);
+      let riyadh = new Date(utc.getTime() + (3 * 60 * 60 * 1000));
+      // End
+
       // get total seconds between the times
       // var date = new Date(Date.now());
       // date.setMinutes(date.getMinutes()-150);
-      var delta = (timestamp - Date.now()) / 1000;
+      var delta = (timestamp - Number(moment(riyadh,'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
 
       // console.log(delta + 600000); 
       // delta +=7200;
