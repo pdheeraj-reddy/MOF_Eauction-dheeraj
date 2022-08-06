@@ -354,7 +354,8 @@
                             <app-send-bidding-offer
                                 *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published"
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
-                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice" [bidValue]="response.ZzPbEstPrice"
+                                [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
+                                [bidValue]="response.ZzPbEstPrice"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
@@ -1242,6 +1243,7 @@
                     <p class="text-14 text-primary font-weight-bold" style="margin-top: 40px;">
                         {{'bidderAuctionDetails.auction-instruction.AuctionWorkflow' | translate }}
                     </p>
+                    <br>
 
                     <div class="steps-wrapper">
                         <ul class="steps-group steps-two">
@@ -1305,7 +1307,7 @@
 
             <!--================= Offer Reports =================-->
             <div *ngIf="editmode3" class="card" style="width: 73%;">
-                <app-offer-report [auctionId]="auctionId"></app-offer-report>
+                <app-offer-report [auctionId]="auctionId" [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
             </div>
             <!-- End -->
         </div>

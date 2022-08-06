@@ -15,6 +15,7 @@ declare var $: any;
 export class OfferReportComponent implements OnInit {
 
   @Input() auctionId: string;
+  @Input() offerReportPdf: string;
 
   openofferListData: any;
   copyOpenofferListData: any;
@@ -22,7 +23,7 @@ export class OfferReportComponent implements OnInit {
   auctionReport: any;
   offerListData: any;
   selectedPageNumber: number;
-  pagelimit: number = 10;
+  pagelimit: number = 8;
 
   offervalue: string;
   facilityname: string;
@@ -50,7 +51,8 @@ export class OfferReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOffersData();
-    this.refreshCalendarCntrl()
+    this.refreshCalendarCntrl();
+
   }
 
 
@@ -61,39 +63,50 @@ export class OfferReportComponent implements OnInit {
       localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
       this.mapping(res.body);
     });
+
+
   }
 
   public mapping(serverObj: any) {
     if (serverObj.d.results?.length) {
       let results = serverObj.d.results;
-      console.log('results: ', results);
+      console.log('results: ', results?.length);
       let resultSet: any = [];
       if (results?.length) {
         results.forEach((result: any) => {
-          if (result.serialNo) {
-            let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
-            const items = {
-              serialNo: result['Sno'] ? result['Sno'] : '-',
-              offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
-              BidderId: result['BidderId'] ? result['BidderId'] : null,
-              PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
-              submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
-              submissionTime: this.timeTransform(result['DtTime']),
-              facilityName: result['BidderName'] ? result['BidderName'] : '-',
-              FileName: result['FileName'] ? result['FileName'] : '',
-              bidderStatus: result['bidderStatus'] ? result['bidderStatus'] : '',
-              commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
-              downloadingAttachmet: false
-            };
-            resultSet.push(items);
-          }
+          // if (result.serialNo) {
+          let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
+          const items = {
+            serialNo: result['Sno'] ? result['Sno'] : '-',
+            Status: result['Status'] ? result['Status'] : '',
+            offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
+            BidderId: result['BidderId'] ? result['BidderId'] : null,
+            PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
+            submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
+            submissionTime: this.timeTransform(result['DtTime']),
+            submissionTimeSuffix: this.timeSuffixTransform(result['DtTime']),
+            facilityName: result['BidderName'] ? result['BidderName'] : '-',
+            FileName: result['FileName'] ? result['FileName'] : '',
+            bidderStatus: result['bidderStatus'] ? result['bidderStatus'] : '',
+            commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
+            downloadingAttachmet: false
+          };
+
+          resultSet.push(items);
+          // }
         });
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
       this.copyOpenofferListData = resultSet;
       this.navigateToPage(1);
-      console.log('this.openofferListData: ', this.openofferListData);
+      this.openofferListData.forEach((res: any) => {
+        if (res.Status == 'W') {
+          res.Status = 'Awarded';
+        } else {
+          res.Status = 'Not Awarded';
+        }
+      });
     }
   }
 
@@ -102,21 +115,39 @@ export class OfferReportComponent implements OnInit {
     var d = new Date(time.replace(/(\d{2}).(\d{2}).(\d{4})/, "$2/$1/$3"));
     let hour: any = d.getHours();
     let min: any = d.getMinutes()
-    let part = hour >= 12 ? 'pm' : 'am';
+    let part = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12;
+    hour = hour ? hour : 12; // the hour '0' should be '12'
+    min = min < 10 ? '0' + min : min;
+    var strTime = hour + ':' + min;
+    return strTime;
+  }
+
+  timeSuffixTransform(time: any) {
+    var d = new Date(time.replace(/(\d{2}).(\d{2}).(\d{4})/, "$2/$1/$3"));
+    let hour: any = d.getHours();
+    let min: any = d.getMinutes()
+    let part = hour >= 12 ? 'PM' : 'AM';
     hour = hour % 12;
     hour = hour ? hour : 12; // the hour '0' should be '12'
     min = min < 10 ? '0' + min : min;
     var strTime = hour + ':' + min + ' ' + part;
-    return strTime;
+    return part;
   }
 
   // download report
-  downloadReport(data: any) {
-    console.log(data);
-    const blob = new Blob([data], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
+  downloadReport() {
+    let fileName = "Auction & Offers Report.pdf";
+    let contentType = "application/pdf";
+    const linkSource = `data:${contentType};base64,${this.offerReportPdf}`;
+    const downloadLink = document.createElement("a");
+    console.log('linkSource: ', linkSource);
+    downloadLink.href = linkSource;
+    downloadLink.target = '_blank';
+    downloadLink.download = fileName;
+    downloadLink.click();
   }
+
 
   viewAttachment(file: any) {
     if (file.PdfContent) {
@@ -155,6 +186,7 @@ export class OfferReportComponent implements OnInit {
   public toggleFilter() {
     console.log("toggleFilter");
     this.showFilterForm = !this.showFilterForm;
+    this.openofferListData = this.copyOpenofferListData;
   }
 
   resetFilter() {
@@ -165,7 +197,7 @@ export class OfferReportComponent implements OnInit {
       commercial_ref: '',
     }
     this.refreshCalendarCntrl()
-    this.openofferListData = this.copyOpenofferListData;
+    // this.openofferListData = this.copyOpenofferListData;
   }
 
   applyFilter() {

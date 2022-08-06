@@ -20,6 +20,7 @@
     "Running Now": "Running Now",
     "Cancelled": "Cancelled",
     "Awarded": "Awarded",
+    "Not Awarded": "Not Awarded",
     "Public": "Public",
     "Private": "Private",
     "Select": "Select",
@@ -62,7 +63,6 @@
     "ZEAUCTION_SALCOMM_MEMBER": "Committee Member",
     "Offer Made": "Offer Submitted",
     "No Offer": "No Offer Made",
-    "No Award": "Not Awarded",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
@@ -773,8 +773,8 @@
         "PersuitRate": "Persuit rate",
         "AddedTaxValue": "Added tax value",
         "TotalOfferPrice": "Total offer price",
-        "SendOffer": "Send offer",
-        "SentOffer": "Offer",
+        "SendOffer": "Submit",
+        "SentOffer": "Offer Made",
         "NoOfferMade": "No offer has been made",
         "NoFileUpload": "Upload a file",
         "ConfirmationBidSubmission": "Confirmation of bid submission?",
@@ -974,7 +974,8 @@
             "reject": "Reject",
             "accept": "Award",
             "previous": "Previous",
-            "next": "Next One"
+            "next": "Next One",
+            "SAR": "SAR"
         }
     },
     "offerReport": {

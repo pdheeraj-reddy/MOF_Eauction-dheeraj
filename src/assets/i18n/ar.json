@@ -20,6 +20,7 @@
     "Running Now": "يعمل الآن",
     "Cancelled": "ألغيت",
     "Awarded": "تمت الترسية",
+    "Not Awarded": "غير مرسى",
     "Public": "مزاد عام",
     "Private": "مزاد خاص",
     "Select": "اختار",
@@ -780,7 +781,8 @@
             "reject": "رفض",
             "accept": "قبول",
             "previous": "سابق",
-            "next": "التالي"
+            "next": "التالي",
+            "SAR": "ر.س"
         }
     },
     "offerReport": {
@@ -1096,7 +1098,7 @@
         "Reset": "إعادة تعيين",
         "Research": "يتقدم",
         "payment_bill": "فاتورة الدفع",
-        "auction_report_and_bids_submitted": "تم إرسال تقرير المزاد والعطاءات"
+        "auction_report_and_bids_submitted": "تقرير المزاد والعروض المقدمة"
     },
     "bidderSendInvoice": {
         "send_invoice": "إرسال الفاتورة",
