@@ -456,7 +456,7 @@
 
                                                 <ul class="thumbs">
                                                     <div class="gallery-container" #imageSlide>
-                                                        <ng-container *ngFor="let slide of slidesStore">
+                                                        <ng-container *ngFor="let slide of slidesStore;let i = index">
                                                             <div>
                                                                 <div class="opacity-0-5 image-box"
                                                                     [ngClass]="{'opacity-1': slide.id == fullImage.id}">
@@ -464,11 +464,11 @@
                                                                         class="img-fluid" [src]="slide.src"
                                                                         style="width:70px;height: 45px; min-width:70px;"
                                                                         [alt]="slide.alt" [title]="slide.title"
-                                                                        width="70px" (click)="viewItem(slide)" />
+                                                                        width="70px" (click)="viewItem(slide,i)" />
                                                                     <video
                                                                         *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
                                                                         style="width:70px;height: 45px;" id="video1"
-                                                                        width="50" (click)="viewItem(slide)">
+                                                                        width="50" (click)="viewItem(slide,i)">
                                                                         <source [src]="slide.src" type="video/mp4">
                                                                         Your browser does not support HTML video.
                                                                     </video>
@@ -555,8 +555,8 @@
                                 </button>
 
                             </div>
-                            <!-- <p class="text-12 text-center">10 of 23</p> -->
-
+                            <p class="text-12 text-center" *ngIf="slidesStore?.length">
+                                {{fullImage?.index || 1}} of {{slidesStore?.length}}</p>
                             <p class="text-primary font-weight-bold text-22">{{upcomingAuction.auctionnote1}}</p>
 
                             <p class="text-16 text-muted">{{upcomingAuction.auctionnote2}}</p>

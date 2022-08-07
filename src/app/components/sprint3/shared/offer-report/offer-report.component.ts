@@ -39,7 +39,7 @@ export class OfferReportComponent implements OnInit {
     commercial_ref: '',
   }
   spinner: boolean = false;
-  columnLst = ['serialNo', 'offerValue', 'primaryWarranty', 'submissionDate', 'facilityName', 'commercialRegistrationNo', 'bidderStatus'];
+  columnLst = ['serialNo', 'offerValue', 'FileName', 'submissionDateTime', 'facilityName', 'commercialRegistrationNo', 'Status'];
   pageRangeForAttach: any;
   constructor(
     public datepipe: DatePipe,
@@ -82,12 +82,12 @@ export class OfferReportComponent implements OnInit {
             offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
             BidderId: result['BidderId'] ? result['BidderId'] : null,
             PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
+            submissionDateTime: date,
             submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
             submissionTime: this.timeTransform(result['DtTime']),
             submissionTimeSuffix: this.timeSuffixTransform(result['DtTime']),
             facilityName: result['BidderName'] ? result['BidderName'] : '-',
             FileName: result['FileName'] ? result['FileName'] : '',
-            bidderStatus: result['bidderStatus'] ? result['bidderStatus'] : '',
             commercialRegistrationNo: result['CrNo'] ? result['CrNo'] : '-',
             downloadingAttachmet: false
           };

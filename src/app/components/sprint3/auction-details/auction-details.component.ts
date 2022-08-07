@@ -861,6 +861,7 @@ export class AuctionDetailsComponent implements OnInit {
           type: this.slidesStore[0].type,
           blankImage: false,
           title: this.slidesStore[0].title,
+          index: 1
         }
         this.selectedProduct = this.slidesStore[0].id;
         this.showLoaderSubImage = true;
@@ -898,13 +899,14 @@ export class AuctionDetailsComponent implements OnInit {
         type: this.slidesStore[0].type,
         blankImage: this.slidesStore[0].blankImage,
         title: this.slidesStore[0].title,
+        index: 1
       }
       this.selectedProduct = this.slidesStore[0].id;
     }
     console.log(this.fullImage, 'this.slidesStore: ', this.slidesStore);
   }
 
-  viewItem(a: any) {
+  viewItem(a: any, index: number) {
     this.selectedProduct = a.id;
     this.showVideo = false;
     this.fullImage = {
@@ -913,6 +915,7 @@ export class AuctionDetailsComponent implements OnInit {
       type: a.type,
       blankImage: a.blankImage,
       title: a.title,
+      index: index + 1
     }
     setTimeout(() => {
       this.showVideo = true;
