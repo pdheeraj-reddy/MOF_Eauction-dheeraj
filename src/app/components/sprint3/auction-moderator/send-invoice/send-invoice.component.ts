@@ -23,7 +23,6 @@ export class SendInvoiceComponent implements OnInit {
   auctionId: string = '';
   showSuccessPopup: boolean = false;
   downloadingInvoice: boolean = false;
-  invoiceSent: boolean = false;
   invoiceData: any = [];
   auctionStartDate: any;
   auctionStartTime: any;
@@ -140,8 +139,7 @@ export class SendInvoiceComponent implements OnInit {
 
   closeSuccess() {
     this.showSuccessPopup = false;
-    this.ngOnInit();
-    this.invoiceSent = true;
+    window.location.reload();
   }
 
   navigateToPage(pageNoVal: number) {
