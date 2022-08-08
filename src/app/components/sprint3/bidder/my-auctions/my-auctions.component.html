@@ -74,7 +74,8 @@
             </div>
         </div>
         <div class="col-auto justify-content-end">
-            <button (click)="toggleFilter()" class="btn nav-tabs-btn h-100" style="color:#32ad71"
+            <button (click)="toggleFilter()" style="height: 48px; width: 48px;"
+                class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm text-success"
                 [ngClass]="{'filter-active': showFilterForm }" type="button" id="dropdownMenuButton"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="text-14 icon-filters"></span>
@@ -88,7 +89,7 @@
                 <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
                     'bidderMyAuctions.filter-title' | translate }}</h3>
                 <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
-                    (click)="toggleFilter()">
+                    (click)="toggleFilter(); getMyAuctionList(1);">
                     <span class="icon-close"></span>
                 </button>
             </div>
@@ -97,7 +98,7 @@
                     <div class="col-md-4 mb-3">
                         <label class="d-flex" for="validationCustom02">{{ 'bidderMyAuctions.AuctionReferenceNumber' |
                             translate }}</label>
-                        <input type="text" maxlength="10" formControlName="prevRefNo" class="form-control"
+                        <input type="text" digitOnly maxlength="10" formControlName="prevRefNo" class="form-control"
                             placeholder="{{ 'bidderMyAuctions.AuctionReferenceNumber' | translate }}"
                             id="validationCustom01" [required]="true" />
                     </div>
@@ -126,7 +127,8 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="validationCustom01">{{ 'bidderMyAuctions.AuctionEndDate' | translate }}</label>
-                        <input type="text" id="auctionEndDate" formControlName="auctionEndDate"
+                        <input type="text" onkeydown="event.preventDefault()" id="auctionEndDate"
+                            formControlName="auctionEndDate"
                             placeholder="{{ 'bidderMyAuctions.Auction-formDate-pholder' | translate }}"
                             (change)="onChangeEndDate($event)"
                             class="form-control calendar-control calendar-both-control" />
@@ -143,13 +145,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md "
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-info btn-md "
                     (click)="isFilterSearch = true;isSearch=true;resetFilter()">
                     {{ 'bidderMyAuctions.filter-btn2' | translate }}
                 </button>
                 <button type="button" class="btn btn-primary-light btn-md"
                     (click)="isFilterSearch = true;getMyAuctionList(1)">
-                    {{ 'bidderMyAuctions.filter-btn1' | translate }}
+                    {{'auctionlist.filter-btn1' | translate }}
                 </button>
             </div>
         </form>
@@ -326,8 +328,9 @@
 
                     <nav aria-label="..." class="nav-pagination">
                         <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
-                            <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                                <a (click)="getServerData(PaginationServc.currentPage)" class="page-link" tabindex="-1"
+                            <li class="page-item clickable" disabled
+                                [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
+                                <a (click)="getServerData(PaginationServc.currentPage)" class="page-link"
                                     aria-disabled="true">{{ 'auctionlist.grid-previous' | translate }}</a>
                             </li>
                             <li *ngFor="let page of PaginationServc.pages" class="page-item"
@@ -336,7 +339,7 @@
                                     {{ page }}
                                 </a>
                             </li>
-                            <li class="page-item"
+                            <li class="page-item clickable" disabled
                                 [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
                                 <a (click)="getServerData(PaginationServc.currentPage + 2)" class="page-link">{{
                                     'auctionlist.grid-next' | translate }}</a>

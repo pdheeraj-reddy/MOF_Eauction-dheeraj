@@ -20,7 +20,7 @@ export class MyInvoicesComponent implements OnInit {
   invoiceListData: any;
   copyInvoiceListData: any;
   selectedPageNumber: number;
-  pagelimit: number = 4;
+  pagelimit: number = 10;
   totcntforall: number;
   totcntforawaiting: number;
   totcntforpaid: number;
@@ -169,10 +169,13 @@ export class MyInvoicesComponent implements OnInit {
     this.resetFilter();
     this.showFilterForm = !this.showFilterForm;
     this.refreshCalendarCntrl();
+    // this.invoiceListData = this.copyInvoiceListData;
+    this.getInvoiceList()
   }
 
   applyFilter() {
     this.invoiceListData = this.copyInvoiceListData;
+    // this.getInvoiceList();
     if (this.filterModel.amount) {
       this.invoiceListData = this.invoiceListData.filter((i: any) => {
         if (i.invoiceAmt.toLowerCase().indexOf(this.filterModel.amount) > -1) return true;
@@ -213,7 +216,7 @@ export class MyInvoicesComponent implements OnInit {
       status: '',
     }
     this.refreshCalendarCntrl()
-    this.invoiceListData = this.copyInvoiceListData;
+    // this.invoiceListData = this.copyInvoiceListData;
   }
 
   navigateToPage(pageNoVal: number) {

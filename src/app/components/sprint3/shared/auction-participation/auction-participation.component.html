@@ -36,9 +36,13 @@
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button [disabled]="btnDisable" class="btn btn-primary-light btn-md align-self-center"
-            (click)="showConfirmationModal = true">
+        <button *ngIf="!btnDisable" class="btn btn-primary-light btn-lg align-self-center"
+            (click)="showConfirmationModal = true" style="width: 218.29px;">
             {{'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
+        </button>
+        <button *ngIf="btnDisable" class="disabled btn btn-primary-light btn-lg align-self-center"
+            style="width: 218.29px;">
+            {{'bidderAuctionDetails.Participated' | translate }}
         </button>
         <!-- End -->
 
@@ -47,7 +51,7 @@
 
     <!--=================== Confirmatiom model  ===================-->
     <div class="modal show" *ngIf="showConfirmationModal" [ngClass]="{ 'modal-show': showConfirmationModal }">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">
@@ -80,7 +84,7 @@
 
     <!--=================== Successful model  ===================-->
     <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content" style="align-items: center;">
                 <button (click)="closeModal('close')" type="button" class="modal-close btn-close btn-sm">
                     <span class="icon-close"></span>
@@ -91,7 +95,7 @@
                         <div style="display: flex;">
                             <div class="circle"></div>
                         </div>
-                        <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
+                        <h4 class="modal-title mt-4" id="exampleModalLabel" style="text-align: center">
                             {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
                         </h4>
                     </div>

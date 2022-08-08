@@ -31,12 +31,13 @@ export class AmAuctionComponent implements OnInit {
     { code: "Closed", disp: "Closed" }
   ];
   dropValStatus = [
-    { code: "Published", disp: "Published" },
+    { code: "Upcoming", disp: "Upcoming" },
     { code: "Ongoing", disp: "Ongoing" },
     { code: "Pending Selecting", disp: "Pending Selecting" },
     { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
     { code: "Pending FBGA", disp: "Pending FBGA" },
     { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+    { code: "Pending Paying", disp: "Pending Paying" },
     { code: "Awarded", disp: "Awarded" },
     { code: "Terminated", disp: "Terminated" },
   ];;
@@ -278,14 +279,15 @@ export class AmAuctionComponent implements OnInit {
   getstatus(type: any) {
     if (type === "All") {
       this.dropValStatus = [
-        { code: "Published", disp: "Published" },
+        { code: "Upcoming", disp: "Upcoming" },
         { code: "Ongoing", disp: "Ongoing" },
         { code: "Pending Selecting", disp: "Pending Selecting" },
         { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
         { code: "Pending FBGA", disp: "Pending FBGA" },
         { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+        { code: "Pending Paying", disp: "Pending Paying" },
         { code: "Awarded", disp: "Awarded" },
-        { code: "Terminated", disp: "Terminated" },
+        { code: "Terminated", disp: "Terminated" }
       ];
     } else if (type === "Pending Selecting") {
       this.dropValStatus = [
@@ -293,6 +295,7 @@ export class AmAuctionComponent implements OnInit {
         { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
         { code: "Pending FBGA", disp: "Pending FBGA" },
         { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+        { code: "Pending Paying", disp: "Pending Paying" }
       ];
     } else if (type === "Closed") {
       this.dropValStatus = [

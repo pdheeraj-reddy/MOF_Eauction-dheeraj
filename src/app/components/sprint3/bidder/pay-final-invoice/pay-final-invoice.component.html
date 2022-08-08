@@ -173,8 +173,11 @@
                 </div>
                 <div class="center-icon" (click)="downloadInvoice()">
                     <a class="text-primary text-18 font-weight-bold mt-2">{{'sprint3_auction_detail.download_invoice' |
-                        translate}} <img class="mx-2" *ngIf="!downloadingInvoice"
-                            [src]="'assets/icons/download.svg'"></a>
+                        translate}}
+                        <span *ngIf="!downloadingInvoice" class="icon-download text-18 mx-1"></span>
+                        <!-- <img class="mx-2" *ngIf="!downloadingInvoice"
+                            [src]="'assets/icons/download.svg'"> -->
+                    </a>
 
                     <div *ngIf="downloadingInvoice"
                         class="spinner-border spinner-border-light-green icon-spinner text-light">
@@ -465,7 +468,7 @@
                 </tbody>
             </table>
 
-            <div class="mt-4 row justify-content-end" *ngIf="invoiceData?.invoicetoprodnav.results.length > 0">
+            <div class="mt-4 row justify-content-end" *ngIf="invoiceData?.invoicetoprodnav.results.length > 8">
                 <div class="mb-5">
                     <nav aria-label="..." class="nav-pagination">
                         <ul class="pagination">

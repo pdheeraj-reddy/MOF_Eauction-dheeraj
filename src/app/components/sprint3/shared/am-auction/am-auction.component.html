@@ -146,7 +146,7 @@
                     <div class="col-md-4 mb-3">
                         <label class="d-flex" for="validationCustom02">{{ 'auctionlist.filter-refno' | translate
                             }}</label>
-                        <input type="text" maxlength="10" formControlName="prevRefNo" class="form-control"
+                        <input type="text" digitOnly maxlength="10" formControlName="prevRefNo" class="form-control"
                             placeholder="{{ 'auctionlist.filter-refno-pholder' | translate }}" id="validationCustom01"
                             [required]="true" />
                     </div>
@@ -172,7 +172,8 @@
                     <div class="col-md-4 mb-3">
                         <label class="d-flex" for="validationCustom02">{{ 'auctionlist.filter-auctionstartdate' |
                             translate }}</label>
-                        <input type="text" id="auctionStartDate" formControlName="auctionStartDate"
+                        <input type="text" onkeydown="event.preventDefault()" id="auctionStartDate"
+                            formControlName="auctionStartDate"
                             placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                             (change)="onChangeStartDate($event)" class="form-control calendar-control
                                 calendar-both-control" />
@@ -180,7 +181,8 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="validationCustom01">{{ 'auctionlist.filter-auctionenddate' | translate }}</label>
-                        <input type="text" id="auctionEndDate" formControlName="auctionEndDate"
+                        <input type="text" onkeydown="event.preventDefault()" id="auctionEndDate"
+                            formControlName="auctionEndDate"
                             placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                             (change)="onChangeEndDate($event)"
                             class="form-control calendar-control calendar-both-control" />

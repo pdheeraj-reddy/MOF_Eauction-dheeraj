@@ -47,7 +47,7 @@
                 <div class="col-md-4 mb-3">
                     <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th2' | translate
                         }}</label>
-                    <input type="text" class="form-control" [(ngModel)]="filterModel.offer_value"
+                    <input type="text" digitOnly class="form-control" [(ngModel)]="filterModel.offer_value"
                         placeholder="{{ 'auctionCommittee.ac-openOffers.th2' | translate }}" id="validationCustom01" />
                 </div>
                 <div class="col-md-4 mb-3">
@@ -57,13 +57,14 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationCustom01">{{ 'auctionCommittee.ac-openOffers.th6' | translate }}</label>
-                    <input type="text" [(ngModel)]="filterModel.commercial_ref" class="form-control"
+                    <input type="text" digitOnly [(ngModel)]="filterModel.commercial_ref" class="form-control"
                         placeholder="{{ 'auctionCommittee.ac-openOffers.th6' | translate }}" id="validationCustom01" />
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="d-flex" for="validationCustom02">{{ 'auctionCommittee.ac-openOffers.th4' |
                         translate }}</label>
-                    <input type="text" id="submission_date" [(ngModel)]="filterModel.submission_date"
+                    <input type="text" onkeydown="event.preventDefault()" id="submission_date"
+                        [(ngModel)]="filterModel.submission_date"
                         placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
                         (change)="onChangeDate($event)" class="form-control calendar-control
                             calendar-both-control" />

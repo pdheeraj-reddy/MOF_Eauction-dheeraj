@@ -267,21 +267,36 @@ export class PayFinalInvoiceComponent implements OnInit {
     }
   }
 
+  // downloadInvoice() {
+  //   this.bidderService.downloadInvoice(this.auctionId).subscribe((result) => {
+  //     const data = result.body.d.results[0];
+  //     console.log('data: ', data);
+  //     var byteString = atob(atob(data.FileContent).split(',')[1]);
+  //     console.log('asdasd', byteString.split(',')[1]);
+  //     var ab = new ArrayBuffer(byteString.length);
+  //     var ia = new Uint8Array(ab);
+  //     for (var i = 0; i < byteString.length; i++) {
+  //       ia[i] = byteString.charCodeAt(i);
+  //     }
+  //     const blob = new Blob([ab], { type: 'application/pdf' });
+  //     console.log(blob);
+  //     let fileURL = window.URL.createObjectURL(blob);
+  //     window.open(fileURL, '_blank');
+  //   });
+  // }
+
   downloadInvoice() {
+    this.downloadingInvoice = true;
     this.bidderService.downloadInvoice(this.auctionId).subscribe((result) => {
       const data = result.body.d.results[0];
       console.log('data: ', data);
-      var byteString = atob(atob(data.FileContent).split(',')[1]);
-      console.log('asdasd', byteString.split(',')[1]);
-      var ab = new ArrayBuffer(byteString.length);
-      var ia = new Uint8Array(ab);
-      for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      const blob = new Blob([ab], { type: 'application/pdf' });
-      console.log(blob);
-      let fileURL = window.URL.createObjectURL(blob);
-      window.open(fileURL, '_blank');
+      const linkSource = 'data:application/pdf;base64,' + data.PdfContent;
+      const downloadLink = document.createElement("a");
+      const fileName = data.ObjectId + ".pdf";
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      this.downloadingInvoice = false;
+      downloadLink.click();
     });
   }
 }

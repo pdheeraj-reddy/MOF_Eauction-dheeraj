@@ -59,7 +59,8 @@
             </div>
         </div>
         <div class="col-auto justify-content-end">
-            <button (click)="toggleFilter()" class="btn nav-tabs-btn h-100" style="color:#32ad71"
+            <button (click)="toggleFilter()" style="height: 48px; width: 48px;"
+                class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm text-success"
                 [ngClass]="{'filter-active': showFilterForm }" type="button" id="dropdownMenuButton"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="text-14 icon-filters"></span>
@@ -80,19 +81,21 @@
                 <div class="col-md-4 mb-3">
                     <label class="d-flex" for="validationCustom02">{{ 'bidderMyInvoices.InvoiceReferenceNumber' |
                         translate }}</label>
-                    <input type="text" maxlength="10" [(ngModel)]="filterModel.referenceno" class="form-control"
+                    <input type="text" digitOnly maxlength="10" [(ngModel)]="filterModel.referenceno"
+                        class="form-control"
                         placeholder="{{ 'bidderMyInvoices.InvoiceReferenceNumberPholder' | translate }}"
                         id="validationCustom01" />
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationCustom01">{{ 'bidderMyInvoices.AmountOfTheInvoice' | translate }}</label>
-                    <input type="number" [(ngModel)]="filterModel.amount" class="form-control"
+                    <input type="text" digitOnly [decimal]="true" [(ngModel)]=" filterModel.amount" class="form-control"
                         placeholder="{{ 'bidderMyInvoices.AmountOfTheInvoice' | translate }}" id="validationCustom01" />
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="d-flex" for="validationCustom02">{{ 'bidderMyInvoices.InvoiceIssueDate' |
                         translate }}</label>
-                    <input type="text" id="invoice_date" [(ngModel)]="filterModel.issue_date"
+                    <input type="text" onkeydown="event.preventDefault()" id="invoice_date"
+                        [(ngModel)]="filterModel.issue_date"
                         placeholder="{{ 'bidderMyInvoices.Invoice-formDate-pholder' | translate }}"
                         (change)="onChangeDate($event)" class="form-control calendar-control calendar-both-control" />
                 </div>
@@ -109,12 +112,12 @@
             <!-- {{filterFormGroup.value | json}} -->
         </div>
         <div class="modal-footer">
-            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger btn-md "
+            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-info btn-md "
                 (click)="resetFilter()">
                 {{ 'bidderMyInvoices.filter-btn2' | translate }}
             </button>
             <button type="button" class="btn btn-primary-light btn-md" (click)="applyFilter()">
-                {{ 'bidderMyInvoices.filter-btn1' | translate }}
+                {{'auctionlist.filter-btn1' | translate }}
             </button>
         </div>
     </div>
@@ -279,10 +282,10 @@
                     </tbody>
                 </table>
             </div>
-            <div *ngIf="invoiceListData?.length > 0" class="mt-4 row justify-content-end">
+            <div *ngIf="invoiceListData?.length > 10" class="mt-4 row justify-content-end">
                 <div class="mb-5">
                     <nav aria-label="..." class="nav-pagination">
-                        <ul class="pagination">
+                        <ul class="pagination" *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0">
                             <li class="page-item clickable" disabled
                                 [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
                                 <a (click)="navigateToPage(pageRangeForAttach.currentPage -1)" class="page-link"
