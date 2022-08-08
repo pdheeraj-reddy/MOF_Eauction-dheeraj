@@ -55,11 +55,12 @@ export class ProductDetailPopupComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
-  viewItem(a: any) {
+  viewItem(a: any, index: number) {
     this.showVideo = false;
     this.fullImage = {
       src: a.src,
-      type: a.type
+      type: a.type,
+      index: index + 1
     }
     setTimeout(() => {
       this.showVideo = true;
@@ -186,7 +187,8 @@ export class ProductDetailPopupComponent implements OnInit {
           if (this.slidesStore.length == 1) {
             this.fullImage = {
               src: this.slidesStore[0].src,
-              type: this.slidesStore[0].type
+              type: this.slidesStore[0].type,
+              index: 1
             }
             this.fetchPicture = true;
           }

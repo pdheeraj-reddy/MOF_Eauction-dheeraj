@@ -9,3 +9,15 @@
     line-height: 9px;
     vertical-align: top;
 }
+
+.ncgr-main {
+    position: relative;
+}
+
+.vertical-line {
+    border-left: 1px solid #CCCCCC;
+    height: 30px;
+    position: absolute;
+    left: 14px;
+    top: 4px;
+}

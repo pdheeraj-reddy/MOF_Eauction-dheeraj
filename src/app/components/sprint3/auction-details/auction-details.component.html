@@ -555,8 +555,11 @@
                                 </button>
 
                             </div>
-                            <p class="text-12 text-center" *ngIf="slidesStore?.length">
-                                {{fullImage?.index || 1}} of {{slidesStore?.length}}</p>
+                            <div>
+                                <p class="text-12 text-center" *ngIf="slidesStore?.length">
+                                    {{fullImage?.index || 1}} {{'sprint3_auction_detail.of' | translate }}
+                                    {{slidesStore?.length}}</p>
+                            </div>
                             <p class="text-primary font-weight-bold text-22">{{upcomingAuction.auctionnote1}}</p>
 
                             <p class="text-16 text-muted">{{upcomingAuction.auctionnote2}}</p>

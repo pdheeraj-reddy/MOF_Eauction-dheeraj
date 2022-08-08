@@ -85,7 +85,7 @@
         "Save": "Save",
         "Cancel": "Cancel",
         "no_picture": "No Picture Found",
-        "supervision": "Under the supervision of"
+        "supervision": "Supervision of"
     },
     "auctionlist": {
         "bcrumb1": "Etimad Services",
@@ -1174,7 +1174,8 @@
         "bidderReport": "Auction report and bids submitted",
         "no_product_picture": "There is no product picture",
         "download_invoice": "Download invoice",
-        "press_here": "Press here"
+        "press_here": "Press here",
+        "of": "of"
     },
     "payInvoice": {
         "head": "Awaiting Payment",

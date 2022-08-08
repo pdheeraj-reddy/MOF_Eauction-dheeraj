@@ -78,7 +78,7 @@
 
                 <ul class="thumbs">
                     <div class="gallery-container" #imageSlide>
-                        <ng-container *ngFor="let slide of slidesStore">
+                        <ng-container *ngFor="let slide of slidesStore;let i = index">
                             <div>
                                 <div [id]="slide.id" class="opacity-0-5 image-box"
                                     [ngClass]="{'opacity-1': slide.src == fullImage.src}">
@@ -87,10 +87,10 @@
                                         class="img-fluid" [src]="slide.src"
                                         style="width:85px;height: 75px;min-width:85px;border-radius: 0px;"
                                         [alt]="slide.alt" [title]="slide.title" width="70px"
-                                        (click)="viewItem(slide)" />
+                                        (click)="viewItem(slide,i)" />
                                     <video *ngIf="slide.type =='video/mp4' || slide.type == 'video/quicktime'"
                                         style="width:85px;height: 75px;" id="video1" width="85px" height="85px"
-                                        (click)="viewItem(slide)">
+                                        (click)="viewItem(slide,i)">
                                         <source [src]="slide.src" type="video/mp4">
                                         Your browser does not support HTML video.
                                     </video>
@@ -157,6 +157,8 @@
                     <i class="icon-arrow_right" style="color:white"></i>
                 </div>
             </div>
+            <p class="text-12 text-center" *ngIf="slidesStore?.length">
+                {{fullImage?.index || 1}} {{'sprint3_auction_detail.of' | translate }} {{slidesStore?.length}}</p>
         </div>
         <div *ngIf="!showLoader && slidesStore.length < 1">
             <div class="blank-image rounded" style="border: 1px solid #b1b1b1; width: 100%; height: 100%;">
