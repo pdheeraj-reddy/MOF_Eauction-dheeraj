@@ -1,6 +1,3 @@
-<!-- <div class="row">
-    <div class="col-12"> -->
-
 <div class="card bg-primary text-white mt-1" style="height: 910px;" [ngClass]="textDir ? 'card-en' : 'card-ar'">
 
     <div class="noOffer" *ngIf="biddet.length == 0">
@@ -10,16 +7,17 @@
     <div *ngIf="biddet.length > 0" class="card-body">
         <p class="text-22">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
 
-
-        <div class="list-card" style="height: 80px;" *ngFor="let b of biddet">
-            <div class="text-body"
-                style="display: flex;justify-content: space-between; height: 100%; align-items: center;">
-                <p style="margin: 0;">{{ b.BidderName }}</p>&nbsp;&nbsp;
-                <p style="margin: 0;">#{{ b.SlNo }}</p>
-            </div>
-            <!-- <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;">{{ getsince(b.BidSubmitOn,b.BidSubmitAt)
-                }}</p> -->
-        </div>
+        <ng-container *ngFor="let b of biddet;index as i">
+            <ng-container *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
+                <div class="list-card" style="height: 80px;">
+                    <div class="text-body"
+                        style="display: flex;justify-content: space-between; height: 100%; align-items: center;">
+                        <p style="margin: 0;">{{ b.BidderName }}</p>&nbsp;&nbsp;
+                        <p style="margin: 0;">#{{ b.SlNo }}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
         <div *ngIf="!biddet" class="list-card">
             <div class="text-body" style="display: flex;justify-content: space-between;">
                 <p style="margin: 0;">No Bidder submitted</p>
@@ -27,39 +25,29 @@
             </div>
             <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;"> Not yet</p>
         </div>
-
-        <div *ngIf="PaginationServc.totalPages > 1" class="mt-4 ml-3 row margin-auto">
+        <div *ngIf="biddet.length > 0" class="mt-4 row justify-content-end">
             <div class="mb-5">
-
                 <nav aria-label="..." class="nav-pagination">
                     <ul class="pagination">
-
-                        <li class="page-item" [ngClass]="{ disabled: PaginationServc.currentPage === 1 }">
-                            <a (click)="getBidDetails(PaginationServc.currentPage)" class="page-link" tabindex="-1"
-                                aria-disabled="true">{{ 'auctionlist.grid-previous' | translate }}</a>
+                        <li class="page-item clickable" disabled
+                            [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
+                            <a (click)="navigateToPage(pageRangeForAttach.currentPage -1)" class="page-link"
+                                aria-disabled="true">{{
+                                'auctionlist.grid-previous' | translate }}</a>
                         </li>
-                        <li *ngFor="let page of PaginationServc.pages" class="page-item"
-                            [ngClass]="{ active: PaginationServc.currentPage === page }">
-                            <a (click)="getBidDetails(page + 1)" class="page-link">
-                                {{ page }}
-                            </a>
+                        <li *ngFor="let page of pageRangeForAttach.pages" class="page-item page-no"
+                            [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
+                            <a (click)="navigateToPage(page)" class="page-link "> {{
+                                page }} </a>
                         </li>
-                        <li class="page-item"
-                            [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages }">
-                            <a (click)="getBidDetails(PaginationServc.currentPage + 2)" class="page-link">{{
+                        <li class="page-item clickable" disabled
+                            [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
+                            <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1)" class="page-link">{{
                                 'auctionlist.grid-next' | translate }}</a>
                         </li>
-
                     </ul>
-
                 </nav>
             </div>
         </div>
-
-
     </div>
-
 </div>
-<!-- </div>
-
-</div> -->

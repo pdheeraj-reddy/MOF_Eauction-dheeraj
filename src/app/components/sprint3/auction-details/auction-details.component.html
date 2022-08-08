@@ -287,7 +287,7 @@
 
             <!-- Auction Details start -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div *ngIf="editmode1" style="width: 72%; float: right;">
+            <div [hidden]="editmode2 || editmode3" style="width: 72%; float: right;">
                 <!-- =================This is to show error message if bidder is not participated ================= -->
                 <div *ngIf="role.bidder && response.ZzBidderSts == '' && !status.published"
                     class="alert alert-outline alert-info alert-dismissible fade show" role="alert">
@@ -1200,14 +1200,7 @@
 
             </div>
 
-
-
-            <!-- Auction Details end -->
-
-
-            <!-- Auction Instruction strats here -->
-
-            <div *ngIf="editmode2" class="card" style="width: 73%;">
+            <div [hidden]="editmode1 || editmode3" class="card" style="width: 73%;">
 
                 <div class="mt-5 mr-5 ml-5">
                     <p class="text-18 text-primary font-weight-bold">
@@ -1306,7 +1299,7 @@
             <!-- Auction instruction ends here -->
 
             <!--================= Offer Reports =================-->
-            <div *ngIf="editmode3" class="card" style="width: 73%;">
+            <div [hidden]="editmode1 || editmode2" class="card" style="width: 73%;">
                 <app-offer-report [auctionId]="auctionId" [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
             </div>
             <!-- End -->

@@ -470,14 +470,14 @@ ul.thumbs {
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
-    border: 1px solid #b1b1b1;
+    border: 1px solid #b1b1b16b;
     border-radius: 5px;
     min-height: 45px;
 
     .image-box {
-        border-right: 0.5px solid #b1b1b1;
-        border-left: 0.5px solid #b1b1b1;
-        padding: 1px;
+        border-right: 0.5px solid #b1b1b16b;
+        border-left: 0.5px solid #b1b1b16b;
+        // padding: 1px;
         height: 45px;
     }
 }
@@ -492,4 +492,8 @@ ul.thumbs {
 
 .list-primary-bullets li:before {
     font-size: 10px !important;
+}
+
+.heading {
+    margin-bottom: 5px !important;
 }

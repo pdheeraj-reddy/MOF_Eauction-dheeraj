@@ -238,12 +238,11 @@ ul.thumbs {
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
-    border: 1px solid #b1b1b1;
+    border: 1px solid #b1b1b16b;
     border-radius: 5px;
 
     .image-box {
-        border-right: 1px solid #b1b1b1;
-        padding: 1px;
+        border-right: 1px solid #b1b1b16b;
         height: 75px;
     }
 }

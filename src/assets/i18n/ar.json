@@ -84,7 +84,8 @@
         "SAR": "ريال",
         "Save": "حفظ",
         "Cancel": "إلغاء",
-        "no_picture": "لا يوجد صور"
+        "no_picture": "لا يوجد صور",
+        "supervision": "تحت إشراف"
     },
     "auctionlist": {
         "bcrumb1": "خدمات اعتماد",
