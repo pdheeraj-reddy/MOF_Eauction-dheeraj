@@ -354,7 +354,7 @@
 
 <!--=================== Confirmatiom model  ===================-->
 <div class="modal show" *ngIf="showConfirmation" id="confirmMemberModal" [ngClass]="{ 'modal-show': showConfirmation }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">
@@ -369,6 +369,9 @@
           'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
       </div>
       <div class="modal-footer" style="justify-content: end">
+        <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmation=false">
+          {{'bidderAuctionDetails.auction-popup.Cancellation' | translate }}
+        </button>
         <button type="button" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
           (click)="sendBidOffer()">
           <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
@@ -376,9 +379,6 @@
           </div>
           &nbsp;
           {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
-        </button>
-        <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmation=false">
-          {{'bidderAuctionDetails.auction-popup.Cancellation' | translate }}
         </button>
       </div>
     </div>
@@ -388,7 +388,7 @@
 
 <!--=================== Successful model  ===================-->
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content" style="align-items: center;">
       <button (click)="showSuccessfulModal=false; reloadPage()" e="button" class="modal-close btn-close btn-sm">
         <span class="icon-close"></span>

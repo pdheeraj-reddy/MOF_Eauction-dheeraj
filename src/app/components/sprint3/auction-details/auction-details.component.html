@@ -289,7 +289,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div [hidden]="editmode2 || editmode3" style="width: 72%; float: right;">
                 <!-- =================This is to show error message if bidder is not participated ================= -->
-                <div *ngIf="role.bidder && response.ZzBidderSts == '' && !status.published"
+                <div *ngIf="role.bidder && response.ZzBidderSts == '' && !(status.published || status.terminated || status.awarded)"
                     class="alert alert-outline alert-info alert-dismissible fade show" role="alert">
                     <div class="alert-wrapper">
                         <div class="alert-body">

@@ -27,7 +27,7 @@ export class AmAuctionComponent implements OnInit {
   }
   showLoader: boolean = false;
   dropValProducts = [
-    { code: "Open", disp: "Open" },
+    // { code: "Open", disp: "Open" },
     { code: "Closed", disp: "Closed" }
   ];
   dropValStatus = [

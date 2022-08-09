@@ -37,7 +37,9 @@ export class MyAuctionsComponent implements OnInit {
   showLoader: boolean = false;
   isFilterSearch: boolean = false;
   isSearch: boolean = false;
-  dropValProducts: any = ['Public', 'Private'];
+  dropValProducts: any = ['Public',
+    //  'Private'
+  ];
   dropValStatus = [
     { code: "Published", disp: "Upcoming", },
     { code: "Ongoing", disp: "Ongoing" },

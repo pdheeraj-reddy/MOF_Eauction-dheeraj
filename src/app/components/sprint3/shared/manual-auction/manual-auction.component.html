@@ -55,15 +55,15 @@
                         'bidderAuctionDetails.manualAuction-popup.DetailsOfManualAuctionStart' | translate }}</label>
                 </div>
                 <div class="modal-footer" style="justify-content: end">
+                    <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmationModal = false">
+                        {{'bidderAuctionDetails.manualAuction-popup.cancelBtn' | translate }}
+                    </button>
                     <button type="button" class="btn btn-primary-light btn-md" (click)="startManualAuction()">
                         <div *ngIf="showLoader" class="spinner-border spinner-border-light text-light" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                         &nbsp;
                         {{"bidderAuctionDetails.manualAuction-popup.acceptBtn" | translate}}
-                    </button>
-                    <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmationModal = false">
-                        {{'bidderAuctionDetails.manualAuction-popup.cancelBtn' | translate }}
                     </button>
                 </div>
             </div>
