@@ -51,7 +51,9 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
       // get total seconds between the times
       // var date = new Date(Date.now());
       // date.setMinutes(date.getMinutes()-150);
-      var delta = (timestamp - Number(moment(riyadh,'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
+      var delta = (timestamp - Number(moment(riyadh, 'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
+      // var delta = (timestamp - Date.now()) / 1000;
+
 
       // console.log(delta + 600000); 
       // delta +=7200;
@@ -85,12 +87,12 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     }, 1000);
   }
   /** Convert the date into Date object */
-  convert(hms:any){
+  convert(hms: any) {
     const date = hms.split(" ")[0];
     const Time = hms.split(" ")[1];
-    const [day,month,year] = date.split(".");
+    const [day, month, year] = date.split(".");
     const [hours, minutes, seconds] = Time.split(':');
-    var time = new Date(year,Number(month)-1,day,hours,minutes,seconds);
+    var time = new Date(year, Number(month) - 1, day, hours, minutes, seconds);
     // time.setMinutes(time.getMinutes()+150);
     const arbDate = moment(time).format("DD.MM.YYYY HH:mm:ss");
     return arbDate;

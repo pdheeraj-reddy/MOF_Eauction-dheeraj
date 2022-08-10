@@ -25,6 +25,7 @@ export class OpenOffersComponent implements OnInit {
   offervalue: string;
   facilityname: string;
   commercialNo: string;
+  serialNo: string;
   rejectReason: string;
   showFilterForm: boolean = false;
   dropValStatus: any = [];
@@ -171,6 +172,7 @@ export class OpenOffersComponent implements OnInit {
     this.offervalue = data.offerValue;
     this.facilityname = data.facilityName;
     this.commercialNo = data.commercialRegistrationNo;
+    this.serialNo = data.serialNo;
     const param = {
       AucId: this.auctionId,
       BidderId: data.BidderId,
@@ -195,6 +197,7 @@ export class OpenOffersComponent implements OnInit {
     this.offervalue = data.offerValue;
     this.facilityname = data.facilityName;
     this.commercialNo = data.commercialRegistrationNo;
+    this.serialNo = data.serialNo;
     const param = {
       AucId: this.auctionId,
       BidderId: data.BidderId,
@@ -213,6 +216,7 @@ export class OpenOffersComponent implements OnInit {
     this.offervalue = data.offerValue;
     this.facilityname = data.facilityName;
     this.commercialNo = data.commercialRegistrationNo;
+    this.serialNo = data.serialNo;
     const param = {
       AucId: this.auctionId,
       BidderId: data.BidderId,
@@ -228,7 +232,7 @@ export class OpenOffersComponent implements OnInit {
   }
 
   rejectOffer(data: any) {
-    if(this.rejectReason.trim().length <= 0){
+    if (this.rejectReason.trim().length <= 0) {
       this.rejectReason = '';
       return;
     }

@@ -1040,18 +1040,18 @@
         "grid-next": "التالي"
     },
     "bidderSendOffer": {
-        "LatestOffersSent": "أخر العروض المرسلة",
-        "AttachThePrimaryWarranty": "إرفاق الضمان الأساسي",
-        "ForHelpSupportManagingAuctions": "بإمكانك إصدار الضمان عن طريق خدمة الضمان البنكي لمنصة اعتماد",
+        "LatestOffersSent": "تقديم عرض",
+        "AttachThePrimaryWarranty": "ارفاق الضمان الابتدائي",
+        "ForHelpSupportManagingAuctions": "بامكانك اصدار الضمان عن طريق البنك الخاص بك وارفاق نسخه من الملف",
         "ClickHere": "اضغط هنا",
         "UploadFileFormat": "رفع ملف PNG, JPG, DOCX, DOC, PDF",
         "AddYourOffer": "أضف عرضك",
         "SAR": "ريال سعودي",
-        "PersuitRate": "معدل بيرسويت",
+        "PersuitRate": "نسبه السعي",
         "AddedTaxValue": "قيمة الضريبة المضافة",
         "TotalOfferPrice": "اجمالي سعر العرض",
         "SendOffer": "إرسال العرض",
-        "SentOffer": "تقديم عرض",
+        "SentOffer": "تم تقديم عرض",
         "NoOfferMade": "لم يتم تقديم عرض",
         "NoFileUpload": "رفع ملف",
         "ConfirmationBidSubmission": "تأكيد تقديم العرض؟",
@@ -1140,7 +1140,7 @@
         "my_invoices": "الفواتير"
     },
     "open_offer": {
-        "adoption_of_awarding": "اعتماد ترسية العرض رقم 1؟",
+        "adoption_of_awarding": "اعتماد ترسية العرض رقم",
         "upon_confirmation": "عند التأكيد سيتم اعتماد الترسية المبدئية وإرسالها للإعتماد النهائي",
         "gear_adoption": "اعتماد الترسية",
         "the_award_has_been_successfully_approved": "تم اعتماد الترسية بنجاح",

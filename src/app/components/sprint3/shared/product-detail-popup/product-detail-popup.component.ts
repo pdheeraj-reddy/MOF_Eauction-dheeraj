@@ -30,6 +30,8 @@ export class ProductDetailPopupComponent implements OnInit {
   pageRangeForAttach: any;
   activeIndex = -1;
   showVideo: boolean = true;
+  longitude: any = '';
+  lattitude: any = '';
   @ViewChild('imageSlide', { read: ElementRef }) public imageSlide: ElementRef<any>;
   constructor(
     public dialogRef: MatDialogRef<ProductDetailPopupComponent>,
@@ -92,6 +94,8 @@ export class ProductDetailPopupComponent implements OnInit {
 
     // this.slidesStore = this.dialogData.data;
     this.viewproduct = this.dialogData.viewproduct;
+    this.longitude = this.viewproduct.location.locLongitude.split(',')[0];
+    this.lattitude = this.viewproduct.location.locLatitude.split(',')[1];
     console.log(this.slidesStore, "HAriiahra");
     console.log('viewproduct ', this.viewproduct);
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {

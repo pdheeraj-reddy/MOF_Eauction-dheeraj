@@ -1,4 +1,4 @@
-<div class="card flex-row">
+<div class="card flex-row mt-4">
 
   <!--=================== Yellow box to show auction status ===================-->
   <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
@@ -126,7 +126,8 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" [routerLink]="'/auctions'" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false">
+        <button type="button" [routerLink]="'/auctions'" class="btn btn-primary-light btn-md"
+          (click)="this.showSuccessAccept = false">
           {{'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>
@@ -194,7 +195,8 @@
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" [routerLink]="'/auctions'" class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close">
+        <button type="button" [routerLink]="'/auctions'" class="btn btn-primary-light btn-md" data-dismiss="modal"
+          aria-label="Close">
           {{ 'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>

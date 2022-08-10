@@ -337,7 +337,7 @@
 
                         <!--================ Latest offer send card ================-->
                         <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published"
-                            style="width: 40%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
+                            style="width: 42%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
                             <app-latest-offers-sent [aucId]="auctionId" pageno="1">
                             </app-latest-offers-sent>
                         </div>
@@ -355,7 +355,7 @@
                                 *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published"
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
                                 [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
-                                [bidValue]="response.ZzPbEstPrice"
+                                [bidValue]="response.ZzPbEstPrice" [commission]="response.ZzCommPercent"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
@@ -365,7 +365,7 @@
                         &nbsp; &nbsp; &nbsp;
                         <div class="left-left-card" style="margin-inline-end: 14px;"
                             [ngClass]="{'flex-fill': upcomingAuction.auctionStatus == 'Published' || response.ZzBidderSts ==''}">
-                            <div style="position: relative; margin-top: 5px;">
+                            <div style="position: relative;">
                                 <div id="">
                                     <ng-container>
                                         <div id="slideshow">
@@ -653,7 +653,7 @@
                                                                     }}</label>
                                                                 <div class="row text-success">
                                                                     <span class="col-md-6"
-                                                                        style="max-width: 49% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
+                                                                        style="max-width: 50% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">
@@ -675,7 +675,7 @@
                                                                     }}</label>
                                                                 <div class="row text-success">
                                                                     <span class="col-md-6"
-                                                                        style="max-width: 49% !important;">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
+                                                                        style="max-width: 50% !important;">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">

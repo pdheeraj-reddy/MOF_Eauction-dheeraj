@@ -1,4 +1,4 @@
-<div class="card flex-row">
+<div class="card flex-row mt-4">
     <!--=================== Yellow box to show auction status ===================-->
     <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
         <div class="mx-3">
@@ -111,15 +111,16 @@
                 <p class="text-primary text-14 m-0">
                     {{'sprint3_auction_detail.please_issue_and_attach' | translate}}<br>
                     {{'sprint3_auction_detail.issuance_of_the_final_guarantee' | translate}}
-                    <a class="text-info text-14"
-                        style="text-decoration: underline">{{'sprint3_auction_detail.press_here' | translate}}</a>
+                    <!-- <a class="text-info text-14"
+                        style="text-decoration: underline">{{'sprint3_auction_detail.press_here' | translate}}</a> -->
                 </p>
             </div>
         </div>
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button class="btn btn-primary-light btn-md align-self-center" (click)="sendFbga()" [disabled]="disableBtn">
+        <button class="btn btn-primary-light btn-md align-self-center" style="min-width: 200px;" (click)="sendFbga()"
+            [disabled]="disableBtn">
             {{'sprint3_auction_detail.send_the_final_guarantee' | translate}}
         </button>
         <!-- End -->

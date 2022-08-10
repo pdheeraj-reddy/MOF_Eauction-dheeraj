@@ -765,18 +765,18 @@
         "grid-next": "Next"
     },
     "bidderSendOffer": {
-        "LatestOffersSent": "Latest offers sent",
+        "LatestOffersSent": "Submit Offer",
         "AttachThePrimaryWarranty": "Attach the primary warranty",
         "ForHelpSupportManagingAuctions": "You can issue the IBGA through the bank guarantee service of the Etimad platform",
         "ClickHere": "Click here",
         "UploadFileFormat": "Upload PNG, JPG, DOCX, DOC, PDF",
         "AddYourOffer": "Add your offer",
         "SAR": "SAR",
-        "PersuitRate": "Persuit rate",
+        "PersuitRate": "Commission",
         "AddedTaxValue": "Added tax value",
         "TotalOfferPrice": "Total offer price",
         "SendOffer": "Submit",
-        "SentOffer": "Offer Made",
+        "SentOffer": "Offer Submitted",
         "NoOfferMade": "No offer has been made",
         "NoFileUpload": "Upload a file",
         "ConfirmationBidSubmission": "Confirm Submitting the Offer?",
@@ -1141,7 +1141,7 @@
         "my_invoices": "My Invoices"
     },
     "open_offer": {
-        "adoption_of_awarding": "Awarding Offer Number 1? ",
+        "adoption_of_awarding": "Awarding Offer Number ",
         "upon_confirmation": "When you confirm, The Initial Awarding will be approved and sent for Auction Final awarding.",
         "gear_adoption": "Confirm Awarding",
         "the_award_has_been_successfully_approved": "The Offer has been successfully Awarded!",
@@ -1182,7 +1182,7 @@
         "head": "Awaiting Payment",
         "sub_head": "Please pay the invoice to approve the final award.",
         "label": "The award will be canceled if the bill is not paid within 30 days of the award.",
-        "pay_btn": "Pay Bill"
+        "pay_btn": "Pay Invoice"
     },
     "am-primary-awarding": {
         "head": "Primary Awarding",
@@ -1215,7 +1215,7 @@
     },
     "send-fbga": {
         "popup1_head": "Send FBGA ?",
-        "popup1_subhead": "Please make sure to attach the correct FBGA, when your confirm, wyou will not be able to modify.",
+        "popup1_subhead": "Please make sure to attach the correct FBGA. When your confirm, you will not be able to modify.",
         "popup1_accept": "Send Warranty",
         "popup2_head": "FBGA Sent successfully!",
         "popup2_subhead": "You will receive an email if the auction is awarded on your offer.",

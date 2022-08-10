@@ -1,4 +1,4 @@
-<div class="card flex-row">
+<div class="card flex-row mt-4">
 
   <!--=================== Yellow box to show auction status ===================-->
   <div class="d-flex flex-column justify-content-center custom-bg-yellow" style="min-height: 130px; width: 30%">
@@ -30,7 +30,8 @@
         <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')"
           class="text-primary text-14 font-weight-bold d-flex" style="text-decoration: none;">
 
-          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' | translate}}</span>&nbsp;&nbsp;
+          <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' |
+            translate}}</span>&nbsp;&nbsp;
           <span class="text-16 icon-download"></span>
         </a>
         <div *ngIf="showAttachLoader">

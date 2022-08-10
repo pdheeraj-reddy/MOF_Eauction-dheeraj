@@ -17,7 +17,8 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() disable: any;
   @Input() ibgaDoc: any;
   @Input() notParticipated: any;
-  @Input() bidValue:any;
+  @Input() bidValue: any;
+  @Input() commission: any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -53,10 +54,10 @@ export class SendBiddingOfferComponent implements OnInit {
     // this.amount = 30005;
     this.minAmount = this.totalBookValue;
     console.log(this.ibgaDoc);
-    if(this.notParticipated){
+    if (this.notParticipated) {
       this.totalBookValue = 0;
     }
-    if(this.disable && !this.notParticipated){
+    if (this.disable && !this.notParticipated) {
       this.totalBookValue = this.bidValue;
     }
 
@@ -90,7 +91,7 @@ export class SendBiddingOfferComponent implements OnInit {
   }
 
   calc() {
-    this.persuitRate = Math.round(2.5 * this.totalBookValue) / 100;
+    this.persuitRate = Math.round(Number(this.commission) * this.totalBookValue) / 100;
     this.addedTaxValue = Math.round(8 * this.totalBookValue) / 100;
     this.totalOfferPrice += this.persuitRate + this.addedTaxValue + Number(this.totalBookValue);
   }
@@ -300,7 +301,7 @@ export class SendBiddingOfferComponent implements OnInit {
       console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 226 ~ resData", resData);
     });
   }
-  reloadPage(){
+  reloadPage() {
     window.location.reload();
   }
 }

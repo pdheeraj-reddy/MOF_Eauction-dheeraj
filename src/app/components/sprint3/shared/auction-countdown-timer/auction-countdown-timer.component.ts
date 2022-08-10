@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export class AuctionCountdownTimerComponent implements OnInit {
 
   @Input() date: string;
-  @Input() showText : string;
+  @Input() showText: string;
 
   constructor() { }
 
@@ -21,13 +21,13 @@ export class AuctionCountdownTimerComponent implements OnInit {
   hours: number = 0
   minutes: number = 0
   seconds: number = 0
-  timestamp : any;
+  timestamp: any;
 
   ngOnInit(): void {
     // console.log("🎯TC🎯 ~ file: auction-countdown-timer.component.ts ~ line 28 ~ this.date", this.date);
     let dateStr = this.date;
     let timestamp: number = 0;
-    
+
     if (dateStr) {
       timestamp = Number(moment(dateStr, 'DD.MM.YYYY HH:mm:ss').format('x'));
     }
@@ -40,9 +40,10 @@ export class AuctionCountdownTimerComponent implements OnInit {
       let utc = new Date(local + offset);
       let riyadh = new Date(utc.getTime() + (3 * 60 * 60 * 1000));
       // End
-      
+
       // get total seconds between the times
-      var delta = (timestamp - Number(moment(riyadh,'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
+      var delta = (timestamp - Number(moment(riyadh, 'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
+      // var delta = (timestamp - Date.now()) / 1000;
       // console.log(delta);
       if (delta > 0) {
         // calculate (and subtract) whole days
