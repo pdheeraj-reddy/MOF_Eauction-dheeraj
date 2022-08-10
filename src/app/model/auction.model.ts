@@ -22,6 +22,7 @@ export class AuctionBasicMaster {
     startAuction: string;
     auctionAnncStartDate: string;
     bidOpeningTime: string;
+    bidOpeningTimeSufix: string;
     startPrice: string;
     lowBidValue: string;
     gnteePercentage: string;
@@ -43,8 +44,8 @@ export class AuctionProduct {
     productCondition: string;
     productSKUNumber: string;
     productSerialNumber: string;
-    productNo : string;
-    productFiles : [];
+    productNo: string;
+    productFiles: [];
     productValue: string;
     productSpec: string;
     productImages: [];

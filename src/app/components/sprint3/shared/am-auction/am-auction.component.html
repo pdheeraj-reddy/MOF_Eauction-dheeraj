@@ -246,12 +246,12 @@
             </ng-container>
             <ng-container *ngIf="!showLoader && auctionListData!.length> 0">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-11" *ngFor="let rowItem of auctionListData">
+                    <div style="justify-content: center;display: flex;" class="col-lg-6 col-xl-4 col-md-12 col-12"
+                        *ngFor="let rowItem of auctionListData">
                         <app-auction-card [auction]="rowItem">
                         </app-auction-card>
                     </div>
                 </div>
-                <!-- <app-auction-card [auction]="rowItem" *ngFor="let rowItem of auctionListData"></app-auction-card> -->
             </ng-container>
             <!--============= No data available card =============-->
             <div class="card mb-4 w-100" *ngIf="!showPageLoader &&!showLoader && auctionListData!.length == 0">

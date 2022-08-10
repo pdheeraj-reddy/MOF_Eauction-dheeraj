@@ -47,7 +47,7 @@ export class AuctionDetailComponent implements OnInit {
   showAlertModal: boolean = false;
   activeFileDownloadIndex = -1;
   columnLst = ['index', 'name'];
-  startValError : boolean = false;
+  startValError: boolean = false;
   // Dropdown Values
   // dropValBeneCategories: any = ['category 1', 'category 2', 'category 3', 'category 4'];
   dropValProducts: any = [
@@ -291,11 +291,17 @@ export class AuctionDetailComponent implements OnInit {
           down: 'icon-arrow-down text-primary',
         },
       });
-      if (this.auctionItem.auctionStartTime) {
-        auctionStartTime.val(this.auctionItem.auctionStartTime);
+
+      if (this.auctionItem.auctionStartTime || this.basicFormGroup.value.auctionStartTime) {
+        let start = this.auctionItem.auctionStartTime || this.basicFormGroup.value.auctionStartTime
+        start = start.split(' ')
+        auctionStartTime.val(start[0] + ' ' + this.translate.instant(start[1]));
       }
-      if (this.auctionItem.auctionEndTime) {
-        auctionEndTime.val(this.auctionItem.auctionEndTime);
+
+      if (this.auctionItem.auctionEndTime || this.basicFormGroup.value.auctionEndTime) {
+        let end = this.auctionItem.auctionEndTime || this.basicFormGroup.value.auctionEndTime
+        end = end.split(' ')
+        auctionEndTime.val(end[0] + ' ' + this.translate.instant(end[1]));
       }
 
       $("#auctionAnncStartDate").hijriDatePicker({
@@ -309,17 +315,6 @@ export class AuctionDetailComponent implements OnInit {
           next: '<span class="icon-keyboard_arrow_right"></span>',
         },
       });
-      // $("#bidOpeningTime").hijriDatePicker({
-      //   hijri: false,
-      //   locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
-      //   format: "hh:mm A",
-      //   showSwitcher: false,
-      //   showTodayButton: false,
-      //   icons: {
-      //     up: 'icon-arrow-up text-primary',
-      //     down: 'icon-arrow-down text-primary',
-      //   },
-      // });
       var bidOpeningTime = $("#bidOpeningTime").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
@@ -331,8 +326,11 @@ export class AuctionDetailComponent implements OnInit {
           down: 'icon-arrow-down text-primary',
         },
       });
-      if (this.auctionItem.bidOpeningTime) {
-        bidOpeningTime.val(this.auctionItem.bidOpeningTime);
+
+      if (this.auctionItem.bidOpeningTime || this.basicFormGroup.value.bidOpeningTime) {
+        let end = this.auctionItem.bidOpeningTime || this.basicFormGroup.value.bidOpeningTime
+        end = end.split(' ')
+        bidOpeningTime.val(end[0] + ' ' + this.translate.instant(end[1]));
       }
 
       $("#finalGntee").hijriDatePicker({
@@ -843,13 +841,13 @@ export class AuctionDetailComponent implements OnInit {
     var byteString = btoa(file.filesrc);
     return byteString;
   }
-  checkStartValue(){
+  checkStartValue() {
     let startValue = this.basicFormGroup.controls['startPrice'].value;
     console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 848 ~ startValue", startValue);
-    if(startValue < 0 || !startValue){
+    if (startValue < 0 || !startValue) {
       this.startValError = true;
       return;
-    }else{
+    } else {
       this.startValError = false;
     }
   }
@@ -864,8 +862,8 @@ export class AuctionDetailComponent implements OnInit {
     let bidOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
     // let startValue = this.basicFormGroup.controls['startPrice'].value;
     // console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 855 ~ startValue", startValue);
-    
-    
+
+
 
     if (startDate && endDate) {
       if ((moment(startDate).isAfter(endDate, 'day'))) {
