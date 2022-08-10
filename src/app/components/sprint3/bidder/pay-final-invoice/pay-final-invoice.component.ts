@@ -96,6 +96,11 @@ export class PayFinalInvoiceComponent implements OnInit {
       this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
       localStorage.setItem('x-csrf-token', this.moderatorService.XCSRFToken);
       this.invoiceData = res.body.d.results[0];
+      if (this.invoiceData?.Status !== 'Pending Paying') {
+        this.router.navigateByUrl('/bidder');
+        return
+      }
+      console.log('this.invoiceData: ', this.invoiceData);
       this.auctionStartDate = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[0], 'DD.MM.YYYY').format('YYYY-MM-DD');
       this.auctionStartTime = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('hh:mm');
       this.auctionStartSuffix = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('A');
@@ -173,24 +178,6 @@ export class PayFinalInvoiceComponent implements OnInit {
       this.mapping(res);
     })
 
-    // Service call
-    // this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
-    //   this.showLoader = false;
-
-    //   this.PaginationServc.setPagerValues(
-    //     +res.body.d.results[0].TotEle,
-    //     10,
-    //     +pageNoVal
-    //   );
-
-    //   const csrfToken = localStorage.getItem("x-csrf-token");    
-    //   localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-    //   this.auctionListData = this.mapping(res.body);
-
-    // }, (error) => {
-    //   this.showLoader = false;
-    //   console.log('getAuctionList RespError : ', error);
-    // });
   }
 
   public mapping(serverObj: any) {
@@ -266,24 +253,6 @@ export class PayFinalInvoiceComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  // downloadInvoice() {
-  //   this.bidderService.downloadInvoice(this.auctionId).subscribe((result) => {
-  //     const data = result.body.d.results[0];
-  //     console.log('data: ', data);
-  //     var byteString = atob(atob(data.FileContent).split(',')[1]);
-  //     console.log('asdasd', byteString.split(',')[1]);
-  //     var ab = new ArrayBuffer(byteString.length);
-  //     var ia = new Uint8Array(ab);
-  //     for (var i = 0; i < byteString.length; i++) {
-  //       ia[i] = byteString.charCodeAt(i);
-  //     }
-  //     const blob = new Blob([ab], { type: 'application/pdf' });
-  //     console.log(blob);
-  //     let fileURL = window.URL.createObjectURL(blob);
-  //     window.open(fileURL, '_blank');
-  //   });
-  // }
 
   downloadInvoice() {
     this.downloadingInvoice = true;

@@ -17,7 +17,6 @@ export class SendInvoiceComponent implements OnInit {
 
   selectedPageNumber: number;
   pagelimit: number = 10;
-  userRole: string;
   showLoader: boolean = true;
   textFloat: string = '';
   auctionId: string = '';
@@ -47,7 +46,6 @@ export class SendInvoiceComponent implements OnInit {
     private _location: Location,
     public envService: EnvService
   ) {
-    this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
   }
 
   public get getHomeUrl() {
@@ -68,34 +66,17 @@ export class SendInvoiceComponent implements OnInit {
     }
   }
 
-  // getInvoice(pageNumber?: number) {
-  //   this.showLoader = true;
-  //   const pageNoVal = '' + pageNumber;
-  //   const page = {
-  //     pageNumber: pageNumber,
-  //     pageLimit: this.pagelimit
-  //   };
-  //   // Service call
-  //   this.bidderService.getSendInvoice(this.auctionId).subscribe((res: any) => {
-  //     console.log("🚀🚀 ~~ res", res);
-  //     this.showLoader = false;
-  //     this.PaginationServc.setPagerValues(+res.body.d.results[0].TotEle, 10, +pageNoVal);
-  //     localStorage.setItem("x-csrf-token", res.headers.get('x-csrf-token'));
-  //     this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
-  //     this.mapping(res.body);
-  //   }, (error: any) => {
-  //     this.showLoader = false;
-  //     console.log('getInvoice RespError : ', error);
-  //   });
-  //   // this.mapping(res.body);
-  // }
-
   getInvoice() {
     this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
       this.showLoader = false;
       this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
       localStorage.setItem('x-csrf-token', this.moderatorService.XCSRFToken);
       this.invoiceData = res.body.d.results[0];
+      /* Checking if the invoice status is not pending FBGA approval, then it will redirect to the auctions page. */
+      if (this.invoiceData?.Status !== 'Pending FBGA Approval') {
+        this.router.navigateByUrl('/auctions');
+        return
+      }
       this.auctionStartDate = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[0], 'DD.MM.YYYY').format('YYYY-MM-DD');
       this.auctionStartTime = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('hh:mm');
       this.auctionStartSuffix = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('A');

@@ -141,7 +141,7 @@ const routes: Routes = [
   },
   {
     path: 'auctions',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ModeratorGuard],
     loadChildren: () => import('./components/sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule)
   },
   {
