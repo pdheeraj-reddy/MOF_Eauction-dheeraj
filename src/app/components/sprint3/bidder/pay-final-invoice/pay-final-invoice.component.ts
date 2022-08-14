@@ -70,7 +70,6 @@ export class PayFinalInvoiceComponent implements OnInit {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     this.card = true;
     this.getInvoice();
-    // this.getAuctionList(1);
     this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);
     if (this.userRole) {
       this.userRole = this.userRole.roles;
@@ -126,7 +125,6 @@ export class PayFinalInvoiceComponent implements OnInit {
     });
   }
 
-
   copyToClipboard(str: string) {
     navigator.clipboard.writeText(str);
   }
@@ -146,38 +144,10 @@ export class PayFinalInvoiceComponent implements OnInit {
     }
   }
 
-  sendInv() {
-    // attach the actual auction id
-    let data = {
-      "AucId": "9700000300",
-      "BidderId": "193412",
-    }
-    this.api.postAppporRej(data, 'D').subscribe((res => {
-      console.log(res)
-      if (res['d']['Msgty'] === 'S') {
-        this.modalService.open(this.modalContentApp).result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-      }
-    }))
-  }
-
   getAuctionList(pageNumber?: number) {
-    const pageNoVal = '' + pageNumber;
-    const page = {
-      pageNumber: pageNumber,
-      pageLimit: this.pagelimit
-    };
-    // let res={
-    //   "body" : 
-    // }
     this.http.get<any>(environment.apiBidderFinalInvoiceURL, { responseType: 'json' }).subscribe(res => {
-      console.log(res, "f");
       this.mapping(res);
     })
-
   }
 
   public mapping(serverObj: any) {

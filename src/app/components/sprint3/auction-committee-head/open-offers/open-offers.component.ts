@@ -303,11 +303,6 @@ export class OpenOffersComponent implements OnInit {
     this.navigateToPage(1)
   }
 
-  changeSelect(e: any, dd: string) {
-    console.log('changeSelect');
-    console.log(e.target.value);
-  }
-
   back() {
     this.location.back();
   }
