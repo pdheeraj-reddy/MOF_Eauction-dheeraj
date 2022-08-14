@@ -311,7 +311,7 @@
                         <label for="validationCustom01">
                             {{'auctionCommittee.ac-openOffers.th2' | translate}}
                         </label>
-                        <div class="text-primary"> {{offervalue}} </div>
+                        <div class="text-primary"> {{offervalue}} {{ 'bidderFinalInvoice.SAR' | translate }} </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom01">
@@ -397,7 +397,7 @@
 
             <div class="modal-footer" style="justify-content: end">
                 <button class="btn btn-md btn-outline-light" (click)="showModal.esitimationOffer = false">
-                    {{'bidderSendOffer.Cancellation' | translate}}</button>
+                    {{'open_offer.back' | translate}}</button>
                 <button class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"
                     (click)="terminateOffer(selectedData)">
                     {{'open_offer.confirm_that_the_auction_was_not_awarded' | translate}}

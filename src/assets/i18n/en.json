@@ -745,7 +745,7 @@
         "ThAuctionReferenceNumber": "Auction reference number",
         "ThAuctionName": "Auction Name",
         "ThAuctionType": "Auction Type",
-        "DisplayCase": "Display Case"
+        "DisplayCase": "Offer Status"
     },
     "bidderMyInvoices": {
         "TrustServices": "Etimad Services",
@@ -968,7 +968,7 @@
             "clickHere": "Click here",
             "bids": "Number of bids",
             "participant": "Participants",
-            "noBidMssg": "No offers have been made"
+            "noBidMssg": "No offers submitted"
         },
         "ac-openOffers": {
             "bcrumb1": "Etimad Services",
@@ -1158,9 +1158,10 @@
         "auction_and_all_bids_submitted": "Auction and all bids submitted",
         "this_offer_cannot_be_awarded": "This offer cannot be awarded.",
         "less_than_estimation": "This offer cannot be chosen. as the awarded offer, the price is less than the estimated price by the pricing committee and according to the auction guidelines: If the minimum estimated price for the products is not achieved, the auction will not be awarded.",
-        "confirm_that_the_auction_was_not_awarded": "Confirm Not Awarding  Auction",
+        "confirm_that_the_auction_was_not_awarded": "Confirm terminate auction",
+        "back": "Back",
         "reject_confirmation": "When you confirm, the bidder will be removed from the Offers list.",
-        "are_you_sure_of_the_rejection_of_the_award": "Confirm rejection of the offer?",
+        "are_you_sure_of_the_rejection_of_the_award": "Confirm reject the offer?",
         "rejection_reason": "Rejection reason",
         "rejection_confirmation": "Confirm Reject",
         "rejection_sent_successfully": "Rejection sent successfully",
