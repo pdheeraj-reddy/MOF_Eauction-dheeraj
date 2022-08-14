@@ -52,8 +52,10 @@
         </div>
     </div>
 
-    <img *ngIf="!showLoader" src="{{auctionImg}}" onerror="this.onerror=null;this.src='assets/icons/logo-mini.svg';"
-        class="card-img-top" alt="...">
+    <div class="card-img-top">
+        <img *ngIf="!showLoader" src="{{auctionImg}}" onerror="this.onerror=null;this.src='assets/icons/logo-mini.svg';"
+            alt="...">
+    </div>
 
     <div class="card-body" style="padding: 20px !important;">
         <h5 class="card-title mt-4">{{auction.title}}</h5>
@@ -61,9 +63,9 @@
             {{auction.description}} </p>
         <div class="text-body text-18 mt-4">
             <img src="assets/icons/product-layers.png" alt="">
-            <span class="mx-2"> {{auction.product}} {{ 'Product' | translate }}</span>
+            <span class="mx-2 product-qty"> {{auction.product}} {{ 'Product' | translate }}</span>
         </div>
-        <div class="text-body text-18 d-flex mt-3" *ngIf=" auction.auctiondate">
+        <div class="text-body text-18 d-flex mt-3 product-qty" *ngIf=" auction.auctiondate">
             <span class="icon-calendar text-primary font-weight-bold"></span>
             <span class="mx-3"> {{auction.auctiondate | date:'YYYY-MM-dd'}} </span>∙&nbsp;
             <span *ngIf="auction.auctiontime">

@@ -1,6 +1,6 @@
 .card {
-  max-width: 360px;
-  min-width: 360px;
+  max-width: 350px;
+  min-width: 350px;
   border-radius: 8px;
   height: 430px;
   margin-top: 50px;
@@ -16,8 +16,11 @@
 }
 
 .card-img-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 150px;
-  height: 120px;
+  height: 110px;
   top: -30px;
   border-radius: 15px;
   margin-left: 20px;
@@ -25,6 +28,11 @@
   position: absolute;
   align-self: flex-end;
   box-shadow: 0 4px 31px 0 rgba(111, 111, 111, 0.13);
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .status-code-un {
@@ -114,7 +122,7 @@
 
 .card-title {
   color: #005b4f;
-  font-size: 22px;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: 24px;
   min-height: 48px;
@@ -127,7 +135,7 @@
 
 .card-text {
   color: #7a7a7a;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: 0;
   line-height: 22px;
   min-height: 44px;
@@ -157,4 +165,9 @@
 
 label {
   margin-bottom: 0;
+}
+
+.product-qty {
+  font-size: 14px;
+  color: #4F5457;
 }
