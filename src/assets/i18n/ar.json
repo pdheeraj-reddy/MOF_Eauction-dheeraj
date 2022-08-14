@@ -780,7 +780,7 @@
             "th6": "رقم السجل التجاري.",
             "noData": "لا يوجد بيانات",
             "reject": "رفض",
-            "accept": "قبول",
+            "accept": "ترسيه",
             "previous": "سابق",
             "next": "التالي",
             "SAR": "ر.س"
@@ -918,7 +918,13 @@
             "SubscriptionConfirmation": "تأكيد الاشتراك",
             "SubscriptionConfirmedSuccessfully": "تم تأكيد الإشتراك بنجاح",
             "ReceiveEmail": "سوف تصلك رسالة بالبريد الإلكتروني عند بدء المزاد",
-            "BackToAuctions": "العودة إلى المزادات"
+            "BackToAuctions": "العودة إلى المزادات",
+            "confirmBidSubmission": "تأكيد تقديم العرض؟",
+            "confirmBidBody": "عند التأكيد يوف يتم إرسال عرضك للجنة المزاد. ولن تستطيع تعديل او إلغاء العرض بعد إرساله. ",
+            "acceptSubmit": "إرسال العرض",
+            "successSubmission": "تم إرسال العرض بنجاح",
+            "bestWishes": "تمنياتنا لك بالتوفيق!",
+            "successBody": "سوف تصلك رسالة بالبريد الإلكتروني في حال تم ترسية المزاد على عرضك.  "
         },
         "manualAuction-popup": {
             "ConfirmationOfManualAuctionStart": "هل أنت متاكد من تفعيل المزاد؟",

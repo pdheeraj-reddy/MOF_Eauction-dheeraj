@@ -36,16 +36,20 @@ export class MyAuctionsComponent implements OnInit {
     //  'Private'
   ];
   dropValStatus = [
-    { code: "Published", disp: "Upcoming", },
-    { code: "Ongoing", disp: "Ongoing" },
+    // { code: "Ongoing", disp: "Ongoing" },
     { code: "Pending Selecting", disp: "Pending Selecting" },
     { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
     { code: "Pending FBGA", disp: "Pending FBGA" },
-    { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
-    { code: "Awarded", disp: "Awarded" },
+    // { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+    { code: "Award", disp: "Awarded" },
     { code: "Terminated", disp: "Terminated" },
   ];
-  dropValDisplayCase: any = ["Offer Made", "No Offer", "No Award", "Awarded"];
+  dropValDisplayCase: any = [
+    { code: 'Offer Made', disp: 'Offer Made' },
+    { code: 'No Offer', disp: 'No Offer' },
+    { code: 'No Award', disp: 'No Award' },
+    { code: 'Award', disp: 'Awarded' }
+  ];
   // Form controls
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;

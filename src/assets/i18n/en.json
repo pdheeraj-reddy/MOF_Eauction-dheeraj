@@ -63,6 +63,7 @@
     "ZEAUCTION_SALCOMM_MEMBER": "Committee Member",
     "Offer Made": "Offer Submitted",
     "No Offer": "No Offer Made",
+    "No Award": "Not Awarded",
     "Enter the total estimated value of the products": "Enter the total estimated value of the products",
     "Enter the estimated value for each product separately": "Enter the estimated value for each product seperately",
     "changes_not_saved": "Changes you made may not be saved. Still you want to navigate?",
@@ -643,7 +644,13 @@
             "SubscriptionConfirmation": "Subscription confirmation",
             "SubscriptionConfirmedSuccessfully": "Your participation is confirmed successfully.",
             "ReceiveEmail": "You will receive an email when the auction starts",
-            "BackToAuctions": "Back to Auctions"
+            "BackToAuctions": "Back to Auctions",
+            "confirmBidSubmission": "Confirm Submitting the Offer?",
+            "confirmBidBody": "When you Confirm, your offer will be sent to the auction committee. You will not be able to modify or cancel the offer after it has been sent.",
+            "acceptSubmit": "Submit Offer",
+            "successSubmission": "Offer is sent successfully",
+            "bestWishes": "We wish you good luck!",
+            "successBody": "You will receive an email if the auction is awarded on your offer."
         },
         "manualAuction-popup": {
             "ConfirmationOfManualAuctionStart": "Are you sure activate the acution? ",

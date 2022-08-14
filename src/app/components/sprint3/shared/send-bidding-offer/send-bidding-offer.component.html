@@ -358,7 +358,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">
-          {{ 'bidderAuctionDetails.auction-popup.ConfirmationOfParticipation' | translate }}
+          {{ 'bidderAuctionDetails.auction-popup.confirmBidSubmission' | translate }}
         </h4>
         <button type="button" class="modal-close btn-close btn-sm" (click)="showConfirmation=false">
           <span class="icon-close"></span>
@@ -366,7 +366,7 @@
       </div>
       <div class="modal-body">
         <label for="confirmation" style="color: #414042; font-size: 16px">{{
-          'bidderAuctionDetails.auction-popup.UponConformation' | translate }}</label>
+          'bidderAuctionDetails.auction-popup.confirmBidBody' | translate }}</label>
       </div>
       <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-outline-light btn-md" (click)="showConfirmation=false">
@@ -378,7 +378,7 @@
             <span class="sr-only">Loading...</span>
           </div>
           &nbsp;
-          {{"auctionModerator.am-detail.auction-details-confirmation.Postconfirmation" | translate}}
+          {{"bidderAuctionDetails.auction-popup.acceptSubmit" | translate}}
         </button>
       </div>
     </div>
@@ -400,17 +400,20 @@
             <div class="circle"></div>
           </div>
           <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-            {{ 'bidderAuctionDetails.auction-popup.SubscriptionConfirmedSuccessfully' | translate }}
+            {{ 'bidderAuctionDetails.auction-popup.successSubmission' | translate }}
           </h4>
         </div>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="text-align: center;">
         <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
-          {{ 'bidderAuctionDetails.auction-popup.ReceiveEmail' | translate }}
+          {{ 'bidderAuctionDetails.auction-popup.bestWishes' | translate }}
+        </label>
+        <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">
+          {{ 'bidderAuctionDetails.auction-popup.successBody' | translate }}
         </label>
       </div>
       <div class="modal-footer" style="justify-content: end">
-        <button type="button" [routerLink]="['/auctions']" (click)="showSuccessfulModal=false"
+        <button type="button" [routerLink]="['/bidder/am-auction']" (click)="showSuccessfulModal=false"
           class="btn btn-primary-light btn-md">
           {{ 'bidderAuctionDetails.auction-popup.BackToAuctions' | translate }}
         </button>
