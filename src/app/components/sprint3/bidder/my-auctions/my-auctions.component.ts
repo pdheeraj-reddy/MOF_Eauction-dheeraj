@@ -1,14 +1,9 @@
-import { HttpXsrfTokenExtractor, HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-// import { getStatusText } from 'angular-in-memory-web-api';
 import * as moment from 'moment';
-import { CookieService } from 'ngx-cookie-service';
 import { EnvService } from 'src/app/env.service';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
-import { environment } from 'src/environments/environment';
-import { getStatusText } from '../../../../utils/util';
 import { BidderService } from '../../services/bidder.service';
 declare var $: any;
 
@@ -73,9 +68,6 @@ export class MyAuctionsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public PaginationServc: PaginationSortingService,
-    private cookieService: CookieService,
-    private csrfTokenExtractor: HttpXsrfTokenExtractor,
-    private http: HttpClient,
     public translate: TranslateService,
     public envService: EnvService,
     private bidderSer: BidderService

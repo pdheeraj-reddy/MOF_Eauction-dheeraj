@@ -136,7 +136,7 @@
         <!-- End -->
 
         <!--============ Open offers card ============-->
-        <app-open-offers-card [auctionId]="auctionId" [importantInfo]="upcomingAuction.important_info"
+        <app-open-offers-card [auctionId]="auctionId" [importantInfo]="upcomingAuction.auction_detail"
             *ngIf="role.auctionCommitteeHead && this.status.pendingSelecting"></app-open-offers-card>
         <!-- End -->
 
@@ -149,7 +149,7 @@
         <div class="d-flex mt-4" style="justify-content: space-around;">
 
             <!--============== Auction Settings card ==============-->
-            <div class="card justify-content-between" style="max-height: 775px; width: 26%;">
+            <div class="card" style="max-height: 775px; width: 26%;">
                 <!-- Top section  -->
                 <div>
                     <p class="text-20 text-primary m-3 mt-5 font-weight-bold">
@@ -675,7 +675,8 @@
                                                                     }}</label>
                                                                 <div class="row text-success">
                                                                     <span class="col-md-6"
-                                                                        style="max-width: 50% !important;">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
+                                                                        style="max-width: 50% !important;">
+                                                                        {{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
 
                                                                     <ul
                                                                         class="col list list-primary-bullets d-inline-block">

@@ -94,7 +94,7 @@ export class OpenOffersComponent implements OnInit {
               offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
               BidderId: result['BidderId'] ? result['BidderId'] : null,
               PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
-              submissionDate: this.datepipe.transform(date, 'yyyy-MM-dd'),
+              submissionDate: date ? this.datepipe.transform(date, 'yyyy-MM-dd') : '',
               submissionTime: result['DtTime'] ? result['DtTime'] !== 0 ? moment(result['DtTime'].split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
               submissionTimeSuffix: result['DtTime'] ? result['DtTime'] !== 0 ? moment(result['DtTime'].split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
               facilityName: result['BidderName'] ? result['BidderName'] : '-',
@@ -260,6 +260,7 @@ export class OpenOffersComponent implements OnInit {
   public toggleFilter() {
     this.resetFilter();
     this.showFilterForm = !this.showFilterForm;
+    this.openofferListData = this.copyOpenofferListData;
   }
 
   resetFilter() {
@@ -301,11 +302,6 @@ export class OpenOffersComponent implements OnInit {
       })
     }
     this.navigateToPage(1)
-  }
-
-  changeSelect(e: any, dd: string) {
-    console.log('changeSelect');
-    console.log(e.target.value);
   }
 
   back() {
