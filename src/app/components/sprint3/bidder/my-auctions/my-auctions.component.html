@@ -58,8 +58,8 @@
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Awarded' }"
-                                                    (click)="onTabSelection('Awarded')">
+                                                    [ngClass]="{ active: selectedTab === 'Award' }"
+                                                    (click)="onTabSelection('Award')">
                                                     {{ 'my_auction.awarded' | translate }}
                                                     ({{totalCounts.total_awarded || 0}})
                                                 </a>
@@ -138,7 +138,8 @@
                         <select class="form-control" id="validationCustom04" formControlName="displayCase"
                             (change)="changeSelect($event, 'displayCase')" [required]="true">
                             <option value="">{{ 'bidderMyAuctions.DisplayCase' | translate }} </option>
-                            <option *ngFor="let status of dropValDisplayCase" [value]="status">{{status | translate }}
+                            <option *ngFor="let status of dropValDisplayCase" [value]="status.code">{{status.disp |
+                                translate }}
                             </option>
                         </select>
                     </div>
@@ -293,10 +294,12 @@
                                 <td>{{ rowItem.auctionType | translate }} </td>
                                 <td>
                                     <span class="status status-o"
-                                        [ngClass]="[rowItem.auctionStatus === 'Awarded' ? 'status-o-success-2' : rowItem.auctionStatus?.startsWith('Pending') ? 'status-o-warning-2' : rowItem.auctionStatus === 'Upcoming' ? 'status-o-info-4' : rowItem.auctionStatus === 'Ongoing' ? 'status-o-important-2' : 'status-o-neutral-4']">
+                                        [ngClass]="[rowItem.auctionStatus === 'Awarded' ? 'status-o-success-3' : rowItem.auctionStatus?.startsWith('Pending') ? 'status-o-warning-2' : rowItem.auctionStatus === 'Upcoming' ? 'status-o-info-4' : rowItem.auctionStatus === 'Ongoing' ? 'status-o-important-2' : 'status-o-neutral-4']">
                                         <br>
                                     </span>
-                                    {{ rowItem.auctionStatus | translate }}
+                                    <span>{{ rowItem.auctionStatus == 'Award' ? 'Awarded' : rowItem.auctionStatus |
+                                        translate }}</span>
+
                                 </td>
                                 <td>
                                     <div class="pt-1 text-14">{{ rowItem.autionEndDate }} {{rowItem.cc}}
@@ -307,10 +310,10 @@
 
                                 <td>
                                     <div class="status status-o" *ngIf="rowItem.bidderStatus"
-                                        [ngClass]="[rowItem.bidderStatus === 'Awarded' ? 'status-o-success-2' : rowItem.bidderStatus === 'Offer Made' ? 'status-o-warning-2' :  rowItem.bidderStatus === 'No Offer' ? 'status-o-important-2' : 'status-o-neutral-4']">
+                                        [ngClass]="[rowItem.bidderStatus === 'Award' ? 'status-o-success-3' : rowItem.bidderStatus === 'Offer Made' ? 'status-o-warning-2' :  rowItem.bidderStatus === 'No Award' ? 'status-o-important-2' : 'status-o-neutral-4']">
                                         <br>
                                     </div>
-                                    {{ rowItem.bidderStatus | translate }}
+                                    {{ rowItem.bidderStatus=='Award' ? 'Awarded' : rowItem.bidderStatus | translate }}
                                 </td>
                                 <td width="20px">
                                     <a [routerLink]="['/auction-details', rowItem.referenceno]"

@@ -83,6 +83,7 @@ export class SendBiddingOfferComponent implements OnInit {
         this.amountValidation = false;
       }, 3000);
     }
+    this.calc();
   }
 
   incAmt() {
