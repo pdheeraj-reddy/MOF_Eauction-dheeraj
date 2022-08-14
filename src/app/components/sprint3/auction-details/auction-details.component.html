@@ -79,28 +79,7 @@
 
     <div *ngIf="!showLoader">
 
-        <!-- =================This is to show error message if there is no file is selected ================= -->
-        <div *ngIf="showFileError" #errorMessageFocus
-            class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
-            <div class="alert-wrapper">
-                <div class="alert-body">
-                    <i class="alert-icon">
-                        <span class="icon-filled-wrong"></span>
-                    </i>
-                    <div class="alert-content">
-                        <p>{{'message.alert_upload' | translate}}
-                        </p>
-                    </div>
-                </div>
-                <div class="alert-action">
-                    <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close"
-                        style="outline: none;">
-                        <span class="icon-close"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- ==========End======= -->
+
 
         <!--============= Auction Participation card =============-->
         <app-auction-participation *ngIf="response && role.bidder && this.status.published" [response]="response"
@@ -149,7 +128,7 @@
         <div class="d-flex mt-4" style="justify-content: space-around;">
 
             <!--============== Auction Settings card ==============-->
-            <div class="card" style="max-height: 775px; width: 26%;">
+            <div class="card" style="max-height: 775px; width: 26%; height: fit-content;">
                 <!-- Top section  -->
                 <div>
                     <p class="text-20 text-primary m-3 mt-5 font-weight-bold">
@@ -228,10 +207,11 @@
                         <!-- End -->
 
                         <!--============== Card 5 ==============-->
-                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && status.awarded"
+                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && (status.awarded || status.terminated)"
                             class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118.8px;height: 118.8px;">
-                            <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
-                                id="checkbox5" name="sampleCheckbox">
+                            <input (click)="auctionSettings('offerreport')"
+                                [disabled]="!(status.awarded || status.terminated)" type="radio" id="checkbox5"
+                                name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
                                 <span style="font-size: 14px;">
                                     <span><img *ngIf="!editmode3" src="/assets/icons/offer-report.svg" alt="">
@@ -244,7 +224,7 @@
 
                         <!-- disabled offer report -->
 
-                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && !status.awarded"
+                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && !(status.awarded || status.terminated)"
                             class="etimad-option etimad-option-xs mt-2 rounded"
                             style="width: 118.8px;height: 118.8px; background-color: #F5F5F5 !important;">
                             <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
@@ -286,8 +266,54 @@
             <!-- End -->
 
             <!-- Auction Details start -->
+
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div [hidden]="editmode2 || editmode3" style="width: 72%; float: right;">
+                <!-- =================This is to show error message if there is wrong extension file is selected ================= -->
+                <div *ngIf="showFileError" #errorMessageFocus
+                    class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert-wrapper">
+                        <div class="alert-body">
+                            <i class="alert-icon">
+                                <span class="icon-filled-wrong"></span>
+                            </i>
+                            <div class="alert-content">
+                                <p>{{'message.alert_upload' | translate}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="alert-action">
+                            <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close"
+                                style="outline: none;">
+                                <span class="icon-close"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ==========End======= -->
+
+                <!-- =================This is to show error message if there is no file is selected ================= -->
+                <div *ngIf="showNoFile" #errorMessageFocus
+                    class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert-wrapper">
+                        <div class="alert-body">
+                            <i class="alert-icon">
+                                <span class="icon-filled-wrong"></span>
+                            </i>
+                            <div class="alert-content">
+                                <p>{{'message.alert_nofile' | translate}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="alert-action">
+                            <button (click)="showNoFile=false" type="button" class="close pt-0" aria-label="Close"
+                                style="outline: none;">
+                                <span class="icon-close"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ==========End======= -->
                 <!-- =================This is to show error message if bidder is not participated ================= -->
                 <div *ngIf="role.bidder && response.ZzBidderSts == '' && !(status.published || status.terminated || status.awarded)"
                     class="alert alert-outline alert-info alert-dismissible fade show" role="alert">
@@ -357,7 +383,8 @@
                                 [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
                                 [bidValue]="response.ZzPbEstPrice" [commission]="response.ZzCommPercent"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
-                                (showError)="showError($event)" (diableNow)="diableParticipation($event)">
+                                (showError)="showError($event)" (noFile)="noFile($event)"
+                                (diableNow)="diableParticipation($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
                         </div>
@@ -651,7 +678,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.EndOfBidding' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="row text-success">
+                                                                <div class="row text-success" style="width: 122%;">
                                                                     <span class="col-md-6"
                                                                         style="max-width: 50% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
 
@@ -673,7 +700,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.BidOpeningDate' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="row text-success">
+                                                                <div class="row text-success" style="width: 122%;">
                                                                     <span class="col-md-6"
                                                                         style="max-width: 50% !important;">
                                                                         {{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;

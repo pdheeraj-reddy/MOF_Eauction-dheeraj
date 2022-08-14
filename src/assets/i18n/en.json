@@ -21,6 +21,7 @@
     "Cancelled": "Cancelled",
     "Awarded": "Awarded",
     "Not Awarded": "Not Awarded",
+    "No Offer Submitted": "No Offer Submitted",
     "Public": "Public",
     "Private": "Private",
     "Select": "Select",
@@ -319,7 +320,8 @@
         "alert_validAmount": "The bid must be greater than the starting price of the auction",
         "alert_validCount": "Please upload single file",
         "alert_upload": "The uploaded format is not supported, please upload a file that supports the following formats: PNG, JPG, DOCX, DOC, PDF",
-        "alert_bider_participate": "The time to register for the auction has expired, we regret that you are unable to participate and submit any bids."
+        "alert_bider_participate": "The time to register for the auction has expired, we regret that you are unable to participate and submit any bids.",
+        "alert_nofile": "The Primary warranty is required."
     },
     "OK": "OK",
     "ServiceUnavailable": "Service Unavailable",
@@ -453,7 +455,7 @@
                 "title1": "Confirm of Accept Request?",
                 "sec1-head1": "Upon confirmation, the auction will be sent for assigning pricing committee.",
                 "Reference": "Back",
-                "Postconfirmation": "Confirm Participate"
+                "Postconfirmation": "Confirm"
             },
             "auction-details-success": {
                 "title1": "The request has been successfully accepted",
@@ -784,7 +786,7 @@
         "TotalOfferPrice": "Total offer price",
         "SendOffer": "Submit",
         "SentOffer": "Offer Submitted",
-        "NoOfferMade": "No offer has been made",
+        "NoOfferMade": "No offers submitted",
         "NoFileUpload": "Upload a file",
         "ConfirmationBidSubmission": "Confirm Submitting the Offer?",
         "BidSubmissionDescription": "When you Confirm, your offer will be sent to the auction committee. You will not be able to modify or cancel the offer after it has been sent.",
@@ -1230,7 +1232,7 @@
     },
     "my_auction": {
         "offer_submitted": "Offer Submitted",
-        "no_ofer_made": "No Offer Made",
+        "no_ofer_made": "No Offer Submitted",
         "not_awarded": "Not Awarded",
         "awarded": "Awarded"
     }

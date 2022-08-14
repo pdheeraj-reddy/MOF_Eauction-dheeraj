@@ -132,8 +132,8 @@
 }
 
 .disabled {
-    background-color: #f5f5f5;
-    color: #cccccc;
+    color: #ffff !important;
+    background-color: #818181 !important;
 }
 
 .details-grp {
@@ -346,5 +346,6 @@
     top: 85px;
     color: #32ad71;
 }
+
 
 //<--=========== End ===========-->

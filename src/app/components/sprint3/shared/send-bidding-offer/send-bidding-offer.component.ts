@@ -12,6 +12,7 @@ export class SendBiddingOfferComponent implements OnInit {
 
   @Output() showError = new EventEmitter<boolean>();
   @Output() diableNow = new EventEmitter<boolean>();
+  @Output() noFile = new EventEmitter<boolean>();
   @Input() totalBookValue: number;
   @Input() auctionId: any;
   @Input() disable: any;
@@ -258,7 +259,8 @@ export class SendBiddingOfferComponent implements OnInit {
       if (this.checkFile()) {
         this.showFileError = true;
         this.showConfirmation = true;
-        this.showError.emit(!this.showFileError);
+        // this.showError.emit(!this.showFileError);
+        this.noFile.emit(!this.showFileError);
 
         this.fileToUpload = {
           "FileName": this.files[0].name.split('.')[0],
@@ -277,7 +279,8 @@ export class SendBiddingOfferComponent implements OnInit {
       } else {
         this.showFileError = false;
         this.showConfirmation = false;
-        this.showError.emit(!this.showFileError);
+        // this.showError.emit(!this.showFileError);
+        this.noFile.emit(!this.showFileError);
       }
     }
     console.log(this.showFileError);

@@ -114,6 +114,7 @@ export class AuctionDetailsComponent implements OnInit {
 
   userRole: any;
   showFileError: boolean = false;
+  showNoFile: boolean = false;
   pageRangeForAttach: any;
 
   slidesStore: any = [];
@@ -439,8 +440,8 @@ export class AuctionDetailsComponent implements OnInit {
         end_biddingdate: auctionDetailList.ZzAucEndDt ? auctionDetailList.ZzAucEndDt !== 0 ? moment(auctionDetailList.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
         end_biddingtime: auctionDetailList.ZzAucEndDt ? auctionDetailList.ZzAucEndDt !== 0 ? moment(auctionDetailList.ZzAucEndDt.split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
         end_biddingtimeSufix: auctionDetailList.ZzAucEndDt ? auctionDetailList.ZzAucEndDt !== 0 ? moment(auctionDetailList.ZzAucEndDt.split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
-        open_biddingdate: auctionDetailList.ZzAucSrtDt ? auctionDetailList.ZzAucSrtDt !== 0 ? moment(auctionDetailList.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
-        open_biddingtime: auctionDetailList.ZzAucSrtDt ? auctionDetailList.ZzAucSrtDt !== 0 ? moment(auctionDetailList.ZzAucSrtDt.split(" ")[1], 'HH:mm:ss').format('hh:mm') : '' : '',
+        open_biddingdate: auctionDetailList.ZzAnncSrtD ? auctionDetailList.ZzAnncSrtD !== 0 ? moment(auctionDetailList.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '',
+        open_biddingtime: auctionDetailList.ZzAnncSrtT ? auctionDetailList.ZzAnncSrtT !== 0 ? moment(auctionDetailList.ZzAnncSrtT, 'HH:mm:ss').format('hh:mm') : '' : '',
         open_biddingtimeSufix: auctionDetailList.ZzAucSrtDt ? auctionDetailList.ZzAucSrtDt !== 0 ? moment(auctionDetailList.ZzAucSrtDt.split(" ")[1], 'HH:mm:ss').format('A') : '' : '',
       },
       auction_detail: {
@@ -710,7 +711,18 @@ export class AuctionDetailsComponent implements OnInit {
         behavior: 'smooth'
       });
     }
+    this.errorFocus.nativeElement.focus();
+  }
 
+  noFile(showNow: boolean) {
+    this.showNoFile = showNow;
+    if (this.showNoFile) {
+      window.scrollTo({
+        top: 100,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
     this.errorFocus.nativeElement.focus();
   }
 

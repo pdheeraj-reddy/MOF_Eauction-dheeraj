@@ -70,9 +70,9 @@ export class OfferReportComponent implements OnInit {
   public mapping(serverObj: any) {
     if (serverObj.d.results?.length) {
       let results = serverObj.d.results;
-      console.log('results: ', results?.length);
+      console.log('results: ', results);
       let resultSet: any = [];
-      if (results?.length) {
+      if (results?.length && results[0].BidderId) {
         results.forEach((result: any) => {
           // if (result.serialNo) {
           let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
@@ -98,6 +98,7 @@ export class OfferReportComponent implements OnInit {
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
+      console.log("🚀🚀 ~~ this.openofferListData", this.openofferListData);
       this.copyOpenofferListData = resultSet;
       this.navigateToPage(1);
       this.openofferListData.forEach((res: any) => {

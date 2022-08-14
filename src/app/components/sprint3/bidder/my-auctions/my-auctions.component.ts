@@ -41,7 +41,7 @@ export class MyAuctionsComponent implements OnInit {
     { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
     { code: "Pending FBGA", disp: "Pending FBGA" },
     // { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
-    { code: "Award", disp: "Awarded" },
+    { code: "Awarded", disp: "Awarded" },
     { code: "Terminated", disp: "Terminated" },
   ];
   dropValDisplayCase: any = [
@@ -86,6 +86,7 @@ export class MyAuctionsComponent implements OnInit {
     });
     this.filterForm();
     this.getMyAuctionList(1);
+
   }
 
   getMyAuctionList(pageNumber?: number, sortBy?: string, sorttype?: string) {
@@ -141,6 +142,13 @@ export class MyAuctionsComponent implements OnInit {
       this.isFilterSearch = false;
       if (res) {
         this.myAuctionListData = this.mapping(res.body);
+        this.myAuctionListData.forEach((item: any) => {
+          if (item.bidderStatus == 'Award') {
+            item.bidderStatus = 'Awarded';
+          } else if (item.bidderStatus == 'No Offer') {
+            item.bidderStatus = 'No Offer Submitted';
+          }
+        })
         this.PaginationServc.setPagerValues(+res.body.d.results[0]?.TotEle, 10, +pageNoVal);
       }
     }, (error) => {

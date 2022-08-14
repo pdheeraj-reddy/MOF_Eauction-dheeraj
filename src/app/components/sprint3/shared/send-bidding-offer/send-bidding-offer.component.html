@@ -85,7 +85,7 @@
 
 
     <div class="" style="border-left: 1px solid #32AD71; border-right: 1px solid #32AD71; width: 70%;">
-      <input type="text" digitOnly class="amt-input"
+      <input type="text" digitOnly class="amt-input" (keyup)="calc()"
         style="height: 100%; width: 100%; border:none; text-align: center; color: #32AD71; font-size: 25px;"
         placeholder="Amount" aria-label="Amount" [(ngModel)]="totalBookValue" (blur)="resetAmount()" appComma
         aria-describedby="basic-addon2" />

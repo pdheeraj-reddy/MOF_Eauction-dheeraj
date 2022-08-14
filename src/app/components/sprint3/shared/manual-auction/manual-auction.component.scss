@@ -1,17 +1,20 @@
 // <--=========== Newly added SCSS - Required ===========-->
-.custom-bg-info{
+.custom-bg-info {
     background-color: #E7F1F8;
 }
-.vr-line{
+
+.vr-line {
     width: 1px;
-    background-color:#3A8EC4;
+    background-color: #3A8EC4;
 }
-.icon-dot{
+
+.icon-dot {
     background-color: #32AD71;
     border-radius: 50%;
     width: 4px;
     height: 4px;
 }
+
 .status-success-icon {
     display: flex;
     align-items: center;
@@ -31,4 +34,10 @@
     top: 85px;
     color: #32ad71;
 }
+
+.btn:disabled {
+    color: #ffff !important;
+    background-color: #818181 !important;
+}
+
 //<--=========== End ===========-->
