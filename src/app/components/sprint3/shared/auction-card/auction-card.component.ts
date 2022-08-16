@@ -56,7 +56,7 @@ export class AuctionCardComponent implements OnInit {
       this.showLoader = true;
       this.downloadImages(this.auction.imgsrc);
     } else {
-      this.auctionImg = 'assets/icons/logo-mini.svg'
+      // this.auctionImg = 'assets/icons/logo-mini.svg'
     }
     if (this.auction.auctiontime) {
       var timeString = moment(this.auction.auctiontime).format('HH:mm:ss');

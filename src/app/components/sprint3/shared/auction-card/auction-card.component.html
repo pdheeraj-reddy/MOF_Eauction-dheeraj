@@ -46,17 +46,20 @@
             </div>
         </div>
     </div>
-    <div>
-        <div
-            [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Terminated' ? 'status-code-can' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
-            {{auctionStatus | translate}}
-        </div>
-
-        <div class="card-img-top">
-            <img *ngIf="!showLoader" src="{{auctionImg}}"
-                onerror="this.onerror=null;this.src='assets/icons/logo-mini.svg';" alt="...">
-        </div>
+    <!-- <div> -->
+    <div class="status-code"
+        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Terminated' ? 'status-code-can' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
+        {{auctionStatus | translate}}
     </div>
+
+    <div *ngIf="auctionImg && !showLoader">
+        <img class="card-img-top" src="{{auctionImg}}" (error)="auctionImg='';" alt="...">
+
+    </div>
+    <div *ngIf="!auctionImg && !showLoader" class="card-img-top">
+        <img [src]="'assets/icons/logo-mini.svg'" alt="...">
+    </div>
+    <!-- </div> -->
 
     <div class="card-body" style="padding: 20px !important;">
         <h5 class="card-title">{{auction.title}}</h5>
