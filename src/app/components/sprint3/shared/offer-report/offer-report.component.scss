@@ -12,3 +12,9 @@
 .clickable:not(:disabled) {
     color: #32AD71;
 }
+
+.table-header-cell {
+    span {
+        font-size: 14px;
+    }
+}

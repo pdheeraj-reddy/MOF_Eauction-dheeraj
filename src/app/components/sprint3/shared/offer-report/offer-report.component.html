@@ -95,7 +95,7 @@
                         </div>
                     </th>
                     <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(3, 'string')">
-                        <div class="table-header-cell">
+                        <div class="table-header-cell" style="min-width: 117px;">
                             <span>{{ "auctionCommittee.ac-openOffers.th4" | translate }}</span>
                             <span class="sort"><span class="sort-none"
                                     [ngClass]="{ 'sort-none': isSorting(3), 'sort-asc': isSortAsc(3), 'sort-desc': isSorDesc(3) }"></span></span>
@@ -109,7 +109,7 @@
                         </div>
                     </th>
                     <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(5, 'numeric')">
-                        <div style="width: 105px;" class="table-header-cell">
+                        <div class="table-header-cell">
                             <span>{{ "auctionCommittee.ac-openOffers.th6" | translate }}</span>
                             <span class="sort"><span class="sort-none"
                                     [ngClass]="{ 'sort-none': isSorting(5), 'sort-asc': isSortAsc(5), 'sort-desc': isSorDesc(5) }"></span></span>
