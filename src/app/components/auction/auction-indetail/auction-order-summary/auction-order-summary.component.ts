@@ -284,18 +284,18 @@ export class AuctionOrderSummaryComponent implements OnInit {
         'YYYY-MM-DD'
       )
       : '';
-    this.auctionItem.bidOpeningTime = serverObj.d.results[0].ZzAucEndDt
-      ? serverObj.d.results[0].ZzAucEndDt !== 0
+    this.auctionItem.bidOpeningTime = serverObj.d.results[0].ZzAnncSrtT
+      ? serverObj.d.results[0].ZzAnncSrtT !== 0
         ? moment(
-          serverObj.d.results[0].ZzAucEndDt.split(' ')[1],
+          serverObj.d.results[0].ZzAnncSrtT,
           'HH:mm:ss'
         ).format('hh:mm')
         : ''
       : '';
-    this.auctionItem.bidOpeningTimeSufix = serverObj.d.results[0].ZzAucEndDt
-      ? serverObj.d.results[0].ZzAucEndDt !== 0
+    this.auctionItem.bidOpeningTimeSufix = serverObj.d.results[0].ZzAnncSrtT
+      ? serverObj.d.results[0].ZzAnncSrtT !== 0
         ? moment(
-          serverObj.d.results[0].ZzAucEndDt.split(' ')[1],
+          serverObj.d.results[0].ZzAnncSrtT,
           'HH:mm:ss'
         ).format('A')
         : ''
