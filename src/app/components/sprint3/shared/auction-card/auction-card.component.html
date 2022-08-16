@@ -1,9 +1,4 @@
-<div class="card mb-4">
-
-    <div
-        [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Terminated' ? 'status-code-can' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
-        {{auctionStatus | translate}}
-    </div>
+<div class="card mb-4" [ngClass]="'currentLang' | translate">
 
     <div *ngIf="showLoader" class="card-img-top pt-4">
         <div class="form-row">
@@ -51,14 +46,20 @@
             </div>
         </div>
     </div>
+    <div>
+        <div
+            [ngClass]="[auctionStatus === 'Published' || auctionStatus == 'Pending Paying' || auctionStatus == 'Pending Selecting' || auctionStatus == 'Pending FBGA' ? 'status-code-pb' : auctionStatus == 'Ongoing' ? 'status-code-rn' : auctionStatus == 'Upcoming' ? 'status-code-up' : auctionStatus == 'Terminated' ? 'status-code-can' : auctionStatus == 'Awarded' ? 'status-code-ad' : auctionStatus == 'Pending FBGA Approval' || auctionStatus == 'Pending Primary Awarding'? 'status-code-un' : '']">
+            {{auctionStatus | translate}}
+        </div>
 
-    <div class="card-img-top">
-        <img *ngIf="!showLoader" src="{{auctionImg}}" onerror="this.onerror=null;this.src='assets/icons/logo-mini.svg';"
-            alt="...">
+        <div class="card-img-top">
+            <img *ngIf="!showLoader" src="{{auctionImg}}"
+                onerror="this.onerror=null;this.src='assets/icons/logo-mini.svg';" alt="...">
+        </div>
     </div>
 
     <div class="card-body" style="padding: 20px !important;">
-        <h5 class="card-title mt-4">{{auction.title}}</h5>
+        <h5 class="card-title">{{auction.title}}</h5>
         <p class="card-text" data-toggle="tooltip" data-placement="top" title="{{auction.description}}">
             {{auction.description}} </p>
         <div class="text-body text-18 mt-4">

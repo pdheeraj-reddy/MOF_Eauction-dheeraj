@@ -174,13 +174,15 @@
                         <!-- End -->
 
                         <!--============== Card 3 ==============-->
-                        <div *ngIf="role.auctionMod" class="etimad-option etimad-option-xs mt-2 rounded"
+                        <div *ngIf="role.auctionMod" (click)="auctionSettings('pricingCommittee')"
+                            class="etimad-option etimad-option-xs mt-2 rounded"
                             style="width: 118.8px;height: 118.8px; background-color: #F5F5F5 !important;">
-                            <input type="radio" id="checkbox3" name="sampleCheckbox" disabled>
-                            <label class="d-flex" for="checkbox3">
-                                <span style="font-size: 14px;  color: #CCCCCC;">
+                            <input type="radio" id="checkbox3" name="sampleCheckbox">
+                            <label class="input-target d-flex" for="checkbox3">
+                                <span style="font-size: 14px;">
                                     <span>
-                                        <img src="/assets/icons/Users-shapes.svg" alt="">
+                                        <img *ngIf="!isPricingCommittee" src="/assets/icons/committee.svg" alt="">
+                                        <img *ngIf="isPricingCommittee" src="/assets/icons/committee-active.svg" alt="">
                                     </span><br><br>
                                     {{'auctionCommittee.ac-detail.tab4' | translate}}
                                 </span>
@@ -191,13 +193,15 @@
 
                         <!--============== Card 4 ==============-->
                         <div *ngIf="role.auctionCommitteeHead || role.auctionMod"
+                            (click)="auctionSettings('auctionCommittee')"
                             class="etimad-option etimad-option-xs mt-2 rounded"
                             style="width: 118px;height: 118px; background-color: #F5F5F5 !important;">
-                            <input type="radio" id="checkbox4" name="sampleCheckbox" disabled>
-                            <label class="d-flex" for="checkbox4">
-                                <span style="font-size: 14px;  color: #CCCCCC;">
+                            <input type="radio" id="checkbox4" name="sampleCheckbox">
+                            <label class="input-target d-flex" for="checkbox4">
+                                <span style="font-size: 14px; ">
                                     <span>
-                                        <img src="/assets/icons/Users-shapes.svg" alt="">
+                                        <img *ngIf="isAuctionCommittee" src="/assets/icons/committee-active.svg" alt="">
+                                        <img *ngIf="!isAuctionCommittee" src="/assets/icons/committee.svg" alt="">
                                     </span><br><br>
                                     {{'auctionCommittee.ac-detail.tab3' | translate}}
                                 </span>
@@ -268,7 +272,7 @@
             <!-- Auction Details start -->
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div [hidden]="editmode2 || editmode3" style="width: 72%; float: right;">
+            <div [hidden]="!editmode1" style="width: 72%; float: right;">
                 <!-- =================This is to show error message if there is wrong extension file is selected ================= -->
                 <div *ngIf="showFileError" #errorMessageFocus
                     class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
@@ -1231,7 +1235,7 @@
 
             </div>
 
-            <div [hidden]="editmode1 || editmode3" class="card" style="width: 73%;">
+            <div [hidden]="!editmode2" class="card" style="width: 73%;">
 
                 <div class="mt-5 mr-5 ml-5">
                     <p class="text-18 text-primary font-weight-bold">
@@ -1330,8 +1334,16 @@
             <!-- Auction instruction ends here -->
 
             <!--================= Offer Reports =================-->
-            <div [hidden]="editmode1 || editmode2" class="card" style="width: 73%;">
+            <div [hidden]="!editmode3" class="card" style="width: 73%;">
                 <app-offer-report [auctionId]="auctionId" [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
+            </div>
+
+            <div [hidden]="!isPricingCommittee" class="card" style="width: 73%;">
+                <app-pricing-committee-member [committeeMember]="committeeMember"></app-pricing-committee-member>
+            </div>
+
+            <div [hidden]="!isAuctionCommittee" class="card" style="width: 73%;">
+                <app-auction-committee-member [committeeMember]="committeeMember"></app-auction-committee-member>
             </div>
             <!-- End -->
         </div>

@@ -32,7 +32,8 @@ export class AuctionDetailsComponent implements OnInit {
   editmode1: boolean = true;
   editmode2: boolean = false;
   editmode3: boolean = false;
-
+  isPricingCommittee: boolean = false;
+  isAuctionCommittee: boolean = false;
   offerReport: OfferReport = new OfferReport();
 
   filterFormGroup: FormGroup;
@@ -138,6 +139,7 @@ export class AuctionDetailsComponent implements OnInit {
     navText: ["<div class='nav-button owl-prev'>‹</div>", "<div class='nav-button owl-next'>›</div>"],
   };
   selectedProduct: any;
+  committeeMember: any;
   finalAwardingData: { bidValue: any; bidderName: any; bidderNo: any; pdfData: any; auctionId: any; };
   @ViewChild('imageSlide', { read: ElementRef }) public imageSlide: ElementRef<any>;
   constructor(
@@ -485,6 +487,7 @@ export class AuctionDetailsComponent implements OnInit {
         auctionAttachement: [],
       }
     }
+    this.committeeMember = this.statusData.listtocomiteememnav?.results
     this.primaryAwardingData = {
       bidValue: auctionDetailList.BidOfferValue,
       bidderName: auctionDetailList.BidSupplierName,
@@ -600,21 +603,35 @@ export class AuctionDetailsComponent implements OnInit {
     // });
   }
   auctionSettings(type: any) {
-    if (type == "auctionDetail") {
-      this.editmode1 = true;
-      this.editmode2 = false;
-      this.editmode3 = false;
-    } else if (type == "auctionInstruction") {
-      this.editmode1 = false;
-      this.editmode2 = true;
-      this.editmode3 = false;
-    }
-    else if (type == "offerreport") {
-      this.editmode1 = false;
-      this.editmode2 = false;
-      this.editmode3 = true;
+    this.resetTab();
+    switch (type) {
+      case "auctionDetail":
+        this.editmode1 = true;
+        break;
+      case "auctionInstruction":
+        this.editmode2 = true;
+        break;
+      case "offerreport":
+        this.editmode3 = true;
+        break;
+      case "pricingCommittee":
+        this.isPricingCommittee = true;
+        break;
+      case "auctionCommittee":
+        this.isAuctionCommittee = true;
+        break;
+      default:
+        break;
     }
 
+  }
+
+  resetTab() {
+    this.editmode1 = false;
+    this.editmode2 = false;
+    this.editmode3 = false;
+    this.isPricingCommittee = false;
+    this.isAuctionCommittee = false;
   }
 
   /** Populating the table */
