@@ -40,7 +40,7 @@ export class MyAuctionsComponent implements OnInit {
     { code: "Pending Selecting", disp: "Pending Selecting" },
     { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
     { code: "Pending FBGA", disp: "Pending FBGA" },
-    // { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
+    { code: "Pending FBGA Approval", disp: "Pending FBGA Approval" },
     { code: "Awarded", disp: "Awarded" },
     { code: "Terminated", disp: "Terminated" },
   ];

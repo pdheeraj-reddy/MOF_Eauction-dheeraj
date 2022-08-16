@@ -33,8 +33,8 @@
     </div>
 
     <div class="d-flex align-items-center">
-      <button [routerLink]="['../../auction-committee-head/open-offers', auctionId]"
-        class="btn btn-primary-light btn-md d-flex" style="min-width: 220px;">{{ 'open_offer.card.accept_btn' |
+      <button [disabled]="btnDisable" [routerLink]="['../../auction-committee-head/open-offers', auctionId]"
+        class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">{{ 'open_offer.card.accept_btn' |
         translate }}</button>
     </div>
   </div>

@@ -120,9 +120,10 @@ export class AmAuctionComponent implements OnInit {
       if (res.body.d.results && res.body.d.results.length > 0) {
         this.PaginationServc.setPagerValues(
           +res.body.d.results[0].TotEle,
-          10,
+          6,
           +pageNoVal
         );
+
       }
 
     }, (error) => {

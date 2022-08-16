@@ -1178,8 +1178,8 @@
     },
     "sprint3_auction_detail": {
         "your_bid_has_been_awarded": "Your Offer is about to be awarded!",
-        "please_attach_the_final_guarantee": "Please attach & send the FBGA to continue the awarding process.",
-        "please_issue_and_attach": "Please issue and attach the FBGA within 15 days of intital awarding.",
+        "please_attach_the_final_guarantee": "Please send the FBGA to continue the awarding process.",
+        "please_issue_and_attach": "Please send the FBGA within 15 days of initial awarding.",
         "issuance_of_the_final_guarantee": "You can issue the BGA through the bank guarantee service of the Etimad.",
         "send_the_final_guarantee": "Send FBGA",
         "auction_report_and_bid_submitted": "Auction report and bid submitted BidOffer PDF",
@@ -1201,12 +1201,14 @@
         "primary_warranty": "Primary Warranty",
         "report": "Auction report and bids submitted",
         "reject_btn": "Rejection",
+        "reject_btn2": "Reject Primary Award",
         "accept_btn": "Initial Award Approval",
+        "accept_btn2": "Approve Primary Award",
         "popup1": {
-            "head": "Are you sure of the rejection of the award?",
+            "head": "Are you sure reject the award?",
             "subhead": "This offer has been awarded by the auction committee, and if the award is rejected, it will result in the auction being canceled and the awarding will not take place.",
             "back_btn": "Back",
-            "reject_btn": "Confirmation of rejection of the award and cancellation of the auction"
+            "reject_btn": "Confirm reject and terminate the Auction"
         },
         "popup2": {
             "head": "The award has been rejected and the auction has been successfully cancelled",

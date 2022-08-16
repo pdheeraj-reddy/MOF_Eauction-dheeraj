@@ -94,8 +94,8 @@ export class SendBiddingOfferComponent implements OnInit {
 
   calc() {
     this.persuitRate = Math.round(Number(this.commission) * this.totalBookValue) / 100;
-    this.addedTaxValue = Math.round(8 * this.totalBookValue) / 100;
-    this.totalOfferPrice += this.persuitRate + this.addedTaxValue + Number(this.totalBookValue);
+    this.addedTaxValue = Math.round(15 * this.totalBookValue) / 100;
+    this.totalOfferPrice = this.persuitRate + this.addedTaxValue + Number(this.totalBookValue);
   }
   selectFiles(e: any, dd: string): void {
     this.invalidFileType = true;
