@@ -175,8 +175,7 @@
 
                         <!--============== Card 3 ==============-->
                         <div *ngIf="role.auctionMod" (click)="auctionSettings('pricingCommittee')"
-                            class="etimad-option etimad-option-xs mt-2 rounded"
-                            style="width: 118.8px;height: 118.8px; background-color: #F5F5F5 !important;">
+                            class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118px;height: 118px">
                             <input type="radio" id="checkbox3" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox3">
                                 <span style="font-size: 14px;">
@@ -194,8 +193,7 @@
                         <!--============== Card 4 ==============-->
                         <div *ngIf="role.auctionCommitteeHead || role.auctionMod"
                             (click)="auctionSettings('auctionCommittee')"
-                            class="etimad-option etimad-option-xs mt-2 rounded"
-                            style="width: 118px;height: 118px; background-color: #F5F5F5 !important;">
+                            class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox4" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox4">
                                 <span style="font-size: 14px; ">
@@ -211,11 +209,11 @@
                         <!-- End -->
 
                         <!--============== Card 5 ==============-->
-                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && (status.awarded || status.terminated)"
-                            class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118.8px;height: 118.8px;">
+                        <div *ngIf="(role.auctionCommitteeHead && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && (status.awarded || status.terminated))"
+                            class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118px;height: 118px;">
                             <input (click)="auctionSettings('offerreport')"
-                                [disabled]="!(status.awarded || status.terminated)" type="radio" id="checkbox5"
-                                name="sampleCheckbox">
+                                [disabled]="!(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)"
+                                type="radio" id="checkbox5" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox5">
                                 <span style="font-size: 14px;">
                                     <span><img *ngIf="!editmode3" src="/assets/icons/offer-report.svg" alt="">
@@ -228,9 +226,9 @@
 
                         <!-- disabled offer report -->
 
-                        <div *ngIf="(role.auctionCommitteeHead || role.auctionMod) && !(status.awarded || status.terminated)"
+                        <div *ngIf="(role.auctionCommitteeHead && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && !(status.awarded || status.terminated))"
                             class="etimad-option etimad-option-xs mt-2 rounded"
-                            style="width: 118.8px;height: 118.8px; background-color: #F5F5F5 !important;">
+                            style="width: 118px;height: 118px; background-color: #F5F5F5 !important;">
                             <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
                                 id="checkbox5" name="sampleCheckbox">
                             <label class="d-flex" for="checkbox5">
@@ -366,8 +364,8 @@
                     <div class="mt-4" style="display: flex;">
 
                         <!--================ Latest offer send card ================-->
-                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published"
-                            style="width: 42%;" [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
+                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" style="width: 42%;"
+                            [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
                             <app-latest-offers-sent [aucId]="auctionId" pageno="1">
                             </app-latest-offers-sent>
                         </div>
@@ -615,8 +613,7 @@
                                         src="/assets/icons/auction-primary.svg" alt=""></span>&nbsp;&nbsp;
                                 {{'bidderAuctionDetails.BiddingIs' | translate }} {{auctionBiddingStatus | translate}}
                             </p>
-                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead) && !status.published"
-                                class="et-accordion">
+                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
                                 <div class="card" style="border: none;">
                                     <div class="card-header mt-4"
                                         style="border-bottom: 1px solid #e3e3e3; border-radius: 0; padding: 0px !important; padding-left: 5px !important; padding-right: 5px !important; padding-bottom: 10px !important;"
@@ -737,8 +734,7 @@
                     </div>
 
 
-                    <div *ngIf="!((role.auctionMod || role.auctionCommitteeHead) && !status.published)"
-                        class="et-accordion">
+                    <div *ngIf="!(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
                         <div class="card" style="border: none; margin: 2%;">
                             <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
                                 data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
