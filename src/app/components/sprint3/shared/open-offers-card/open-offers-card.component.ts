@@ -15,12 +15,13 @@ export class OpenOffersCardComponent implements OnInit {
   utc = new Date(this.currentTime + this.offset);
   riyadh = new Date(this.utc.getTime() + (3 * 60 * 60 * 1000));
 
-  startDate = new Date();
+
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.startDate > this.riyadh) {
+    let startDate = new Date(this.importantInfo.auctionAnncStartDate + " " + this.importantInfo.auctionAnncStartTime);
+    if (startDate > this.riyadh) {
       this.btnDisable = true;
     }
     else {
