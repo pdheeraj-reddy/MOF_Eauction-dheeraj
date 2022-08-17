@@ -242,7 +242,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   openAddChairDialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -297,7 +297,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   openAddSecDialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -382,7 +382,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
 
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -439,7 +439,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
 
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -492,7 +492,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   openAddMem3Dialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -543,51 +543,10 @@ export class AssignAuctionCommitteComponent implements OnInit {
     }
   }
 
-  // openAddMem4Dialog(title: any, role: string) {
-  //   this.showPageLoader = true;
-  //   if (this.preAuctionData.Status == 'Pending to Publish')
-  //     this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
-  //       (res: any) => {
-  //         this.showPageLoader = false;
-  //         this.committeeMemberList = res.d.results;
-  //         this.filterMember(this.existingCommitteMemberList);
-  //         console.log(this.committeeMemberList);
-  //         const dialogRef = this.dialog.open(AddMemberComponent, {
-  //           disableClose : true,
-  //           height: 'auto',
-  //           width: 'auto',
-  //           minWidth: '50%',
-  //           position: {
-  //             left: '25%',
-  //           },
-  //           data: {
-  //             title: title,
-  //             role: role,
-  //             committeeMemberList: this.committeeMemberList,
-  //             committeeEditData: this.committeeMem4Data,
-  //           },
-  //           panelClass: 'my-custom-dialog-class',
-  //         });
-  //         dialogRef.afterClosed().subscribe((result) => {
-  //           result.SlNo = '08';
-  //           this.committeeMem4Data = result;
-  //           this.existingCommitteMemberList.push(this.committeeMem4Data.EmployeeId);
-  //           console.log(result?.EmployeeRole);
-  //           if (result?.EmployeeRole == 'ZEAUCTION_SALCOMM_MEMBER')
-  //             this.committeeMem4Selected = true;
-  //         });
-  //       },
-  //       (error) => {
-  //         console.log('approveOrRejectAuction RespError : ', error);
-  //       }
-  //     );
-  // }
-
   openAddMem4Dialog(title: any, role: string) {
-
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -646,7 +605,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
 
     if (this.preAuctionData.Status == 'Pending to Publish' && this.commiteeMemberData != true) {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);

@@ -96,7 +96,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
         if (this.committeeChairSelected) return;
         break;
     }
-    this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+    this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
       (res: any) => {
         console.log('getCommitteeMembersBasedOnRole ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -185,7 +185,7 @@ export class AuctionPricingCommitteComponent implements OnInit {
   }
   setPopUpTitle(title: any, role: string) {
     this.popupTitle = title;
-    this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+    this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
       (res: any) => {
         console.log('getCommitteeMembersBasedOnRole ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');

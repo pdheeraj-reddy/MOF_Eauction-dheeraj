@@ -246,7 +246,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   openAddChairDialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -307,7 +307,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   openAddSecDialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -392,7 +392,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   openAddMem1Dialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -449,7 +449,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   openAddMem2Dialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
@@ -501,7 +501,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   openAddMem3Dialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -560,46 +560,11 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       console.log("notempty");
     }
   }
-  // openAddMem4Dialog(title: any, role: string) {
-  //   if (this.preAuctionData.Status == 'Pending Review')
-  //     this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
-  //       (res: any) => {
-  //         this.committeeMemberList = res.d.results;
-  //         console.log(this.committeeMemberList);
-  //         const dialogRef = this.dialog.open(AddMemberComponent, {
-  //           height: 'auto',
-  //           width: 'auto',
-  //           minWidth: '50%',
-  //           position: {
-  //             left: '25%',
-  //           },
-  //           data: {
-  //             title: title,
-  //             role: role,
-  //             committeeMemberList: this.committeeMemberList,
-  //             committeeEditData : this.committeeMem4Data,
-  //           },
-  //           panelClass: 'my-custom-dialog-class',
-  //         });
-  //         dialogRef.afterClosed().subscribe((result) => {
-  //           if(result){
-  //             result.SlNo = '04';
-  //             this.committeeMem4Data = result;
-  //           }
-  //           console.log(result?.EmployeeRole);
-  //           if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
-  //             this.committeeMem4Selected = true;
-  //         });
-  //       },
-  //       (error) => {
-  //         console.log('approveOrRejectAuction RespError : ', error);
-  //       }
-  //     );
-  // }
+
   openAddMem4Dialog(title: any, role: string) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
@@ -655,7 +620,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   openEditMem4Dialog(title: any, role: string, index: any) {
     if (this.preAuctionData.Status == 'Pending Review') {
       this.showPageLoader = true;
-      this._AuctionService.getCommitteeMembersBasedOnRole(role).subscribe(
+      this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
           console.log('getCommitteeMembersBasedOnRole ', res.body);
