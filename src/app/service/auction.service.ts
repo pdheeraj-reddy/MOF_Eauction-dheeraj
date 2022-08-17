@@ -56,10 +56,26 @@ export class AuctionService {
       isPricingMember: this.hasUserRole("EAuction_PricingCommitteeMember"),
       isPricingSecretary: this.hasUserRole("EAuction_PricingCommitteSecretary"),
       isPricingHead: this.hasUserRole("EAuction_PricingCommitteeChairman"),
-      isBidder: this.hasUserRole("EAuction_Bidder"),
+      isBidder: false,
     }
-    console.log('loggedUserRole In ➼ ', this.loggedUserRole);
+    if (this.hasUserRole("EAuction_Bidder")) {
+      this.SetBidderUserRole();
+    }
     return this.loggedUserRole
+  }
+
+  SetBidderUserRole() {
+    this.loggedUserRole = {
+      isSalesHead: false,
+      isSalesSecretary: false,
+      isInteriorMarketer: false,
+      isAuctionModerator: false,
+      isSalesMember: false,
+      isPricingMember: false,
+      isPricingSecretary: false,
+      isPricingHead: false,
+      isBidder: true,
+    }
   }
 
   getLoggedUserEAucRole() {
