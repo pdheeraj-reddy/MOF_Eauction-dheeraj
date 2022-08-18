@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { OfferReport } from 'src/app/model/auction.model';
+import { MediaService } from 'src/app/service/media.service';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { BidderService } from '../../services/bidder.service';
 import { CommitteeHeadService } from '../../services/committee-head.service';
@@ -47,6 +48,7 @@ export class OfferReportComponent implements OnInit {
     public translate: TranslateService,
     public bidderService: BidderService,
     public committeeHeadService: CommitteeHeadService,
+    private mediaService: MediaService,
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +72,6 @@ export class OfferReportComponent implements OnInit {
   public mapping(serverObj: any) {
     if (serverObj.d.results?.length) {
       let results = serverObj.d.results;
-      console.log('results: ', results);
       let resultSet: any = [];
       if (results?.length && results[0].BidderId) {
         results.forEach((result: any) => {
@@ -98,7 +99,6 @@ export class OfferReportComponent implements OnInit {
       }
       this.showLoader = false;
       this.openofferListData = resultSet;
-      console.log("🚀🚀 ~~ this.openofferListData", this.openofferListData);
       this.copyOpenofferListData = resultSet;
       this.navigateToPage(1);
       this.openofferListData.forEach((res: any) => {
@@ -142,7 +142,6 @@ export class OfferReportComponent implements OnInit {
     let contentType = "application/pdf";
     const linkSource = `data:${contentType};base64,${this.offerReportPdf}`;
     const downloadLink = document.createElement("a");
-    console.log('linkSource: ', linkSource);
     downloadLink.href = linkSource;
     downloadLink.target = '_blank';
     downloadLink.download = fileName;
@@ -153,11 +152,9 @@ export class OfferReportComponent implements OnInit {
   viewAttachment(file: any) {
     if (file.PdfContent) {
       file.downloadingAttachmet = true;
-      this.committeeHeadService.downloadAuctionImages(file.PdfContent).subscribe((downloadAuctionImagesResp: any) => {
-        console.log(downloadAuctionImagesResp);
+      this.mediaService.downloadAuctionImages(file.PdfContent).then((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-        console.log('asdasd', byteString.split(',')[1]);
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
@@ -165,7 +162,6 @@ export class OfferReportComponent implements OnInit {
         }
         const blob = new Blob([ab], { type: 'application/pdf' });
         let fileURL = window.URL.createObjectURL(blob);
-        console.log('fileURL ', fileURL);
         var newWin: any;
         newWin = window.open(fileURL, '_blank');
         // newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
@@ -185,7 +181,6 @@ export class OfferReportComponent implements OnInit {
 
 
   public toggleFilter() {
-    console.log("toggleFilter");
     this.showFilterForm = !this.showFilterForm;
     this.openofferListData = this.copyOpenofferListData;
   }
@@ -211,7 +206,6 @@ export class OfferReportComponent implements OnInit {
     }
     if (this.filterModel.facility_name) {
       this.openofferListData = this.openofferListData.filter((i: any) => {
-        console.log(i.facilityName, this.filterModel.facility_name)
         if (i.facilityName.toLowerCase().indexOf(this.filterModel.facility_name.toLowerCase()) > -1) return true;
         return false;
       })

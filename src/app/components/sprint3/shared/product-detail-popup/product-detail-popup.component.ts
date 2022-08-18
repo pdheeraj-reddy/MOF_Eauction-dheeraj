@@ -8,6 +8,7 @@ import {
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
+import { MediaService } from 'src/app/service/media.service';
 
 export interface DialogData {
   data: any;
@@ -40,6 +41,7 @@ export class ProductDetailPopupComponent implements OnInit {
     private auctionModServ: AucModeratorService,
     private sanitizer: DomSanitizer,
     public PaginationServc: PaginationSortingService,
+    private mediaService: MediaService,
   ) { }
 
   customOptions: OwlOptions = {
@@ -84,7 +86,6 @@ export class ProductDetailPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('lang_pref'))
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
     }
@@ -96,8 +97,6 @@ export class ProductDetailPopupComponent implements OnInit {
     this.viewproduct = this.dialogData.viewproduct;
     this.longitude = this.viewproduct.location.locLongitude.split(',')[0];
     this.lattitude = this.viewproduct.location.locLatitude.split(',')[1];
-    console.log(this.slidesStore, "HAriiahra");
-    console.log('viewproduct ', this.viewproduct);
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;
     } else {
@@ -139,7 +138,6 @@ export class ProductDetailPopupComponent implements OnInit {
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
     const downloadLink = document.createElement("a");
-    console.log('linkSource: ', linkSource);
     downloadLink.href = base64Data;
     downloadLink.target = '_blank';
     downloadLink.download = fileName;
@@ -157,55 +155,44 @@ export class ProductDetailPopupComponent implements OnInit {
     });
 
   downloadImages(index: any) {
-    this.auctionModServ.downloadAuctionImages(index.FilenetId)
-      .subscribe(
-        async (downloadAuctionImagesResp: any) => {
-
-          let filenetId = index.FilenetId;
-          console.log(index.FilenetId, "FILENETID");
-          const fileResp = downloadAuctionImagesResp.d;
-          // console.log(fileResp.FileContent);
-          var byteString = atob(
-            atob(fileResp.FileContent).split(',')[1]
-          );
-          var ab = new ArrayBuffer(byteString.length);
-          var ia = new Uint8Array(ab);
-          for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-          }
-          const blob = new Blob([ab], { type: index.MIMEType });
-          // var a = window.URL.createObjectURL(blob);
-          var base64String = await this.convertBlobToBase64(blob);
-          console.log("base64String in mapping for edit");
-          console.log(base64String)
-
-
-          this.slidesStore.push({
-            id: index + 1,
-            src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
-            alt: 'test',
-            title: 'hello world',
-            type: index.MIMEType
-          });
-
-          if (this.slidesStore.length == 1) {
-            this.fullImage = {
-              src: this.slidesStore[0].src,
-              type: this.slidesStore[0].type,
-              index: 1
-            }
-            this.fetchPicture = true;
-          }
-          if (this.slidesStore.length == this.viewproduct.productImages.length) {
-            this.fetchPicture = false;
-          }
-          this.showLoader = false;
-        },
-        (error) => {
-          // this.showLoader = false;
-          console.log('downloadAuctionImages RespError : ', error);
-        }
+    this.mediaService.downloadAuctionImages(index.FilenetId).then(async (downloadAuctionImagesResp: any) => {
+      const fileResp = downloadAuctionImagesResp.d;
+      var byteString = atob(
+        atob(fileResp.FileContent).split(',')[1]
       );
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: index.MIMEType });
+      var base64String = await this.convertBlobToBase64(blob);
+      this.slidesStore.push({
+        id: index + 1,
+        src: this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string),
+        alt: 'test',
+        title: 'hello world',
+        type: index.MIMEType
+      });
+
+      if (this.slidesStore.length == 1) {
+        this.fullImage = {
+          src: this.slidesStore[0].src,
+          type: this.slidesStore[0].type,
+          index: 1
+        }
+        this.fetchPicture = true;
+      }
+      if (this.slidesStore.length == this.viewproduct.productImages.length) {
+        this.fetchPicture = false;
+      }
+      this.showLoader = false;
+    },
+      (error) => {
+        // this.showLoader = false;
+        console.log('downloadAuctionImages RespError : ', error);
+      }
+    );
   }
 
 
@@ -217,19 +204,15 @@ export class ProductDetailPopupComponent implements OnInit {
       file.downloading = true;
       this.auctionModServ.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
-          console.log(downloadAuctionImagesResp);
           const fileResp = downloadAuctionImagesResp.d;
           var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-          console.log('asdasd', byteString.split(',')[1]);
           var ab = new ArrayBuffer(byteString.length);
           var ia = new Uint8Array(ab);
           for (var i = 0; i < byteString.length; i++) {
             ia[i] = byteString.charCodeAt(i);
           }
           const blob = new Blob([ab], { type: file.MIMEType });
-          console.log(blob);
           let fileURL = window.URL.createObjectURL(blob);
-          console.log('fileURL', fileURL);
           var newWin: any;
           if (option == 'view') {
             newWin = window.open(fileURL, '_blank');
@@ -251,8 +234,6 @@ export class ProductDetailPopupComponent implements OnInit {
       );
     } else {
       const fileType = file.name.split('.').pop()?.toLowerCase();
-      // var reader = new FileReader();
-      // reader.readAsDataURL(file.filesrc['0']);
       var byteString = atob(file.filesrc['0'].split(',')[1]);
       var ab = new ArrayBuffer(byteString.length);
       var ia = new Uint8Array(ab);
@@ -260,8 +241,6 @@ export class ProductDetailPopupComponent implements OnInit {
         ia[i] = byteString.charCodeAt(i);
       }
       const blob = new Blob([ab], { type: file.type });
-
-      console.log('fileURL', blob);
       let fileURL = window.URL.createObjectURL(blob);
       if (
         file.type.indexOf('image') > -1 ||
@@ -270,7 +249,6 @@ export class ProductDetailPopupComponent implements OnInit {
         fileType === 'doc' ||
         fileType === 'pdf'
       ) {
-        console.log('fileURL', fileURL);
         window.open(fileURL, '_blank');
       }
     }

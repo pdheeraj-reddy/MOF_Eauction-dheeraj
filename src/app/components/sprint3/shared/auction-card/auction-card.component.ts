@@ -5,6 +5,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { BidderService } from 'src/app/components/sprint3/services/bidder.service';
 import { AuctionService } from 'src/app/service/auction.service';
+import { MediaService } from 'src/app/service/media.service';
 
 /**
  * auction-card.ts
@@ -39,6 +40,7 @@ export class AuctionCardComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     private auctionSev: AuctionService,
+    private mediaService: MediaService,
   ) { }
 
   async ngOnInit() {
@@ -68,7 +70,6 @@ export class AuctionCardComponent implements OnInit {
     this.auctionStartDateTime = moment(this.auction.auctiontime).format('DD.MM.YYYY HH:mm:ss');
     this.auctionEndDateTime = moment(this.auction.auctionendtime).format('DD.MM.YYYY HH:mm:ss');
     this.auctionTimeSufix = this.auction.auctiontime ? moment(this.auction.auctiontime).format('A') : '';
-    // console.log("🎯TC🎯 ~ file: auction-card.component.ts ~ line 56 ~ this.auction.auctionendtime", this.auction.auctionendtime);
 
   }
 
@@ -83,7 +84,7 @@ export class AuctionCardComponent implements OnInit {
     });
 
   downloadImages(fileId: any) {
-    this.bidderService.downloadAuctionImages(fileId).subscribe(async (downloadAuctionImagesResp: any) => {
+    this.mediaService.downloadAuctionImages(fileId).then(async (downloadAuctionImagesResp: any) => {
       const fileResp = downloadAuctionImagesResp.d;
       var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
       var ab = new ArrayBuffer(byteString.length);
@@ -94,6 +95,10 @@ export class AuctionCardComponent implements OnInit {
       const blob = new Blob([ab], { type: fileResp.MIMEType });
       var base64String = await this.convertBlobToBase64(blob);
       this.auctionImg = await this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(base64String as string));
+      this.auctionSev.auctionImages.push({
+        fileId: fileId,
+        image: this.auctionImg
+      })
       this.showLoader = false;
 
     },
@@ -106,7 +111,6 @@ export class AuctionCardComponent implements OnInit {
   }
 
   redirectToDetail(id: string) {
-    console.log("🚀 ~ redirectToDetailredirectToDetail ~ id", id)
     this.ngZone.run(() => {
       this.router.navigate(['auction-details/' + id])
     })

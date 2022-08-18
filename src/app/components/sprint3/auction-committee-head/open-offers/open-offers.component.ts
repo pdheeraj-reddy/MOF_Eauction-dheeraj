@@ -10,6 +10,7 @@ import { AuctionService } from 'src/app/service/auction.service';
 import { TranslateService } from '@ngx-translate/core';
 import { EnvService } from 'src/app/env.service';
 import { sha1 } from '@angular/compiler/src/i18n/digest';
+import { MediaService } from 'src/app/service/media.service';
 declare var $: any;
 @Component({
   selector: 'app-open-offers',
@@ -58,7 +59,8 @@ export class OpenOffersComponent implements OnInit {
     public translate: TranslateService,
     public datepipe: DatePipe,
     public router: Router,
-    public envService: EnvService
+    public envService: EnvService,
+    private mediaService: MediaService,
   ) { }
 
   public get getHomeUrl() {
@@ -83,7 +85,6 @@ export class OpenOffersComponent implements OnInit {
   public mapping(serverObj: any) {
     if (serverObj.d.results?.length) {
       let results = serverObj.d.results;
-      console.log('results: ', results);
       let resultSet: any = [];
       if (results?.length) {
         results.forEach((result: any) => {
@@ -119,7 +120,6 @@ export class OpenOffersComponent implements OnInit {
       this.openofferListData = resultSet;
       this.copyOpenofferListData = resultSet;
       this.navigateToPage(1);
-      console.log('this.openofferListData: ', this.openofferListData);
     }
   }
 
@@ -138,11 +138,9 @@ export class OpenOffersComponent implements OnInit {
   viewAttachment(file: any) {
     if (file.PdfContent) {
       file.downloadingAttachmet = true;
-      this.committeeHeadService.downloadAuctionImages(file.PdfContent).subscribe((downloadAuctionImagesResp: any) => {
-        console.log(downloadAuctionImagesResp);
+      this.mediaService.downloadAuctionImages(file.PdfContent).then((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-        console.log('asdasd', byteString.split(',')[1]);
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
@@ -150,7 +148,6 @@ export class OpenOffersComponent implements OnInit {
         }
         const blob = new Blob([ab], { type: 'application/pdf' });
         let fileURL = window.URL.createObjectURL(blob);
-        console.log('fileURL ', fileURL);
         var newWin: any;
         newWin = window.open(fileURL, '_blank');
         // newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
@@ -284,7 +281,6 @@ export class OpenOffersComponent implements OnInit {
     }
     if (this.filterModel.facility_name) {
       this.openofferListData = this.openofferListData.filter((i: any) => {
-        console.log(i.facilityName, this.filterModel.facility_name)
         if (i.facilityName.toLowerCase().indexOf(this.filterModel.facility_name.toLowerCase()) > -1) return true;
         return false;
       })

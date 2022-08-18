@@ -143,7 +143,6 @@ export class SendInvoiceComponent implements OnInit {
     this.downloadingInvoice = true;
     this.bidderService.downloadInvoice(this.auctionId).subscribe((result) => {
       const data = result.body.d.results[0];
-      console.log('data: ', data);
       const linkSource = 'data:application/pdf;base64,' + data.PdfContent;
       const downloadLink = document.createElement("a");
       const fileName = data.ObjectId + ".pdf";

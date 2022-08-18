@@ -89,9 +89,6 @@ export class AucModeratorService {
       params: {
       }
     };
-    if (httpOptions) {
-      console.log(httpOptions);
-    }
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(invoiceDetails), httpOptions);
   }
@@ -104,10 +101,6 @@ export class AucModeratorService {
       params: {
       }
     };
-    console.log(httpOptions);
-    console.log(fileId);
-    return this.http.get<any>(
-      this.envService.environment.apiFilenetURL + '/' + fileId
-      , httpOptions);
+    return this.http.get<any>(this.envService.environment.apiFilenetURL + '/' + fileId, httpOptions);
   }
 }

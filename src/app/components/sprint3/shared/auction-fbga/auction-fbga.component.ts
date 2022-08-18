@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { MediaService } from 'src/app/service/media.service';
 import { BidderService } from '../../services/bidder.service';
 
 @Component({
@@ -43,11 +44,10 @@ export class AuctionFbgaComponent implements OnInit {
     FileContent: string; MIMEType: any; FileLength: string; FileExt: any; ObjectType: string; ObjectId: any; InvoiceForm: string;
   };
 
-  constructor(private bidderService: BidderService, private router: Router) { }
+  constructor(private bidderService: BidderService, private router: Router, private mediaService: MediaService,) { }
 
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
-    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.fbgaDoc);
     if (this.bidderStatus == "M") {
       this.disable = false;
       this.disableBtn = false;
@@ -72,6 +72,7 @@ export class AuctionFbgaComponent implements OnInit {
     if (filecount > 1) {
       this.invalidFileType = false;
       this.invalidFileCount = true;
+      // this.showError.emit(true);
       setTimeout(() => {
         this.invalidFileCount = false;
       }, 3000);
@@ -90,8 +91,10 @@ export class AuctionFbgaComponent implements OnInit {
         this.showError.emit(false);
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
+          this.showError.emit(false);
           this.invalidFileType = false;
           if (filesize <= 2097152) {
+            this.showError.emit(false);
             this.FilePushTOArray(file[index], (filesrc: any) => {
               var fileupload = {
                 "name": file[index]['name'],
@@ -103,15 +106,16 @@ export class AuctionFbgaComponent implements OnInit {
                 this.customLoop(++index, limit, file);
               }
               this.files.push(fileupload);
-              console.log("🚀🚀 ~~ this.files", this.files);
-              // this.auctionAttachement.push(new FormControl(fileupload));
             });
           } else {
+            this.showError.emit(true);
             this.invalidFileSize = true;
             setTimeout(() => {
               this.invalidFileSize = false;
             }, 3000);
           }
+        } else {
+          this.showError.emit(true);
         }
       } else {
         this.showError.emit(true);
@@ -137,12 +141,10 @@ export class AuctionFbgaComponent implements OnInit {
 
   sendFbga() {
     if (this.checkFile()) {
-      // this.showError.emit(false);
-      this.noFile.emit(false);
+      this.showError.emit(false);
       this.showConfirmationModal = true;
     } else {
-      // this.showError.emit(true);
-      this.noFile.emit(true);
+      this.showError.emit(true);
     }
 
   }
@@ -159,7 +161,6 @@ export class AuctionFbgaComponent implements OnInit {
       "InvoiceForm": "F",
     };
     this.showLoader = true;
-    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
     this.bidderService.submitFbga(this.auctionId).subscribe((resData) => {
       this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile) => {
         if (resData.d.Msgty == 'S' && resFile.d.Msgty == 'S') {
@@ -169,18 +170,15 @@ export class AuctionFbgaComponent implements OnInit {
           this.showSuccessfulModal = true;
         }
       });
-      console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 92 ~ res", resData.d.Msgty);
 
     });
   }
   openFile(file: any, option: string) {
-    console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 151 ~ file", file);
     if (file.FilenetId) {
       this.showAttachLoader = true;
-      this.bidderService.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
+      this.mediaService.downloadAuctionImages(file.FilenetId).then((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-        console.log('asdasd', byteString.split(',')[1]);
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
@@ -188,7 +186,6 @@ export class AuctionFbgaComponent implements OnInit {
         }
         const blob = new Blob([ab], { type: file.MIMEType });
         let fileURL = window.URL.createObjectURL(blob);
-        console.log('fileURL ', fileURL);
         var newWin: any;
         if (option == 'view') {
           newWin = window.open(fileURL, '_blank');
@@ -217,7 +214,6 @@ export class AuctionFbgaComponent implements OnInit {
       }
       const blob = new Blob([ab], { type: file.type });
 
-      console.log('fileURL', blob);
       let fileURL = window.URL.createObjectURL(blob);
       if ((file.type.indexOf('image') > -1) || (file.type.indexOf('video') > -1) || fileType === 'docx' || fileType === 'doc' || fileType === 'pdf') {
         window.open(fileURL, '_blank');
@@ -244,7 +240,6 @@ export class AuctionFbgaComponent implements OnInit {
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
     const downloadLink = document.createElement("a");
-    console.log('linkSource: ', linkSource);
     downloadLink.href = base64Data;
     downloadLink.target = '_blank';
     downloadLink.download = fileName;

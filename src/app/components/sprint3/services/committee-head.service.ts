@@ -32,9 +32,6 @@ export class CommitteeHeadService {
         'X-CSRF-TOKEN': this.XCSRFToken || localStorage.getItem("x-csrf-token"),
       },
     };
-    if (httpOptions) {
-      console.log(httpOptions);
-    }
     return this.http.post<any>(this.envService.environment.apiOpenOfferStatus
       , JSON.stringify(data), httpOptions);
   }

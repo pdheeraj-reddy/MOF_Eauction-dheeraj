@@ -12,7 +12,7 @@ export class EnvService {
 
     constructor(private http: HttpClient) {
     }
-    
+
     public get environment() {
         if (!this.config) {
             console.log('get environment', this.config);

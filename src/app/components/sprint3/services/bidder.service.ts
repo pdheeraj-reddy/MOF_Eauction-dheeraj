@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { EnvService } from 'src/app/env.service';
-import { AuctionService } from 'src/app/service/auction.service';
 
 
 @Injectable({
@@ -13,8 +13,6 @@ export class BidderService {
   constructor(
     private http: HttpClient,
     private envService: EnvService,
-    public auctionServc: AuctionService,
-    private auctionService: AuctionService
   ) { }
 
   getAuctionList(page: any, filters: any): Observable<any> {
@@ -63,6 +61,7 @@ export class BidderService {
   }
 
   downloadAuctionImages(fileId: any): Observable<any> {
+
     const httpOptions = {
       headers: {
         'X-CSRF-TOKEN': this.XCSRFToken as string
@@ -70,9 +69,7 @@ export class BidderService {
       params: {
       }
     };
-    return this.http.get<any>(
-      this.envService.environment.apiFilenetURL + '/' + fileId
-      , httpOptions);
+    return this.http.get<any>(this.envService.environment.apiFilenetURL + '/' + fileId, httpOptions)
   }
 
   makeParticipateIn(auctionId?: any): Observable<any> {
@@ -93,7 +90,7 @@ export class BidderService {
     return this.http.post<any>(this.envService.environment.apiBidderParticipationAuctions
       , JSON.stringify(participationDetails), httpOptions);
   }
-  manualAuctionStart(auctionId:any){
+  manualAuctionStart(auctionId: any) {
     let participationDetails = {
       "AucId": auctionId,
       "ZzUserAction": "O"

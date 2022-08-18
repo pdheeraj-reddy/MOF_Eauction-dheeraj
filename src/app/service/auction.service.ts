@@ -19,6 +19,7 @@ export class AuctionService {
   loggedUserRole: any;
   XCSRFToken: any;
   unsaved: boolean = false;
+  auctionImages: any[] = [];
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
@@ -87,7 +88,6 @@ export class AuctionService {
         role = currentUserRole.roles.find((r: any) => r.includes("EAuction"));
       }
     }
-    console.log('getLoggedUserEAucRole ', role);
     return role;
   }
 
@@ -111,12 +111,10 @@ export class AuctionService {
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
     }
-    console.log('page ', page, ' filters ', filters);
     const pageLimit = page.pageLimit ? page.pageLimit : '10';
     const pageNumber = page.pageNumber;
 
     let $filters = (filters.Status !== '' ? " and Status eq '" + filters.Status + "'" : '') + (filters.ObjectId !== '' ? " and ObjectId eq '" + filters.ObjectId + "'" : '') + (filters.Description !== '' ? " and Description eq '" + filters.Description + "'" : '') + (filters.BidType !== '' ? " and BidType eq '" + filters.BidType + "'" : '') + (filters.StartDate !== '' ? " and ZzAucSrtDt eq '" + filters.StartDate + "'" : '') + (filters.EndDate !== '' ? " and ZzAucEndDt eq '" + filters.EndDate + "'" : '') + (filters.Message !== '' ? " and Message eq '" + filters.Message + "'" : '') + (filters.Msgty !== '' ? " and Msgty eq '" + filters.Msgty + "'" : '');
-    console.log('$filters ', $filters);
 
     const httpOptions = {
       headers: {
@@ -127,7 +125,6 @@ export class AuctionService {
       },
       observe: 'response' as 'body'
     };
-    console.log('apiAuctionURL', this.envService.environment.apiAuctionURL);
     return this.http.get<any>(
       this.envService.environment.apiAuctionURL +
       config1 +
@@ -157,7 +154,6 @@ export class AuctionService {
       config2 = " and ScreenNav eq 'R'";
     }
     let $filters = (ObjectId !== '' ? " and ObjectId eq '" + ObjectId + "'" : '') + (DraftId !== '' ? " and DraftId eq '" + DraftId + "'" : '');
-    console.log('$filters ', $filters);
     const httpOptions = {
       headers: {
         'x-csrf-token': 'fetch',
@@ -168,7 +164,6 @@ export class AuctionService {
       observe: 'response' as 'body'
     };
     let queryId = (DraftId && DraftId != '0') ? DraftId : ObjectId;
-    console.log('queryId for Encrypt');
     //let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>(
       this.envService.environment.apiAuctionURL + '/' + queryId +

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
+import { MediaService } from 'src/app/service/media.service';
 import { BidderService } from '../../services/bidder.service';
 // import { EventEmitter } from 'stream';
 
@@ -49,12 +50,11 @@ export class SendBiddingOfferComponent implements OnInit {
   showLoader: boolean = false;
   showAttachLoader: boolean = false;
 
-  constructor(private bidderService: BidderService) { }
+  constructor(private bidderService: BidderService, private mediaService: MediaService,) { }
 
   ngOnInit(): void {
     // this.amount = 30005;
     this.minAmount = this.totalBookValue;
-    console.log(this.ibgaDoc);
     if (this.notParticipated) {
       this.totalBookValue = 0;
     }
@@ -137,7 +137,6 @@ export class SendBiddingOfferComponent implements OnInit {
                 this.customLoop(++index, limit, file);
               }
               this.files.push(fileupload);
-              console.log("🚀🚀 ~~ this.files", this.files);
               if (this.checkFile()) {
 
               }
@@ -164,13 +163,11 @@ export class SendBiddingOfferComponent implements OnInit {
   }
 
   openFile(file: any, option: string) {
-    console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 151 ~ file", file);
     if (file.FilenetId) {
       this.showAttachLoader = true;
-      this.bidderService.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
+      this.mediaService.downloadAuctionImages(file.FilenetId).then((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-        console.log('asdasd', byteString.split(',')[1]);
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
@@ -178,7 +175,6 @@ export class SendBiddingOfferComponent implements OnInit {
         }
         const blob = new Blob([ab], { type: file.MIMEType });
         let fileURL = window.URL.createObjectURL(blob);
-        console.log('fileURL ', fileURL);
         var newWin: any;
         if (option == 'view') {
           newWin = window.open(fileURL, '_blank');
@@ -207,7 +203,6 @@ export class SendBiddingOfferComponent implements OnInit {
       }
       const blob = new Blob([ab], { type: file.type });
 
-      console.log('fileURL', blob);
       let fileURL = window.URL.createObjectURL(blob);
       if ((file.type.indexOf('image') > -1) || (file.type.indexOf('video') > -1) || fileType === 'docx' || fileType === 'doc' || fileType === 'pdf') {
         window.open(fileURL, '_blank');
@@ -222,7 +217,6 @@ export class SendBiddingOfferComponent implements OnInit {
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
     const downloadLink = document.createElement("a");
-    console.log('linkSource: ', linkSource);
     downloadLink.href = base64Data;
     downloadLink.target = '_blank';
     downloadLink.download = fileName;
@@ -246,7 +240,6 @@ export class SendBiddingOfferComponent implements OnInit {
     let totalValue = parseFloat(this.totalBookValue.toString());
     let bidValue = parseFloat(this.minAmount.toString());
 
-    console.log("🚀🚀 ~~ this.totalBookValue < this.minAmount", this.totalBookValue, this.minAmount, this.totalBookValue < this.minAmount);
     if (totalValue < bidValue) {
       this.amountValidation = true;
       this.totalBookValue = this.minAmount;
@@ -273,7 +266,6 @@ export class SendBiddingOfferComponent implements OnInit {
           "ObjectId": this.auctionId,
           "InvoiceForm": "I",
         };
-        console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 210 ~ this.files", this.fileToUpload);
         this.showConfirmation = true;
 
       } else {
@@ -283,7 +275,6 @@ export class SendBiddingOfferComponent implements OnInit {
         this.noFile.emit(!this.showFileError);
       }
     }
-    console.log(this.showFileError);
   }
   sendBidOffer() {
     this.showLoader = true;
@@ -294,15 +285,12 @@ export class SendBiddingOfferComponent implements OnInit {
       if (resData.d.Msgty == 'S') dataUpdate = true;
       this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile: any) => {
         if (resFile.d.Msgty == 'S') fileupload = true;
-        console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 227 ~ resFile", resFile);
         if (dataUpdate && fileupload) {
           this.showConfirmation = false;
           this.showSuccessfulModal = true;
           this.diableNow.emit(true);
-          console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 235 ~ this.showSuccess", this.showSuccessfulModal);
         }
       });
-      console.log("🎯TC🎯 ~ file: send-bidding-offer.component.ts ~ line 226 ~ resData", resData);
     });
   }
   reloadPage() {
