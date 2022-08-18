@@ -91,10 +91,10 @@ export class AuctionFbgaComponent implements OnInit {
         this.showError.emit(false);
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
-          this.showError.emit(false);
+          // this.showError.emit(false);
           this.invalidFileType = false;
           if (filesize <= 2097152) {
-            this.showError.emit(false);
+            // this.showError.emit(false);
             this.FilePushTOArray(file[index], (filesrc: any) => {
               var fileupload = {
                 "name": file[index]['name'],
@@ -108,14 +108,13 @@ export class AuctionFbgaComponent implements OnInit {
               this.files.push(fileupload);
             });
           } else {
-            this.showError.emit(true);
+            // this.showError.emit(true);
             this.invalidFileSize = true;
             setTimeout(() => {
               this.invalidFileSize = false;
             }, 3000);
           }
-        } else {
-          this.showError.emit(true);
+
         }
       } else {
         this.showError.emit(true);
@@ -141,10 +140,12 @@ export class AuctionFbgaComponent implements OnInit {
 
   sendFbga() {
     if (this.checkFile()) {
-      this.showError.emit(false);
+      // this.showError.emit(false);
+      this.noFile.emit(false);
       this.showConfirmationModal = true;
     } else {
-      this.showError.emit(true);
+      // this.showError.emit(true);
+      this.noFile.emit(true);
     }
 
   }
