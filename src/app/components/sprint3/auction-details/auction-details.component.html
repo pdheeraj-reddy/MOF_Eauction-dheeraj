@@ -80,6 +80,52 @@
     <div *ngIf="!showLoader">
 
 
+        <!-- =================This is to show error message if there is wrong extension file is selected ================= -->
+        <div *ngIf="showFileError && status.pendingFbga" #errorMessageFocus
+            class="alert alert-outline alert-danger alert-dismissible fade show mt-4" role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-wrong"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>{{'message.alert_upload' | translate}}
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button (click)="showFileError=false" type="button" class="close pt-0" aria-label="Close"
+                        style="outline: none;">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ==========End======= -->
+
+        <!-- =================This is to show error message if there is no file is selected ================= -->
+        <div *ngIf="showNoFile && status.pendingFbga" #errorMessageFocus
+            class="alert alert-outline alert-danger alert-dismissible fade show mt-4" role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-wrong"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>{{'message.alert_nofile_FBGA' | translate}}
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button (click)="showNoFile=false" type="button" class="close pt-0" aria-label="Close"
+                        style="outline: none;">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
 
         <!--============= Auction Participation card =============-->
         <app-auction-participation *ngIf="response && role.bidder && this.status.published" [response]="response"
@@ -92,7 +138,8 @@
         || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'F')
         || (this.status.pendingFbgaApproval && response.ZzBidderSts == 'G')
         || (this.status.pendingFbga && response.ZzBidderSts == 'J'))" [bidderStatus]="response.ZzBidderSts"
-            [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc" (showError)="showError($event)">
+            [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc" (showError)="showError($event)"
+            (noFile)="noFile($event)">
         </app-auction-fbga>
         <!-- End -->
 
@@ -209,7 +256,7 @@
                         <!-- End -->
 
                         <!--============== Card 5 ==============-->
-                        <div *ngIf="(role.auctionCommitteeHead && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && (status.awarded || status.terminated))"
+                        <div *ngIf="(role.auctionCommitteeHead && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying))"
                             class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118px;height: 118px;">
                             <input (click)="auctionSettings('offerreport')"
                                 [disabled]="!(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)"
@@ -226,7 +273,7 @@
 
                         <!-- disabled offer report -->
 
-                        <div *ngIf="(role.auctionCommitteeHead && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && !(status.awarded || status.terminated))"
+                        <div *ngIf="(role.auctionCommitteeHead && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying))"
                             class="etimad-option etimad-option-xs mt-2 rounded"
                             style="width: 118px;height: 118px; background-color: #F5F5F5 !important;">
                             <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
@@ -272,7 +319,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div [hidden]="!editmode1" style="width: 72%; float: right;">
                 <!-- =================This is to show error message if there is wrong extension file is selected ================= -->
-                <div *ngIf="showFileError" #errorMessageFocus
+                <div *ngIf="showFileError && !status.pendingFbga" #errorMessageFocus
                     class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
                     <div class="alert-wrapper">
                         <div class="alert-body">
@@ -295,7 +342,7 @@
                 <!-- ==========End======= -->
 
                 <!-- =================This is to show error message if there is no file is selected ================= -->
-                <div *ngIf="showNoFile" #errorMessageFocus
+                <div *ngIf="showNoFile && !status.pendingFbga" #errorMessageFocus
                     class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
                     <div class="alert-wrapper">
                         <div class="alert-body">

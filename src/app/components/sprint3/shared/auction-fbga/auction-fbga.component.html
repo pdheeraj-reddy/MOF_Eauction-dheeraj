@@ -19,6 +19,8 @@
         <div class="d-flex flex-column justify-content-center m-4" style="width: 440px">
             <!-- ============= File upload area and view area ===============-->
             <div *ngIf="!disable">
+                <p *ngIf="invalidFileSize" class="text-danger text-12">{{'message.alert_maxfilesize' | translate}}</p>
+                <p *ngIf="invalidFileCount" class="text-danger text-12">{{'message.alert_validCount' | translate}}</p>
                 <div *ngIf="!checkFile()" class="file-uploader-zone mt-0 p-0" style="max-width: 80%;">
                     <div class="buttons">
                         <div class="uploader-button-caption d-flex px-4 py-2" style="justify-content: center;">
@@ -37,7 +39,7 @@
                 </div>
                 <div *ngIf="checkFile() || disableInput" class="w-75">
                     <div class="row ml-0 mr-0">
-                        <div class="form-group w-100">
+                        <div class="form-group w-100" *ngIf="files.length > 0">
                             <div class="file-download file-download-sm">
                                 <h3>
                                     <label class="text-success text-15" for="" data-toggle="tooltip"

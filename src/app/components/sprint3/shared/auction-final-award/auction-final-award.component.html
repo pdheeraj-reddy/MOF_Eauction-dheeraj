@@ -127,18 +127,18 @@
 
           </div>
           <h4 class="modal-title" id="exampleModalLabel" style="text-align: center">
-            The award has been successfully approved
+            {{'am-primary-awarding.popup4.head' | translate }}
           </h4>
         </div>
       </div>
-      <div class="modal-body">
+      <!-- <div class="modal-body">
         <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">The award has been
           successfully approved
         </label>
-      </div>
+      </div> -->
       <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessAccept = false; gotoList()">
-          Back to Auction Requests
+          {{'am-primary-awarding.popup2.back_btn' | translate }}
         </button>
       </div>
     </div>
@@ -147,7 +147,7 @@
 
 <!-- Model to confirm Rejection -->
 <div class="modal show" *ngIf="showConfirmationReject" [ngClass]="{ 'modal-show': showConfirmationReject }">
-  <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-danger" id="exampleModalLabel">
@@ -157,10 +157,31 @@
           <span class="icon-close"></span>
         </button>
       </div>
-      <div class="modal-body">
+      <!-- <div class="modal-body">
         <label for="confirmation" style="color: #414042; font-size: 16px"> {{ 'fbga_approval.popup2.subhead' | translate
           }}
         </label>
+      </div> -->
+      <div class="modal-body">
+        <div class="modal-body text-16 text-body">
+          {{ 'fbga_approval.popup2.subhead' | translate }}
+        </div>
+
+        <div class="row mt-4">
+          <div class="form-group col w-100">
+            <div class="border-bottom color-grey"> <label for="goverusermessage">{{
+                'auctionMember.reject-popup.reason-label' | translate }}</label> <span class="float-left text-muted">{{
+                'auctionMember.reject-popup.letter' | translate
+                }}&nbsp;<small id="charNum">{{ (rejectionNotes + '').length || 0
+                  }}/250</small></span>
+            </div>
+            <textarea [(ngModel)]="rejectionNotes" class="form-control text-success" maxlength="250"
+              placeholder="{{ 'auctionMember.reject-popup.phold' | translate }}" rows="4"></textarea>
+
+            <p *ngIf="rejectionReason" class="text-danger text-12 mt-2">{{
+              'auctionMember.reject-popup.section2-validation' | translate }}</p>
+          </div>
+        </div>
       </div>
       <div class="modal-footer" style="justify-content: end ">
         <button type="button" class="btn btn-outline-light btn-md" (click)="this.showConfirmationReject = false">
@@ -200,11 +221,11 @@
           </h4>
         </div>
       </div>
-      <div class="modal-body">
+      <!-- <div class="modal-body">
         <label for="confirmation" style="color: #414042; font-size: 16px; text-align: center;">{{
           'fbga_approval.popup3.subhead' | translate }}
         </label>
-      </div>
+      </div> -->
       <div class="modal-footer" style="justify-content: end">
         <button type="button" class="btn btn-primary-light btn-md" (click)="this.showSuccessReject = false; gotoList()">
           {{ 'fbga_approval.popup3.confirm_btn' | translate }}

@@ -25,6 +25,8 @@ export class AuctionFinalAwardComponent implements OnInit {
   showLoader: boolean = false;
   btnFloat: any = '';
   sendInvoice = false;
+  rejectionNotes: any = '';
+  rejectionReason = false;
 
 
   @ViewChild("showSuccessfulModal") modalContentApp: TemplateRef<any>;
@@ -72,24 +74,35 @@ export class AuctionFinalAwardComponent implements OnInit {
   }
 
   reject() {
-    this.showLoader = true;
-    let data = {
-      "AucId": this.finalaward.auctionId,
-      "BidderId": this.finalaward.bidderNo,
-      "ZzUserAction": 'J'
-    }
-    this.api.postAppporRej(data).subscribe((res => {
-      console.log(res)
-      if (res['d']['Msgty'] === 'S') {
-        this.showLoader = false;
-        this.showConfirmationReject = false;
-        this.showSuccessReject = true;
+    let rejectNote = this.rejectionNotes.trim();
+    if (rejectNote) {
+      this.showLoader = true;
+      let data = {
+        "AucId": this.finalaward.auctionId,
+        "BidderId": this.finalaward.bidderNo,
+        "ZzUserAction": 'J'
       }
-    }));
+      this.api.postAppporRej(data).subscribe((res => {
+        console.log(res)
+        if (res['d']['Msgty'] === 'S') {
+          this.showLoader = false;
+          this.rejectionReason = false;
+          this.showConfirmationReject = false;
+          this.showSuccessReject = true;
+        }
+      }));
+    }
+    else {
+      this.rejectionNotes = "";
+      this.rejectionReason = true;
+      setTimeout(() => {
+        this.rejectionReason = false;
+      }, 5000);
+    }
   }
 
   goToInvoice() {
-    this.router.navigateByUrl('auctions/send-invoice/' + this.auctionId, {state : this.statusData});
+    this.router.navigateByUrl('auctions/send-invoice/' + this.auctionId, { state: this.statusData });
   }
 
   ngDoCheck() {
@@ -162,7 +175,7 @@ export class AuctionFinalAwardComponent implements OnInit {
     downloadLink.download = fileName;
     downloadLink.click();
   }
-  reloadPage(){
+  reloadPage() {
     window.location.reload();
   }
 }

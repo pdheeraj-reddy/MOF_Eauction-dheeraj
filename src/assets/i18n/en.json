@@ -322,7 +322,8 @@
         "alert_validCount": "Please upload single file",
         "alert_upload": "The uploaded format is not supported, please upload a file that supports the following formats: PNG, JPG, DOCX, DOC, PDF",
         "alert_bider_participate": "The time to register for the auction has expired, we regret that you are unable to participate and submit any bids.",
-        "alert_nofile": "The Primary warranty is required."
+        "alert_nofile": "The Primary warranty is required.",
+        "alert_nofile_FBGA": "The Final FBGA is required"
     },
     "OK": "OK",
     "ServiceUnavailable": "Service Unavailable",
@@ -1115,8 +1116,8 @@
     },
     "bidderSendInvoice": {
         "send_invoice": "Send Invoice",
-        "reject_btn": "Refusal to be awarded",
-        "accept_btn": "Final Award Approval",
+        "reject_btn": "Refuse final FBGA",
+        "accept_btn": "Approve final FBGA",
         "final_warranty": "Final Warranty",
         "no": "No.",
         "reference": "Back",
@@ -1127,21 +1128,21 @@
     },
     "fbga_approval": {
         "popup1": {
-            "head": "Confirmation of Auction Awarding Approval?",
-            "subhead": "Upon approval of the award, an invoice will be sent to complete the payment by the bidder, and the auction will be awarded automatically upon completion of the payment.",
+            "head": "Confirm FBGA?",
+            "subhead": "If confirms the final guarantee, an invoice will be sent to complete the payment by the bidder, and the auction will be awarded automatically when the payment is completed.",
             "confirm_btn": "Auction Award",
             "back_btn": "Back"
         },
         "popup2": {
-            "head": "Are you sure of the rejection of the award?",
-            "subhead": "This offer has been awarded by the auction committee, and if the award is rejected, it will result in the auction being canceled and the awarding will not take place.",
-            "reject_btn": "Confirmation of rejection of the award and cancellation of the auction",
+            "head": "Confirm refusal of FBGA?",
+            "subhead": "Are you sure to send the rejection of FBGA?",
+            "reject_btn": "Confirm Reject",
             "back_btn": "Back"
         },
         "popup3": {
-            "head": "The award has been rejected and the auction has been successfully cancelled",
+            "head": "FBGA rejected successfully",
             "subhead": "Auction has been canceled due to the previously submitted bid not being awarded by Auction Committee.",
-            "confirm_btn": "Back to Auction Requests"
+            "confirm_btn": "Back to Auctions"
         }
     },
     "menu": {
@@ -1216,13 +1217,13 @@
             "back_btn": "Back to Auctions"
         },
         "popup3": {
-            "head": "Confirmation of Auction Awarding Approval?",
-            "subhead": "Upon approval of the award, an invoice will be sent to complete the payment by the bidder, and the auction will be awarded automatically upon completion of the payment.",
+            "head": "Confirm primary award approval?",
+            "subhead": "If confirms the primary award, a notification will be sent to the supplier to complete attaching the final guarantee.",
             "back_btn": "Back",
             "accept_btn": "Auction Award"
         },
         "popup4": {
-            "head": "The award successfully approved",
+            "head": "Successfully Approved",
             "subhead": "The award has been successfully approved"
         }
     },

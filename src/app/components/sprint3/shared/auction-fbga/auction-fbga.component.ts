@@ -8,13 +8,14 @@ import { BidderService } from '../../services/bidder.service';
   styleUrls: ['./auction-fbga.component.scss']
 })
 export class AuctionFbgaComponent implements OnInit {
-  @Input() upcomingAuction:any;
+  @Input() upcomingAuction: any;
   @Input() fbgaDoc: any;
-  @Input() bidderStatus : any;
+  @Input() bidderStatus: any;
   @Output() showError = new EventEmitter<boolean>();
+  @Output() noFile = new EventEmitter<boolean>();
   invalidFileType: boolean;
   invalidFileSize: boolean;
-  auctionId:any;
+  auctionId: any;
   showConfirmationModal = false;
   showSuccessfulModal = false;
   showLoader = false;
@@ -31,7 +32,7 @@ export class AuctionFbgaComponent implements OnInit {
     'application/msword',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   ];
-  files: any[] =[];
+  files: any[] = [];
   invalidFileCount: boolean = false;
   selectedFileFormat: string;
   selectedFileURL: any;
@@ -42,21 +43,21 @@ export class AuctionFbgaComponent implements OnInit {
     FileContent: string; MIMEType: any; FileLength: string; FileExt: any; ObjectType: string; ObjectId: any; InvoiceForm: string;
   };
 
-  constructor(private bidderService : BidderService, private router: Router) { }
+  constructor(private bidderService: BidderService, private router: Router) { }
 
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
-    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.fbgaDoc); 
-    if(this.bidderStatus == "M"){
+    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 27 ~ this.upcomingAuction", this.fbgaDoc);
+    if (this.bidderStatus == "M") {
       this.disable = false;
       this.disableBtn = false;
       this.disableInput = false;
-    }else if(this.bidderStatus == "J"){
+    } else if (this.bidderStatus == "J") {
       this.disable = false;
       this.disableBtn = false;
       this.disableInput = true;
     }
-    else{
+    else {
       this.disable = true;
       this.disableBtn = true;
       this.disableInput = true;
@@ -71,7 +72,6 @@ export class AuctionFbgaComponent implements OnInit {
     if (filecount > 1) {
       this.invalidFileType = false;
       this.invalidFileCount = true;
-      this.showError.emit(true);
       setTimeout(() => {
         this.invalidFileCount = false;
       }, 3000);
@@ -90,10 +90,8 @@ export class AuctionFbgaComponent implements OnInit {
         this.showError.emit(false);
         this.invalidFileType = false;
         if (!!this.acceptedFiles.find(x => x === file[index]['type'])) {
-          this.showError.emit(false);
           this.invalidFileType = false;
           if (filesize <= 2097152) {
-            this.showError.emit(false);
             this.FilePushTOArray(file[index], (filesrc: any) => {
               var fileupload = {
                 "name": file[index]['name'],
@@ -109,16 +107,13 @@ export class AuctionFbgaComponent implements OnInit {
               // this.auctionAttachement.push(new FormControl(fileupload));
             });
           } else {
-            this.showError.emit(true);
             this.invalidFileSize = true;
             setTimeout(() => {
               this.invalidFileSize = false;
             }, 3000);
           }
-        }else{
-          this.showError.emit(true);
         }
-      }else{
+      } else {
         this.showError.emit(true);
       }
     }
@@ -140,16 +135,18 @@ export class AuctionFbgaComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  sendFbga(){
-    if(this.checkFile()){
-      this.showError.emit(false);
+  sendFbga() {
+    if (this.checkFile()) {
+      // this.showError.emit(false);
+      this.noFile.emit(false);
       this.showConfirmationModal = true;
-    }else{
-      this.showError.emit(true);
+    } else {
+      // this.showError.emit(true);
+      this.noFile.emit(true);
     }
-    
+
   }
-  makeAPIcall(){
+  makeAPIcall() {
     this.fileToUpload = {
       "FileName": this.files[0].name.split('.')[0],
       // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
@@ -162,18 +159,18 @@ export class AuctionFbgaComponent implements OnInit {
       "InvoiceForm": "F",
     };
     this.showLoader = true;
-  console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
-    this.bidderService.submitFbga(this.auctionId).subscribe((resData)=>{
-      this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile)=>{
-        if(resData.d.Msgty == 'S' && resFile.d.Msgty == 'S'){
+    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 84 ~ this.files", this.files);
+    this.bidderService.submitFbga(this.auctionId).subscribe((resData) => {
+      this.bidderService.uploadFile(this.fileToUpload).subscribe((resFile) => {
+        if (resData.d.Msgty == 'S' && resFile.d.Msgty == 'S') {
           this.disableBtn = true;
           this.disableInput = true;
           this.showConfirmationModal = false;
           this.showSuccessfulModal = true;
         }
       });
-    console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 92 ~ res", resData.d.Msgty);
-      
+      console.log("🎯TC🎯 ~ file: auction-fbga.component.ts ~ line 92 ~ res", resData.d.Msgty);
+
     });
   }
   openFile(file: any, option: string) {
@@ -232,17 +229,17 @@ export class AuctionFbgaComponent implements OnInit {
       }
     }
   }
-  closeModal(model:string){
-  if(model == 'Confirmation'){
-    this.showConfirmationModal = false;
-  }
-  if(model == 'Success'){
-    this.showSuccessfulModal = false;
-  }
-  if(model == "AuctionList"){
-    this.showSuccessfulModal = false;
-    this.router.navigate(['/bidder']);
-  }
+  closeModal(model: string) {
+    if (model == 'Confirmation') {
+      this.showConfirmationModal = false;
+    }
+    if (model == 'Success') {
+      this.showSuccessfulModal = false;
+    }
+    if (model == "AuctionList") {
+      this.showSuccessfulModal = false;
+      this.router.navigate(['/bidder']);
+    }
   }
   downloadFile(fileName: string, contentType: string, base64Data: string) {
     const linkSource = `data:${contentType};base64,${base64Data}`;
@@ -256,7 +253,7 @@ export class AuctionFbgaComponent implements OnInit {
   removeFile() {
     this.files.pop();
   }
-  reloadPage(){
+  reloadPage() {
     window.location.reload();
   }
 }
