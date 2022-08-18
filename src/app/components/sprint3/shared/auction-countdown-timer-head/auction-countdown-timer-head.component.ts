@@ -51,8 +51,8 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
       // get total seconds between the times
       // var date = new Date(Date.now());
       // date.setMinutes(date.getMinutes()-150);
-      var delta = (timestamp - Number(moment(riyadh, 'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
-      // var delta = (timestamp - Date.now()) / 1000;
+      // var delta = (timestamp - Number(moment(riyadh, 'DD.MM.YYYY HH:mm:ss').format('x'))) / 1000;
+      var delta = (timestamp - Date.now()) / 1000;
 
 
       // console.log(delta + 600000); 

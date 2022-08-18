@@ -195,7 +195,7 @@
                     <tr *ngFor="let rowItem of openofferListData;index as i">
                         <ng-container *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
                             <td>{{rowItem.serialNo}}</td>
-                            <td>{{rowItem.offerValue}} {{'auctionCommittee.ac-openOffers.SAR' |
+                            <td>{{rowItem.offerValue | number}} {{'auctionCommittee.ac-openOffers.SAR' |
                                 translate}}</td>
                             <td>
                                 <span class="d-inline-block text-truncate" style="max-width: 100px;">

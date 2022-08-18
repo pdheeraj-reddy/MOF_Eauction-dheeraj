@@ -1035,7 +1035,9 @@
     "TrustServices": "Trust services",
     "bidderFinalInvoice": {
         "InvoiceDetails": "Invoice Details",
+        "InvoiceDetails2": "Invoice Details",
         "InvoiceInformation": "Invoice Details",
+        "InvoiceInformation2": "Invoice Details",
         "AuctionData": "Auction Details",
         "AuctionReferenceNumber": "Auction ID",
         "AuctionStartDateandTime": "Auction Start Date & Time",
@@ -1056,6 +1058,7 @@
         "Street": "Street",
         "OtherNotes": "Others",
         "TableOfProductsAndPrices": "Products Details",
+        "TableOfProductsAndPrices2": "Products Details",
         "ProductName": "Product Name",
         "SKU_Number": "Product SKU",
         "GearPrice": "Awarded Price",
@@ -1112,6 +1115,7 @@
         "Reset": "Reset",
         "Research": "Apply",
         "payment_bill": "Invoice",
+        "payment_bill2": "Invoice",
         "auction_report_and_bids_submitted": "Auction & Offers Report"
     },
     "bidderSendInvoice": {

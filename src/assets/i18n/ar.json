@@ -833,7 +833,9 @@
     "Paid": "مدفوعة",
     "bidderFinalInvoice": {
         "InvoiceDetails": "تفاصيل الفاتورة",
+        "InvoiceDetails2": "دفع الفاتوره",
         "InvoiceInformation": "معلومات الفاتورة",
+        "InvoiceInformation2": "تفاصيل الفاتوره",
         "AuctionData": "بيانات المزاد",
         "AuctionReferenceNumber": "الرقم المرجعي للمزاد",
         "AuctionStartDateandTime": "تاريخ ووقت بداية المزاد",
@@ -854,6 +856,7 @@
         "Street": "الشارع",
         "OtherNotes": "ملاحظات أخرى",
         "TableOfProductsAndPrices": "تفاصيل المنتج",
+        "TableOfProductsAndPrices2": "جدول المنتجات",
         "ProductName": "اسم المنتج",
         "SKU_Number": "رقم SKU",
         "GearPrice": "سعر الترسية",
@@ -1110,6 +1113,7 @@
         "Reset": "إعادة تعيين",
         "Research": "يتقدم",
         "payment_bill": "فاتورة الدفع",
+        "payment_bill2": "فاتوره المزاد",
         "auction_report_and_bids_submitted": "تقرير المزاد والعروض المقدمة"
     },
     "bidderSendInvoice": {
