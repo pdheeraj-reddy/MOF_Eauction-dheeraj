@@ -23,7 +23,7 @@ export class AuctionFbgaComponent implements OnInit {
   disableBtn = false;
   disableInput = false;
   disable = false;
-
+  showRejectionReason = false;
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
   acceptedFiles = [
@@ -48,6 +48,7 @@ export class AuctionFbgaComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
+    console.log("🚀🚀 ~~ this.upcomingAuction", this.upcomingAuction);
     if (this.bidderStatus == "M") {
       this.disable = false;
       this.disableBtn = false;
@@ -55,12 +56,16 @@ export class AuctionFbgaComponent implements OnInit {
     } else if (this.bidderStatus == "J") {
       this.disable = false;
       this.disableBtn = false;
-      this.disableInput = true;
+      this.disableInput = false;
     }
     else {
       this.disable = true;
       this.disableBtn = true;
       this.disableInput = true;
+    }
+
+    if (this.upcomingAuction?.rejectNotes) {
+      this.showRejectionReason = true;
     }
   }
   selectFiles(e: any, dd: string): void {

@@ -80,7 +80,8 @@ export class AuctionFinalAwardComponent implements OnInit {
       let data = {
         "AucId": this.finalaward.auctionId,
         "BidderId": this.finalaward.bidderNo,
-        "ZzUserAction": 'J'
+        "ZzUserAction": 'J',
+        "RejectNotes": rejectNote
       }
       this.api.postAppporRej(data).subscribe((res => {
         console.log(res)

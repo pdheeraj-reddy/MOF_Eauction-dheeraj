@@ -132,6 +132,7 @@ export class UpcomingAuction {
     auction_enddate?: any;
     auctionSetting?: AuctionSetting;
     auctionStatus?: string;
+    rejectNotes?: string;
     auctionImage?: any[] = [];
     auctionnote1?: string;
     auctionnote2?: string;

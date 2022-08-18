@@ -408,6 +408,7 @@ export class AuctionDetailsComponent implements OnInit {
         participants: auctionDetailList.NoParticipant,
       },
       auctionStatus: auctionDetailList.Status,
+      rejectNotes: auctionDetailList.RejectNotes,
       auctionImage: [],
       auctionnote1: auctionDetailList.Description,
       auctionnote2: auctionDetailList.ZzAucDesc,
