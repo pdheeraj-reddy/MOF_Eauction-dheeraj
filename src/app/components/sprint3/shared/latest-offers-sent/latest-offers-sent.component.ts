@@ -53,6 +53,7 @@ export class LatestOffersSentComponent implements OnInit {
   getBidDetails(pageno: any) {
     this.api.getLatestBiddetails(this.aucId, pageno).subscribe((res: any) => {
       this.biddet = res['body']['d']['results'][0]['pagetoaucbiddernav']['results'];
+      console.log("🚀🚀 ~~ res['body']['d']['results']", res['body']['d']['results']);
       console.log("this.biddet", this.biddet);
       this.PaginationServc.resetSorting();
       this.navigateToPage(1);

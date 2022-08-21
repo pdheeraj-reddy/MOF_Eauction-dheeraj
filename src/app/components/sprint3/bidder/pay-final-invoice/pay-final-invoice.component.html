@@ -277,7 +277,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="invoiceData?.SameAddress == 'Y'" class="border-bottom mt-4 mb-4">
+                    <!-- <div *ngIf="invoiceData?.SameAddress == 'Y'" class="border-bottom mt-4 mb-4">
                         <p class="text-primary font-weight-bold text-18 mb-4">
                             {{'bidderFinalInvoice.DeliveryData' | translate}}</p>
 
@@ -325,7 +325,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </form>
             </div>
@@ -352,12 +352,12 @@
                                 <span>{{'bidderFinalInvoice.SKU_Number' | translate}}</span>
                             </div>
                         </th>
-                        <th *ngIf="invoiceData?.SameAddress == 'N'" class="btn-primary-light" scope="col">
+                        <th class="btn-primary-light" scope="col">
                             <div class="table-header-cell">
                                 <span>{{'bidderFinalInvoice.DeliveryDate' | translate}}</span>
                             </div>
                         </th>
-                        <th *ngIf="invoiceData?.SameAddress == 'N'" class="btn-primary-light" scope="col">
+                        <th class="btn-primary-light" scope="col">
                             <div class="table-header-cell">
                                 <span>{{'bidderFinalInvoice.DeliveryAdd' | translate}}</span>
                             </div>
@@ -372,56 +372,55 @@
                                 <td>{{i+1}}</td>
                                 <td>{{rowItem.Description}}</td>
                                 <td>{{rowItem.ZzProductSku}}</td>
-                                <td *ngIf="invoiceData?.SameAddress == 'N'">{{rowItem.DelivDate}}</td>
-                                <td *ngIf="invoiceData?.SameAddress == 'N'">{{rowItem.ZzRegion}}, {{rowItem.ZzCity}},
+                                <td>{{rowItem.DelivDate}}</td>
+                                <td style="width: 400px;">{{rowItem.ZzRegion}}, {{rowItem.ZzCity}},
                                     {{rowItem.ZzNeighbourhood}},
                                     {{rowItem.ZzStreet}}</td>
                             </ng-container>
                         </tr>
                     </ng-container>
                     <ng-container *ngIf="invoiceData?.BidderValue">
-                        <ng-container *ngIf="invoiceData?.SameAddress == 'N'">
-                            <tr>
-                                <td colspan="5">
-                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
-                                        |
-                                        translate}}</span>
-                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
-                                        '1.0-2'}}
-                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
-                                        |
-                                        translate}}</span>
-                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
-                                        '1.0-2'}}
-                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <span
-                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
-                                        | translate}}</span>
-                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
-                                        '1.0-2'}}
-                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <span
-                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
-                                        | translate}}</span>
-                                    <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
-                                        '1.0-2'}}
-                                        {{'bidderFinalInvoice.SAR' | translate}}</span>
-                                </td>
-                            </tr>
-                        </ng-container>
+                        <!-- <ng-container *ngIf="invoiceData?.SameAddress == 'N'"> -->
+                        <tr>
+                            <td colspan="5">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
+                                    |
+                                    translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
+                                    |
+                                    translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                    | translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <span
+                                    class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                    | translate}}</span>
+                                <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
+                                    '1.0-2'}}
+                                    {{'bidderFinalInvoice.SAR' | translate}}</span>
+                            </td>
+                        </tr>
+                        <!-- </ng-container>
                         <ng-container *ngIf="invoiceData?.SameAddress == 'Y'">
                             <tr>
                                 <td colspan="3">
@@ -463,7 +462,7 @@
                                         {{'bidderFinalInvoice.SAR' | translate}}</span>
                                 </td>
                             </tr>
-                        </ng-container>
+                        </ng-container> -->
                     </ng-container>
                 </tbody>
             </table>

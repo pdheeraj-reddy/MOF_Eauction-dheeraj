@@ -222,3 +222,7 @@
 .active {
     color: #ffffff !important;
 }
+
+.clickable:not(:disabled) {
+    color: #32AD71;
+}

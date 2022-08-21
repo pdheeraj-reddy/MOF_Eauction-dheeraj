@@ -1,4 +1,4 @@
-<div class="card bg-primary text-white mt-1" style="height: 99.7%;" [ngClass]="textDir ? 'card-en' : 'card-ar'">
+<div class="card bg-primary text-white mt-1 pb-2" style="height: 99.7%;" [ngClass]="textDir ? 'card-en' : 'card-ar'">
 
     <div class="noOffer" *ngIf="biddet.length == 0">
         <p style="opacity: 65%;">{{ "auctionCommittee.ac-detail.noBidMssg" | translate }}</p>
@@ -25,7 +25,8 @@
             </div>
             <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;"> Not yet</p>
         </div>
-        <div *ngIf="biddet.length > pagelimit" class="mt-4 row justify-content-end">
+        <div *ngIf="biddet.length > pagelimit" class="mt-4 mb-2 row justify-content-end"
+            style="height: 10%; position: absolute; bottom: 0%; width: 100%; margin-left: -25px !important; margin-right: -25px !important; padding-top: 30px;">
             <div class="mb-5">
                 <nav aria-label="..." class="nav-pagination">
                     <ul class="pagination">
