@@ -154,6 +154,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./components/sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule)
   },
+  { path: 'home', loadChildren: () => import('./components/sprint3/home/home.module').then(m => m.HomeModule) },
 ];
 
 @NgModule({
