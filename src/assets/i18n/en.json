@@ -1244,5 +1244,10 @@
         "no_ofer_made": "No Offer Submitted",
         "not_awarded": "Not Awarded",
         "awarded": "Awarded"
+    },
+    "home": {
+        "landing": {},
+        "auction": {},
+        "auction-detail": {}
     }
 }

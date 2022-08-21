@@ -1242,5 +1242,10 @@
         "no_ofer_made": "لم يتم تقديم عرض",
         "not_awarded": "لم تتم الترسية",
         "awarded": "تمت الترسية"
+    },
+    "home": {
+        "landing": {},
+        "auction": {},
+        "auction-detail": {}
     }
 }
