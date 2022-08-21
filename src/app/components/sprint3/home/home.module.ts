@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuctionComponent } from './auction/auction.component';
 import { AuctionDetailComponent } from './auction-detail/auction-detail.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AuctionDetailComponent } from './auction-detail/auction-detail.componen
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    SharedModule
   ]
 })
 export class HomeModule { }

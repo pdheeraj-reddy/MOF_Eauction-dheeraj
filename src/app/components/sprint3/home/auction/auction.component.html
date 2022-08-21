@@ -1,1 +1,179 @@
-<p>auction works!</p>
+<div class="col-12 mt-1">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a [href]="getHomeUrl">{{'home.auction.bcrumb1' | translate}}</a></li>
+            <li class="breadcrumb-item"><a href="/home">{{ 'home.auction.bcrumb2' | translate }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'home.auction.bcrumb3' | translate}}
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="col-12 pb-2" style="margin-top: 150px !important;">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="text-32 text-primary font-weight-500">{{'home.auction.title' | translate}}</h1>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <div class="row">
+                <div>
+                    <div class="search-group search-custom">
+                        <div class="p-2 text-light d-flex align-items-center">
+                            <span class="icon-filled-search"></span>
+                        </div>
+                        <input type="text" style="text-align:left" class="search-input"
+                            placeholder="{{'home.auction.search' | translate}}">
+                    </div>
+                </div>
+                <div class="col">
+                    <button (click)="toggleFilter()" style="height: 48px; width: 48px;"
+                        class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm text-success"
+                        [ngClass]="{ 'filter-active': showFilterForm }" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-16 icon-filters"></span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="modal-content p-4 shadow-lg border mt-4" *ngIf="showFilterForm">
+            <form [formGroup]="filterFormGroup">
+                <div class="modal-header">
+                    <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
+                        'bidderAuctions.filter-title' | translate }}</h3>
+                    <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal"
+                        aria-label="Close" (click)="toggleFilter()">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body mb-3">
+                    <div class="col-12 row pr-0">
+                        <div class="col-md-4 mb-3">
+                            <label class="d-flex" for="validationCustom02">{{ 'auctionlist.filter-refno' | translate
+                                }}</label>
+                            <input type="text" digitOnly maxlength="10" formControlName="prevRefNo"
+                                class="form-control"
+                                placeholder="{{ 'auctionlist.filter-refno-pholder' | translate }}"
+                                id="validationCustom01" [required]="true" />
+                        </div>
+                        <!-- <div class="col-md-4 mb-3" *ngIf="selectedTab==='All'">
+                            <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate
+                                }}</label>
+                            <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
+                                (change)="changeSelect($event, 'auctionStatus')" [required]="true">
+                                <option value="">{{ 'Auction Status' | translate }} </option>
+                                <option [value]="status.code" *ngFor="let status of dropValStatus">{{status.disp |
+                                    translate
+                                    }}</option>
+                            </select>
+                        </div> -->
+                        <!-- <div class="col-md-4 mb-3">
+                            <label for="validationCustom04">{{ 'bidderAuctions.BiddingMethod' | translate }}</label>
+                            <select class="form-control" id="validationCustom04" formControlName="biddingMethod"
+                                (change)="changeSelect($event, 'biddingMethod')" [required]="true">
+                                <option value="">{{ 'bidderAuctions.BiddingMethod' | translate }} </option>
+                                <option [value]="product.code" *ngFor="let product of dropValProducts">
+                                    {{product.disp |
+                                    translate }}</option>
+                            </select>
+                        </div> -->
+                        <div class="col-md-4 mb-3">
+                            <label class="d-flex" for="validationCustom02">{{ 'auctionlist.filter-auctionstartdate'
+                                |
+                                translate }}</label>
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionStartDate"
+                                formControlName="auctionStartDate"
+                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                                (change)="onChangeStartDate($event)" class="form-control calendar-control
+                                    calendar-both-control" />
+                            <!-- <input type="text" formControlName="auctionStartDate" class="form-control" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">{{ 'auctionlist.filter-auctionenddate' | translate
+                                }}</label>
+                            <input type="text" onkeydown="event.preventDefault()" id="auctionEndDate"
+                                formControlName="auctionEndDate"
+                                placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
+                                (change)="onChangeEndDate($event)"
+                                class="form-control calendar-control calendar-both-control" />
+                            <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}" bsDatepicker [required]="true"> -->
+                        </div>
+                    </div>
+                    <!-- {{filterFormGroup.value | json}} -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" aria-label="Close"
+                        class="btn btn-outline-secondary-blue btn-md " (click)="resetFilter()">
+                        {{ 'bidderAuctions.filter-btn2' | translate }}
+                    </button>
+                    <button type="button" class="btn btn-primary-light btn-md" (click)="getAuctionList(1)">
+                        {{ 'bidderAuctions.filter-btn1' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 d-flex flex-wrap" style="margin-top: 65px !important; padding: 0px !important;">
+    <!-- <ng-container *ngFor="let item of auctionListData">
+        <app-auction-card [auction]="item">
+        </app-auction-card>
+    </ng-container> -->
+    <ng-container>
+        <div class="row" style="width: 100%;display: contents;justify-content: center;">
+            <div style="justify-content: center;display: flex;" class="col-lg-6 col-xl-4 col-md-12 col-12"
+                *ngFor="let item of auctionListData">
+                <app-auction-card [auction]="item">
+                </app-auction-card>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="mt-4 row justify-content-end" *ngIf="auctionListData!.length > 0">
+    <div class="mb-5">
+        <nav aria-label="..." class="nav-pagination">
+            <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
+                <li class="page-item clickable" disabled
+                    [ngClass]="{ disabled: PaginationServc.currentPage === 1 || showLoader}">
+                    <a (click)="getServerData(PaginationServc.currentPage);this.showPagination = true;"
+                        class="page-link" aria-disabled="true">{{
+                        'auctionlist.grid-previous' | translate }}</a>
+                </li>
+                <li *ngFor="let page of PaginationServc.pages" class="page-item"
+                    [ngClass]="{ active: PaginationServc.currentPage === page }">
+                    <a (click)="getServerData(page + 1);this.showPagination = true;" class="page-link"
+                        [ngClass]="{diabled : showLoader}"> {{ page }} </a>
+                </li>
+                <li class="page-item clickable" disabled
+                    [ngClass]="{ disabled: PaginationServc.currentPage === PaginationServc.totalPages || showLoader}">
+                    <a (click)="getServerData(PaginationServc.currentPage + 2);this.showPagination = true;"
+                        class="page-link">{{
+                        'auctionlist.grid-next' | translate }}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="card card-padding flex-row">
+    <div class="card-custom p-2">
+        <div>
+            <img src="assets\icons\logo-mini.svg" width="80px" alt="">
+        </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="d-flex align-items-center w-100 justify-content-between">
+        <div>
+            <h3 class="text-primary text-24">{{'home.auction.user-manual' | translate}}</h3>
+            <p class="text-18">{{'home.auction.user-manual-desc' | translate}}</p>
+        </div>
+        <button class="btn btn-primary-light font-weight-500 text-18">
+            <span class="icon-download" style="font-size: 20px;"></span>
+            &nbsp;
+            {{'home.auction.user-manual-button' | translate}}
+        </button>
+    </div>
+
+</div>

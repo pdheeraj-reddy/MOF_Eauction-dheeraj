@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="254px" height="254px" viewBox="0 0 254 254" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>C25881A9-8E44-41D6-B281-A12B3630B6CC</title>
+    <defs>
+        <rect id="path-1" x="48.4889706" y="10.4293785" width="121.022059" height="121.141243" rx="19.2"></rect>
+        <filter x="-81.8%" y="-81.7%" width="263.6%" height="263.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="26" dy="26" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="20" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.920306377   0 0 0 0 0.95813519   0 0 0 0 0.932915981  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feOffset dx="-26" dy="-26" in="SourceAlpha" result="shadowOffsetOuter2"></feOffset>
+            <feGaussianBlur stdDeviation="20" in="shadowOffsetOuter2" result="shadowBlurOuter2"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.9 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="shadowMatrixOuter2"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Landing-Page-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-page-v2/2" transform="translate(-1054.000000, -2008.000000)">
+            <g id="Group-25" transform="translate(171.000000, 1957.000000)">
+                <g id="Graph" transform="translate(901.000000, 107.000000)">
+                    <rect id="Rectangle-Copy-2" fill="#FFFFFF" opacity="0" x="0" y="0" width="218" height="142" rx="2"></rect>
+                    <g id="Rectangle-Copy-5">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#F9FCFA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

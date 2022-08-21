@@ -1247,7 +1247,16 @@
     },
     "home": {
         "landing": {},
-        "auction": {},
+        "auction": {
+            "bcrumb1":"Etimad Services",
+            "bcrumb2":"Online Auction",
+            "bcrumb3":"All Auctions",
+            "title": "All Auctions",
+            "search":"Search",
+            "user-manual":"User's Manual",
+            "user-manual-desc":"Helps you get the information you want to start benefiting from the services",
+            "user-manual-button":"Download User Manual"
+        },
         "auction-detail": {}
     }
 }
