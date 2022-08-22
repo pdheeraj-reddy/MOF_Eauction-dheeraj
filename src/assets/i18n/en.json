@@ -1265,7 +1265,9 @@
             "download_manual": "Download User Manual",
             "need_help": "Need help?",
             "faq_page": "On the Frequently Asked Questions page, you will find a list of the most frequently asked questions. If you still need help, we are glad to serve you by contacting the attached form.",
-            "connect_with_us": "Connect with us"
+            "connect_with_us": "Connect with us",
+            "latest_product": "Latest Auctions",
+            "browse_all_auction": "Browse all auctions"
         },
         "auction": {
             "bcrumb1": "Etimad Services",
