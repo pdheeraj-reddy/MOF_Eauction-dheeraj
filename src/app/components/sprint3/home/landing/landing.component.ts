@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-
-  constructor() { }
+  lang: string = ''
+  constructor(
+    public translate: TranslateService,
+  ) { }
 
   ngOnInit(): void {
+    this.lang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.lang = event.lang;
+    });
   }
 
 }

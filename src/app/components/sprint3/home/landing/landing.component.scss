@@ -1,7 +1,6 @@
 .background {
     width: 100%;
     height: 600px;
-    // background-image: url(assets/imgs/home-background.png);
     background-repeat: no-repeat;
     display: flex;
     background-size: cover;
@@ -9,14 +8,12 @@
 
 .image {
     margin-top: 80px;
-    margin-left: 120px;
-    width: 100%;
+    width: 376px;
 }
 
 .image-text {
     display: flex;
     margin-top: 180px;
-    margin-left: 240px;
     display: block;
 }
 
@@ -27,117 +24,226 @@
     justify-content: space-around;
 }
 
-.img {
-    // width: 80px;
-}
-
-.detail {
+.auction-step-4 {
     display: flex;
-    justify-content: space-evenly;
     margin-top: 40px;
     margin-bottom: 50px;
+    position: relative;
+    height: 522px;
+
+
 }
 
-.bg-body {
-    width: 250px;
-    height: 250px;
-    background-color: #32ad71;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
+.ar {
+    .bg-body {
+        width: 382px;
+        height: 448px;
+        background-color: #32AD71;
+        position: absolute;
+        left: 14%;
+        border-radius: 20px;
+    }
+
+    .auction-card {
+        width: 351px;
+        height: 424px;
+        bottom: -77px;
+        // backdrop-filter: blur(30px);
+        left: -200px;
+        position: absolute;
+    }
+
+    .auction-price {
+        width: 302px;
+        height: 230px;
+        position: absolute;
+        right: -145px;
+        top: 52px;
+        backdrop-filter: blur(30px);
+    }
+
+    .auction-tab {
+        width: 628px;
+        height: 105px;
+        position: absolute;
+        bottom: 19px;
+        z-index: 99;
+        backdrop-filter: blur(30px);
+        border-radius: 10px;
+
+        @media screen and (max-width: 992px) {
+            right: -158px;
+            width: 533px;
+        }
+
+        @media screen and (max-width: 1200px) and (min-width: 992px) {
+            right: -57px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            right: 88px;
+        }
+    }
 }
 
-.truck-img {
+.en {
+    .bg-body {
+        width: 382px;
+        height: 448px;
+        background-color: #32AD71;
+        position: absolute;
+        right: 14%;
+        border-radius: 20px;
+    }
+
+    .auction-card {
+        width: 351px;
+        height: 424px;
+        bottom: -77px;
+        right: -200px;
+        position: absolute;
+    }
+
+    .auction-price {
+        width: 302px;
+        height: 230px;
+        position: absolute;
+        left: -145px;
+        top: 52px;
+        backdrop-filter: blur(30px);
+    }
+
+    .auction-tab {
+        width: 628px;
+        height: 105px;
+        position: absolute;
+        bottom: 19px;
+        z-index: 99;
+        backdrop-filter: blur(30px);
+        border-radius: 10px;
+
+        @media screen and (max-width: 992px) {
+            left: -158px;
+            width: 533px;
+        }
+
+        @media screen and (max-width: 1200px) and (min-width: 992px) {
+            left: -57px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            left: 88px;
+        }
+    }
+}
+
+
+
+.user-guide {
     margin-top: 80px;
-    width: 206px;
-    margin-left: -74px;
+    height: 192px;
+    width: 100%;
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        place-content: flex-start;
+
+        button {
+            margin: 0 40px;
+        }
+    }
+
+    .logo-back {
+        width: 121px;
+        height: 121px;
+        border-radius: 19px;
+        display: flex;
+        margin: 0 20px;
+        justify-content: center;
+        align-items: center;
+        --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1) !important;
+        --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color) !important;
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+
+        img {
+            width: 161px;
+            height: 72px;
+        }
+    }
+
+    .card {
+        width: inherit;
+    }
 }
 
-.truck-img1 {
-    width: 182px;
-    margin-top: 33px;
-    height: 131px;
-    margin-left: 36px;
+.head-desc {
+    font-size: 18px;
+    line-height: 26px;
+    color: #414042;
 }
 
-.truck-img2 {
-    width: 405px;
-    margin-top: 53px;
-    height: 54px;
-    margin-left: 36px;
-}
-
-.detail2 {
+.step {
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 80px;
+    max-width: 316px;
+    font-size: 25px;
 
+    p {
+        color: #414042;
+        font-size: 14px;
+    }
 }
 
-.card-body {
-    text-align: center;
-    width: 50%;
-    border: 1px solid rgba(108, 101, 101, 0.179);
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    justify-content: center;
+.help-section {
+    margin-top: 40px;
+    height: 224px;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, .125);
 
+    .title {
+        display: flex;
+        place-content: flex-start;
+    }
 
-}
+    .desc {
+        display: flex;
+        place-content: flex-start;
+        text-align: initial;
+        margin-left: 35px;
+        margin-right: 35px;
+    }
 
-.img1 {
-    width: 40px;
-    margin-top: 11px;
-    margin-right: 0px;
-}
+    .content {
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        place-content: flex-start;
 
-.card {
-    display: flex;
-}
+        h1 {
+            margin: 20px;
+        }
 
-.btn2 {
-    width: 133px;
-    height: 27px;
-    margin-top: 32px;
-    margin-right: 44px;
-    background-color: #008000d4;
-    outline: none;
-    border: 0;
-    border-radius: 10px;
-    color: white;
-}
+    }
 
-.detail3 {
-    display: flex;
-    justify-content: space-evenly;
+    .cs-button {
+        display: flex;
+        place-content: flex-end;
 
-}
+        button {
+            border: 1px solid #32AD71;
+            color: #32AD71;
+            border-radius: 5px;
+        }
+    }
 
-.card-body1 {
-    text-align: center;
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    justify-content: center;
-}
+    img {
+        width: 65px;
+        height: 65px;
+    }
 
-.card1 {
-    display: flex;
-}
-
-.btn3 {
-    width: 133px;
-    height: 27px;
-    background-color: #008000d4;
-    outline: none;
-    border: 0;
-    border-radius: 10px;
-    color: white;
-    margin-top: 60px;
+    .card {
+        width: inherit;
+    }
 }

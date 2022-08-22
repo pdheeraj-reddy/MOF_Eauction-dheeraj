@@ -2,14 +2,11 @@
     <div class="container-fluid">
         <div class="background" style="background-image: url(assets/imgs/home-background.png);">
             <div class="image-text">
-                <h1>Lorem ipsum </h1>
-                <h1 style="margin-top: 10px;">Lorem ipsum dolor sit amet.</h1>
-                <p style=" margin-top: 10px;margin-bottom:10px;">Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Recusandae,
-                    adipisci?</p>
-                <p style="margin-top: 10px;margin-bottom:10px;">Lorem ipsum dolor, sit amet consectetur adipisicing
-                    elit. Culpa, voluptate!</p>
-                <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">User</button>
+                <h1>{{'home.landing.welcome' | translate}} </h1>
+                <h1 style="margin-top: 10px;">{{'home.landing.online_auction_service' | translate}}</h1>
+                <p class="head-desc">{{'home.landing.description' | translate}}</p>
+                <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">{{'home.landing.sign_in' |
+                    translate}}</button>
             </div>
             <div>
                 <img src="assets/imgs/home-illustrator.png" class="image" alt="">
@@ -18,92 +15,80 @@
         </div>
     </div>
     <div class="container text-center">
-        <div class="row">
-            <div style="display: flex;">
-                <div style="width: min-content;">
-                    <h2>Lorem, ipsum.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eius?</p>
-                </div>
+        <div class="row" style="margin-bottom: 100px;">
+            <div class="step">
                 <div class="col">
-                    <img src="assets/imgs/1.png" class="img
-                    " alt="">
+                    <img src="assets/imgs/1.png" class="img" alt="">
+                </div>
+                <div>
+                    <h2>{{'home.landing.1_title' | translate}}</h2>
+                    <p>{{'home.landing.1_desc' | translate}}</p>
                 </div>
             </div>
-            <div style="display: flex;">
-                <div style="width: min-content;">
-                    <h2>Lorem, ipsum.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eius?</p>
-                </div>
+            <div class="step">
                 <div class="col">
-                    <img src="assets/imgs/2.png" class="img
-                            " alt="">
+                    <img src="assets/imgs/2.png" class="img" alt="">
+                </div>
+                <div>
+                    <h2>{{'home.landing.2_title' | translate}}</h2>
+                    <p>{{'home.landing.2_desc' | translate}}</p>
                 </div>
             </div>
-            <div style="display: flex;">
-                <div style="width: min-content;">
-                    <h2>Lorem, ipsum.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eius?</p>
-                </div>
+            <div class="step">
                 <div class="col">
-                    <img src="assets/imgs/3.png" class="img
-                                " alt="">
+                    <img src="assets/imgs/3.png" class="img" alt="">
+                </div>
+                <div>
+                    <h2>{{'home.landing.3_title' | translate}}</h2>
+                    <p>{{'home.landing.3_desc' | translate}}</p>
                 </div>
             </div>
         </div>
-        <div>
-            <div class="detail">
-                <div style="display: flex;">
-                    <div style="width: min-content;">
-                        <h2>Lorem, ipsum.</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eius?</p>
-                    </div>
+        <div class="" style="margin-bottom: 100px;">
+            <div class="auction-step-4" [ngClass]="lang">
+                <div class="step">
                     <div class="col">
                         <img src="assets/imgs/4.png" class="img" alt="">
                     </div>
+                    <div>
+                        <h2>{{'home.landing.4_title' | translate}}</h2>
+                        <p>{{'home.landing.4_desc' | translate}}</p>
+                    </div>
                 </div>
+                <img src="assets/imgs/auction-tab.png" class="auction-tab" alt="">
                 <div class="bg-body">
-                    <div>
-                        <img src="assets/imgs/auction-card.png" class="truck-img" alt="">
-                    </div>
-                    <div>
-                        <img src="assets/imgs/auction-tab.png" class="truck-img2" alt="">
-                        <img src="assets/imgs/auction-price.png" class="truck-img1" alt="">
-                    </div>
+                    <img src="assets/imgs/auction-price.png" class="auction-price" alt="">
+                    <img src="assets/imgs/auction-card.png" class="auction-card" alt="">
                 </div>
             </div>
         </div>
-        <div class="detail2">
-            <div class="card-body">
-                <div>
-                    <img src="assets/icons/logo-mini.svg" class="img1" alt="">
+        <div class="user-guide container card">
+            <div class="content">
+                <span class="logo-back">
+                    <img src="assets/icons/logo-mini.svg" class="img1" alt="logo">
+                </span>
+                <div style="text-align: initial;">
+                    <h1>{{'home.landing.user_guide' | translate}}</h1>
+                    <p>{{'home.landing.user_guide_desc' | translate}}</p>
                 </div>
-                <div class="card">
-                    <div>
-                        <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">Submit the
-                            data</button>
-                    </div>
-                    <div>
-                        <h1>lorem</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, dicta!</p>
-                    </div>
-                </div>
+                <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">
+                    {{'home.landing.download_manual' | translate}}
+                </button>
             </div>
         </div>
-        <div class="detail3">
-            <div class="card-body1">
-                <div>
-                    <img src="assets/imgs/Hints.svg" class="img1" alt="">
+        <div class="help-section container">
+            <div class="content">
+                <div class="title">
+                    <img src="assets/imgs/Hints.svg" alt="Hints">
+                    <h1>{{'home.landing.need_help' | translate}}</h1>
                 </div>
-
-                <div class="card1">
-                    <div>
-                        <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">Submit the
-                            data</button>
-                    </div>
-                    <div>
-                        <h1>lorem</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, dicta!</p>
-                    </div>
+                <div class="desc">
+                    <p>{{'home.landing.faq_page' | translate}}</p>
+                </div>
+                <div class="cs-button">
+                    <button class="btn btn-lg d-flex">
+                        {{'home.landing.connect_with_us' | translate}}
+                    </button>
                 </div>
             </div>
         </div>
