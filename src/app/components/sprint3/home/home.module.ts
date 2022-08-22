@@ -7,6 +7,7 @@ import { LandingComponent } from './landing/landing.component';
 import { AuctionComponent } from './auction/auction.component';
 import { AuctionDetailComponent } from './auction-detail/auction-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuctionCardComponent } from './auction-card/auction-card.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     HomeComponent,
     LandingComponent,
     AuctionComponent,
-    AuctionDetailComponent
+    AuctionDetailComponent,
+    AuctionCardComponent
   ],
   imports: [
     CommonModule,

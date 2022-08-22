@@ -1255,7 +1255,10 @@
             "search":"Search",
             "user-manual":"User's Manual",
             "user-manual-desc":"Helps you get the information you want to start benefiting from the services",
-            "user-manual-button":"Download User Manual"
+            "user-manual-button":"Download User Manual",
+            "help-title": "Need help?",
+            "help-desc": "On the Frequently Asked Questions page, you will find a list of the most frequently asked questions. If you still need help, we are glad to serve you by contacting the attached form.",
+            "help-button": "Connect with us"
         },
         "auction-detail": {}
     }
