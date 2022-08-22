@@ -62,6 +62,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="upcoming-auction mt-5">
+            <h1>{{'home.landing.latest_product' | translate}}</h1>
+            <div class="auction-card-par d-flex flex-wrap ">
+                <div class="auction-card" #auctionSlide>
+                    <span class="icon-keyboard_arrow_right arrow_right" (click)="scrollAuctionSlider('right')"></span>
+                    <span class="icon-keyboard_arrow_left arrow_left" (click)="scrollAuctionSlider('left')"></span>
+                    <div *ngFor="let item of auctionListData" style="margin: 0 15px;">
+                        <app-auction-card-landing [auction]="item">
+                        </app-auction-card-landing>
+                    </div>
+                </div>
+            </div>
+
+            <p>{{'home.landing.browse_all_auction' | translate}}<span class="icon-keyboard_arrow_left"></span></p>
+        </div>
         <div class="user-guide container card">
             <div class="content">
                 <span class="logo-back">
