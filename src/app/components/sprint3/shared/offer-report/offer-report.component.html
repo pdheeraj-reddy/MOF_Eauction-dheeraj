@@ -194,7 +194,7 @@
                 <ng-container *ngIf="!showLoader && openofferListData?.length > 0">
                     <tr *ngFor="let rowItem of openofferListData;index as i">
                         <ng-container *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
-                            <td>{{rowItem.serialNo}}</td>
+                            <td>{{i+1}}</td>
                             <td>{{rowItem.offerValue | number}} {{'auctionCommittee.ac-openOffers.SAR' |
                                 translate}}</td>
                             <td>
@@ -226,7 +226,7 @@
                             <td>{{ rowItem.commercialRegistrationNo }}</td>
                             <td>
                                 <div
-                                    [ngClass]="[rowItem.Status === 'Awarded' ? 'status status-o status-o-success-2' : 'status status-o status-o-neutral-2']">
+                                    [ngClass]="[rowItem.Status === 'Awarded' ? 'status status-o status-o-success-3' : 'status status-o status-o-neutral-2']">
                                     <br>
                                 </div>
                                 {{ rowItem.Status | translate }}

@@ -85,7 +85,7 @@
             </app-auction-countdown-timer>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
             <div class="mt-5">
-                <button style="width: 125px;"
+                <button style="width: 125px;" [routerLink]="['/home/auction-detail']"
                     [ngClass]="(auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md'">
                     {{ 'AuctionDetails' | translate }}
                 </button>

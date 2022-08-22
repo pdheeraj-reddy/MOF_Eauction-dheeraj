@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnvService } from 'src/app/env.service';
 
 @Component({
   selector: 'app-auction-detail',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuctionDetailComponent implements OnInit {
 
-  constructor() { }
+  days: number = 0;
+  hours: number = 0;
+  minutes: number = 0;
+  seconds: number = 0;
+  showText = 'Starts In'
+
+  constructor(private envService: EnvService) { }
+
+  public get getHomeUrl() {
+    return this.envService.environment.idmHomeUrl;
+  }
 
   ngOnInit(): void {
   }

@@ -1378,7 +1378,8 @@
 
             <!--================= Offer Reports =================-->
             <div [hidden]="!editmode3" class="card" style="width: 73%;">
-                <app-offer-report [auctionId]="auctionId" [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
+                <app-offer-report [auctionId]="auctionId" [auctionStatus]="auctionStatus"
+                    [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
             </div>
 
             <div [hidden]="!isPricingCommittee" class="card" style="width: 73%;">

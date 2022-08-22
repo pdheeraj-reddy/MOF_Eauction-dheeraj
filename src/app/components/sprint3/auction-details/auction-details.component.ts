@@ -39,6 +39,8 @@ export class AuctionDetailsComponent implements OnInit {
 
   filterFormGroup: FormGroup;
 
+  auctionStatus: any = '';
+
   //filter Form controls
   showFilterForm: boolean = false;
 
@@ -484,6 +486,9 @@ export class AuctionDetailsComponent implements OnInit {
       pdfData: auctionDetailList.BidOfferPDF,
       auctionId: auctionDetailList.ObjectId,
     }
+
+
+    this.auctionStatus = this.upcomingAuction.auctionStatus;
 
     if (this.upcomingAuction.auctionStatus == "Published") {
       this.status.published = true;

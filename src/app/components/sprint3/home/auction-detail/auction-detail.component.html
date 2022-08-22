@@ -1,1 +1,524 @@
-<p>auction-detail works!</p>
+<!--=========== Breadcrumb ===========-->
+<div class="col-12 mt-1 pl-0 pr-0">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a [href]="getHomeUrl">{{'home.auction.bcrumb1' | translate}}</a></li>
+            <li class="breadcrumb-item"><a href="/home">{{ 'home.auction.bcrumb2' | translate }}</a>
+            </li>
+            <li class="breadcrumb-item"><a href="/home/auction">{{ 'home.auction.bcrumb3' | translate }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ 'home.auction-detail.bcrumb4' | translate}}
+            </li>
+        </ol>
+    </nav>
+</div>
+<!-- End -->
+
+<!-- ================= Title of Page ==================== -->
+<div class="col-12 pb-2 pl-0 pr-0 smt-5 border-bottom">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="text-32 text-primary font-weight-500">{{'home.auction-detail.bcrumb4' | translate}}</h1>
+        </div>
+    </div>
+</div>
+<!-- End -->
+
+<!-- ============   Auction Details Box   ================== -->
+
+<div class="mt-4">
+    <div class="card" style="width: 85%; margin-left: 7%; margin-right: 7%; padding: 30px;">
+
+        <!-- ======= Block for Timer and Status ========= -->
+        <div class="d-flex align-items-center mt-3">
+
+            <!--============= Timer in head =============-->
+            <div class="w-75">
+                <div style="width: 25%;">
+                    <label for="end-through" class="text-body text-10">{{ showText | translate }}:</label>
+                    <div class="row" style="display: flex;justify-content: space-evenly;">
+                        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+                            <label for="day" class="text-success text-18 font-weight-bold">{{days | number :
+                                '1.0'}}</label>
+                            <label for="day" class="text-primary text-12 font-weight-bold">{{ 'Day' | translate
+                                }}</label>
+                        </div>
+                        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+                            <label for="hour" class="text-success text-18 font-weight-bold">{{hours | number :
+                                '1.0'}}</label>
+                            <label for="hour" class="text-primary text-12 font-weight-bold">{{ 'Hour' | translate
+                                }}</label>
+                        </div>
+                        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+                            <label for="accurate" class="text-success text-18 font-weight-bold">{{minutes | number :
+                                '1.0'}}</label>
+                            <label for="accurate" class="text-primary text-12 font-weight-bold">{{ 'Accurate' |
+                                translate }}</label>
+                        </div>
+                        <div class="col-1" style="display: flex; flex-direction: column;align-items: center;">
+                            <label for="second" class="text-success text-18 font-weight-bold">{{seconds | number :
+                                '1.0'}}</label>
+                            <label for="second" class="text-primary text-12 font-weight-bold">{{ 'Second' | translate
+                                }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End -->
+
+            <!--============= Shows status =============-->
+            <div class="w-25 d-flex justify-content-end">
+                <p class="status-code-up">{{ 'Upcoming' | translate}}</p>
+            </div>
+            <!-- End -->
+
+        </div>
+        <!-- =====   End here   ===== -->
+
+        <!-- ======= Image Gallery block -->
+        <div class="blank-image border mt-4">
+            <img class="img-fluid" [src]="" />
+            <p class="product-name">Image for product</p>
+            <p class="no-image">
+                {{'sprint3_auction_detail.no_product_picture' | translate }}
+            </p>
+        </div>
+        <div>
+            <p class="text-12 text-center">
+                {{1}} {{'sprint3_auction_detail.of' | translate }}
+                {{1}}</p>
+        </div>
+
+        <p class="text-primary font-weight-bold text-22">Auction Name</p>
+
+        <p class="text-16" style="color: #7A7A7A;">Auction Description</p>
+
+        <p class="text-14 text-black d-flex">
+            <img src="assets/icons/product-layers.png" alt="">&nbsp;
+            <span class="mx-1">10</span>
+            <span>{{ 'bidderAuctionDetails.Product' | translate }}</span>
+        </p>
+
+        <p class="text-14 text-black">
+            <span class="icon-calendar text-primary font-weight-bold text-20"></span>
+            &nbsp;
+            {{'bidderAuctionDetails.AuctionStarts' | translate }}
+            2022-08-22 &nbsp; ∙
+            01:30
+            PM
+        </p>
+
+        <p class="text-14 text-black">
+            <span class="text-primary font-weight-bold text-20"><img src="/assets/icons/auction-primary.svg"
+                    alt=""></span>&nbsp;&nbsp;
+            {{'bidderAuctionDetails.BiddingIs' | translate }} Closed
+        </p>
+
+        <div class="et-accordion mt-4">
+            <div class="card" style="border: none;">
+                <div class="card-header"
+                    style="border-bottom: 1px solid #e3e3e3; border-radius: 0; padding: 0 !important;"
+                    data-toggle="collapse" data-target="#localContentFirst" aria-expanded="false"
+                    aria-controls="localContentFirst">
+                    <h2 class="mb-0 text-body">{{'bidderAuctionDetails.ImportantInformation' | translate }}
+                    </h2>
+                    <button class="btn btn-accordion-control" type="button" data-toggle="collapse"
+                        data-target="#localContentFirst" aria-expanded="false" aria-controls="localContentFirst">
+                        <div class="collapsed-icon">
+                            <span class="icon-arrow-down"></span>
+                        </div>
+                    </button>
+                </div>
+                <div class="collapse mt-4" id="localContentFirst" style="border-top: none;">
+                    <div class="card-body" style="padding: 0 !important;">
+                        <div class="form-field">
+                            <form class="needs-validation" novalidate>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3" style="padding-left: 5px; padding-right: 5px;">
+                                        <div class="form-group">
+                                            <label>{{ 'bidderAuctionDetails.AuctionStartPrice' | translate
+                                                }}</label>
+                                            <div class="text-primary">
+                                                1000000 {{'common.SAR' | translate}} </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>{{
+                                                "bidderAuctionDetails.InitialGuaranteePercentage"
+                                                | translate }}</label>
+                                            <div class="text-primary">
+                                                5 %
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>{{ 'bidderAuctionDetails.CommissionRate' | translate
+                                                }}</label>
+                                            <div class="text-primary">
+                                                3 %
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3" style="padding-left: 5px; padding-right: 5px;">
+                                        <div class="form-group">
+                                            <label>{{ 'bidderAuctionDetails.EndOfBidding' | translate
+                                                }}</label>
+                                            <div class="row text-primary">
+                                                <span class="col-md-6"
+                                                    style="max-width: 47% !important;">2022-08-22</span>&nbsp;
+
+                                                <ul class="col list list-primary-bullets d-inline-block">
+                                                    <li class="text-muted">
+                                                        <span>02:30 PM </span>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label>{{ 'bidderAuctionDetails.BidOpeningDate' | translate
+                                                }}</label>
+                                            <div class="row text-primary">
+                                                <span class="col-md-6"
+                                                    style="max-width: 47% !important;">2022-08-22</span>&nbsp;
+
+                                                <ul class="col list list-primary-bullets d-inline-block">
+                                                    <li class="text-muted">
+                                                        <span>02:00 AM</span>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="et-accordion mt-4" style="width: 85%; margin-left: 7%; margin-right: 7%;">
+    <div class="card">
+        <div class="card-header" data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
+            aria-controls="localContentFirst2">
+            <h2 class="mb-0 text-body">{{'bidderAuctionDetails.AuctionDetails1' | translate }}
+            </h2>
+            <button class="btn btn-accordion-control" type="button" data-toggle="collapse"
+                data-target="#localContentFirst2" aria-expanded="false" aria-controls="localContentFirst2">
+                <div class="collapsed-icon">
+                    <span class="icon-arrow-down"></span>
+                </div>
+            </button>
+        </div>
+        <div class="collapse" id="localContentFirst2">
+            <div class="card-body">
+                <div class="form-field">
+                    <form class="needs-validation" novalidate>
+                        <div class="border-bottom">
+
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.AuctionReferenceNumber'
+                                        |
+                                        translate }}</label>
+                                    <div class="text-primary">
+                                        900001 </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.AuctionType' |
+                                        translate
+                                        }}</label>
+                                    <div class="text-primary">
+                                        Public </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.BiddingMethod' |
+                                        translate
+                                        }}</label>
+                                    <div class="text-primary">
+                                        Closed </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.AuctionName' |
+                                        translate
+                                        }}</label>
+                                    <div class="text-primary">
+                                        Auction Name </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.AuctionProducts' |
+                                        translate }}</label>
+                                    <div class="text-primary">
+                                        Product Name </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.EntityNo' | translate
+                                        }}</label>
+                                    <div class="text-primary">
+                                        1000 </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">{{
+                                        'bidderAuctionDetails.auction-details.EntityName' |
+                                        translate
+                                        }}</label>
+                                    <div class="text-primary">
+                                        Entity </div>
+                                </div>
+                                <!-- <div class="col-md-4 mb-3">
+                                                        <label for="validationCustom01">The period of presentation of products in the market</label>
+                                                        <div class="text-primary">3 months</div>
+                                                    </div> -->
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="goverusermessage">{{
+                                            'bidderAuctionDetails.auction-details.AuctionDescription'
+                                            |
+                                            translate }} </label>
+                                        <div class="text-primary">
+                                            Auction Description </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom">
+                            <div class="pt-5 pb-3">
+                                <h4> {{ 'bidderAuctionDetails.auction-details.AuctionDateAndTime' |
+                                    translate }} </h4>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            'bidderAuctionDetails.auction-details.BiddingBegins' |
+                                            translate }}</label>
+                                        <div class="row text-primary">
+                                            <span class="col-md-6" style="max-width: 45% !important;">2022-08-22</span>
+
+                                            <ul class="col list list-primary-bullets d-inline-block">
+                                                <li class="text-muted">
+                                                    <span>12:30 PM</span>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            'bidderAuctionDetails.auction-details.EndOfBidding' |
+                                            translate }}</label>
+                                        <div class="row text-primary">
+                                            <span class="col-md-6" style="max-width: 45% !important;">2022-08-09</span>
+                                            <ul class="col list list-primary-bullets d-inline-block">
+                                                <li class="text-muted">
+                                                    <span>02:20AM</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            "bidderAuctionDetails.auction-details.HowToStartTheAuction"
+                                            |
+                                            translate }}</label>
+                                        <div class="text-primary">
+                                            Automatic </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            "bidderAuctionDetails.auction-details.BidOpeningDate" |
+                                            translate }}</label>
+                                        <div class="row text-primary">
+                                            <span class="col-md-6" style="max-width: 45% !important;">202-08-26</span>
+                                            <ul class="col list list-primary-bullets d-inline-block">
+                                                <li class="text-muted">
+                                                    <span>12:20 PM</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="border-bottom">
+                            <div class="pt-5 pb-3">
+                                <h4> {{ "bidderAuctionDetails.auction-details.FinancialAuctionItems"
+                                    |
+                                    translate }} </h4>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            "bidderAuctionDetails.auction-details.AuctionStartPrice"
+                                            |
+                                            translate }}</label>
+                                        <div class="text-primary">
+                                            1000 SAR
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            "bidderAuctionDetails.auction-details.WarrantyPercentage"
+                                            | translate }}</label>
+                                        <div class="text-primary">
+                                            5
+                                            %
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            'bidderAuctionDetails.auction-details.CommissionType' |
+                                            translate }}</label>
+                                        <div class="text-primary">
+                                            Next Financial
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            "bidderAuctionDetails.auction-details.Pursuit-percentage-commission"
+                                            | translate }}</label>
+                                        <div class="text-primary">3 %
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label>{{
+                                            "bidderAuctionDetails.auction-details.Final-guarantee-payment-date"
+                                            | translate }}</label>
+                                        <div class="text-primary">
+                                            10 days
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Auction Attachments -->
+                        <div class="">
+                            <div class="pt-5 pb-3">
+                                <h4> {{ "bidderAuctionDetails.auction-details.Attachments" |
+                                    translate }}
+                                </h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-3">
+                                    <table id="auctionAttachment"
+                                        class="table table-bordered table-striped table-expanded table-hover">
+                                        <thead>
+                                            <tr class="btn-primary-light">
+                                                <th class="th-serials" scope="col">
+                                                    <span>{{'bidderAuctionDetails.auction-details.Attached'
+                                                        | translate }}</span><span class="sort"><span
+                                                            class="sort-none"></span></span>
+                                                </th>
+                                                <th class="" scope="col">
+                                                    <span>{{
+                                                        'bidderAuctionDetails.auction-details.AttachmentName'
+                                                        | translate }}</span><span class="sort"><span
+                                                            class="sort-none"></span></span>
+                                                </th>
+                                                <th class="th-action" scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="border: 1px solid rgba(0,0,0,.125);">
+
+                                            <tr>
+                                                <td colspan="10" class="p-3 bg-white">
+                                                    <div class="alert-body text-center"><i class="alert-icon"><svg
+                                                                width="48" height="48"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <g fill="#CCC" fill-rule="nonzero">
+                                                                    <path
+                                                                        d="M46.884 15.272L24.513 8.087a1.545 1.545 0 00-1.005-.006L1.113 15.273A1.606 1.606 0 000 16.802v21.35a2.4 2.4 0 001.618 2.268l21.592 7.445a2.365 2.365 0 001.57 0l21.6-7.447A2.4 2.4 0 0048 38.153V16.802c0-.698-.451-1.316-1.116-1.53zM23.2
+                                                                        9.862v10.94a.8.8 0 001.6 0V9.86l21.6 6.935V16.808h-.005L24 24.001 1.605 16.795 23.2 9.861zM1.6 38.151V18.488l21.6 6.938v20.744l-21.058-7.26a.8.8 0 01-.542-.756zm44.26.757l-21.06 7.26V25.426l21.6-6.938v19.666a.8.8 0 01-.54.756z">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M20.246 26.289l-14.87-4.88a1.538 1.538 0 00-1.399.231c-.404.3-.643.78-.644 1.291v13.563c0 .682.424 1.289 1.055 1.511l14.87 5.24c.478.17 1.007.091 1.42-.21.411-.3.656-.785.655-1.302V27.816a1.592
+                                                                        1.592 0 00-1.087-1.527zM4.9 28.353l14.87 4.88v3.74l-14.87-4.878v-3.742zm14.87-.537v3.742l-14.87-4.879v-3.748l14.87 4.885zm-14.87 8.678v-2.72l14.87 4.88v3.079l-14.87-5.24zM44.023 21.64a1.546 1.546 0 00-1.4-.231l-14.87 4.879a1.592 1.592 0 00-1.086
+                                                                        1.53v13.916c0 .517.245 1.002.657 1.302.412.3.94.378 1.418.21l14.87-5.24a1.598 1.598 0 001.055-1.51V22.932a1.62 1.62 0 00-.644-1.294zm-.922 1.293v5.565l-3.932 1.288a2.326 2.326 0 00-1.546 2.27 1.595 1.595 0 01-1.122 1.53c-.664.2-1.378-.07-1.755-.663a2.166
+                                                                        2.166 0 00-2.53-.867l-3.984 1.305v-5.544l14.87-4.884zm-14.87 18.801V35.04l4.462-1.458a.645.645 0 01.738.207 3.098 3.098 0 003.519 1.327c1.33-.404 2.242-1.656 2.238-3.076a.728.728 0 01.458-.73l3.455-1.133v6.32l-14.87 5.237zM24 6.667c.368 0 .667-.373.667-.834v-5C24.667.373
+                                                                        24.368 0 24 0c-.368 0-.667.373-.667.833v5c0 .46.299.834.667.834zM12.484 7.539a.786.786 0 001.073.373.85.85 0 00.359-1.118l-2.4-5a.786.786 0 00-1.073-.373.85.85 0 00-.359 1.119l2.4 4.999zM34.44 7.911c.192.1.413.116.615.046a.81.81 0 00.463-.423l2.398-4.995a.85.85
+                                                                        0 00-.359-1.118.785.785 0 00-1.072.373L34.087 6.79a.864.864 0 00-.047.637c.066.21.21.385.4.484z">
+                                                                    </path>
+                                                                </g>
+                                                            </svg></i>
+                                                        <div class="alert-content">
+                                                            <h5 class="text-black-50">{{
+                                                                'common.msg-noattach' | translate }}
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="margin-left: 7%; margin-right: 7%; margin-bottom: 40px;">
+    <button [routerLink]="['/home/auction']" type="submit"
+        class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg">
+        <span class="btn-text">Back</span> <span class="v-divider"></span>
+        <span class="icon icon-arrow-left"></span>
+    </button>
+</div>

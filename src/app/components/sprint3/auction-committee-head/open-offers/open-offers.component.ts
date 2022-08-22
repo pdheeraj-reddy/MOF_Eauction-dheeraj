@@ -233,6 +233,7 @@ export class OpenOffersComponent implements OnInit {
       this.rejectReason = '';
       return;
     }
+    console.log("data", data)
     const param = {
       AucId: this.auctionId,
       BidderId: data.BidderId,
@@ -241,7 +242,8 @@ export class OpenOffersComponent implements OnInit {
     this.committeeHeadService.updateOpenOfferStatus(param).subscribe((res: any) => {
       this.rejectReason = '';
       data.selected = false;
-      const foundIndex = this.openofferListData.findIndex((i: any) => i.Sno == data.Sno)
+
+      const foundIndex = this.openofferListData.findIndex((i: any) => i.serialNo == data.serialNo)
       if (foundIndex > -1 && foundIndex < this.openofferListData.length) {
         this.openofferListData[foundIndex + 1].selected = true;
         this.copyOpenofferListData = this.openofferListData

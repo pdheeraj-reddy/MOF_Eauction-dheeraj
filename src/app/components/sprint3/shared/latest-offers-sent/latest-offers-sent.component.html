@@ -8,7 +8,7 @@
         <p class="text-22">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
 
         <ng-container *ngFor="let b of biddet;index as i">
-            <ng-container *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
+            <ng-container>
                 <div class="list-card" style="height: 10%;">
                     <div class="text-body"
                         style="display: flex;justify-content: space-between; height: 100%; align-items: center;">
@@ -25,25 +25,25 @@
             </div>
             <p style="color: #414042;opacity: 0.61;font-size: 12px;margin: 0;"> Not yet</p>
         </div>
-        <div *ngIf="biddet.length > pagelimit" class="mt-4 mb-2 row justify-content-end"
+        <div *ngIf="totalElement > pagelimit" class="mt-4 mb-2 row justify-content-end"
             style="height: 10%; position: absolute; bottom: 0%; width: 100%; margin-left: -25px !important; margin-right: -25px !important; padding-top: 30px;">
             <div class="mb-5">
                 <nav aria-label="..." class="nav-pagination">
-                    <ul class="pagination">
+                    <ul *ngIf="pageRangeForAttach.pages && pageRangeForAttach.pages.length > 0" class="pagination">
                         <li class="page-item clickable" disabled
                             [ngClass]="{ disabled: pageRangeForAttach.currentPage === 1 }">
-                            <a (click)="navigateToPage(pageRangeForAttach.currentPage -1)" class="page-link"
+                            <a (click)="getServerData(pageRangeForAttach.currentPage);" class="page-link"
                                 aria-disabled="true">{{
                                 'auctionlist.grid-previous' | translate }}</a>
                         </li>
                         <li *ngFor="let page of pageRangeForAttach.pages" class="page-item page-no"
                             [ngClass]="{ active: pageRangeForAttach.currentPage === page }">
-                            <a (click)="navigateToPage(page)" class="page-link "> {{
+                            <a (click)="getServerData(page + 1);" class="page-link "> {{
                                 page }} </a>
                         </li>
                         <li class="page-item clickable" disabled
                             [ngClass]="{ disabled: pageRangeForAttach.currentPage === pageRangeForAttach.totalPages }">
-                            <a (click)="navigateToPage(pageRangeForAttach.currentPage + 1)" class="page-link">{{
+                            <a (click)="getServerData(PaginationServc.currentPage + 2);" class="page-link">{{
                                 'auctionlist.grid-next' | translate }}</a>
                         </li>
                     </ul>

@@ -16,6 +16,7 @@ declare var $: any;
 export class OfferReportComponent implements OnInit {
 
   @Input() auctionId: string;
+  @Input() auctionStatus: string;
   @Input() offerReportPdf: string;
 
   openofferListData: any;
@@ -101,13 +102,20 @@ export class OfferReportComponent implements OnInit {
       this.openofferListData = resultSet;
       this.copyOpenofferListData = resultSet;
       this.navigateToPage(1);
-      this.openofferListData.forEach((res: any) => {
-        if (res.Status == 'W') {
-          res.Status = 'Awarded';
-        } else {
+      if (this.auctionStatus == 'Terminated') {
+        this.openofferListData.forEach((res: any) => {
           res.Status = 'Not Awarded';
-        }
-      });
+        });
+      }
+      else {
+        this.openofferListData.forEach((res: any) => {
+          if (res.Status == 'R' || res.Status == 'B') {
+            res.Status = 'Not Awarded';
+          } else {
+            res.Status = 'Awarded';
+          }
+        });
+      }
     }
   }
 

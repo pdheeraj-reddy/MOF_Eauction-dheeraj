@@ -176,6 +176,10 @@
     background-color: transparent;
 }
 
+.page-item.disabled .page-link {
+    color: #cccccc !important;
+}
+
 .page-link:hover {
     background-color: #ffff;
     color: #32ad71;
@@ -216,11 +220,11 @@
 }
 
 .page-item.page-no {
-    color: #6c757d !important;
+    color: #cccccc !important;
 }
 
 .active {
-    color: #ffffff !important;
+    color: #F7F9FD !important;
 }
 
 .clickable:not(:disabled) {

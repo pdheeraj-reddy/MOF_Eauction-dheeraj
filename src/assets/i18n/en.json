@@ -139,6 +139,7 @@
         "pageTitle": "Create A New Auction Request",
         "pageSection1Nav1": "Auction Details",
         "pageSection1Nav2": "Product Details",
+        "pageSection1Nav20": "Product Details",
         "pageSection1Nav3": "Auction Committee Members",
         "pageSection1Nav4": "Order Summary",
         "grid-previous": "Previous",
@@ -1279,6 +1280,8 @@
             "help-desc": "On the Frequently Asked Questions page, you will find a list of the most frequently asked questions. If you still need help, we are glad to serve you by contacting the attached form.",
             "help-button": "Connect with us"
         },
-        "auction-detail": {}
+        "auction-detail": {
+            "bcrumb4": "Auction Details"
+        }
     }
 }

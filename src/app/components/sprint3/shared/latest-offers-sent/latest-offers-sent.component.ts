@@ -17,6 +17,8 @@ export class LatestOffersSentComponent implements OnInit {
   textDir: any;
   pagelimit: number = 8;
   pageRangeForAttach: any;
+  totalElement: any;
+  selectedPageNumber: number;
   constructor(private api: AucModeratorService,
     public PaginationServc: PaginationSortingService) { }
 
@@ -25,7 +27,7 @@ export class LatestOffersSentComponent implements OnInit {
 
     this.PageNo = this.pageno;
 
-    this.getBidDetails(this.PageNo);
+    this.getBidDetails(1);
     this.currentLang = localStorage.getItem('lang_pref');
     if (this.currentLang == 'en') {
       this.textDir = true;
@@ -52,18 +54,25 @@ export class LatestOffersSentComponent implements OnInit {
   }
   getBidDetails(pageno: any) {
     this.api.getLatestBiddetails(this.aucId, pageno).subscribe((res: any) => {
+      if (res['body']['d']['results'][0]['pagetoaucbiddernav']['results'] && res['body']['d']['results'][0]['pagetoaucbiddernav']['results'].length > 0) {
+        this.PaginationServc.setPagerValues(
+          +res['body']['d']['results'][0].TotEle,
+          this.pagelimit,
+          +this.PageNo
+        );
+
+      }
+      this.totalElement = res['body']['d']['results'][0].TotEle;
+      console.log("🚀🚀 ~~ this.totalElement", this.totalElement);
       this.biddet = res['body']['d']['results'][0]['pagetoaucbiddernav']['results'];
-      console.log("🚀🚀 ~~ res['body']['d']['results']", res['body']['d']['results']);
-      console.log("this.biddet", this.biddet);
       this.PaginationServc.resetSorting();
-      this.navigateToPage(1);
-      console.log('this.PaginationServc: ', this.PaginationServc);
+      this.navigateToPage(pageno);
     });
 
   }
 
   navigateToPage(pageNoVal: number) {
-    this.PaginationServc.setPagerValues(this.biddet.length, this.pagelimit, pageNoVal);
+    this.PaginationServc.setPagerValues(this.totalElement, this.pagelimit, pageNoVal);
     this.pageRangeForAttach = {
       rangeStart: pageNoVal == 1 ? 0 : ((pageNoVal - 1) * this.pagelimit),
       rangeEnd: pageNoVal == 1 ? (this.pagelimit - 1) : ((pageNoVal - 1) * this.pagelimit) + (this.pagelimit - 1),
@@ -71,6 +80,20 @@ export class LatestOffersSentComponent implements OnInit {
       currentPage: this.PaginationServc.currentPage,
       totalPages: this.PaginationServc.totalPages,
     }
+  }
+
+  public getServerData(selectedPageNumber: number) {
+
+    if (selectedPageNumber <= 2) {
+      selectedPageNumber = 1;
+    } else {
+      selectedPageNumber = selectedPageNumber - 1;
+    }
+    this.selectedPageNumber = selectedPageNumber;
+
+    this.getBidDetails(selectedPageNumber);
+    // window.scrollTo(0, 100);
+    this.PaginationServc.resetSorting();
   }
 
 
