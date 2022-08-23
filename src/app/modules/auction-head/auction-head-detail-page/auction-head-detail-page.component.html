@@ -93,9 +93,6 @@
                 role="tab" aria-controls="pills-profile" aria-selected="false" (click)="changeToPricing()">{{
                 "auctionHead.head-detail.tab3" | translate }}</a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" aria-controls="pills-profile" aria-selected="false">{{ "auctionHead.head-detail.tab4" | translate }}</a>
-        </li> -->
     </ul>
     <div *ngIf="showAuction">
         <app-auction-req-details [preAuctionData]="preAuctionData" [ObjectId]="ObjectId" [DraftId]="DraftId"

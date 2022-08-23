@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from "src/app/service/auction.service";
 import { InterconversionService } from 'src/app/service/interconversion.service';
 import { AuctionHeadDetailPageComponent } from 'src/app/modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
-// import { EventEmitter } from 'stream';
+
 
 @Component({
   selector: 'app-prodct-details',
@@ -82,13 +82,13 @@ export class ProdctDetailsComponent implements OnInit {
 
   }
   checkPrices() {
-    // this.showConfim = true;
+
     if (this.showAdjustPriceOption == true && this.productValue < 1 && this.inputMode) {
       this.invalidQty = true;
-      // window.scroll({ top: 0, behavior: "smooth" });
+
       this.inputFieldElementFocus.nativeElement.focus();
       this.inputFieldElementFocus.nativeElement.select();
-      // this.showConfim = false;
+
     } else if (!this.inputMode) {
       if (this.productValue > 0) {
         let product = this.preAuctionData?.listtoproductnav?.results;
@@ -208,8 +208,6 @@ export class ProdctDetailsComponent implements OnInit {
         }
       }
 
-
-      console.log("🚀🚀 ~~ this.productValue", this.productValue);
     });
   }
 
@@ -330,14 +328,14 @@ export class ProdctDetailsComponent implements OnInit {
     }
     this.selectedPageNumber = selectedPageNumber;
 
-    // this.getAuctionList(selectedPageNumber);
+
     this.PaginationServc.resetSorting();
   }
 
   openAdjustPriceOption(index: number) {
     this.preAuctionData?.listtoproductnav?.results.forEach((product: any, pindex: number) => {
       if (pindex == index) {
-        setTimeout(() => { // this will make the execution after the above boolean has changed
+        setTimeout(() => {
           this.inputFieldElementFocus.nativeElement.focus();
           this.inputFieldElementFocus.nativeElement.select();
         }, 0);
@@ -357,7 +355,7 @@ export class ProdctDetailsComponent implements OnInit {
       this.pdtEstPricePc += product.ZzPdtEstPricePc * product.Quantity.split('.')[0];
     });
     this.productValue = parseFloat(this.pdtEstPricePc as string);
-    // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
+
   }
   cancel(index: number) {
     let product = this.preAuctionData?.listtoproductnav?.results;
@@ -398,8 +396,7 @@ export class ProdctDetailsComponent implements OnInit {
       this.invalidQty = false;
       this.productValue = parseFloat(this.pdtEstPricePc as string);
     }
-    // this.preAuctionData?.listtoproductnav?.results?[index]?.ZzPdtEstPricePc = 'asdf' ;
-    // this.productValue = parseFloat(this.pdtEstPricePc as string);
+
 
   }
 
@@ -479,7 +476,7 @@ export class ProdctDetailsComponent implements OnInit {
   sendPricingValues() {
     if (this.productValue < 1 && this.inputMode) {
       this.invalidQty = true;
-      // window.scroll({ top: 0, behavior: "smooth" });
+
       this.inputFieldElementFocus.nativeElement.focus();
       this.inputFieldElementFocus.nativeElement.select();
     } else if (!this.inputMode) {
@@ -536,7 +533,7 @@ export class ProdctDetailsComponent implements OnInit {
     } else if (this.loggedUserRole.isPricingMember) {
       this.isPriceSuccess = true;
     }
-    
+
   }
 
   rejectPrices() {
@@ -554,7 +551,6 @@ export class ProdctDetailsComponent implements OnInit {
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
     let tableData1 = [];
-    // this.PaginationServc.sortByTableHeaderId(      'inventoryAllocationTable',      columnId,      sortType,      dateFormat    );
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     if ((this.preAuctionData?.Status == 'Pending Pricing' || this.preAuctionData?.Status == 'Pending Pricing Approval' || this.preAuctionData?.Status == 'Rejected Prices') && this.preAuctionData?.Status != 'Pending to Publish') {
       tableData1 = this.PaginationServc.sortAllTableData(this.preAuctionData?.listtoproductnav?.results, (this.columnLst2[columnId]));

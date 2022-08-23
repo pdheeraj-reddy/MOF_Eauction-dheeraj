@@ -82,7 +82,6 @@ export class BidValueUpdateComponent implements OnInit {
   }
   adjustTotalPriceAuction(action: any) {
     this.preAuctionData.ActionTaken = action;
-    console.log(this.preAuctionData);
     this._AuctionService
       .approveOrRejectAuction({
         ObjectId: this.preAuctionData.ObjectId,
@@ -95,7 +94,6 @@ export class BidValueUpdateComponent implements OnInit {
       })
       .subscribe(
         (res: any) => {
-          console.log(res);
           this.getPreAuctionData();
         },
         (error) => {
@@ -107,7 +105,6 @@ export class BidValueUpdateComponent implements OnInit {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
         this.totalBidValue = parseFloat(this.preAuctionData.ZzPbEstPricePc);
@@ -124,8 +121,6 @@ export class BidValueUpdateComponent implements OnInit {
         console.log('getAuctionList RespError : ', error);
       }
     );
-    // let temp = this._AuctionService.getPreAuctionApproval('9700000300');
-    // this.preAuctionData = temp['d']['results'][0];
   }
 
   public getUserInfo() {

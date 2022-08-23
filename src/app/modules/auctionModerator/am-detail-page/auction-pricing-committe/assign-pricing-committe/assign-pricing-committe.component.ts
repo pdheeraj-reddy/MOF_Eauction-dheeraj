@@ -74,13 +74,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     private translate: TranslateService
   ) {
     window.addEventListener('beforeunload', (e) => {
-      // if (this.auctionServc.unsaved) {
-      //   e.preventDefault();
-      //   this.handleUnsavedError();
-      //   e.returnValue = '';
-      // }
     });
-    // this.auctionServc.unsaved = false;
   }
   closeConfirm() {
     this.showConfirm = false;
@@ -90,30 +84,19 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   }
   async goBack() {
     this.stepperEvent1.emit();
-    // this.router.navigateByUrl('/');
   }
   async goBacktoList() {
     this.router.navigateByUrl('/');
   }
   checkMember() {
-    // this.getPreAuctionData();
     if (
       this.committeeChairData == undefined ||
-      // this.committeeSecData == undefined ||
       this.committeeMem1Data == undefined ||
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
     ) {
       this._3MembersErrorMsg.emit(true);
       window.scroll({ top: 0, behavior: "smooth" });
-      // scroll.scrollTop = scroll?.scrollHeight;
-      // if (this.committeeChairData == undefined) {
-      //   console.log(this.committeeChairData);
-      //   // alert('Enter Required fields');
-      //   this._3MembersErrorMsg.emit(true);
-      // } else {
-      //   this._3MembersErrorMsg.emit(true);
-      // }
     } else {
       this._3MembersAdded = true;
       this.showConfirm = true;
@@ -140,11 +123,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     this.committeeSecData = undefined;
     this.existingCommitteMemberList = [];
     this.addcommitteeMemberList = [];
-    // this.committeeChairData = [];
-    // this.committeeMem1Data = [];
-    // this.committeeMem2Data = [];
-    // this.committeeMem3Data = [];
-    // this.committeeMem4Data = [];
     this._3MembersErrorMsg.emit(false);
     this.committeeChairSelected = false;
     this.committeeSecSelected = false;
@@ -156,8 +134,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
 
     this.auctionServc.unsaved = false;
     this.showCancelPopup = false;
-    // this.ngOnInit();
-    // this.router.navigate(['/auctionlist']);
   }
 
   assignPricingCommittee() {
@@ -167,13 +143,11 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     this.preAuctionData;
     if (
       this.committeeChairData == undefined ||
-      // this.committeeSecData == undefined ||
       this.committeeMem1Data == undefined ||
       this.committeeMem2Data == undefined ||
       this.committeeMem3Data == undefined
     ) {
       console.log(this.committeeChairData);
-      // alert('Enter Required fields');
       return;
     } else {
       console.log(this.committeeChairData);
@@ -192,8 +166,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: 'A',
-          ZzPrtReason: '', // Reject reason
-          ObjectId: this.preAuctionData.ObjectId, // 9700000487     9700000488   9700000489
+          ZzPrtReason: '',
+          ObjectId: this.preAuctionData.ObjectId,
           Description: this.preAuctionData.Description,
           Status: 'Pending Review', // Rejected
           UserId: '1827879980',
@@ -202,15 +176,12 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
         })
         .subscribe(
           (res: any) => {
-            // alert('Updated Successfully');
             this.showSuccessPopup = true;
             this.auctionServc.unsaved = false;
             this.showPageLoader = false;
-            console.log(res);
             this.getPreAuctionData();
           },
           (error) => {
-            // alert('Error Updating');
             this.showPageLoader = false;
             console.log('approveOrRejectAuction RespError : ', error);
           }
@@ -218,17 +189,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     }
   }
 
-  memberSelected(data: any) {
-    console.log(data);
-  }
+
   filterMember(member: any) {
     if (member.length > 0) {
       this.list = [];
-      console.log("Member:" + member);
       for (var index1 = 0; index1 < this.committeeMemberList.length; index1++) {
         var flag = false;
         for (var index2 = 0; index2 < member.length; index2++) {
-          console.log(index1);
 
           if (this.committeeMemberList[index1].EmployeeId == member[index2]) {
             flag = true;
@@ -240,7 +207,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
         }
       }
       this.committeeMemberList = this.list;
-      console.log(this.list);
     }
   }
   openAddChairDialog(title: any, role: string) {
@@ -249,13 +215,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log(this.committeeMemberList);
-          console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
-          console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             height: 'auto',
             width: 'auto',
@@ -273,19 +235,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
             panelClass: 'my-custom-dialog-class',
           });
           dialogRef.afterClosed().subscribe((result) => {
-            console.log(this.preAuctionData);
-            console.log("this.test");
-            console.log(result);
             if (result) {
               this.auctionServc.unsaved = true;
               if (this.committeeChairData) {
                 this.existingCommitteMemberList = this.existingCommitteMemberList.filter((i: string) => i !== this.committeeChairData.EmployeeId)
               }
               this.committeeChairData = result;
-              console.log(this.committeeMemberList);
               this.existingCommitteMemberList.push(this.committeeChairData.EmployeeId);
-
-              // console.log(this.committeeMemberList);
             }
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_HEAD')
               this.committeeChairSelected = true;
@@ -293,7 +249,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
             if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
               this.add4Mem = true;
             }
-            console.log(result);
           });
         },
         (error) => {
@@ -310,11 +265,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
-          console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
             height: 'auto',
@@ -376,7 +329,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
               this.committeeSecData = result;
               this.existingCommitteMemberList.push(this.committeeSecData.EmployeeId);
             }
-            console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_SECRETARY')
               this.committeeSecSelected = true;
             this.hideErrorMsg();
@@ -395,13 +347,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log("this.addcommitteeMemberList", this.addcommitteeMemberList)
-          console.log("this.existingCommitteMemberList", this.existingCommitteMemberList)
           this.filterMember(this.existingCommitteMemberList);
-          console.log("this.committeeMemberList", this.committeeMemberList)
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
             height: 'auto',
@@ -427,9 +375,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
               }
               this.committeeMem1Data = result;
               this.existingCommitteMemberList.push(this.committeeMem1Data.EmployeeId);
-              console.log(this.existingCommitteMemberList.length);
             }
-            console.log(result?.EmployeeRole);
+
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
               this.committeeMem1Selected = true;
             }
@@ -455,7 +402,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
           this.filterMember(this.existingCommitteMemberList);
-          console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
             height: 'auto',
@@ -482,7 +428,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
               this.committeeMem2Data = result;
               this.existingCommitteMemberList.push(this.committeeMem2Data.EmployeeId);
             }
-            console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem2Selected = true;
             if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
@@ -504,13 +449,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log(this.addcommitteeMemberList);
-          console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
-          console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
             height: 'auto',
@@ -536,9 +477,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
               }
               this.committeeMem3Data = result;
               this.existingCommitteMemberList.push(this.committeeMem3Data.EmployeeId);
-              // console.log(this.);
             }
-            console.log(result?.EmployeeRole);
             if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER')
               this.committeeMem3Selected = true;
             if (this.committeeMem1Selected == true && this.committeeMem2Selected == true && this.committeeMem3Selected == true) {
@@ -557,7 +496,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   hideErrorMsg() {
     if (this.committeeMem1Data != undefined && this.committeeMem2Data != undefined && this.committeeMem3Data != undefined) {
       this._3MembersErrorMsg.emit(false);
-      console.log("notempty");
     }
   }
 
@@ -567,13 +505,9 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log(this.addcommitteeMemberList);
-          console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
-          console.log(this.committeeMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
             height: 'auto',
@@ -604,10 +538,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
                 // this.committeeMem4Selected = true;
                 this.addcommitteeMemberList.push(result);
                 this.existingCommitteMemberList.push(result.EmployeeId);
-                console.log(result);
               }
             }
-            console.log(result?.EmployeeRole);
           });
         },
         (error) => {
@@ -623,11 +555,8 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
         (res: any) => {
           this.showPageLoader = false;
-          console.log('getCommitteeMembersBasedOnRole ', res.body);
           this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
           this.committeeMemberList = res.body.d.results;
-          console.log(this.addcommitteeMemberList);
-          console.log(this.existingCommitteMemberList);
           this.filterMember(this.existingCommitteMemberList);
           const dialogRef = this.dialog.open(AddMemberComponent, {
             disableClose: true,
@@ -651,8 +580,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
               if (result?.EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
                 result.SlNo = this.addcommitteeMemberList[index].SlNo;
                 this.addcommitteeMemberList[index] = result;
-                console.log("this.addcommitteeMemberList");
-                console.log(this.addcommitteeMemberList);
               }
             }
           });
@@ -682,7 +609,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       startWith(''),
       map((value) => this._filter(value))
     );
-    console.log(this.preAuctionData);
     this.getPreAuctionData();
   }
 
@@ -699,18 +625,14 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
         let temp = this.preAuctionData;
         this.isPendingReview = this.preAuctionData.Status == 'Pending Review' ? true : false;
-        console.log(temp);
         this.addcommitteeMemberList = [];
         if (temp?.listtocomiteememnav?.results?.length > 0) {
           let data = temp.listtocomiteememnav.results;
-          console.log(data.length);
           for (let i = 0; i < data.length; i++) {
-            console.log(data[i]);
             this.showPageLoader = false;
             if (data[i].EmployeeRole == 'ZEAUCTION_PRICECOMM_HEAD') {
               this.committeeChairSelected = true;
@@ -735,7 +657,6 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
             if (data[i].SlNo !== '01' && data[i].SlNo !== '02' && data[i].SlNo !== '03' && data[i].EmployeeRole == 'ZEAUCTION_PRICECOMM_MEMBER') {
               this.committeeMem4Selected = true;
               this.addcommitteeMemberList.push(data[i])
-              // this.committeeMem4Data = data[i];
             }
           }
         }

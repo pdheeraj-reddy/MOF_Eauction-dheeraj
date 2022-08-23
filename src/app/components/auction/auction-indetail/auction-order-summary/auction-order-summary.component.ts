@@ -713,6 +713,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
   public onSubmit() {
     this.submitted = true;
     this.showLoader = true;
+    delete this.auctionDetailsResp.listtobiddernav
     const auctiondetail = this.generateAuctionDetailFormat(
       this.auctionDetailsResp
     );

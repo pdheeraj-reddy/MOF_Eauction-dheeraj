@@ -48,7 +48,6 @@ export class AuctionHeadDetailPageComponent implements OnInit {
 
   adjustPrice() {
     this.priceAdjustment = !this.priceAdjustment;
-    // this.isBidUpdate = !this.isBidUpdate;
   }
 
   goBack() {
@@ -76,7 +75,6 @@ export class AuctionHeadDetailPageComponent implements OnInit {
     this.showPageLoader = true;
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
         if (this.preAuctionData.ZzEstOpt == 'A') this.isBidUpdate = false;

@@ -172,7 +172,6 @@ export class AuctionListsComponent implements OnInit {
       this.lang = event.lang;
     });
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
-    console.log('this.loggedUserRole ➼ ', this.loggedUserRole);
     this.prePopulateForm();
     this.filterForm();
     this.getAuctionList(1);
@@ -212,7 +211,6 @@ export class AuctionListsComponent implements OnInit {
   }
 
   ngOnChanges() {
-    console.log('currentLang ', this.translate.currentLang);
   }
 
   refreshCalendarCntrl() {
@@ -328,7 +326,6 @@ export class AuctionListsComponent implements OnInit {
       this.showStatusFilter = false;
     }
 
-    console.log("🚀 ~ this.auctionServc.getAuctionList ~ filters", filters)
     this.auctionServc.getAuctionList(page, filters).subscribe((res: any) => {
       this.showLoader = false;
       this.showPageLoader = false;
@@ -337,7 +334,6 @@ export class AuctionListsComponent implements OnInit {
       this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
       this.auctionListData = this.mapping(res.body);
 
-      console.log(filters, "SKA", this.auctionListData)
 
       if (res.body.d.results && res.body.d.results.length > 0) {
         this.PaginationServc.setPagerValues(
@@ -349,7 +345,6 @@ export class AuctionListsComponent implements OnInit {
 
     }, (error) => {
       this.showLoader = false;
-      console.log('getAuctionList RespError : ', error);
     });
   }
 

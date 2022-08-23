@@ -92,7 +92,6 @@ export class AucMemDetailPageComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
       },
@@ -100,15 +99,6 @@ export class AucMemDetailPageComponent implements OnInit {
         console.log('getAuctionList RespError : ', error);
       }
     );
-    // this._AuctionService.getPreAuctionApproval('9700000300').subscribe(
-    //   (res: any) => {
-    //     console.log(res);
-    //   },
-    //   (error) => {
-    //     console.log('getAuctionList RespError : ', error);
-    //   }
-    // );
-    // let temp = this._AuctionService.getPreAuctionApproval('9700000300');
-    // this.preAuctionData = temp['d']['results'][0];
+
   }
 }
