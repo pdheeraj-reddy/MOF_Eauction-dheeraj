@@ -238,40 +238,6 @@
   </div>
 
 
-  <!-- <button class="add-btn" (click)=" openAddMem4Dialog(committeeMemTitle, 'ZEAUCTION_PRICECOMM_MEMBER') ">
-      <div *ngIf="!committeeMem4Selected" class="card flex-card-item last-card">
-        <div class="card-body">
-          <div style="display: flex; justify-content: space-around; align-items: center;">
-            <img src="assets\icons\User.svg" alt="User icon" />
-            <p>{{"auctionModerator.am-detail.pricing-committee.card3-head1" | translate}}</p>
-          </div>
-          <img src="assets\icons\plus.svg" alt="Add icon" style="padding-top: 40px;" />
-        </div>
-      </div>
-      <div *ngIf="committeeMem4Selected" class="card flex-card-item last-card-data">
-        <div class="card-body">
-          <div
-            style="display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #dfebe8;">
-            <img src="assets\icons\User.svg" alt="User icon" />
-            <p>{{"auctionModerator.am-detail.pricing-committee.card3-head2" | translate}}</p>
-            <button class="btn btn-ghost btn-sm fill-primary-light-green" style="margin-left: 20px;"><span
-                class="icon-edit"></span></button>
-</div>
-<p style="color: #414042; font-size: 16px; margin-top: 20px;">{{committeeMem4Data?.EmployeeName}}</p>
-<div>
-    <div style="display: flex; justify-content: space-between; margin-top: 30px;">
-        <p style="color: #117abe;">{{"auctionModerator.am-detail.pricing-committee.jobNumber" | translate}}</p>
-        <p>{{committeeMem4Data?.EmployeeId}}</p>
-    </div>
-    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-        <p style="color: #117abe;">{{"auctionModerator.am-detail.pricing-committee.email" | translate}}</p>
-        <p>{{committeeMem4Data?.EmpMailid}}</p>
-    </div>
-</div>
-</div>
-</div>
-</button> -->
-
   <div *ngFor="let committeeMemIData of addcommitteeMemberList; let i = index" class="card flex-card-item-data">
     <div class="card-body-data">
       <div

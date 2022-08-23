@@ -36,8 +36,7 @@
                         placeholder="{{ 'auctionMember.bid-value.phold' | translate }}" style="
                         width: 300px; outline: none; border: none; border-bottom: 1px solid grey;
                         background-color: #eaf6ef; " />&nbsp; &nbsp; &nbsp;
-                    <!-- <button class="btn btn-primary-light btn-md" (click)="adjustTotalPrice()"> {{
-                        "auctionMember.bid-value.save" | translate }}</button> -->
+
                 </div>
                 <div *ngIf="invalidQty" class="invalid-feedback d-block">{{
                     'auctionMember.bid-value.overall_failure_mssg' | translate }}
@@ -226,25 +225,7 @@
         </button>
     </div>
 </div>
-<!-- <div class="btn-submit-grp">
-        <button class="btn btn-with-arrow btn-outline-light btn-md">
-      <span class="icon-keyboard_arrow_left"></span>
-      <font _mstmutation="1" _msthash="1230112" _msttexthash="94172">
-        Back
-      </font>
-    </button>
-    </div>
 
-    <div class="col-offset-4">
-        <div>
-            <button (click)="approveOrRejectAuction('R', 'Rejected Prices ')" class="btn btn-danger" _msthash="1893008" _msttexthash="94172" data-toggle="modal" data-target="#confirmDenialeModal" style="direction: ltr">
-        Denial of pricing
-      </button>
-            <button (click)="approveOrRejectAuction('A', 'Pending Pricing Approval')" class="btn btn-primary-light" _msthash="1893008" _msttexthash="94172" data-toggle="modal" data-target="#confirmAcceptanceModal" style="direction: ltr">
-        Accept pricing
-      </button>
-        </div>
-    </div> -->
 <div *ngIf="preAuctionData?.Status == 'Pending Pricing Approval' && loggedUserRole.isPricingHead "
     class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mt-5">
     <div class="flex-grow-1 flex-md-grow-0">
@@ -258,8 +239,7 @@
         </button>
     </div>
     <div class="d-flex flex-column flex-md-row">
-        <!-- <button class="btn btn-danger btn-lg mx-0 mx-md-2" data-toggle="modal" data-target="#rejectPricing"
-            _msthash="1893008" _msttexthash="94172"> -->
+
         <button class="btn btn-danger btn-lg mx-0 mx-md-2" (click)="rejectPrices()">
             {{ "auctionModerator.am-detail.product-details.reject_btn" | translate }}
         </button>
@@ -339,9 +319,7 @@
 <div class="modal show" *ngIf="confirmPublish" [ngClass]="{ 'modal-show': confirmPublish }">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content" style="align-items: center;">
-            <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-                                <span class="icon-close"></span>
-                                </button> -->
+
             <div class="card result result-success">
                 <div class="alert-body">
                     <i class="alert-icon">
@@ -406,9 +384,7 @@
 <div class="modal show" *ngIf="confirmApproval" [ngClass]="{ 'modal-show': confirmApproval }">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content" style="align-items: center;">
-            <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-                                <span class="icon-close"></span>
-                                </button> -->
+
             <div class="card result result-success">
                 <div class="alert-body">
                     <i class="alert-icon">
@@ -439,8 +415,7 @@
 
 
 <!-- Confirmation of pricing rejection -->
-<!-- <div class="modal fade" id="rejectPricing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true"> -->
+
 <div class="modal show" *ngIf="rejectionModal" [ngClass]="{ 'modal-show': rejectionModal }">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -485,9 +460,7 @@
 <div class="modal show" *ngIf="confirmRejection" [ngClass]="{ 'modal-show': confirmRejection }">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content" style="align-items: center;">
-            <!-- <button (click)="hideSuccessfulModal()" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
-                                <span class="icon-close"></span>
-                                </button> -->
+
             <div class="card result result-success">
                 <div class="alert-body">
                     <i class="alert-icon">

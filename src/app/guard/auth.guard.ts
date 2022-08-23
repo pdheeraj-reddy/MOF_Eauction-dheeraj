@@ -31,7 +31,6 @@ export class AuthGuard implements CanActivate {
 
     if (this._authService.loggedIn()) {
       const currentUserRole = this.auctionServc.loggedUser;
-      console.log('currentUserRole ➼ ', currentUserRole);
       if (currentUserRole) {
         // check if idToken has EAuction roles and envi clientId
         let isvalidRole, isvalidClientID;
@@ -44,13 +43,10 @@ export class AuthGuard implements CanActivate {
           if (currentUserRole.idmclientid) {
             isvalidClientID = !!(currentUserRole.idmclientid == this.envService.environment.idmClientId);
           }
-          console.log('isvalidRole ➼ ', isvalidRole, ' isvalidClientID ➼ ', isvalidClientID);
           if (!isvalidRole && isvalidClientID) {
-            console.log('invalid user');
             this.redirect2IdmHome();
             return false;
           } else {
-            console.log('valid user');
             return true;
             return this.checkRoles(currentUserRole)
           }
@@ -82,7 +78,6 @@ export class AuthGuard implements CanActivate {
   redirect2IdmLogin() {
     this.cookieService.deleteAll();
     const redirectUrl = this.envService.environment.idmLoginURL;
-    console.log('redirectUrl ➼ ', redirectUrl);
     window.location.href = redirectUrl;
   }
 

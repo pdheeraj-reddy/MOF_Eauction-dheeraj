@@ -68,7 +68,6 @@ export class AmDetailPageComponent implements OnInit {
   selectToggle(type: any) { }
 
   attachmentDownload(attchment: any) {
-    console.log(attchment);
     window.open(attchment.DispUrl, '_blank');
   }
 
@@ -85,7 +84,6 @@ export class AmDetailPageComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
     });
   }
   nowchangetoAuction() {
@@ -100,7 +98,6 @@ export class AmDetailPageComponent implements OnInit {
   approveOrRejectAuction(action: any) {
     this.preAuctionData.ActionTaken = action;
     if (action == 'R') this.preAuctionData.RejectNotes = this.rejectionNotes;
-    console.log(this.preAuctionData);
     this._AuctionService
       .approveOrRejectAuction({
         ActionTaken: action,
@@ -117,7 +114,6 @@ export class AmDetailPageComponent implements OnInit {
           // alert('Updated Successfully');
 
           this.getPreAuctionData();
-          console.log(res);
           this.stepper.next();
         },
         (error) => {
@@ -166,8 +162,6 @@ export class AmDetailPageComponent implements OnInit {
         (res: any) => {
           this.stepper.next();
           this.showSuccessfulModalPub = true;
-          console.log(res);
-          console.log(res.d.Msgty);
           if (res.d.Msgty == 'S') {
             this.auctionAnnouncement = false;
           }
@@ -180,7 +174,6 @@ export class AmDetailPageComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('/');
-    console.log("parent")
   }
   goBacktoAuction() {
     this.showAuction = true;
@@ -200,10 +193,8 @@ export class AmDetailPageComponent implements OnInit {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         this.showLoader = false;
-        console.log('getAuctionDetails Resp ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
-        console.log(this.preAuctionData, "saurabh kumar singh")
         if (this.preAuctionData.ActionTaken == 'A') {
           this.tabTwo = true;
         } else {

@@ -15,15 +15,12 @@ export class EnvService {
 
     public get environment() {
         if (!this.config) {
-            console.log('get environment', this.config);
         }
         return this.config
     }
 
     public loadConfig() {
-        console.log('loadConfig');
         return this.http.get('properties/environment.json').toPromise().then((config: any) => {
-            console.log('loadConfig get', config);
             this.config = config;
             // this.configSubject$.next(this.config);
         }).catch((err: any) => {

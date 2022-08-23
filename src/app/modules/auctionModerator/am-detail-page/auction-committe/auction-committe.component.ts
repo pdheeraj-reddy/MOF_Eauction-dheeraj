@@ -57,10 +57,6 @@ export class AuctionCommitteComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res.body.d.results[0].CommitteeAssigned, "SKING");
-        // if (res.body.d.results[0].CommitteeAssigned == 'X') {
-        //   this.gonext = false
-        // }
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
       },
@@ -71,8 +67,6 @@ export class AuctionCommitteComponent implements OnInit {
   }
 
   async goBacktoList() {
-    // alert(1)
-    console.log("🚀 ~ goBacktoList ~ this.auctionServc.unsaved", this.auctionServc.unsaved)
     if (this.auctionServc.unsaved) {
       const confirm = await this.auctionServc.handleUnsavedError();;
       if (confirm) {

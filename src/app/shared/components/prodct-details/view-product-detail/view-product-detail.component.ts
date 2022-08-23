@@ -65,7 +65,7 @@ export class ViewProductDetailComponent implements OnInit {
     nav: false,
   };
 
-  // sortByTableHeaderId(a: number, b: string) { }
+
   closeDialog() {
     if (this.price < 1) {
       this.invalid = true;
@@ -129,7 +129,6 @@ export class ViewProductDetailComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    // this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     this.PaginationServc.sortAllTableData(this.viewproduct.productFiles, (this.columnLst[columnId]));
   }
@@ -203,7 +202,6 @@ export class ViewProductDetailComponent implements OnInit {
             ia[i] = byteString.charCodeAt(i);
           }
           const blob = new Blob([ab], { type: index.MIMEType });
-          // var a = window.URL.createObjectURL(blob);
           var base64String = await this.convertBlobToBase64(blob);
 
           this.slidesStore.push({
@@ -274,7 +272,6 @@ export class ViewProductDetailComponent implements OnInit {
           }
           this.activeDownloadFileIndex = -1;
           file.downloading = false;
-          // window.open(fileContent, "_blank");
         },
         (error) => {
           this.activeDownloadFileIndex = -1;
@@ -284,8 +281,7 @@ export class ViewProductDetailComponent implements OnInit {
       );
     } else {
       const fileType = file.name.split('.').pop()?.toLowerCase();
-      // var reader = new FileReader();
-      // reader.readAsDataURL(file.filesrc['0']);
+
       var byteString = atob(file.filesrc['0'].split(',')[1]);
       var ab = new ArrayBuffer(byteString.length);
       var ia = new Uint8Array(ab);

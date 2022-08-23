@@ -45,10 +45,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
     public auctionServc: AuctionService,
   ) { }
 
-  memberSelected(data: any) {
-    console.log(this.preAuctionData);
-    console.log(data);
-  }
 
   async goBacktoList() {
     if (this.auctionServc.unsaved) {
@@ -85,7 +81,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
 
   showErrorMsg(error: any) {
     this._3MembersErrorMsg = error;
-    console.log(error);
   }
   openAddMemberDialog(title: any, role: string) {
     switch (role) {
@@ -98,7 +93,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
     }
     this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
       (res: any) => {
-        console.log('getCommitteeMembersBasedOnRole ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.committeeMemberList = res.body.d.results;
         const dialogRef = this.dialog.open(AddMemberComponent, {
@@ -114,8 +108,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
           },
         });
         dialogRef.afterClosed().subscribe((result) => {
-          console.log('Haroi');
-          console.log(this.preAuctionData);
           this.committeeMemberData = result;
           switch (result?.EmployeeRole) {
             case 'ZEAUCTION_SALCOMM_CHAIRMAN':
@@ -124,7 +116,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
             case 'ZEAUCTION_SALCOMM_SECRETARY':
               this.committeeSecSelected = true;
           }
-          console.log(result);
         });
       },
       (error) => {
@@ -160,7 +151,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
   approveOrRejectAuction(action: any) {
     this.preAuctionData.ActionTaken = action;
     if (action == 'R') this.preAuctionData.RejectNotes = this.rejectionNotes;
-    console.log(this.preAuctionData);
     this._AuctionService
       .approveOrRejectAuction({
         ActionTaken: action,
@@ -175,7 +165,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
         (res: any) => {
           // alert('Updated Successfully');
           this.getPreAuctionData();
-          console.log(res);
         },
         (error) => {
           // alert('Error Updating');
@@ -187,7 +176,6 @@ export class AuctionPricingCommitteComponent implements OnInit {
     this.popupTitle = title;
     this._AuctionService.getCommitteeMembersBasedOnRole(btoa(role)).subscribe(
       (res: any) => {
-        console.log('getCommitteeMembersBasedOnRole ', res.body);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.committeeMemberList = res.body.d.results;
       },
@@ -225,10 +213,8 @@ export class AuctionPricingCommitteComponent implements OnInit {
   getPreAuctionData() {
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
-        console.log(res);
         this.auctionServc.XCSRFToken = res.headers.get('x-csrf-token');
         this.preAuctionData = res.body.d.results[0];
-        console.log(this.preAuctionData, "THara thara")
       },
       (error) => {
         console.log('getAuctionList RespError : ', error);

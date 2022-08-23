@@ -52,8 +52,6 @@ export class RejectAuctionPopupComponent implements OnInit {
     this.preAuctionData.ActionTaken = action;
     if (action == 'R') {
       this.preAuctionData.RejectNotes = this.rejectionReason;
-      console.log("🚀🚀 ~~ this.preAuctionData.RejectNotes", this.preAuctionData.RejectNotes);
-      console.log(this.preAuctionData);
       this._AuctionService
         .approveOrRejectAuction({
           ActionTaken: action,
@@ -65,7 +63,6 @@ export class RejectAuctionPopupComponent implements OnInit {
         })
         .subscribe(
           (res: any) => {
-            console.log(res);
             this.showSubmitBtnLoader = false;
             this.showCancelSuccessfulModal = true;
           },

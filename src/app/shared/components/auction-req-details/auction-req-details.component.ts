@@ -20,7 +20,6 @@ export class AuctionReqDetailsComponent implements OnInit {
 
   productValue: any;
   rejectionNotes: any;
-  // Objects
   auctionDetails: any;
   auctionDetailsResp: any;
   auctionItem: AuctionBasicMaster = new AuctionBasicMaster();
@@ -40,12 +39,9 @@ export class AuctionReqDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('AuctionReqDetailsComponent getPreAuctionData ', this.preAuctionData);
     if (this.ObjectId || this.DraftId) {
-      console.log('edit');
       this.getAuctionDetails(this.ObjectId, this.DraftId);
     } else {
-      console.log('new');
     }
   }
 
@@ -67,13 +63,11 @@ export class AuctionReqDetailsComponent implements OnInit {
       .getAuctionDetails(ObjectId, DraftId)
       .subscribe(
         (auctionDetailsResp: any) => {
-          console.log('getAuctionDetails Resp ', auctionDetailsResp.body);
           this.auctionServc.XCSRFToken = auctionDetailsResp.headers.get('x-csrf-token');
           this.auctionDetailsResp = auctionDetailsResp.body.d.results[0];
           this.auctionItem = this.interconversionService.mappingObjForView(this.auctionDetailsResp);
           this.navigateToPage(1, 'auctionAttach');
           this.auctionDetails = auctionDetailsResp.body.d.results[0];
-          // Load until data loads then slowly load images
           this.showLoader = false;
         },
         (error) => {
@@ -84,17 +78,14 @@ export class AuctionReqDetailsComponent implements OnInit {
   }
 
   attachmentDownload(attchment: any) {
-    console.log(attchment);
     window.open(attchment.DispUrl, '_blank');
   }
 
   approveOrRejectAuction(action: any) {
     this.preAuctionData.ActionTaken = action;
     if (action == 'R') this.preAuctionData.RejectNotes = this.rejectionNotes;
-    console.log(this.preAuctionData);
     this.auctionApprovalServc.approveOrRejectAuction(this.preAuctionData).subscribe(
       (res: any) => {
-        console.log(res);
       },
       (error) => {
         console.log('approveOrRejectAuction RespError : ', error);
@@ -103,64 +94,10 @@ export class AuctionReqDetailsComponent implements OnInit {
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {
-    // this.PaginationServc.sortByTableHeaderId('auctionAttachment', columnId, sortType, dateFormat);
     this.PaginationServc.sortByColumnName('inventoryAllocationTable', columnId, sortType, dateFormat);
     this.PaginationServc.sortAllTableData(this.auctionItem.auctionAttachement, this.columnLst[columnId]);
-    console.log("🚀 ~ sortByTableHeaderId ~ this.auctionItem.auctionAttachement", this.auctionItem.auctionAttachement)
   }
 
-  getPreAuctionData() {
-    // this._AuctionService.getPreAuctionApproval('9700000300').subscribe(
-    //   (res: any) => {
-    //     console.log(res);
-    //   },
-    //   (error) => {
-    //     console.log('getAuctionList RespError : ', error);
-    //   }
-    // );
-    // sathya - comment getPreAuctionApproval
-    // let temp = this.auctionApprovalServc.getPreAuctionApproval('9700000300');
-    // this.preAuctionData = temp['d']['results'][0];
-    // console.log(this.preAuctionData);
-    // for (let i = 0; i < this.preAuctionData.listtoproductnav.results; i++) {
-    //   this.productValue =
-    //     this.productValue +
-    //     parseFloat(
-    //       this.preAuctionData.listtoproductnav.results[i].ProductValue
-    //     );
-    // }
-  }
-
-  // viewAttachment(file: any, index:number) {
-  //   this.activeIndex = index;
-  //   if (file.FilenetId) {
-  //     this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
-  //       (downloadAuctionImagesResp: any) => {
-  //         console.log(downloadAuctionImagesResp);
-  //         const fileResp = downloadAuctionImagesResp.d;
-  //         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-  //         console.log('asdasd', byteString.split(',')[1]);
-  //         var ab = new ArrayBuffer(byteString.length);
-  //         var ia = new Uint8Array(ab);
-  //         for (var i = 0; i < byteString.length; i++) {
-  //           ia[i] = byteString.charCodeAt(i);
-  //         }
-  //         const blob = new Blob([ab], { type: file.MIMEType });
-  //         console.log(blob);
-  //         this.activeIndex = -1;
-  //         let fileURL = window.URL.createObjectURL(blob);
-  //         console.log('fileURL', fileURL);
-  //         window.open(fileURL, '_blank');
-  //         // window.open(fileContent, "_blank");
-  //       },
-  //       (error) => {
-  //         this.showLoader = false;
-  //         this.activeIndex = -1;
-  //         console.log('downloadAuctionImages RespError : ', error);
-  //       }
-  //     );
-  //   }
-  // }
 
   activeDownloadFileIndex = -1
 
@@ -170,10 +107,8 @@ export class AuctionReqDetailsComponent implements OnInit {
       this.activeDownloadFileIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe(
         (downloadAuctionImagesResp: any) => {
-          console.log(downloadAuctionImagesResp);
           const fileResp = downloadAuctionImagesResp.d;
           var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-          console.log('asdasd', byteString.split(',')[1]);
           var ab = new ArrayBuffer(byteString.length);
           var ia = new Uint8Array(ab);
           for (var i = 0; i < byteString.length; i++) {
@@ -181,7 +116,6 @@ export class AuctionReqDetailsComponent implements OnInit {
           }
           const blob = new Blob([ab], { type: file.MIMEType });
           let fileURL = window.URL.createObjectURL(blob);
-          console.log('fileURL ', fileURL);
           this.showViewAttachmentsModal = false;
           var newWin: any;
           if (option == 'view') {
@@ -194,7 +128,6 @@ export class AuctionReqDetailsComponent implements OnInit {
           }
           file.downloading = false;
           this.activeDownloadFileIndex = -1;
-          // window.open(fileContent, "_blank");
         },
         (error) => {
           file.downloading = false;
@@ -205,8 +138,7 @@ export class AuctionReqDetailsComponent implements OnInit {
       );
     } else {
       const fileType = file.name.split('.').pop()?.toLowerCase();
-      // var reader = new FileReader();
-      // reader.readAsDataURL(file.filesrc['0']);
+
       var byteString = atob(file.filesrc['0'].split(',')[1]);
       var ab = new ArrayBuffer(byteString.length);
       var ia = new Uint8Array(ab);
@@ -215,7 +147,6 @@ export class AuctionReqDetailsComponent implements OnInit {
       }
       const blob = new Blob([ab], { type: file.type });
 
-      console.log('fileURL', blob);
       let fileURL = window.URL.createObjectURL(blob);
       if (
         file.type.indexOf('image') > -1 ||
@@ -225,7 +156,7 @@ export class AuctionReqDetailsComponent implements OnInit {
         fileType === 'pdf'
       ) {
         this.showViewAttachmentsModal = false;
-        console.log('fileURL', fileURL);
+
         window.open(fileURL, '_blank');
       } else {
         if (file.type.indexOf('image') > -1) {
@@ -234,9 +165,7 @@ export class AuctionReqDetailsComponent implements OnInit {
           this.selectedFileFormat = 'video';
         }
         this.selectedFileURL = file.filesrc['0'].split(',')[1];
-        // reader.onload = (_event) => {
-        //   this.selectedFileURL = reader.result;
-        // }
+
         this.showViewAttachmentsModal = true;
       }
     }

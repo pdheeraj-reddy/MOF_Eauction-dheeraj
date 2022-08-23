@@ -21,7 +21,6 @@ export class AlertModalComponent implements OnInit {
     private router: Router,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data);
     this.dialogObj = { ...data };
   }
 
@@ -29,7 +28,6 @@ export class AlertModalComponent implements OnInit {
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
     }
-    console.log('dialogObj ', this.dialogObj);
   }
 
   closeAlertModal() {
@@ -41,16 +39,11 @@ export class AlertModalComponent implements OnInit {
 
   confirmAlert() {
     this.dialogRef.close(true);
-    // this.router.navigate(['/auctionlist'])
   }
 
   redirect2IdmHome() {
     this.cookieService.deleteAll();
     const redirectUrl = this.envService.environment.idmLoginURL;
-    console.log('redirectUrl ? ', redirectUrl);
-    // window.location.href = redirectUrl;
-    // window.location.href = "https://loginpp.etimad.sa/";
-    // window.location.href = "https://login.etimad.sa/";
     window.location.href = "https://10.14.8.61:8055";
   }
 
