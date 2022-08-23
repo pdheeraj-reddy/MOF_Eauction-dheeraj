@@ -1,44 +1,52 @@
 <div>
     <div class="container-fluid">
-        <div class="background" style="background-image: url(assets/imgs/home-background.png);">
+        <div class="banner">
+            <img src="assets/imgs/home-background.png" class="background">
             <div class="image-text">
                 <h1>{{'home.landing.welcome' | translate}} </h1>
                 <h1 style="margin-top: 10px;">{{'home.landing.online_auction_service' | translate}}</h1>
-                <p class="head-desc">{{'home.landing.description' | translate}}</p>
-                <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">{{'home.landing.sign_in' |
+                <p class="head-desc mt-5">{{'home.landing.description' | translate}}</p>
+                <button class="btn btn-primary-light btn-lg d-flex mt-5"
+                    style="min-width: 147px;">{{'home.landing.sign_in' |
                     translate}}</button>
             </div>
-            <div>
-                <img src="assets/imgs/home-illustrator.png" class="image" alt="">
+            <div class="image">
+                <img src="assets/imgs/home-illustrator.png" alt="">
             </div>
 
         </div>
     </div>
-    <div class="container text-center">
-        <div class="row" style="margin-bottom: 100px;">
+    <div class="container text-center main-secion">
+        <div class="row" style="margin-bottom: 100px;position: relative;">
             <div class="step">
+                <img src="assets/svg/1.svg" class="line-1" *ngIf="lang == 'ar'" [ngClass]="lang">
+                <img src="assets/svg/1f.svg" class="line-1" *ngIf="lang == 'en'" [ngClass]="lang">
                 <div class="col">
                     <img src="assets/imgs/1.png" class="img" alt="">
                 </div>
-                <div>
+                <div class="text">
                     <h2>{{'home.landing.1_title' | translate}}</h2>
                     <p>{{'home.landing.1_desc' | translate}}</p>
                 </div>
             </div>
             <div class="step">
+                <img src="assets/svg/2.svg" class="line-2" *ngIf="lang == 'ar'" [ngClass]="lang">
+                <img src="assets/svg/2f.svg" class="line-2" *ngIf="lang == 'en'" [ngClass]="lang">
                 <div class="col">
                     <img src="assets/imgs/2.png" class="img" alt="">
                 </div>
-                <div>
+                <div class="text">
                     <h2>{{'home.landing.2_title' | translate}}</h2>
                     <p>{{'home.landing.2_desc' | translate}}</p>
                 </div>
             </div>
             <div class="step">
+                <img src="assets/svg/3.svg" class="line-3" *ngIf="lang == 'ar'" [ngClass]="lang">
+                <img src="assets/svg/3f.svg" class="line-3" *ngIf="lang == 'en'" [ngClass]="lang">
                 <div class="col">
                     <img src="assets/imgs/3.png" class="img" alt="">
                 </div>
-                <div>
+                <div class="text">
                     <h2>{{'home.landing.3_title' | translate}}</h2>
                     <p>{{'home.landing.3_desc' | translate}}</p>
                 </div>
@@ -47,10 +55,12 @@
         <div class="" style="margin-bottom: 100px;">
             <div class="auction-step-4" [ngClass]="lang">
                 <div class="step">
+                    <img src="assets/svg/4.svg" class="line-4" *ngIf="lang == 'ar'" [ngClass]="lang">
+                    <img src="assets/svg/4f.svg" class="line-4" *ngIf="lang == 'en'" [ngClass]="lang">
                     <div class="col">
                         <img src="assets/imgs/4.png" class="img" alt="">
                     </div>
-                    <div>
+                    <div class="text">
                         <h2>{{'home.landing.4_title' | translate}}</h2>
                         <p>{{'home.landing.4_desc' | translate}}</p>
                     </div>
@@ -69,14 +79,16 @@
                 <div class="auction-card" #auctionSlide>
                     <span class="icon-keyboard_arrow_right arrow_right" (click)="scrollAuctionSlider('right')"></span>
                     <span class="icon-keyboard_arrow_left arrow_left" (click)="scrollAuctionSlider('left')"></span>
-                    <div *ngFor="let item of auctionListData" style="margin: 0 15px;">
+                    <div *ngFor="let item of auctionListData" style="margin: 0 15px;text-align: initial;">
                         <app-auction-card-landing [auction]="item">
                         </app-auction-card-landing>
                     </div>
                 </div>
             </div>
 
-            <p>{{'home.landing.browse_all_auction' | translate}}<span class="icon-keyboard_arrow_left"></span></p>
+            <a [routerLink]="['/home/auction']" routerLinkActive="router-link-active" (click)="goToAuction()">
+                <p>{{'home.landing.browse_all_auction' | translate}}<span class="icon-keyboard_arrow_left"></span></p>
+            </a>
         </div>
         <div class="user-guide container card">
             <div class="content">
@@ -87,7 +99,10 @@
                     <h1>{{'home.landing.user_guide' | translate}}</h1>
                     <p>{{'home.landing.user_guide_desc' | translate}}</p>
                 </div>
-                <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">
+                <button class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;position: absolute;"
+                    [ngStyle]="lang == 'ar'?{'left':0} : {'right':0}">
+                    <span class="icon-download" style="font-size: 20px;"></span>
+                    &nbsp;
                     {{'home.landing.download_manual' | translate}}
                 </button>
             </div>

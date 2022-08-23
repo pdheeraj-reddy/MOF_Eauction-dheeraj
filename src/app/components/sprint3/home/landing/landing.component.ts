@@ -47,10 +47,14 @@ export class LandingComponent implements OnInit {
 
   scrollAuctionSlider(side: string) {
     if (side == 'left') {
-      this.auctionSlide.nativeElement.scrollTo({ left: (this.auctionSlide.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+      this.auctionSlide.nativeElement.scrollTo({ left: (this.auctionSlide.nativeElement.scrollLeft - 250), behavior: 'smooth' });
     } else if (side == 'right') {
       this.auctionSlide.nativeElement.scrollTo({ left: (this.auctionSlide.nativeElement.scrollLeft + 150), behavior: 'smooth' });
     }
+  }
+
+  goToAuction() {
+    window.scrollTo(0, 1)
   }
 
 }
