@@ -8,7 +8,6 @@ import { DatePipe } from '@angular/common';
 import { AppRoutingModule } from '../../app-routing.module';
 import { AppComponent } from '../../app.component';
 import { AuctionComponent } from './auction-indetail/auction.component';
-import { TenderComponent } from '../../tender/tender.component';
 import { AuctionListsComponent } from './auction-lists/auction-lists.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -31,7 +30,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   declarations: [
     AppComponent,
     AuctionComponent,
-    TenderComponent,
     AuctionListsComponent,
     AuctionProductComponent,
     AuctionCommitteeMembersComponent,

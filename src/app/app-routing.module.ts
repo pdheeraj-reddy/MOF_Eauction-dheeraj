@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuctionComponent } from './components/auction/auction-indetail/auction.component';
-import { TenderComponent } from './tender/tender.component';
 import { AuctionListsComponent } from './components/auction/auction-lists/auction-lists.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AuctionModeratorComponent } from './modules/auctionModerator/auction-moderator.component';
 import { AmDetailPageComponent } from './modules/auctionModerator/am-detail-page/am-detail-page.component';
@@ -19,7 +17,6 @@ import { AuctionCommiteeLandingPageComponent } from './modules/auction-commitee/
 import { AuctionCommiteeDetailPageComponent } from './modules/auction-commitee/auction-commitee-detail-page/auction-commitee-detail-page.component';
 import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/auction-commitee-open-offers/auction-commitee-open-offers.component';
 
-import { AuctionSliderComponent } from './common/components/auction-slider/auction-slider.component';
 import { AppGuard } from './guard/app.guard';
 import { ModeratorGuard } from './guard/moderator.guard';
 import { MemberGuard } from './guard/member.guard';
@@ -29,17 +26,9 @@ import { AuctionCommiteeGuardGuard } from './guard/auction-commitee-head.guard';
 import { MarketerGuard } from './guard/marketer.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/auctionlist', pathMatch: 'full' },
-  { path: 'tender', component: TenderComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  // { path:'**', redirectTo:'/dashboard' },
-  // { path:'**', redirectTo:'/auctionlist' },
-  // { path:'auctionlist', component:AuctionListsComponent },
   { path: 'auctionlist', component: AuctionListsComponent, canActivate: [AuthGuard, AppGuard] },
   { path: 'auction', component: AuctionComponent, canActivate: [AuthGuard] },
   { path: 'auction/:ObjectId/:DraftId/:ViewMode', component: AuctionComponent, canActivate: [AuthGuard, MarketerGuard] },
-  { path: 'tender', component: TenderComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'slider', component: AuctionSliderComponent },
   {
     path: 'auctionModerator',
     component: AuctionModeratorComponent,

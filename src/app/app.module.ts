@@ -18,8 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { EAucCommonModule } from './common/eauccommon.module';
 import { AppComponent } from './app.component';
 import { AuctionComponent } from './components/auction/auction-indetail/auction.component';
-import { TenderComponent } from './tender/tender.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuctionListsComponent } from './components/auction/auction-lists/auction-lists.component';
 import {
   HttpClient,
@@ -98,10 +96,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ProductDetailPopupComponent,
     AppComponent,
     AuctionComponent,
-    TenderComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent,
     AuctionListsComponent,
     AuctionProductComponent,
     AuctionCommitteeMembersComponent,

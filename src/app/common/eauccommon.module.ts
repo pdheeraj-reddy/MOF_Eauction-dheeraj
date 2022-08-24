@@ -11,7 +11,6 @@ import { NumericDirective } from './directives/positive-numeric.directive';
 import { CurrencyDirective } from './directives/currency.directive';
 import { TimePickerDirective } from './directives/time-picker.directive';
 import { DatePickerDirective } from './directives/date-picker.directive';
-import { AuctionSliderComponent } from './components/auction-slider/auction-slider.component';
 import { DigitOnlyDirective } from './directives/digit-only.directive';
 import { CommaDirective } from './directives/comma.directive';
 
@@ -22,7 +21,6 @@ import { CommaDirective } from './directives/comma.directive';
     CurrencyDirective,
     TimePickerDirective,
     DatePickerDirective,
-    AuctionSliderComponent,
     CommaDirective
   ],
   imports: [
