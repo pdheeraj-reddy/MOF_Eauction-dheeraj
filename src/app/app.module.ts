@@ -54,10 +54,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 // Hari new comp
 import { AddMemberComponent } from './components/shared/add-member/add-member.component';
-import { AmLandingPageComponent } from './modules/auctionModerator/am-landing-page/am-landing-page.component';
 import { AuctionModeratorComponent } from './modules/auctionModerator/auction-moderator.component';
 import { AmDetailPageComponent } from './modules/auctionModerator/am-detail-page/am-detail-page.component';
-import { AucModLandingPageComponent } from './modules/auctionModerator/auc-mod-landing-page/auc-mod-landing-page.component';
 import { AuctionReqDetailsComponent } from './shared/components/auction-req-details/auction-req-details.component';
 import { ProdctDetailsComponent } from './shared/components/prodct-details/prodct-details.component';
 import { RejectAuctionPopupComponent } from './modules/auctionModerator/am-detail-page/reject-auction-popup/reject-auction-popup.component';
@@ -104,10 +102,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionOrderSummaryComponent,
     AuctionDetailComponent,
     AddMemberComponent,
-    AmLandingPageComponent,
     AuctionModeratorComponent,
     AmDetailPageComponent,
-    AucModLandingPageComponent,
     AuctionReqDetailsComponent,
     ProdctDetailsComponent,
     RejectAuctionPopupComponent,
