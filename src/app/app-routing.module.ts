@@ -10,7 +10,6 @@ import { AucMemDetailPageComponent } from './modules/auction-member/auc-mem-deta
 import { AuctionHeadComponent } from './modules/auction-head/auction-head.component';
 import { AuctionHeadDetailPageComponent } from './modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
 import { AuctionCommiteeComponent } from './modules/auction-commitee/auction-commitee.component';
-import { AuctionCommiteeLandingPageComponent } from './modules/auction-commitee/auction-commitee-landing-page/auction-commitee-landing-page.component';
 import { AuctionCommiteeDetailPageComponent } from './modules/auction-commitee/auction-commitee-detail-page/auction-commitee-detail-page.component';
 import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/auction-commitee-open-offers/auction-commitee-open-offers.component';
 
@@ -68,11 +67,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'landingPage',
-        component: AuctionCommiteeLandingPageComponent,
-        canActivate: [AuthGuard],
-      },
-      {
         path: 'detailPage/:ObjectId',
         component: AuctionCommiteeDetailPageComponent,
         canActivate: [AuthGuard],
@@ -81,12 +75,7 @@ const routes: Routes = [
         path: 'openOffer/:ObjectId',
         component: AuctionCommiteeOpenOffersComponent,
         canActivate: [AuthGuard],
-      },
-      {
-        path: '',
-        redirectTo: 'landingPage',
-        pathMatch: 'full',
-      },
+      }
     ],
   },
 

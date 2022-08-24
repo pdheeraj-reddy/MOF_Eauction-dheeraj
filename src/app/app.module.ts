@@ -73,7 +73,6 @@ import { AuctionHeadComponent } from './modules/auction-head/auction-head.compon
 import { AuctionHeadDetailPageComponent } from './modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
 
 import { AuctionCommiteeComponent } from './modules/auction-commitee/auction-commitee.component';
-import { AuctionCommiteeLandingPageComponent } from './modules/auction-commitee/auction-commitee-landing-page/auction-commitee-landing-page.component';
 import { AuctionCommiteeDetailPageComponent } from './modules/auction-commitee/auction-commitee-detail-page/auction-commitee-detail-page.component';
 import { AuctionCommiteeOpenOffersComponent } from './modules/auction-commitee/auction-commitee-open-offers/auction-commitee-open-offers.component';
 
@@ -117,7 +116,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionHeadComponent,
     AuctionHeadDetailPageComponent,
     AuctionCommiteeComponent,
-    AuctionCommiteeLandingPageComponent,
     AuctionCommiteeDetailPageComponent,
     AuctionCommiteeOpenOffersComponent,
     AlertModalComponent
