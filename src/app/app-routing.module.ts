@@ -8,7 +8,6 @@ import { AmDetailPageComponent } from './modules/auctionModerator/am-detail-page
 import { AuctionMemberComponent } from './modules/auction-member/auction-member.component';
 import { AucMemDetailPageComponent } from './modules/auction-member/auc-mem-detail-page/auc-mem-detail-page.component';
 import { AuctionHeadComponent } from './modules/auction-head/auction-head.component';
-import { AuctionHeadLandingPageComponent } from './modules/auction-head/auction-head-landing-page/auction-head-landing-page.component';
 import { AuctionHeadDetailPageComponent } from './modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
 import { AuctionCommiteeComponent } from './modules/auction-commitee/auction-commitee.component';
 import { AuctionCommiteeLandingPageComponent } from './modules/auction-commitee/auction-commitee-landing-page/auction-commitee-landing-page.component';
@@ -57,20 +56,10 @@ const routes: Routes = [
     canActivate: [AuthGuard, HeadGuard],
     children: [
       {
-        path: 'landingPage',
-        component: AuctionHeadLandingPageComponent,
-        canActivate: [AuthGuard, HeadGuard],
-      },
-      {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AuctionHeadDetailPageComponent,
         canActivate: [AuthGuard, HeadGuard],
-      },
-      {
-        path: '',
-        redirectTo: 'landingPage',
-        pathMatch: 'full',
-      },
+      }
     ],
   },
   {

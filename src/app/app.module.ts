@@ -70,7 +70,6 @@ import { EditBidValueComponent } from './shared/components/prodct-details/edit-b
 import { ViewProductDetailComponent } from './shared/components/prodct-details/view-product-detail/view-product-detail.component';
 
 import { AuctionHeadComponent } from './modules/auction-head/auction-head.component';
-import { AuctionHeadLandingPageComponent } from './modules/auction-head/auction-head-landing-page/auction-head-landing-page.component';
 import { AuctionHeadDetailPageComponent } from './modules/auction-head/auction-head-detail-page/auction-head-detail-page.component';
 
 import { AuctionCommiteeComponent } from './modules/auction-commitee/auction-commitee.component';
@@ -116,7 +115,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EditBidValueComponent,
     ViewProductDetailComponent,
     AuctionHeadComponent,
-    AuctionHeadLandingPageComponent,
     AuctionHeadDetailPageComponent,
     AuctionCommiteeComponent,
     AuctionCommiteeLandingPageComponent,
