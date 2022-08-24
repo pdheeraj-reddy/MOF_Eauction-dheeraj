@@ -14,7 +14,7 @@
                     </a>
                     <div class="main-nav">
                         <ul
-                            *ngIf="!loggedUserRole.isAuctionModerator && !loggedUserRole.isBidder && !loggedUserRole.isSalesHead">
+                            *ngIf="(!loggedUserRole.isAuctionModerator && !loggedUserRole.isBidder && !loggedUserRole.isSalesHead) && !isHomePage">
                             <li class="nav-item mx-2">
                                 <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
                             </li>
@@ -22,6 +22,16 @@
                                 <a class="nav-link font-medium" href="">{{ 'header.main-menu2' | translate }}</a>
                             </li>
                         </ul>
+
+                        <ul *ngIf="isHomePage">
+                            <li class="nav-item mx-2">
+                                <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link font-medium" href="">{{ 'header.no-role' | translate }}</a>
+                            </li>
+                        </ul>
+
                         <ul *ngIf="loggedUserRole.isSalesHead">
                             <li class="nav-item mx-2">
                                 <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">

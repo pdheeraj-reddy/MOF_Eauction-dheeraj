@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public applang: string = 'ar';
   loggedUser: any;
   loggedUserRole: any;
+  isHomePage: boolean = false;
   currentUserRole: string;
   isAuction: boolean = false;
   title = 'Header';
@@ -45,6 +46,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.url = event.url;
+        if (this.url.includes('/home')) {
+
+          this.isHomePage = true;
+          console.log("🚀🚀 ~~ this.isHomePage", this.isHomePage);
+        }
         this.manageTab();
       }
     });
@@ -69,6 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.applang = event.lang
     });
+
   }
 
   public onLangChange() {

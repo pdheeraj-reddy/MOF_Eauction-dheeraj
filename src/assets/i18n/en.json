@@ -72,6 +72,7 @@
     "header": {
         "main-menu1": "Auctions",
         "main-menu2": "Online Auction Requests",
+        "no-role": "Online Auction",
         "logout": "Log out"
     },
     "common": {
