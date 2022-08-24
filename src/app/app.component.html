@@ -42,7 +42,7 @@
     </div>
 </div>
 <ng-container *ngIf="!showLoader">
-    <app-header *ngIf="loggedUserRole" [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'"></app-header>
+    <app-header></app-header>
     <div style="background-color: #F9FCFA;">
         <div class="container" [attr.dir]="browserLang === 'ar' ? 'rtl' : 'ltr'">
             <router-outlet></router-outlet>

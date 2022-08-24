@@ -47,15 +47,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         this.url = event.url;
         if (this.url.includes('/home')) {
-
           this.isHomePage = true;
-          console.log("🚀🚀 ~~ this.isHomePage", this.isHomePage);
         }
         this.manageTab();
       }
     });
     if (!this.url && this.router.url) {
       this.url = this.router.url;
+      if (this.url.includes('/home')) {
+        this.isHomePage = true;
+      }
       this.manageTab();
     }
 

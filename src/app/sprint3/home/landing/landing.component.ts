@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { EnvService } from 'src/app/env.service';
 import { AuctionList } from '../../interface/bidder.interface';
 
 @Component({
@@ -13,6 +14,7 @@ export class LandingComponent implements OnInit {
   @ViewChild('auctionSlide', { read: ElementRef }) public auctionSlide: ElementRef<any>;
   constructor(
     public translate: TranslateService,
+    private envService: EnvService,
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +24,10 @@ export class LandingComponent implements OnInit {
     });
 
     this.auctionListData = this.mappingObject();
+  }
+
+  get homeUrl() {
+    return this.envService.environment.idmHomeUrl;
   }
 
   mappingObject() {
