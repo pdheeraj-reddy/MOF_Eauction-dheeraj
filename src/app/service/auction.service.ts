@@ -39,10 +39,10 @@ export class AuctionService {
 
   hasUserRole(role: string) {
     let isvalidRole;
-    if (typeof this.loggedUser.roles === "string") {
+    if (typeof this.loggedUser?.roles === "string") {
       isvalidRole = !!(this.loggedUser.roles == role);
     } else {
-      isvalidRole = !!(this.loggedUser.roles.find((r: any) => r == role));
+      isvalidRole = !!(this.loggedUser?.roles.find((r: any) => r == role));
     }
     return isvalidRole;
   }
@@ -81,7 +81,7 @@ export class AuctionService {
 
   getLoggedUserEAucRole() {
     let currentUserRole = this.loggedUser, role = '';
-    if (currentUserRole.roles) {
+    if (currentUserRole?.roles) {
       if (typeof currentUserRole.roles === "string") {
         role = currentUserRole.roles;
       } else {
