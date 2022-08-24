@@ -137,24 +137,24 @@ const routes: Routes = [
   {
     path: 'bidder',
     canActivate: [AuthGuard, BidderGuard],
-    loadChildren: () => import('./components/sprint3/bidder/bidder.module').then(m => m.BidderModule)
+    loadChildren: () => import('./sprint3/bidder/bidder.module').then(m => m.BidderModule)
   },
   {
     path: 'auctions',
     canActivate: [AuthGuard, ModeratorGuard],
-    loadChildren: () => import('./components/sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule)
+    loadChildren: () => import('./sprint3/auction-moderator/auction-moderator.module').then(m => m.AuctionModeratorModule)
   },
   {
     path: 'auction-committee-head',
     canActivate: [AuthGuard, AuctionCommiteeGuardGuard],
-    loadChildren: () => import('./components/sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule)
+    loadChildren: () => import('./sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule)
   },
   {
     path: 'auction-details/:auctionId',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./components/sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule)
+    loadChildren: () => import('./sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule)
   },
-  { path: 'home', loadChildren: () => import('./components/sprint3/home/home.module').then(m => m.HomeModule) },
+  { path: 'home', loadChildren: () => import('./sprint3/home/home.module').then(m => m.HomeModule) },
 ];
 
 @NgModule({
