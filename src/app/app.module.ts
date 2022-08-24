@@ -64,7 +64,6 @@ import { AssignPricingCommitteComponent } from './modules/auctionModerator/am-de
 import { AuctionCommitteComponent } from './modules/auctionModerator/am-detail-page/auction-committe/auction-committe.component';
 import { AssignAuctionCommitteComponent } from './modules/auctionModerator/am-detail-page/auction-committe/assign-auction-committe/assign-auction-committe.component';
 import { AuctionMemberComponent } from './modules/auction-member/auction-member.component';
-import { AucMemLandingPageComponent } from './modules/auction-member/auc-mem-landing-page/auc-mem-landing-page.component';
 import { AucMemDetailPageComponent } from './modules/auction-member/auc-mem-detail-page/auc-mem-detail-page.component';
 import { BidValueUpdateComponent } from './shared/components/bid-value-update/bid-value-update.component';
 import { EditBidValueComponent } from './shared/components/prodct-details/edit-bid-value/edit-bid-value.component';
@@ -112,7 +111,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuctionCommitteComponent,
     AssignAuctionCommitteComponent,
     AuctionMemberComponent,
-    AucMemLandingPageComponent,
     AucMemDetailPageComponent,
     BidValueUpdateComponent,
     EditBidValueComponent,

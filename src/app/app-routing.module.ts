@@ -6,7 +6,6 @@ import { AuthGuard } from './guard/auth.guard';
 import { AuctionModeratorComponent } from './modules/auctionModerator/auction-moderator.component';
 import { AmDetailPageComponent } from './modules/auctionModerator/am-detail-page/am-detail-page.component';
 import { AuctionMemberComponent } from './modules/auction-member/auction-member.component';
-import { AucMemLandingPageComponent } from './modules/auction-member/auc-mem-landing-page/auc-mem-landing-page.component';
 import { AucMemDetailPageComponent } from './modules/auction-member/auc-mem-detail-page/auc-mem-detail-page.component';
 import { AuctionHeadComponent } from './modules/auction-head/auction-head.component';
 import { AuctionHeadLandingPageComponent } from './modules/auction-head/auction-head-landing-page/auction-head-landing-page.component';
@@ -46,20 +45,10 @@ const routes: Routes = [
     canActivate: [AuthGuard, MemberGuard],
     children: [
       {
-        path: 'landingPage',
-        component: AucMemLandingPageComponent,
-        canActivate: [AuthGuard, MemberGuard],
-      },
-      {
         path: 'detailPage/:ObjectId/:DraftId/:ViewMode',
         component: AucMemDetailPageComponent,
         canActivate: [AuthGuard, MemberGuard],
-      },
-      {
-        path: '',
-        redirectTo: 'landingPage',
-        pathMatch: 'full',
-      },
+      }
     ],
   },
   {
