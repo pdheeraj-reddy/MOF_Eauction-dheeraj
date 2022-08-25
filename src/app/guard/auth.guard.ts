@@ -60,7 +60,7 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     } else {
-      this.redirect2IdmLogin();
+      this.redirectToHome();
       return false;
     }
   }
@@ -79,6 +79,11 @@ export class AuthGuard implements CanActivate {
     this.cookieService.deleteAll();
     const redirectUrl = this.envService.environment.idmLoginURL;
     window.location.href = redirectUrl;
+  }
+
+  redirectToHome() {
+    this.cookieService.deleteAll();
+    this.router.navigateByUrl('/home')
   }
 
   redirect2IdmHome() {
