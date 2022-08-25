@@ -411,6 +411,7 @@ export class ProdctDetailsComponent implements OnInit {
       this.preAuctionData.RejectNotes = this.rejectionNotes;
       this.preAuctionData.UserId = '1622234795';
       adjustedPriceData = this.preAuctionData;
+      delete adjustedPriceData.listtobiddernav;
       adjustedPriceData?.listtoproductnav?.results.forEach((product: any) => {
         product.ZzPdtEstPricePc = product.ZzPdtEstPricePc?.toString();
         delete product.show;
@@ -449,6 +450,7 @@ export class ProdctDetailsComponent implements OnInit {
     this.preAuctionData.ZzPbEstPricePc = this.productValue.toString();
     this.preAuctionData.UserId = '1622234795';
     adjustedPriceData = this.preAuctionData;
+    delete adjustedPriceData.listtobiddernav;
     adjustedPriceData?.listtoproductnav?.results.forEach((product: any) => {
       product.ZzPdtEstPricePc = product.ZzPdtEstPricePc?.toString();
       delete product.show;
