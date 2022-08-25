@@ -60,7 +60,7 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     } else {
-      this.redirect2IdmHome();
+      this.redirect2IdmLogin();
       return false;
     }
   }
