@@ -9,6 +9,6 @@
   "apiAuctionURL": "/internal/v1/e-auction/auctions",
   "apiFilenetURL": "/internal/v1/e-auction/files",
   "apiCommiteeURL": "/internal/v1/e-auction/committees",
-  "apiBidderFinalInvoiceURL": "/mock-internal/auctions/1/final-invoice",
-  "apiBidderAuctions": "/mock-internal/auctions"
+  "apiBidderFinalInvoiceURL": "/internal/v1/e-auction/auctions/1/final-invoice",
+  "apiBidderAuctions": "/internal/v1/e-auction/auctions"
 }
