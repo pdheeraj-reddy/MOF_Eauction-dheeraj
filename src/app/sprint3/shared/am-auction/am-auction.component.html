@@ -66,7 +66,7 @@
         </div>
     </div>
     <div *ngIf="!showPageLoader" class="row justify-content-between no-gutters">
-        <div class="col-md-10 justify-content-start">
+        <div class="col-md-11 justify-content-start">
             <div class=" row no-gutters">
                 <div class="col-12">
                     <div class="card">
@@ -84,17 +84,17 @@
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Ongoing' }"
-                                                    (click)="onTabSelection('Ongoing')">
-                                                    {{ 'auctionCommittee.tab2' | translate }}
-                                                    ({{totalCounts.total_ongoing || 0}})</a>
-                                            </li>
-                                            <li class="nav-item border-left">
-                                                <a class="nav-link nav-link-tabs"
                                                     [ngClass]="{ active: selectedTab === 'Published' }"
                                                     (click)="onTabSelection('Published')">
                                                     {{ 'auctionCommittee.tab3' | translate }}
                                                     ({{totalCounts.total_upcoming || 0}})</a>
+                                            </li>
+                                            <li class="nav-item border-left">
+                                                <a class="nav-link nav-link-tabs"
+                                                    [ngClass]="{ active: selectedTab === 'Ongoing' }"
+                                                    (click)="onTabSelection('Ongoing')">
+                                                    {{ 'auctionCommittee.tab2' | translate }}
+                                                    ({{totalCounts.total_ongoing || 0}})</a>
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
@@ -105,8 +105,15 @@
                                             </li>
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Closed' }"
-                                                    (click)="onTabSelection('Closed')">
+                                                    [ngClass]="{ active: selectedTab === 'Awarded' }"
+                                                    (click)="onTabSelection('Awarded')">
+                                                    {{ 'auctionCommittee.tab6' | translate }}
+                                                    ({{totalCounts.total_awarded || 0}})</a>
+                                            </li>
+                                            <li class="nav-item border-left">
+                                                <a class="nav-link nav-link-tabs"
+                                                    [ngClass]="{ active: selectedTab === 'Terminated' }"
+                                                    (click)="onTabSelection('Terminated')">
                                                     {{ 'auctionCommittee.tab5' | translate }}
                                                     ({{totalCounts.total_completed || 0}})
                                                 </a>
@@ -150,7 +157,27 @@
                             placeholder="{{ 'auctionlist.filter-refno-pholder' | translate }}" id="validationCustom01"
                             [required]="true" />
                     </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All'">
+                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All' && !loggedUserRole.isBidder">
+                        <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
+                        <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
+                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
+                            <option value="">{{ 'Auction Status' | translate }} </option>
+                            <option [value]="status.code" *ngFor="let status of dropValStatus">{{status.disp |
+                                translate
+                                }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All' && loggedUserRole.isBidder">
+                        <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
+                        <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
+                            (change)="changeSelect($event, 'auctionStatus')" [required]="true">
+                            <option value="">{{ 'Auction Status' | translate }} </option>
+                            <option [value]="status.code" *ngFor="let status of dropValStatus_temp">{{status.disp |
+                                translate
+                                }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3" *ngIf="selectedTab === 'Pending Selecting' && loggedUserRole.isBidder">
                         <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
                             (change)="changeSelect($event, 'auctionStatus')" [required]="true">

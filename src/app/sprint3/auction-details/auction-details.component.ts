@@ -61,7 +61,7 @@ export class AuctionDetailsComponent implements OnInit {
   selectedFileURL: any;
   auctionAttachment: any = [];
   transformedAttachment: any = [];
-  textDir: boolean;
+  textDir: boolean = true;
   currentLang: any;
   auctionBiddingStatus: any;
   auctionBiddingMethod: any;

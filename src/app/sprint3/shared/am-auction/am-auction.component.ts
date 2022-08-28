@@ -6,6 +6,7 @@ import * as moment from 'moment-mini';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BidderService } from '../../services/bidder.service';
 import { AuctionList } from '../../interface/bidder.interface';
+import { AuctionService } from 'src/app/service/auction.service';
 declare var $: any;
 
 @Component({
@@ -18,9 +19,11 @@ export class AmAuctionComponent implements OnInit {
   auctionListData: AuctionList[] = [];
   selectedPageNumber: number;
   pagelimit: number = 6;
+  loggedUserRole: any;
   totalCounts = {
     total_completed: 0,
     total_under_gear: 0,
+    total_awarded: 0,
     total_upcoming: 0,
     total_ongoing: 0,
     total_all: 0
@@ -41,6 +44,15 @@ export class AmAuctionComponent implements OnInit {
     { code: "Awarded", disp: "Awarded" },
     { code: "Terminated", disp: "Terminated" },
   ];;
+
+  dropValStatus_temp = [
+    { code: "Upcoming", disp: "Upcoming" },
+    { code: "Ongoing", disp: "Ongoing" },
+    { code: "Pending Selecting", disp: "Pending Selecting" },
+    { code: "Awarded", disp: "Awarded" },
+    { code: "Terminated", disp: "Terminated" },
+  ];;
+
   showPageLoader: boolean = false;
   showPagination: boolean = false;
   selectedTab: string = 'All';
@@ -56,9 +68,11 @@ export class AmAuctionComponent implements OnInit {
     public translate: TranslateService,
     public bidderService: BidderService,
     public envService: EnvService,
+    public auctionServc: AuctionService
   ) { }
 
   ngOnInit(): void {
+    this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     this.showPageLoader = true;
     this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -102,6 +116,10 @@ export class AmAuctionComponent implements OnInit {
       filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
       filters.Message = 'F';
     }
+    if (this.selectedTab === 'Pending Selecting' && this.filterFormGroup.controls['auctionStatus'].value !== '') {
+      filters.Status = this.filterFormGroup.controls['auctionStatus'].value;
+      filters.Message = 'F';
+    }
     if (sortBy && sorttype) {
       filters.Msgty = sorttype + ' ' + sortBy;
     }
@@ -136,7 +154,8 @@ export class AmAuctionComponent implements OnInit {
     if (!serverObj.d.results?.length) return [];
     let resultSet: AuctionList[] = [];
     this.totalCounts = {
-      total_completed: serverObj.d.results[0].TotCompleted,
+      total_completed: serverObj.d.results[0].TotTerminated,
+      total_awarded: serverObj.d.results[0].TotAwarded,
       total_under_gear: serverObj.d.results[0].TotPendSelect,
       total_upcoming: serverObj.d.results[0].TotPublish,
       total_ongoing: serverObj.d.results[0].TotPublishedOngoing,
@@ -271,14 +290,17 @@ export class AmAuctionComponent implements OnInit {
     this.showFilterForm = false;
     if (value === 'All') {
       this.filterFormGroup.controls['auctionStatus'].setValue('');
-    } else {
+    } else if (value === 'Pending Selecting') {
+      this.filterFormGroup.controls['auctionStatus'].setValue('');
+    }
+    else {
       this.filterFormGroup.controls['auctionStatus'].setValue(value);
       this.filterFormGroup.controls['auctionStatus'].disable();
     }
     this.getAuctionList(1);
   }
   getstatus(type: any) {
-    if (type === "All") {
+    if (type === "All && !loggedUserRole.isBidder") {
       this.dropValStatus = [
         { code: "Upcoming", disp: "Upcoming" },
         { code: "Ongoing", disp: "Ongoing" },
@@ -290,7 +312,16 @@ export class AmAuctionComponent implements OnInit {
         { code: "Awarded", disp: "Awarded" },
         { code: "Terminated", disp: "Terminated" }
       ];
-    } else if (type === "Pending Selecting") {
+    } else if (type === "All && loggedUserRole.isBidder") {
+      this.dropValStatus_temp = [
+        { code: "Upcoming", disp: "Upcoming" },
+        { code: "Ongoing", disp: "Ongoing" },
+        { code: "Pending Selecting", disp: "Pending Selecting" },
+        { code: "Awarded", disp: "Awarded" },
+        { code: "Terminated", disp: "Terminated" }
+      ];
+    }
+    else if (type === "Pending Selecting") {
       this.dropValStatus = [
         { code: "Pending Selecting", disp: "Pending Selecting" },
         { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
