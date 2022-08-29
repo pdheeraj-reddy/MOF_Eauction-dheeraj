@@ -80,7 +80,7 @@ export class OfferReportComponent implements OnInit {
           let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
           const items = {
             serialNo: result['Sno'] ? result['Sno'] : '-',
-            Status: result['Status'] ? result['Status'] : '',
+            ZzBidderSts: result['ZzBidderSts'] ? result['ZzBidderSts'] : '',
             offerValue: result['OfferValue'] ? result['OfferValue'] : '-',
             BidderId: result['BidderId'] ? result['BidderId'] : null,
             PdfContent: result['PdfContent'] ? result['PdfContent'] : null,
@@ -104,15 +104,15 @@ export class OfferReportComponent implements OnInit {
       this.navigateToPage(1);
       if (this.auctionStatus == 'Terminated') {
         this.openofferListData.forEach((res: any) => {
-          res.Status = 'Not Awarded';
+          res.ZzBidderSts = 'Not Awarded';
         });
       }
       else {
         this.openofferListData.forEach((res: any) => {
-          if (res.Status == 'R' || res.Status == 'B') {
-            res.Status = 'Not Awarded';
+          if (res.ZzBidderSts == 'R' || res.ZzBidderSts == 'B') {
+            res.ZzBidderSts = 'Not Awarded';
           } else {
-            res.Status = 'Awarded';
+            res.ZzBidderSts = 'Awarded';
           }
         });
       }
