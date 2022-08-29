@@ -16,6 +16,7 @@ import { filter } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public applang: string = 'ar';
+  textDir = 'rtl';
   loggedUser: any;
   loggedUserRole: any;
   isHomePage: boolean = false;
@@ -67,6 +68,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.applang = localStorage.getItem('lang_pref') || 'ar'
     translate.use(this.applang.match(/en|ar/) ? this.applang : 'ar');
 
+    if (this.applang == 'ar') {
+      this.textDir = 'rtl';
+    }
+    else {
+      this.textDir = 'ltr';
+    }
+
 
   }
 
@@ -75,8 +83,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loggedUserRole = this.auctionServc.getLoggedUserRole();
     this.currentUserRole = this.auctionServc.getLoggedUserEAucRole();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.applang = event.lang
+      this.applang = event.lang;
+      if (this.applang == 'ar') {
+        this.textDir = 'rtl';
+      }
+      else {
+        this.textDir = 'ltr';
+      }
     });
+
+
 
   }
 

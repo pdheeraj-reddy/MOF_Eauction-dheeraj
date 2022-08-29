@@ -2,7 +2,7 @@
 <header class="main-header">
     <div class="container">
         <div class="row">
-            <div class="header">
+            <div class="header" [ngStyle]="{ direction: textDir}">
                 <div class="header-navigation">
                     <a class="navbar-brand" [href]="auctionServc.getHomeUrl()">
                         <img src="../../../assets/icons/logo.svg" alt="Etimad - Electronic Financial Services Platform"
