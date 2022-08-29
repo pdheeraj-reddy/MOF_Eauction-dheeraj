@@ -37,11 +37,12 @@ export class AuthGuard implements CanActivate {
       if (currentUserRole) {
         // check if idToken has EAuction roles and envi clientId
         let isvalidRole, isvalidClientID;
+        // currentUserRole.roles.push('EAuction_Bidder')
         if (currentUserRole.roles && currentUserRole.idmclientid) {
           if (typeof currentUserRole.roles === "string") {
             isvalidRole = !!(currentUserRole.roles.includes("EAuction"));
           } else {
-            if (this.checkEAuctionMultipleRole(currentUserRole.roles)) {
+            if (this.checkEAuctionMultipleRole(currentUserRole.roles) && !this.auctionServc.loggedUserRole.isBidder) {
               this.redirect2IdmHome(this.errorMessage.multiple_roles);
               return false;
             } else {
@@ -116,7 +117,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkEAuctionMultipleRole(roles: string[]) {
-    const find_roles = (roles.filter((r: any) => { return r.includes("EAuction") && !r.includes("EAuction_Bidder") })) || [];
+    const find_roles = (roles.filter((r: any) => { return r.includes("EAuction") })) || [];
     if (find_roles?.length > 1) {
       return true
     }
