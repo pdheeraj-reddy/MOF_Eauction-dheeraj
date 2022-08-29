@@ -17,6 +17,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductDetailPopupComponent } from '../shared/product-detail-popup/product-detail-popup.component';
 import { FormGroup } from '@angular/forms';
 import { MediaService } from 'src/app/service/media.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 declare var $: any;
 
@@ -157,6 +158,7 @@ export class AuctionDetailsComponent implements OnInit {
     public envService: EnvService,
     public router: Router,
     private mediaService: MediaService,
+    private translate: TranslateService
   ) { }
 
   public get getHomeUrl() {
@@ -168,13 +170,18 @@ export class AuctionDetailsComponent implements OnInit {
     this.role.auctionMod = this.currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
     this.role.bidder = this.currentUser.isBidder;
-    this.currentLang = localStorage.getItem('lang_pref');
-    if (this.currentLang == 'en') {
-      this.textDir = true;
-    }
-    else {
-      this.textDir = false;
-    }
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+
+      this.currentLang = event.lang;
+      if (this.currentLang == 'en') {
+        this.textDir = true;
+      }
+      else {
+        this.textDir = false;
+      }
+
+    });
+
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
@@ -182,20 +189,7 @@ export class AuctionDetailsComponent implements OnInit {
 
     // this.getupcomingAuctionList(1);
   }
-  ngDoCheck() {
-    let newLang = localStorage.getItem('lang_pref')
-    if (this.currentLang != newLang) {
-      if (newLang == 'ar') {
-        this.currentLang = newLang;
-        this.textDir = false;
-      }
-      else {
-        this.textDir = true;
-        this.currentLang = newLang;
-      }
-    }
 
-  }
   getAuctionDetails() {
     this.bidderService.getAuctionDetail(this.auctionId).subscribe((res) => {
       this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
