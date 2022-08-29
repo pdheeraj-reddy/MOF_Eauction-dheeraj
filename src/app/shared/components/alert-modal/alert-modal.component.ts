@@ -43,8 +43,8 @@ export class AlertModalComponent implements OnInit {
 
   redirect2IdmHome() {
     this.cookieService.deleteAll();
-    const redirectUrl = this.envService.environment.idmLoginURL;
-    window.location.href = "https://10.14.8.61:8055";
+    const redirectUrl = this.envService.environment.idmHomeUrl;
+    window.location.href = redirectUrl;
   }
 
 }

@@ -15,7 +15,10 @@ import { AlertModalComponent } from '../shared/components/alert-modal/alert-moda
 export class AuthGuard implements CanActivate {
   userInfo: any;
   dialogObj: any;
-
+  errorMessage = {
+    not_authorized: 'You are not Authorized. Please contact Etimad Support Team.',
+    multiple_roles: 'multiple_role_error'
+  }
   constructor(
     private _authService: AuthService,
     private cookieService: CookieService,
@@ -38,13 +41,18 @@ export class AuthGuard implements CanActivate {
           if (typeof currentUserRole.roles === "string") {
             isvalidRole = !!(currentUserRole.roles.includes("EAuction"));
           } else {
-            isvalidRole = !!(currentUserRole.roles.find((r: any) => r.includes("EAuction")));
+            if (this.checkEAuctionMultipleRole(currentUserRole.roles)) {
+              this.redirect2IdmHome(this.errorMessage.multiple_roles);
+              return false;
+            } else {
+              isvalidRole = !!(currentUserRole.roles.find((r: any) => r.includes("EAuction")));
+            }
           }
           if (currentUserRole.idmclientid) {
             isvalidClientID = !!(currentUserRole.idmclientid == this.envService.environment.idmClientId);
           }
           if (!isvalidRole && isvalidClientID) {
-            this.redirect2IdmHome();
+            this.redirect2IdmHome(this.errorMessage.multiple_roles);
             return false;
           } else {
             return true;
@@ -52,11 +60,11 @@ export class AuthGuard implements CanActivate {
           }
           return true;
         } else {
-          this.redirect2IdmHome();
+          this.redirect2IdmHome(this.errorMessage.multiple_roles);
           return false;
         }
       } else {
-        this.redirect2IdmHome();
+        this.redirect2IdmHome(this.errorMessage.multiple_roles);
         return false;
       }
     } else {
@@ -86,9 +94,9 @@ export class AuthGuard implements CanActivate {
     this.router.navigateByUrl('/home')
   }
 
-  redirect2IdmHome() {
+  redirect2IdmHome(message: string) {
     this.dialogObj = {
-      message: 'You are not Authorized. Please contact Etimad Support Team.',
+      message: message,
       mnBtnAction: 'logout',
       mnBtntext: 'Back to Home Page'
     }
@@ -105,5 +113,13 @@ export class AuthGuard implements CanActivate {
       isBidder = !!(roles.find((r: any) => r.includes("EAuction_Bidder")));
     }
     return true
+  }
+
+  checkEAuctionMultipleRole(roles: string[]) {
+    const find_roles = (roles.filter((r: any) => { return r.includes("EAuction") && !r.includes("EAuction_Bidder") })) || [];
+    if (find_roles?.length > 1) {
+      return true
+    }
+    return false
   }
 }
