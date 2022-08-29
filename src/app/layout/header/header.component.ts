@@ -63,7 +63,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     translate.addLangs(['ar', 'en']);
     translate.setDefaultLang('ar');
 
-    this.applang = localStorage.getItem('lang_pref') || translate.getBrowserLang() || 'ar';
+    // this.applang = localStorage.getItem('lang_pref') || translate.getBrowserLang() || 'ar';
+    this.applang = localStorage.getItem('lang_pref') || 'ar'
     translate.use(this.applang.match(/en|ar/) ? this.applang : 'ar');
 
 
@@ -80,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public onLangChange() {
-    this.applang = this.applang == 'en' ? 'ar' : 'en';
+    this.applang = this.applang == 'ar' ? 'en' : 'ar';
     localStorage.setItem('lang_pref', this.applang);
     this.translate.use(this.applang);
     this.changeLangTag();

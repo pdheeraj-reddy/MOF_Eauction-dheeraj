@@ -69,11 +69,11 @@
                                 <a class="nav-link font-medium" [routerLink]="['/bidder/my-auctions']"
                                     routerLinkActive="router-link-active">{{ 'menu.my_auction' | translate }}</a>
                             </li>
-                            <li class="nav-item" [ngClass]="{'active': bidderTab.invitation}">
+                            <!-- <li class="nav-item" [ngClass]="{'active': bidderTab.invitation}">
                                 <a class="nav-link font-medium" [routerLink]="['/bidder/invitation']"
                                     routerLinkActive="router-link-active">{{
                                     'menu.invitation' | translate }}</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item" [ngClass]="{'active': bidderTab.my_invoices}">
                                 <a class="nav-link font-medium" [routerLink]="['/bidder/my-invoices']"
                                     routerLinkActive="router-link-active">{{
@@ -88,7 +88,7 @@
                     <ul>
                         <li>
                             <button class="btn btn-ghost font-weight-bold color-lightgreen" (click)="onLangChange()"> {{
-                                applang == 'en' ? 'AR' : 'EN' }} </button>
+                                applang == 'ar' ? 'EN' : 'AR' }} </button>
                         </li>
                         <li *ngIf="loggedUser">
                             <button class="btn btn-ghost fill-primary-blue btn-user-profile" id="userProfile"
