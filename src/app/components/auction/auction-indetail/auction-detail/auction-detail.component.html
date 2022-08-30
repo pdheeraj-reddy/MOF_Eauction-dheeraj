@@ -238,79 +238,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="form-row" *ngIf="form['auctionType'].value === 'Private'">
-                    <div class="col-md-12 mb-3">
-                        <label> <span>Reason for private auction </span> </label>
-                        <select class="form-control" formControlName="reasonPrivateAuction" id="validationCustom05" (change)="changeSelect($event, 'reasonPrivateAuction')" [required]="form['auctionType'].value === 'Public'">
-                            <option value="">Select</option>
-                            <option *ngFor="let reason of dropValReasons" [ngValue]="reason">{{reason}}</option>
-                        </select>
-                        <div *ngIf="submitted && form['reasonPrivateAuction'].errors" class="invalid-feedback">
-                            <div *ngIf="form['reasonPrivateAuction'].errors['required']">Reason Type is required</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row" *ngIf="form['auctionType'].value === 'Private'">
-                    <div class="col-12 col-md-12">
-                        <div class="form-group">
-                            <div class="border-bottom">
-                                <label><span>Reason </span></label> <span class="float-left text-muted">character <small>{{reasonVal.value.length}} /{{maxChars}}</small> </span>
-                            </div>
-                            <textarea class="form-control" #reasonVal [attr.maxlength]="maxChars" formControlName="reason" placeholder="Please specify the reason for running your auction" rows="5" [required]="true"></textarea>
-                        </div>
-                    </div>
-                </div> -->
             </div>
-            <!-- <div class="card p-5 shadow-lg mt-4" *ngIf="form['auctionType'].value === 'Private'">
-                <h4 class="pb-3">The beneficiary category of the private auction</h4>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label><span>General Beneficiary Category - First Level</span></label>
-                            <select class="form-control" formControlName="beneficiaryCategory1" id="validationCustom05" (change)="changeSelect($event, 'beneficiaryCategory')" [required]="true">
-                            <option value="">Select</option>
-                            <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}</option>
-                            </select>
-                            <div *ngIf="submitted && form['beneficiaryCategory1'].errors" class="invalid-feedback">
-                                <div *ngIf="form['beneficiaryCategory1'].errors['required']">Beneficiary Category - First Level is required</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label><span>Beneficiary Subcategory - Level Two</span></label>
-                            <select class="form-control" formControlName="beneficiaryCategory2" id="validationCustom05" (change)="changeSelect($event, 'beneficiaryCategory')" [required]="true">
-                            <option value="">Select</option>
-                            <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}</option>
-                            </select>
-                            <div *ngIf="submitted && form['beneficiaryCategory2'].errors" class="invalid-feedback">
-                                <div *ngIf="form['beneficiaryCategory2'].errors['required']">Beneficiary Subcategory - Level Two is required</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label><span>Beneficiary Subcategory - Level Three</span></label>
-                            <select class="form-control" formControlName="beneficiaryCategory3" id="validationCustom05" (change)="changeSelect($event, 'beneficiaryCategory')" [required]="true">
-                            <option value="">Select</option>
-                            <option *ngFor="let category of dropValBeneCategories" [ngValue]="category">{{category}}</option>
-                            </select>
-                            <div *ngIf="submitted && form['beneficiaryCategory3'].errors" class="invalid-feedback">
-                                <div *ngIf="form['beneficiaryCategory3'].errors['required']">Beneficiary Subcategory - Level Three is required</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label><span>The period of displaying products in the online market</span></label>
-                            <input type="text" formControlName="auctionPeriod" class="form-control" placeholder="Enter the period in number of days" [required]="form['auctionType'].value === 'private'" /> </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="card p-5 shadow-lg mt-4">
                 <h4 class="pb-3 text-20">{{ 'auctioncreate.auctiondetails.section1_formGrp6' | translate }}</h4>
                 <div class="form-row">

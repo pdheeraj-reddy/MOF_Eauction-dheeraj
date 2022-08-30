@@ -884,37 +884,6 @@ export class AuctionDetailComponent implements OnInit {
         return;
       }
     }
-    // Bidding anncStartDate < endDate
-    // if (startDate && anncStartDate) {
-    //   if ((moment(startDate).isAfter(anncStartDate, 'day'))) {
-    //     this.isValidAnncSDate = true;
-    //     return;
-    //   }
-    // }
-    // console.log(startDate,endDate,anncStartDate);
-    // if(startDate && endDate && anncStartDate){
-    //   console.log(startDate,endDate,anncStartDate);
-    //   if ((moment(anncStartDate).isBetween(moment(startDate),moment(endDate)))) {
-    //     console.log("Inside If")
-    //     this.isValidAnncSDate = true;
-    //     return;
-    //   }
-    // }
-
-    // anncEndDate > startDate
-    // if (startDate && endDate && anncEndDate) {
-    //   if ((moment(anncEndDate).isAfter(endDate, 'day')) || (moment(anncEndDate).isBefore(startDate, 'day'))) {
-    //     this.isValidAnncEDate = true;
-    //     return;
-    //   }
-    // }
-    // if (endDate && anncEndDate) {
-    //   if ((moment(anncEndDate).isAfter(endDate, 'day'))) {
-    //     this.isValidAnncEDate = true;
-    //     return;
-    //   }
-    // }
-
     this.submitted = true;
 
     if (submitSrc === 'save') {
@@ -1300,6 +1269,11 @@ export class AuctionDetailComponent implements OnInit {
 
   public generateAuctionDetailFormat(obj: any) {
     console.log('generateAuctionDetailFormat ', obj);
+    if (this.lang == 'ar') {
+      obj.auctionEndTime = obj.auctionEndTime?.split(' ')[1] == 'م' ? obj.auctionEndTime.replace(obj.auctionEndTime.split(' ')[1], 'PM') : obj.auctionEndTime?.split(' ')[1] == 'ص' ? obj.auctionEndTime.replace(obj.auctionEndTime.split(' ')[1], 'AM') : obj.auctionEndTime
+      obj.auctionStartTime = obj.auctionStartTime?.split(' ')[1] == 'م' ? obj.auctionStartTime.replace(obj.auctionStartTime.split(' ')[1], 'PM') : obj.auctionStartTime?.split(' ')[1] == 'ص' ? obj.auctionStartTime.replace(obj.auctionStartTime.split(' ')[1], 'AM') : obj.auctionStartTime
+      obj.bidOpeningTime = obj.bidOpeningTime?.split(' ')[1] == 'م' ? obj.bidOpeningTime.replace(obj.bidOpeningTime.split(' ')[1], 'PM') : obj.bidOpeningTime?.split(' ')[1] == 'ص' ? obj.bidOpeningTime.replace(obj.bidOpeningTime.split(' ')[1], 'AM') : obj.bidOpeningTime
+    }
     let auctionList = {
       SaveAsDraft: "X",
       DraftId: this.DraftId ? this.DraftId : '',

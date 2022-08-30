@@ -304,101 +304,10 @@ export class AuctionOrderSummaryComponent implements OnInit {
     this.auctionItem.lowBidValue = serverObj.d.results[0].ZzLowBidVl;
     this.auctionItem.gnteePercentage = serverObj.d.results[0].ZzIbgaPercent;
     this.auctionItem.finalGntee = serverObj.d.results[0].ZzFbgaDeadline;
-    // this.auctionItem.finalGnteeUnit = serverObj.d.results[0].Description;
     this.auctionItem.commissionType = serverObj.d.results[0].ZzCommisionTyp;
-    this.auctionItem.pursuitPerCommission =
-      serverObj.d.results[0].ZzCommPercent;
+    this.auctionItem.pursuitPerCommission = serverObj.d.results[0].ZzCommPercent;
+    console.log('this.auctionItem: ', this.auctionItem);
 
-    // if(serverObj.d.results[0].listtoattachnav['results']){
-    //   this.temp = [];
-    //   console.log("att data form API" ,  serverObj.d.results[0].listtoattachnav['results']);
-    //   var productImagesArray = this.auctionDetails.listtoattachnav['results'].filter(function (el: any) {
-    //     return el.ObjectType == "/AuctionProductImages" &&
-    //     el.ZzProductNo.trim() == serverObj.d.results[0].ZzProductNo.trim();
-    //   });
-    //   var productFilesArray = this.auctionDetails.listtoattachnav['results'].filter(function (el: any) {
-    //     return el.ObjectType == "/AuctionProductDocuments" &&
-    //     el.ZzProductNo.trim() == serverObj.d.results[0].ZzProductNo.trim();
-    //   });
-    //   if(productImagesArray.length > 0){
-    //     productImagesArray.forEach(
-    //       (value: any, index: any, array: any) => {
-    //           console.log(index, 'attachment index');
-    //           var fileupload = {
-    //             name: value.FileName + '.' + value.FileExt,
-    //             size: '',
-    //             type: '',
-    //             filesrc: '',
-    //             FilenetId: value.FilenetId,
-    //             MIMEType: value.MIMEType,
-    //           };
-    //           this.auctionServc
-    //             .downloadAuctionImages(fileupload.FilenetId)
-    //             .subscribe(
-    //               async (downloadAuctionImagesResp: any) => {
-    //                 const fileResp = downloadAuctionImagesResp.d;
-    //                 var byteString = atob(
-    //                   atob(fileResp.FileContent).split(',')[1]
-    //                 );
-    //                 var ab = new ArrayBuffer(byteString.length);
-    //                 var ia = new Uint8Array(ab);
-    //                 for (var i = 0; i < byteString.length; i++) {
-    //                   ia[i] = byteString.charCodeAt(i);
-    //                 }
-    //                 const blob = new Blob([ab], { type: fileupload.MIMEType });
-    //                 // var a = window.URL.createObjectURL(blob);
-    //                 var base64String = await this.convertBlobToBase64(blob);
-    //                 console.log("base64String in mapping for edit",base64String);
-
-    //                 this.temp.push({
-    //                   id: index + 1,
-    //                   src: base64String,
-    //                   alt: 'test',
-    //                   title: 'hello world',
-    //                 });
-    //                 this.showLoader=false;
-
-    //                 if (
-    //                   index + 1 ==
-    //                   serverObj.d.results[0].listtoattachnav['results'].length
-    //                 ) {
-    //                   this.globalProductData = this.temp;
-    //                 }
-    //                 // console.log('Base64 String - ', base64String);
-    //                 this.auctionItem.productAttachment.push(fileupload);
-    //                 //  window.open(fileURL, '_blank');
-    //                 // window.open(fileContent, "_blank");
-    //               },
-    //               (error) => {
-    //                 this.showLoader = false;
-    //                 console.log('downloadAuctionImages RespError : ', error);
-    //               }
-    //             );
-
-    //       }
-    //     );
-    //   }else{
-    //     this.showLoader=false;
-    //   }
-    //   if(productFilesArray.length > 0){
-    //     productFilesArray.forEach(
-    //       (value: any, index: any, array: any) => {
-    //           // console.log(value, 'auction doc');
-    //           var fileupload = {
-    //             name: value.FileName + '.' + value.FileExt,
-    //             size: '',
-    //             type: '',
-    //             filesrc: '',
-    //             FilenetId: value.FilenetId,
-    //             MIMEType: value.MIMEType,
-    //           };
-    //           this.auctionItem.auctionAttachement.push(fileupload);
-    //       }
-    //     );
-    //   }else{
-    //     this.showLoader = false;
-    //   }
-    // }
     const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
     if (serverObj.d.results[0].listtoattachnav['results']) {
       this.temp = [];
@@ -431,82 +340,9 @@ export class AuctionOrderSummaryComponent implements OnInit {
             FilenetId: value.FilenetId,
             MIMEType: value.MIMEType,
           };
-          // downloading pictures
-          // this.auctionServc
-          //   .downloadAuctionImages(fileupload.FilenetId)
-          //   .subscribe(
-          //     async (downloadAuctionImagesResp: any) => {
-
-          //       let filenetId = fileupload.FilenetId;
-          //       console.log(filenetId, "FILENETID")
-          //       const fileResp = downloadAuctionImagesResp.d;
-          //       // console.log(fileResp.FileContent);
-          //       this.receivedCount++;
-          //       var byteString = atob(
-          //         atob(fileResp.FileContent).split(',')[1]
-          //       );
-          //       var ab = new ArrayBuffer(byteString.length);
-          //       var ia = new Uint8Array(ab);
-          //       for (var i = 0; i < byteString.length; i++) {
-          //         ia[i] = byteString.charCodeAt(i);
-          //       }
-          //       const blob = new Blob([ab], { type: fileupload.MIMEType });
-          //       // var a = window.URL.createObjectURL(blob);
-          //       var base64String = await this.convertBlobToBase64(blob);
-          //       console.log("base64String in mapping for edit");
-          //       console.log(this.imageCount)
-          //       console.log(this.receivedCount)
-          //       if(this.imageCount == this.receivedCount){
-          //         // this.showLoader=false;
-          //       }
-
-          //       this.temp.push({
-          //         id: index + 1,
-          //         src: base64String,
-          //         alt: 'test',
-          //         title: 'hello world',
-          //         filenetId: filenetId
-          //       });
-          //       // To load until the images load
-          //       // this.showLoader=false;
-
-          //       // var reader = new FileReader();
-          //       // reader.readAsDataURL(blob);
-          //       // var base64String = (reader.onloadend = function () {
-          //       //   var base64String = reader.result;
-          //       //   return base64String;
-          //       // });
-
-          //       if (
-          //         index + 1 ==
-          //         serverObj.d.results[0].listtoattachnav['results'].length
-          //       ) {
-          //         this.globalProductData = this.temp;
-          //         // this.addData(this.temp);
-          //       }
-          //       // console.log('Base64 String - ', base64String);
-          //       this.auctionItem.productAttachment.push(fileupload);
-          //       //  window.open(fileURL, '_blank');
-          //       // window.open(fileContent, "_blank");
-          //     },
-          //     (error) => {
-          //       this.showLoader = false;
-          //       console.log('downloadAuctionImages RespError : ', error);
-          //     }
-          //   );
-          // await timer(3000);
         }
-
-
       }
-      // );
     }
-
-    // console.log('hari', this.auctionItem.productAttachment);
-
-    // serverObj.d.results[0].listtoattachnav['results'].forEach((value:any,index:any,array:any) => {
-    //     this.auctionItem.auctionAttachement.push(new FormControl(value));
-    // })
     return this.auctionItem;
   }
 
@@ -539,12 +375,6 @@ export class AuctionOrderSummaryComponent implements OnInit {
 
   public mappingObjForProducts(data: any) {
     console.log('mappingObjForProduct');
-    // this.auctionProducts.value.forEach((pItem : any , index : number) => {
-    //   this.removeProduct(index-1);
-    // });
-    // this.productsFormGroup.get('sameLocNDate')?.setValue(false);
-    // let sameLocNDateVal = { target : { checked : false } };
-    // this.setValidation(sameLocNDateVal);
     let productsArray = data.listtoproductnav.results;
     console.log('productsArray ', productsArray);
     productsArray.forEach((pItem: any) => {
