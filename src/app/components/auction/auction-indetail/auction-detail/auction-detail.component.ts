@@ -230,7 +230,7 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.get('gnteePercentage')?.setValue('2');
     this.basicFormGroup.get('finalGntee')?.setValue('15');
     this.basicFormGroup.get('commissionType')?.setValue('Next Financial');
-    this.basicFormGroup.get('pursuitPerCommission')?.setValue('15');
+    this.basicFormGroup.get('pursuitPerCommission')?.setValue('2.5');
   }
 
   refreshCalendarCntrl() {
@@ -561,7 +561,7 @@ export class AuctionDetailComponent implements OnInit {
       gnteePercentage: new FormControl(this.auctionItem.gnteePercentage ? this.auctionItem.gnteePercentage : '2'),
       finalGntee: new FormControl(this.auctionItem.finalGntee ? this.auctionItem.finalGntee : '15'),
       commissionType: new FormControl(this.auctionItem.commissionType ? this.auctionItem.commissionType : ''),
-      pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : ''),
+      pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : '2.5'),
       auctionAttachement: new FormArray((this.auctionItem.auctionAttachement ? this.auctionItem.auctionAttachement : [])),
     });
     console.log("Form", this.basicFormGroup);
@@ -591,6 +591,7 @@ export class AuctionDetailComponent implements OnInit {
       this.basicFormGroup.get('pursuitPerCommission')?.disable();
     }
     this.basicFormGroup.get('gnteePercentage')?.disable();
+    this.basicFormGroup.get('pursuitPerCommission')?.disable();
     if (this.auctionDetails?.listtoattachnav['results']) {
       while (this.auctionAttachement.length !== 0) {
         this.auctionAttachement.removeAt(0)
@@ -1297,7 +1298,7 @@ export class AuctionDetailComponent implements OnInit {
       ZzIbgaPercent: '2', // HardCoded to 2, need to changed in future
       ZzFbgaDeadline: obj.finalGntee,
       ZzCommisionTyp: obj.commissionType,
-      ZzCommPercent: obj.pursuitPerCommission,
+      ZzCommPercent: '2.5',
       listtoproductnav: [{}],
       // listtoattachnav : {}
     }

@@ -37,8 +37,8 @@
 
                                             <li class="nav-item border-left">
                                                 <a class="nav-link nav-link-tabs"
-                                                    [ngClass]="{ active: selectedTab === 'Awaiting Payment' }"
-                                                    (click)="onTabSelection('Awaiting Payment')">{{
+                                                    [ngClass]="{ active: selectedTab === 'Pending Paying' }"
+                                                    (click)="onTabSelection('Pending Paying')">{{
                                                     'bidderMyInvoices.AwaitingPayment' | translate }}
                                                     ({{totcntforawaiting}})</a>
                                             </li>
@@ -105,7 +105,8 @@
                         }}</label>
                     <select class="form-control" id="validationCustom04" [(ngModel)]="filterModel.status">
                         <option value="">{{ 'bidderMyInvoices.InvoiceStatus' | translate }} </option>
-                        <option *ngFor="let status of dropValStatus">{{status | translate }}</option>
+                        <option [value]="status.value" *ngFor="let status of dropValStatus">{{status.name | translate }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -256,7 +257,7 @@
                                     <td>{{ rowItem.entityName | translate }} </td>
                                     <td>
                                         <div
-                                            [ngClass]="[rowItem.auctionStatus === 'Awaiting Payment' ? 'status status-o status-o-warning-2' : 'status status-o status-o-success-3'  ]">
+                                            [ngClass]="[rowItem.auctionStatus === 'Pending Paying' ? 'status status-o status-o-warning-2' : 'status status-o status-o-success-3'  ]">
                                             <br>
                                         </div>
                                         {{ rowItem.auctionStatus | translate }}

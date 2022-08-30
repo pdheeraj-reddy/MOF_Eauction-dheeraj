@@ -47,7 +47,7 @@ export class MyAuctionsComponent implements OnInit {
   ];
   dropValDisplayCase: any = [
     { code: 'Offer Made', disp: 'Offer Made' },
-    { code: 'No Offer', disp: 'No Offer' },
+    { code: 'No Offer', disp: 'No Offer Submitted' },
     { code: 'No Award', disp: 'No Award' },
     { code: 'Award', disp: 'Awarded' }
   ];

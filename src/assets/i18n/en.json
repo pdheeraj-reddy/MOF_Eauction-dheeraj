@@ -757,7 +757,7 @@
         "Invoices": "Invoices",
         "InvoicesTitle": "Invoices",
         "All": "All",
-        "AwaitingPayment": "Awaiting Payment",
+        "AwaitingPayment": "Pending Paying",
         "Paid": "Paid",
         "filter-title": "Filter",
         "InvoiceReferenceNumber": "Invoice reference number",
@@ -803,7 +803,7 @@
         "BackToAuctions": "Back to Auctions"
     },
     "bidderPayInvoice": {
-        "AwaitingPayment": "Awaiting payment",
+        "AwaitingPayment": "Pending Paying",
         "PleasePayInvoice-approve-final-award": "Pay the invoice to approve the final awarding.",
         "AwardCanceled": "The awarding will be canceled if the invoice is not paid within 30 days of awarding.",
         "PayTheBill": "Pay the Invoice"
@@ -1034,7 +1034,7 @@
     "Accurate": "Minute",
     "Second": "Second",
     "Product": "products",
-    "Awaiting Payment": "Awaiting Payment",
+    "Awaiting Payment": "Pending Paying",
     "Paid": "Paid",
     "TrustServices": "Trust services",
     "bidderFinalInvoice": {
@@ -1199,7 +1199,7 @@
         "of": "of"
     },
     "payInvoice": {
-        "head": "Awaiting Payment",
+        "head": "Pending Paying",
         "sub_head": "Please pay the invoice to approve the final award.",
         "label": "The award will be canceled if the bill is not paid within 30 days of the award.",
         "pay_btn": "Pay Invoice"

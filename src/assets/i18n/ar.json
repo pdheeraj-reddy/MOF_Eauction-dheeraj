@@ -722,7 +722,7 @@
         "tab3": "مزادات قادمة",
         "tab4": "تحت الترسية",
         "tab5": "مزادات منتهية",
-        "tab6": "المزادات الممنوحة",
+        "tab6": "تمت الترسيه",
         "filter": "فلاتر",
         "status": "حالة",
         "type": "يكتب",
@@ -766,7 +766,7 @@
             "subHead": "يمكنك إدارة المزاد من هذه القائمة",
             "tab1": "تعليمات المزاد",
             "tab2": "تفاصيل المزاد",
-            "tab3": "لجنة البيع",
+            "tab3": "لجنه المزاد",
             "tab4": "لجنة التسعير",
             "tab5": "تقرير العروض",
             "more": "للمساعدة أو الدعم في إدارة المزادات",
@@ -819,7 +819,7 @@
         "tab1": "تفاصيل المزاد",
         "tab2": "تعليمات المزاد",
         "tab3": "لجنة التسعير",
-        "tab4": "لجنة البيع",
+        "tab4": "لجنه المزاد",
         "tab5": "تقرير العروض",
         "instruction": "للمساعدة أو الدعم في إدارة المزادات",
         "content1": "عدد المزايدات",
@@ -833,7 +833,7 @@
     "Accurate": "دقيقة",
     "Second": "ثانية",
     "Product": "منتج",
-    "Awaiting Payment": "بإنتظار الدفع",
+    "Awaiting Payment": "بإنتظار الدفع ",
     "Paid": "مدفوعة",
     "bidderFinalInvoice": {
         "InvoiceDetails": "تفاصيل الفاتورة",
@@ -1035,7 +1035,7 @@
         "Invoices": "الفواتير",
         "InvoicesTitle": "الفواتير",
         "All": "الكل",
-        "AwaitingPayment": "بإنتظار الدفع",
+        "AwaitingPayment": "بإنتظار الدفع ",
         "Paid": "مدفوعة",
         "filter-title": "البحث المتقدم",
         "InvoiceReferenceNumber": "الرقم المرجعي للمزاد",
@@ -1081,7 +1081,7 @@
         "BackToAuctions": "العودة إلى المزادات"
     },
     "bidderPayInvoice": {
-        "AwaitingPayment": "Awaiting payment",
+        "AwaitingPayment": "بإنتظار الدفع ",
         "PleasePayInvoice-approve-final-award": " Please pay the invoice to approve the final award.",
         "AwardCanceled": "The award will be canceled if the invoice is not paid within 30 days of awarding.",
         "PayTheBill": "Pay the bill"

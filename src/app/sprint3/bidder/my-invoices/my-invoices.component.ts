@@ -26,7 +26,10 @@ export class MyInvoicesComponent implements OnInit {
   totcntforpaid: number;
   selectedTab: string = 'All';
   showLoader: boolean = false;
-  dropValStatus: any = ["Awaiting Payment", "Paid"];
+  dropValStatus: any = [
+    { name: "Pending Paying", value: "Pending Paying" },
+    { name: "Paid", value: "Paid" }
+  ];
   // Form controls
   filterFormGroup: FormGroup;
   showFilterForm: boolean = false;
@@ -91,7 +94,7 @@ export class MyInvoicesComponent implements OnInit {
       }
       console.log("AUCTION", items.auctionStatus)
       if (items.auctionStatus == 'N') {
-        items.auctionStatus = 'Awaiting Payment';
+        items.auctionStatus = 'Pending Paying';
       }
       else {
         items.auctionStatus = 'Paid';
