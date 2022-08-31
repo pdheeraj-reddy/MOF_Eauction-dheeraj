@@ -157,7 +157,8 @@
                             placeholder="{{ 'auctionlist.filter-refno-pholder' | translate }}" id="validationCustom01"
                             [required]="true" />
                     </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All' && !loggedUserRole.isBidder">
+                    <div class="col-md-4 mb-3"
+                        *ngIf="selectedTab==='All' && !(loggedUserRole.isBidder || loggedUserRole.isAuctionModerator || loggedUserRole.isSalesHead)">
                         <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
                             (change)="changeSelect($event, 'auctionStatus')" [required]="true">
@@ -167,7 +168,8 @@
                                 }}</option>
                         </select>
                     </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab==='All' && loggedUserRole.isBidder">
+                    <div class="col-md-4 mb-3"
+                        *ngIf="selectedTab==='All' && (loggedUserRole.isBidder || loggedUserRole.isAuctionModerator || loggedUserRole.isSalesHead)">
                         <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
                             (change)="changeSelect($event, 'auctionStatus')" [required]="true">
@@ -177,7 +179,8 @@
                                 }}</option>
                         </select>
                     </div>
-                    <div class="col-md-4 mb-3" *ngIf="selectedTab === 'Pending Selecting' && loggedUserRole.isBidder">
+                    <div class="col-md-4 mb-3"
+                        *ngIf="selectedTab === 'Pending Selecting' && (loggedUserRole.isBidder || loggedUserRole.isAuctionModerator || loggedUserRole.isSalesHead)">
                         <label for="validationCustom04">{{ 'auctionlist.filter-auctionstatus' | translate }}</label>
                         <select class="form-control" id="validationCustom04" formControlName="auctionStatus"
                             (change)="changeSelect($event, 'auctionStatus')" [required]="true">
