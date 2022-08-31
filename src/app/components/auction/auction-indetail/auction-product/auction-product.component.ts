@@ -380,8 +380,8 @@ export class AuctionProductComponent implements OnInit {
         location: {
           deliveryDate: pItem.DelivDate ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD') : '',
           deliveryTime: pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '',
-          locLatitude: pItem.ZzLocationCord.split(",")[0],
-          locLongitude: pItem.ZzLocationCord.split(",")[1],
+          // locLatitude: pItem.ZzLocationCord.split(",")[0],
+          // locLongitude: pItem.ZzLocationCord.split(",")[1],
           locRegion: pItem.ZzRegion,
           locCity: pItem.ZzCity,
           locNeighborhood: pItem.ZzNeighbourhood,
@@ -397,8 +397,8 @@ export class AuctionProductComponent implements OnInit {
         this.productsFormGroup.get('location')?.get('deliveryDate')?.setValue(pItem.DelivDate ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD') : '');
         this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue(pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '');
         console.log('setVal', pItem.DelivTime);
-        this.productsFormGroup.get('location')?.get('locLatitude')?.setValue(pItem.ZzLocationCord.split(",")[0]);
-        this.productsFormGroup.get('location')?.get('locLongitude')?.setValue(pItem.ZzLocationCord.split(",")[1]);
+        // this.productsFormGroup.get('location')?.get('locLatitude')?.setValue(pItem.ZzLocationCord.split(",")[0]);
+        // this.productsFormGroup.get('location')?.get('locLongitude')?.setValue(pItem.ZzLocationCord.split(",")[1]);
         this.productsFormGroup.get('location')?.get('locRegion')?.setValue(pItem.ZzRegion);
         this.productsFormGroup.get('location')?.get('locCity')?.setValue(pItem.ZzCity);
         this.productsFormGroup.get('location')?.get('locNeighborhood')?.setValue(pItem.ZzNeighbourhood);
@@ -474,8 +474,8 @@ export class AuctionProductComponent implements OnInit {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChoose = true;
-    this.locationForm['locLatitude'].setValue(this.lat);
-    this.locationForm['locLongitude'].setValue(this.lat);
+    // this.locationForm['locLatitude'].setValue(this.lat);
+    // this.locationForm['locLongitude'].setValue(this.lat);
   }
 
   // <!----------add product event function------------------------>
@@ -485,8 +485,8 @@ export class AuctionProductComponent implements OnInit {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChoose = true;
-    this.addproductlocationForm['locLatitude'].setValue(this.lat);
-    this.addproductlocationForm['locLongitude'].setValue(this.lat);
+    // this.addproductlocationForm['locLatitude'].setValue(this.lat);
+    // this.addproductlocationForm['locLongitude'].setValue(this.lat);
   }
 
   createForm() {
@@ -495,8 +495,8 @@ export class AuctionProductComponent implements OnInit {
       location: this.formBuilder.group({
         deliveryDate: new FormControl(this.productItem.location?.deliveryDate ? this.productItem.location.deliveryDate : '', Validators.required),
         deliveryTime: new FormControl(this.productItem.location?.deliveryTime ? this.productItem.location.deliveryTime : '', Validators.required),
-        locLatitude: new FormControl(this.productItem.location?.locLatitude ? this.productItem.location.locLatitude : '', Validators.required),
-        locLongitude: new FormControl(this.productItem.location?.locLongitude ? this.productItem.location.locLongitude : '', Validators.required),
+        // locLatitude: new FormControl(''),
+        // locLongitude: new FormControl(''),
         locRegion: new FormControl(this.productItem.location?.locRegion ? this.productItem.location.locRegion : '', Validators.required),
         locCity: new FormControl(this.productItem.location?.locCity ? this.productItem.location.locCity : '', Validators.required),
         locNeighborhood: new FormControl(this.productItem.location?.locNeighborhood ? this.productItem.location.locNeighborhood : '', Validators.required),
@@ -522,8 +522,8 @@ export class AuctionProductComponent implements OnInit {
     if (this.ViewMode == 'view') {
       this.productsFormGroup.get('location')?.get('deliveryDate')?.disable();
       this.productsFormGroup.get('location')?.get('deliveryTime')?.disable();
-      this.productsFormGroup.get('location')?.get('locLatitude')?.disable();
-      this.productsFormGroup.get('location')?.get('locLongitude')?.disable();
+      // this.productsFormGroup.get('location')?.get('locLatitude')?.disable();
+      // this.productsFormGroup.get('location')?.get('locLongitude')?.disable();
       this.productsFormGroup.get('location')?.get('locRegion')?.disable();
       this.productsFormGroup.get('location')?.get('locCity')?.disable();
       this.productsFormGroup.get('location')?.get('locNeighborhood')?.disable();
@@ -546,8 +546,8 @@ export class AuctionProductComponent implements OnInit {
       location: this.formBuilder.group({
         deliveryDate: new FormControl(pItem.location?.deliveryDate ? pItem.location.deliveryDate : '', Validators.required),
         deliveryTime: new FormControl(pItem.location?.deliveryTime ? pItem.location.deliveryTime : '', Validators.required),
-        locLatitude: new FormControl(pItem.location?.locLatitude ? pItem.location.locLatitude : '', Validators.required),
-        locLongitude: new FormControl(pItem.location?.locLongitude ? pItem.location.locLongitude : '', Validators.required),
+        // locLatitude: new FormControl(''),
+        // locLongitude: new FormControl(''),
         locRegion: new FormControl(pItem.location?.locRegion ? pItem.location.locRegion : '', Validators.required),
         locCity: new FormControl(pItem.location?.locCity ? pItem.location.locCity : '', Validators.required),
         locNeighborhood: new FormControl(pItem.location?.locNeighborhood ? pItem.location.locNeighborhood : '', Validators.required),
@@ -574,8 +574,8 @@ export class AuctionProductComponent implements OnInit {
       location: this.formBuilder.group({
         deliveryDate: new FormControl(this.productlist.location?.deliveryDate ? this.productlist.location.deliveryDate : ''),
         deliveryTime: new FormControl(this.productlist.location?.deliveryTime ? this.productlist.location.deliveryTime : ''),
-        locLatitude: new FormControl(this.productlist.location?.locLatitude ? this.productlist.location.locLatitude : ''),
-        locLongitude: new FormControl(this.productlist.location?.locLongitude ? this.productlist.location.locLongitude : ''),
+        // locLatitude: new FormControl(''),
+        // locLongitude: new FormControl(''),
         locRegion: new FormControl(this.productlist.location?.locRegion ? this.productlist.location.locRegion : ''),
         locCity: new FormControl(this.productlist.location?.locCity ? this.productlist.location.locCity : ''),
         locNeighborhood: new FormControl(this.productlist.location?.locNeighborhood ? this.productlist.location.locNeighborhood : ''),
@@ -593,8 +593,8 @@ export class AuctionProductComponent implements OnInit {
       this.addFormGroup.get('productSpec')?.disable();
       this.addFormGroup.get('location')?.get('deliveryDate')?.disable();
       this.addFormGroup.get('location')?.get('deliveryTime')?.disable();
-      this.addFormGroup.get('location')?.get('locLatitude')?.disable();
-      this.addFormGroup.get('location')?.get('locLongitude')?.disable();
+      // this.addFormGroup.get('location')?.get('locLatitude')?.disable();
+      // this.addFormGroup.get('location')?.get('locLongitude')?.disable();
       this.addFormGroup.get('location')?.get('locRegion')?.disable();
       this.addFormGroup.get('location')?.get('locCity')?.disable();
       this.addFormGroup.get('location')?.get('locNeighborhood')?.disable();
@@ -1304,6 +1304,7 @@ export class AuctionProductComponent implements OnInit {
 
   public onSubmit(submitSrc: string) {
     // this.showLoader = true;
+    console.log('this.productsFormGroup: ', this.productsFormGroup);
     if (this.productsFormGroup.controls['sameLocNDate']) {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
@@ -1363,8 +1364,8 @@ export class AuctionProductComponent implements OnInit {
       if (this.productsFormGroup.controls['sameLocNDate'].value) {
         this.location.controls['deliveryDate'].setValidators([Validators.required]);
         this.location.controls['deliveryTime'].setValidators([Validators.required]);
-        this.location.controls['locLatitude'].setValidators([Validators.required]);
-        this.location.controls['locLongitude'].setValidators([Validators.required]);
+        // this.location.controls['locLatitude'].setValidators();
+        // this.location.controls['locLongitude'].setValidators();
         this.location.controls['locRegion'].setValidators([Validators.required]);
         this.location.controls['locCity'].setValidators([Validators.required]);
         this.location.controls['locNeighborhood'].setValidators([Validators.required]);
@@ -1374,8 +1375,8 @@ export class AuctionProductComponent implements OnInit {
       } else {
         this.location.controls['deliveryDate'].clearValidators();
         this.location.controls['deliveryTime'].clearValidators();
-        this.location.controls['locLatitude'].clearValidators();
-        this.location.controls['locLongitude'].clearValidators();
+        // this.location.controls['locLatitude'].clearValidators();
+        // this.location.controls['locLongitude'].clearValidators();
         this.location.controls['locRegion'].clearValidators();
         this.location.controls['locCity'].clearValidators();
         this.location.controls['locNeighborhood'].clearValidators();
@@ -1388,8 +1389,8 @@ export class AuctionProductComponent implements OnInit {
       this.productsFormGroup.controls['sameLocNDate'].clearValidators();
       this.location.controls['deliveryDate'].clearValidators();
       this.location.controls['deliveryTime'].clearValidators();
-      this.location.controls['locLatitude'].clearValidators();
-      this.location.controls['locLongitude'].clearValidators();
+      // this.location.controls['locLatitude'].clearValidators();
+      // this.location.controls['locLongitude'].clearValidators();
       this.location.controls['locRegion'].clearValidators();
       this.location.controls['locCity'].clearValidators();
       this.location.controls['locNeighborhood'].clearValidators();
@@ -1400,8 +1401,8 @@ export class AuctionProductComponent implements OnInit {
       if (this.productsFormGroup.controls['sameLocNDate'].value) {
         this.location.controls['deliveryDate'].setValidators([Validators.required]);
         this.location.controls['deliveryTime'].setValidators([Validators.required]);
-        this.location.controls['locLatitude'].setValidators([Validators.required]);
-        this.location.controls['locLongitude'].setValidators([Validators.required]);
+        // this.location.controls['locLatitude'].setValidators();
+        // this.location.controls['locLongitude'].setValidators();
         this.location.controls['locRegion'].setValidators([Validators.required]);
         this.location.controls['locCity'].setValidators([Validators.required]);
         this.location.controls['locNeighborhood'].setValidators([Validators.required]);
@@ -1411,8 +1412,8 @@ export class AuctionProductComponent implements OnInit {
       } else {
         this.location.controls['deliveryDate'].clearValidators();
         this.location.controls['deliveryTime'].clearValidators();
-        this.location.controls['locLatitude'].clearValidators();
-        this.location.controls['locLongitude'].clearValidators();
+        // this.location.controls['locLatitude'].clearValidators();
+        // this.location.controls['locLongitude'].clearValidators();
         this.location.controls['locRegion'].clearValidators();
         this.location.controls['locCity'].clearValidators();
         this.location.controls['locNeighborhood'].clearValidators();
@@ -1424,8 +1425,8 @@ export class AuctionProductComponent implements OnInit {
     this.productsFormGroup.controls['sameLocNDate'].updateValueAndValidity();
     this.location.controls['deliveryDate'].updateValueAndValidity();
     this.location.controls['deliveryTime'].updateValueAndValidity();
-    this.location.controls['locLatitude'].updateValueAndValidity();
-    this.location.controls['locLongitude'].updateValueAndValidity();
+    // this.location.controls['locLatitude'].updateValueAndValidity();
+    // this.location.controls['locLongitude'].updateValueAndValidity();
     this.location.controls['locRegion'].updateValueAndValidity();
     this.location.controls['locCity'].updateValueAndValidity();
     this.location.controls['locNeighborhood'].updateValueAndValidity();
@@ -1466,7 +1467,7 @@ export class AuctionProductComponent implements OnInit {
         ZzProdDesc: pObj.productSpec,
         DelivDate: obj.location.deliveryDate ? moment(obj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
         DelivTime: obj.location.deliveryTime ? moment(obj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-        ZzLocationCord: (obj.location.locLatitude ? obj.location.locLatitude : '') + (obj.location.locLongitude ? " , " + obj.location.locLongitude : ''),
+        ZzLocationCord: '21.486256032618705 , 39.19187197360076',
         ZzRegion: obj.location.locRegion,
         ZzCity: obj.location.locCity,
         ZzNeighbourhood: obj.location.locNeighborhood,
@@ -1487,7 +1488,7 @@ export class AuctionProductComponent implements OnInit {
         ZzProdDesc: pObj.productSpec,
         DelivDate: pObj.location.deliveryDate ? moment(pObj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
         DelivTime: pObj.location.deliveryTime ? moment(pObj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-        ZzLocationCord: (pObj.location.locLatitude ? pObj.location.locLatitude : '') + (pObj.location.locLongitude ? " , " + pObj.location.locLongitude : ''),
+        ZzLocationCord: '21.486256032618705 , 39.19187197360076',
         ZzRegion: pObj.location.locRegion,
         ZzCity: pObj.location.locCity,
         ZzNeighbourhood: pObj.location.locNeighborhood,
@@ -1542,7 +1543,7 @@ export class AuctionProductComponent implements OnInit {
           ZzProdDesc: pObj.productSpec,
           DelivDate: obj.location.deliveryDate ? moment(obj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
           DelivTime: obj.location.deliveryTime ? moment(obj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-          ZzLocationCord: (obj.location.locLatitude ? obj.location.locLatitude : '') + (obj.location.locLongitude ? " , " + obj.location.locLongitude : ''),
+          ZzLocationCord: '21.486256032618705 , 39.19187197360076',
           ZzRegion: obj.location.locRegion,
           ZzCity: obj.location.locCity,
           ZzNeighbourhood: obj.location.locNeighborhood,
@@ -1563,7 +1564,7 @@ export class AuctionProductComponent implements OnInit {
           ZzProdDesc: pObj.productSpec,
           DelivDate: pObj.location.deliveryDate ? moment(pObj.location.deliveryDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
           DelivTime: pObj.location.deliveryTime ? moment(pObj.location.deliveryTime, 'h:m:s A').format('HH:mm:ss') : '',
-          ZzLocationCord: (pObj.location.locLatitude ? pObj.location.locLatitude : '') + (pObj.location.locLongitude ? " , " + pObj.location.locLongitude : ''),
+          ZzLocationCord: '21.486256032618705 , 39.19187197360076',
           ZzRegion: pObj.location.locRegion,
           ZzCity: pObj.location.locCity,
           ZzNeighbourhood: pObj.location.locNeighborhood,
