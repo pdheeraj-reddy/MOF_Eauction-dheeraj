@@ -34,7 +34,7 @@ export class AmAuctionComponent implements OnInit {
     { code: "Closed", disp: "Closed" }
   ];
   dropValStatus = [
-    { code: "Upcoming", disp: "Upcoming" },
+    { code: "Published", disp: "Upcoming" },
     { code: "Ongoing", disp: "Ongoing" },
     { code: "Pending Selecting", disp: "Pending Selecting" },
     { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
@@ -46,7 +46,7 @@ export class AmAuctionComponent implements OnInit {
   ];;
 
   dropValStatus_temp = [
-    { code: "Upcoming", disp: "Upcoming" },
+    { code: "Published", disp: "Upcoming" },
     { code: "Ongoing", disp: "Ongoing" },
     { code: "Pending Selecting", disp: "Pending Selecting" },
     { code: "Awarded", disp: "Awarded" },
@@ -302,7 +302,7 @@ export class AmAuctionComponent implements OnInit {
   getstatus(type: any) {
     if (type === "All && !loggedUserRole.isBidder") {
       this.dropValStatus = [
-        { code: "Upcoming", disp: "Upcoming" },
+        { code: "Published", disp: "Upcoming" },
         { code: "Ongoing", disp: "Ongoing" },
         { code: "Pending Selecting", disp: "Pending Selecting" },
         { code: "Pending Primary Awarding", disp: "Pending Primary Awarding" },
@@ -314,7 +314,7 @@ export class AmAuctionComponent implements OnInit {
       ];
     } else if (type === "All && loggedUserRole.isBidder") {
       this.dropValStatus_temp = [
-        { code: "Upcoming", disp: "Upcoming" },
+        { code: "Published", disp: "Upcoming" },
         { code: "Ongoing", disp: "Ongoing" },
         { code: "Pending Selecting", disp: "Pending Selecting" },
         { code: "Awarded", disp: "Awarded" },
