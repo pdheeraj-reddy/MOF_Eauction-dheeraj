@@ -16,26 +16,27 @@ export class AuctionParticipationComponent implements OnInit {
 
   showLoader: boolean = false;
   showSuccessfulModal: boolean = false;
-  showConfirmationModal : boolean = false;
-  constructor(private http: HttpClient, private bidderService: BidderService, private router: Router) { }
+  showConfirmationModal: boolean = false;
   btnDisable = false;
+  timeOver: boolean = false;
+  constructor(private bidderService: BidderService, private router: Router) { }
+
+
   ngOnInit(): void {
     console.log("🚀🚀 ~~ upcomingAuction", this.upcomingAuction);
-    console.log("🎯TC🎯 <--", this.response);
     if (this.response.ZzBidderSts == 'P') {
-      console.log("🎯TC🎯 <--", this.response);
       this.btnDisable = true;
+    } else if (new Date(`${this.upcomingAuction.auctionStartsdate} ${this.upcomingAuction.auctionStartstime} ${this.upcomingAuction.auctionStartstimeSufix}`).getTime() < new Date().getTime()) {
+      this.timeOver = true;
     }
+    console.log("Participant time", new Date(`${this.upcomingAuction.auctionStartsdate} ${this.upcomingAuction.auctionStartstime} ${this.upcomingAuction.auctionStartstimeSufix}`), new Date())
+
   }
-  // participation() {
-  //   this.showSuccessfulModal = true;
-  //   console.log("🎯TC🎯 <-- AuctionParticipationComponent <-- participation <-- this.showSuccessfulModal", this.showSuccessfulModal);
-  // }
+
   submitparticipation() {
     if (this.AuctionId) {
       this.showLoader = true;
       this.bidderService.makeParticipateIn(this.AuctionId).subscribe((res) => {
-        console.log("🎯TC🎯 ~ file: auction-participation.component.ts ~ line 37 ~ res.d.Msgty", res.d.Msgty);
         if (res.d.Msgty == 'S') {
           this.showConfirmationModal = false;
           this.showSuccessfulModal = true;

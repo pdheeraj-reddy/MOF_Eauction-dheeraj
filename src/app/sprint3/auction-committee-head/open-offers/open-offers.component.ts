@@ -140,19 +140,22 @@ export class OpenOffersComponent implements OnInit {
       file.downloadingAttachmet = true;
       this.mediaService.downloadAuctionImages(file.PdfContent).then((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
-        var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
-        }
-        const blob = new Blob([ab], { type: 'application/pdf' });
-        let fileURL = window.URL.createObjectURL(blob);
-        var newWin: any;
-        newWin = window.open(fileURL, '_blank');
-        // newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
-        if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined')) {
-          alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+        console.log('fileResp: ', fileResp);
+        if (fileResp.FileContent) {
+          var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
+          var ab = new ArrayBuffer(byteString.length);
+          var ia = new Uint8Array(ab);
+          for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          const blob = new Blob([ab], { type: fileResp.MIMEType });
+          let fileURL = window.URL.createObjectURL(blob);
+          var newWin: any;
+          newWin = window.open(fileURL, '_blank');
+          // newWin = this.downloadFile(file.name, file.MIMEType, fileURL);
+          if ((!newWin || newWin.closed || typeof newWin.closed == 'undefined')) {
+            alert("Unable to open the downloaded file. Please allow popups in case it is blocked at browser level.")
+          }
         }
         file.downloadingAttachmet = false;
         // window.open(fileContent, "_blank");
@@ -260,6 +263,7 @@ export class OpenOffersComponent implements OnInit {
     this.resetFilter();
     this.showFilterForm = !this.showFilterForm;
     this.openofferListData = this.copyOpenofferListData;
+    this.navigateToPage(1);
   }
 
   resetFilter() {

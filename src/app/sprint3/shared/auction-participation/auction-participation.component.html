@@ -36,8 +36,8 @@
         <!-- End -->
 
         <!--=================== Participation Button ===================-->
-        <button *ngIf="!btnDisable" class="btn btn-primary-light btn-lg align-self-center"
-            (click)="showConfirmationModal = true" style="width: 218.29px;">
+        <button *ngIf="!btnDisable" class="btn btn-primary-light btn-lg align-self-center" [disabled]="timeOver"
+            [ngClass]="{'disabled': timeOver}" (click)="showConfirmationModal = true" style="width: 218.29px;">
             {{'bidderAuctionDetails.ParticipateInTheAuction' | translate }}
         </button>
         <button *ngIf="btnDisable" class="disabled btn btn-primary-light btn-lg align-self-center"
