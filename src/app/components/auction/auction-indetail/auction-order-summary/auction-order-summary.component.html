@@ -476,7 +476,8 @@
                     </button>
                 </div>
                 <div class="d-flex flex-column flex-md-row mb-5" *ngIf="ViewMode != 'view'">
-                    <button type="button" (click)="onSubmit()" class="btn arrow-btn btn-primary-light btn-lg mx-0">
+                    <button type="button" data-toggle="modal" data-target="#sendRequestModal"
+                        class="btn arrow-btn btn-primary-light btn-lg mx-0">
                         <span class="btn-text">{{ "auctioncreate.auctiondetails.section2_orderSum-col9" | translate
                             }}</span>
                     </button>
@@ -485,6 +486,35 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="sendRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                    {{"message.confirm_title" |
+                    translate}}
+                </h4>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"><span
+                        class="icon-close"></span></button>
+            </div>
+            <div class="modal-body"><label for="confirmation"
+                    style="color: #414042; font-size: 16px;">{{"message.confirm_subtitle"
+                    |
+                    translate}}</label></div>
+            <div class="modal-footer" style="justify-content: end;">
+                <button type="button" class="btn btn-md" data-dismiss="modal" aria-label="Close"
+                    style="border: 1px solid #cccccc; border-radius: 5px;">
+                    {{"message.back" | translate}} </button>
+                <button type="button" (click)="onSubmit()" class="btn btn-primary-light btn-md" data-dismiss="modal"
+                    aria-label="Close">
+                    {{"message.accept" | translate}} </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal show" *ngIf="showSuccessfulModal" [ngClass]="{ 'modal-show': showSuccessfulModal }">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content text-center">

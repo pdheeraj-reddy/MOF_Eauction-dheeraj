@@ -636,29 +636,32 @@
                                     {{fullImage?.index || 1}} {{'sprint3_auction_detail.of' | translate }}
                                     {{slidesStore?.length}}</p>
                             </div>
-                            <p class="text-primary font-weight-bold text-22">{{upcomingAuction.auctionnote1}}</p>
+                            <p class="text-primary font-weight-bold text-22" style="margin: 0 0 14px !important;">
+                                {{upcomingAuction.auctionnote1}}</p>
 
-                            <p class="text-16 text-muted">{{upcomingAuction.auctionnote2}}</p>
+                            <p class="text-16 text-muted" style="margin: 0 0 14px !important;">
+                                {{upcomingAuction.auctionnote2}}</p>
 
-                            <p class="text-14 text-black d-flex">
-                                <img src="assets/icons/product-layers.png" alt="">&nbsp;
-                                <span class="mx-1">{{upcomingAuction.productCount | number}}</span>
-                                <span>{{ 'bidderAuctionDetails.Product' | translate }}</span>
+                            <p class="text-14 text-black d-flex" style="margin: 0 0 14px !important;">
+                                <img src="assets/icons/layers.svg" alt="">&nbsp;
+                                <span class="mx-1 text-14">{{upcomingAuction.productCount | number}}</span>
+                                <span class="text-14">{{ 'bidderAuctionDetails.Product' | translate }}</span>
                             </p>
 
-                            <p class="text-14 text-black">
-                                <span class="icon-calendar text-primary font-weight-bold text-20"></span>
+                            <p class="text-14 text-black" style="margin: 0 0 14px !important;">
+                                <!-- <span class="icon-calendar text-primary font-weight-bold text-20"></span> -->
+                                <img src="assets/icons/calendar-auction.svg" alt="">
                                 &nbsp;
-                                {{'bidderAuctionDetails.AuctionStarts' | translate }}
+                                {{'bidderAuctionDetails.AuctionStarts' | translate }} :
                                 {{upcomingAuction.auctionStartsdate}} &nbsp; ∙
                                 {{upcomingAuction.auctionStartstime}}
                                 {{ auctionStartSuffix | translate}}
                             </p>
 
-                            <p class="text-14 text-black">
+                            <p class="text-14 text-black" style="margin: 0 0 14px !important;">
                                 <span class="text-primary font-weight-bold text-20"><img
                                         src="/assets/icons/auction-primary.svg" alt=""></span>&nbsp;&nbsp;
-                                {{'bidderAuctionDetails.BiddingIs' | translate }} {{auctionBiddingStatus | translate}}
+                                {{'bidderAuctionDetails.BiddingIs' | translate }} : {{auctionBiddingStatus | translate}}
                             </p>
                             <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
                                 <div class="card" style="border: none;">
@@ -782,7 +785,7 @@
 
 
                     <div *ngIf="!(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
-                        <div class="card" style="border: none; margin: 2%;">
+                        <div class="card" style="border: none; margin: auto;">
                             <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
                                 data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"
                                 aria-controls="localContentFirst2">

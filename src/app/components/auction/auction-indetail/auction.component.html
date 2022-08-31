@@ -92,9 +92,17 @@
                 <label class="text-16 text-secondary-gray text-center" for="confirmation"> {{
                     'message.success_draft_para' | translate }} </label>
             </div>
-            <div class="modal-footer justify-content-center"> <button type="button" (click)="closeModal('success')"
-                    class="btn btn-primary-light btn-md" data-dismiss="modal" aria-label="Close"> {{
-                    'message.back_auctionRequest' | translate }} </button> </div>
+
+            <div class="modal-footer justify-content-center">
+
+                <button type=" button" (click)="closeModal('close')" class="btn btn-outline-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{
+                    'message.stay_in_draft' | translate }} </button>
+
+                <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md"
+                    data-dismiss="modal" aria-label="Close"> {{
+                    'message.back_auctionRequest' | translate }} </button>
+            </div>
         </div>
     </div>
 </div>

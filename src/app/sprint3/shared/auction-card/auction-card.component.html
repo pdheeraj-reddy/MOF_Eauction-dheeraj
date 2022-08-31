@@ -66,13 +66,14 @@
         <p class="card-text" data-toggle="tooltip" data-placement="top" title="{{auction.description}}">
             {{auction.description}} </p>
         <div class="text-body text-18 mt-4">
-            <img src="assets/icons/product-layers.png" alt="">
+            <img src="assets/icons/layers.svg" alt="">
             <span class="mx-2 product-qty"> {{auction.product}} {{ 'Product' | translate }}</span>
         </div>
-        <div class="text-body text-18 d-flex mt-3 product-qty" *ngIf=" auction.auctiondate">
-            <span class="icon-calendar text-primary font-weight-bold"></span>
-            <span class="mx-3"> {{auction.auctiondate | date:'YYYY-MM-dd'}} </span>∙&nbsp;
-            <span *ngIf="auction.auctiontime">
+        <div class="text-body text-18 d-flex mt-3" *ngIf=" auction.auctiondate">
+            <!-- <span class="icon-calendar text-primary font-weight-bold"></span> -->
+            <img src="assets/icons/calendar-auction.svg" alt="">
+            <span class="mx-3 text-14 product-qty"> {{auction.auctiondate | date:'YYYY-MM-dd'}} </span>∙&nbsp;
+            <span class="text-14 product-qty" *ngIf="auction.auctiontime">
                 {{auctionStartTime}} {{auctionTimeSufix | translate}}
             </span>
         </div>

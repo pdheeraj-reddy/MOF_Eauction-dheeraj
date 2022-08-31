@@ -219,7 +219,7 @@
             "section1_formGrp2": "Delivery Date",
             "section1_formGrp3": "Delivery Time Date",
             "section1_formGrp3-plch": "Choose the Time",
-            "section1_formGrp4": "Products Address",
+            "section1_formGrp4": "National Address",
             "section1_formGrp41": "Products Locations",
             "section1_formGrp41-plch": "Latitude",
             "section1_formGrp42-plch": "Longitude",
@@ -281,7 +281,7 @@
                 "popup_formGrp10": "Delivery Date",
                 "popup_formGrp11": "Delivery Time Date",
                 "popup_formGrp11-plch": "Choose the time",
-                "popup_formGrp12": "Products Address",
+                "popup_formGrp12": "National Address",
                 "popup_formGrp13": "Region",
                 "popup_formGrp14": "City",
                 "popup_formGrp15": "District",
@@ -299,11 +299,12 @@
     },
     "message": {
         "service_na": "Service Unavailable",
-        "success_draft_title": "The request was saved as a draft successfully",
-        "success_draft_para": "Saved successfully, you can find the request on the online auction requests page and modify it at any time.",
+        "success_draft_title": "The request has been saved as a draft successfully!",
+        "success_draft_para": "You can find the request on 'Auction Requests' page and complete it at any time.",
+        "stay_in_draft": "Continue the draft",
         "back_auctionRequest": "Back to Auction Requests",
-        "success_sendrequest_para": "Sent successfully, you can find the request with Pending Review status on the online auction requests page.",
-        "success_sendrequest_title": "The request is sent for approval successfully",
+        "success_sendrequest_para": "You can follow up on the status of the request from the 'Auction Requests' page.",
+        "success_sendrequest_title": "The request has been successfully submitted for approval!",
         "success_cancel_title": "The request has been rejected successfully.",
         "success_attach_title": "The attachment has been canceled successfully.",
         "confirm_cancel_title": "Confirmation of Cancellation of Auction Request Form?",
@@ -325,7 +326,11 @@
         "alert_upload": "The uploaded format is not supported, please upload a file that supports the following formats: PNG, JPG, DOCX, DOC, PDF",
         "alert_bider_participate": "The time to register for the auction has expired, we regret that you are unable to participate and submit any bids.",
         "alert_nofile": "The Primary warranty is required.",
-        "alert_nofile_FBGA": "The Final FBGA is required"
+        "alert_nofile_FBGA": "The Final FBGA is required",
+        "confirm_title": "Are you sure to send the auction request?",
+        "confirm_subtitle": "If you confirmed, you will not be able to modify any of the auction information.",
+        "accept": "Send Request",
+        "back": "Cancel"
     },
     "OK": "OK",
     "ServiceUnavailable": "Service Unavailable",
@@ -535,8 +540,9 @@
                 "reject": "Cancel",
                 "popup1-title": "Confirmation of assignment of auction committee?",
                 "popup1-subtitle": "Upon confirmation, the auction committee members will be assigned and notified.",
-                "popup2-title": "The request has been successfully sent to the auction committee",
-                "popup2-subtitle": "You can now pulish the acution."
+                "popup2-title": "The auction committee has been notified successfully!",
+                "popup2-subtitle": "You can now announce the auction on the platform.",
+                "canPublish": "Confirm announce the auction"
             },
             "add-member": {
                 "heading": "Search by Employee ID or email",
@@ -557,10 +563,10 @@
             }
         },
         "publish-popup": {
-            "title1": "Confirmation of Auction Announcement?",
-            "subtitle1": "Upon confirmation, the auction announcement will be approved and published in the Electronic Auction. ",
-            "confirm": "Confirm Publish",
-            "back": "Back",
+            "title1": "Confirm ?",
+            "subtitle1": "If you confirm, the auction will be published in the E-Auction",
+            "confirm": "Confirm",
+            "back": "Cancel",
             "title2": "The auction was successfully announced.",
             "subtitle2": "You can follow the auction status from the auction page",
             "accept": "Back to Auction Requests"
@@ -628,7 +634,7 @@
         "Participated": "Participated",
         "Product": "products",
         "AuctionStarts": "Auction starts",
-        "BiddingIs": "Bidding method: ",
+        "BiddingIs": "Bidding method ",
         "ImportantInformation": "Auction Summary",
         "AuctionStartPrice": "Bid Start Price",
         "InitialGuaranteePercentage": "IBGA %",
@@ -875,14 +881,15 @@
         },
         "confirmation-popup": {
             "title": "Confirm sending product pricing?",
-            "subtitle": "Upon confirmation, the auction application will be approved and sent for approval.",
-            "accept": "Confirmation of Publication",
-            "back": "Back"
+            "subtitle": "If you confirm, the pricing will be sent for approval.",
+            "accept": "Confirm",
+            "back": "Cancel"
         },
         "successful-popup": {
-            "title": "Pricing was sent successfully",
-            "subtitle": "The request was successfully sent",
-            "accept": "Back to Auction Requests"
+            "title": "The pricing has been successfully sent!",
+            "subtitle": "You can follow up on the request status from the 'Pricing Requests' page.",
+            "accept": "Back to Auction Requests",
+            "accept_pricing": "Back to Pricing Requests"
         },
         "error-popup": {
             "subtitle": "Please note that one of the estimated values is equal to 0. Do you want to continue?",
@@ -900,13 +907,14 @@
             "accept": "Back to Auction Requests"
         },
         "reject-popup": {
-            "title": "Confirmation of rejection of the request?",
-            "subtitle": "Are you sure to send the rejection request?",
-            "reason-label": "Please enter the reason",
+            "title": "Reject the pricing?",
+            "subtitle": "If you confirm, the pricing will be returned for the update.",
+            "reason-label": "Rejection Reason",
             "section2-validation": "the reason is required",
             "letter": "Letter",
             "phold": "Text..",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "rejection_btn": "Confirm"
         },
         "reject-success": {
             "title": "The application was successfully rejected",
@@ -1085,7 +1093,7 @@
         "awardDate": "Award Date",
         "paymentOptions": "Payment Options",
         "paymentViaSadad": "Payment via SADAD service",
-        "payViaCard": "Pay via Card",
+        "payViaCard": "Pay via Credit Card",
         "almost": "soon",
         "popup-head": "Payment via SADAD service",
         "invoiceNumber": "Invoice Number",
@@ -1142,10 +1150,10 @@
             "back_btn": "Back"
         },
         "popup2": {
-            "head": "Confirm refusal of FBGA?",
-            "subhead": "Are you sure to send the rejection of FBGA?",
-            "reject_btn": "Confirm Reject",
-            "back_btn": "Back"
+            "head": "Reject the FBGA?",
+            "subhead": "If you confirm, the FBGA will be returned for the update.",
+            "reject_btn": "Confirm",
+            "back_btn": "Cancel"
         },
         "popup3": {
             "head": "FBGA rejected successfully",

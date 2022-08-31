@@ -341,7 +341,7 @@
             <div class="modal-footer" style="justify-content: end">
                 <button type="button" (click)="closeModal('success')" class="btn btn-primary-light btn-md"
                     data-dismiss="modal" aria-label="Close">
-                    {{ "auctionMember.successful-popup.accept" | translate }}
+                    {{ "auctionMember.successful-popup.accept_pricing" | translate }}
                 </button>
             </div>
         </div>
@@ -447,10 +447,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer" style="justify-content: end">
+                <button type="button" class="btn btn-md" (click)="closeRejectionModal()" data-dismiss="modal"
+                    aria-label="Close" style="border: 1px solid #cccccc; border-radius: 5px;">
+                    {{"auctionMember.reject-popup.cancel" | translate}} </button>
                 <button (click)="rejectAuction('R', 'Rejected Prices')" type="button"
                     class="btn btn-md btn-danger rounded">
-                    {{ 'auctionMember.reject-popup.cancel' | translate }} </button>
+                    {{ 'auctionMember.reject-popup.rejection_btn' | translate }} </button>
             </div>
         </div>
     </div>
