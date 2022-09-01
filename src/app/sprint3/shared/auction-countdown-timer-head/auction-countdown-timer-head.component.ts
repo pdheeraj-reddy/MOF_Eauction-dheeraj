@@ -29,7 +29,14 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
     if (this.auctionStatus == "Published") {
       this.label = 'Starts In';
       dateStr = this.auctionStartDate;
-    } else {
+    } else if (this.auctionStatus == 'Terminated') {
+      this.label = 'Ends In';
+      this.days = 0;
+      this.hours = 0;
+      this.minutes = 0;
+      this.seconds = 0;
+    }
+    else {
       this.label = 'Ends In';
       dateStr = this.auctionEndDate;
     }

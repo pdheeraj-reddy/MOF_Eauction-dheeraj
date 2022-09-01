@@ -62,8 +62,11 @@
     <!-- </div> -->
 
     <div class="card-body" style="padding: 20px !important;">
-        <h5 class="card-title">{{auction.title}}</h5>
-        <p class="card-text" data-toggle="tooltip" data-placement="top" title="{{auction.description}}">
+        <h5 class="card-title" style="white-space: nowrap; display: block;" data-toggle="tooltip" data-placement="top"
+            title="{{auction.title}}">{{auction.title}}
+        </h5>
+        <p class="card-text" style="white-space: nowrap; display: block;" data-toggle="tooltip" data-placement="top"
+            title="{{auction.description}}">
             {{auction.description}} </p>
         <div class="text-body text-18 mt-4">
             <img src="assets/icons/layers.svg" alt="">
@@ -78,11 +81,11 @@
             </span>
         </div>
         <div style="display: flex;">
-            <app-auction-countdown-timer *ngIf="auction.statuscode == 'Published'" [date]="auctionStartDateTime"
-                showText="Starts In" class="mt-3" style="width: 90%;">
+            <app-auction-countdown-timer *ngIf="auction.statuscode == 'Published'" [auctionStatus]="auctionStatus"
+                [date]="auctionStartDateTime" showText="Starts In" class="mt-3" style="width: 90%;">
             </app-auction-countdown-timer>
-            <app-auction-countdown-timer *ngIf="auction.statuscode != 'Published'" [date]="auctionEndDateTime"
-                showText="Ends In" class="mt-3" style="width: 90%;">
+            <app-auction-countdown-timer *ngIf="auction.statuscode != 'Published'" [auctionStatus]="auctionStatus"
+                [date]="auctionEndDateTime" showText="Ends In" class="mt-3" style="width: 90%;">
             </app-auction-countdown-timer>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
             <div class="mt-5">
