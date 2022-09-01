@@ -50,7 +50,7 @@ export class AuctionApprovalService {
     //let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>( 
       // 'https://10.13.85.56:9443' + 
-      environment.apiAuctionURL + '/' + ObjectId +
+      environment.apiAuctionURL + '/' + btoa(ObjectId) +
       "?$expand=listtoproductnav,listtoattachnav" +
       "&$format=json" 
       , httpOptions);
