@@ -57,7 +57,7 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(this.envService.environment.apiBidderAuctions + "/"
-      + auctionId + "?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json", httpOptions);
+      + btoa(auctionId) + "?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav&$format=json", httpOptions);
   }
 
   downloadAuctionImages(fileId: any): Observable<any> {
@@ -167,7 +167,7 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(this.envService.environment.apiFinalInvoiceReport +
-      "/" + auctionId + "/awardedBidderInvoices?", httpOptions)
+      "/" + btoa(auctionId) + "/awardedBidderInvoices?", httpOptions)
   }
 
   getNoOfParticipants(auctionId: any, auctionStatus: any): Observable<any> {
@@ -182,7 +182,7 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(this.envService.environment.apiBidderParticipantsBids +
-      "?auctionId=" + auctionId + "&status=" + auctionStatus, httpOptions)
+      "?auctionId=" + btoa(auctionId) + "&status=" + auctionStatus, httpOptions)
 
   }
   getMyAuctionsList(filters: any, pageLimit: any, status: string, pageNumber?: number): Observable<any> {
@@ -225,7 +225,7 @@ export class BidderService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(
-      this.envService.environment.apiOfferReport.replace('{auctionId}', auctionId), httpOptions);
+      this.envService.environment.apiOfferReport.replace('{auctionId}', btoa(auctionId)), httpOptions);
   }
 
   getSendInvoice(auctionId: string) {
@@ -238,7 +238,7 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId) + "&$format=json", httpOptions);
+    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', btoa(auctionId)) + "&$format=json", httpOptions);
   }
 
   downloadInvoice(auctionId: string) {
@@ -250,6 +250,6 @@ export class BidderService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId), httpOptions);
+    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', btoa(auctionId)), httpOptions);
   }
 }

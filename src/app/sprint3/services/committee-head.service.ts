@@ -23,7 +23,7 @@ export class CommitteeHeadService {
       observe: 'response' as 'body'
     };
     return this.http.get<any>(
-      this.envService.environment.apiOfferReport.replace('{auctionId}', auctionId), httpOptions);
+      this.envService.environment.apiOfferReport.replace('{auctionId}', btoa(auctionId)), httpOptions);
   }
 
   updateOpenOfferStatus(data: any): Observable<any> {

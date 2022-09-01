@@ -27,7 +27,7 @@ export class ManualAuctionComponent implements OnInit {
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
     this.timesplit();
-    if (this.startDate > this.riyadh) {
+    if (this.startDate > this.currentDate) {
       this.btnDisable = true;
     }
     else {

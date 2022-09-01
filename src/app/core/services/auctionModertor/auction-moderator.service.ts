@@ -13,11 +13,11 @@ import * as CryptoJS from 'crypto-js';
 })
 export class AuctionModeratorService {
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private cookieService: CookieService,
     public auctionServc: AuctionService,
     private envService: EnvService,
-  ) {}
+  ) { }
 
   //for getting Auction List with Filters
   getAuctionList(page: any, filters: any): Observable<any> {
@@ -105,14 +105,14 @@ export class AuctionModeratorService {
       },
       observe: 'response' as 'body'
     };
-    let queryId = (DraftId && DraftId != '0') ? DraftId : ObjectId;
+    let queryId = (DraftId && DraftId != '0') ? btoa(DraftId) : btoa(ObjectId);
     console.log('queryId for Encrypt');
     //let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>(
       // 'https://10.13.85.56:9443' +
       this.envService.environment.apiAuctionURL +
       '/' +
-      ObjectId +
+      btoa(ObjectId) +
       '?$expand=listtoproductnav,listtoattachnav,listtocomiteememnav' +
       '&$format=json',
       httpOptions

@@ -57,7 +57,7 @@ export class AucModeratorService {
 
     return this.http.get<any>(
       this.envService.environment.apiLatestBid +
-      "" + ObjectId + "/bidders?pageNumber=" + PageNo
+      "" + btoa(ObjectId) + "/bidders?pageNumber=" + PageNo
       , httpOptions);
 
 
@@ -73,7 +73,7 @@ export class AucModeratorService {
       },
       observe: 'response' as 'body'
     };
-    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', auctionId), httpOptions);
+    return this.http.get<any>(this.envService.environment.apiSendInvoice.replace('{auctionId}', btoa(auctionId)), httpOptions);
   }
 
   sendInvoice(auctionId?: any, bidderId?: any): Observable<any> {
