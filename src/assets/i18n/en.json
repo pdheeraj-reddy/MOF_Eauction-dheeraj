@@ -181,7 +181,7 @@
             "section1_formGrp17": "IBGA %",
             "section1_formGrp18": "FBGA Deadline",
             "section1_formGrp19": "Commission Type",
-            "section1_formGrp20": "Enter Commission %",
+            "section1_formGrp20": "Commission %",
             "section1_formGrp21": "Enter the number of days",
             "section1_formAttachTitle": "Auction Attachments",
             "section1_formAttachSubTitle": "Add Attachment",
@@ -300,10 +300,10 @@
     "message": {
         "service_na": "Service Unavailable",
         "success_draft_title": "The request has been saved as a draft successfully!",
-        "success_draft_para": "You can find the request on 'Auction Requests' page and complete it at any time.",
+        "success_draft_para": "You can find the request on Auction Requests page and complete it at any time.",
         "stay_in_draft": "Continue the draft",
         "back_auctionRequest": "Back to Auction Requests",
-        "success_sendrequest_para": "You can follow up on the status of the request from the 'Auction Requests' page.",
+        "success_sendrequest_para": "You can follow up on the status of the request from the Auction Requests page.",
         "success_sendrequest_title": "The request has been successfully submitted for approval!",
         "success_cancel_title": "The request has been rejected successfully.",
         "success_attach_title": "The attachment has been canceled successfully.",
@@ -887,7 +887,7 @@
         },
         "successful-popup": {
             "title": "The pricing has been successfully sent!",
-            "subtitle": "You can follow up on the request status from the 'Pricing Requests' page.",
+            "subtitle": "You can follow up on the request status from the Pricing Requests page.",
             "accept": "Back to Auction Requests",
             "accept_pricing": "Back to Pricing Requests"
         },

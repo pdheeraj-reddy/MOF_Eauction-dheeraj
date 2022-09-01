@@ -180,7 +180,7 @@
             "section1_formGrp17": "نسبه الضمان %",
             "section1_formGrp18": "أخر موعد لدفع الضمان النهائي",
             "section1_formGrp19": "نوع العمولة",
-            "section1_formGrp20": "أدخل نسبة السعي - العمولة ٪",
+            "section1_formGrp20": " نسبة السعي - العمولة ٪",
             "section1_formGrp21": "أدخل عدد الأيام",
             "section1_formAttachTitle": "مرفقات المزاد",
             "section1_formAttachSubTitle": "إضافة مرفق",
@@ -302,7 +302,7 @@
         "success_draft_para": "يمكنك العثور على الطلب في صفحة طلبات المزاد وإكماله في أي وقت.",
         "stay_in_draft": " إكمال المسودة",
         "back_auctionRequest": "العودة  الى طلبات المزاد",
-        "success_sendrequest_para": "يمكنك متابعة حالة الطلب من صفحة 'طلبات المزاد '",
+        "success_sendrequest_para": "يمكنك متابعة حالة الطلب من صفحة طلبات المزاد ",
         "success_sendrequest_title": "تم إرسال الطلب للموافقة بنجاح!",
         "success_cancel_title": "تم رفض الطلب بنجاح",
         "success_attach_title": "تم إلغاء المرفق بنجاح.",
@@ -686,7 +686,7 @@
         },
         "successful-popup": {
             "title": "تم إرسال التسعير بنجاح!",
-            "subtitle": "يمكنك متابعة حالة الطلب من صفحة 'طلبات التسعير'",
+            "subtitle": "يمكنك متابعة حالة الطلب من صفحة طلبات التسعير",
             "accept": "العودة  الى طلبات المزاد",
             "accept_pricing": "العودة الى طلبات التسعير"
         },
