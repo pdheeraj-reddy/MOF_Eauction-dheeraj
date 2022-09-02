@@ -319,7 +319,7 @@
         <div class="mt-4 row justify-content-end" *ngIf="auctionListData!.length > 0 && showPagination">
             <div class="mb-5">
                 <nav aria-label="..." class="nav-pagination">
-                    <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 0" class="pagination">
+                    <ul *ngIf="PaginationServc.pages && PaginationServc.pages.length > 1" class="pagination">
                         <li class="page-item clickable" disabled
                             [ngClass]="{ disabled: PaginationServc.currentPage === 1 || showLoader}">
                             <a (click)="getServerData(PaginationServc.currentPage);this.showPagination = true;"

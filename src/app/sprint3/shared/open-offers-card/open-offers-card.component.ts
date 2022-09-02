@@ -20,8 +20,8 @@ export class OpenOffersCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let startDate = new Date(this.importantInfo.auctionAnncStartDate + " " + this.importantInfo.auctionAnncStartTime);
-    if (startDate > this.riyadh) {
+    let startDate = new Date(this.importantInfo.auctionAnncStartDate + " " + this.importantInfo.auctionAnncStartTime + " " + this.importantInfo.bidOpeningtimeSufix);
+    if (startDate > this.currentDate) {
       this.btnDisable = true;
     }
     else {

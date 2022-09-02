@@ -159,16 +159,19 @@ export class OfferReportComponent implements OnInit {
 
   viewAttachment(file: any) {
     if (file.PdfContent) {
+      console.log("🚀🚀 ~~ file.PdfContent", file.PdfContent);
+
       file.downloadingAttachmet = true;
       this.mediaService.downloadAuctionImages(file.PdfContent).then((downloadAuctionImagesResp: any) => {
         const fileResp = downloadAuctionImagesResp.d;
+        console.log("🚀🚀 ~~ fileResp", fileResp);
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
           ia[i] = byteString.charCodeAt(i);
         }
-        const blob = new Blob([ab], { type: 'application/pdf' });
+        const blob = new Blob([ab], { type: fileResp.MIMEType });
         let fileURL = window.URL.createObjectURL(blob);
         var newWin: any;
         newWin = window.open(fileURL, '_blank');

@@ -563,7 +563,7 @@
             }
         },
         "publish-popup": {
-            "title1": "Confirm ?",
+            "title1": "Confirm publish Auction",
             "subtitle1": "If you confirm, the auction will be published in the E-Auction",
             "confirm": "Confirm",
             "back": "Cancel",
