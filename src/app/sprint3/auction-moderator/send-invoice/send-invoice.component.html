@@ -472,6 +472,39 @@
 </div>
 
 
+<!--  ==============  Pop-up for bill not generated  ===============  -->
+
+<div class="modal show" *ngIf="showBillError" [ngClass]="{ 'modal-show': showBillError }">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="card shadow-lg result result-danger">
+            <div class="alert-body">
+                <button (click)="closeError()" style="outline: none;" type="button" class="modal-close btn-close btn-sm"
+                    data-dismiss="modal" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+                <em class="alert-icon">
+                    <span class="icon-alert-error"></span>
+                </em>
+                <div>
+
+                    <div class="alert-information">
+                        <p class="text-18 text-danger">Invoice Number not Generated due to Integration Error!</p>
+                        <p class="text-18 text-danger">Please try again...</p>
+                    </div>
+                    <p class="text-14 text-body">If issue persists, Kindly contact Support team</p>
+                </div>
+            </div>
+            <div class="alert-action mt-4">
+                <button type="button" class="btn btn-md btn-secondary-blue" (click)="sendInvoice()" data-dismiss="modal"
+                    aria-label="Close">
+                    Re-generate
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Success pop-up for approval of the final award and send the invoice -->
 
 <div class="modal show" *ngIf="showSuccessPopup" [ngClass]="{ 'modal-show': showSuccessPopup }">

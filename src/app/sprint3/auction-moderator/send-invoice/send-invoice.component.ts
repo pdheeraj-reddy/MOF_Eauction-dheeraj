@@ -21,6 +21,7 @@ export class SendInvoiceComponent implements OnInit {
   textFloat: string = '';
   auctionId: string = '';
   showSuccessPopup: boolean = false;
+  showBillError: boolean = false;
   downloadingInvoice: boolean = false;
   invoiceData: any = [];
   auctionStartDate: any;
@@ -66,6 +67,11 @@ export class SendInvoiceComponent implements OnInit {
     }
   }
 
+  closeError() {
+    this.showBillError = false;
+    // window.location.reload();
+  }
+
   getInvoice() {
     this.moderatorService.getSendInvoice(this.auctionId).subscribe((res: any) => {
       this.showLoader = false;
@@ -103,9 +109,12 @@ export class SendInvoiceComponent implements OnInit {
 
 
   sendInvoice() {
+    this.showBillError = false;
     this.moderatorService.sendInvoice(this.auctionId, this.bidderId).subscribe((res: any) => {
       if (res['d']['Msgty'] === 'S') {
         this.showSuccessPopup = true;
+      } else if (res['d']['Msgty'] === 'E') {
+        this.showBillError = true;
       }
     })
   }

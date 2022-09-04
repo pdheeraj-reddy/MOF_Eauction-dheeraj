@@ -31,3 +31,7 @@ html[dir='rtl'] .close-button {
     align-items: center;
     cursor: pointer;
 }
+
+::ng-deep .modal-dialog {
+    pointer-events: all !important;
+}
