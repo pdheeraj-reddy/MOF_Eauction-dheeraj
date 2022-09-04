@@ -95,10 +95,10 @@ export class PayFinalInvoiceComponent implements OnInit {
       this.moderatorService.XCSRFToken = res.headers.get('x-csrf-token');
       localStorage.setItem('x-csrf-token', this.moderatorService.XCSRFToken);
       this.invoiceData = res.body.d.results[0];
-      if (this.invoiceData?.Status !== 'Pending Paying') {
-        this.router.navigateByUrl('/bidder');
-        return
-      }
+      // if (this.invoiceData?.Status !== 'Pending Paying') {
+      //   this.router.navigateByUrl('/bidder');
+      //   return
+      // }
       console.log('this.invoiceData: ', this.invoiceData);
       this.auctionStartDate = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[0], 'DD.MM.YYYY').format('YYYY-MM-DD');
       this.auctionStartTime = moment(this.invoiceData?.ZzAucSrtDt.split(' ')[1], 'HH:mm:ss').format('hh:mm');
