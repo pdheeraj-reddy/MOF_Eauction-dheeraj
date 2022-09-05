@@ -1140,7 +1140,11 @@
         "approval_of_the_final_award_title": "Approval of the final award and send the invoice ?",
         "approval_of_the_final_award_desc": "When the award is approved and the invoice is sent to complete the payment by the bidder, the auction will be awarded automatically.",
         "invoice_sent_successfully": "Invoice sent successfully",
-        "you_will_receive_invoice": "You will receive an email when payment has been completed and the auction has been awarded."
+        "you_will_receive_invoice": "You will receive an email when payment has been completed and the auction has been awarded.",
+        "popup_head": "Invoice Number not Generated due to Integration Error!",
+        "popup_subhead": "Please try again...",
+        "warning": "If issue persists, Kindly contact Support team",
+        "regenerate": "Re-generate"
     },
     "fbga_approval": {
         "popup1": {

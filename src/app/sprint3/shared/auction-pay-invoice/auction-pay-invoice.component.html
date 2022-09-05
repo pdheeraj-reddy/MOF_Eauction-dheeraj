@@ -22,7 +22,7 @@
 
         <!--=================== Participation Button ===================-->
         <button class="btn btn-primary-light btn-md align-self-center" style="min-width: 200px;"
-            [routerLink]="['/bidder/pay-final-invoice',auctionId]">
+            [routerLink]="['/bidder/pay-final-invoice',encryptData(auctionId)]">
             {{ 'payInvoice.pay_btn' | translate }}
         </button>
         <!-- End -->

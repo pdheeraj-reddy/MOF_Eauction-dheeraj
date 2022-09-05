@@ -367,7 +367,7 @@ export class OpenOffersComponent implements OnInit {
     this.showModal.acceptOfferSuccess = false;
     this.showModal.rejectOfferSuccess = false;
     this.showModal.estimationOfferSuccess = false;
-    this.router.navigate(['/auction-details/' + this.auctionId])
+    this.router.navigate(['/auction-details/' + btoa(this.auctionId)])
   }
 
 }

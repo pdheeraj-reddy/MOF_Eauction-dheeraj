@@ -488,16 +488,16 @@
                 <div>
 
                     <div class="alert-information">
-                        <p class="text-18 text-danger">Invoice Number not Generated due to Integration Error!</p>
-                        <p class="text-18 text-danger">Please try again...</p>
+                        <p class="text-18 text-danger">{{'bidderSendInvoice.popup_head' | translate}}</p>
+                        <p class="text-18 text-danger">{{'bidderSendInvoice.popup_subhead' | translate}}</p>
                     </div>
-                    <p class="text-14 text-body">If issue persists, Kindly contact Support team</p>
+                    <p class="text-14 text-body">{{'bidderSendInvoice.warning' | translate}}</p>
                 </div>
             </div>
             <div class="alert-action mt-4">
                 <button type="button" class="btn btn-md btn-secondary-blue" (click)="sendInvoice()" data-dismiss="modal"
                     aria-label="Close">
-                    Re-generate
+                    {{'bidderSendInvoice.regenerate' | translate}}
                 </button>
             </div>
         </div>

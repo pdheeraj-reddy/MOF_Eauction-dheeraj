@@ -29,4 +29,8 @@ export class OpenOffersCardComponent implements OnInit {
     }
   }
 
+  encryptData(data: any) {
+    return btoa(data);
+  }
+
 }
