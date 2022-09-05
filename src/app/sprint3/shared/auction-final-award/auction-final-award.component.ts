@@ -103,7 +103,7 @@ export class AuctionFinalAwardComponent implements OnInit {
   }
 
   goToInvoice() {
-    this.router.navigateByUrl('auctions/send-invoice/' + this.auctionId, { state: this.statusData });
+    this.router.navigateByUrl('auctions/send-invoice/' + btoa(this.auctionId), { state: this.statusData });
   }
 
   ngDoCheck() {

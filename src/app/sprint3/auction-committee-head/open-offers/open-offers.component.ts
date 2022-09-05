@@ -326,6 +326,10 @@ export class OpenOffersComponent implements OnInit {
     return this.PaginationServc.isSortDesc(columnId);
   }
 
+  encryptData(data: any) {
+    return btoa(data);
+  }
+
   navigateToPage(pageNoVal: number) {
     this.PaginationServc.setPagerValues(this.openofferListData.length, this.pagelimit, pageNoVal);
     this.pageRangeForAttach = {

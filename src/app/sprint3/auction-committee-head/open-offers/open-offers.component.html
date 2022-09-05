@@ -6,7 +6,7 @@
             <li class="breadcrumb-item"><a [routerLink]="['/auction-committee-head/am-auction']"
                     routerLinkActive="router-link-active">{{ "auctionCommittee.ac-openOffers.bcrumb2" | translate }}</a>
             </li>
-            <li class="breadcrumb-item"><a [routerLink]="['/auction-details',auctionId]"
+            <li class="breadcrumb-item"><a [routerLink]="['/auction-details',encryptData(auctionId)]"
                     routerLinkActive="router-link-active">{{ "auctionCommittee.ac-openOffers.bcrumb3" | translate }}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{ "auctionCommittee.ac-openOffers.bcrumb4" |

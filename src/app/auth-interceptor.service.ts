@@ -41,7 +41,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           'X_MOF_ClientID': this.envService.environment.clientId,
           'X_MOF_RqUID': this.envService.environment.ruId,
           'Authorization': 'Bearer ' + accessToken,
-          'withCredentials': 'true',
+          'withCredentials': 'false',
           'Content-Type': 'application/json',
           // 'Access-Control-Allow-Origin': '*',
           // 'Access-Control-Allow-Methods': '*',
@@ -54,8 +54,8 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (error instanceof HttpErrorResponse && (error.status === 500 || error.status === 501)) {
           // display error popup message
           this.dialogObj = {
-            message : 'ServiceUnavailable',
-            mnBtnAction : 'close',
+            message: 'ServiceUnavailable',
+            mnBtnAction: 'close',
             mnBtntext: 'OK'
           }
           this.handleServerError();
@@ -117,7 +117,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private handleServerError() {
-    this.dialog.open(AlertModalComponent, { 
+    this.dialog.open(AlertModalComponent, {
       data: this.dialogObj
     });
   }
