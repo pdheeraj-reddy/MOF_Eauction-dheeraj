@@ -317,7 +317,7 @@
                                     </span>
                                 </td>
                                 <td width="20px">
-                                    <a [routerLink]="['/auction-details', rowItem.referenceno]"
+                                    <a [routerLink]="['/auction-details', encryptData(rowItem.referenceno)]"
                                         class="btn btn-ghost btn-sm fill-primary-light-green">
                                         <span class="icon-eye-open"></span>
                                     </a>

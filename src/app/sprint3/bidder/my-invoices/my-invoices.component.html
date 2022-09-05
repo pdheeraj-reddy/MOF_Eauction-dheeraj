@@ -266,13 +266,13 @@
                                         <!-- <a *ngIf="rowItem.auctionStatus === 'Pending Review'" [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'view']" class="btn btn-ghost btn-sm fill-primary-light-green">
                                         <span class="icon-eye-open"></span>
                                     </a> -->
-                                        <a [routerLink]="['/bidder/pay-final-invoice',  rowItem.ObjectId]"
+                                        <a [routerLink]="['/bidder/pay-final-invoice',  encryptData(rowItem.ObjectId)]"
                                             class="btn btn-ghost btn-sm fill-primary-light-green">
                                             <span class="icon-eye-open"></span>
                                         </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                                [routerLink]="['/auctions/1/final-invoice', rowItem.ObjectId]">{{
+                                                [routerLink]="['/auctions/1/final-invoice', encryptData(rowItem.ObjectId)]">{{
                                                 'bidderMyInvoices.grid1-btn3' | translate }}</a>
                                             <!-- <a class="dropdown-item text-danger">{{ 'bidderMyInvoices.grid1-btn2' | translate }}</a> -->
                                         </div>

@@ -54,6 +54,7 @@ export class BidValueUpdateComponent implements OnInit {
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
+      this.ObjectId = atob(this.ObjectId);
     }
     this.userInfo = this.getUserInfo();
     if (this.userInfo.role === 'EAuction_InteriorMarketer') {

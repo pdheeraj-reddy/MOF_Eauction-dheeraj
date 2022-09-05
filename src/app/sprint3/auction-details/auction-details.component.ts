@@ -183,6 +183,7 @@ export class AuctionDetailsComponent implements OnInit {
     });
 
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
+    this.auctionId = atob(this.auctionId);
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
 

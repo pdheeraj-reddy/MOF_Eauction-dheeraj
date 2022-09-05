@@ -590,6 +590,8 @@ export class AssignAuctionCommitteComponent implements OnInit {
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
+      this.ObjectId = atob(this.ObjectId);
+      this.DraftId = atob(this.DraftId);
     }
     this.getPreAuctionData();
     this.committeeChairSelected = false;

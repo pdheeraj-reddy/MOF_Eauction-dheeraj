@@ -68,6 +68,7 @@ export class PayFinalInvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
+    this.auctionId = atob(this.auctionId);
     this.card = true;
     this.getInvoice();
     this.userRole = JSON.parse(localStorage.getItem("userInfo") as string);

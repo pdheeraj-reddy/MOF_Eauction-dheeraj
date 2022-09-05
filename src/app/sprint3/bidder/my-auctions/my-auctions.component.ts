@@ -90,6 +90,10 @@ export class MyAuctionsComponent implements OnInit {
 
   }
 
+  encryptData(data: any) {
+    return btoa(data);
+  }
+
   getMyAuctionList(pageNumber?: number, sortBy?: string, sorttype?: string) {
 
     this.showLoader = true;

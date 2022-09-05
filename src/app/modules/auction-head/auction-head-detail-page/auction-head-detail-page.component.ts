@@ -42,6 +42,8 @@ export class AuctionHeadDetailPageComponent implements OnInit {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
       this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
+      this.ObjectId = atob(this.ObjectId);
+      this.DraftId = atob(this.DraftId);
     }
     this.getPreAuctionData();
   }

@@ -404,7 +404,7 @@
                                 <td width="20px">
                                     <ng-container *ngIf="loggedUserRole.isInteriorMarketer">
                                         <a *ngIf="rowItem.auctionStatus === 'Pending Review' || rowItem.auctionStatus === 'Published'"
-                                            [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'view']"
+                                            [routerLink]="['/auction', encryptData(rowItem.ObjectId), encryptData(rowItem.DraftId), 'view']"
                                             class="btn btn-ghost btn-sm fill-primary-light-green">
                                             <span class="icon-eye-open"></span>
                                         </a>
@@ -420,10 +420,10 @@
                                         </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                                [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'view']">{{
+                                                [routerLink]="['/auction', encryptData(rowItem.ObjectId), encryptData(rowItem.DraftId), 'view']">{{
                                                 'auctionlist.grid1-btn3' | translate }}</a>
                                             <a class="dropdown-item"
-                                                [routerLink]="['/auction', rowItem.ObjectId, rowItem.DraftId, 'edit']">{{
+                                                [routerLink]="['/auction', encryptData(rowItem.ObjectId), encryptData(rowItem.DraftId), 'edit']">{{
                                                 'auctionlist.grid1-btn1' | translate }}</a>
                                             <!-- <a class="dropdown-item text-danger">{{ 'auctionlist.grid1-btn2' | translate }}</a> -->
                                         </div>
@@ -431,36 +431,36 @@
                                     <ng-container *ngIf="loggedUserRole.isAuctionModerator">
                                         <a *ngIf="rowItem.auctionStatus=='Pending Review' || rowItem.auctionStatus=='Pending to Publish'"
                                             class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                            [routerLink]="['/auctionModerator/detailPage', rowItem.referenceno, rowItem.referenceno, 'edit']">
+                                            [routerLink]="['/auctionModerator/detailPage', encryptData(rowItem.referenceno), encryptData(rowItem.referenceno), 'edit']">
                                             <span class="icon-edit"></span>
                                         </a>
                                         <a *ngIf="rowItem.auctionStatus=='Rejected' || rowItem.auctionStatus=='Pending Pricing' || rowItem.auctionStatus=='Published'"
                                             class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                            [routerLink]="[ '/auctionModerator/detailPage', rowItem.referenceno, rowItem.referenceno, 'edit']">
+                                            [routerLink]="[ '/auctionModerator/detailPage', encryptData(rowItem.referenceno), encryptData(rowItem.referenceno), 'edit']">
                                             <span class="icon-eye-open"></span>
                                         </a>
                                     </ng-container>
                                     <ng-container *ngIf="loggedUserRole.isPricingMember">
                                         <a *ngIf="rowItem.auctionStatus=='Pending Pricing' || rowItem.auctionStatus=='Rejected Prices'"
                                             class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                            [routerLink]="[ '/auctionMember/detailPage', rowItem.referenceno, rowItem.referenceno, 'edit']">
+                                            [routerLink]="[ '/auctionMember/detailPage', encryptData(rowItem.referenceno), encryptData(rowItem.referenceno), 'edit']">
                                             <span class="icon-edit"></span>
                                         </a>
                                         <a *ngIf=" rowItem.auctionStatus=='Pending Pricing Approval' || rowItem.auctionStatus=='Pending to Publish'"
                                             class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                            [routerLink]="[ '/auctionMember/detailPage', rowItem.referenceno, rowItem.referenceno, 'edit']">
+                                            [routerLink]="[ '/auctionMember/detailPage', encryptData(rowItem.referenceno), encryptData(rowItem.referenceno), 'edit']">
                                             <span class="icon-eye-open"></span>
                                         </a>
                                     </ng-container>
                                     <ng-container *ngIf="loggedUserRole.isPricingHead">
                                         <a *ngIf=" rowItem.auctionStatus=='Pending Pricing Approval'"
                                             class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                            [routerLink]="[ '/auctionHead/detailPage', rowItem.referenceno, rowItem.referenceno, 'edit']">
+                                            [routerLink]="[ '/auctionHead/detailPage', encryptData(rowItem.referenceno), encryptData(rowItem.referenceno), 'edit']">
                                             <span class="icon-edit"></span>
                                         </a>
                                         <a *ngIf=" rowItem.auctionStatus=='Rejected Prices' || rowItem.auctionStatus=='Pending Pricing'  || rowItem.auctionStatus=='Pending to Publish'"
                                             class="btn btn-ghost btn-sm fill-primary-light-green mx-3 dropdown-toggle"
-                                            [routerLink]="[ '/auctionHead/detailPage', rowItem.referenceno, rowItem.referenceno, 'edit']">
+                                            [routerLink]="[ '/auctionHead/detailPage', encryptData(rowItem.referenceno), encryptData(rowItem.referenceno), 'edit']">
                                             <span class="icon-eye-open"></span>
                                         </a>
                                     </ng-container>

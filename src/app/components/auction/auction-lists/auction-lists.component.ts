@@ -177,6 +177,10 @@ export class AuctionListsComponent implements OnInit {
     this.getAuctionList(1);
   }
 
+  encryptData(data: any) {
+    return btoa(data)
+  }
+
   prePopulateForm() {
     if (this.loggedUserRole.isInteriorMarketer) {
       this.dropValStatus = [

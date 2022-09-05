@@ -597,6 +597,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
 
     if (this.activatedRoute.snapshot.paramMap.get('ObjectId')) {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
+      this.ObjectId = atob(this.ObjectId);
     }
     this.committeeChairSelected = false;
     this.committeeSecSelected = false;

@@ -55,6 +55,7 @@ export class SendInvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
+    this.auctionId = atob(this.auctionId);
     this.getInvoice();
   }
 

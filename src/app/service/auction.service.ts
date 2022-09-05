@@ -135,6 +135,7 @@ export class AuctionService {
 
   // for getting Auction details for ObjectId
   getAuctionDetails(ObjectId: string, DraftId?: string): Observable<any> {
+    console.log("🚀🚀 ~~ this.ObjectId", ObjectId);
     let role = '', config1 = '', config2 = '';
     if (this.loggedUserRole.isInteriorMarketer) {
       role = "InteriorMarketer";
@@ -164,6 +165,7 @@ export class AuctionService {
       observe: 'response' as 'body'
     };
     let queryId = (DraftId && DraftId != '0') ? btoa(DraftId) : btoa(ObjectId);
+    console.log("🚀🚀 ~~ this.ObjectId", ObjectId);
     //let encyptQueryId = CryptoJS.AES.encrypt(queryId.trim(), 'sathya'.trim()).toString();
     return this.http.get<any>(
       this.envService.environment.apiAuctionURL + '/' + queryId +

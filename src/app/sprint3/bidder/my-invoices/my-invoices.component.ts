@@ -65,6 +65,10 @@ export class MyInvoicesComponent implements OnInit {
     this.getInvoiceList();
   }
 
+  encryptData(data: any) {
+    return btoa(data);
+  }
+
   getInvoiceList() {
     this.showLoader = true;
     this.bidderService.getMyInvoiceList().subscribe((res: any) => {

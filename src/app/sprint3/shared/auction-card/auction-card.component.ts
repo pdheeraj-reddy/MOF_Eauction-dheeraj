@@ -111,8 +111,9 @@ export class AuctionCardComponent implements OnInit {
   }
 
   redirectToDetail(id: string) {
+
     this.ngZone.run(() => {
-      this.router.navigate(['auction-details/' + id])
+      this.router.navigate(['auction-details/' + btoa(id)])
     })
   }
 

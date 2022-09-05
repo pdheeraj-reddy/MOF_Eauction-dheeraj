@@ -61,6 +61,8 @@ export class AmDetailPageComponent implements OnInit {
       this.ObjectId = this.activatedRoute.snapshot.paramMap.get('ObjectId');
       this.DraftId = this.activatedRoute.snapshot.paramMap.get('DraftId');
       this.ViewMode = this.activatedRoute.snapshot.paramMap.get('ViewMode');
+      this.ObjectId = atob(this.ObjectId);
+      this.DraftId = atob(this.DraftId);
     }
     this.getPreAuctionData();
   }
@@ -190,6 +192,7 @@ export class AmDetailPageComponent implements OnInit {
 
   getPreAuctionData() {
     this.showLoader = true;
+    console.log("🚀🚀 ~~ this.ObjectId", this.ObjectId);
     this._AuctionService.getAuctionDetails(this.ObjectId).subscribe(
       (res: any) => {
         this.showLoader = false;
