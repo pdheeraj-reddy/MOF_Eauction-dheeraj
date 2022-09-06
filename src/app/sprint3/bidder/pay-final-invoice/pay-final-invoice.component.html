@@ -539,8 +539,9 @@
                     type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary-light btn-lg">
                     {{'bidderFinalInvoice.accept_btn' | translate}}
                 </button>
-                <button [routerLink]="['/auction-details', auctionId]" data-dismiss="modal" aria-label="Close"
-                    type="button" class="btn btn-lg" style="background-color: #117ABE; color: #FFFFFF;">
+                <button [routerLink]="['/auction-details', encryptData(auctionId)]" data-dismiss="modal"
+                    aria-label="Close" type="button" class="btn btn-lg"
+                    style="background-color: #117ABE; color: #FFFFFF;">
                     {{'bidderFinalInvoice.back_btn' | translate}}
                 </button>
 

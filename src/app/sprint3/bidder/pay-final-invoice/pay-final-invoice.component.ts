@@ -78,6 +78,10 @@ export class PayFinalInvoiceComponent implements OnInit {
     console.log(this.userRole);
   }
 
+  encryptData(data: any) {
+    return btoa(data);
+  }
+
   ngDoCheck() {
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textFloat = 'left';

@@ -91,7 +91,7 @@ export class SendInvoiceComponent implements OnInit {
       this.offerTime = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('hh:mm');
       this.offerSuffix = moment(this.invoiceData?.OfferTime, 'HH:mm:ss').format('A');
       this.deliveryDate = moment(this.invoiceData?.DelivDate, 'YYYYMMDD').format('YYYY-MM-DD');
-      this.bidderId = res.body.d.results[0].BidderId;
+      this.bidderId = res.body.d.results[0].CrNumber;
       this.invoiceData?.invoicetoprodnav.results.forEach((res: any) => {
         res.DelivDate = moment(res.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
       });

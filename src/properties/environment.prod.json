@@ -10,5 +10,17 @@
   "apiFilenetURL": "/internal/v1/e-auction/files",
   "apiCommiteeURL": "/internal/v1/e-auction/committees",
   "apiBidderFinalInvoiceURL": "/internal/v1/e-auction/auctions/1/final-invoice",
-  "apiBidderAuctions": "/internal/v1/e-auction/auctions"
+  "apiBidderAuctions": "/internal/v1/e-auction/auctions",
+  "apiBidderMyAuctions": "/internal/v1/e-auction/auctions",
+  "apiBidderMyInvoices": "/internal/v1/e-auction/e-bidder/bidders/invoices",
+  "apiBidderBidAuctions": "/internal/v1/e-auction/e-bidder/bidders",
+  "apiAppRej": "/internal/v1/e-auction/e-bidder/bidders",
+  "apiLatestBid": "/internal/v1/e-auction/e-bidder/",
+  "apiBidderParticipationAuctions": "/internal/v1/e-auction/e-bidder/bidders",
+  "apiBidderParticipantsBids": "/internal/v1/e-auction/e-bidder/bidders",
+  "apiFinalInvoiceReport": "/internal/v1/e-auction/e-bidder/bidders",
+  "apiOfferReport": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/bids",
+  "apiSendInvoice": "internal/v1/e-auction/e-bidder/bidders/{auctionId}/awardedBidderInvoices",
+  "apiOpenOfferReport": "internal/v1/e-auction/e-bidder/bidders/BidderreportSet",
+  "apiOpenOfferStatus": "internal/v1/e-auction/e-bidder/bidders"
 }
