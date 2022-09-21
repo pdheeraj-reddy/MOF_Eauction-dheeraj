@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-// import data from "src/properties/environment.json";
+import data from "../properties/environment.json";
 
 
 @Injectable({
@@ -20,12 +20,13 @@ export class EnvService {
     }
 
     public loadConfig() {
-        return this.http.get('properties/environment.json').toPromise().then((config: any) => {
-            this.config = config;
-            // this.configSubject$.next(this.config);
-        }).catch((err: any) => {
-            console.error(err);
-        })
+        this.config = data;
+        // return this.http.get('properties/environment.json').toPromise().then((config: any) => {
+        //     this.config = config;
+        //     // this.configSubject$.next(this.config);
+        // }).catch((err: any) => {
+        //     console.error(err);
+        // })
     }
 
 }

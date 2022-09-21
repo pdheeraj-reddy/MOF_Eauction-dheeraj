@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 
 @Injectable({
   providedIn: 'root'

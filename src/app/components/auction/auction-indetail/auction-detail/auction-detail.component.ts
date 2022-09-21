@@ -12,7 +12,7 @@ import { AuctionService } from "src/app/service/auction.service";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { map, mergeMap, subscribeOn } from 'rxjs/operators';
 import { Moment } from 'moment-mini';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 declare var $: any;
 
 @Component({

@@ -5,7 +5,7 @@ import { PaginationSortingService } from "src/app/service/pagination.service";
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 import { EnvService } from 'src/app/env.service';
 import { BidderService } from '../../services/bidder.service';
 declare var $: any;

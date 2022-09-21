@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from 'src/app/service/auction.service';
 import { subscribeOn } from 'rxjs/operators';
 import { Moment } from 'moment-mini';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductDetailPopupComponent } from './product-detail-popup/product-detail-popup.component';

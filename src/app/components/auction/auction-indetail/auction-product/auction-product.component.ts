@@ -8,7 +8,7 @@ import { MapsAPILoader } from '@agm/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { AuctionService } from "src/app/service/auction.service";
 import { Moment } from 'moment-mini';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 declare var $: any;
 
 @Component({

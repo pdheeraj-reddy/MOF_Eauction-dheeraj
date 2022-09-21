@@ -5,7 +5,7 @@ import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
 import { Location } from '@angular/common';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 import { EnvService } from 'src/app/env.service';
 
 @Component({

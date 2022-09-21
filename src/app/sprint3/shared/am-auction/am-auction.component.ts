@@ -2,7 +2,7 @@ import { EnvService } from 'src/app/env.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PaginationSortingService } from "src/app/service/pagination.service";
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BidderService } from '../../services/bidder.service';
 import { AuctionList } from '../../interface/bidder.interface';

@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Moment } from 'moment-mini';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 import { filter } from 'rxjs/operators';
 declare var $: any;
 

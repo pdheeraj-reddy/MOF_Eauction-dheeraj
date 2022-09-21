@@ -2,7 +2,7 @@ import { Component, Input, NgZone, OnInit, SecurityContext } from '@angular/core
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { AuctionService } from 'src/app/service/auction.service';
 import { MediaService } from 'src/app/service/media.service';
 import { BidderService } from '../../services/bidder.service';

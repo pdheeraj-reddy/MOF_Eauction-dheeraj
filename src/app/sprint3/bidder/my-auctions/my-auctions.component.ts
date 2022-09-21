@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { EnvService } from 'src/app/env.service';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { BidderService } from '../../services/bidder.service';

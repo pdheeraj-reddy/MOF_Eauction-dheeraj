@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 
 @Component({
   selector: 'app-auction-countdown-timer-head',

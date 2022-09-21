@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountdownConfig } from 'ngx-countdown';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
 
 const CountdownTimeUnits: Array<[string, number]> = [

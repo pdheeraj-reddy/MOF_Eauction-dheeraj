@@ -6,7 +6,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { EnvService } from 'src/app/env.service';
 import { MapsAPILoader } from '@agm/core';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 import { DatePipe } from '@angular/common'
 import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';

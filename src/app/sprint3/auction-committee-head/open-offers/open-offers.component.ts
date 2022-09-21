@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { BidderService } from '../../services/bidder.service';
 import { CommitteeHeadService } from '../../services/committee-head.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { DatePipe, Location } from '@angular/common';
 import { AuctionService } from 'src/app/service/auction.service';
 import { TranslateService } from '@ngx-translate/core';

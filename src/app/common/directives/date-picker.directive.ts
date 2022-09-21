@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, HostListener, asNativeElements } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import * as moment from 'moment';
+import moment from 'moment';
 declare var $: any;
 
 @Directive({
