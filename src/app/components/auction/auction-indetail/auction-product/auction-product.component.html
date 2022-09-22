@@ -155,7 +155,7 @@
                                                         autocomplete="off" appTimePicker formControlName="deliveryTime"
                                                         name="delivery-time" class="form-control time-control"
                                                         placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp3-plch' | translate }}"
-                                                        (click)="changedatetime($event,'deliveryTime');" />
+                                                        (change)="changedatetime($event,'deliveryTime');" />
                                                     <div *ngIf="submitted && locationForm['deliveryTime'].errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf="locationForm['deliveryTime'].errors['required']">{{
