@@ -60,6 +60,10 @@
                                 {
                                     "replace": "src/environments/environment.ts",
                                     "with": "src/environments/environment.prod.ts"
+                                },
+                                {
+                                    "replace": "src/properties/environment.json",
+                                    "with": "src/properties/environment.prod.json"
                                 }
                             ],
                             "outputHashing": "all"
@@ -81,6 +85,10 @@
                                 {
                                     "replace": "src/environments/environment.ts",
                                     "with": "src/environments/environment.stage.ts"
+                                },
+                                {
+                                    "replace": "src/properties/environment.json",
+                                    "with": "src/properties/environment.stage.json"
                                 }
                             ],
                             "outputHashing": "all"

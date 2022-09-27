@@ -167,12 +167,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CookieService,
     AuthService,
     AuctionHeadDetailPageComponent,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [EnvService],
-      multi: true
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initConfig,
+    //   deps: [EnvService],
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
@@ -183,6 +183,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 })
 export class AppModule { }
 
-export function initConfig(envService: EnvService) {
-  return () => envService.loadConfig();
-}
+// export function initConfig(envService: EnvService) {
+//   return () => envService.loadConfig();
+// }
