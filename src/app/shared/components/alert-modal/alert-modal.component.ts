@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AlertModalComponent implements OnInit {
   dialogObj: any;
-  textDir: string = 'ltr';
+  textDir: string;
 
   constructor(
     public dialogRef: MatDialogRef<AlertModalComponent>,
@@ -27,6 +27,9 @@ export class AlertModalComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
     }
   }
 

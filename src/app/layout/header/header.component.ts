@@ -44,6 +44,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document,
   ) {
 
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      localStorage.setItem('lang_pref', event.lang);
+    })
+
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.url = event.url;

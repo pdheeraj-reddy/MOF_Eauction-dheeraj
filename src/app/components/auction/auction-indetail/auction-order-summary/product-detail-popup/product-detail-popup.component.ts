@@ -23,7 +23,7 @@ export class ProductDetailPopupComponent implements OnInit {
   slidesStore: any = [];
   viewproduct: any;
   fullImage: any;
-  textDir = 'ltr';
+  textDir: string;
   showLoader: boolean = false;
   fetchPicture: boolean = true;
   showVideo: boolean = true;
@@ -67,19 +67,16 @@ export class ProductDetailPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('lang_pref'))
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = 'rtl'
     }
     else {
-      // this.textDir= 'ltr'
+      this.textDir = 'ltr'
     }
 
     // this.slidesStore = this.dialogData.data;
 
     this.viewproduct = this.dialogData.viewproduct;
-    console.log(this.slidesStore, "HAriiahra");
-    console.log('viewproduct ', this.viewproduct);
     if (this.viewproduct.productImages && this.viewproduct.productImages.length < 1) {
       this.showLoader = false;
     } else {
@@ -98,6 +95,16 @@ export class ProductDetailPopupComponent implements OnInit {
     // if (this.slidesStore.length > 0) {
     //   this.fullImage = this.slidesStore[0].src;
     // }
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
+    }
+
   }
 
   downloadFile(fileName: string, contentType: string, base64Data: string) {

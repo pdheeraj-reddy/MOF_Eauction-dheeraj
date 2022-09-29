@@ -26,7 +26,7 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
   _3MembersAdded = false;
   showConfirm = false;
   showPageLoader: boolean = false;
-  textDir: boolean = false;
+  textDir: boolean;
   popupTitle: any = '';
   committeeMemberList: any = [];
   existingCommitteSecList: any = [];
@@ -611,6 +611,13 @@ export class AssignPricingCommitteComponent implements OnInit, OnDestroy {
       map((value) => this._filter(value))
     );
     this.getPreAuctionData();
+
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
   }
 
   ngDoCheck() {

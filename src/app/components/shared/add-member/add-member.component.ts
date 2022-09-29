@@ -37,6 +37,8 @@ export class AddMemberComponent implements OnInit {
   filteredStates: Observable<Employee[]>;
   selectedEmployee: any;
   noData = false;
+
+  textDir: string;
   get currentLang() {
     return localStorage.getItem('lang_pref') ?? 'en'
   }
@@ -128,6 +130,15 @@ export class AddMemberComponent implements OnInit {
     if (this.committeeMemberList.length <= 0) {
       this.noData = true;
     }
+
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
+    }
+
+
     // this.stateCtrl.setValue(((this.dialogData.committeeEditData != undefined) ? this.dialogData.committeeEditData.EmployeeId : ''));
 
 
@@ -137,6 +148,15 @@ export class AddMemberComponent implements OnInit {
       // console.log("this.test");
       // console.log(committeeEditData);
       this.selectedEmployee = this.dialogData.committeeEditData;
+    }
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
     }
   }
 

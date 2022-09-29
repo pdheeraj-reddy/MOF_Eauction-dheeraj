@@ -62,7 +62,7 @@ export class AuctionDetailsComponent implements OnInit {
   selectedFileURL: any;
   auctionAttachment: any = [];
   transformedAttachment: any = [];
-  textDir: boolean = true;
+  textDir: boolean;
   currentLang: any;
   auctionBiddingStatus: any;
   auctionBiddingMethod: any;
@@ -170,17 +170,13 @@ export class AuctionDetailsComponent implements OnInit {
     this.role.auctionMod = this.currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
     this.role.bidder = this.currentUser.isBidder;
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
 
-      this.currentLang = event.lang;
-      if (this.currentLang == 'en') {
-        this.textDir = true;
-      }
-      else {
-        this.textDir = false;
-      }
-
-    });
 
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     this.auctionId = atob(this.auctionId);
@@ -189,6 +185,16 @@ export class AuctionDetailsComponent implements OnInit {
 
 
     // this.getupcomingAuctionList(1);
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
+
   }
 
   getAuctionDetails() {

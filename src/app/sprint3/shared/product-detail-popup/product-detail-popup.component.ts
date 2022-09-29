@@ -9,6 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { MediaService } from 'src/app/service/media.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 export interface DialogData {
   data: any;
@@ -25,7 +26,7 @@ export class ProductDetailPopupComponent implements OnInit {
   slidesStore: any = [];
   viewproduct: any;
   fullImage: any;
-  textDir = 'ltr';
+  textDir: string;
   showLoader: boolean = false;
   fetchPicture: boolean = false;
   pageRangeForAttach: any;
@@ -42,6 +43,7 @@ export class ProductDetailPopupComponent implements OnInit {
     private sanitizer: DomSanitizer,
     public PaginationServc: PaginationSortingService,
     private mediaService: MediaService,
+    private translate: TranslateService
   ) { }
 
   customOptions: OwlOptions = {
@@ -90,8 +92,9 @@ export class ProductDetailPopupComponent implements OnInit {
       this.textDir = 'rtl'
     }
     else {
-      // this.textDir= 'ltr'
+      this.textDir = 'ltr'
     }
+
 
     // this.slidesStore = this.dialogData.data;
     this.viewproduct = this.dialogData.viewproduct;
@@ -118,6 +121,15 @@ export class ProductDetailPopupComponent implements OnInit {
     // if (this.slidesStore.length > 0) {
     //   this.fullImage = this.slidesStore[0].src;
     // }
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
+    }
   }
   navigateToPage(pageNoVal: number, section: string) {
     this.PaginationServc.setPagerValues(

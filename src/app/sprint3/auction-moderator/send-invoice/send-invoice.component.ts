@@ -18,7 +18,7 @@ export class SendInvoiceComponent implements OnInit {
   selectedPageNumber: number;
   pagelimit: number = 10;
   showLoader: boolean = true;
-  textFloat: string = '';
+  textFloat: string;
   auctionId: string = '';
   showSuccessPopup: boolean = false;
   showBillError: boolean = false;
@@ -57,6 +57,13 @@ export class SendInvoiceComponent implements OnInit {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
     this.auctionId = atob(this.auctionId);
     this.getInvoice();
+
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textFloat = 'left';
+    }
+    else {
+      this.textFloat = 'right';
+    }
   }
 
   ngDoCheck() {

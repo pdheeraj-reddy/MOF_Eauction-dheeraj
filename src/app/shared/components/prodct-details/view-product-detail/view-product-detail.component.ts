@@ -27,7 +27,7 @@ export class ViewProductDetailComponent implements OnInit {
   slidesStore: any = [];
   viewproduct: any;
   fullImage: any;
-  textDir = 'ltr';
+  textDir: string;
   product: any;
   index: any;
   price: any = 0;
@@ -90,7 +90,7 @@ export class ViewProductDetailComponent implements OnInit {
       this.textDir = 'rtl'
     }
     else {
-      // this.textDir= 'ltr'
+      this.textDir = 'ltr'
     }
 
     // this.slidesStore = this.dialogData.data;
@@ -126,6 +126,15 @@ export class ViewProductDetailComponent implements OnInit {
     this.index = this.dialogData.index;
     this.isBidUpdate = this.dialogData.isBidUpdate;
     this.price = this.product?.['ZzPdtEstPricePc'];
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
+    }
   }
 
   sortByTableHeaderId(columnId: number, sortType: string, dateFormat?: string) {

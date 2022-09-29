@@ -23,7 +23,7 @@ export class AuctionFinalAwardComponent implements OnInit {
   showConfirmationReject: boolean = false;
   showSuccessReject: boolean = false;
   showLoader: boolean = false;
-  btnFloat: any = '';
+  btnFloat: string;
   sendInvoice = false;
   rejectionNotes: any = '';
   rejectionReason = false;

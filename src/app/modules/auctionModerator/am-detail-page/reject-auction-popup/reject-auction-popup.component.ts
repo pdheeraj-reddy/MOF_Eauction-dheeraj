@@ -19,7 +19,7 @@ export class RejectAuctionPopupComponent implements OnInit {
   rejectionNotes = '';
   rejectionReason: string = '';
   maxLen = 250;
-  textDir = 'ltr';
+  textDir: string;
   showSubmitBtnLoader: boolean = false;
   submitForm: boolean = false;
   showCancelSuccessfulModal: boolean = false;
@@ -39,6 +39,15 @@ export class RejectAuctionPopupComponent implements OnInit {
       this.textDir = 'ltr'
     }
     this.preAuctionData = this.dialogData.auctionData;
+  }
+
+  ngDoCheck() {
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = 'rtl'
+    }
+    else {
+      this.textDir = 'ltr'
+    }
   }
   closeDialog() {
     this.dialogRef.close();

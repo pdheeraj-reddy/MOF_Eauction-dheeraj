@@ -26,7 +26,7 @@ export class AssignAuctionCommitteComponent implements OnInit {
   _3MembersAdded = false;
   showConfirm = false;
   showCancelPopup = false;
-  textDir = false;
+  textDir: boolean;
   showSuccessPopup = false;
   preAuctionData: any;
   popupTitle: any = '';
@@ -604,6 +604,13 @@ export class AssignAuctionCommitteComponent implements OnInit {
       startWith(''),
       map((value) => this._filter(value))
     );
+
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textDir = false;
+    }
+    else {
+      this.textDir = true;
+    }
   }
 
   ngDoCheck() {

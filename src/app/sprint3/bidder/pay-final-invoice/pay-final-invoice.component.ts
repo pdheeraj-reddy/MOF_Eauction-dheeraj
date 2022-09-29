@@ -29,8 +29,8 @@ export class PayFinalInvoiceComponent implements OnInit {
   auctionId: any;
   invoiceData: any = [];
   showLoader: boolean = true;
-  textFloat: string = '';
-  textDir: any = '';
+  textFloat: string;
+  textDir: string;
   showSuccessPopup: boolean = false;
   downloadingInvoice: boolean = false;
   invoiceSent: boolean = false;
@@ -76,6 +76,15 @@ export class PayFinalInvoiceComponent implements OnInit {
       this.userRole = this.userRole.roles;
     }
     console.log(this.userRole);
+
+    if (localStorage.getItem('lang_pref') == 'ar') {
+      this.textFloat = 'left';
+      this.textDir = 'rtl';
+    }
+    else {
+      this.textFloat = 'right';
+      this.textDir = 'ltr';
+    }
   }
 
   encryptData(data: any) {
