@@ -29,6 +29,7 @@ export class AuctionProductComponent implements OnInit {
   @Output() changeauctiontype = new EventEmitter<string>();
   // AUCTION edit end
   //variables
+  lang: string;
   title = 'Auction Product';
   sCount = 1;
   maxChars = 250;
@@ -110,11 +111,58 @@ export class AuctionProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.lang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      // this.refreshCalendarCntrl();
+      this.refreshCalendarCntrl();
     });
     this.pageRefresh();
+  }
+
+
+  refreshCalendarCntrl() {
+    let lang = this.translate.currentLang;
+    let selectedDate = '';
+    const todayDate = moment().format('YYYY-MM-DD');
+    setTimeout(() => {
+      $('[data-toggle="tooltip"]').tooltip(({ delay: { hide: 800 } }));
+      $("#deliveryDate").unbind().removeData();
+      $("#deliveryTime").unbind().removeData();
+      $("#deliveryDate").hijriDatePicker({
+        hijri: false,
+        locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
+        format: "YYYY-MM-DD",
+        showSwitcher: false,
+        minDate: todayDate,
+        icons: {
+          previous: '<span class="icon-keyboard_arrow_left"></span>',
+          next: '<span class="icon-keyboard_arrow_right"></span>',
+        },
+      });
+
+      var deliveryTime = $("#deliveryTime").hijriDatePicker({
+        hijri: false,
+        locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
+        format: "hh:mm A",
+        showSwitcher: false,
+        showTodayButton: false,
+        icons: {
+          up: 'icon-arrow-up text-primary',
+          down: 'icon-arrow-down text-primary',
+        },
+      });
+
+      $("#deliveryDate").on('dp.change', function (arg: any) {
+        const v = new Event('change');
+        const e = document.querySelector("#deliveryDate");
+        e?.dispatchEvent(v);
+      });
+      $("#deliveryTime").on('dp.change', function (arg: any) {
+        const v = new Event('change');
+        const e = document.querySelector("#deliveryTime");
+        e?.dispatchEvent(v);
+      });
+
+    }, 100);
   }
 
   pageRefresh() {
@@ -316,6 +364,9 @@ export class AuctionProductComponent implements OnInit {
     let productsArray = this.auctionDetails.listtoproductnav.results;
     let productImages: any = [], productFiles: any = [];
     productsArray.forEach((pItem: any, index: number) => {
+
+
+
       productImages = [], productFiles = [];
       if (pItem.ZzProductNo) {
         if (this.ViewMode == 'view' || this.ViewMode == 'edit' || (this.ObjectId || this.DraftId)) {
@@ -389,14 +440,31 @@ export class AuctionProductComponent implements OnInit {
           notes: pItem.ZzPdOthrNts
         }
       }
+
+      if (this.lang == 'ar') {
+        item.location.deliveryTime = item.location.deliveryTime?.split(' ')[1] == 'PM' ? item.location.deliveryTime.replace(item.location.deliveryTime.split(' ')[1], 'م') : item.location.deliveryTime?.split(' ')[1] == 'AM' ? item.location.deliveryTime.replace(item.location.deliveryTime.split(' ')[1], 'ص') : item.location.deliveryTime
+      }
+
+
       this.addProducts(item);
       if (this.auctionDetails.SameAddress == 'Y') {
         this.productsFormGroup.get('sameLocNDate')?.setValue(true);
         let sameLocNDateVal = { target: { checked: true } };
         this.setValidation(sameLocNDateVal);
         this.productsFormGroup.get('location')?.get('deliveryDate')?.setValue(pItem.DelivDate ? moment(pItem.DelivDate, 'DD.MM.YYYY').format('YYYY-MM-DD') : '');
-        this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue(pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '');
-        console.log('setVal', pItem.DelivTime);
+
+        if (this.lang == 'ar') {
+          let delTime = pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '';
+
+          delTime = delTime?.split(' ')[1] == 'PM' ? delTime.replace(delTime.split(' ')[1], 'م') : delTime?.split(' ')[1] == 'AM' ? delTime.replace(delTime.split(' ')[1], 'ص') : delTime
+
+          this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue(delTime)
+        }
+        else {
+          this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue(pItem.DelivTime ? moment(pItem.DelivTime, 'HH:mm:ss').format('hh:mm A') : '');
+        }
+
+
         // this.productsFormGroup.get('location')?.get('locLatitude')?.setValue(pItem.ZzLocationCord.split(",")[0]);
         // this.productsFormGroup.get('location')?.get('locLongitude')?.setValue(pItem.ZzLocationCord.split(",")[1]);
         this.productsFormGroup.get('location')?.get('locRegion')?.setValue(pItem.ZzRegion);
@@ -409,6 +477,7 @@ export class AuctionProductComponent implements OnInit {
         let sameLocNDateVal = { target: { checked: false } };
         this.setValidation(sameLocNDateVal);
       }
+
     });
     this.totalValue = 0;
     this.totalQty = 0;
@@ -1343,6 +1412,7 @@ export class AuctionProductComponent implements OnInit {
         }
       }
     }
+
   }
 
   /**
@@ -1450,6 +1520,15 @@ export class AuctionProductComponent implements OnInit {
   }
 
   public generateProductFormat(obj: any, product: any, action: string) {
+    if (this.lang == 'ar') {
+      obj.location.deliveryTime = obj.location.deliveryTime?.split(' ')[1] == 'م' ? obj.location.deliveryTime.replace(obj.location.deliveryTime.split(' ')[1], 'PM') : obj.location.deliveryTime?.split(' ')[1] == 'ص' ? obj.location.deliveryTime.replace(obj.location.deliveryTime.split(' ')[1], 'AM') : obj.location.deliveryTime
+    }
+
+    if (this.lang == 'ar') {
+      product.location.deliveryTime = product.location.deliveryTime?.split(' ')[1] == 'م' ? product.location.deliveryTime.replace(product.location.deliveryTime.split(' ')[1], 'PM') : product.location.deliveryTime?.split(' ')[1] == 'ص' ? product.location.deliveryTime.replace(product.location.deliveryTime.split(' ')[1], 'AM') : product.location.deliveryTime
+    }
+
+
     let productList: any = [];
     let auctionList = {};
     let pObj = product;
