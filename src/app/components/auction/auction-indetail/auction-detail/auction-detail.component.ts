@@ -48,6 +48,9 @@ export class AuctionDetailComponent implements OnInit {
   activeFileDownloadIndex = -1;
   columnLst = ['index', 'name'];
   startValError: boolean = false;
+  isValidEndTime: boolean = false;
+  isValidStartTime: boolean = false;
+  isValidOpeningTime: boolean = false;
   // Dropdown Values
   // dropValBeneCategories: any = ['category 1', 'category 2', 'category 3', 'category 4'];
   dropValProducts: any = [
@@ -117,7 +120,8 @@ export class AuctionDetailComponent implements OnInit {
     public auctionServc: AuctionService,
     public customService: CustomService,
     public translate: TranslateService,
-    public router: Router
+    public router: Router,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -400,6 +404,7 @@ export class AuctionDetailComponent implements OnInit {
           this.isValidAuctionDate = true;
         } else {
           this.isValidAuctionDate = false;
+
         }
       }
     }
@@ -445,11 +450,78 @@ export class AuctionDetailComponent implements OnInit {
     //     }
     //   }
     // }
+
   }
 
   onChangeEndDate($event: any) {
     this.basicFormGroup.controls['auctionEndDate'].setValue($event.target.value);
   }
+
+
+  onChangeStartTime($event: any) {
+    let aucStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
+    let aucStartTime = this.basicFormGroup.controls['auctionStartTime'].value;
+    let auctionDate = new Date(aucStartDate + " " + aucStartTime)
+    let currentDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
+    let currentTime = moment(new Date()).format('hh:mm A');
+    let dateNow = new Date(currentDate + " " + currentTime);
+
+    if (aucStartTime) {
+      if (auctionDate <= dateNow) {
+        this.isValidStartTime = true;
+      }
+      else {
+        this.isValidStartTime = false;
+      }
+    }
+
+  }
+
+  onChangeEndTime($event: any) {
+    let aucStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
+    let aucEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
+    let aucStartTime = this.basicFormGroup.controls['auctionStartTime'].value;
+    let aucEndTime = this.basicFormGroup.controls['auctionEndTime'].value;
+    let startDate = new Date(aucStartDate + " " + aucStartTime);
+    let endDate = new Date(aucEndDate + " " + aucEndTime);
+    let currentDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
+    let currentTime = moment(new Date()).format('hh:mm A');
+    let dateNow = new Date(currentDate + " " + currentTime);
+
+    if (aucEndTime) {
+      if ((startDate >= endDate) || (endDate <= dateNow)) {
+        this.isValidEndTime = true;
+      } else {
+        this.isValidEndTime = false;
+      }
+    }
+  }
+
+  onChangeOpeningTime($event: any) {
+    let aucStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
+    let aucEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
+    let aucStartTime = this.basicFormGroup.controls['auctionStartTime'].value;
+    let aucEndTime = this.basicFormGroup.controls['auctionEndTime'].value;
+    let aucOpenDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
+    let aucOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
+    let startDate = new Date(aucStartDate + " " + aucStartTime);
+    let endDate = new Date(aucEndDate + " " + aucEndTime);
+    let openDate = new Date(aucOpenDate + " " + aucOpenTime);
+    let currentDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
+    let currentTime = moment(new Date()).format('hh:mm A');
+    let dateNow = new Date(currentDate + " " + currentTime);
+
+    if (aucOpenTime) {
+      if ((startDate >= openDate) || (endDate >= openDate) || (dateNow >= openDate)) {
+        this.isValidOpeningTime = true;
+      }
+      else {
+        this.isValidOpeningTime = false;
+      }
+    }
+  }
+
+
 
   prePopulatesFormValues() {
     this.showLoader = true;
@@ -858,11 +930,22 @@ export class AuctionDetailComponent implements OnInit {
 
     let startDate = this.basicFormGroup.controls['auctionStartDate'].value;
     let endDate = this.basicFormGroup.controls['auctionEndDate'].value;
+    let startTime = this.basicFormGroup.controls['auctionStartTime'].value;
+    let endTime = this.basicFormGroup.controls['auctionEndTime'].value;
     let anncStartDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
     // Need to validate bid opening time
     let bidOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
     // let startValue = this.basicFormGroup.controls['startPrice'].value;
     // console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 855 ~ startValue", startValue);
+    let currentDate = new Date();
+    let aucStartDate = new Date(startDate + " " + startTime);
+    let aucEndDate = new Date(endDate + " " + endTime);
+    let currDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
+    let currentTime = moment(new Date()).format('hh:mm A');
+    let dateNow = new Date(currDate + " " + currentTime);
+    let aucOpenDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
+    let aucOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
+    let openDate = new Date(aucOpenDate + " " + aucOpenTime);
 
 
 
@@ -872,6 +955,24 @@ export class AuctionDetailComponent implements OnInit {
         return;
       }
     }
+
+    if ((aucStartDate >= aucEndDate) || (aucEndDate <= dateNow)) {
+      this.isValidEndTime = true;
+      return;
+    }
+
+    if ((aucStartDate >= openDate) || (aucEndDate >= openDate) || (dateNow >= openDate)) {
+      this.isValidOpeningTime = true;
+      return;
+    }
+
+
+
+    if (aucStartDate <= dateNow) {
+      this.isValidStartTime = true;
+      return;
+    }
+
     if (startDate && endDate && anncStartDate) {
       if ((moment(anncStartDate).isBefore(endDate, 'day')) || (moment(anncStartDate).isBefore(startDate, 'day'))) {
         this.isValidAnncSDate = true;

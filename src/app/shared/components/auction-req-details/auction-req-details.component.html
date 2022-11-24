@@ -169,7 +169,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp13" | translate }}</label>
-                                <div class="text-success">
+                                <div class="text-muted">
                                     <span>{{ auctionItem.bidOpeningTime }}</span>
                                 </div>
                             </div>
@@ -185,20 +185,20 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp15" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.startPrice }} </div>
+                                <div class="text-success"> {{ auctionItem.startPrice | number : '1.0-2' }} </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3"
                             *ngIf=" !( auctionItem.auctionType === 'Public' &&auctionItem.auctionSubType === 'Closed' ) ">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp16" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.lowBidValue }} </div>
+                                <div class="text-success"> {{ auctionItem.lowBidValue | number : '1.0-2' }} </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp17" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.gnteePercentage | number : '1.0-0'}} %</div>
+                                <div class="text-success"> {{ auctionItem.gnteePercentage | number : '1.0-2'}} %</div>
                             </div>
                         </div>
                     </div>
@@ -212,14 +212,14 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section2_orderSum-col7" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.pursuitPerCommission | number : '1.2-2'}} %
+                                <div class="text-success"> {{ auctionItem.pursuitPerCommission | number : '1.0-2'}} %
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp18" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.finalGntee }}</div>
+                                <div class="text-success"> {{ auctionItem.finalGntee }} {{"days" | translate }}</div>
                             </div>
                         </div>
                     </div>

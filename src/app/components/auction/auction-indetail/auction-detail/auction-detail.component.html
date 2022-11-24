@@ -250,7 +250,7 @@
                             <input type="text" onkeydown="event.preventDefault()" id="auctionStartDate"
                                 formControlName="auctionStartDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionStartDate')"
+                                (change)="onChangeDateTime($event, 'auctionStartDate'); onChangeStartTime($event)"
                                 class="form-control calendar-control calendar-both-control"
                                 [required]="form['auctionType'].value === 'Public'" />
                             <div *ngIf="submitted && form['auctionStartDate'].errors" class="invalid-feedback">
@@ -267,7 +267,7 @@
                             <input type="text" onkeydown="event.preventDefault()" id="auctionEndDate"
                                 formControlName="auctionEndDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionEndDate')"
+                                (change)="onChangeDateTime($event, 'auctionEndDate'); onChangeEndTime($event)"
                                 class="form-control calendar-control calendar-both-control"
                                 [required]="form['auctionType'].value === 'Public'" />
                             <!-- <input type="text" formControlName="auctionEndDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="form['auctionType'].value === 'Public'" /> -->
@@ -287,9 +287,12 @@
                             <input type="text" onkeydown="event.preventDefault()" id="auctionStartTime"
                                 formControlName="auctionStartTime"
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp9' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionStartTime')"
+                                (change)="onChangeDateTime($event, 'auctionStartTime'); onChangeStartTime($event)"
                                 class="form-control time-control" [required]="form['auctionType'].value === 'Public'" />
                         </div>
+
+                        <div *ngIf="isValidStartTime" class="invalid-feedback">{{ 'message.failure_invalid_mindate' |
+                            translate }}</div>
                         <div *ngIf="submitted && form['auctionStartTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionStartTime'].errors['required']">{{
                                 'auctioncreate.auctiondetails.section1_formGrp9' | translate }} {{
@@ -302,9 +305,11 @@
                             <input type="text" onkeydown="event.preventDefault()" id="auctionEndTime"
                                 formControlName="auctionEndTime"
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp10' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionEndTime')" class="form-control time-control"
-                                [required]="form['auctionType'].value === 'Public'" />
+                                (change)="onChangeDateTime($event, 'auctionEndTime'); onChangeEndTime($event)"
+                                class="form-control time-control" [required]="form['auctionType'].value === 'Public'" />
                         </div>
+                        <div *ngIf="isValidEndTime" class="invalid-feedback">{{ 'message.failure_invalid_mindate' |
+                            translate }}</div>
                         <div *ngIf="submitted && form['auctionEndTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionEndTime'].errors['required']">{{
                                 'auctioncreate.auctiondetails.section1_formGrp10' | translate }} {{
@@ -339,7 +344,7 @@
                             <input type="text" onkeydown="event.preventDefault()" id="auctionAnncStartDate"
                                 formControlName="auctionAnncStartDate"
                                 placeholder="{{ 'auctionlist.filter-formDate-pholder' | translate }}"
-                                (change)="onChangeDateTime($event, 'auctionAnncStartDate')"
+                                (change)="onChangeDateTime($event, 'auctionAnncStartDate'); onChangeOpeningTime($event)"
                                 class="form-control calendar-control calendar-both-control" [required]="true" />
                             <!-- <input type="text" formControlName="auctionAnncStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
                             <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
@@ -352,8 +357,11 @@
                             <input type="text" onkeydown="event.preventDefault()" id="bidOpeningTime"
                                 formControlName="bidOpeningTime"
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp13' | translate }}"
-                                (change)="onChangeDateTime($event, 'bidOpeningTime')" class="form-control time-control"
-                                [required]="true" />
+                                (change)="onChangeDateTime($event, 'bidOpeningTime'); onChangeOpeningTime($event)"
+                                class="form-control time-control" [required]="true" />
+                            <div *ngIf="isValidOpeningTime" class="invalid-feedback">{{
+                                'message.failure_invalid_mindate' |
+                                translate }}</div>
                             <div *ngIf="isBidOpeningTime" class="invalid-feedback">{{
                                 'auctioncreate.auctiondetails.section1_formGrp13' | translate }} {{
                                 'auctioncreate.page-validerror' | translate }}</div>

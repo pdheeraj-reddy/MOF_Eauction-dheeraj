@@ -705,7 +705,7 @@
                                                                     | translate }}</label>
                                                                 <div class="text-primary">
                                                                     {{upcomingAuction.important_info?.guarantee_per |
-                                                                    number}} %
+                                                                    number:'1.0-2'}} %
 
                                                                 </div>
                                                             </div>
@@ -716,7 +716,7 @@
                                                                     translate
                                                                     }}</label>
                                                                 <div class="text-primary">
-                                                                    {{upcomingAuction.important_info?.commissionRate}}%
+                                                                    {{commissionRateValue | number:'1.0-2' }}%
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -729,7 +729,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.EndOfBidding' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="row text-primary" style="width: 122%;">
+                                                                <div class="row text-primary" style="width: 133%;">
                                                                     <span class="col-md-6"
                                                                         style="max-width: 50% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
 
@@ -751,7 +751,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.BidOpeningDate' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="row text-primary" style="width: 122%;">
+                                                                <div class="row text-primary" style="width: 133%;">
                                                                     <span class="col-md-6"
                                                                         style="max-width: 50% !important;">
                                                                         {{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
@@ -810,7 +810,7 @@
                                                             }}</label>
                                                         <div class="text-primary">
                                                             {{upcomingAuction.important_info?.auctionstartprice |
-                                                            number}} {{'common.SAR' | translate}} </div>
+                                                            number:'1.0-2'}} {{'common.SAR' | translate}} </div>
                                                     </div>
                                                 </div>
                                                 <div *ngIf="upcomingAuction.important_info?.guarantee_per"
@@ -820,7 +820,8 @@
                                                             "bidderAuctionDetails.InitialGuaranteePercentage"
                                                             | translate }}</label>
                                                         <div class="text-primary">
-                                                            {{upcomingAuction.important_info?.guarantee_per | number}} %
+                                                            {{upcomingAuction.important_info?.guarantee_per |
+                                                            number:'1.0-2'}} %
 
                                                         </div>
                                                     </div>
@@ -830,7 +831,7 @@
                                                         <label>{{ 'bidderAuctionDetails.CommissionRate' | translate
                                                             }}</label>
                                                         <div class="text-primary">
-                                                            {{commissionRateValue | number}} %
+                                                            {{commissionRateValue | number:'1.0-2'}} %
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1078,7 +1079,9 @@
                                                             |
                                                             translate }}</label>
                                                         <div class="text-primary">
-                                                            {{upcomingAuction.auction_detail?.startPrice | number}}
+                                                            {{upcomingAuction.auction_detail?.startPrice |
+                                                            number:'1.0-2'}}
+                                                            {{ "common.SAR" | translate }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1088,7 +1091,8 @@
                                                             "bidderAuctionDetails.auction-details.WarrantyPercentage"
                                                             | translate }}</label>
                                                         <div class="text-primary">
-                                                            {{upcomingAuction.auction_detail?.gnteePercentage | number}}
+                                                            {{upcomingAuction.auction_detail?.gnteePercentage |
+                                                            number:'1.0-2'}}
                                                             %
                                                         </div>
                                                     </div>
@@ -1113,7 +1117,7 @@
                                                         <div class="text-primary"> {{
                                                             upcomingAuction.auction_detail?.pursuitPerCommission |
                                                             number :
-                                                            '1.2-2'}} %
+                                                            '1.0-2'}} %
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1124,6 +1128,7 @@
                                                             | translate }}</label>
                                                         <div class="text-primary">
                                                             {{upcomingAuction.auction_detail?.finalgnteePaymentDays}}
+                                                            {{"days" | translate}}
                                                         </div>
                                                     </div>
                                                 </div>

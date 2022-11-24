@@ -198,7 +198,8 @@
                                     <label for="validationCustom01">{{
                                         "auctioncreate.auctionproduct.auctionpopup.popup_formGrp5" |
                                         translate }}</label>
-                                    <div class="text-dark-green"> {{ viewproduct.productValue }} </div>
+                                    <div class="text-dark-green"> {{ viewproduct.productValue | number:'1.0-2' }}
+                                        {{"common.SAR" | translate}}</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom01">{{

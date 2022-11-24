@@ -293,7 +293,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-success" id="exampleModalLabel">
-                    {{'open_offer.adoption_of_awarding' | translate}} {{serialNo}} ?
+                    {{'open_offer.adoption_of_awarding' | translate}} {{serialNo}} {{'open_offer.qMark' | translate}}
                 </h4>
                 <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
                     (click)="showModal.acceptOffer = false">
@@ -311,7 +311,8 @@
                         <label for="validationCustom01">
                             {{'auctionCommittee.ac-openOffers.th2' | translate}}
                         </label>
-                        <div class="text-primary"> {{offervalue}} {{ 'bidderFinalInvoice.SAR' | translate }} </div>
+                        <div class="text-primary"> {{offervalue | number:'1.0-2'}} {{ 'bidderFinalInvoice.SAR' |
+                            translate }} </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom01">

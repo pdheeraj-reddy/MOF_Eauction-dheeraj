@@ -155,13 +155,15 @@
                                                         autocomplete="off" appTimePicker formControlName="deliveryTime"
                                                         name="delivery-time" class="form-control time-control"
                                                         placeholder="{{ 'auctioncreate.auctionproduct.section1_formGrp3-plch' | translate }}"
-                                                        (change)="changedatetime($event,'deliveryTime');" />
+                                                        (change)="changedatetime($event,'deliveryTime'); onChangeDelTime($event);" />
                                                     <div *ngIf="submitted && locationForm['deliveryTime'].errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf="locationForm['deliveryTime'].errors['required']">{{
                                                             'auctioncreate.auctionproduct.section1_formGrp3' | translate
                                                             }} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                                     </div>
+                                                    <div *ngIf="isValidDeliveryTime" class="invalid-feedback d-block">{{
+                                                        'message.failure_invalid_mindate' | translate }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -359,7 +361,8 @@
                                                     *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
                                                     <td width="170px" scope="row">{{code.productName}}</td>
                                                     <td width="160px">{{code.productSerialNumber}}</td>
-                                                    <td width="220px">{{code.productValue}}</td>
+                                                    <td width="220px">{{code.productValue | number:'1.0-2' }}
+                                                        {{"common.SAR" | translate }} </td>
                                                     <td width="160px">{{code.productCondition | translate }}</td>
                                                     <td>
                                                         <div class="qq-btn-group" style="min-width: 76px;">
@@ -396,7 +399,7 @@
                                             </td>
                                             <td width="210px" class="font-medium color-darkgreen">{{
                                                 'auctioncreate.auctionproduct.section1_grid1-ft-text2' | translate }}:
-                                                {{ totalValue }} {{
+                                                {{ totalValue | number: '1.0-2'}} {{
                                                 'auctioncreate.auctionproduct.section1_grid1-ft-text3' | translate }}
                                             </td>
                                             <td width="160px"></td>
@@ -1022,15 +1025,17 @@
                                             class="form-control calendar-control calendar-gregorian-control"
                                             [required]="true"
                                             (change)="productchangedatetime($event,'deliveryDate');" />
+
+                                        <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryDate'].errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="addproductlocationForm['deliveryDate'].errors['required']">
+                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' |
+                                                translate}}
+                                                {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                        </div>
+                                        <div *ngIf="isValidPDeliveryDate" class="invalid-feedback d-block">{{
+                                            'message.failure_invalid_mindate' | translate }}</div>
                                     </div>
-                                    <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryDate'].errors"
-                                        class="invalid-feedback">
-                                        <div *ngIf="addproductlocationForm['deliveryDate'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' | translate}}
-                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
-                                    </div>
-                                    <div *ngIf="isValidPDeliveryDate" class="invalid-feedback d-block">{{
-                                        'message.failure_invalid_mindate' | translate }}</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
@@ -1041,13 +1046,15 @@
                                             class="form-control time-control"
                                             placeholder="{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11-plch' | translate}}"
                                             [required]="true"
-                                            (change)="productchangedatetime($event,'deliveryTime');" />
+                                            (change)="productchangedatetime($event,'deliveryTime'); onChangePDelTime($event)" />
                                         <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryTime'].errors"
                                             class="invalid-feedback">
                                             <div *ngIf="addproductlocationForm['deliveryTime'].errors['required']">
                                                 {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' |
                                                 translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
                                         </div>
+                                        <div *ngIf="isValidPDeliveryTime" class="invalid-feedback d-block">{{
+                                            'message.failure_invalid_mindate' | translate }}</div>
                                     </div>
                                 </div>
                             </div>

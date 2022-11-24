@@ -36,6 +36,7 @@
     "Direct": "Direct",
     "To me": "Automatic",
     "Automatic": "Automatic",
+    "days": "days",
     "AM": "AM",
     "PM": "PM",
     "New": "New",
@@ -217,7 +218,7 @@
             "section1_subheading1_opt1": "Yes",
             "section1_subheading1_opt2": "No",
             "section1_formGrp2": "Delivery Date",
-            "section1_formGrp3": "Delivery Time Date",
+            "section1_formGrp3": "Delivery Time",
             "section1_formGrp3-plch": "Choose the Time",
             "section1_formGrp4": "National Address",
             "section1_formGrp41": "Products Locations",
@@ -708,7 +709,7 @@
             "AuctionInstructions": "Auction Guidelines",
             "AuctionParticipationInstructions": "Auction Participation Instructions",
             "instructionsList1": "1. Before participating in the auction, the commercial registration status must be “Participant” in the Etimad platform.",
-            "instructionsList2": "2. When the auction starts, you will be required to issue and attach the bid bond, submit your bid, and attach the final bond in case the auction is awarded to you. And you can issue guarantees through the adoption platform",
+            "instructionsList2": "2. When the auction starts, you will be required to issue and attach the bid bond, submit your bid, and attach the final bond in case the auction is awarded to you. And you can issue guarantees through the bank",
             "instructionsList2-link": "the bank guarantee service",
             "instructionsList3": "3. At the start of the auction, the initial guarantee amount will be reserved, after which the bidding can be started, and in the event that the auction is not awarded to the bidder, the bank guarantee will be immediately released.",
             "instructionsList4": "4. If the minimum estimated price of the products is not met, the auction will not be awarded.",
@@ -1172,6 +1173,7 @@
         "my_invoices": "My Invoices"
     },
     "open_offer": {
+        "qMark": "?",
         "adoption_of_awarding": "Awarding Offer Number ",
         "upon_confirmation": "When you confirm, The Initial Awarding will be approved and sent for Auction Final awarding.",
         "gear_adoption": "Confirm Awarding",

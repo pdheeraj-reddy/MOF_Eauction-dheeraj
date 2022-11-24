@@ -48,7 +48,7 @@ export class AuctionListsComponent implements OnInit {
   showPageLoader: boolean = false;
   dropValProducts: any = [
     { code: "Public", disp: "Public" },
-    { code: "Private", disp: "Private" }
+    // { code: "Private", disp: "Private" }
   ];
   dropValStatus: any = [];
   // Form controls

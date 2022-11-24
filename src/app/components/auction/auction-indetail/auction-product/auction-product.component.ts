@@ -70,6 +70,8 @@ export class AuctionProductComponent implements OnInit {
   invalidQty: boolean = false;
   isValidDeliveryDate: boolean = false;
   isValidPDeliveryDate: boolean = false;
+  isValidDeliveryTime: boolean = false;
+  isValidPDeliveryTime: boolean = false;
   invalidImageSize: boolean = false;
   invalidImageType: boolean = false;
   invalidFileSize: boolean = false;
@@ -513,29 +515,86 @@ export class AuctionProductComponent implements OnInit {
     this.locationForm[dd].setValue(e.target.value);
     if (dd == 'deliveryDate') {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
-      if (startDate && deliveryDate) {
-        if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
+      let deliveryTime = this.locationForm['deliveryTime'].value;
+      let aucEndDate = new Date(endDate + " " + endTime);
+      let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
+      if (endDate && deliveryDate) {
+        if ((moment(endDate).isAfter(deliveryDate, 'day'))) {
           this.isValidDeliveryDate = true;
         } else {
           this.isValidDeliveryDate = false;
+          if (aucEndDate >= aucDelDate) {
+            this.isValidDeliveryTime = true;
+          } else {
+            this.isValidDeliveryTime = false;
+          }
         }
       }
     }
+  }
+
+  onChangeDelTime($event: any) {
+    let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+    let deliveryDate = this.locationForm['deliveryDate'].value;
+    let deliveryTime = this.locationForm['deliveryTime'].value;
+    let aucEndDate = new Date(endDate + " " + endTime);
+    let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
+
+    if (aucEndDate >= aucDelDate) {
+      this.isValidDeliveryTime = true;
+    } else {
+      this.isValidDeliveryTime = false;
+    }
+
   }
 
   productchangedatetime(e: any, dd: string) {
     this.addproductlocationForm[dd].setValue(e.target.value);
     if (dd == 'deliveryDate') {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
       let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
-      if (startDate && deliveryDate) {
-        if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
+      let deliveryTime = this.addproductlocationForm['deliveryTime'].value;
+      let aucEndDate = new Date(endDate + " " + endTime);
+      let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
+
+
+
+      if (endDate && deliveryDate) {
+        if ((moment(endDate).isAfter(deliveryDate, 'day'))) {
           this.isValidPDeliveryDate = true;
-        } else {
+          return
+        }
+        else {
           this.isValidPDeliveryDate = false;
+          if (aucEndDate >= aucDelDate) {
+            this.isValidPDeliveryTime = true;
+          } else {
+            this.isValidPDeliveryTime = false;
+          }
         }
       }
+
+
+    }
+  }
+
+  onChangePDelTime($event: any) {
+    let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+    let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
+    let deliveryTime = this.addproductlocationForm['deliveryTime'].value;
+    let aucEndDate = new Date(endDate + " " + endTime);
+    let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
+    if (aucEndDate >= aucDelDate) {
+      this.isValidPDeliveryTime = true;
+    } else {
+      this.isValidPDeliveryTime = false;
     }
   }
   //google map location
@@ -748,7 +807,7 @@ export class AuctionProductComponent implements OnInit {
     this.submitted = true;
     this.showPopupLoader = false;
     this.validateFormControls("addProduct");
-    if (this.productsFormGroup.status === 'VALID') {
+    if (this.productsFormGroup.status === 'VALID' && !this.isValidDeliveryDate && !this.isValidDeliveryTime) {
       this.showProductModal = true;
     }
     // this.refreshCalendarCntrl();
@@ -1056,12 +1115,25 @@ export class AuctionProductComponent implements OnInit {
       return;
     }
     let startDate = this.auctionDetails?.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
     let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
-    if (startDate && deliveryDate) {
-      if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
+    let deliveryTime = this.addproductlocationForm['deliveryTime'].value;
+    let aucEndDate = new Date(endDate + " " + endTime);
+    let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
+
+    if (endDate && deliveryDate) {
+      if ((moment(endDate).isAfter(deliveryDate, 'day'))) {
         this.isValidPDeliveryDate = true;
         return;
       }
+    }
+
+    if (aucEndDate >= aucDelDate) {
+      this.isValidPDeliveryTime = true;
+      return;
+    } else {
+      this.isValidPDeliveryTime = false;
     }
     if (submitSrc === 'save') {
       if (this.addFormGroup.status === 'VALID') {
@@ -1376,12 +1448,33 @@ export class AuctionProductComponent implements OnInit {
     console.log('this.productsFormGroup: ', this.productsFormGroup);
     if (this.productsFormGroup.controls['sameLocNDate']) {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+
+      let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
-      if (startDate && deliveryDate) {
-        if ((moment(startDate).isAfter(deliveryDate, 'day'))) {
+      let deliveryTime = this.locationForm['deliveryTime'].value;
+      let aucEndDate = new Date(endDate + " " + endTime);
+      let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
+
+
+      if (aucEndDate >= aucDelDate) {
+        this.isValidDeliveryTime = true;
+      } else {
+        this.isValidDeliveryTime = false;
+      }
+
+      if (endDate && deliveryDate) {
+        if ((moment(endDate).isAfter(deliveryDate, 'day'))) {
           this.isValidDeliveryDate = true;
+          return;
         } else {
           this.isValidDeliveryDate = false;
+          if (aucEndDate >= aucDelDate) {
+            this.isValidDeliveryTime = true;
+            return;
+          } else {
+            this.isValidDeliveryTime = false;
+          }
         }
       }
     }

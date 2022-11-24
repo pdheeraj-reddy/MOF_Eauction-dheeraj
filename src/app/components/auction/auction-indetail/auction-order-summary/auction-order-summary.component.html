@@ -227,7 +227,7 @@
                                                 <div class="form-group">
                                                     <label>{{ "auctioncreate.auctiondetails.section1_formGrp13" |
                                                         translate }}</label>
-                                                    <div class="text-success">
+                                                    <div class="text-muted">
                                                         <span>{{ auctionItem.bidOpeningTime }} {{
                                                             auctionItem.bidOpeningTimeSufix | translate }}</span>
                                                     </div>
@@ -251,7 +251,8 @@
                                                 <div class="form-group">
                                                     <label>{{ "auctioncreate.auctiondetails.section2_orderSum-col5" |
                                                         translate }}</label>
-                                                    <div class="text-success"> {{ auctionItem.startPrice }} </div>
+                                                    <div class="text-success"> {{ auctionItem.startPrice | number :
+                                                        '1.0-2' }} </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-3"
@@ -259,14 +260,16 @@
                                                 <div class="form-group">
                                                     <label>{{ "auctioncreate.auctiondetails.section1_formGrp16" |
                                                         translate }}</label>
-                                                    <div class="text-success"> {{ auctionItem.lowBidValue }}</div>
+                                                    <div class="text-success"> {{ auctionItem.lowBidValue | number :
+                                                        '1.0-2' }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <div class="form-group">
                                                     <label>{{ "auctioncreate.auctiondetails.section2_orderSum-col6" |
                                                         translate }}</label>
-                                                    <div class="text-success"> {{ auctionItem.gnteePercentage }} %</div>
+                                                    <div class="text-success"> {{ auctionItem.gnteePercentage | number :
+                                                        '1.0-2' }} %</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -284,14 +287,15 @@
                                                     <label>{{ "auctioncreate.auctiondetails.section2_orderSum-col7" |
                                                         translate }}</label>
                                                     <div class="text-success"> {{ auctionItem.pursuitPerCommission |
-                                                        number : '1.2-2' }} %</div>
+                                                        number : '1.0-2' }} %</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <div class="form-group">
                                                     <label>{{ "auctioncreate.auctiondetails.section1_formGrp18" |
                                                         translate }}</label>
-                                                    <div class="text-success"> {{ auctionItem.finalGntee }} </div>
+                                                    <div class="text-success"> {{ auctionItem.finalGntee }} {{ "days" |
+                                                        translate }} </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -383,7 +387,9 @@
                                                 *ngIf="i >= pageRangeForProductAttach.rangeStart && i <= pageRangeForProductAttach.rangeEnd">
                                                 <td width="170px" scope="row"> {{ code.productName }} </td>
                                                 <td width="160px">{{ code.productSerialNumber }}</td>
-                                                <td width="230px">{{ code.productValue }}</td>
+                                                <td width="230px">{{ code.productValue | number: '1.0-2' }}
+                                                    {{"common.SAR" | translate }}
+                                                </td>
                                                 <td width="160px"> {{ code.productCondition | translate }} </td>
                                                 <td>
                                                     <div class="qq-btn-group">
@@ -408,7 +414,8 @@
                                             "auctioncreate.auctionproduct.section1_grid1-ft-text1" | translate }} </td>
                                         <td width="220px" class="font-medium color-darkgreen"> {{
                                             "auctioncreate.auctionproduct.section1_grid1-ft-text2" | translate }}: {{
-                                            totalValue }} {{ "auctioncreate.auctionproduct.section1_grid1-ft-text3" |
+                                            totalValue | number: '1.0-2' }} {{
+                                            "auctioncreate.auctionproduct.section1_grid1-ft-text3" |
                                             translate }} </td>
                                         <td width="170px"></td>
                                         <td class="th-action"></td>
