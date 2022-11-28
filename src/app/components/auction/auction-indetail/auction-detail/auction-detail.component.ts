@@ -100,6 +100,7 @@ export class AuctionDetailComponent implements OnInit {
   isValidAnncSDate: boolean = false;
   isValidAnncEDate: boolean = false;
   isBidOpeningTime: boolean = false;
+  commissionPercent = '';
 
   // Form controls
   basicFormGroup: FormGroup;
@@ -178,10 +179,10 @@ export class AuctionDetailComponent implements OnInit {
       this.dropValmoderatorsList = [];
       this.showLoader = false;
       this.dropValmoderatorsList = moderatorsListResp.body.d.results;
+      this.commissionPercent = moderatorsListResp.body.d.results[0].ZzCommPercent;
     }, (error) => {
       console.log('getAuctionModeratorsList RespError : ', error);
     });
-    console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 179 ~ this.basicFormGroup", this.basicFormGroup);
   }
 
   public getUserInfo() {
@@ -531,6 +532,7 @@ export class AuctionDetailComponent implements OnInit {
       this.dropValmoderatorsList = [];
       this.showLoader = false;
       this.dropValmoderatorsList = moderatorsListResp.body.d.results;
+      this.commissionPercent = moderatorsListResp.body.d.results[0].ZzCommPercent;
     }, (error) => {
       console.log('getAuctionModeratorsList RespError : ', error);
     });
@@ -610,7 +612,6 @@ export class AuctionDetailComponent implements OnInit {
   }
 
   createForm() {
-    // console.log("Form",this.auctionItem);
     this.basicFormGroup = this.formBuilder.group({
       auctionType: new FormControl(this.auctionItem.auctionType ? this.auctionItem.auctionType : 'Public'),
       auctionSubType: new FormControl(this.auctionItem.auctionSubType ? this.auctionItem.auctionSubType : 'C'),
@@ -633,7 +634,7 @@ export class AuctionDetailComponent implements OnInit {
       gnteePercentage: new FormControl(this.auctionItem.gnteePercentage ? this.auctionItem.gnteePercentage : '2'),
       finalGntee: new FormControl(this.auctionItem.finalGntee ? this.auctionItem.finalGntee : '15'),
       commissionType: new FormControl(this.auctionItem.commissionType ? this.auctionItem.commissionType : ''),
-      pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : '2.5'),
+      pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : ''),
       auctionAttachement: new FormArray((this.auctionItem.auctionAttachement ? this.auctionItem.auctionAttachement : [])),
     });
     console.log("Form", this.basicFormGroup);
@@ -1399,7 +1400,7 @@ export class AuctionDetailComponent implements OnInit {
       ZzIbgaPercent: '2', // HardCoded to 2, need to changed in future
       ZzFbgaDeadline: obj.finalGntee,
       ZzCommisionTyp: obj.commissionType,
-      ZzCommPercent: '2.5',
+      ZzCommPercent: this.commissionPercent,
       listtoproductnav: [{}],
       // listtoattachnav : {}
     }

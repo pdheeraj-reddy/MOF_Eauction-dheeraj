@@ -465,10 +465,13 @@
                         <div class="form-group">
                             <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp20' | translate }}
                                 </span></label>
-                            <input type="text" digitOnly [decimal]="true" formControlName="pursuitPerCommission"
+                            <input type="text" digitOnly [decimal]="true"
+                                value="{{commissionPercent | number: '1.0-2'}}" formControlName="pursuitPerCommission"
                                 class="form-control"
                                 placeholder="{{ 'auctioncreate.auctiondetails.section1_formGrp20' | translate }}"
                                 [required]="true" />
+
+
                         </div>
                     </div>
                 </div>

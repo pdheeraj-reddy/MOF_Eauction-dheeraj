@@ -88,7 +88,7 @@ export class MyInvoicesComponent implements OnInit {
       const items = {
         ObjectId: result['ObjectId'] ? result['ObjectId'] : '0',
         DraftId: result['DraftId'] ? result['DraftId'] : '0',
-        referenceno: result['ObjectId'] ? result['ObjectId'] : '',
+        referenceno: result['InvoiceNumber'] ? result['InvoiceNumber'] : '',
         invoiceAmt: result['BidderValue'] ? result['BidderValue'] : '',
         entityName: result['ZzAgencyName'] ? result['ZzAgencyName'] : '',
         auctionStatus: result['InvoiceStatus'] ? result['InvoiceStatus'] : '',
