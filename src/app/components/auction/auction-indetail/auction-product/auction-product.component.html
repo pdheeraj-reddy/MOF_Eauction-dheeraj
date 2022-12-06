@@ -140,11 +140,10 @@
                                                     <div *ngIf="submitted && locationForm['deliveryDate'].errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf="locationForm['deliveryDate'].errors['required']">{{
-                                                            'auctioncreate.auctionproduct.section1_formGrp2' | translate
-                                                            }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                            'validations.deliveryDate' | translate }}</div>
                                                     </div>
                                                     <div *ngIf="isValidDeliveryDate" class="invalid-feedback d-block">{{
-                                                        'message.failure_invalid_mindate' | translate }}</div>
+                                                        'validations.invalidDelDate' | translate }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -159,11 +158,10 @@
                                                     <div *ngIf="submitted && locationForm['deliveryTime'].errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf="locationForm['deliveryTime'].errors['required']">{{
-                                                            'auctioncreate.auctionproduct.section1_formGrp3' | translate
-                                                            }} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                            'validations.deliveryTime' | translate }}</div>
                                                     </div>
                                                     <div *ngIf="isValidDeliveryTime" class="invalid-feedback d-block">{{
-                                                        'message.failure_invalid_mindate' | translate }}</div>
+                                                        'validations.invalidDelTime' | translate }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,9 +220,8 @@
                                                     id="validationCustom01" [required]="true" />
                                                 <div *ngIf="submitted && locationForm['locRegion'].errors"
                                                     class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locRegion'].errors['required']">{{
-                                                        'auctioncreate.auctionproduct.section1_formGrp5' | translate }}
-                                                        {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                    <div *ngIf="locationForm['locRegion'].errors['required']">
+                                                        {{ 'validations.region' | translate }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -237,8 +234,8 @@
                                                     id="validationCustom01" [required]="true" />
                                                 <div *ngIf="submitted && locationForm['locCity'].errors"
                                                     class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locCity'].errors['required']">City {{
-                                                        'auctioncreate.page-validerror' | translate }}</div>
+                                                    <div *ngIf="locationForm['locCity'].errors['required']">
+                                                        {{ 'validations.city' | translate }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -253,9 +250,8 @@
                                                     id="validationCustom01" [required]="true" />
                                                 <div *ngIf="submitted && locationForm['locNeighborhood'].errors"
                                                     class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locNeighborhood'].errors['required']">{{
-                                                        'auctioncreate.auctionproduct.section1_formGrp7' | translate }}
-                                                        {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                    <div *ngIf="locationForm['locNeighborhood'].errors['required']">
+                                                        {{ 'validations.neighbour' | translate }}</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -268,9 +264,8 @@
                                                     id="validationCustom01" [required]="true" />
                                                 <div *ngIf="submitted && locationForm['locStreet'].errors"
                                                     class="invalid-feedback">
-                                                    <div *ngIf="locationForm['locStreet'].errors['required']">{{
-                                                        'auctioncreate.auctionproduct.section1_formGrp8' | translate }}
-                                                        {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                    <div *ngIf="locationForm['locStreet'].errors['required']">
+                                                        {{ 'validations.street' | translate }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1029,12 +1024,10 @@
                                         <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryDate'].errors"
                                             class="invalid-feedback">
                                             <div *ngIf="addproductlocationForm['deliveryDate'].errors['required']">
-                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' |
-                                                translate}}
-                                                {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                {{'validations.deliveryDate' | translate }}</div>
                                         </div>
                                         <div *ngIf="isValidPDeliveryDate" class="invalid-feedback d-block">{{
-                                            'message.failure_invalid_mindate' | translate }}</div>
+                                            'validations.invalidDelDate' | translate }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -1050,11 +1043,10 @@
                                         <div *ngIf="onAddProductSubmitted && addproductlocationForm['deliveryTime'].errors"
                                             class="invalid-feedback">
                                             <div *ngIf="addproductlocationForm['deliveryTime'].errors['required']">
-                                                {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp11' |
-                                                translate}} {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                                {{'validations.deliveryTime' | translate }}</div>
                                         </div>
                                         <div *ngIf="isValidPDeliveryTime" class="invalid-feedback d-block">{{
-                                            'message.failure_invalid_mindate' | translate }}</div>
+                                            'validations.invalidDelTime' | translate }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -1111,8 +1103,7 @@
                                     <div *ngIf="onAddProductSubmitted && addproductlocationForm['locRegion'].errors"
                                         class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locRegion'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp13' | translate}}
-                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'validations.region' | translate }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -1125,8 +1116,7 @@
                                     <div *ngIf="onAddProductSubmitted && addproductlocationForm['locCity'].errors"
                                         class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locCity'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp14' | translate}}
-                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'validations.city' | translate }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -1142,8 +1132,7 @@
                                     <div *ngIf="onAddProductSubmitted && addproductlocationForm['locNeighborhood'].errors"
                                         class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locNeighborhood'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp15' | translate}}
-                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'validations.neighbour' | translate }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -1156,8 +1145,7 @@
                                     <div *ngIf="onAddProductSubmitted && addproductlocationForm['locStreet'].errors"
                                         class="invalid-feedback">
                                         <div *ngIf="addproductlocationForm['locStreet'].errors['required']">
-                                            {{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp16' | translate}}
-                                            {{ 'auctioncreate.page-validerror' | translate }}</div>
+                                            {{'validations.street' | translate }}</div>
                                     </div>
                                 </div>
                             </div>

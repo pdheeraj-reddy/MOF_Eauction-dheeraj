@@ -277,7 +277,7 @@
                                 'auctioncreate.auctiondetails.section1_formGrp8' | translate }} {{
                                 'auctioncreate.page-validerror' | translate }}</div>
                         </div>
-                        <div *ngIf="isValidAuctionDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate' |
+                        <div *ngIf="isValidAuctionDate" class="invalid-feedback">{{ 'validations.endDate' |
                             translate }}</div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -291,7 +291,7 @@
                                 class="form-control time-control" [required]="form['auctionType'].value === 'Public'" />
                         </div>
 
-                        <div *ngIf="isValidStartTime" class="invalid-feedback">{{ 'message.failure_invalid_mindate' |
+                        <div *ngIf="isValidStartTime" class="invalid-feedback">{{ 'validations.startTime' |
                             translate }}</div>
                         <div *ngIf="submitted && form['auctionStartTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionStartTime'].errors['required']">{{
@@ -308,7 +308,7 @@
                                 (change)="onChangeDateTime($event, 'auctionEndTime'); onChangeEndTime($event)"
                                 class="form-control time-control" [required]="form['auctionType'].value === 'Public'" />
                         </div>
-                        <div *ngIf="isValidEndTime" class="invalid-feedback">{{ 'message.failure_invalid_mindate' |
+                        <div *ngIf="isValidEndTime" class="invalid-feedback">{{ 'validations.endTime' |
                             translate }}</div>
                         <div *ngIf="submitted && form['auctionEndTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionEndTime'].errors['required']">{{
@@ -347,7 +347,7 @@
                                 (change)="onChangeDateTime($event, 'auctionAnncStartDate'); onChangeOpeningTime($event)"
                                 class="form-control calendar-control calendar-both-control" [required]="true" />
                             <!-- <input type="text" formControlName="auctionAnncStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
-                            <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'message.failure_invalid_mindate'
+                            <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'validations.openingDate'
                                 | translate }}</div>
                         </div>
                     </div>
@@ -360,7 +360,7 @@
                                 (change)="onChangeDateTime($event, 'bidOpeningTime'); onChangeOpeningTime($event)"
                                 class="form-control time-control" [required]="true" />
                             <div *ngIf="isValidOpeningTime" class="invalid-feedback">{{
-                                'message.failure_invalid_mindate' |
+                                'validations.openingTime' |
                                 translate }}</div>
                             <div *ngIf="isBidOpeningTime" class="invalid-feedback">{{
                                 'auctioncreate.auctiondetails.section1_formGrp13' | translate }} {{

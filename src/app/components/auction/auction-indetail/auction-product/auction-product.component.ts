@@ -35,7 +35,7 @@ export class AuctionProductComponent implements OnInit {
   maxChars = 250;
   submitted = false;
   onAddProductSubmitted = false;
-  isSameaddress: boolean = true;
+  isSameaddress: boolean = false;
   // Dropdown Values
   dropValBeneCategories: any = ['New', 'Refurbished', 'Good Usage', 'Bad Usage', 'Average Usage'];
   // Form controls
@@ -515,10 +515,14 @@ export class AuctionProductComponent implements OnInit {
     this.locationForm[dd].setValue(e.target.value);
     if (dd == 'deliveryDate') {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-      let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-      let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+      let endDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT, 'hh:mm:ss').format('hh:mm A') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
       let deliveryTime = this.locationForm['deliveryTime'].value;
+      if (this.lang == 'ar') {
+        endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+        deliveryTime = deliveryTime?.split(' ')[1] == 'م' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'PM') : deliveryTime?.split(' ')[1] == 'ص' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'AM') : deliveryTime
+      }
       let aucEndDate = new Date(endDate + " " + endTime);
       let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
       if (endDate && deliveryDate) {
@@ -537,10 +541,14 @@ export class AuctionProductComponent implements OnInit {
   }
 
   onChangeDelTime($event: any) {
-    let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-    let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+    let endDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT, 'hh:mm:ss').format('hh:mm A') : '' : '';
     let deliveryDate = this.locationForm['deliveryDate'].value;
     let deliveryTime = this.locationForm['deliveryTime'].value;
+    if (this.lang == 'ar') {
+      endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+      deliveryTime = deliveryTime?.split(' ')[1] == 'م' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'PM') : deliveryTime?.split(' ')[1] == 'ص' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'AM') : deliveryTime
+    }
     let aucEndDate = new Date(endDate + " " + endTime);
     let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
 
@@ -556,10 +564,14 @@ export class AuctionProductComponent implements OnInit {
     this.addproductlocationForm[dd].setValue(e.target.value);
     if (dd == 'deliveryDate') {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-      let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-      let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+      let endDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT, 'hh:mm:ss').format('hh:mm A') : '' : '';
       let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
       let deliveryTime = this.addproductlocationForm['deliveryTime'].value;
+      if (this.lang == 'ar') {
+        endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+        deliveryTime = deliveryTime?.split(' ')[1] == 'م' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'PM') : deliveryTime?.split(' ')[1] == 'ص' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'AM') : deliveryTime
+      }
       let aucEndDate = new Date(endDate + " " + endTime);
       let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
 
@@ -585,10 +597,14 @@ export class AuctionProductComponent implements OnInit {
   }
 
   onChangePDelTime($event: any) {
-    let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-    let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+    let endDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT, 'hh:mm:ss').format('hh:mm A') : '' : '';
     let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
     let deliveryTime = this.addproductlocationForm['deliveryTime'].value;
+    if (this.lang == 'ar') {
+      endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+      deliveryTime = deliveryTime?.split(' ')[1] == 'م' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'PM') : deliveryTime?.split(' ')[1] == 'ص' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'AM') : deliveryTime
+    }
     let aucEndDate = new Date(endDate + " " + endTime);
     let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
     if (aucEndDate >= aucDelDate) {
@@ -619,7 +635,7 @@ export class AuctionProductComponent implements OnInit {
 
   createForm() {
     this.productsFormGroup = this.formBuilder.group({
-      sameLocNDate: new FormControl(this.productItem.sameLocNDate ? this.productItem.sameLocNDate : true, Validators.required),
+      sameLocNDate: new FormControl(this.productItem.sameLocNDate ? this.productItem.sameLocNDate : false, Validators.required),
       location: this.formBuilder.group({
         deliveryDate: new FormControl(this.productItem.location?.deliveryDate ? this.productItem.location.deliveryDate : '', Validators.required),
         deliveryTime: new FormControl(this.productItem.location?.deliveryTime ? this.productItem.location.deliveryTime : '', Validators.required),
@@ -1115,10 +1131,14 @@ export class AuctionProductComponent implements OnInit {
       return;
     }
     let startDate = this.auctionDetails?.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-    let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-    let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+    let endDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+    let endTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT, 'hh:mm:ss').format('hh:mm A') : '' : '';
     let deliveryDate = this.addproductlocationForm['deliveryDate'].value;
     let deliveryTime = this.addproductlocationForm['deliveryTime'].value;
+    if (this.lang == 'ar') {
+      endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+      deliveryTime = deliveryTime?.split(' ')[1] == 'م' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'PM') : deliveryTime?.split(' ')[1] == 'ص' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'AM') : deliveryTime
+    }
     let aucEndDate = new Date(endDate + " " + endTime);
     let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
 
@@ -1449,10 +1469,14 @@ export class AuctionProductComponent implements OnInit {
     if (this.productsFormGroup.controls['sameLocNDate']) {
       let startDate = this.auctionDetails.ZzAucSrtDt ? this.auctionDetails.ZzAucSrtDt !== 0 ? moment(this.auctionDetails.ZzAucSrtDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
 
-      let endDate = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
-      let endTime = this.auctionDetails.ZzAucEndDt ? this.auctionDetails.ZzAucEndDt !== 0 ? moment(this.auctionDetails.ZzAucEndDt.split(" ")[1], 'hh:mm:ss').format('hh:mm A') : '' : '';
+      let endDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD, 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
+      let endTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT, 'hh:mm:ss').format('hh:mm A') : '' : '';
       let deliveryDate = this.locationForm['deliveryDate'].value;
       let deliveryTime = this.locationForm['deliveryTime'].value;
+      if (this.lang == 'ar') {
+        endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+        deliveryTime = deliveryTime?.split(' ')[1] == 'م' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'PM') : deliveryTime?.split(' ')[1] == 'ص' ? deliveryTime.replace(deliveryTime.split(' ')[1], 'AM') : deliveryTime
+      }
       let aucEndDate = new Date(endDate + " " + endTime);
       let aucDelDate = new Date(deliveryDate + " " + deliveryTime);
 

@@ -265,7 +265,7 @@ export class AuctionDetailComponent implements OnInit {
       $("#auctionEndDate").hijriDatePicker({
         hijri: false,
         locale: lang == 'en' ? 'en-us' : 'ar-SA', //ar-SA
-        minDate: this.form['auctionStartDate'] ? (this.form['auctionStartDate'].value !== '' ? moment(this.form['auctionStartDate'].value, 'YYYY-MM-DD').format('YYYY-MM-DD') : todayDate) : todayDate,
+        minDate: this.form['auctionEndDate'] ? (this.form['auctionEndDate'].value !== '' ? moment(this.form['auctionEndDate'].value, 'YYYY-MM-DD').format('YYYY-MM-DD') : todayDate) : todayDate,
         format: "YYYY-MM-DD",
         showSwitcher: false,
         // minDate: todayDate,
@@ -462,6 +462,9 @@ export class AuctionDetailComponent implements OnInit {
   onChangeStartTime($event: any) {
     let aucStartDate = this.basicFormGroup.controls['auctionStartDate'].value;
     let aucStartTime = this.basicFormGroup.controls['auctionStartTime'].value;
+    if (this.lang == 'ar') {
+      aucStartTime = aucStartTime?.split(' ')[1] == 'م' ? aucStartTime.replace(aucStartTime.split(' ')[1], 'PM') : aucStartTime?.split(' ')[1] == 'ص' ? aucStartTime.replace(aucStartTime.split(' ')[1], 'AM') : aucStartTime
+    }
     let auctionDate = new Date(aucStartDate + " " + aucStartTime)
     let currentDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
     let currentTime = moment(new Date()).format('hh:mm A');
@@ -483,6 +486,10 @@ export class AuctionDetailComponent implements OnInit {
     let aucEndDate = this.basicFormGroup.controls['auctionEndDate'].value;
     let aucStartTime = this.basicFormGroup.controls['auctionStartTime'].value;
     let aucEndTime = this.basicFormGroup.controls['auctionEndTime'].value;
+    if (this.lang == 'ar') {
+      aucEndTime = aucEndTime?.split(' ')[1] == 'م' ? aucEndTime.replace(aucEndTime.split(' ')[1], 'PM') : aucEndTime?.split(' ')[1] == 'ص' ? aucEndTime.replace(aucEndTime.split(' ')[1], 'AM') : aucEndTime
+      aucStartTime = aucStartTime?.split(' ')[1] == 'م' ? aucStartTime.replace(aucStartTime.split(' ')[1], 'PM') : aucStartTime?.split(' ')[1] == 'ص' ? aucStartTime.replace(aucStartTime.split(' ')[1], 'AM') : aucStartTime
+    }
     let startDate = new Date(aucStartDate + " " + aucStartTime);
     let endDate = new Date(aucEndDate + " " + aucEndTime);
     let currentDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
@@ -505,6 +512,11 @@ export class AuctionDetailComponent implements OnInit {
     let aucEndTime = this.basicFormGroup.controls['auctionEndTime'].value;
     let aucOpenDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
     let aucOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
+    if (this.lang == 'ar') {
+      aucEndTime = aucEndTime?.split(' ')[1] == 'م' ? aucEndTime.replace(aucEndTime.split(' ')[1], 'PM') : aucEndTime?.split(' ')[1] == 'ص' ? aucEndTime.replace(aucEndTime.split(' ')[1], 'AM') : aucEndTime
+      aucStartTime = aucStartTime?.split(' ')[1] == 'م' ? aucStartTime.replace(aucStartTime.split(' ')[1], 'PM') : aucStartTime?.split(' ')[1] == 'ص' ? aucStartTime.replace(aucStartTime.split(' ')[1], 'AM') : aucStartTime
+      aucOpenTime = aucOpenTime?.split(' ')[1] == 'م' ? aucOpenTime.replace(aucOpenTime.split(' ')[1], 'PM') : aucOpenTime?.split(' ')[1] == 'ص' ? aucOpenTime.replace(aucOpenTime.split(' ')[1], 'AM') : aucOpenTime
+    }
     let startDate = new Date(aucStartDate + " " + aucStartTime);
     let endDate = new Date(aucEndDate + " " + aucEndTime);
     let openDate = new Date(aucOpenDate + " " + aucOpenTime);
@@ -936,6 +948,14 @@ export class AuctionDetailComponent implements OnInit {
     let anncStartDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
     // Need to validate bid opening time
     let bidOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
+    let aucOpenDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
+    let aucOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
+    if (this.lang == 'ar') {
+      endTime = endTime?.split(' ')[1] == 'م' ? endTime.replace(endTime.split(' ')[1], 'PM') : endTime?.split(' ')[1] == 'ص' ? endTime.replace(endTime.split(' ')[1], 'AM') : endTime
+      startTime = startTime?.split(' ')[1] == 'م' ? startTime.replace(startTime.split(' ')[1], 'PM') : startTime?.split(' ')[1] == 'ص' ? startTime.replace(startTime.split(' ')[1], 'AM') : startTime
+      aucOpenTime = aucOpenTime?.split(' ')[1] == 'م' ? aucOpenTime.replace(aucOpenTime.split(' ')[1], 'PM') : aucOpenTime?.split(' ')[1] == 'ص' ? aucOpenTime.replace(aucOpenTime.split(' ')[1], 'AM') : aucOpenTime
+      bidOpenTime = bidOpenTime?.split(' ')[1] == 'م' ? bidOpenTime.replace(bidOpenTime.split(' ')[1], 'PM') : bidOpenTime?.split(' ')[1] == 'ص' ? bidOpenTime.replace(bidOpenTime.split(' ')[1], 'AM') : bidOpenTime
+    }
     // let startValue = this.basicFormGroup.controls['startPrice'].value;
     // console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 855 ~ startValue", startValue);
     let currentDate = new Date();
@@ -944,8 +964,6 @@ export class AuctionDetailComponent implements OnInit {
     let currDate = this.datePipe.transform(new Date(), 'YYYY-MM-dd');
     let currentTime = moment(new Date()).format('hh:mm A');
     let dateNow = new Date(currDate + " " + currentTime);
-    let aucOpenDate = this.basicFormGroup.controls['auctionAnncStartDate'].value;
-    let aucOpenTime = this.basicFormGroup.controls['bidOpeningTime'].value;
     let openDate = new Date(aucOpenDate + " " + aucOpenTime);
 
 

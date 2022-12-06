@@ -94,6 +94,9 @@ export class SendBiddingOfferComponent implements OnInit {
 
   calc() {
     this.persuitRate = Math.round(Number(this.commission) * this.totalBookValue) / 100;
+    if (this.persuitRate > 500) {
+      this.persuitRate = 500;
+    }
     this.addedTaxValue = Math.round(15 * this.totalBookValue) / 100;
     this.totalOfferPrice = this.persuitRate + this.addedTaxValue + Number(this.totalBookValue);
   }
