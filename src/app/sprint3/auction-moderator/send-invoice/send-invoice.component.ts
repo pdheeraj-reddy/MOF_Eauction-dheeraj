@@ -105,11 +105,15 @@ export class SendInvoiceComponent implements OnInit {
 
       let bidderValue = parseFloat(this.invoiceData?.BidderValue);
       let quest = parseFloat(this.invoiceData?.ZzCommPercent);
+      let commCap = parseFloat(this.invoiceData?.CommCap);
 
       this.gearPrice = bidderValue;
       this.questRate = (bidderValue * quest) / 100;
+      if (this.questRate > commCap) {
+        this.questRate = commCap;
+      }
       this.vat = (bidderValue * 15) / 100;
-      this.totalValue = this.gearPrice + this.questRate + this.vat;
+      this.totalValue = this.gearPrice + Number(this.questRate) + this.vat;
       this.navigateToPage(1)
 
     });
