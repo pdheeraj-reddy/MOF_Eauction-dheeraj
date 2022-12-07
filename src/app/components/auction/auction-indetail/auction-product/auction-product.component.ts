@@ -1668,7 +1668,7 @@ export class AuctionProductComponent implements OnInit {
         ZzCity: obj.location.locCity,
         ZzNeighbourhood: obj.location.locNeighborhood,
         ZzStreet: obj.location.locStreet,
-        ZzPdOthrNts: obj.location.notes,
+        ZzPdOthrNts: obj.location.notes ? obj.location.notes : '',
       }
       productList.push(product);
     } else {
@@ -1689,7 +1689,7 @@ export class AuctionProductComponent implements OnInit {
         ZzCity: pObj.location.locCity,
         ZzNeighbourhood: pObj.location.locNeighborhood,
         ZzStreet: pObj.location.locStreet,
-        ZzPdOthrNts: pObj.location.notes,
+        ZzPdOthrNts: pObj.location.notes ? pObj.location.notes : '',
       }
       productList.push(product);
     }
@@ -1744,7 +1744,7 @@ export class AuctionProductComponent implements OnInit {
           ZzCity: obj.location.locCity,
           ZzNeighbourhood: obj.location.locNeighborhood,
           ZzStreet: obj.location.locStreet,
-          ZzPdOthrNts: obj.location.notes,
+          ZzPdOthrNts: obj.location.notes ? obj.location.notes : '',
         }
         productList.push(product);
       });
@@ -1765,7 +1765,7 @@ export class AuctionProductComponent implements OnInit {
           ZzCity: pObj.location.locCity,
           ZzNeighbourhood: pObj.location.locNeighborhood,
           ZzStreet: pObj.location.locStreet,
-          ZzPdOthrNts: pObj.location.notes,
+          ZzPdOthrNts: pObj.location.notes ? pObj.location.notes : '',
         }
         productList.push(product);
       });

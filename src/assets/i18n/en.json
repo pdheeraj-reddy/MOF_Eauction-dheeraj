@@ -334,6 +334,10 @@
         "back": "Cancel"
     },
     "validations": {
+        "startBidDate": "Please enter the beginning of bidding date",
+        "startBidTime": "Please enter the bidding time",
+        "endBidDate": "Please enter the end of bidding date",
+        "endBidTime": "Please enter the end of bidding time",
         "startTime": "Please enter a date greater than today's date.",
         "endDate": "Please enter a date greater than the bid starting date.",
         "endTime": "Please enter a time greater than the start time of bidding.",

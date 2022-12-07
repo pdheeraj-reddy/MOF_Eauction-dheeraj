@@ -255,8 +255,7 @@
                                 [required]="form['auctionType'].value === 'Public'" />
                             <div *ngIf="submitted && form['auctionStartDate'].errors" class="invalid-feedback">
                                 <div *ngIf="form['auctionStartDate'].errors['required']">{{
-                                    'auctioncreate.auctiondetails.section1_formGrp7' | translate }} {{
-                                    'auctioncreate.page-validerror' | translate }}</div>
+                                    'validations.startBidDate' | translate }}</div>
                             </div>
                         </div>
                     </div>
@@ -274,8 +273,7 @@
                         </div>
                         <div *ngIf="submitted && form['auctionEndDate'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionEndDate'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp8' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.endBidDate' | translate }}</div>
                         </div>
                         <div *ngIf="isValidAuctionDate" class="invalid-feedback">{{ 'validations.endDate' |
                             translate }}</div>
@@ -295,8 +293,7 @@
                             translate }}</div>
                         <div *ngIf="submitted && form['auctionStartTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionStartTime'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp9' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.startBidTime' | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -312,8 +309,7 @@
                             translate }}</div>
                         <div *ngIf="submitted && form['auctionEndTime'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionEndTime'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp10' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.endBidTime' | translate }}</div>
                         </div>
                     </div>
                 </div>

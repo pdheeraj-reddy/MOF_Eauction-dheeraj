@@ -21,6 +21,7 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() notParticipated: any;
   @Input() bidValue: any;
   @Input() commission: any;
+  @Input() commissionCap: any;
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -94,11 +95,11 @@ export class SendBiddingOfferComponent implements OnInit {
 
   calc() {
     this.persuitRate = Math.round(Number(this.commission) * this.totalBookValue) / 100;
-    if (this.persuitRate > 500) {
-      this.persuitRate = 500;
+    if (this.persuitRate > this.commissionCap) {
+      this.persuitRate = this.commissionCap;
     }
     this.addedTaxValue = Math.round(15 * this.totalBookValue) / 100;
-    this.totalOfferPrice = this.persuitRate + this.addedTaxValue + Number(this.totalBookValue);
+    this.totalOfferPrice = Number(this.persuitRate) + this.addedTaxValue + Number(this.totalBookValue);
   }
   selectFiles(e: any, dd: string): void {
     this.invalidFileType = true;

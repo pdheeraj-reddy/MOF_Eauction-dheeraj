@@ -431,6 +431,7 @@
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
                                 [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
                                 [bidValue]="response.ZzPbEstPrice" [commission]="response.ZzCommPercent"
+                                [commissionCap]="response.CommCap"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (noFile)="noFile($event)"
                                 (diableNow)="diableParticipation($event)">
