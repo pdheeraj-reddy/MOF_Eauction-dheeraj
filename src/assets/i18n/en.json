@@ -338,6 +338,8 @@
         "startBidTime": "Please enter the bidding time",
         "endBidDate": "Please enter the end of bidding date",
         "endBidTime": "Please enter the end of bidding time",
+        "openDate": "Please enter the bids opening date ",
+        "openTime": "Please enter the bids opening time ",
         "startTime": "Please enter a date greater than today's date.",
         "endDate": "Please enter a date greater than the bid starting date.",
         "endTime": "Please enter a time greater than the start time of bidding.",

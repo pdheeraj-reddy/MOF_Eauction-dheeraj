@@ -345,6 +345,10 @@
                             <!-- <input type="text" formControlName="auctionAnncStartDate" class="form-control" placeholder="day-month-year" bsDatepicker [required]="true"/>  -->
                             <div *ngIf="isValidAnncSDate" class="invalid-feedback">{{ 'validations.openingDate'
                                 | translate }}</div>
+                            <div *ngIf="isBidOpenDate" class="invalid-feedback">
+                                {{
+                                'validations.openDate' | translate }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -358,9 +362,10 @@
                             <div *ngIf="isValidOpeningTime" class="invalid-feedback">{{
                                 'validations.openingTime' |
                                 translate }}</div>
-                            <div *ngIf="isBidOpeningTime" class="invalid-feedback">{{
-                                'auctioncreate.auctiondetails.section1_formGrp13' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                            <div *ngIf="isBidOpenTime" class="invalid-feedback">
+                                {{
+                                'validations.openTime' | translate }}
+                            </div>
                         </div>
                     </div>
                 </div>
