@@ -29,14 +29,14 @@
         </p>
         <p class="text-16 text-dark mb-2">{{ 'bidderSendInvoice.no' | translate }} {{prmyaward.bidderNo}} </p>
         <!-- BidCrNumber -->
-        <a *ngIf="!showAttachLoader" (click)="openFile(ibgaDoc,'download')" class="text-primary tex-14"
+        <a *ngIf="!showAttachLoader" (click)="openFile(ibgaDoc,'download')" class="text-normal tex-14"
           style="text-decoration: none;">
           <span class="text-16 icon-download"></span>
           &nbsp;
           <span style="text-decoration: underline;">{{ 'am-primary-awarding.primary_warranty' | translate }}</span>
         </a>
         <div *ngIf="showAttachLoader">
-          <div class="spinner-border text-primary"
+          <div class="spinner-border text-normal"
             style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
             <span class="sr-only">Loading...</span>
           </div>
@@ -48,7 +48,7 @@
 
     <div class="top-card-right-right">
       <div>
-        <a (click)="downloadPDF()" class="text-primary text-14 px-4"
+        <a (click)="downloadPDF()" class="text-normal text-14 px-4"
           style="text-decoration: none; font-weight: bold; justify-content: end; display: flex;">
           <span style="text-decoration: underline;">{{ 'am-primary-awarding.report' | translate }}</span>
           <span class="text-16 icon-download mx-2"></span>

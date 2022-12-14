@@ -13,7 +13,7 @@
                                     committee<span class="memberedit pl-4 icon-edit"></span> </span>
                                 <div class="pt-4">
                                     <h5 class="text-center">Mohammed Saleh Al-shathri</h5>
-                                    <div class="list list-primary-bullets text-primary mt-3">
+                                    <div class="list list-primary-bullets text-normal mt-3">
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -38,7 +38,7 @@
                                         class="memberedit pl-4 icon-edit"></span></span>
                                 <div class="pt-4">
                                     <h5 class="text-center">Mohammed Saleh Al-shathri</h5>
-                                    <div class="list list-primary-bullets text-primary mt-3">
+                                    <div class="list list-primary-bullets text-normal mt-3">
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -63,7 +63,7 @@
                                         class="memberedit pl-4 icon-edit"></span></span>
                                 <div class="pt-4">
                                     <h5 class="text-center">Mohammed Saleh Al-shathri</h5>
-                                    <div class="list list-primary-bullets text-primary mt-3">
+                                    <div class="list list-primary-bullets text-normal mt-3">
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -98,18 +98,22 @@
             <div class="pt-5">
                 <div class="form-row">
                     <div class="col-12">
-                        <div class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
+                        <div
+                            class="d-flex align-items-md-center align-items-stretch flex-column flex-md-row justify-content-between mx-n2">
                             <div class="mb-2 mb-md-5 flex-grow-1 flex-md-grow-0">
-                                <button (click)="back()" type="button" class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
+                                <button (click)="back()" type="button"
+                                    class="btn arrow-btn arrow-btn-reverse btn-outline-light btn-lg btn-block">
                                     <span class="btn-text">back</span> <span class="v-divider"></span>
                                     <span class="icon icon-arrow-left"></span>
                                 </button>
                             </div>
                             <div class="d-flex flex-column flex-md-row mb-5">
                                 <button class="btn btn-danger btn-lg mx-0 mx-md-2" routerLink="/">Cancel</button>
-                                <button type="button" (click)="onSubmit('saveasdraft')" class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> Save as
+                                <button type="button" (click)="onSubmit('saveasdraft')"
+                                    class="btn btn-outline-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0"> Save as
                                     draft </button>
-                                <button type="button" (click)="onSubmit('save')" class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
+                                <button type="button" (click)="onSubmit('save')"
+                                    class="btn arrow-btn btn-primary-light btn-lg mx-0 mx-md-2 mt-2 mt-md-0">
                                     <span class="btn-text">Save and continue</span> <span class="v-divider"></span>
                                     <span class="icon icon-arrow-left"></span>
                                 </button>
@@ -121,7 +125,8 @@
         </form>
     </div>
 </div>
-<div class="modal fade" id="auctionMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="auctionMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,8 +140,10 @@
                         <div class="col-md-12 mb-3">
                             <label class="d-flex" for="validationCustom02">Search by employee number or email</label>
                             <div class="search-group search-custom">
-                                <input type="text" class=" search-input px-2" id="validationCustom02" placeholder="Enter employee number or email" required />
-                                <div class="text-light d-flex align-items-center mr-3"> <span class="icon-filled-search"></span> </div>
+                                <input type="text" class=" search-input px-2" id="validationCustom02"
+                                    placeholder="Enter employee number or email" required />
+                                <div class="text-light d-flex align-items-center mr-3"> <span
+                                        class="icon-filled-search"></span> </div>
                                 <div class="valid-feedback">Your input is valid</div>
                             </div>
                         </div>
@@ -173,7 +180,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" style="justify-content: end;"> <button type="button" class="btn btn-primary-light btn-md"> <span class="icon-add"></span> Add </button> </div>
+            <div class="modal-footer" style="justify-content: end;"> <button type="button"
+                    class="btn btn-primary-light btn-md"> <span class="icon-add"></span> Add </button> </div>
         </div>
     </div>
 </div>

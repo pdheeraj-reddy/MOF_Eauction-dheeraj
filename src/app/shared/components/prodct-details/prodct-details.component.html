@@ -5,7 +5,7 @@
         </h4>
         <div style="display: flex"
             *ngIf="loggedUserRole.isPricingHead && preAuctionData.Status != 'Rejected Prices' && preAuctionData.Status != 'Pending Pricing' && preAuctionData.Status != 'Pending to Publish'">
-            <h1 class="text-14 text-primary font-weight-medium"
+            <h1 class="text-14 text-normal font-weight-medium"
                 style="padding-right: 10px; margin: 0; font-size: 14px !important">
                 {{ "auctionHead.head-detail.Price_adjustment" | translate }}
             </h1> &nbsp; &nbsp;
@@ -101,7 +101,7 @@
                             <td scope="row">{{product?.Description}}</td>
                             <td>{{product?.Quantity.split('.')[0]}}</td>
                             <td><span class="row"><span class="col">{{product?.ProductValue | number}}</span><span
-                                        class="col text-primary-light">{{"common.SAR" | translate}}</span></span>
+                                        class="col text-normal-light">{{"common.SAR" | translate}}</span></span>
                             </td>
                             <td *ngIf="isBidUpdate && (preAuctionData?.Status=='Pending Pricing' || preAuctionData?.Status=='Pending Pricing Approval' || preAuctionData?.Status=='Rejected Prices') && preAuctionData?.Status!='Pending to Publish'"
                                 class="position-relative" [ngClass]="{'border-lightgreen' : product.show}">
@@ -112,7 +112,7 @@
                                         style="font-size: 16px; background-color: none; border: none; outline: none;"
                                         digitOnly [decimal]="true" type="text" [(ngModel)]="product.ZzPdtEstPricePc"
                                         [disabled]="false" /> &nbsp;
-                                    <span class="col text-primary-light"> {{"common.SAR" |
+                                    <span class="col text-normal-light"> {{"common.SAR" |
                                         translate}}</span>&nbsp;&nbsp;
                                     <span class="icon-edit" style="color: #ccc;" *ngIf="product.show"></span>
                                     <a *ngIf="!product.show && showAdjustPriceOption && ((loggedUserRole.isPricingHead && preAuctionData.Status == 'Pending Pricing Approval') || (loggedUserRole.isPricingMember && (preAuctionData.Status == 'Pending Pricing' || preAuctionData.Status == 'Rejected Prices')))"

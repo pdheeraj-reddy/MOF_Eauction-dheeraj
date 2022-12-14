@@ -11,7 +11,7 @@
 <div class="col-12">
     <div class="row justify-content-between no-gutters border-bottom mb-4 pb-4">
         <div class="col-md-9 justify-content-start">
-            <h1 class="text-20 text-primary font-medium" [ngClass]="lang == 'en' ? 'text-left' : 'text-right'">{{
+            <h1 class="text-20 text-normal font-medium" [ngClass]="lang == 'en' ? 'text-left' : 'text-right'">{{
                 'auctionlist.pageTitle' | translate }}</h1>
         </div>
     </div>
@@ -177,7 +177,7 @@
     <div *ngIf="!showPageLoader && showFilterForm" class="modal-content p-4 shadow-lg border mt-4">
         <form [formGroup]="filterFormGroup">
             <div class="modal-header">
-                <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
+                <h3 class="modal-title text-20 text-normal font-weight-medium" id="exampleModalLabel">{{
                     'auctionlist.filter-title' | translate }}</h3>
                 <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
                     (click)="toggleFilter(); getAuctionList(1);">

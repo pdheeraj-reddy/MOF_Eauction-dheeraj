@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="heading">
-                <h1 class="text-20 text-primary font-medium"> {{ "auctionCommittee.ac-openOffers.pageTitle" | translate
+                <h1 class="text-20 text-normal font-medium"> {{ "auctionCommittee.ac-openOffers.pageTitle" | translate
                     }} </h1>
             </div>
         </div>
@@ -35,7 +35,7 @@
     </div>
     <div class="modal-content p-4 mt-2 shadow-lg border" *ngIf="showFilterForm">
         <div class="modal-header">
-            <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
+            <h3 class="modal-title text-20 text-normal font-weight-medium" id="exampleModalLabel">{{
                 'auctionlist.filter-title' | translate }}</h3>
             <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
                 (click)="toggleFilter();">
@@ -311,14 +311,14 @@
                         <label for="validationCustom01">
                             {{'auctionCommittee.ac-openOffers.th2' | translate}}
                         </label>
-                        <div class="text-primary"> {{offervalue | number:'1.0-2'}} {{ 'bidderFinalInvoice.SAR' |
+                        <div class="text-normal"> {{offervalue | number:'1.0-2'}} {{ 'bidderFinalInvoice.SAR' |
                             translate }} </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom01">
                             {{'auctionCommittee.ac-openOffers.th5' | translate}}
                         </label>
-                        <div class="text-primary"> {{facilityname}} </div>
+                        <div class="text-normal"> {{facilityname}} </div>
                     </div>
                 </div>
 
@@ -327,7 +327,7 @@
                         <label for="validationCustom01">
                             {{'auctionCommittee.ac-openOffers.th6' | translate}}
                         </label>
-                        <div class="text-primary"> {{commercialNo}} </div>
+                        <div class="text-normal"> {{commercialNo}} </div>
                     </div>
                 </div>
             </div>

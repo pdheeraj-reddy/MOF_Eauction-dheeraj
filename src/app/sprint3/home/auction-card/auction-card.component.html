@@ -70,7 +70,7 @@
             <span class="mx-2 product-qty"> {{auction.product}} {{ 'Product' | translate }}</span>
         </div>
         <div class="text-body text-18 d-flex mt-3" *ngIf=" auction.auctiondate">
-            <span class="icon-calendar text-primary font-weight-bold"></span>
+            <span class="icon-calendar text-normal font-weight-bold"></span>
             <span class="mx-3 text-14 product-qty"> {{auction.auctiondate | date:'YYYY-MM-dd'}} </span>∙&nbsp;
             <span class="text-14 product-qty" *ngIf="auction.auctiontime">
                 {{auctionStartTime}} {{auctionTimeSufix | translate}}

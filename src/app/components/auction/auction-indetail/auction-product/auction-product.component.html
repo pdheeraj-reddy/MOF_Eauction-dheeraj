@@ -24,10 +24,10 @@
             <!-- <ul class="list list-group list-group-horizontal float-left">
                 <li class="m-2 text-muted">ObjectId: {{ ObjectId }}</li>
                 <li class="m-2 text-muted">DraftId: {{ DraftId }}</li>
-                <li class="m-2 text-primary">
+                <li class="m-2 text-normal">
                     <a class="btn btn-primary text-white input-group-text p-1" style="height: 30px" (click)="populateSome()">Fill Some</a>
                 </li>
-                <li class="m-2 text-primary">
+                <li class="m-2 text-normal">
                     <a class="btn btn-primary text-white input-group-text p-1" style="height: 30px" (click)="populateSomePL()">Fill Some via PL</a>
                 </li>
             </ul> -->
@@ -295,17 +295,38 @@
                     </div>
                 </div>
             </div>
+
+            <div *ngIf="submitted && ( atLeastOneRequired || auctionProducts.errors) && !(auctionProducts['controls'].length > 0)"
+                class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert-wrapper">
+                    <div class="alert-body">
+                        <i class="alert-icon">
+                            <span class="icon-filled-wrong"></span>
+                        </i>
+                        <div class="alert-content">
+                            <p class="text-14">{{ 'message.failure_atleastOne_product' | translate}}</p>
+                        </div>
+                    </div>
+                    <div class="alert-action">
+                        <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert"
+                            aria-label="Close">
+                            <span class="icon-close"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div class="card shadow-lg mt-4">
                 <div class="form-row">
                     <div class="col-12">
                         <div class="card-body">
                             <div class="heading-without-border pt-0 pb-0 align-items-start">
                                 <h4 class="pb-3">{{ 'auctioncreate.auctionproduct.section1_formGrp10' | translate }}
-                                    <div class="text-16"
+                                    <!-- <div class="text-16"
                                         *ngIf="submitted && ( atLeastOneRequired || auctionProducts.errors) && !(auctionProducts['controls'].length > 0)">
                                         <div class="invalid-cust-feedback">{{ 'message.failure_atleastOne_product' |
                                             translate }} </div>
-                                    </div>
+                                    </div> -->
                                 </h4>
                                 <button *ngIf="ViewMode != 'view'" type="button" class="btn btn-primary-light btn-md"
                                     (click)="addproduct()" data-toggle="modal" data-target="#exampleModal"
@@ -573,8 +594,7 @@
                                 <div *ngIf="onAddProductSubmitted && addForm['productName'].errors"
                                     class="invalid-feedback">
                                     <div *ngIf="addForm['productName'].errors['required']">{{
-                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp1' | translate }} {{
-                                        'auctioncreate.page-validerror' | translate }}</div>
+                                        'validations.productName' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -591,8 +611,7 @@
                                 <div *ngIf="onAddProductSubmitted && addForm['productCondition'].errors"
                                     class="invalid-feedback">
                                     <div *ngIf="addForm['productCondition'].errors['required']">{{
-                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp2' | translate }} {{
-                                        'auctioncreate.page-validerror' | translate }}</div>
+                                        'validations.productCondition' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -603,8 +622,8 @@
                                     [required]="true" />
                                 <div *ngIf="onAddProductSubmitted && addForm['productSKUNumber'].errors"
                                     class="invalid-feedback">
-                                    <div *ngIf="addForm['productSKUNumber'].errors['required']">SKU number {{
-                                        'auctioncreate.page-validerror' | translate }}</div>
+                                    <div *ngIf="addForm['productSKUNumber'].errors['required']">{{
+                                        'validations.skuNumber' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -634,8 +653,7 @@
                                 <div *ngIf="onAddProductSubmitted && addForm['productSerialNumber'].errors"
                                     class="invalid-feedback">
                                     <div *ngIf="addForm['productSerialNumber'].errors['required']">{{
-                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }} {{
-                                        'auctioncreate.page-validerror' | translate }}</div>
+                                        'validations.quantity' | translate }}</div>
                                     <div *ngIf="addForm['productSerialNumber'].errors['pattern']">{{
                                         'auctioncreate.auctionproduct.auctionpopup.popup_formGrp4' | translate }} {{
                                         'auctioncreate.page-validnumericerror' | translate }}</div>
@@ -655,8 +673,7 @@
                                 <div *ngIf="onAddProductSubmitted && addForm['productValue'].errors"
                                     class="invalid-feedback">
                                     <div *ngIf="addForm['productValue'].errors['required']">{{
-                                        'auctioncreate.auctionproduct.auctionpopup.popup_formGrp5' | translate }} {{
-                                        'auctioncreate.page-validerror' | translate }}</div>
+                                        'validations.bookValue' | translate }}</div>
                                     <div *ngIf="addForm['productValue'].errors['pattern']">{{ 'message.failure_nonZero'
                                         | translate }}</div>
                                 </div>
@@ -678,8 +695,7 @@
                                     <div *ngIf="onAddProductSubmitted && addForm['productSpec'].errors"
                                         class="invalid-feedback">
                                         <div *ngIf="addForm['productSpec'].errors['required']">{{
-                                            'auctioncreate.auctionproduct.auctionpopup.popup_formGrp6' | translate }} {{
-                                            'auctioncreate.page-validerror' | translate }}</div>
+                                            'validations.productSpecs' | translate }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -1014,7 +1030,7 @@
                                     <div class="form-group">
                                         <label>{{'auctioncreate.auctionproduct.auctionpopup.popup_formGrp10' |
                                             translate}}</label>
-                                        <input type="text" onkeydown="event.preventDefault()" autocomplete="off"
+                                        <input type="" onkeydown="event.preventDefault()" autocomplete="off"
                                             appDatePicker name="delivery-date" formControlName="deliveryDate"
                                             placeholder="{{ 'auctioncreate.formDate-plch' | translate }}"
                                             class="form-control calendar-control calendar-gregorian-control"
@@ -1239,7 +1255,7 @@
             <button type="button" (click)="closeModal('success')" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> The request has been sent successfully </h4>
             </div>
@@ -1260,7 +1276,7 @@
                 data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
                     'message.success_draft_title' | translate }} </h4>
@@ -1317,7 +1333,7 @@
                 data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
                     'message.success_cancel_title' | translate }} </h4>
@@ -1351,7 +1367,7 @@
                 data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
                     'message.success_attach_title' | translate }} </h4>

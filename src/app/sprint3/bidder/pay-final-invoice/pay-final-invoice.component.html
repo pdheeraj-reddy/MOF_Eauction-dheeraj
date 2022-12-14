@@ -16,7 +16,7 @@
 <div class="col-12 border-bottom pb-2 mt-4">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-20 text-primary font-weight-500">{{'bidderFinalInvoice.InvoiceDetails2' | translate}}</h1>
+            <h1 class="text-20 text-normal font-weight-500">{{'bidderFinalInvoice.InvoiceDetails2' | translate}}</h1>
         </div>
     </div>
 </div>
@@ -51,14 +51,14 @@
                 <div class="col-md-4 mb-3">
                     <div class="form-group">
                         <label>{{'bidderFinalInvoice.invoiceValue' | translate}}</label>
-                        <div class="text-primary">{{totalValue | number:
+                        <div class="text-normal">{{totalValue | number:
                             '1.0-2'}} {{'bidderFinalInvoice.SAR' | translate}}</div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-group">
                         <label>{{'bidderFinalInvoice.awardDate' | translate}}</label>
-                        <div class="text-primary">
+                        <div class="text-normal">
                             {{ offerDate }}
                         </div>
                     </div>
@@ -168,11 +168,11 @@
         <div style="margin: 6%;" *ngIf="!showLoader">
             <div style="display:flex;justify-content: space-between;">
                 <div>
-                    <p class="text-primary text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}
+                    <p class="text-normal text-18 font-weight-bold">{{'bidderFinalInvoice.AuctionData' | translate}}
                     </p>
                 </div>
                 <div class="center-icon" (click)="downloadInvoice()">
-                    <a class="text-primary text-18 font-weight-bold mt-2">{{'sprint3_auction_detail.download_invoice' |
+                    <a class="text-normal text-18 font-weight-bold mt-2">{{'sprint3_auction_detail.download_invoice' |
                         translate}}
                         <span *ngIf="!downloadingInvoice" class="icon-download text-18 mx-1"></span>
                         <!-- <img class="mx-2" *ngIf="!downloadingInvoice"
@@ -192,13 +192,13 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.AuctionReferenceNumber' | translate}}</label>
-                                    <div class="text-primary">{{invoiceData?.ObjectId}}</div>
+                                    <div class="text-normal">{{invoiceData?.ObjectId}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.AuctionStartDateandTime' | translate}}</label>
-                                    <div class="text-primary">
+                                    <div class="text-normal">
                                         <span>{{ auctionStartDate }}</span>
                                         <ul class="list list-primary-bullets d-inline-block">
                                             <li class="text-muted"> {{auctionStartTime}} {{auctionStartSuffix |
@@ -210,7 +210,7 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.ProductsType' | translate}}</label>
-                                    <div class="text-primary">
+                                    <div class="text-normal">
                                         {{invoiceData?.ZzAucProduct}}
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label> {{'bidderFinalInvoice.OfferAwardDate' | translate}}</label>
-                                    <div class="text-primary">
+                                    <div class="text-normal">
                                         <span>{{ offerDate }}</span>
                                         <ul class="list list-primary-bullets d-inline-block">
                                             <li class="text-muted"> {{ offerTime }} {{offerSuffix | translate}}
@@ -235,13 +235,13 @@
 
                     <div class="border-bottom d-flex mt-4 mb-4">
                         <div class="w-50">
-                            <p class="text-primary font-weight-bold text-18">
+                            <p class="text-normal font-weight-bold text-18">
                                 {{'bidderFinalInvoice.BillHolderInformation' | translate}}</p>
                             <div class="form-row mt-4">
                                 <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.FacilityName' | translate}}</label>
-                                        <div class="text-primary">{{invoiceData?.BidderName}}</div>
+                                        <div class="text-normal">{{invoiceData?.BidderName}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -249,20 +249,20 @@
                                 <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.CommercialRegistrationNo' | translate}}</label>
-                                        <div class="text-primary">{{invoiceData?.CrNumber}}</div>
+                                        <div class="text-normal">{{invoiceData?.CrNumber}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="w-50">
-                            <p class="text-primary font-weight-bold text-18">
+                            <p class="text-normal font-weight-bold text-18">
                                 {{'bidderFinalInvoice.BillerData' | translate}}</p>
                             <div class="form-row mt-4">
                                 <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.EntityName' | translate}}</label>
-                                        <div class="text-primary">{{invoiceData?.ZzAgencyName}}</div>
+                                        <div class="text-normal">{{invoiceData?.ZzAgencyName}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@
                                 <div class="col mb-3">
                                     <div class="form-group">
                                         <label>{{'bidderFinalInvoice.EntityNo' | translate}}</label>
-                                        <div class="text-primary">{{invoiceData?.ZzAgencyId}}</div>
+                                        <div class="text-normal">{{invoiceData?.ZzAgencyId}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -278,14 +278,14 @@
                     </div>
 
                     <!-- <div *ngIf="invoiceData?.SameAddress == 'Y'" class="border-bottom mt-4 mb-4">
-                        <p class="text-primary font-weight-bold text-18 mb-4">
+                        <p class="text-normal font-weight-bold text-18 mb-4">
                             {{'bidderFinalInvoice.DeliveryData' | translate}}</p>
 
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.DeliveryDate' | translate}}</label>
-                                    <div class="text-primary">{{ deliveryDate }}</div>
+                                    <div class="text-normal">{{ deliveryDate }}</div>
                                 </div>
                             </div>
                         </div>
@@ -294,19 +294,19 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.Region' | translate}}</label>
-                                    <div class="text-primary">{{invoiceData?.ZzRegion}}</div>
+                                    <div class="text-normal">{{invoiceData?.ZzRegion}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.City' | translate}}</label>
-                                    <div class="text-primary">{{invoiceData?.ZzCity}}</div>
+                                    <div class="text-normal">{{invoiceData?.ZzCity}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.District' | translate}}</label>
-                                    <div class="text-primary">{{invoiceData?.ZzNeighbourhood}}</div>
+                                    <div class="text-normal">{{invoiceData?.ZzNeighbourhood}}</div>
                                 </div>
                             </div>
                         </div>
@@ -315,13 +315,13 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.Street' | translate}}</label>
-                                    <div class="text-primary">{{invoiceData?.ZzStreet}}</div>
+                                    <div class="text-normal">{{invoiceData?.ZzStreet}}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label>{{'bidderFinalInvoice.OtherNotes' | translate}}</label>
-                                    <div class="text-primary">{{invoiceData?.ZzPdOthrNts}}</div>
+                                    <div class="text-normal">{{invoiceData?.ZzPdOthrNts}}</div>
                                 </div>
                             </div>
                         </div>
@@ -331,7 +331,7 @@
             </div>
 
 
-            <p class="text-primary text-18 font-weight-bold">
+            <p class="text-normal text-18 font-weight-bold">
                 {{'bidderFinalInvoice.TableOfProductsAndPrices2' | translate}}</p>
 
             <table id="inventoryAllocationTable" class="table table-bordered table-expanded">
@@ -383,7 +383,7 @@
                         <!-- <ng-container *ngIf="invoiceData?.SameAddress == 'N'"> -->
                         <tr>
                             <td colspan="5">
-                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
+                                <span class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
                                     |
                                     translate}}</span>
                                 <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
@@ -393,7 +393,7 @@
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
+                                <span class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
                                     |
                                     translate}}</span>
                                 <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
@@ -403,7 +403,7 @@
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                <span class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
                                     | translate}}</span>
                                 <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
                                     '1.0-2'}}
@@ -413,7 +413,7 @@
                         <tr>
                             <td colspan="5">
                                 <span
-                                    class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                    class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
                                     | translate}}</span>
                                 <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
                                     '1.0-2'}}
@@ -424,7 +424,7 @@
                         <ng-container *ngIf="invoiceData?.SameAddress == 'Y'">
                             <tr>
                                 <td colspan="3">
-                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
+                                    <span class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.GearPrice'
                                         |
                                         translate}}</span>
                                     <span [ngStyle]="{float: textFloat}" class="text-success">{{gearPrice | number:
@@ -434,7 +434,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <span class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
+                                    <span class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.QuestRate'
                                         |
                                         translate}}</span>
                                     <span [ngStyle]="{float: textFloat}" class="text-success">{{questRate | number:
@@ -445,7 +445,7 @@
                             <tr>
                                 <td colspan="3">
                                     <span
-                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
+                                        class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.ValueAddedTax'
                                         | translate}}</span>
                                     <span [ngStyle]="{float: textFloat}" class="text-success">{{vat | number:
                                         '1.0-2'}}
@@ -455,7 +455,7 @@
                             <tr>
                                 <td colspan="3">
                                     <span
-                                        class="text-primary text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
+                                        class="text-normal text-14 font-weight-bold">{{'bidderFinalInvoice.TotalInvoicePrice'
                                         | translate}}</span>
                                     <span [ngStyle]="{float: textFloat}" class="text-success">{{totalValue | number:
                                         '1.0-2'}}
@@ -513,8 +513,8 @@
             <div class="modal-body" style="background-color: #F9FCFA; padding: 7%;">
                 <div class="row">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.invoiceNumber' | translate}}</div>
-                    <div class="col text-primary d-flex">
-                        <span class="icon-copy text-primary" style="cursor: pointer;" data-toggle="tooltip"
+                    <div class="col text-normal d-flex">
+                        <span class="icon-copy text-normal" style="cursor: pointer;" data-toggle="tooltip"
                             data-placement="bottom" title="{{'bidderFinalInvoice.copied' | translate}}"
                             (click)="copyToClipboard(invoiceData?.InvoiceNumber)"></span>
                         <span class="mx-2">{{ invoiceData?.InvoiceNumber }}</span>
@@ -522,16 +522,16 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.invoiceValue' | translate}}</div>
-                    <div class="col text-primary">{{totalValue | number:
+                    <div class="col text-normal">{{totalValue | number:
                         '1.0-2'}} {{'bidderFinalInvoice.SAR' | translate}}</div>
                 </div>
                 <div class="row mt-4">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.paymentDeadline' | translate}}</div>
-                    <div class="col text-primary">{{ paymentDeadline }}</div>
+                    <div class="col text-normal">{{ paymentDeadline }}</div>
                 </div>
                 <div class="row mt-4">
                     <div class="col" style="color: #117ABE;">{{'bidderFinalInvoice.billerName' | translate}}</div>
-                    <div class="col text-primary">{{ invoiceData?.BidderName}} - {{ invoiceData?.BidderId }}</div>
+                    <div class="col text-normal">{{ invoiceData?.BidderName}} - {{ invoiceData?.BidderId }}</div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">

@@ -4,7 +4,8 @@
             <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-openOffers.bcrumb1" | translate }}</a></li>
             <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-openOffers.bcrumb2" | translate }}</a></li>
             <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-openOffers.bcrumb3" | translate }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ "auctionCommittee.ac-openOffers.bcrumb4" | translate }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ "auctionCommittee.ac-openOffers.bcrumb4" |
+                translate }}</li>
         </ol>
     </nav>
 </div>
@@ -12,7 +13,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="heading">
-                <h1 class="text-20 text-primary font-medium"> {{ "auctionCommittee.ac-openOffers.pageTitle" | translate }} </h1>
+                <h1 class="text-20 text-normal font-medium"> {{ "auctionCommittee.ac-openOffers.pageTitle" | translate
+                    }} </h1>
             </div>
         </div>
     </div>
@@ -20,7 +22,8 @@
     <div class="dropdown dropdown-filters-container d-flex">
         <div style="width: 96%;"></div>
         <div>
-            <button (click)="toggleFilter()" class="btn btn-ghost fill-primary-light-green btn-with-badge filters-btn shadow-sm" type="button">
+            <button (click)="toggleFilter()"
+                class="btn btn-ghost fill-primary-light-green btn-with-badge filters-btn shadow-sm" type="button">
                 <span class="text-14 icon-filters"></span>
             </button>
         </div>
@@ -28,8 +31,9 @@
     <div class="modal-content p-4 shadow-lg border" *ngIf="showFilterForm">
         <form [formGroup]="filterFormGroup">
             <div class="modal-header">
-                <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">FILTERS</h3>
-                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close" (click)="toggleFilter()">
+                <h3 class="modal-title text-20 text-normal font-weight-medium" id="exampleModalLabel">FILTERS</h3>
+                <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
+                    (click)="toggleFilter()">
                     <span class="icon-close"></span>
                 </button>
             </div>
@@ -37,14 +41,16 @@
                 <div class="col-12 row pr-0">
                     <div class="col-md-4 mb-2">
                         <label class="d-flex" for="validationCustom01">Status</label>
-                        <select formControlName="status" class="form-control" id="validationCustom01" (change)="changeSelect($event, 'status')" [required]="true">
+                        <select formControlName="status" class="form-control" id="validationCustom01"
+                            (change)="changeSelect($event, 'status')" [required]="true">
                             <option selected disabled value="">Select</option>
                             <option *ngFor="let status of dropValStatus" [ngValue]="status">{{status}}</option>
                         </select>
                     </div>
                     <div class="col-md-4 mb-2">
                         <label class="d-flex" for="validationCustom02">Type</label>
-                        <select formControlName="type" class="form-control" id="validationCustom02" (change)="changeSelect($event, 'type')">
+                        <select formControlName="type" class="form-control" id="validationCustom02"
+                            (change)="changeSelect($event, 'type')">
                             <option selected disabled value="">Select</option>
                             <option *ngFor="let type of dropValType" [ngValue]="type">{{type}}</option>
                         </select>
@@ -52,7 +58,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button (click)="resetFilter()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-light btn-md">Reset</button>
+                <button (click)="resetFilter()" type="button" data-dismiss="modal" aria-label="Close"
+                    class="btn btn-outline-light btn-md">Reset</button>
                 <button (click)="applyFilter()" type="button" class="btn btn-primary-light btn-md">Apply</button>
             </div>
         </form>
@@ -132,7 +139,8 @@
                         <td><span class="d-inline-block text-truncate" style="max-width: 200px;"><a
                                     (click)="viewAttachment()"
                                     class="btn btn-ghost btn-sm fill-primary-light-green"><span
-                                        class="icon-Group-3319"></span></a> &nbsp; <a style="text-decoration: underline; color: #32AD71;">{{rowItem.primaryWarranty}}</a></span>
+                                        class="icon-Group-3319"></span></a> &nbsp; <a
+                                    style="text-decoration: underline; color: #32AD71;">{{rowItem.primaryWarranty}}</a></span>
                         </td>
                         <td>{{ rowItem.submissionDate }} <br>
                             <p style="color: #9D9D9D;">{{ rowItem.submissionTime }}</p>
@@ -141,8 +149,11 @@
                         <td>{{ rowItem.commercialRegistrationNo }}</td>
                         <td>
                             <ng-container *ngIf="i==0">
-                                <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#notSuccessModal">{{ "auctionCommittee.ac-openOffers.reject" |
-                                    translate }}</button> &nbsp; &nbsp; <button class="btn btn-primary-light btn-sm" type="button" (click)="acceptOffer(openofferListData[i])" data-toggle="modal" data-target="#showSuccessfulModal"> {{ "auctionCommittee.ac-openOffers.accept" |
+                                <button class="btn btn-danger btn-sm" type="button" data-toggle="modal"
+                                    data-target="#notSuccessModal">{{ "auctionCommittee.ac-openOffers.reject" |
+                                    translate }}</button> &nbsp; &nbsp; <button class="btn btn-primary-light btn-sm"
+                                    type="button" (click)="acceptOffer(openofferListData[i])" data-toggle="modal"
+                                    data-target="#showSuccessfulModal"> {{ "auctionCommittee.ac-openOffers.accept" |
                                     translate }}</button>
                             </ng-container>
                             <ng-container *ngIf="i>0">
@@ -230,22 +241,26 @@
     </div>
     <br><br><br><br>
     <!-- Successful modal first -->
-    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="showSuccessfulModal" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" style="width: 100%; height: 100%;">
                 <div class="" style="display: flex; margin-top: 10px;">
                     <div style="width: 400px; text-align: left;">
-                        <p style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
+                        <p
+                            style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
                             Adoption of awarding offer No. 1?</p>
                     </div>
                     <div style="margin-left: 110px;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="outline: none;">
                             <span class="icon-close"></span>
                         </button>
                     </div>
                 </div>
                 <div style="width: 470px; margin-top: 10px; text-align: left;">
-                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                    <p
+                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
                         Upon confirmation, the initial award will be approved and sent for final approval</p>
                 </div>
                 <div style="margin-top: 10px; display: flex;">
@@ -265,18 +280,23 @@
                     </div>
                 </div>
                 <div style="margin-left: 220px;">
-                    <button style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
-                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#secondPopup" style="height:45px; width: 120px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                    <button
+                        style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
+                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal"
+                        aria-label="Close" data-toggle="modal" data-target="#secondPopup"
+                        style="height:45px; width: 120px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
                         Gear adoption</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- success modal confirmation -->
-    <div style="width: 600px; margin-left: 400px;" class="modal" id="secondPopup" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 600px; margin-left: 400px;" class="modal" id="secondPopup" tabindex="-2" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="card shadow-lg result result-success" style="align-items: center;">
-                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
+                    data-dismiss="modal" aria-label="Close">
                     <span class="icon-close"></span>
                 </button>
                 <div class="alert-body">
@@ -285,7 +305,8 @@
                     </i>
                     <div class="alert-content">
                         <h4>The award has been successfully approved</h4>
-                        <p style="color: #414042;"> The initial award will be sent for final approval with a report <br> Auction and all bids submitted </p>
+                        <p style="color: #414042;"> The initial award will be sent for final approval with a report <br>
+                            Auction and all bids submitted </p>
                     </div>
                 </div>
                 <div class="alert-action">
@@ -295,51 +316,65 @@
         </div>
     </div>
     <!-- offer less than estimated price -->
-    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="notSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 600px; margin-left: 400px;" class="modal fade" id="notSuccessModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" style="width: 100%; height: 100%;">
                 <div class="" style="display: flex; margin-top: 10px;">
                     <div style="width: 400px; text-align: left;">
-                        <p style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
+                        <p
+                            style="font-family:DIN Next LT Arabic Regular; color: #32AD71; font-size: 22px; line-height: 26px; font-weight: bold;">
                             This offer cannot be awarded.</p>
                     </div>
                     <div style="margin-left: 110px;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="outline: none;">
                             <span class="icon-close"></span>
                         </button>
                     </div>
                 </div>
                 <br>
-                <div style="width: 470px; margin-top: 10px; text-align: left; background-color: #F8FCFA; width: 100%; padding: 25px;">
-                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
-                        This offer cannot be chosen as the offered price is less than the price estimated by the pricing committee and according to the auction instructions: If the minimum estimated price for the products is not achieved, the auction will not be awarded.</p>
+                <div
+                    style="width: 470px; margin-top: 10px; text-align: left; background-color: #F8FCFA; width: 100%; padding: 25px;">
+                    <p
+                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                        This offer cannot be chosen as the offered price is less than the price estimated by the pricing
+                        committee and according to the auction instructions: If the minimum estimated price for the
+                        products is not achieved, the auction will not be awarded.</p>
                 </div>
                 <br><br>
                 <div style="margin-left: 145px;">
-                    <button style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
-                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#rejectPopup" style="height:45px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
+                    <button
+                        style="height:45px; width: 90px; border: 1px grey solid; outline: none; background-color: white; color: grey; border-radius: 5px;">Reference</button>
+                    <button type="button" class="btn btn-primary-light-green btn-md" data-dismiss="modal"
+                        aria-label="Close" data-toggle="modal" data-target="#rejectPopup"
+                        style="height:45px; width: 220px; margin-left: 30px; background-color: #32AD71; color: white; font-weight: bold; outline: none; border: none; border-radius: 4px;">
                         Confirm that the auction was not awarded</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Reject popup -->
-    <div style="width: 690px; margin-left: 400px;" class="modal fade" id="rejectPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 690px; margin-left: 400px;" class="modal fade" id="rejectPopup" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" style="width: 100%; height: 100%;">
                 <div class="" style="display: flex; margin-top: 10px;">
                     <div style="width: 650px; text-align: left;">
-                        <p style="font-family:DIN Next LT Arabic Regular; color: #F66F5B; font-size: 22px; line-height: 26px; font-weight: bold;">
+                        <p
+                            style="font-family:DIN Next LT Arabic Regular; color: #F66F5B; font-size: 22px; line-height: 26px; font-weight: bold;">
                             Upon confirmation, the bidder will be crossed off the list.</p>
                     </div>
                     <div style="margin-left: 25px;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="outline: none;">
                             <span class="icon-close"></span>
                         </button>
                     </div>
                 </div>
                 <div style="width: 470px; margin-top: 10px; text-align: left; width: 100%;">
-                    <p style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
+                    <p
+                        style="font-family:DIN Next LT Arabic Regular; font-size: 20px; color: #414042; line-height: 24px;">
                         Are you sure of the rejection of the award?</p>
                 </div>
                 <br>
@@ -348,22 +383,30 @@
                     <p style="margin-left: 265px; color: #cac1c1;">Letter 0/250</p>
                 </div>
                 <div>
-                    <textarea style="width: 100%; height: 130px;border: none;  border-bottom: 1px solid #cac1c1; border-top: 1px solid #cac1c1; padding: 10px;" maxlength="250" name="" id="" cols="30" rows="10" placeholder="the reason of refuse.."></textarea>
+                    <textarea
+                        style="width: 100%; height: 130px;border: none;  border-bottom: 1px solid #cac1c1; border-top: 1px solid #cac1c1; padding: 10px;"
+                        maxlength="250" name="" id="" cols="30" rows="10"
+                        placeholder="the reason of refuse.."></textarea>
                 </div>
                 <br><br>
                 <div>
-                    <button style="background-color: white; color: #cac1c1; border: #cac1c1 1px solid; border-radius: 4px; width: 100px; height: 50px; margin-left: 275px;">Cancellation</button>
-                    <button class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#confirmPopup" style="background-color: #F66F5B; color: #FFFFFF; border: none; border-radius: 4px; width: 160px; height: 50px; margin-left: 40px;">Rejection
+                    <button
+                        style="background-color: white; color: #cac1c1; border: #cac1c1 1px solid; border-radius: 4px; width: 100px; height: 50px; margin-left: 275px;">Cancellation</button>
+                    <button class="btn btn-primary-light-green btn-md" data-dismiss="modal" aria-label="Close"
+                        data-toggle="modal" data-target="#confirmPopup"
+                        style="background-color: #F66F5B; color: #FFFFFF; border: none; border-radius: 4px; width: 160px; height: 50px; margin-left: 40px;">Rejection
                         confirmation</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Rejection confirmation -->
-    <div style="width: 600px; margin-left: 400px;" class="modal" id="confirmPopup" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 600px; margin-left: 400px;" class="modal" id="confirmPopup" tabindex="-2" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="card shadow-lg result result-success" style="align-items: center; width: 100%;">
-                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close">
+                <button style="position: absolute;left: 90%;" type="button" class="modal-close btn-close btn-sm"
+                    data-dismiss="modal" aria-label="Close">
                     <span class="icon-close"></span>
                 </button>
                 <div class="alert-body">

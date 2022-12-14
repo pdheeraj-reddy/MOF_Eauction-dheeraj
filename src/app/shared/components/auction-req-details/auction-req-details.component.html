@@ -63,18 +63,18 @@
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section2_orderSum-col1" |
                                 translate }}</label>
-                            <div class="text-success"> {{ auctionItem.auctionId }} </div>
+                            <div class="text-normal"> {{ auctionItem.auctionId }} </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section1_formGrp1" |
                                 translate
                                 }}</label>
-                            <div class="text-success"> {{ auctionItem.auctionType | translate }} </div>
+                            <div class="text-normal"> {{ auctionItem.auctionType | translate }} </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section2_orderSum-col2" |
                                 translate }}</label>
-                            <div class="text-success"> {{ auctionItem.auctionSubType | translate }} </div>
+                            <div class="text-normal"> {{ auctionItem.auctionSubType | translate }} </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -82,30 +82,30 @@
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section1_formGrp3" |
                                 translate
                                 }}</label>
-                            <div class="text-success"> {{ auctionItem.auctionName }} </div>
+                            <div class="text-normal"> {{ auctionItem.auctionName }} </div>
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section1_formGrp4" |
                                 translate
                                 }}</label>
-                            <div class="text-success"> {{ auctionItem.auctionProduct }} </div>
+                            <div class="text-normal"> {{ auctionItem.auctionProduct }} </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section2_orderSum-col3" |
                                 translate }}</label>
-                            <div class="text-success"> {{ auctionItem.entityNo }} </div>
+                            <div class="text-normal"> {{ auctionItem.entityNo }} </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01">{{ "auctioncreate.auctiondetails.section2_orderSum-col4" |
                                 translate }}</label>
-                            <div class="text-success"> {{ auctionItem.entityName }} </div>
+                            <div class="text-normal"> {{ auctionItem.entityName }} </div>
                         </div>
                         <!-- <div class="col-md-4 mb-3">
                             <label for="validationCustom01">The period of presentation of products in the market</label>
-                            <div class="text-success">3 months</div>
+                            <div class="text-normal">3 months</div>
                         </div> -->
                     </div>
                     <div class="form-row">
@@ -114,7 +114,7 @@
                                 <label for="goverusermessage">{{ "auctioncreate.auctiondetails.section1_formGrp5" |
                                     translate
                                     }} </label>
-                                <div class="text-success"> {{ auctionItem.auctionDesc }} </div>
+                                <div class="text-normal"> {{ auctionItem.auctionDesc }} </div>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp7" | translate }}</label>
-                                <div class="text-success">
+                                <div class="text-normal">
                                     <span>{{ auctionItem.auctionStartDate }}</span>
                                     <ul *ngIf="auctionItem.auctionStartTime"
                                         class="list list-primary-bullets d-inline-block">
@@ -140,7 +140,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp8" | translate }}</label>
-                                <div class="text-success">
+                                <div class="text-normal">
                                     <span>{{ auctionItem.auctionEndDate }}</span>
                                     <ul *ngIf="auctionItem.auctionEndTime"
                                         class="list list-primary-bullets d-inline-block">
@@ -153,7 +153,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp11" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.startAuction | translate }} </div>
+                                <div class="text-normal"> {{ auctionItem.startAuction | translate }} </div>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp12" | translate }}</label>
-                                <div class="text-success">
+                                <div class="text-normal">
                                     <span>{{ auctionItem.auctionAnncStartDate }}</span>
                                 </div>
                             </div>
@@ -185,20 +185,20 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp15" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.startPrice | number : '1.0-2' }} </div>
+                                <div class="text-normal"> {{ auctionItem.startPrice | number : '1.0-2' }} </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3"
                             *ngIf=" !( auctionItem.auctionType === 'Public' &&auctionItem.auctionSubType === 'Closed' ) ">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp16" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.lowBidValue | number : '1.0-2' }} </div>
+                                <div class="text-normal"> {{ auctionItem.lowBidValue | number : '1.0-2' }} </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp17" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.gnteePercentage | number : '1.0-2'}} %</div>
+                                <div class="text-normal"> {{ auctionItem.gnteePercentage | number : '1.0-2'}} %</div>
                             </div>
                         </div>
                     </div>
@@ -206,20 +206,20 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp19" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.commissionType | translate }} </div>
+                                <div class="text-normal"> {{ auctionItem.commissionType | translate }} </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section2_orderSum-col7" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.pursuitPerCommission | number : '1.0-2'}} %
+                                <div class="text-normal"> {{ auctionItem.pursuitPerCommission | number : '1.0-2'}} %
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp18" | translate }}</label>
-                                <div class="text-success"> {{ auctionItem.finalGntee }} {{"days" | translate }}</div>
+                                <div class="text-normal"> {{ auctionItem.finalGntee }} {{"days" | translate }}</div>
                             </div>
                         </div>
                     </div>
@@ -255,7 +255,7 @@
                                                 *ngIf="index >= pageRangeForAttach.rangeStart && index <= pageRangeForAttach.rangeEnd">
                                                 <td>{{file.index+1}}</td>
                                                 <td>
-                                                    <div class="text-capitalize text-success"><span
+                                                    <div class="text-capitalize text-normal"><span
                                                             class="attach-icon icon-attachment mx-2"></span><span>{{file.name}}</span>
                                                     </div>
                                                 </td>

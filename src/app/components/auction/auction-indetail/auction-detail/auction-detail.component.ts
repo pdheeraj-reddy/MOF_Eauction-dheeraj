@@ -176,7 +176,6 @@ export class AuctionDetailComponent implements OnInit {
 
     // this.prePopulatesFormValues();
     this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
-      console.log('getAuctionModeratorsList', moderatorsListResp.body);
       this.auctionServc.XCSRFToken = moderatorsListResp.headers.get('x-csrf-token');
       this.dropValmoderatorsList = [];
       this.showLoader = false;
@@ -211,34 +210,6 @@ export class AuctionDetailComponent implements OnInit {
     this.PaginationServc.sortAllTableData(this.auctionAttachement.value, this.columnLst[columnId]);
   }
 
-  populateSome() {
-    const date = this.addDaysWRONG(new Date(), 0),
-      endDate = this.addDaysWRONG(new Date(), 20),
-      startADate = this.addDaysWRONG(new Date(), 5),
-      endADate = this.addDaysWRONG(new Date(), 15);
-    this.basicFormGroup.get('auctionType')?.setValue('Public');
-    this.basicFormGroup.get('auctionSubType')?.setValue('C');
-    this.basicFormGroup.get('prevRefNo')?.setValue('');
-    this.basicFormGroup.get('auctionName')?.setValue('UAT ISUZU Trucks Auction 00' + this.sCount);
-    this.basicFormGroup.get('auctionProduct')?.setValue('UAT Trucks 00' + this.sCount);
-    this.basicFormGroup.get('auctionManager')?.setValue('1827879980');
-    this.basicFormGroup.get('auctionDesc')?.setValue('We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries');
-    this.basicFormGroup.get('reasonPrivateAuction')?.setValue('');
-    this.basicFormGroup.get('reason')?.setValue('');
-    this.basicFormGroup.get('auctionStartDate')?.setValue(moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-    this.basicFormGroup.get('auctionEndDate')?.setValue(moment(endDate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-    this.basicFormGroup.get('auctionStartTime')?.setValue('02:00 PM');
-    this.basicFormGroup.get('auctionEndTime')?.setValue('02:00 AM');
-    this.basicFormGroup.get('startAuction')?.setValue('T');
-    this.basicFormGroup.get('auctionAnncStartDate')?.setValue(moment(startADate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-    this.basicFormGroup.get('bidOpeningTime')?.setValue('02:00 AM');
-    this.basicFormGroup.get('startPrice')?.setValue('5600000');
-    this.basicFormGroup.get('lowBidValue')?.setValue('60000');
-    this.basicFormGroup.get('gnteePercentage')?.setValue('2');
-    this.basicFormGroup.get('finalGntee')?.setValue('15');
-    this.basicFormGroup.get('commissionType')?.setValue('Next Financial');
-    this.basicFormGroup.get('pursuitPerCommission')?.setValue('2.5');
-  }
 
   refreshCalendarCntrl() {
     let lang = this.translate.currentLang;
@@ -283,8 +254,8 @@ export class AuctionDetailComponent implements OnInit {
         showSwitcher: false,
         showTodayButton: false,
         icons: {
-          up: 'icon-arrow-up text-primary',
-          down: 'icon-arrow-down text-primary',
+          up: 'icon-arrow-up text-normal',
+          down: 'icon-arrow-down text-normal',
         },
       });
       var auctionEndTime = $("#auctionEndTime").hijriDatePicker({
@@ -294,8 +265,8 @@ export class AuctionDetailComponent implements OnInit {
         showSwitcher: false,
         showTodayButton: false,
         icons: {
-          up: 'icon-arrow-up text-primary',
-          down: 'icon-arrow-down text-primary',
+          up: 'icon-arrow-up text-normal',
+          down: 'icon-arrow-down text-normal',
         },
       });
 
@@ -329,8 +300,8 @@ export class AuctionDetailComponent implements OnInit {
         showSwitcher: false,
         showTodayButton: false,
         icons: {
-          up: 'icon-arrow-up text-primary',
-          down: 'icon-arrow-down text-primary',
+          up: 'icon-arrow-up text-normal',
+          down: 'icon-arrow-down text-normal',
         },
       });
 
@@ -546,7 +517,6 @@ export class AuctionDetailComponent implements OnInit {
   prePopulatesFormValues() {
     this.showLoader = true;
     this.auctionServc.getAuctionModeratorsList().subscribe((moderatorsListResp: any) => {
-      console.log('getAuctionModeratorsList', moderatorsListResp.body);
       this.auctionServc.XCSRFToken = moderatorsListResp.headers.get('x-csrf-token');
       this.dropValmoderatorsList = [];
       this.showLoader = false;
@@ -597,7 +567,6 @@ export class AuctionDetailComponent implements OnInit {
   }
 
   public mappingObjForEdit() {
-    console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 492 ~ this.auctionDetails", this.auctionDetails);
     this.auctionItem.auctionType = this.getAuctionTypeDesc(this.auctionDetails.BidType);
     this.auctionItem.auctionSubType = this.auctionDetails.ZzCloseInd;
     this.auctionItem.prevRefNo = this.auctionDetails.ZzPrevAucId1;
@@ -615,7 +584,6 @@ export class AuctionDetailComponent implements OnInit {
     this.auctionItem.auctionAnncStartDate = this.auctionDetails.ZzAnncSrtD ? this.auctionDetails.ZzAnncSrtD !== 0 ? moment(this.auctionDetails.ZzAnncSrtD.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD') : '' : '';
     // let auctionStartDateTime = this.auctionDetails.ZzAnncSrtD +" "+ this.auctionDetails.ZzAnncSrtT;
     this.auctionItem.bidOpeningTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT.split(" ")[0], 'HH:mm:ss').format('hh:mm A') : '' : '';
-    console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 508 ~ this.auctionDetails.ZzAnncSrtT).format('hh:mm A')", this.auctionItem.bidOpeningTime);
 
     this.auctionItem.startPrice = this.auctionDetails.ZzBidSrtPrice;
     this.auctionItem.lowBidValue = this.auctionDetails.ZzLowBidVl;
@@ -656,7 +624,6 @@ export class AuctionDetailComponent implements OnInit {
       pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : ''),
       auctionAttachement: new FormArray((this.auctionItem.auctionAttachement ? this.auctionItem.auctionAttachement : [])),
     });
-    console.log("Form", this.basicFormGroup);
     if (this.ViewMode == 'view') {
       this.basicFormGroup.disable();
       this.basicFormGroup.get('auctionType')?.disable();
@@ -770,7 +737,6 @@ export class AuctionDetailComponent implements OnInit {
         }
       }
     }
-    console.log('auctionAttachement ', this.auctionAttachement);
     // } else {
     //   this.invalidFileSize = true;
     // }
@@ -823,7 +789,6 @@ export class AuctionDetailComponent implements OnInit {
       // this.showAlertModal = true;
       this.showLoader = true;
       this.auctionServc.deleteAuctionImages(file.FilenetId).subscribe((deleteAuctionImagesResp: any) => {
-        console.log(deleteAuctionImagesResp);
         this.showLoader = false;
         this.files.splice(index, 1);
         this.auctionAttachement.removeAt(index);
@@ -874,19 +839,17 @@ export class AuctionDetailComponent implements OnInit {
       file.downloading = true;
       this.activeFileDownloadIndex = index;
       this.auctionServc.downloadAuctionImages(file.FilenetId).subscribe((downloadAuctionImagesResp: any) => {
-        console.log(downloadAuctionImagesResp);
+
         const fileResp = downloadAuctionImagesResp.d;
         var byteString = atob(atob(fileResp.FileContent).split(',')[1]);
-        console.log('asdasd', byteString.split(',')[1]);
+
         var ab = new ArrayBuffer(byteString.length);
         var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
           ia[i] = byteString.charCodeAt(i);
         }
         const blob = new Blob([ab], { type: file.MIMEType });
-        console.log(blob);
         let fileURL = window.URL.createObjectURL(blob);
-        console.log('fileURL', fileURL);
         this.showViewAttachmentsModal = false;
         window.open(fileURL, '_blank');
         this.activeFileDownloadIndex = -1;
@@ -910,11 +873,9 @@ export class AuctionDetailComponent implements OnInit {
       }
       const blob = new Blob([ab], { type: file.type });
 
-      console.log('fileURL', blob);
       let fileURL = window.URL.createObjectURL(blob);
       if ((file.type.indexOf('image') > -1) || (file.type.indexOf('video') > -1) || fileType === 'docx' || fileType === 'doc' || fileType === 'pdf') {
         this.showViewAttachmentsModal = false;
-        console.log('fileURL', fileURL);
         window.open(fileURL, '_blank');
       } else {
         if (file.type.indexOf('image') > -1) {
@@ -940,7 +901,6 @@ export class AuctionDetailComponent implements OnInit {
   }
   checkStartValue() {
     let startValue = this.basicFormGroup.controls['startPrice'].value;
-    console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 848 ~ startValue", startValue);
     if (startValue < 0 || !startValue) {
       this.startValError = true;
       return;
@@ -967,8 +927,6 @@ export class AuctionDetailComponent implements OnInit {
       aucOpenTime = aucOpenTime?.split(' ')[1] == 'م' ? aucOpenTime.replace(aucOpenTime.split(' ')[1], 'PM') : aucOpenTime?.split(' ')[1] == 'ص' ? aucOpenTime.replace(aucOpenTime.split(' ')[1], 'AM') : aucOpenTime
       bidOpenTime = bidOpenTime?.split(' ')[1] == 'م' ? bidOpenTime.replace(bidOpenTime.split(' ')[1], 'PM') : bidOpenTime?.split(' ')[1] == 'ص' ? bidOpenTime.replace(bidOpenTime.split(' ')[1], 'AM') : bidOpenTime
     }
-    // let startValue = this.basicFormGroup.controls['startPrice'].value;
-    // console.log("🎯TC🎯 ~ file: auction-detail.component.ts ~ line 855 ~ startValue", startValue);
     let currentDate = new Date();
     let aucStartDate = new Date(startDate + " " + startTime);
     let aucEndDate = new Date(endDate + " " + endTime);
@@ -1039,10 +997,8 @@ export class AuctionDetailComponent implements OnInit {
       if (this.basicFormGroup.status === 'VALID') {
         this.showSaveBtnLoader = true;
         const auctiondetail = this.generateAuctionDetailFormat(this.basicFormGroup.value);
-        console.log("auctiondetail final format ", auctiondetail);
+
         this.auctionServc.createAuction(auctiondetail).subscribe((auctionDetailsResp: any) => {
-          console.log('createAuction Resp ', auctionDetailsResp);
-          // alert('Auction is Saved Successfully. Please Continue...');
           this.DraftId = auctionDetailsResp.d.DraftId;
           this.ObjectId = auctionDetailsResp.d.ObjectId;
           let auctionCreateResp = {
@@ -1070,10 +1026,7 @@ export class AuctionDetailComponent implements OnInit {
         if (this.basicFormGroup.status === 'VALID') {
           this.showSaveasdraftBtnLoader = true;
           const auctiondetail = this.generateAuctionDetailFormat(this.basicFormGroup.value);
-          console.log("auctiondetail final format ", auctiondetail);
           this.auctionServc.createAuction(auctiondetail).subscribe((auctionDetailsResp: any) => {
-            console.log('createAuction Resp ', auctionDetailsResp);
-            // alert('Auction is Saved as Draft Successfully');
             this.DraftId = auctionDetailsResp.d.DraftId;
             this.ObjectId = auctionDetailsResp.d.ObjectId;
             let auctionCreateResp = {
@@ -1084,7 +1037,6 @@ export class AuctionDetailComponent implements OnInit {
             if (this.auctionAttachement['controls'].length > 0) {
               this.auctionAttachmentsUploads(submitSrc, auctionCreateResp);
             } else {
-              console.log('auctionCreateResp', auctionCreateResp);
               this.auctionCreateResp.emit(auctionCreateResp);
               this.showSaveasdraftBtnLoader = false;
               this.showSuccessfulModal = true;
@@ -1130,7 +1082,6 @@ export class AuctionDetailComponent implements OnInit {
 
   async auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
     let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
-    console.log('filestoUpload ', filestoUpload);
 
     if (filestoUpload.length > 0) {
 
@@ -1147,7 +1098,6 @@ export class AuctionDetailComponent implements OnInit {
             "ObjectType": "/AuctionDocuments",
             "ObjectId": this.ObjectId,
           };
-          console.log('fileNetAuctionDetail -- ', fileNetAuctionDetail);
           this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(result => {
             customLoop(i + 1);
           }, (error: any) => {
@@ -1182,133 +1132,7 @@ export class AuctionDetailComponent implements OnInit {
     }
   }
 
-  // async auctionAttachmentsUploads(submitSrc: any, auctionCreateResp: any) {
-  //   let fileNetAuctionDetail: any;
-  //   let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
-  //   console.log('filestoUpload ', filestoUpload);
-
-  //   const timer = (ms: number) => new Promise(res => setTimeout(res, ms))
-  //   if (filestoUpload.length > 0) {
-  //     for (let i = 0; i < filestoUpload.length; i++) {
-  //       let file = filestoUpload[i];
-  //       fileNetAuctionDetail = {
-  //         "FileName": file.name.split('.')[0],
-  //         // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-  //         "FileContent": btoa(file.filesrc),
-  //         "MIMEType": file.type,
-  //         "FileLength": '' + file.size,
-  //         "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-  //         "Version": "1.0",
-  //         "ObjectType": "/AuctionDocuments",
-  //         "ObjectId": this.ObjectId,
-  //       };
-  //       await timer(3000);
-  //       console.log("File detail");
-  //       console.log(fileNetAuctionDetail);
-  //       this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
-  //         (data) => {
-  //           console.log(i + "-success");
-  //           if (i + 1 == filestoUpload.length) {
-  //             if (submitSrc == "saveasdraft") {
-  //               console.log('auctionCreateResp', auctionCreateResp);
-  //               this.auctionCreateResp.emit(auctionCreateResp);
-  //               this.showSaveasdraftBtnLoader = false;
-  //               this.showSuccessfulModal = true;
-  //             } else {
-  //               console.log("upload done");
-  //               this.showSaveBtnLoader = false;
-  //               this.activeStep++;
-  //               this.changeSteps.emit(this.activeStep);
-  //             }
-  //           }
-  //         }, (error) => {
-  //           console.log(i + "-fail");
-  //           this.showSaveBtnLoader = false;
-  //           this.activeStep++;
-  //           this.changeSteps.emit(this.activeStep);
-  //         }
-  //       )
-  //     }
-  //   } else {
-  //     if (submitSrc == "saveasdraft") {
-  //       console.log('auctionCreateResp', auctionCreateResp);
-  //       this.auctionCreateResp.emit(auctionCreateResp);
-  //       this.showSaveasdraftBtnLoader = false;
-  //       this.showSuccessfulModal = true;
-  //     } else {
-  //       console.log("upload done");
-  //       this.showSaveBtnLoader = false;
-  //       this.activeStep++;
-  //       this.changeSteps.emit(this.activeStep);
-  //     }
-  //   }
-  // }
-
-  // async auctionAttachmentsUploadsTest() {
-  //   let fileNetAuctionDetail: any;
-  //   let filestoUpload = this.auctionAttachement.value.filter(function (file: any) { return (file.filesrc['0'] && !file.FilenetId) })
-  //   console.log('filestoUpload ', filestoUpload);
-  //   const promises: any = [];
-  //   filestoUpload.forEach((file: any) => {
-  //     fileNetAuctionDetail = {
-  //       "FileName": file.name.split('.')[0],
-  //       "FileContent": btoa(file.filesrc),
-  //       "MIMEType": file.type,
-  //       "FileLength": '' + file.size,
-  //       "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-  //       "Version": "1.0",
-  //       "ObjectType": "/AuctionDocuments",
-  //       "ObjectId": this.ObjectId,
-  //     };
-  //     promises.push(
-  //       this.makeAPICall(fileNetAuctionDetail)
-  //     );
-  //   });
-  //   await (Promise as any).allSettled(promises).then(
-  //     (results: any) => results.forEach(
-  //       (result :any) => {
-  //         console.log('Status', result.status);
-  //         this.showSaveBtnLoader = false;
-  //         this.activeStep++;
-  //         this.changeSteps.emit(this.activeStep);
-  //       })
-  //     );
-
-  //   // return forkJoin(
-  //   //   filestoUpload.map(async (file: any, index: number) => {
-  //   //     var prefix = (file.name.split('.')[0]).replace(/[^\w\s]/g, '').replace(' ', '') + "-" + this.DraftId;
-  //   //     fileNetAuctionDetail = {
-  //   //       "FileName": file.name.split('.')[0],
-  //   //       // "FileName": this.generateFileName(prefix) + "." + file.name.split('.')[1],
-  //   //       "FileContent": btoa(file.filesrc),
-  //   //       "MIMEType": file.type,
-  //   //       "FileLength": '' + file.size,
-  //   //       "FileExt": file.name.substring(file.name.lastIndexOf('.')).replace('.', ''),
-  //   //       "Version": "1.0",
-  //   //       "ObjectType": "/AuctionDocuments",
-  //   //       "ObjectId": this.ObjectId,
-  //   //     };
-  //   //     const uploadDocWithDocIdRes = await this.makeAPICall(fileNetAuctionDetail);
-  //   //     return uploadDocWithDocIdRes;
-  //   //   })
-  //   // );
-  //   // seqJoin.subscribe((fileNetResp: any) => {
-  //   //   console.log('fileNetResp', fileNetResp);
-  //   //   debugger;
-  //   //   this.showSaveBtnLoader = false;
-  //   //   this.activeStep++;
-  //   //   this.changeSteps.emit(this.activeStep);
-  //   // }, (error: any) => {
-  //   //   this.showSaveBtnLoader = false;
-  //   //   console.log('createAuction RespError : ', error);
-  //   // });
-  //   // this.showSaveBtnLoader = false;
-  //   // this.activeStep ++;
-  //   // this.changeSteps.emit(this.activeStep);
-  // }
-
   makeAPICall(fileNetAuctionDetail: any) {
-    console.log('makeAPICall');
     return this.auctionServc.uploadAuctionImages(fileNetAuctionDetail).subscribe(
       (data) => {
         console.log('auctionCreateResp', data);

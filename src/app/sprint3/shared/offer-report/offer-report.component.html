@@ -1,14 +1,14 @@
 <div style="padding: 15px; margin-top: 30px;">
     <div style="display: flex;justify-content: space-between;">
 
-        <p class="text-primary font-weight-500" style="font-size: 21px;">{{
+        <p class="text-normal font-weight-500" style="font-size: 21px;">{{
             'auctionSettings.tab5' | translate }}</p>
 
         <div style="display: flex; align-items: center;">
             <a class="mx-4" (click)="downloadReport()">
-                <span class="text-primary font-weight-bold text-14" style="text-decoration:underline;">
+                <span class="text-normal font-weight-bold text-14" style="text-decoration:underline;">
                     {{ 'bidderAuctions.auction_report_and_bids_submitted' | translate }}</span> &nbsp;
-                <span class="icon-download text-primary text-18"></span>
+                <span class="icon-download text-normal text-18"></span>
             </a>
 
             <div class="col-auto justify-content-end pl-0 pr-0">
@@ -24,7 +24,7 @@
 
     <div class="modal-content p-4 shadow-lg border mt-3" *ngIf="showFilterForm">
         <div class="modal-header">
-            <h3 class="modal-title text-20 text-primary font-weight-medium" id="exampleModalLabel">{{
+            <h3 class="modal-title text-20 text-normal font-weight-medium" id="exampleModalLabel">{{
                 'bidderAuctions.filter-title' | translate }}</h3>
             <button type="button" class="modal-close btn-close btn-sm" data-dismiss="modal" aria-label="Close"
                 (click)="toggleFilter();">

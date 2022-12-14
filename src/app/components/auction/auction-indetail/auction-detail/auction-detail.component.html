@@ -19,12 +19,30 @@
         </div>
     </div>
 
+    <div *ngIf="atLeastOneRequired" class="alert alert-outline alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert-wrapper">
+            <div class="alert-body">
+                <i class="alert-icon">
+                    <span class="icon-filled-wrong"></span>
+                </i>
+                <div class="alert-content">
+                    <p class="text-14">{{ 'validations.addAtleastOne' | translate}}</p>
+                </div>
+            </div>
+            <div class="alert-action">
+                <button type="button" class="close pt-0" style="outline: none;" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="py-3 mb-3">
         <h4>
             <!-- <ul class="list list-group list-group-horizontal float-left">
                 <li class="m-2 text-muted">ObjectId: {{ ObjectId }}</li>
                 <li class="m-2 text-muted">DraftId: {{DraftId}}</li>
-                <li class="m-2 text-primary">
+                <li class="m-2 text-normal">
                     <div class="input-group">
                         <input type="text" style="width:50px; height: 30px" [(ngModel)]="sCount" class="form-control p-1" placeholder="1" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
@@ -147,9 +165,9 @@
                                 method is required</div>
                         </div>
                     </div>
-                    <div class="col-md-12 mb-3" *ngIf="atLeastOneRequired">
+                    <!-- <div class="col-md-12 mb-3" *ngIf="atLeastOneRequired">
                         <div class="invalid-feedback">{{ 'message.failure_atleastOne_auction' | translate }} </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="col-md-6 mb-3">
                         <label class="d-flex" for="validationCustom02">Previous reference number</label>
                         <div class="search-group search-custom">
@@ -170,8 +188,7 @@
                             id="validationCustom01" />
                         <div *ngIf="submitted && form['auctionName'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionName'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp3' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.auctionName' | translate }}</div>
                             <div *ngIf="form['auctionName'].errors['minlength']">{{ 'message.failure_minCharAuctionName'
                                 | translate }}</div>
                         </div>
@@ -188,8 +205,7 @@
                             id="validationCustom01" [required]="true" />
                         <div *ngIf="submitted && form['auctionProduct'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionProduct'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp4' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.auctionProduct' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -212,8 +228,7 @@
                         </select>
                         <div *ngIf="submitted && form['auctionManager'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionManager'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp31' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.auctionMode' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -233,8 +248,7 @@
                         </div>
                         <div *ngIf="submitted && form['auctionDesc'].errors" class="invalid-feedback">
                             <div *ngIf="form['auctionDesc'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp5' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.auctionDesc' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -387,8 +401,7 @@
                         </div>
                         <div *ngIf="submitted && form['startPrice'].errors" class="invalid-feedback">
                             <div *ngIf="form['startPrice'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.auctionStartPrice' | translate }}</div>
                             <div *ngIf="form['startPrice'].errors['min']">{{
                                 'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
                                 'auctioncreate.greater-then-zero' | translate }}</div>
@@ -458,8 +471,7 @@
                         </div>
                         <div *ngIf="submitted && form['commissionType'].errors" class="invalid-feedback">
                             <div *ngIf="form['commissionType'].errors['required']">{{
-                                'auctioncreate.auctiondetails.section1_formGrp19' | translate }} {{
-                                'auctioncreate.page-validerror' | translate }}</div>
+                                'validations.commissionType' | translate }}</div>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -481,7 +493,7 @@
                 <h4 class="pb-4 text-20">{{ 'auctioncreate.auctiondetails.section1_formAttachTitle' | translate }}</h4>
                 <h5 class="pb-1 text-16" *ngIf="ViewMode != 'view'">{{
                     'auctioncreate.auctiondetails.section1_formAttachSubTitle' | translate }}</h5>
-                <p class="text-primary text-12" *ngIf="ViewMode != 'view'">{{
+                <p class="text-normal text-12" *ngIf="ViewMode != 'view'">{{
                     'auctioncreate.auctiondetails.section1_formAttachPara' | translate }}</p>
                 <div class="row no-gutters">
                     <div class="col-12" *ngIf="ViewMode != 'view'">
@@ -712,7 +724,7 @@
                 data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
                     'message.success_draft_title' | translate }} </h4>
@@ -771,7 +783,7 @@
                 data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
                     'message.success_cancel_title' | translate }} </h4>
@@ -792,7 +804,7 @@
                 data-dismiss="modal" aria-label="Close">
                 <span class="icon-close"></span>
             </button>
-            <span class="icon-Check-shapes text-primary-light text-40 mb-4"></span>
+            <span class="icon-Check-shapes text-normal-light text-40 mb-4"></span>
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title text-24 font-regular text-center" id="exampleModalLabel"> {{
                     'message.success_attach_title' | translate }} </h4>

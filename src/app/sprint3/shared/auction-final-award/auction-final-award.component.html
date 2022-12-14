@@ -28,7 +28,7 @@
         <p class="text-16 text-dark mb-2">{{ 'bidderSendInvoice.no' | translate }} {{finalaward.bidderNo}} </p>
         <!-- BidCrNumber -->
         <a *ngIf="!showAttachLoader" (click)="openFile(fbgaDoc,'download')"
-          class="text-primary text-14 font-weight-bold d-flex" style="text-decoration: none;">
+          class="text-normal text-14 font-weight-bold d-flex" style="text-decoration: none;">
 
           <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' |
             translate}}</span>&nbsp;&nbsp;
@@ -37,7 +37,7 @@
         <div *ngIf="showAttachLoader">
           <span style="text-decoration: underline;">{{'bidderSendInvoice.final_warranty' | translate}}</span>
           &nbsp;
-          <div class="spinner-border text-primary"
+          <div class="spinner-border text-normal"
             style="font-size: 12px;width: 20px !important;height: 20px !important;" role="status">
             <span class="sr-only">Loading...</span>
           </div>
@@ -47,7 +47,7 @@
 
     <div class="top-card-right-right">
       <div>
-        <a (click)="downloadPDF()" class="text-primary text-14 d-flex font-weight-bold"
+        <a (click)="downloadPDF()" class="text-normal text-14 d-flex font-weight-bold"
           style="text-decoration: none; justify-content: end;">
 
 

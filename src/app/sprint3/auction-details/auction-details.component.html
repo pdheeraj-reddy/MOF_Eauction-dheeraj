@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="heading">
-                <h1 class="text-20 text-primary font-weight-medium">{{ 'bidderAuctionDetails.AuctionDetails' | translate
+                <h1 class="text-20 text-normal font-weight-medium">{{ 'bidderAuctionDetails.AuctionDetails' | translate
                     }}</h1>
             </div>
         </div>
@@ -178,10 +178,10 @@
             <div class="card" style="max-height: 775px; width: 26%; height: fit-content;">
                 <!-- Top section  -->
                 <div>
-                    <p class="text-20 text-primary m-3 mt-5 font-weight-bold">
+                    <p class="text-20 text-normal m-3 mt-5 font-weight-bold">
                         {{ 'bidderAuctionDetails.AuctionSettings' | translate}}
                     </p>
-                    <p class="text-12 text-primary m-3 mb-2">{{
+                    <p class="text-12 text-normal m-3 mb-2">{{
                         'bidderAuctionDetails.auction-settings.You-can-manage-the-auction' | translate }}
                     </p>
 
@@ -637,7 +637,7 @@
                                     {{fullImage?.index || 1}} {{'sprint3_auction_detail.of' | translate }}
                                     {{slidesStore?.length}}</p>
                             </div>
-                            <p class="text-primary font-weight-bold text-22" style="margin: 0 0 14px !important;">
+                            <p class="text-normal font-weight-bold text-22" style="margin: 0 0 14px !important;">
                                 {{upcomingAuction.auctionnote1}}</p>
 
                             <p class="text-16 text-muted" style="margin: 0 0 14px !important;">
@@ -650,7 +650,7 @@
                             </p>
 
                             <p class="text-14 text-black" style="margin: 0 0 14px !important;">
-                                <!-- <span class="icon-calendar text-primary font-weight-bold text-20"></span> -->
+                                <!-- <span class="icon-calendar text-normal font-weight-bold text-20"></span> -->
                                 <img src="assets/icons/calendar-auction.svg" alt="">
                                 &nbsp;
                                 {{'bidderAuctionDetails.AuctionStarts' | translate }} :
@@ -660,7 +660,7 @@
                             </p>
 
                             <p class="text-14 text-black" style="margin: 0 0 14px !important;">
-                                <span class="text-primary font-weight-bold text-20"><img
+                                <span class="text-normal font-weight-bold text-20"><img
                                         src="/assets/icons/auction-primary.svg" alt=""></span>&nbsp;&nbsp;
                                 {{'bidderAuctionDetails.BiddingIs' | translate }} : {{auctionBiddingStatus | translate}}
                             </p>
@@ -692,7 +692,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.AuctionStartPrice' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="text-primary">
+                                                                <div class="text-normal">
                                                                     {{upcomingAuction.important_info?.auctionstartprice
                                                                     |
                                                                     number}} {{'common.SAR' | translate}} </div>
@@ -704,7 +704,7 @@
                                                                 <label>{{
                                                                     "bidderAuctionDetails.InitialGuaranteePercentage"
                                                                     | translate }}</label>
-                                                                <div class="text-primary">
+                                                                <div class="text-normal">
                                                                     {{upcomingAuction.important_info?.guarantee_per |
                                                                     number:'1.0-2'}} %
 
@@ -716,7 +716,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.CommissionRate' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="text-primary">
+                                                                <div class="text-normal">
                                                                     {{commissionRateValue | number:'1.0-2' }}%
                                                                 </div>
                                                             </div>
@@ -730,7 +730,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.EndOfBidding' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="row text-primary" style="width: 133%;">
+                                                                <div class="row text-normal" style="width: 133%;">
                                                                     <span class="col-md-6"
                                                                         style="max-width: 50% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;&nbsp;
 
@@ -752,7 +752,7 @@
                                                                 <label>{{ 'bidderAuctionDetails.BidOpeningDate' |
                                                                     translate
                                                                     }}</label>
-                                                                <div class="row text-primary" style="width: 133%;">
+                                                                <div class="row text-normal" style="width: 133%;">
                                                                     <span class="col-md-6"
                                                                         style="max-width: 50% !important;">
                                                                         {{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;&nbsp;
@@ -809,7 +809,7 @@
                                                     <div class="form-group">
                                                         <label>{{ 'bidderAuctionDetails.AuctionStartPrice' | translate
                                                             }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{upcomingAuction.important_info?.auctionstartprice |
                                                             number:'1.0-2'}} {{'common.SAR' | translate}} </div>
                                                     </div>
@@ -820,7 +820,7 @@
                                                         <label>{{
                                                             "bidderAuctionDetails.InitialGuaranteePercentage"
                                                             | translate }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{upcomingAuction.important_info?.guarantee_per |
                                                             number:'1.0-2'}} %
 
@@ -831,7 +831,7 @@
                                                     <div class="form-group">
                                                         <label>{{ 'bidderAuctionDetails.CommissionRate' | translate
                                                             }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{commissionRateValue | number:'1.0-2'}} %
                                                         </div>
                                                     </div>
@@ -844,7 +844,7 @@
                                                     <div class="form-group">
                                                         <label>{{ 'bidderAuctionDetails.EndOfBidding' | translate
                                                             }}</label>
-                                                        <div class="row text-primary">
+                                                        <div class="row text-normal">
                                                             <span class="col-md-6"
                                                                 style="max-width: 47% !important;">{{upcomingAuction.important_info?.end_biddingdate}}</span>&nbsp;
 
@@ -864,7 +864,7 @@
                                                     <div class="form-group">
                                                         <label>{{ 'bidderAuctionDetails.BidOpeningDate' | translate
                                                             }}</label>
-                                                        <div class="row text-primary">
+                                                        <div class="row text-normal">
                                                             <span class="col-md-6"
                                                                 style="max-width: 47% !important;">{{upcomingAuction.important_info?.open_biddingdate}}</span>&nbsp;
 
@@ -921,7 +921,7 @@
                                                         'bidderAuctionDetails.auction-details.AuctionReferenceNumber'
                                                         |
                                                         translate }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{upcomingAuction.auction_detail?.auctionId}} </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
@@ -929,7 +929,7 @@
                                                         'bidderAuctionDetails.auction-details.AuctionType' |
                                                         translate
                                                         }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{auctionType | translate}} </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
@@ -937,7 +937,7 @@
                                                         'bidderAuctionDetails.auction-details.BiddingMethod' |
                                                         translate
                                                         }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{auctionBiddingMethod | translate}} </div>
                                                 </div>
                                             </div>
@@ -947,14 +947,14 @@
                                                         'bidderAuctionDetails.auction-details.AuctionName' |
                                                         translate
                                                         }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{upcomingAuction.auction_detail?.auctionName}} </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom01">{{
                                                         'bidderAuctionDetails.auction-details.AuctionProducts' |
                                                         translate }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{upcomingAuction.auction_detail?.auctionProduct}} </div>
                                                 </div>
                                             </div>
@@ -963,7 +963,7 @@
                                                     <label for="validationCustom01">{{
                                                         'bidderAuctionDetails.auction-details.EntityNo' | translate
                                                         }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{upcomingAuction.auction_detail?.entityNo}} </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
@@ -971,12 +971,12 @@
                                                         'bidderAuctionDetails.auction-details.EntityName' |
                                                         translate
                                                         }}</label>
-                                                    <div class="text-primary">
+                                                    <div class="text-normal">
                                                         {{upcomingAuction.auction_detail?.entityName}} </div>
                                                 </div>
                                                 <!-- <div class="col-md-4 mb-3">
                                                         <label for="validationCustom01">The period of presentation of products in the market</label>
-                                                        <div class="text-primary">3 months</div>
+                                                        <div class="text-normal">3 months</div>
                                                     </div> -->
                                             </div>
                                             <div class="form-row">
@@ -986,7 +986,7 @@
                                                             'bidderAuctionDetails.auction-details.AuctionDescription'
                                                             |
                                                             translate }} </label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{upcomingAuction.auction_detail?.auctionDesc}} </div>
                                                     </div>
                                                 </div>
@@ -1003,7 +1003,7 @@
                                                         <label>{{
                                                             'bidderAuctionDetails.auction-details.BiddingBegins' |
                                                             translate }}</label>
-                                                        <div class="row text-primary">
+                                                        <div class="row text-normal">
                                                             <span class="col-md-6"
                                                                 style="max-width: 45% !important;">{{upcomingAuction.auction_detail?.auctionStartDate}}</span>
 
@@ -1022,7 +1022,7 @@
                                                         <label>{{
                                                             'bidderAuctionDetails.auction-details.EndOfBidding' |
                                                             translate }}</label>
-                                                        <div class="row text-primary">
+                                                        <div class="row text-normal">
                                                             <span class="col-md-6"
                                                                 style="max-width: 45% !important;">{{upcomingAuction.auction_detail?.auctionEndDate}}</span>
                                                             <ul class="col list list-primary-bullets d-inline-block">
@@ -1040,7 +1040,7 @@
                                                             "bidderAuctionDetails.auction-details.HowToStartTheAuction"
                                                             |
                                                             translate }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{startAuctionMethod | translate}} </div>
                                                     </div>
                                                 </div>
@@ -1051,7 +1051,7 @@
                                                         <label>{{
                                                             "bidderAuctionDetails.auction-details.BidOpeningDate" |
                                                             translate }}</label>
-                                                        <div class="row text-primary">
+                                                        <div class="row text-normal">
                                                             <span class="col-md-6"
                                                                 style="max-width: 45% !important;">{{upcomingAuction.auction_detail?.auctionAnncStartDate}}</span>
                                                             <ul class="col list list-primary-bullets d-inline-block">
@@ -1079,7 +1079,7 @@
                                                             "bidderAuctionDetails.auction-details.AuctionStartPrice"
                                                             |
                                                             translate }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{upcomingAuction.auction_detail?.startPrice |
                                                             number:'1.0-2'}}
                                                             {{ "common.SAR" | translate }}
@@ -1091,7 +1091,7 @@
                                                         <label>{{
                                                             "bidderAuctionDetails.auction-details.WarrantyPercentage"
                                                             | translate }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{upcomingAuction.auction_detail?.gnteePercentage |
                                                             number:'1.0-2'}}
                                                             %
@@ -1105,7 +1105,7 @@
                                                         <label>{{
                                                             'bidderAuctionDetails.auction-details.CommissionType' |
                                                             translate }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{ nextFinancial | translate }}
                                                         </div>
                                                     </div>
@@ -1115,7 +1115,7 @@
                                                         <label>{{
                                                             "bidderAuctionDetails.auction-details.Pursuit-percentage-commission"
                                                             | translate }}</label>
-                                                        <div class="text-primary"> {{
+                                                        <div class="text-normal"> {{
                                                             upcomingAuction.auction_detail?.pursuitPerCommission |
                                                             number :
                                                             '1.0-2'}} %
@@ -1127,7 +1127,7 @@
                                                         <label>{{
                                                             "bidderAuctionDetails.auction-details.Final-guarantee-payment-date"
                                                             | translate }}</label>
-                                                        <div class="text-primary">
+                                                        <div class="text-normal">
                                                             {{upcomingAuction.auction_detail?.finalgnteePaymentDays}}
                                                             {{"days" | translate}}
                                                         </div>
@@ -1290,12 +1290,12 @@
             <div [hidden]="!editmode2" class="card" style="width: 73%;">
 
                 <div class="mt-5 mr-5 ml-5">
-                    <p class="text-18 text-primary font-weight-bold">
+                    <p class="text-18 text-normal font-weight-bold">
                         <span class="icon-information"></span>&nbsp;
                         {{'bidderAuctionDetails.auction-instruction.AuctionInstructions' | translate }}
                     </p>
 
-                    <p class="mt-4 text-14 text-primary font-weight-bold">
+                    <p class="mt-4 text-14 text-normal font-weight-bold">
                         {{'bidderAuctionDetails.auction-instruction.AuctionParticipationInstructions' | translate }}
                     </p>
 
@@ -1320,7 +1320,7 @@
                     <br>
                     <hr class="my-4">
 
-                    <p class="text-14 text-primary font-weight-bold" style="margin-top: 40px;">
+                    <p class="text-14 text-normal font-weight-bold" style="margin-top: 40px;">
                         {{'bidderAuctionDetails.auction-instruction.AuctionWorkflow' | translate }}
                     </p>
                     <br>

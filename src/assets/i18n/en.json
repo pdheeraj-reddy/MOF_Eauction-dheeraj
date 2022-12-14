@@ -280,7 +280,7 @@
                 "popup_formGrp8-taletd1": "attached File",
                 "popup_formGrp9": "Product Pictures",
                 "popup_formGrp10": "Delivery Date",
-                "popup_formGrp11": "Delivery Time Date",
+                "popup_formGrp11": "Delivery Time",
                 "popup_formGrp11-plch": "Choose the time",
                 "popup_formGrp12": "National Address",
                 "popup_formGrp13": "Region",
@@ -334,6 +334,13 @@
         "back": "Cancel"
     },
     "validations": {
+        "addAtleastOne": "At least one of the Mandatory fields need to be filled",
+        "auctionName": "Please enter the Auction name",
+        "auctionProduct": "Please specify the auction products",
+        "auctionMode": "Please choose the auction moderator",
+        "auctionDesc": "Please add a description about the auction",
+        "auctionStartPrice": "Please enter the starting price of the auction (in Saudi riyals)",
+        "commissionType": "Please choose the commission type",
         "startBidDate": "Please enter the beginning of bidding date",
         "startBidTime": "Please enter the bidding time",
         "endBidDate": "Please enter the end of bidding date",
@@ -352,7 +359,13 @@
         "region": "Please enter the region",
         "city": "Please enter the city",
         "neighbour": "Please enter neighborhood name",
-        "street": "Please enter street name"
+        "street": "Please enter street name",
+        "productName": "Please enter the Product Name",
+        "productCondition": "Please choose the Product Condition",
+        "skuNumber": "Please enter the SKU Number",
+        "quantity": "Please enter the Quantity",
+        "bookValue": "Please enter the Book value of the product",
+        "productSpecs": "Please enter the Product Specification"
     },
     "OK": "OK",
     "ServiceUnavailable": "Service Unavailable",

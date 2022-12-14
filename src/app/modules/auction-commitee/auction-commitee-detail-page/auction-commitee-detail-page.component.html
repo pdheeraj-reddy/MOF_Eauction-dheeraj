@@ -1,30 +1,30 @@
 <div class="col-12 mt-1">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb px-0">
-            <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-detail.bcrumb1" | translate }}</a></li>
-            <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-detail.bcrumb2" | translate }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> {{ "auctionCommittee.ac-detail.bcrumb3" | translate }}
-            </li>
-        </ol>
-    </nav>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb px-0">
+      <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-detail.bcrumb1" | translate }}</a></li>
+      <li class="breadcrumb-item"><a href="#">{{ "auctionCommittee.ac-detail.bcrumb2" | translate }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> {{ "auctionCommittee.ac-detail.bcrumb3" | translate }}
+      </li>
+    </ol>
+  </nav>
 </div>
 <div class="col-12">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="heading">
-                <h1 class="text-20 text-primary font-weight-medium"> {{ "auctionCommittee.ac-detail.pageTitle" | translate }}
-                </h1>
-            </div>
-        </div>
-        <div class="card-grp">
-            <div style="
+  <div class="row">
+    <div class="col-md-12">
+      <div class="heading">
+        <h1 class="text-20 text-normal font-weight-medium"> {{ "auctionCommittee.ac-detail.pageTitle" | translate }}
+        </h1>
+      </div>
+    </div>
+    <div class="card-grp">
+      <div style="
           display: flex;
           border: 1px solid #cccccc;
           border-radius: 8px;
           width: 98%;
           margin-bottom: 20px;
         ">
-                <div style="
+        <div style="
             background-color: #fef7e8;
             color: #f9b122;
             padding-top: 20px;
@@ -32,12 +32,13 @@
             padding-left: 25px;
             width: 32%;
           ">
-                    <div *ngIf="detailPageResponse.status == 'Published'">
-                        <p style="font-weight: bold; color: #f9b122; font-size: 18px"> {{ "auctionCommittee.ac-detail.sec1-text" | translate }} </p>
-                        <p class="text-14" style="color: #f9b122">{{ "auctionCommittee.ac-detail.sec1-subtext" | translate }}</p>
-                    </div>
-                </div>
-                <div style="
+          <div *ngIf="detailPageResponse.status == 'Published'">
+            <p style="font-weight: bold; color: #f9b122; font-size: 18px"> {{ "auctionCommittee.ac-detail.sec1-text" |
+              translate }} </p>
+            <p class="text-14" style="color: #f9b122">{{ "auctionCommittee.ac-detail.sec1-subtext" | translate }}</p>
+          </div>
+        </div>
+        <div style="
             color: #117abe;
             background-color: #ffff;
             padding-bottom: 15px;
@@ -45,14 +46,19 @@
             padding-left: 35px;
             width: 35%;
           ">
-                    <p>{{ "auctionCommittee.ac-detail.sec2" | translate }}</p>
-                    <div style="display: flex">
-                        <p style="color: #08594d">{{ detailPageResponse.startDate }}</p> &nbsp; &nbsp; <span style="font-size: 6px; margin-top: 7px; color: #32ad71" class="icon-fiber_manual_record"></span> &nbsp; &nbsp;
-                        <p style="color: #cac1c1">{{ detailPageResponse.startTime }}</p>
-                    </div>
-                </div>
-                <div class="dropdown dropdown-filters-container d-inline">
-                    <button (click)="openOffers()" class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="
+          <p>{{ "auctionCommittee.ac-detail.sec2" | translate }}</p>
+          <div style="display: flex">
+            <p style="color: #08594d">{{ detailPageResponse.startDate }}</p> &nbsp; &nbsp; <span
+              style="font-size: 6px; margin-top: 7px; color: #32ad71" class="icon-fiber_manual_record"></span> &nbsp;
+            &nbsp;
+            <p style="color: #cac1c1">{{ detailPageResponse.startTime }}</p>
+          </div>
+        </div>
+        <div class="dropdown dropdown-filters-container d-inline">
+          <button (click)="openOffers()"
+            class="btn btn-ghost fill-primary-light-green dropdown-toggle btn-with-badge filters-btn shadow-sm"
+            type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            style="
               height: 50px;
               width: 200px;
               margin-top: 35px;
@@ -63,9 +69,9 @@
               color: white;
               border-radius: 5px;
             "> {{ "auctionCommittee.ac-detail.openOffers" | translate }} </button>
-                </div>
-            </div>
-            <!-- <div class="top-card">
+        </div>
+      </div>
+      <!-- <div class="top-card">
         
         <div class="top-card-left">
           <div
@@ -116,133 +122,139 @@
           </div>
         </div>
       </div> -->
-            <div class="left-card">
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between">
-                        <div>
-                            <div class="status-code-rn-detail">
-                                <!-- <span class="icon-eye-open"></span> -->{{ detailPageResponse.status | translate}}
-                            </div>
-                        </div>
-                        <div>
-                            <div style="width: 150px">
-                                <label for="end-through" style="color: #4f5457; font-size: 12px">{{ "auctionCommittee.ac-detail.timer" |
+      <div class="left-card">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between">
+            <div>
+              <div class="status-code-rn-detail">
+                <!-- <span class="icon-eye-open"></span> -->{{ detailPageResponse.status | translate}}
+              </div>
+            </div>
+            <div>
+              <div style="width: 150px">
+                <label for="end-through" style="color: #4f5457; font-size: 12px">{{ "auctionCommittee.ac-detail.timer" |
                   translate }}</label>
-                                <br>
-                                <countdown [config]="detailPageResponse.config"></countdown>
-                                <div style="display: flex; justify-content: space-evenly">
-                                    <div style="
+                <br>
+                <countdown [config]="detailPageResponse.config"></countdown>
+                <div style="display: flex; justify-content: space-evenly">
+                  <div style="
                       display: flex;
                       flex-direction: column;
                       align-items: center;
                     ">
-                                        <label for="day" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
+                    <label for="day" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
                       "auctionCommittee.ac-detail.day" | translate }}</label>
-                                    </div>
-                                    <div style="
+                  </div>
+                  <div style="
                       display: flex;
                       flex-direction: column;
                       align-items: center;
                     ">
-                                        <label for="hour" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
+                    <label for="hour" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
                       "auctionCommittee.ac-detail.hour" | translate }}</label>
-                                    </div>
-                                    <div style="
+                  </div>
+                  <div style="
                       display: flex;
                       flex-direction: column;
                       align-items: center;
                     ">
-                                        <label for="accurate" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
+                    <label for="accurate" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
                       "auctionCommittee.ac-detail.accurate" | translate }}</label>
-                                    </div>
-                                    <div style="
+                  </div>
+                  <div style="
                       display: flex;
                       flex-direction: column;
                       align-items: center;
                     ">
-                                        <label for="second" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
+                    <label for="second" style="color: #32ad71; font-size: 12px; font-weight: 500">{{
                       "auctionCommittee.ac-detail.second" | translate }}</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display: flex">
-                        <div class="left-left-card">
-                            <div class="card-body">
-                                <div>
-                                    <button class="btn btn-primary-light btn-sm img-btn">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex">
+            <div class="left-left-card">
+              <div class="card-body">
+                <div>
+                  <button class="btn btn-primary-light btn-sm img-btn">
                     <span class="icon-eye-open"></span>{{ "auctionCommittee.ac-detail.detail_btn" | translate }}
                   </button>
-                                    <img src="https://picsum.photos/200/150" class="card-img-top" alt="..." />
-                                </div>
-                                <p style="color: #414042; font-size: 12px; text-align: center"> 10 of 23 </p>
-                                <h5 class="card-title"> {{ detailPageResponse.describtion }} </h5>
-                                <p class="card-text"> {{ detailPageResponse.detailedDescription }} </p>
-                                <div style="color: #4f5457; font-size: 18px">
-                                    <img src="assets/icons/layers.png" alt="" width="20px" /> {{ detailPageResponse.productTotal }} {{ "auctionCommittee.ac-detail.product" | translate }}
-                                </div>
-                                <div style="color: #4f5457; font-size: 18px">
-                                    <span class="icon-calendar" style="color: #005b4f;font-weight: bold;"></span> {{ detailPageResponse.startDate }} {{ detailPageResponse.startTime }}
-                                </div>
-                                <div style="color: #4f5457; font-size: 18px">
-                                    <!-- Icon not available -->
-                                    <img src="assets\icon\Details.png" alt="" width="20px" /> {{ "auctionCommittee.ac-detail.biddingIs" | translate }} {{ detailPageResponse.ZzCloseInd | translate}}
-                                </div>
-                                <button class="btn collapse-card-inside" type="button" data-toggle="collapse" data-target="#importantInformation" aria-expanded="false" aria-controls="collapseExample">
+                  <img src="https://picsum.photos/200/150" class="card-img-top" alt="..." />
+                </div>
+                <p style="color: #414042; font-size: 12px; text-align: center"> 10 of 23 </p>
+                <h5 class="card-title"> {{ detailPageResponse.describtion }} </h5>
+                <p class="card-text"> {{ detailPageResponse.detailedDescription }} </p>
+                <div style="color: #4f5457; font-size: 18px">
+                  <img src="assets/icons/layers.png" alt="" width="20px" /> {{ detailPageResponse.productTotal }} {{
+                  "auctionCommittee.ac-detail.product" | translate }}
+                </div>
+                <div style="color: #4f5457; font-size: 18px">
+                  <span class="icon-calendar" style="color: #005b4f;font-weight: bold;"></span> {{
+                  detailPageResponse.startDate }} {{ detailPageResponse.startTime }}
+                </div>
+                <div style="color: #4f5457; font-size: 18px">
+                  <!-- Icon not available -->
+                  <img src="assets\icon\Details.png" alt="" width="20px" /> {{ "auctionCommittee.ac-detail.biddingIs" |
+                  translate }} {{ detailPageResponse.ZzCloseInd | translate}}
+                </div>
+                <button class="btn collapse-card-inside" type="button" data-toggle="collapse"
+                  data-target="#importantInformation" aria-expanded="false" aria-controls="collapseExample">
                   <p style="margin: 0; color: #414042">{{ "auctionCommittee.ac-detail.impInfo" | translate }}</p>
                   <span class="icon-expand_more" style="color: #08594d"></span>
                 </button>
-                                <div class="collapse" id="importantInformation">
-                                    <div class="card card-body" style="
+                <div class="collapse" id="importantInformation">
+                  <div class="card card-body" style="
                       border: none;
                       display: flex;
                       flex-direction: row;
                       flex-wrap: wrap;
                     ">
-                                        <div>
-                                            <label>{{ "auctionCommittee.ac-detail.auctionPrice" | translate }}</label>
-                                            <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.auctionPrice }} </p>
-                                        </div>
-                                        <div style="padding-left: 15px">
-                                            <label>{{ "auctionCommittee.ac-detail.initialGuarantee" | translate }}</label>
-                                            <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.initialGauPercentage }} </p>
-                                        </div>
-                                        <div style="padding-left: 15px">
-                                            <label>{{ "auctionCommittee.ac-detail.commissionRate" | translate }}</label>
-                                            <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.commissionRate }} </p>
-                                        </div>
-                                        <div>
-                                            <label>{{ "auctionCommittee.ac-detail.start" | translate }}</label>
-                                            <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.startDate }} {{ detailPageResponse.startTime }} </p>
-                                        </div>
-                                        <div style="padding-left: 15px">
-                                            <label>{{ "auctionCommittee.ac-detail.end" | translate }}</label>
-                                            <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.endDate }} {{ detailPageResponse.endTime }} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-left-card">
-                            <div class="card-body">
-                                <p style="color: #ffff; font-size: 21px">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
-                                <div class="list-card" *ngFor="
+                    <div>
+                      <label>{{ "auctionCommittee.ac-detail.auctionPrice" | translate }}</label>
+                      <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.auctionPrice }} </p>
+                    </div>
+                    <div style="padding-left: 15px">
+                      <label>{{ "auctionCommittee.ac-detail.initialGuarantee" | translate }}</label>
+                      <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.initialGauPercentage }} </p>
+                    </div>
+                    <div style="padding-left: 15px">
+                      <label>{{ "auctionCommittee.ac-detail.commissionRate" | translate }}</label>
+                      <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.commissionRate }} </p>
+                    </div>
+                    <div>
+                      <label>{{ "auctionCommittee.ac-detail.start" | translate }}</label>
+                      <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.startDate }} {{
+                        detailPageResponse.startTime }} </p>
+                    </div>
+                    <div style="padding-left: 15px">
+                      <label>{{ "auctionCommittee.ac-detail.end" | translate }}</label>
+                      <p style="color: #005b4e; font-size: 14px"> {{ detailPageResponse.endDate }} {{
+                        detailPageResponse.endTime }} </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="right-left-card">
+              <div class="card-body">
+                <p style="color: #ffff; font-size: 21px">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
+                <div class="list-card" *ngFor="
                     let item of detailPageResponse.latestOffers;
                     let i = index
                   ">
-                                    <div style="display: flex; justify-content: space-between">
-                                        <p style="margin: 0">{{ item.bidderName }}</p>
-                                        <p style="margin: 0">#{{ item.siNo }}</p>
-                                    </div>
-                                    <p style="
+                  <div style="display: flex; justify-content: space-between">
+                    <p style="margin: 0">{{ item.bidderName }}</p>
+                    <p style="margin: 0">#{{ item.siNo }}</p>
+                  </div>
+                  <p style="
                       color: #414042;
                       opacity: 0.61;
                       font-size: 12px;
                       margin: 0;
                     "> {{ item.time }} </p>
-                                </div>
-                                <!-- <div class="mt-4 row margin-auto">
+                </div>
+                <!-- <div class="mt-4 row margin-auto">
                   <div class="mb-5">
                     <nav aria-label="..." class="nav-pagination">
                       <ul class="pagination">
@@ -279,26 +291,29 @@
                     </nav>
                   </div>
                 </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn collapse-card-inside" type="button" data-toggle="collapse" data-target="#auctionDetails" aria-expanded="false" aria-controls="collapseExample">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn collapse-card-inside" type="button" data-toggle="collapse" data-target="#auctionDetails"
+          aria-expanded="false" aria-controls="collapseExample">
           <p style="margin: 0; color: #414042">{{ "auctionCommittee.ac-detail.auctionDetails" | translate }}</p>
           <span class="icon-expand_more" style="color: #08594d"></span>
         </button>
-                <div class="collapse" id="auctionDetails">
-                    <app-auction-req-details [preAuctionData]="preAUctionData">
-                    </app-auction-req-details>
-                </div>
-            </div>
-            <div class="right-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 21px; color: #005b4e"> {{ "auctionCommittee.ac-detail.auctionSetting" | translate }} </h5>
-                        <p class="card-text" style="font-size: 12px; color: #005b4e"> {{ "auctionCommittee.ac-detail.subHead" | translate }} </p>
-                        <div class="icon-card-grp">
-                            <button class="icon-card">
+        <div class="collapse" id="auctionDetails">
+          <app-auction-req-details [preAuctionData]="preAUctionData">
+          </app-auction-req-details>
+        </div>
+      </div>
+      <div class="right-card">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size: 21px; color: #005b4e"> {{
+              "auctionCommittee.ac-detail.auctionSetting" | translate }} </h5>
+            <p class="card-text" style="font-size: 12px; color: #005b4e"> {{ "auctionCommittee.ac-detail.subHead" |
+              translate }} </p>
+            <div class="icon-card-grp">
+              <button class="icon-card">
                 <span class="icon-pin"></span>
                 <p style="
                     font-size: 14px;
@@ -307,7 +322,7 @@
                     font-weight: 500;
                   "> {{ "auctionCommittee.ac-detail.tab1" | translate }} </p>
               </button>
-                            <button class="icon-card">
+              <button class="icon-card">
                 <span class="icon-pin"></span>
                 <p style="
                     font-size: 14px;
@@ -316,7 +331,7 @@
                     font-weight: 500;
                   "> {{ "auctionCommittee.ac-detail.tab2" | translate }} </p>
               </button>
-                            <button class="icon-card">
+              <button class="icon-card">
                 <span class="icon-users"></span>
                 <p style="
                     font-size: 14px;
@@ -325,7 +340,7 @@
                     font-weight: 500;
                   "> {{ "auctionCommittee.ac-detail.tab3" | translate }} </p>
               </button>
-                            <button class="icon-card">
+              <button class="icon-card">
                 <span class="icon-users"></span>
                 <p style="
                     font-size: 14px;
@@ -334,7 +349,7 @@
                     font-weight: 500;
                   "> {{ "auctionCommittee.ac-detail.tab4" | translate }} </p>
               </button>
-                            <button class="icon-card disabled" disabled>
+              <button class="icon-card disabled" disabled>
                 <span class="icon-check_circle_outline"></span>
                 <p style="
                     font-size: 14px;
@@ -343,14 +358,15 @@
                     font-weight: 500;
                   "> {{ "auctionCommittee.ac-detail.tab5" | translate }} </p>
               </button>
-                            <p style="color: #202842; font-size: 16px; margin: 0"> {{ "auctionCommittee.ac-detail.more" | translate }}
-                            </p>
-                            <a href="#" style="color: #117abe; font-size: 15px; margin-top: 10px">{{
+              <p style="color: #202842; font-size: 16px; margin: 0"> {{ "auctionCommittee.ac-detail.more" | translate }}
+              </p>
+              <a href="#" style="color: #117abe; font-size: 15px; margin-top: 10px">{{
                 "auctionCommittee.ac-detail.clickHere" | translate }}</a>
-                        </div>
-                        <div class="details-grp">
-                            <div class="details">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+            </div>
+            <div class="details-grp">
+              <div class="details">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                  class="bi bi-cash-coin" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
                   <path
@@ -359,16 +375,16 @@
                     d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
                   <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
                 </svg>
-                                <p>{{ "auctionCommittee.ac-detail.bids" | translate }} {{ participantsData?.bids }}</p>
-                            </div>
-                            <div class="details">
-                                <span class="icon-add-user"></span>
-                                <p>{{ "auctionCommittee.ac-detail.participant" | translate }} {{ participantsData?.participants }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p>{{ "auctionCommittee.ac-detail.bids" | translate }} {{ participantsData?.bids }}</p>
+              </div>
+              <div class="details">
+                <span class="icon-add-user"></span>
+                <p>{{ "auctionCommittee.ac-detail.participant" | translate }} {{ participantsData?.participants }}</p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

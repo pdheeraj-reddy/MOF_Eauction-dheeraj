@@ -148,8 +148,8 @@ export class AuctionProductComponent implements OnInit {
         showSwitcher: false,
         showTodayButton: false,
         icons: {
-          up: 'icon-arrow-up text-primary',
-          down: 'icon-arrow-down text-primary',
+          up: 'icon-arrow-up text-normal',
+          down: 'icon-arrow-down text-normal',
         },
       });
 
