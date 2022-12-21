@@ -214,7 +214,7 @@
         },
         "auctionproduct": {
             "section1_Title": "Product Details",
-            "section1_subheading1": "Is the address and delivery date the same?",
+            "section1_subheading1": "Do you want to make this address the 'default delivery address' for all products?",
             "section1_subheading1_opt1": "Yes",
             "section1_subheading1_opt2": "No",
             "section1_formGrp2": "Delivery Date",

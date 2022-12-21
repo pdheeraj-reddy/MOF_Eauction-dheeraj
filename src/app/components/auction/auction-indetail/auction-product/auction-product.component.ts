@@ -189,135 +189,7 @@ export class AuctionProductComponent implements OnInit {
     return result;
   }
 
-  populateSome() {
-    // this.refreshCalendarCntrl();
-    const deliveryDate = this.addDaysWRONG(new Date(), 10);
-    this.auctionProducts.value.forEach((pItem: any, index: number) => {
-      this.removeProduct(index - 1, 1, pItem);
-    });
-    this.productsFormGroup.get('sameLocNDate')?.setValue(true);
-    let sameLocNDateVal = { target: { checked: true } };
-    this.setValidation(sameLocNDateVal);
-    this.productsFormGroup.get('location')?.get('deliveryDate')?.setValue(moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-    this.productsFormGroup.get('location')?.get('deliveryTime')?.setValue('01:00 AM');
-    this.productsFormGroup.get('location')?.get('locLatitude')?.setValue('21.486256032618705');
-    this.productsFormGroup.get('location')?.get('locLongitude')?.setValue('39.19187197360076');
-    this.productsFormGroup.get('location')?.get('locRegion')?.setValue('P.O.Box : 147, Jeddah');
-    this.productsFormGroup.get('location')?.get('locCity')?.setValue('Jeddah Nozhah City');
-    this.productsFormGroup.get('location')?.get('locNeighborhood')?.setValue(' Jeddah');
-    this.productsFormGroup.get('location')?.get('locStreet')?.setValue('Nozhah City,');
-    this.productsFormGroup.get('location')?.get('notes')?.setValue('We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks.');
-    // this.productsFormGroup.get('location')?.get('notes')?.setValue('We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries.');
-    // let productsArray = [
-    //   {
-    //     productName : "ISUZU NPR 85H STANDARD CARGO",
-    //     productCondition : "New",
-    //     productSKUNumber : "UGG-BB-PNN-001",
-    //     productSerialNumber : "5",
-    //     productValue : "125800",
-    //     productSpec : "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE CAB WITH A/C 4X2 LIGHT DUTY MY2022 Light Duty Code Diesel. Car code: NPR85B1 - 85H STANDARD CARGO (4.2 Ton approx payload). Year: 2022. ENGINE: 4JJ1-TC, DIESEL, 4 CYL.",
-    //   }
-    // ];
-    // productsArray.forEach(pItem => {
-    //   this.addProducts(pItem);
-    // });
-    this.totalValue = 0;
-    this.totalQty = 0
-    this.auctionProducts.value.forEach((product: any) => {
-      this.totalValue = this.totalValue + (+product.productValue * +product.productSerialNumber);
-      this.totalQty = this.totalQty + (+product.productSerialNumber);
-    });
-    if (this.auctionProducts['controls'].length > 0) {
-      this.productsFormGroup.controls['sameLocNDate'].disable();
-    }
-  }
 
-  populateSomePL() {
-    this.showLoader = true;
-    // this.refreshCalendarCntrl();
-    const deliveryDate = this.addDaysWRONG(new Date(), 10);
-    // this.auctionProducts.value.forEach((pItem: any, index: number) => {
-    //   this.removeProduct(index - 1, 1, pItem);
-    // });
-    this.productsFormGroup.get('sameLocNDate')?.setValue(false);
-    let sameLocNDateVal = { target: { checked: false } };
-    this.setValidation(sameLocNDateVal);
-    let productsArray = [
-      {
-        productName: "ISUZU NPR 85H STANDARD CARGO",
-        productCondition: "New",
-        productSKUNumber: "UGG-BB-PNN-001",
-        productSerialNumber: "15",
-        productValue: "225000",
-        productSpec: "Model description: ISUZU NPR 85H STANDARD CHASSIS PAYLOAD 4 TON APPROX SINGLE CAB WITH A/C 4X2 LIGHT DUTY MY2022 Light Duty Code Diesel. Car code: NPR85B1 - 85H STANDARD CARGO (4.2 Ton approx payload). Year: 2022. ENGINE: 4JJ1-TC, DIESEL, 4 CYL.",
-        location: {
-          deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-          deliveryTime: "05:00 PM",
-          locLatitude: "21.501589481841094",
-          locLongitude: "39.187752100966684",
-          locRegion: "P.O.Box : 147, Jeddah",
-          locCity: "Jeddah Nozhah City",
-          locNeighborhood: "Jeddah",
-          locStreet: "Nozhah City,",
-          notes: "'We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries.",
-        }
-      },
-      {
-        productName: "The Isuzu MU-X",
-        productCondition: "Good Usage",
-        productSKUNumber: "UGG-BB-PNN-002",
-        productSerialNumber: "30",
-        productValue: "240000",
-        productSpec: "Model description: The Isuzu MU-X has 1 Diesel Engine on offer. The Diesel engine is 1898 cc . It is available with Automatic transmission.Depending upon the variant and fuel type the MU-X has a mileage of 12.31 to 13.0 kmpl & Ground clearance of MU-X is 230.",
-        location: {
-          deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-          deliveryTime: "05:00 PM",
-          locLatitude: "21.501589481841094",
-          locLongitude: "39.187752100966684",
-          locRegion: "Al Dabab Street, Al Ma'azer Dist.",
-          locCity: "Al Ma'azer Dist.",
-          locNeighborhood: "Al Ma'azer Dist.",
-          locStreet: "Al Dabab Street",
-          notes: "We are a leading provider of Mining Control Vehicles, Mining Suppression Trucks and Mining Control Trucks, which are widely used in the areas like chemical, coal, mining, steel cement, docks, construction and aggregate industries.",
-        }
-      },
-      {
-        productName: "The Isuzu NPR EarthCruiser",
-        productCondition: "Refurbished",
-        productSKUNumber: "UGG-BB-PNN-003",
-        productSerialNumber: "20",
-        productValue: "300000",
-        productSpec: "Model description: The Isuzu NPR HD platform also benefits from an American-sourced power plant, a 6.6L, 350 horsepower, 425 pound-feet, V8, produced by General Motors for use in Heavy Duty pickup trucks.",
-        location: {
-          deliveryDate: moment(deliveryDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-          deliveryTime: "05:00 PM",
-          locLatitude: "21.501589481841094",
-          locLongitude: "39.187752100966684",
-          locRegion: "P.O.Box : 18, Rouwais Dist.",
-          locCity: "Jeddah Rouwais Dist",
-          locNeighborhood: "Jeddah Rouwais Dist",
-          locStreet: "Jeddah",
-          notes: "EarthCruiser, one of America’s largest overland vehicle manufacturers, moves to a new platform for some of its models. The company switches to the Isuzu NPR Series Class 4 platform, which replaces the previous Fuso platform. This move covers the next-generation EXP and FX EarthCruiser models, as well as the CORE model.",
-        }
-      }
-    ];
-    productsArray.forEach((pItem: any, index: number) => {
-      this.addProducts(pItem);
-      this.editProduct(index);
-      this.onAddProduct('save');
-    });
-    this.totalValue = 0;
-    this.totalQty = 0;
-    this.auctionProducts.value.forEach((product: any) => {
-      this.totalValue = this.totalValue + (+product.productValue * +product.productSerialNumber);
-      this.totalQty = this.totalQty + (+product.productSerialNumber);
-    });
-    if (this.auctionProducts['controls'].length > 0) {
-      this.productsFormGroup.controls['sameLocNDate'].disable();
-    }
-    this.showLoader = false;
-    this.pageRefresh();
-  }
 
   onQuantityChange = (inc: boolean) => {
     let quantity = this.addFormGroup.get('productSerialNumber')?.value || 0
@@ -1412,8 +1284,7 @@ export class AuctionProductComponent implements OnInit {
   }
 
   removeProduct(index: number, currentPage: number, Product: any) {
-    console.log(this.addFormGroup.controls["editIndex"]);
-    const editdata = this.auctionProducts.controls[index].value;
+    const editdata = Product;
     this.files = [];
     this.docs = [];
     this.productImages.clear();

@@ -213,7 +213,7 @@
         },
         "auctionproduct": {
             "section1_Title": "تفاصيل المنتج",
-            "section1_subheading1": "هل عنوان وتاريخ التسليم واحد ؟",
+            "section1_subheading1": "هل تريد جعل هذا العنوان 'عنوان التسليم الافتراضي' لكل المنتجات ؟",
             "section1_subheading1_opt1": "نعم",
             "section1_subheading1_opt2": "لا",
             "section1_formGrp2": "تاريخ التسليم",
@@ -337,7 +337,7 @@
         "auctionProduct": "الرجاء تحديد نوع منتجات المزاد",
         "auctionMode": "الرجاء إختيار مدير مسؤول عن المزاد",
         "auctionDesc": "الرجاء إضافة وصف عن المزاد",
-        "auctionStartPrice": "(بالريال السعودي) الرجاء تحديد سعر بدء المزاد",
+        "auctionStartPrice": "الرجاء تحديد سعر بدء المزاد (بالريال السعودي) ",
         "commissionType": "الرجاء اختيار نوع العمولة",
         "addAtleastOne": "يجب ملء الحقول الاجبارية لمتابعة إنشاء المزاد",
         "startBidDate": "الرجاء إدخال تاريخ لبداية تقديم العروض في المزاد",

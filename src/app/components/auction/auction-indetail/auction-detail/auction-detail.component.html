@@ -400,8 +400,8 @@
                                 class="form-control" placeholder="150,000" [required]="true" />
                         </div>
                         <div *ngIf="submitted && form['startPrice'].errors" class="invalid-feedback">
-                            <div *ngIf="form['startPrice'].errors['required']">{{
-                                'validations.auctionStartPrice' | translate }}</div>
+                            <div *ngIf="form['startPrice'].errors['required']">
+                                {{'validations.auctionStartPrice' | translate }}</div>
                             <div *ngIf="form['startPrice'].errors['min']">{{
                                 'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
                                 'auctioncreate.greater-then-zero' | translate }}</div>
