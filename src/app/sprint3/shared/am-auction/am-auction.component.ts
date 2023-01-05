@@ -30,7 +30,7 @@ export class AmAuctionComponent implements OnInit {
   }
   showLoader: boolean = false;
   dropValProducts = [
-    // { code: "Open", disp: "Open" },
+    { code: "Live", disp: "Live" },
     { code: "Closed", disp: "Closed" }
   ];
   dropValStatus = [
@@ -133,7 +133,6 @@ export class AmAuctionComponent implements OnInit {
       console.log('this.bidderService.XCSRFToken: ', this.bidderService.XCSRFToken);
       localStorage.setItem('x-csrf-token', this.bidderService.XCSRFToken)
       this.auctionListData = this.mapping(res.body);
-      console.log("🚀🚀 ~~ this.auctionListData", this.auctionListData);
 
       if (res.body.d.results && res.body.d.results.length > 0) {
         this.PaginationServc.setPagerValues(

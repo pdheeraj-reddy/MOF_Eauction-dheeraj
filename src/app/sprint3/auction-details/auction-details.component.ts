@@ -332,7 +332,7 @@ export class AuctionDetailsComponent implements OnInit {
           this.auctionBiddingStatus = 'Closed';
         }
         else if (this.upcomingAuction?.biddingStatus == 'D') {
-          this.auctionBiddingStatus = 'Direct';
+          this.auctionBiddingStatus = 'Live';
         }
       }
 
@@ -341,7 +341,7 @@ export class AuctionDetailsComponent implements OnInit {
           this.auctionBiddingMethod = 'Closed';
         }
         else if (this.upcomingAuction.auction_detail?.BiddingMethod == 'D') {
-          this.auctionBiddingMethod = 'Direct';
+          this.auctionBiddingMethod = 'Live';
         }
       }
 
@@ -451,7 +451,9 @@ export class AuctionDetailsComponent implements OnInit {
         auctionAnncStartTime: auctionDetailList.ZzAnncSrtT ? auctionDetailList.ZzAnncSrtT !== 0 ? moment(auctionDetailList.ZzAnncSrtT, 'HH:mm:ss').format('hh:mm') : '' : '',
         bidOpeningtimeSufix: auctionDetailList.ZzAnncSrtT ? auctionDetailList.ZzAnncSrtT !== 0 ? moment(auctionDetailList.ZzAnncSrtT, 'HH:mm:ss').format('A') : '' : '',
         startPrice: (auctionDetailList.ZzBidSrtPrice) ? auctionDetailList.ZzBidSrtPrice : '',
+        incrementPrice: (auctionDetailList.ZzLowBidVl) ? auctionDetailList.ZzLowBidVl : '',
         gnteePercentage: (auctionDetailList.ZzIbgaPercent) ? auctionDetailList.ZzIbgaPercent : '',
+        FinalGnteePercentage: (auctionDetailList.ZzFbgaPercent) ? auctionDetailList.ZzFbgaPercent : '',
         commissionType: (auctionDetailList.ZzCommisionTyp) ? auctionDetailList.ZzCommisionTyp : '',
         pursuitPerCommission: (auctionDetailList.ZzCommPercent) ? auctionDetailList.ZzCommPercent : '',
         finalgnteePaymentDays: (auctionDetailList.ZzFbgaDeadline) ? auctionDetailList.ZzFbgaDeadline : '',

@@ -188,17 +188,30 @@
                                 <div class="text-normal"> {{ auctionItem.startPrice | number : '1.0-2' }} </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3"
+                        <div class="col-md-4 mb-3" *ngIf="auctionItem.auctionSubType === 'Live'">
+                            <div class="form-group">
+                                <label>{{ "auctioncreate.auctiondetails.incremental_price" | translate }}</label>
+                                <div class="text-normal"> {{ auctionItem.incrementPrice | number : '1.0-2' }} </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-4 mb-3"
                             *ngIf=" !( auctionItem.auctionType === 'Public' &&auctionItem.auctionSubType === 'Closed' ) ">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp16" | translate }}</label>
                                 <div class="text-normal"> {{ auctionItem.lowBidValue | number : '1.0-2' }} </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
+                        </div> -->
+                        <div class="col-md-4 mb-3" *ngIf="auctionItem.auctionSubType !== 'Live'">
                             <div class="form-group">
                                 <label>{{ "auctioncreate.auctiondetails.section1_formGrp17" | translate }}</label>
                                 <div class="text-normal"> {{ auctionItem.gnteePercentage | number : '1.0-2'}} %</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3" *ngIf="auctionItem.auctionSubType === 'Live'">
+                            <div class="form-group">
+                                <label>{{ "auctioncreate.auctiondetails.FBGA_percent" | translate }}</label>
+                                <div class="text-normal"> {{ auctionItem.FinalGnteePercentage | number : '1.0-2'}} %
+                                </div>
                             </div>
                         </div>
                     </div>

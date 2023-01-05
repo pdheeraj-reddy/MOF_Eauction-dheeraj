@@ -24,8 +24,9 @@ export class AuctionBasicMaster {
     bidOpeningTime: string;
     bidOpeningTimeSufix: string;
     startPrice: string;
-    lowBidValue: string;
+    incrementPrice: string;
     gnteePercentage: string;
+    FinalGnteePercentage: string;
     finalGntee: Date;
     commissionType: string;
     pursuitPerCommission: string;
@@ -176,7 +177,9 @@ export class Auction_detail {
     auctionAnncStartTime?: string;
     bidOpeningtimeSufix?: string;
     startPrice?: string;
+    incrementPrice?: string;
     gnteePercentage?: string;
+    FinalGnteePercentage?: string;
     commissionType?: string;
     pursuitPerCommission?: string;
     finalgnteePaymentDays?: string;

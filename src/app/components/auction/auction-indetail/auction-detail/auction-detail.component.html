@@ -150,7 +150,7 @@
                         <div class="py-2">
                             <div class="custom-control custom-radio custom-control-inline"> <input type="radio"
                                     id="customRadioInline1" formControlName="auctionSubType" name="auctionSubType"
-                                    value="D" class="custom-control-input" [required]="true" [attr.disabled]="true" />
+                                    value="D" class="custom-control-input" [required]="true" />
                                 <label class="custom-control-label" for="customRadioInline1">{{
                                     'auctioncreate.auctiondetails.section1_formGrp2_opt1' | translate }}</label>
                             </div>
@@ -407,17 +407,33 @@
                                 'auctioncreate.greater-then-zero' | translate }}</div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group"
-                            *ngIf="basicFormGroup.controls['auctionType'].value == 'C' && basicFormGroup.controls['auctionSubType'].value == 'D'">
+
+                    <!-- Incremental price starts -->
+                    <div class="col-md-6 mb-3" *ngIf="basicFormGroup.controls['auctionSubType'].value == 'D'">
+                        <div class="form-group">
                             <label>
-                                <span>{{ 'auctioncreate.auctiondetails.section1_formGrp16' | translate }}</span>
+                                <span>{{ 'auctioncreate.auctiondetails.incremental_price' | translate }}</span>
+                                <span class="icon-filled-information mx-2 text-secondary-aqua cursor-pointer"
+                                    data-html="true" data-toggle="tooltip"
+                                    [attr.data-placement]="lang == 'en' ? 'left' : 'left'" title=""
+                                    [attr.data-original-title]="'tooltip.increment_price' | translate"></span>
                             </label>
-                            <input type="text" numeric formControlName="lowBidValue" class="form-control"
-                                placeholder="150,000" [required]="true" />
+                            <input type="text" numeric formControlName="incrementPrice" min="1" step="any"
+                                class="form-control" placeholder="150,000" [required]="true" />
+                        </div>
+                        <div *ngIf="submitted && form['incrementPrice'].errors" class="invalid-feedback">
+                            <div *ngIf="form['incrementPrice'].errors['required']">
+                                {{ 'auctioncreate.auctiondetails.incremental_price_req' | translate }}</div>
+                            <div *ngIf="form['incrementPrice'].errors['min']">{{
+                                'auctioncreate.auctiondetails.section1_formGrp15' | translate }} {{
+                                'auctioncreate.greater-then-zero' | translate }}</div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <!-- Incremental price ends -->
+                    <div class="col-md-6 mb-3" *ngIf="basicFormGroup.controls['auctionSubType'].value != 'D'"></div>
+
+
+                    <div class="col-md-6 mb-3" *ngIf="basicFormGroup.controls['auctionSubType'].value != 'D'">
                         <div class="form-group">
                             <label>
                                 <span>{{ 'auctioncreate.auctiondetails.section1_formGrp17' | translate }}</span>
@@ -432,6 +448,23 @@
                                 [required]="true" />
                         </div>
                     </div>
+
+                    <div class="col-md-6 mb-3" *ngIf="basicFormGroup.controls['auctionSubType'].value == 'D'">
+                        <div class="form-group">
+                            <label>
+                                <span>{{ 'auctioncreate.auctiondetails.FBGA_percent' | translate }}</span>
+                                <span class="icon-filled-information mx-2 text-secondary-aqua cursor-pointer"
+                                    data-html="true" data-toggle="tooltip"
+                                    [attr.data-placement]="lang == 'en' ? 'left' : 'left'" title=""
+                                    [attr.data-original-title]="'tooltip.guree_percentage' | translate"></span>
+                            </label>
+                            <input type="text" digitOnly [decimal]="true" formControlName="FinalGnteePercentage"
+                                class="form-control"
+                                placeholder="{{ 'auctioncreate.auctiondetails.FBGA_percent' | translate }}"
+                                [required]="true" />
+                        </div>
+                    </div>
+
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label><span>{{ 'auctioncreate.auctiondetails.section1_formGrp18' | translate

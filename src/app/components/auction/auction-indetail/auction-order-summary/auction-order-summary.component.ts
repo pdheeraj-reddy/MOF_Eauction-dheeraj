@@ -176,7 +176,7 @@ export class AuctionOrderSummaryComponent implements OnInit {
 
   public getAuctionSubTypeDesc(type: string) {
     if (type === 'D') {
-      return 'Direct';
+      return 'Live';
     } else if (type === 'C') {
       return 'Closed';
     } else {
@@ -301,8 +301,9 @@ export class AuctionOrderSummaryComponent implements OnInit {
         : ''
       : '';
     this.auctionItem.startPrice = serverObj.d.results[0].ZzBidSrtPrice;
-    this.auctionItem.lowBidValue = serverObj.d.results[0].ZzLowBidVl;
+    this.auctionItem.incrementPrice = serverObj.d.results[0].ZzLowBidVl;
     this.auctionItem.gnteePercentage = serverObj.d.results[0].ZzIbgaPercent;
+    this.auctionItem.FinalGnteePercentage = serverObj.d.results[0].ZzFbgaPercent;
     this.auctionItem.finalGntee = serverObj.d.results[0].ZzFbgaDeadline;
     this.auctionItem.commissionType = serverObj.d.results[0].ZzCommisionTyp;
     this.auctionItem.pursuitPerCommission = serverObj.d.results[0].ZzCommPercent;

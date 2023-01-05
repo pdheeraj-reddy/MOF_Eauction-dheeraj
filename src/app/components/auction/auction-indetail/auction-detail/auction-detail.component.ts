@@ -48,6 +48,7 @@ export class AuctionDetailComponent implements OnInit {
   activeFileDownloadIndex = -1;
   columnLst = ['index', 'name'];
   startValError: boolean = false;
+  incrementValError: boolean = false;
   isValidEndTime: boolean = false;
   isValidStartTime: boolean = false;
   isValidOpeningTime: boolean = false;
@@ -586,8 +587,10 @@ export class AuctionDetailComponent implements OnInit {
     this.auctionItem.bidOpeningTime = this.auctionDetails.ZzAnncSrtT ? this.auctionDetails.ZzAnncSrtT !== 0 ? moment(this.auctionDetails.ZzAnncSrtT.split(" ")[0], 'HH:mm:ss').format('hh:mm A') : '' : '';
 
     this.auctionItem.startPrice = this.auctionDetails.ZzBidSrtPrice;
-    this.auctionItem.lowBidValue = this.auctionDetails.ZzLowBidVl;
+    this.auctionItem.incrementPrice = this.auctionDetails.ZzLowBidVl;
     this.auctionItem.gnteePercentage = this.auctionDetails.ZzIbgaPercent;
+    this.auctionItem.FinalGnteePercentage = this.auctionDetails.ZzFbgaPercent;
+
     this.auctionItem.finalGntee = this.auctionDetails.ZzFbgaDeadline;
     // this.auctionItem.finalGnteeUnit = this.auctionDetails.Description;
     this.auctionItem.commissionType = this.auctionDetails.ZzCommisionTyp;
@@ -617,8 +620,9 @@ export class AuctionDetailComponent implements OnInit {
       auctionAnncStartDate: new FormControl(this.auctionItem.auctionAnncStartDate ? this.auctionItem.auctionAnncStartDate : ''),
       bidOpeningTime: new FormControl(this.auctionItem.bidOpeningTime ? this.auctionItem.bidOpeningTime : ''),
       startPrice: new FormControl(this.auctionItem.startPrice ? this.auctionItem.startPrice : ''),
-      lowBidValue: new FormControl(this.auctionItem.lowBidValue ? this.auctionItem.lowBidValue : ''),
+      incrementPrice: new FormControl(this.auctionItem.incrementPrice ? this.auctionItem.incrementPrice : ''),
       gnteePercentage: new FormControl(this.auctionItem.gnteePercentage ? this.auctionItem.gnteePercentage : '2'),
+      FinalGnteePercentage: new FormControl(this.auctionItem.FinalGnteePercentage ? this.auctionItem.FinalGnteePercentage : '5'),
       finalGntee: new FormControl(this.auctionItem.finalGntee ? this.auctionItem.finalGntee : '15'),
       commissionType: new FormControl(this.auctionItem.commissionType ? this.auctionItem.commissionType : ''),
       pursuitPerCommission: new FormControl(this.auctionItem.pursuitPerCommission ? this.auctionItem.pursuitPerCommission : ''),
@@ -643,13 +647,15 @@ export class AuctionDetailComponent implements OnInit {
       this.basicFormGroup.get('auctionAnncStartDate')?.disable();
       this.basicFormGroup.get('bidOpeningTime')?.disable();
       this.basicFormGroup.get('startPrice')?.disable();
-      this.basicFormGroup.get('lowBidValue')?.disable();
+      this.basicFormGroup.get('incrementPrice')?.disable();
       this.basicFormGroup.get('gnteePercentage')?.disable();
+      this.basicFormGroup.get('FinalGnteePercentage')?.disable();
       this.basicFormGroup.get('finalGntee')?.disable();
       this.basicFormGroup.get('commissionType')?.disable();
       this.basicFormGroup.get('pursuitPerCommission')?.disable();
     }
     this.basicFormGroup.get('gnteePercentage')?.disable();
+    this.basicFormGroup.get('FinalGnteePercentage')?.disable();
     this.basicFormGroup.get('pursuitPerCommission')?.disable();
     if (this.auctionDetails?.listtoattachnav['results']) {
       while (this.auctionAttachement.length !== 0) {
@@ -909,6 +915,16 @@ export class AuctionDetailComponent implements OnInit {
     }
   }
 
+  checkIncrementValue() {
+    let startValue = this.basicFormGroup.controls['incrementPrice'].value;
+    if (startValue < 0 || !startValue) {
+      this.incrementValError = true;
+      return;
+    } else {
+      this.incrementValError = false;
+    }
+  }
+
   public onSubmit(submitSrc: string) {
     // this.showLoader = true;
 
@@ -1020,6 +1036,7 @@ export class AuctionDetailComponent implements OnInit {
           console.log('createAuction RespError : ', error);
         });
       }
+
     } else if (submitSrc === 'saveasdraft') {
       this.validateFormControls(submitSrc);
       if (this.isSaveasdraftValid()) {
@@ -1050,12 +1067,13 @@ export class AuctionDetailComponent implements OnInit {
         // this.changeSteps.emit(this.activeStep);
       }
     }
+
     this.basicFormGroup.controls['startAuction'].clearValidators();
     this.basicFormGroup.controls['auctionAnncStartDate'].clearValidators();
     this.basicFormGroup.controls['bidOpeningTime'].clearValidators();
     // this.basicFormGroup.controls['startPrice'].clearValidators();
-    this.basicFormGroup.controls['lowBidValue'].clearValidators();
     this.basicFormGroup.controls['gnteePercentage'].clearValidators();
+    this.basicFormGroup.controls['FinalGnteePercentage'].clearValidators();
     this.basicFormGroup.controls['finalGntee'].clearValidators();
     this.basicFormGroup.controls['pursuitPerCommission'].clearValidators();
     this.basicFormGroup.controls['auctionName'].updateValueAndValidity();
@@ -1072,8 +1090,9 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.controls['auctionAnncStartDate'].updateValueAndValidity();
     this.basicFormGroup.controls['bidOpeningTime'].updateValueAndValidity();
     this.basicFormGroup.controls['startPrice'].updateValueAndValidity();
-    this.basicFormGroup.controls['lowBidValue'].updateValueAndValidity();
+    this.basicFormGroup.controls['incrementPrice'].updateValueAndValidity();
     this.basicFormGroup.controls['gnteePercentage'].updateValueAndValidity();
+    this.basicFormGroup.controls['FinalGnteePercentage'].updateValueAndValidity();
     this.basicFormGroup.controls['finalGntee'].updateValueAndValidity();
     this.basicFormGroup.controls['commissionType'].updateValueAndValidity();
     this.basicFormGroup.controls['pursuitPerCommission'].updateValueAndValidity();
@@ -1166,7 +1185,9 @@ export class AuctionDetailComponent implements OnInit {
       this.form['auctionStartTime'].value !== '' ||
       this.form['auctionEndTime'].value !== '' ||
       this.form['bidOpeningTime'].value !== '' ||
-      this.form['auctionAnncStartDate'].value !== ''
+      this.form['auctionAnncStartDate'].value !== '' ||
+      this.form['auctionSubType'].value !== '' ||
+      this.form['startAuction'].value !== ''
     ) {
       this.atLeastOneRequired = false;
       return true;
@@ -1189,6 +1210,7 @@ export class AuctionDetailComponent implements OnInit {
       this.basicFormGroup.controls['auctionAnncStartDate'].setValidators([Validators.required]);
       this.basicFormGroup.controls['bidOpeningTime'].setValidators([Validators.required]);
       this.basicFormGroup.controls['startPrice'].setValidators(Validators.compose([Validators.required, Validators.min(1)]));
+      this.basicFormGroup.controls['incrementPrice'].setValidators(Validators.compose([Validators.required, Validators.min(1)]));
       this.basicFormGroup.controls['commissionType'].setValidators([Validators.required]);
       if (this.basicFormGroup.controls['auctionType'].value === 'Private') {
         this.basicFormGroup.controls['prevRefNo'].setValidators([Validators.required]);
@@ -1196,6 +1218,9 @@ export class AuctionDetailComponent implements OnInit {
       } else {
         this.basicFormGroup.controls['prevRefNo'].clearValidators();
         this.basicFormGroup.controls['reasonPrivateAuction'].clearValidators();
+      }
+      if (this.basicFormGroup.controls['auctionSubType'].value !== 'D') {
+        this.basicFormGroup.controls['incrementPrice'].clearValidators();
       }
     } else if (submitType === 'saveasdraft') {
       this.basicFormGroup.controls['auctionName'].setValidators([Validators.required, Validators.minLength(4)]);
@@ -1210,16 +1235,19 @@ export class AuctionDetailComponent implements OnInit {
       this.basicFormGroup.controls['auctionAnncStartDate'].setValidators([Validators.required]);
       this.basicFormGroup.controls['bidOpeningTime'].setValidators([Validators.required]);
       this.basicFormGroup.controls['startPrice'].setValidators(Validators.compose([Validators.required, Validators.min(1)]));
+      this.basicFormGroup.controls['incrementPrice'].setValidators(Validators.compose([Validators.required, Validators.min(1)]));
       // this.basicFormGroup.controls['startPrice'].setValidators([Validators.min(1)]);
+      // this.basicFormGroup.controls['incrementPrice'].setValidators([Validators.min(1)]);
       this.basicFormGroup.controls['commissionType'].setValidators([Validators.required]);
       this.basicFormGroup.controls['prevRefNo'].clearValidators();
     }
     this.basicFormGroup.controls['startAuction'].clearValidators();
     // this.basicFormGroup.controls['auctionAnncStartDate'].clearValidators();
     // this.basicFormGroup.controls['bidOpeningTime'].clearValidators();
-    // this.basicFormGroup.controls['startPrice'].clearValidators();
-    this.basicFormGroup.controls['lowBidValue'].clearValidators();
+    this.basicFormGroup.controls['startPrice'].clearValidators();
+    this.basicFormGroup.controls['incrementPrice'].clearValidators();
     this.basicFormGroup.controls['gnteePercentage'].clearValidators();
+    this.basicFormGroup.controls['FinalGnteePercentage'].clearValidators();
     this.basicFormGroup.controls['finalGntee'].clearValidators();
     this.basicFormGroup.controls['pursuitPerCommission'].clearValidators();
     this.basicFormGroup.controls['auctionName'].updateValueAndValidity();
@@ -1236,8 +1264,9 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.controls['auctionAnncStartDate'].updateValueAndValidity();
     this.basicFormGroup.controls['bidOpeningTime'].updateValueAndValidity();
     this.basicFormGroup.controls['startPrice'].updateValueAndValidity();
-    this.basicFormGroup.controls['lowBidValue'].updateValueAndValidity();
+    this.basicFormGroup.controls['incrementPrice'].updateValueAndValidity();
     this.basicFormGroup.controls['gnteePercentage'].updateValueAndValidity();
+    this.basicFormGroup.controls['FinalGnteePercentage'].updateValueAndValidity();
     this.basicFormGroup.controls['finalGntee'].updateValueAndValidity();
     this.basicFormGroup.controls['commissionType'].updateValueAndValidity();
     this.basicFormGroup.controls['pursuitPerCommission'].updateValueAndValidity();
@@ -1270,8 +1299,9 @@ export class AuctionDetailComponent implements OnInit {
       ZzAnncSrtD: obj.auctionAnncStartDate ? moment(obj.auctionAnncStartDate, 'YYYY-MM-DD').format('DD.MM.YYYY') : '',
       ZzAnncSrtT: obj.bidOpeningTime ? moment(obj.bidOpeningTime, 'h:m:s A').format('HH:mm:ss') : '',
       ZzBidSrtPrice: obj.startPrice,
-      ZzLowBidVl: obj.lowBidValue,
+      ZzLowBidVl: obj.incrementPrice,
       ZzIbgaPercent: '2', // HardCoded to 2, need to changed in future
+      ZzFbgaPercent: '5', // HardCoded to 5, need to changed in future
       ZzFbgaDeadline: obj.finalGntee,
       ZzCommisionTyp: obj.commissionType,
       ZzCommPercent: this.commissionPercent,

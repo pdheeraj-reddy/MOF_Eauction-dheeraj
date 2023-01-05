@@ -22,7 +22,7 @@ export class InterconversionService {
 
   public getAuctionSubTypeDesc(type: string) {
     if (type === 'D') {
-      return 'Direct';
+      return 'Live';
     } else if (type === 'C') {
       return 'Closed';
     } else {
@@ -119,8 +119,9 @@ export class InterconversionService {
       )
       : '';
     auctionDetails.startPrice = serverObj.ZzBidSrtPrice;
-    auctionDetails.lowBidValue = serverObj.ZzLowBidVl;
+    auctionDetails.incrementPrice = serverObj.ZzLowBidVl;
     auctionDetails.gnteePercentage = serverObj.ZzIbgaPercent;
+    auctionDetails.FinalGnteePercentage = serverObj.ZzFbgaPercent;
     auctionDetails.finalGntee = serverObj.ZzFbgaDeadline;
     auctionDetails.commissionType = serverObj.ZzCommisionTyp;
     auctionDetails.pursuitPerCommission = serverObj.ZzCommPercent;

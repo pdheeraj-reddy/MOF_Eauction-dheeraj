@@ -698,7 +698,7 @@
                                                                     number}} {{'common.SAR' | translate}} </div>
                                                             </div>
                                                         </div>
-                                                        <div *ngIf="upcomingAuction.important_info?.guarantee_per"
+                                                        <!-- <div *ngIf="upcomingAuction.important_info?.guarantee_per"
                                                             class="col-md-4 mb-3">
                                                             <div class="form-group">
                                                                 <label>{{
@@ -720,7 +720,7 @@
                                                                     {{commissionRateValue | number:'1.0-2' }}%
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>-->
                                                     </div>
 
                                                     <div class="form-row">
@@ -738,7 +738,8 @@
                                                                         class="col list list-primary-bullets d-inline-block">
                                                                         <li class="text-muted">
                                                                             <span>{{upcomingAuction.important_info?.end_biddingtime}}
-                                                                                {{ endBiddingSuffix | translate}}</span>
+                                                                                {{ endBiddingSuffix |
+                                                                                translate}}</span>
 
                                                                         </li>
                                                                     </ul>
@@ -761,7 +762,8 @@
                                                                         class="col list list-primary-bullets d-inline-block">
                                                                         <li class="text-muted">
                                                                             <span>{{upcomingAuction.important_info?.open_biddingtime}}
-                                                                                {{ openBidSuffix | translate}}</span>
+                                                                                {{ openBidSuffix |
+                                                                                translate}}</span>
 
                                                                         </li>
                                                                     </ul>
@@ -814,7 +816,7 @@
                                                             number:'1.0-2'}} {{'common.SAR' | translate}} </div>
                                                     </div>
                                                 </div>
-                                                <div *ngIf="upcomingAuction.important_info?.guarantee_per"
+                                                <!-- <div *ngIf="upcomingAuction.important_info?.guarantee_per"
                                                     class="col-md-4 mb-3">
                                                     <div class="form-group">
                                                         <label>{{
@@ -835,7 +837,7 @@
                                                             {{commissionRateValue | number:'1.0-2'}} %
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
 
                                             <div class="form-row">
@@ -1086,13 +1088,37 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-4 mb-3" *ngIf="auctionBiddingMethod != 'Live'">
                                                     <div class="form-group">
                                                         <label>{{
                                                             "bidderAuctionDetails.auction-details.WarrantyPercentage"
                                                             | translate }}</label>
                                                         <div class="text-normal">
                                                             {{upcomingAuction.auction_detail?.gnteePercentage |
+                                                            number:'1.0-2'}}
+                                                            %
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3" *ngIf="auctionBiddingMethod == 'Live'">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            "auctioncreate.auctiondetails.incremental_price"
+                                                            | translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.incrementPrice |
+                                                            number:'1.0-2'}}
+                                                            {{ "common.SAR" | translate }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3" *ngIf="auctionBiddingMethod == 'Live'">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            "auctioncreate.auctiondetails.FBGA_percent"
+                                                            | translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.FinalGnteePercentage |
                                                             number:'1.0-2'}}
                                                             %
                                                         </div>
