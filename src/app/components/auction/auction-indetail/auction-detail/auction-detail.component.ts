@@ -147,9 +147,9 @@ export class AuctionDetailComponent implements OnInit {
 
     this.refreshCalendarCntrl();
 
-    this.basicFormGroup?.valueChanges.subscribe(x => {
-      this.isSaveasdraftValid();
-    });
+    // this.basicFormGroup?.valueChanges.subscribe(x => {
+    //   this.isSaveasdraftValid();
+    // });
 
     window.addEventListener("drop", (e: any) => {
       if (e && e.target.id !== "dropzone") {
@@ -1010,31 +1010,33 @@ export class AuctionDetailComponent implements OnInit {
     if (submitSrc === 'save') {
       this.validateFormControls(submitSrc);
       this.atLeastOneRequired = false;
-      if (this.basicFormGroup.status === 'VALID') {
-        this.showSaveBtnLoader = true;
-        const auctiondetail = this.generateAuctionDetailFormat(this.basicFormGroup.value);
+      if (this.isSaveasdraftValid()) {
+        if (this.basicFormGroup.status === 'VALID') {
+          this.showSaveBtnLoader = true;
+          const auctiondetail = this.generateAuctionDetailFormat(this.basicFormGroup.value);
 
-        this.auctionServc.createAuction(auctiondetail).subscribe((auctionDetailsResp: any) => {
-          this.DraftId = auctionDetailsResp.d.DraftId;
-          this.ObjectId = auctionDetailsResp.d.ObjectId;
-          let auctionCreateResp = {
-            DraftId: this.DraftId,
-            ObjectId: this.ObjectId,
-          }
-          this.auctionCreateResp.emit(auctionCreateResp);
-          // fileNet Services
-          if (this.auctionAttachement['controls'].length > 0) {
-            this.auctionAttachmentsUploads(submitSrc, auctionCreateResp);
-            // this.auctionAttachmentsUploadsTest();
-          } else {
+          this.auctionServc.createAuction(auctiondetail).subscribe((auctionDetailsResp: any) => {
+            this.DraftId = auctionDetailsResp.d.DraftId;
+            this.ObjectId = auctionDetailsResp.d.ObjectId;
+            let auctionCreateResp = {
+              DraftId: this.DraftId,
+              ObjectId: this.ObjectId,
+            }
+            this.auctionCreateResp.emit(auctionCreateResp);
+            // fileNet Services
+            if (this.auctionAttachement['controls'].length > 0) {
+              this.auctionAttachmentsUploads(submitSrc, auctionCreateResp);
+              // this.auctionAttachmentsUploadsTest();
+            } else {
+              this.showSaveBtnLoader = false;
+              this.activeStep++;
+              this.changeSteps.emit(this.activeStep);
+            }
+          }, (error) => {
             this.showSaveBtnLoader = false;
-            this.activeStep++;
-            this.changeSteps.emit(this.activeStep);
-          }
-        }, (error) => {
-          this.showSaveBtnLoader = false;
-          console.log('createAuction RespError : ', error);
-        });
+            console.log('createAuction RespError : ', error);
+          });
+        }
       }
 
     } else if (submitSrc === 'saveasdraft') {
@@ -1072,6 +1074,7 @@ export class AuctionDetailComponent implements OnInit {
     this.basicFormGroup.controls['auctionAnncStartDate'].clearValidators();
     this.basicFormGroup.controls['bidOpeningTime'].clearValidators();
     // this.basicFormGroup.controls['startPrice'].clearValidators();
+    // this.basicFormGroup.controls['incrementPrice'].clearValidators();
     this.basicFormGroup.controls['gnteePercentage'].clearValidators();
     this.basicFormGroup.controls['FinalGnteePercentage'].clearValidators();
     this.basicFormGroup.controls['finalGntee'].clearValidators();
@@ -1185,9 +1188,7 @@ export class AuctionDetailComponent implements OnInit {
       this.form['auctionStartTime'].value !== '' ||
       this.form['auctionEndTime'].value !== '' ||
       this.form['bidOpeningTime'].value !== '' ||
-      this.form['auctionAnncStartDate'].value !== '' ||
-      this.form['auctionSubType'].value !== '' ||
-      this.form['startAuction'].value !== ''
+      this.form['auctionAnncStartDate'].value !== ''
     ) {
       this.atLeastOneRequired = false;
       return true;
@@ -1240,12 +1241,16 @@ export class AuctionDetailComponent implements OnInit {
       // this.basicFormGroup.controls['incrementPrice'].setValidators([Validators.min(1)]);
       this.basicFormGroup.controls['commissionType'].setValidators([Validators.required]);
       this.basicFormGroup.controls['prevRefNo'].clearValidators();
+
+      if (this.basicFormGroup.controls['auctionSubType'].value !== 'D') {
+        this.basicFormGroup.controls['incrementPrice'].clearValidators();
+      }
     }
     this.basicFormGroup.controls['startAuction'].clearValidators();
     // this.basicFormGroup.controls['auctionAnncStartDate'].clearValidators();
     // this.basicFormGroup.controls['bidOpeningTime'].clearValidators();
-    this.basicFormGroup.controls['startPrice'].clearValidators();
-    this.basicFormGroup.controls['incrementPrice'].clearValidators();
+    // this.basicFormGroup.controls['startPrice'].clearValidators();
+    // this.basicFormGroup.controls['incrementPrice'].clearValidators();
     this.basicFormGroup.controls['gnteePercentage'].clearValidators();
     this.basicFormGroup.controls['FinalGnteePercentage'].clearValidators();
     this.basicFormGroup.controls['finalGntee'].clearValidators();

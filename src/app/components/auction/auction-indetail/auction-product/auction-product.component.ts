@@ -1586,6 +1586,7 @@ export class AuctionProductComponent implements OnInit {
       ZzBidSrtPrice: this.auctionDetails.ZzBidSrtPrice,
       ZzLowBidVl: this.auctionDetails.ZzLowBidVl,
       ZzIbgaPercent: this.auctionDetails.ZzIbgaPercent,
+      ZzFbgaPercent: this.auctionDetails.ZzFbgaPercent,
       ZzFbgaDeadline: this.auctionDetails.ZzFbgaDeadline,
       ZzCommisionTyp: this.auctionDetails.ZzCommisionTyp,
       ZzCommPercent: this.auctionDetails.ZzCommPercent,

@@ -24,14 +24,13 @@ export class AuctionFbgaComponent implements OnInit {
   disableInput = false;
   disable = false;
   showRejectionReason = false;
-  acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
+  acceptedExtensions = ['png', 'jpg', 'jpeg', 'pdf'];
 
   acceptedFiles = [
     'image/png',
     'image/jpeg',
+    'image/jpg',
     'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   ];
   files: any[] = [];
   invalidFileCount: boolean = false;
@@ -48,7 +47,6 @@ export class AuctionFbgaComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.upcomingAuction.auction_detail.auctionId;
-    console.log("🚀🚀 ~~ this.upcomingAuction", this.upcomingAuction);
     if (this.bidderStatus == "M") {
       this.disable = false;
       this.disableBtn = false;
