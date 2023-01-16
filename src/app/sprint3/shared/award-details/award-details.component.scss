@@ -1,0 +1,48 @@
+.card-body {
+    padding: 20px;
+}
+
+
+.icon-card:focus {
+    outline: none;
+    border: 2px solid #28ab6d;
+    box-shadow: 0 6px 11px 0 rgba(0, 91, 78, 0.17);
+    color: #32ad71;
+}
+
+
+.icon-alert-success:before {
+    content: "\eb62";
+    font-weight: 600;
+    color: #28ab6d;
+    font-size: 24px;
+}
+
+.custom-bg-green {
+    background-color: #EAF6EF;
+}
+
+.vr-line {
+    width: 1px;
+    background-color: #32AD71;
+}
+
+.status-success-icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.circle {
+    width: 96px;
+    height: 96px;
+    background: #f9fcfa;
+    border-radius: 50%;
+}
+
+.icon-check {
+    position: absolute;
+    font-size: 30px;
+    top: 85px;
+    color: #32ad71;
+}

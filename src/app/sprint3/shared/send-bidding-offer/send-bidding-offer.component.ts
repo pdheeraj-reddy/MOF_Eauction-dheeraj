@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
+import moment from 'moment';
 import { MediaService } from 'src/app/service/media.service';
 import { BidderService } from '../../services/bidder.service';
+import { CommitteeHeadService } from '../../services/committee-head.service';
 // import { EventEmitter } from 'stream';
 
 @Component({
@@ -22,6 +24,10 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() bidValue: any;
   @Input() commission: any;
   @Input() commissionCap: any;
+  @Input() biddingMethod: any;
+  @Input() incrementPrice: any;
+  @Output() successOffer = new EventEmitter<boolean>();
+
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
 
@@ -50,10 +56,21 @@ export class SendBiddingOfferComponent implements OnInit {
   showSuccessfulModal: boolean = false;
   showLoader: boolean = false;
   showAttachLoader: boolean = false;
+  totalLiveBookValue: number = 0;
+  totalLiveOfferPrice: number = 0;
+  highestOffer: any = [];
+  isOfferAvailable: boolean = false;
+  showLiveConfirm: boolean = false;
+  latestBid = 0;
+  isValueNotHighest: boolean = false;
+  offerDate = '';
+  offerTime = '';
+  offerTimeSuffix = '';
 
-  constructor(private bidderService: BidderService, private mediaService: MediaService,) { }
+  constructor(private bidderService: BidderService, private mediaService: MediaService, private committeeHeadService: CommitteeHeadService) { }
 
   ngOnInit(): void {
+    this.getHighestOffer();
     // this.amount = 30005;
     this.minAmount = this.totalBookValue;
     if (this.notParticipated) {
@@ -91,6 +108,34 @@ export class SendBiddingOfferComponent implements OnInit {
   incAmt() {
     this.totalBookValue++;
     this.calc();
+  }
+
+  incLiveAmt() {
+    this.totalLiveBookValue += Number(this.incrementPrice);
+    this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
+    this.totalLiveOfferPrice = this.totalLiveBookValue + this.addedTaxValue;
+  }
+
+  decLiveAmt() {
+    if (this.highestOffer.OfferValue == "") {
+      if (this.totalLiveBookValue <= (Number(this.totalBookValue) + Number(this.incrementPrice))) {
+        this.totalLiveBookValue = (Number(this.totalBookValue) + Number(this.incrementPrice));
+      } else {
+        this.totalLiveBookValue -= Number(this.incrementPrice);
+        this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
+        this.totalLiveOfferPrice = this.totalLiveBookValue + this.addedTaxValue;
+      }
+    }
+    else {
+      if (this.totalLiveBookValue <= (Number(this.latestBid) + Number(this.incrementPrice))) {
+        this.totalLiveBookValue = (Number(this.latestBid) + Number(this.incrementPrice));
+      } else {
+        this.totalLiveBookValue -= Number(this.incrementPrice);
+        this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
+        this.totalLiveOfferPrice = this.totalLiveBookValue + this.addedTaxValue;
+      }
+    }
+
   }
 
   calc() {
@@ -299,5 +344,70 @@ export class SendBiddingOfferComponent implements OnInit {
   }
   reloadPage() {
     window.location.reload();
+  }
+
+  // method to get highest bid
+  getHighestOffer() {
+    this.committeeHeadService.getHighestOffer(this.auctionId).subscribe((res: any) => {
+      this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+
+      this.highestOffer = res.body.d.results[0];
+      this.latestBid = Number(this.highestOffer.BidderValue);
+      this.offerDate = moment(this.highestOffer.DtTime.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD')
+      this.offerTime = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('hh:mm')
+      this.offerTimeSuffix = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('A')
+      if (this.highestOffer.OfferValue == "") {
+        this.isOfferAvailable = false;
+        this.totalLiveBookValue = Number(this.totalBookValue) + Number(this.incrementPrice);
+        this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
+        this.totalLiveOfferPrice = this.addedTaxValue + this.totalLiveBookValue;
+      } else {
+        this.isOfferAvailable = true;
+        this.totalLiveBookValue = Number(this.highestOffer.BidderValue) + Number(this.incrementPrice);
+        this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
+        this.totalLiveOfferPrice = this.addedTaxValue + this.totalLiveBookValue;
+      }
+      localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
+    });
+  }
+
+  reloadValue() {
+    // this.getHighestOffer();
+    this.ngOnInit();
+  }
+
+  checkLiveOffer() {
+    this.committeeHeadService.getHighestOffer(this.auctionId).subscribe((res: any) => {
+      this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+
+      this.highestOffer = res.body.d.results[0];
+      if (this.highestOffer.OfferValue < this.totalLiveOfferPrice) {
+        this.showLiveConfirm = true;
+      } else {
+        this.isValueNotHighest = true;
+        setTimeout(() => {
+          this.isValueNotHighest = false;
+        }, 3000);
+        this.ngOnInit();
+
+      }
+
+      localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
+    });
+
+
+  }
+
+  sendLiveOffer() {
+    this.showLoader = true;
+    this.bidderService.submitLiveBid(this.auctionId, this.totalLiveBookValue.toString()).subscribe((resData: any) => {
+      if (resData.d.Msgty == 'S') {
+        this.showLoader = false;
+        this.showLiveConfirm = false;
+        this.successOffer.emit(true);
+
+        this.ngOnInit();
+      }
+    })
   }
 }

@@ -22,6 +22,7 @@ import { OfferReportComponent } from './offer-report/offer-report.component';
 import { ManualAuctionComponent } from './manual-auction/manual-auction.component';
 import { AuctionCountdownTimerComponent } from './auction-countdown-timer/auction-countdown-timer.component';
 import { AuctionCardComponent } from './auction-card/auction-card.component';
+import { AwardDetailsComponent } from './award-details/award-details.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { AuctionCardComponent } from './auction-card/auction-card.component';
         ManualAuctionComponent,
         AuctionCountdownTimerComponent,
         AuctionCardComponent,
+        AwardDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -75,6 +77,7 @@ import { AuctionCardComponent } from './auction-card/auction-card.component';
         ManualAuctionComponent,
         AuctionCountdownTimerComponent,
         AuctionCardComponent,
+        AwardDetailsComponent
     ]
 })
 export class SharedModule { }

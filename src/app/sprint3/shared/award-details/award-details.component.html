@@ -1,0 +1,37 @@
+<div class="card flex-row mt-4">
+
+    <!--=================== Yellow box to show auction status ===================-->
+    <div class="d-flex flex-column justify-content-center custom-bg-green" style="min-height: 130px; width: 30%">
+        <div class="mx-3">
+            <p class="text-18 text-primary font-weight-bold">{{ 'LiveAuction.after_head' | translate }}</p>
+            <p class="text-12 text-primary">
+                {{ 'LiveAuction.after_subhead1' | translate }}
+            </p>
+            <p class="text-12 text-primary">
+                {{ 'LiveAuction.after_subhead2' | translate }}
+            </p>
+        </div>
+    </div>
+    <!-- End -->
+
+    <div class="vr-line"></div>
+
+    <div class="d-flex justify-content-between w-75">
+        <div class="d-flex flex-column justify-content-center" style="width: 450px">
+            <div class="card-body">
+                <div class="d-flex" style="align-items: center;">
+                    <span class="icon-alert-success font-weight-bold"></span>
+                    &nbsp;&nbsp;
+                    <h5 style="font-size: 24px; color: #28AB6D;">{{highestOffer.OfferValue | number:'1.0-2'}} {{
+                        'bidderFinalInvoice.SAR'
+                        | translate}}</h5>
+                </div>
+                <p class="card-text" class=" text-14 text-body mt-2">
+                    {{ highestOffer.BidderName }}
+                </p>
+                <p class="text-14 text-body mb-2"> {{offerDate}} {{offerTime}} {{offerTimeSuffix | translate}} </p>
+            </div>
+        </div>
+
+    </div>
+</div>

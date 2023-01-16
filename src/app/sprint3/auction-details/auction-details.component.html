@@ -79,6 +79,26 @@
 
     <div *ngIf="!showLoader">
 
+        <!-- =================This is to show successful offer submission============================ -->
+        <div *ngIf="showSuccessOffer" class="alert alert-outline alert-success alert-dismissible fade show mt-4"
+            role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-positive"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>{{ 'sprint3_auction_detail.live_submit' | translate }}</p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button type="button" class="close pt-0" data-dismiss="alert" aria-label="Close">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- =============End============= -->
 
         <!-- =================This is to show error message if there is wrong extension file is selected ================= -->
         <div *ngIf="showFileError && status.pendingFbga" #errorMessageFocus
@@ -141,6 +161,12 @@
             [upcomingAuction]="upcomingAuction" [fbgaDoc]="fbgaDoc" (showError)="showError($event)"
             (noFile)="noFile($event)">
         </app-auction-fbga>
+        <!-- End -->
+
+        <!--============ Show Live Auction Awarded Details ============-->
+        <app-award-details *ngIf="role.bidder && response.ZzCloseInd=='D' && response.ZzBidderSts=='B'"
+            [auctionId]="auctionId">
+        </app-award-details>
         <!-- End -->
 
         <!--============ Pay Invoice card ============-->
@@ -383,6 +409,9 @@
                     </div>
                 </div>
                 <!-- ==========End======= -->
+
+
+
                 <div class="card">
                     <div class="d-flex align-items-center mt-3">
 
@@ -431,10 +460,11 @@
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
                                 [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
                                 [bidValue]="response.ZzPbEstPrice" [commission]="response.ZzCommPercent"
-                                [commissionCap]="response.CommCap"
+                                [commissionCap]="response.CommCap" [biddingMethod]="response.ZzCloseInd"
+                                [incrementPrice]="response.ZzLowBidVl"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (noFile)="noFile($event)"
-                                (diableNow)="diableParticipation($event)">
+                                (diableNow)="diableParticipation($event)" (successOffer)="successfulOffer($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
                         </div>

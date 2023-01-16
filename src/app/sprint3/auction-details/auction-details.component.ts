@@ -37,6 +37,7 @@ export class AuctionDetailsComponent implements OnInit {
   isPricingCommittee: boolean = false;
   isAuctionCommittee: boolean = false;
   offerReport: OfferReport = new OfferReport();
+  showSuccessOffer: boolean = false;
 
   filterFormGroup: FormGroup;
 
@@ -711,6 +712,13 @@ export class AuctionDetailsComponent implements OnInit {
   }
 
   downloadReport(file: any) { }
+
+  successfulOffer(bool: boolean) {
+    setTimeout(() => {
+      this.showSuccessOffer = true;
+    }, 5000);
+
+  }
 
 
 

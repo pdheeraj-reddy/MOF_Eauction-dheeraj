@@ -26,6 +26,19 @@ export class CommitteeHeadService {
       this.envService.environment.apiOfferReport.replace('{auctionId}', btoa(auctionId)), httpOptions);
   }
 
+  getHighestOffer(auctionId: string): Observable<any> {
+    const httpOptions = {
+      headers: {
+        'x-csrf-token': 'fetch'
+      },
+      params: {
+      },
+      observe: 'response' as 'body'
+    };
+    return this.http.get<any>(
+      this.envService.environment.apiOfferReport.replace('{auctionId}', btoa(auctionId) + "L"), httpOptions);
+  }
+
   updateOpenOfferStatus(data: any): Observable<any> {
     const httpOptions = {
       headers: {

@@ -223,6 +223,7 @@
     box-shadow: 0 6px 11px 0 rgb(0 91 78 / 17%) !important;
     color: #32ad71 !important;
 }
+
 // <--=========== Newly added SCSS - Required ===========-->
 .status-success-icon {
     display: flex;
@@ -265,4 +266,26 @@
     width: 40px;
     height: 40px;
 }
+
+.animate {
+    // opacity: 0.1;
+    // background: linear-gradient(180deg, #FFFFFF 0%, #33A566 100%);
+    height: 226px;
+}
+
+.offer {
+    text-align: center;
+}
+
+.reloadSection :hover {
+    color: #f66f5b !important;
+}
+
+.reloadSection {
+    cursor: pointer;
+    // color: #f66f5b;
+}
+
+
+
 //<--=========== End ===========-->
