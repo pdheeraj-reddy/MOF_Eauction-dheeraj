@@ -18,6 +18,7 @@ export class OfferReportComponent implements OnInit {
   @Input() auctionId: string;
   @Input() auctionStatus: string;
   @Input() offerReportPdf: string;
+  @Input() auctionSubtype: string;
 
   openofferListData: any;
   copyOpenofferListData: any;

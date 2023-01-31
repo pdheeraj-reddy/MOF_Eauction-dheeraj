@@ -100,6 +100,77 @@
         </div>
         <!-- =============End============= -->
 
+        <!-- =================This is to show error message if the live auction offer is invalid ================= -->
+        <div *ngIf="invalidOfferAlert" class="alert alert-outline alert-danger alert-dismissible fade show mt-4"
+            role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-wrong"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>{{'LiveAuction.amount_valid' | translate}}
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button (click)="invalidOfferAlert=false" type="button" class="close pt-0" aria-label="Close"
+                        style="outline: none;">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ==========End======= -->
+
+        <!-- =================This is to show error message if the live auction start offer is invalid ================= -->
+        <div *ngIf="invalidStartOfferAlert" class="alert alert-outline alert-danger alert-dismissible fade show mt-4"
+            role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-wrong"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>{{'LiveAuction.start_valid' | translate}} {{minimumBidAmount | number : '1.0-2'}}
+                            {{'common.SAR' | translate}}
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button (click)="invalidStartOfferAlert=false" type="button" class="close pt-0" aria-label="Close"
+                        style="outline: none;">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ==========End======= -->
+
+        <!-- =================This is to show error message if the live auction current offer is invalid ================= -->
+        <div *ngIf="invalidCurrentOfferAlert" class="alert alert-outline alert-danger alert-dismissible fade show mt-4"
+            role="alert">
+            <div class="alert-wrapper">
+                <div class="alert-body">
+                    <i class="alert-icon">
+                        <span class="icon-filled-wrong"></span>
+                    </i>
+                    <div class="alert-content">
+                        <p>{{'LiveAuction.offer_valid' | translate}} {{ minimumQuoteAmount | number: '1.0-2' }}
+                            {{'common.SAR' | translate}}
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-action">
+                    <button (click)="invalidCurrentOfferAlert=false" type="button" class="close pt-0" aria-label="Close"
+                        style="outline: none;">
+                        <span class="icon-close"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ==========End======= -->
+
         <!-- =================This is to show error message if there is wrong extension file is selected ================= -->
         <div *ngIf="showFileError && status.pendingFbga" #errorMessageFocus
             class="alert alert-outline alert-danger alert-dismissible fade show mt-4" role="alert">
@@ -164,7 +235,8 @@
         <!-- End -->
 
         <!--============ Show Live Auction Awarded Details ============-->
-        <app-award-details *ngIf="role.bidder && response.ZzCloseInd=='D' && response.ZzBidderSts=='B'"
+        <app-award-details
+            *ngIf="role.bidder && !status.terminated && response.ZzCloseInd=='D' && response.ZzBidderSts=='B'"
             [auctionId]="auctionId">
         </app-award-details>
         <!-- End -->
@@ -464,7 +536,9 @@
                                 [incrementPrice]="response.ZzLowBidVl"
                                 [notParticipated]="response.ZzBidderSts == 'P' && !status.published && !status.ongoing"
                                 (showError)="showError($event)" (noFile)="noFile($event)"
-                                (diableNow)="diableParticipation($event)" (successOffer)="successfulOffer($event)">
+                                (diableNow)="diableParticipation($event)" (successOffer)="successfulOffer($event)"
+                                (invalidOffer)="invalidOffer($event)" (invalidStartOffer)="invalidStartOffer($event)"
+                                (invalidCurrentOffer)="invalidCurrentOffer($event)" (sendValues)="sendValues($event)">
                             </app-send-bidding-offer>
                             <!-- End -->
                         </div>
@@ -1343,7 +1417,7 @@
 
             </div>
 
-            <div [hidden]="!editmode2" class="card" style="width: 73%;">
+            <div *ngIf="response.ZzCloseInd != 'D'" [hidden]="!editmode2" class="card" style="width: 73%;">
 
                 <div class="mt-5 mr-5 ml-5">
                     <p class="text-18 text-normal font-weight-bold">
@@ -1439,12 +1513,101 @@
 
                 </div>
             </div>
+            <div *ngIf="response.ZzCloseInd == 'D'" [hidden]="!editmode2" class="card" style="width: 73%;">
+
+                <div class="mt-5 mr-5 ml-5">
+                    <p class="text-18 text-normal font-weight-bold">
+                        <span class="icon-information"></span>&nbsp;
+                        {{'bidderAuctionDetails.auction-instruction.AuctionInstructions' | translate }}
+                    </p>
+
+                    <!-- <p class="mt-4 text-14 text-normal font-weight-bold">
+                        {{'bidderAuctionDetails.auction-instruction.AuctionParticipationInstructions' | translate }}
+                    </p> -->
+
+                    <p class="text-14 mt-4 text-dark">
+                        {{'LiveAuction.guidelines1' | translate }}
+                    </p>
+
+                    <p class="text-14 mt-4 text-dark">
+                        {{'LiveAuction.guidelines2' | translate }}
+                        <!-- <a href="" class="text-info" style="text-decoration: underline; color: #1DA3DF;">
+                                        {{'bidderAuctionDetails.auction-instruction.instructionsList2-link' | translate }}
+                                    </a> -->
+                    </p>
+
+                    <p class="text-14 mt-4 text-dark">
+                        {{'LiveAuction.guidelines3' | translate }}
+                    </p>
+
+                    <p class="text-14 mt-4 text-dark">
+                        {{'LiveAuction.guidelines4' | translate }}
+                    </p>
+                    <br>
+                    <hr class="my-4">
+
+                    <p class="text-14 text-normal font-weight-bold" style="margin-top: 40px;">
+                        {{'bidderAuctionDetails.auction-instruction.AuctionWorkflow' | translate }}
+                    </p>
+                    <br>
+
+                    <div class="steps-wrapper">
+                        <ul class="steps-group steps-two">
+                            <li class="step-item live">
+                                <a>
+                                    <span class="step-number text-18 font-weight-bold">1</span>
+                                    <span class="step-label text-dark text-13">
+                                        {{'LiveAuction.workflow_step1' |
+                                        translate}}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="step-item live">
+                                <a>
+                                    <span class="step-number text-18 font-weight-bold">2</span>
+                                    <span class="step-label text-dark text-13">
+                                        {{'LiveAuction.workflow_step2' | translate
+                                        }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="step-item live">
+                                <a>
+                                    <span class="step-number text-18 font-weight-bold">3</span>
+                                    <span class="step-label text-dark text-13">{{
+                                        'LiveAuction.workflow_step3' |
+                                        translate
+                                        }}</span>
+                                </a>
+                            </li>
+                            <li class="step-item live">
+                                <a>
+                                    <span class="step-number text-18 font-weight-bold">4</span>
+                                    <span class="step-label text-dark text-13">{{
+                                        'LiveAuction.workflow_step4' | translate
+                                        }}</span>
+                                </a>
+                            </li>
+                            <li class="step-item live">
+                                <a>
+                                    <span class="step-number text-18 font-weight-bold">5</span>
+                                    <span class="step-label text-dark text-13">{{
+                                        'LiveAuction.workflow_step5' | translate }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <br><br><br>
+
+                </div>
+            </div>
             <!-- Auction instruction ends here -->
 
             <!--================= Offer Reports =================-->
             <div [hidden]="!editmode3" class="card" style="width: 73%;">
                 <app-offer-report [auctionId]="auctionId" [auctionStatus]="auctionStatus"
-                    [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
+                    [auctionSubtype]="response.ZzCloseInd" [offerReportPdf]="response.BidOfferPDF"></app-offer-report>
             </div>
 
             <div [hidden]="!isPricingCommittee" class="card" style="width: 73%;">

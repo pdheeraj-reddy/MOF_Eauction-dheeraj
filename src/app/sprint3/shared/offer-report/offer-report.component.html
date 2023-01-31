@@ -87,7 +87,8 @@
                                     [ngClass]="{ 'sort-none': isSorting(1), 'sort-asc': isSortAsc(1), 'sort-desc': isSorDesc(1) }"></span></span>
                         </div>
                     </th>
-                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(2, 'string')">
+                    <th *ngIf="auctionSubtype != 'D'" class="btn-primary-light" scope="col"
+                        (click)="sortByTableHeaderId(2, 'string')">
                         <div class="table-header-cell">
                             <span>{{ "auctionCommittee.ac-openOffers.th3" | translate }}</span>
                             <span class="sort"><span class="sort-none"
@@ -197,7 +198,7 @@
                             <td>{{i+1}}</td>
                             <td>{{rowItem.offerValue | number}} {{'auctionCommittee.ac-openOffers.SAR' |
                                 translate}}</td>
-                            <td>
+                            <td *ngIf="auctionSubtype != 'D'">
                                 <span class="d-inline-block text-truncate" style="max-width: 100px;">
                                     <a *ngIf="rowItem.PdfContent && !rowItem.downloadingAttachmet"
                                         (click)="viewAttachment(rowItem)" class="text-success">

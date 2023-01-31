@@ -27,6 +27,11 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() biddingMethod: any;
   @Input() incrementPrice: any;
   @Output() successOffer = new EventEmitter<boolean>();
+  @Output() invalidOffer = new EventEmitter<boolean>();
+  @Output() invalidStartOffer = new EventEmitter<boolean>();
+  @Output() invalidCurrentOffer = new EventEmitter<boolean>();
+  @Output() sendValues = new EventEmitter<Number>();
+
 
 
   acceptedExtensions = ['png', 'jpg', 'docx', 'doc', 'pdf'];
@@ -66,6 +71,7 @@ export class SendBiddingOfferComponent implements OnInit {
   offerDate = '';
   offerTime = '';
   offerTimeSuffix = '';
+  highestBid = 0;
 
   constructor(private bidderService: BidderService, private mediaService: MediaService, private committeeHeadService: CommitteeHeadService) { }
 
@@ -112,25 +118,30 @@ export class SendBiddingOfferComponent implements OnInit {
 
   incLiveAmt() {
     this.totalLiveBookValue += Number(this.incrementPrice);
+    this.totalLiveBookValue = Number(this.totalLiveBookValue.toFixed(2));
     this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
     this.totalLiveOfferPrice = this.totalLiveBookValue + this.addedTaxValue;
   }
 
   decLiveAmt() {
     if (this.highestOffer.OfferValue == "") {
-      if (this.totalLiveBookValue <= (Number(this.totalBookValue) + Number(this.incrementPrice))) {
-        this.totalLiveBookValue = (Number(this.totalBookValue) + Number(this.incrementPrice));
+      if (this.totalLiveBookValue <= Number(this.totalBookValue)) {
+        this.totalLiveBookValue = Number(this.totalBookValue);
+        this.totalLiveBookValue = Number(this.totalLiveBookValue.toFixed(2));
       } else {
         this.totalLiveBookValue -= Number(this.incrementPrice);
+        this.totalLiveBookValue = Number(this.totalLiveBookValue.toFixed(2));
         this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
         this.totalLiveOfferPrice = this.totalLiveBookValue + this.addedTaxValue;
       }
     }
     else {
-      if (this.totalLiveBookValue <= (Number(this.latestBid) + Number(this.incrementPrice))) {
-        this.totalLiveBookValue = (Number(this.latestBid) + Number(this.incrementPrice));
+      if (this.totalLiveBookValue <= Number(this.latestBid)) {
+        this.totalLiveBookValue = Number(this.latestBid);
+        this.totalLiveBookValue = Number(this.totalLiveBookValue.toFixed(2));
       } else {
         this.totalLiveBookValue -= Number(this.incrementPrice);
+        this.totalLiveBookValue = Number(this.totalLiveBookValue.toFixed(2));
         this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
         this.totalLiveOfferPrice = this.totalLiveBookValue + this.addedTaxValue;
       }
@@ -352,18 +363,19 @@ export class SendBiddingOfferComponent implements OnInit {
       this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
 
       this.highestOffer = res.body.d.results[0];
+      this.highestBid = this.highestOffer.BidderValue ? this.highestOffer.BidderValue : '0';
       this.latestBid = Number(this.highestOffer.BidderValue);
       this.offerDate = moment(this.highestOffer.DtTime.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD')
       this.offerTime = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('hh:mm')
       this.offerTimeSuffix = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('A')
       if (this.highestOffer.OfferValue == "") {
         this.isOfferAvailable = false;
-        this.totalLiveBookValue = Number(this.totalBookValue) + Number(this.incrementPrice);
+        this.totalLiveBookValue = Number(this.totalBookValue);
         this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
         this.totalLiveOfferPrice = this.addedTaxValue + this.totalLiveBookValue;
       } else {
         this.isOfferAvailable = true;
-        this.totalLiveBookValue = Number(this.highestOffer.BidderValue) + Number(this.incrementPrice);
+        this.totalLiveBookValue = Number(this.highestOffer.BidderValue);
         this.addedTaxValue = Number(0.15 * this.totalLiveBookValue);
         this.totalLiveOfferPrice = this.addedTaxValue + this.totalLiveBookValue;
       }
@@ -381,13 +393,22 @@ export class SendBiddingOfferComponent implements OnInit {
       this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
 
       this.highestOffer = res.body.d.results[0];
-      if (this.highestOffer.OfferValue < this.totalLiveOfferPrice) {
+      if (this.highestOffer.OfferValue == "" && this.totalLiveBookValue == this.totalBookValue) {
+        this.invalidStartOffer.emit(true);
+      }
+      else if (this.highestOffer.BidderValue < this.totalLiveBookValue) {
         this.showLiveConfirm = true;
-      } else {
-        this.isValueNotHighest = true;
-        setTimeout(() => {
-          this.isValueNotHighest = false;
-        }, 3000);
+      } else if (this.highestOffer.BidderValue == this.totalLiveBookValue) {
+        let minimumQuote = Number(this.incrementPrice);
+        this.sendValues.emit(minimumQuote);
+        this.invalidCurrentOffer.emit(true);
+      }
+      else {
+        // this.isValueNotHighest = true;
+        this.invalidOffer.emit(true);
+        // setTimeout(() => {
+        //   this.isValueNotHighest = false;
+        // }, 3000);
         this.ngOnInit();
 
       }

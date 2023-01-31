@@ -38,10 +38,15 @@ export class AuctionDetailsComponent implements OnInit {
   isAuctionCommittee: boolean = false;
   offerReport: OfferReport = new OfferReport();
   showSuccessOffer: boolean = false;
+  invalidOfferAlert: boolean = false;
+  invalidStartOfferAlert: boolean = false;
+  invalidCurrentOfferAlert: boolean = false;
 
   filterFormGroup: FormGroup;
 
   auctionStatus: any = '';
+  minimumBidAmount = 0;
+  minimumQuoteAmount = 0;
 
   //filter Form controls
   showFilterForm: boolean = false;
@@ -475,6 +480,7 @@ export class AuctionDetailsComponent implements OnInit {
         auctionAttachement: [],
       }
     }
+    this.minimumBidAmount = Number(this.upcomingAuction.auction_detail?.startPrice) + Number(this.upcomingAuction.auction_detail?.incrementPrice);
     this.committeeMember = this.statusData.listtocomiteememnav?.results
     this.primaryAwardingData = {
       bidValue: auctionDetailList.BidOfferValue,
@@ -714,10 +720,70 @@ export class AuctionDetailsComponent implements OnInit {
   downloadReport(file: any) { }
 
   successfulOffer(bool: boolean) {
+    this.showSuccessOffer = true;
+    this.invalidOfferAlert = false;
+    this.invalidStartOfferAlert = false;
+    this.invalidCurrentOfferAlert = false;
+    window.scrollTo({
+      top: 100,
+      left: 0,
+      behavior: 'smooth'
+    });
     setTimeout(() => {
-      this.showSuccessOffer = true;
-    }, 5000);
+      this.showSuccessOffer = false;
+    }, 15000);
+  }
 
+  invalidOffer(bool: boolean) {
+    this.invalidOfferAlert = true;
+    this.showSuccessOffer = false;
+    this.invalidStartOfferAlert = false;
+    this.invalidCurrentOfferAlert = false;
+    window.scrollTo({
+      top: 100,
+      left: 0,
+      behavior: 'smooth'
+    });
+    setTimeout(() => {
+      this.invalidOfferAlert = false;
+    }, 15000);
+
+  }
+
+  invalidStartOffer(bool: boolean) {
+    this.invalidStartOfferAlert = true;
+    this.showSuccessOffer = false;
+    this.invalidOfferAlert = false;
+    this.invalidCurrentOfferAlert = false;
+    window.scrollTo({
+      top: 100,
+      left: 0,
+      behavior: 'smooth'
+    });
+    setTimeout(() => {
+      this.invalidStartOfferAlert = false;
+    }, 15000);
+
+  }
+
+  invalidCurrentOffer(bool: boolean) {
+    this.invalidCurrentOfferAlert = true;
+    this.showSuccessOffer = false;
+    this.invalidOfferAlert = false;
+    this.invalidStartOfferAlert = false;
+    window.scrollTo({
+      top: 100,
+      left: 0,
+      behavior: 'smooth'
+    });
+    setTimeout(() => {
+      this.invalidCurrentOfferAlert = false;
+    }, 15000);
+
+  }
+
+  sendValues(number: any) {
+    this.minimumQuoteAmount = number;
   }
 
 

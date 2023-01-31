@@ -297,6 +297,12 @@
     left: 78px;
 }
 
+.steps-group.steps-two li.live::after {
+    width: 95px;
+    right: 89px;
+    left: 89px;
+}
+
 .steps-group.steps-two li.step-item {
     text-align: center;
     border: 0;
