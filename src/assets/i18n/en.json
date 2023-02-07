@@ -1269,6 +1269,7 @@
         "upon_confirm": "Upon confirmation your bid of ",
         "submitted": "will be placed",
         "SAR": "SAR",
+        "SAR_mod": "SAR",
         "after_head": "Auction time has expired",
         "after_subhead1": "The auction was awarded to the highest bidder.",
         "after_subhead2": "We wish you the best of luck!",
@@ -1280,7 +1281,10 @@
         "workflow_step2": "Bid Starting Time",
         "workflow_step3": "Initial Awarding and attaching the FBGA",
         "workflow_step4": "Final awarding from the Government Agency",
-        "workflow_step5": "Invoice Payment and Products Delivery"
+        "workflow_step5": "Invoice Payment and Products Delivery",
+        "AuctionDate": "Auction Dates",
+        "AuctionInfo": "Auction Information",
+        "FinanceItems": "Financial Auction Items"
     },
     "payInvoice": {
         "head": "Pending Paying",

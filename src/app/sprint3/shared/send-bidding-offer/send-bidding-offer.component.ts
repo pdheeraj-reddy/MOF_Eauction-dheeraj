@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import moment from 'moment';
 import { MediaService } from 'src/app/service/media.service';
+import { AucModeratorService } from '../../services/auc-moderator.service';
 import { BidderService } from '../../services/bidder.service';
 import { CommitteeHeadService } from '../../services/committee-head.service';
 // import { EventEmitter } from 'stream';
@@ -26,6 +27,7 @@ export class SendBiddingOfferComponent implements OnInit {
   @Input() commissionCap: any;
   @Input() biddingMethod: any;
   @Input() incrementPrice: any;
+  @Input() noBids = 0;
   @Output() successOffer = new EventEmitter<boolean>();
   @Output() invalidOffer = new EventEmitter<boolean>();
   @Output() invalidStartOffer = new EventEmitter<boolean>();
@@ -72,8 +74,10 @@ export class SendBiddingOfferComponent implements OnInit {
   offerTime = '';
   offerTimeSuffix = '';
   highestBid = 0;
+  isHighestOffer = '';
 
-  constructor(private bidderService: BidderService, private mediaService: MediaService, private committeeHeadService: CommitteeHeadService) { }
+  constructor(private bidderService: BidderService, private mediaService: MediaService, private committeeHeadService: CommitteeHeadService,
+    private modService: AucModeratorService,) { }
 
   ngOnInit(): void {
     this.getHighestOffer();
@@ -89,6 +93,13 @@ export class SendBiddingOfferComponent implements OnInit {
     // this.minAmount = 10;
     // this.totalBookValue = 10;
     this.calc();
+    this.getAuctionDetails();
+  }
+
+  ngOnChanges(changes: any) {
+    if (changes.noBids) {
+      this.ngOnInit();
+    }
   }
 
   decAmt() {
@@ -365,9 +376,9 @@ export class SendBiddingOfferComponent implements OnInit {
       this.highestOffer = res.body.d.results[0];
       this.highestBid = this.highestOffer.BidderValue ? this.highestOffer.BidderValue : '0';
       this.latestBid = Number(this.highestOffer.BidderValue);
-      this.offerDate = moment(this.highestOffer.DtTime.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD')
-      this.offerTime = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('hh:mm')
-      this.offerTimeSuffix = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('A')
+      this.offerDate = moment(this.highestOffer.DtTime.split(" ")[0], 'DD.MM.YYYY').format('YYYY-MM-DD');
+      this.offerTime = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('hh:mm');
+      this.offerTimeSuffix = moment(this.highestOffer.DtTime.split(" ")[1], 'HH:mm:ss').format('A');
       if (this.highestOffer.OfferValue == "") {
         this.isOfferAvailable = false;
         this.totalLiveBookValue = Number(this.totalBookValue);
@@ -430,5 +441,14 @@ export class SendBiddingOfferComponent implements OnInit {
         this.ngOnInit();
       }
     })
+  }
+
+
+  getAuctionDetails() {
+    this.bidderService.getAuctionDetail(this.auctionId).subscribe((res) => {
+      this.bidderService.XCSRFToken = res.headers.get('x-csrf-token');
+      this.modService.XCSRFToken = res.headers.get('x-csrf-token');
+      this.isHighestOffer = res.body.d.results[0].Msgty;
+    });
   }
 }

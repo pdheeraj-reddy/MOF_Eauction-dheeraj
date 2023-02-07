@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import moment from 'moment';
 
-/**
- * auction-countdown-timer.ts
- * @author Naveenkumar <naveenkumar@datasack.in>
- */
+
 @Component({
   selector: 'app-auction-countdown-timer',
   templateUrl: './auction-countdown-timer.component.html',

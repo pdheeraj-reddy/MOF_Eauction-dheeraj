@@ -402,10 +402,8 @@
                         </a>
                         <hr>
                     </div>
-                    <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId"
-                        [participants]="upcomingAuction.auctionSetting?.participants"
-                        [noBids]="upcomingAuction.auctionSetting?.bitsNo"
-                        [auctionStatus]="upcomingAuction.auctionStatus"></app-no-of-participants-bids>
+                    <app-no-of-participants-bids *ngIf="response" [auctionId]="auctionId" [participants]="participants"
+                        [noBids]="noBids" [auctionStatus]="upcomingAuction.auctionStatus"></app-no-of-participants-bids>
                 </div>
                 <!-- End -->
 
@@ -514,7 +512,8 @@
                         <!--================ Latest offer send card ================-->
                         <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" style="width: 42%;"
                             [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
-                            <app-latest-offers-sent [aucId]="auctionId" pageno="1">
+                            <app-latest-offers-sent [aucId]="auctionId" [noBids]="noBids"
+                                [biddingMethod]="response.ZzCloseInd" pageno="1">
                             </app-latest-offers-sent>
                         </div>
                         <!-- End -->
@@ -528,7 +527,7 @@
 
                             <!--============= Send offer card =============-->
                             <app-send-bidding-offer
-                                *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published"
+                                *ngIf="role.bidder && response.ZzBidderSts != '' && !status.published" [noBids]="noBids"
                                 [disable]="!(response.ZzBidderSts == 'P' && status.ongoing)" [auctionId]="auctionId"
                                 [ibgaDoc]="ibgaDoc" [totalBookValue]="response.ZzBidSrtPrice"
                                 [bidValue]="response.ZzPbEstPrice" [commission]="response.ZzCommPercent"
@@ -741,10 +740,13 @@
                                     {{fullImage?.index || 1}} {{'sprint3_auction_detail.of' | translate }}
                                     {{slidesStore?.length}}</p>
                             </div>
-                            <p class="text-normal font-weight-bold text-22" style="margin: 0 0 14px !important;">
+                            <p class="text-normal font-weight-bold text-22"
+                                style="margin: 0 0 14px !important; white-space: nowrap; display: block;"
+                                data-toggle="tooltip" data-placement="top" title="{{upcomingAuction.auctionnote1}}">
                                 {{upcomingAuction.auctionnote1}}</p>
 
-                            <p class="text-16 text-muted" style="margin: 0 0 14px !important;">
+                            <p class="card-text text-16 text-muted" style="margin: 0 0 14px !important;"
+                                data-toggle="tooltip" data-placement="top" title="{{upcomingAuction.auctionnote2}}">
                                 {{upcomingAuction.auctionnote2}}</p>
 
                             <p class="text-14 text-black d-flex" style="margin: 0 0 14px !important;">
@@ -768,7 +770,7 @@
                                         src="/assets/icons/auction-primary.svg" alt=""></span>&nbsp;&nbsp;
                                 {{'bidderAuctionDetails.BiddingIs' | translate }} : {{auctionBiddingStatus | translate}}
                             </p>
-                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
+                            <!-- <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
                                 <div class="card" style="border: none;">
                                     <div class="card-header mt-4"
                                         style="border-bottom: 1px solid #e3e3e3; border-radius: 0; padding: 0px !important; padding-left: 5px !important; padding-right: 5px !important; padding-bottom: 10px !important;"
@@ -802,29 +804,6 @@
                                                                     number}} {{'common.SAR' | translate}} </div>
                                                             </div>
                                                         </div>
-                                                        <!-- <div *ngIf="upcomingAuction.important_info?.guarantee_per"
-                                                            class="col-md-4 mb-3">
-                                                            <div class="form-group">
-                                                                <label>{{
-                                                                    "bidderAuctionDetails.InitialGuaranteePercentage"
-                                                                    | translate }}</label>
-                                                                <div class="text-normal">
-                                                                    {{upcomingAuction.important_info?.guarantee_per |
-                                                                    number:'1.0-2'}} %
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 mb-3">
-                                                            <div class="form-group">
-                                                                <label>{{ 'bidderAuctionDetails.CommissionRate' |
-                                                                    translate
-                                                                    }}</label>
-                                                                <div class="text-normal">
-                                                                    {{commissionRateValue | number:'1.0-2' }}%
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
                                                     </div>
 
                                                     <div class="form-row">
@@ -883,7 +862,311 @@
                                     </div>
                                 </div>
 
+                            </div> -->
+
+                            <ul *ngIf="(role.auctionMod || role.auctionCommitteeHead)" class="nav et-tabs mt-4 mb-4"
+                                id="pills-tab" role="tablist">
+                                <li class="nav-item" style="width: 27%">
+                                    <a class="nav-link active" id="pills-dates-tab" data-toggle="pill"
+                                        href="#pills-dates" role="tab" aria-controls="pills-dates"
+                                        aria-selected="true">{{ 'LiveAuction.AuctionDate' | translate }}</a>
+                                </li>
+                                <li class="nav-item" style="width: 35%">
+                                    <a class="nav-link" id="pills-info-tab" data-toggle="pill" href="#pills-info"
+                                        role="tab" aria-controls="pills-info" aria-selected="true">
+                                        {{ 'LiveAuction.AuctionInfo' | translate }}
+                                    </a>
+                                </li>
+                                <li class="nav-item" style="width: 38%">
+                                    <a class="nav-link" id="pills-finance-tab" data-toggle="pill" href="#pills-finance"
+                                        role="tab" aria-controls="pills-finance" aria-selected="true">
+                                        {{ "LiveAuction.FinanceItems" |
+                                        translate }}
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" style="height: 200px;"
+                                class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-dates" role="tabpanel"
+                                    aria-labelledby="pills-dates-tab">
+                                    <div class="form-field">
+                                        <form class="needs-validation" novalidate>
+                                            <div class="form-row">
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            'bidderAuctionDetails.auction-details.BiddingBegins' |
+                                                            translate }}</label>
+                                                        <div class="row text-normal" style="width: 133%;">
+                                                            <span class="col-md-6"
+                                                                style="max-width: 40% !important; padding-inline-end: 0px;">
+                                                                {{upcomingAuction.auction_detail?.auctionStartDate}}</span>
+
+                                                            <ul class="col list list-primary-bullets d-inline-block">
+                                                                <li class="text-muted">
+                                                                    <span>{{upcomingAuction.auction_detail?.auctionStartTime}}
+                                                                        {{bidBegginingSuffix | translate}}</span>
+
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{ 'bidderAuctionDetails.EndOfBidding' |
+                                                            translate
+                                                            }}</label>
+                                                        <div class="row text-normal" style="width: 133%;">
+                                                            <span class="col-md-6"
+                                                                style="max-width: 40% !important; padding-inline-end: 0px;">{{upcomingAuction.important_info?.end_biddingdate}}</span>
+
+                                                            <ul class="col list list-primary-bullets d-inline-block">
+                                                                <li class="text-muted">
+                                                                    <span>{{upcomingAuction.important_info?.end_biddingtime}}
+                                                                        {{ endBiddingSuffix |
+                                                                        translate}}</span>
+
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col mb-3">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            "bidderAuctionDetails.auction-details.BidOpeningDate" |
+                                                            translate }}</label>
+                                                        <div class="row text-normal">
+                                                            <span class="col-md-6"
+                                                                style="max-width: 23% !important; padding-inline-end: 0px;">
+                                                                {{upcomingAuction.auction_detail?.auctionAnncStartDate}}</span>
+
+                                                            <ul class="col list list-primary-bullets d-inline-block">
+                                                                <li class="text-muted">
+                                                                    <span>{{upcomingAuction.auction_detail?.auctionAnncStartTime}}
+                                                                        {{ bidBegginingSuffix | translate}}</span>
+
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show" id="pills-info" role="tabpanel"
+                                    aria-labelledby="pills-info-tab">
+                                    <div class="form-field">
+                                        <form class="needs-validation" novalidate>
+                                            <div class="form-row">
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            'bidderAuctionDetails.auction-details.AuctionReferenceNumber'
+                                                            |
+                                                            translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.auctionId}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            'bidderAuctionDetails.auction-details.AuctionType' |
+                                                            translate
+                                                            }}</label>
+                                                        <div class="text-normal">
+                                                            {{auctionType | translate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{
+                                                            'bidderAuctionDetails.auction-details.BiddingMethod' |
+                                                            translate
+                                                            }}
+                                                        </label>
+                                                        <div class="text-normal">
+                                                            {{auctionBiddingMethod | translate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            'bidderAuctionDetails.auction-details.AuctionProducts' |
+                                                            translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.auctionProduct}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            'bidderAuctionDetails.auction-details.EntityName' |
+                                                            translate
+                                                            }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.entityName}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{'bidderAuctionDetails.auction-details.EntityNo' |
+                                                            translate
+                                                            }}
+                                                        </label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.entityNo}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show" id="pills-finance" role="tabpanel"
+                                    aria-labelledby="pills-finance-tab">
+                                    <div class="form-field">
+                                        <form class="needs-validation" novalidate>
+                                            <div class="form-row">
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            "bidderAuctionDetails.auction-details.AuctionStartPrice"
+                                                            |
+                                                            translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.startPrice |
+                                                            number:'1.0-2'}}
+                                                            {{ "common.SAR" | translate }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div *ngIf="auctionBiddingMethod != 'Live'" class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{
+                                                            "bidderAuctionDetails.auction-details.WarrantyPercentage"
+                                                            | translate }}
+                                                        </label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.gnteePercentage |
+                                                            number:'1.0-2'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div *ngIf="auctionBiddingMethod == 'Live'" class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{
+                                                            "auctioncreate.auctiondetails.FBGA_percent"
+                                                            | translate }}
+                                                        </label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.FinalGnteePercentage |
+                                                            number:'1.0-2'}}
+                                                            %
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{
+                                                            "bidderAuctionDetails.auction-details.Final-guarantee-payment-date"
+                                                            | translate }}
+                                                        </label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.finalgnteePaymentDays}}
+                                                            {{"days" | translate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            'bidderAuctionDetails.auction-details.CommissionType' |
+                                                            translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{ nextFinancial | translate }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col mb-2 p-0">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{
+                                                            "bidderAuctionDetails.auction-details.Pursuit-percentage-commission"
+                                                            | translate }}
+                                                        </label>
+                                                        <div class="text-normal">
+                                                            {{
+                                                            upcomingAuction.auction_detail?.pursuitPerCommission |
+                                                            number :
+                                                            '1.0-2'}} %
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div *ngIf="auctionBiddingMethod == 'Live'" class="col mb-2">
+                                                    <div class="form-group">
+                                                        <label>{{
+                                                            "auctioncreate.auctiondetails.incremental_price"
+                                                            | translate }}</label>
+                                                        <div class="text-normal">
+                                                            {{upcomingAuction.auction_detail?.incrementPrice |
+                                                            number:'1.0-2'}}
+                                                            {{ "common.SAR" | translate }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
 
@@ -1107,7 +1390,7 @@
                                                 <div class="col-md-4 mb-3">
                                                     <div class="form-group">
                                                         <label>{{
-                                                            'bidderAuctionDetails.auction-details.BiddingBegins' |
+                                                            "bidderAuctionDetails.auction-details.BidOpeningDate" |
                                                             translate }}</label>
                                                         <div class="row text-normal">
                                                             <span class="col-md-6"

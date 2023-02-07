@@ -309,7 +309,7 @@
       aria-label="Basic example">
 
       <div style="width: 15%;">
-        <button type="button"
+        <button type="button" [disabled]="isHighestOffer"
           style="width: 100%;border-radius: 5px; height: 100%; border: none; outline: none; background-color: white;"
           (click)="incLiveAmt()">
           <span class="icon-plus text-success"></span>
@@ -323,7 +323,7 @@
           aria-describedby="basic-addon2" />
       </div>
       <div style="width: 15%; align-items: center;">
-        <button type="button"
+        <button type="button" [disabled]="isHighestOffer"
           style="width: 100%; height: 100%;border-radius: 5px; color: #32AD71; border: none; outline: none; background-color: white;"
           (click)="decLiveAmt()">
           <img src="assets/icons/minus.svg" alt="">
@@ -349,7 +349,8 @@
         'bidderSendOffer.SAR' | translate }}
       </p>
     </div>
-    <button (click)="checkLiveOffer()" class="btn btn-primary-light btn-lg mt-4" style="width: 100%;">{{
+    <button [disabled]="isHighestOffer" (click)="checkLiveOffer()" class="btn btn-primary-light btn-lg mt-4"
+      style="width: 100%;">{{
       'bidderSendOffer.SendLiveOffer' | translate }}</button>
 
     <div class="text-body mt-2 text-12 mb-4">

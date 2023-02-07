@@ -1,20 +1,40 @@
 <div class="card bg-primary text-white mt-1 pb-2" style="height: 99.7%;" [ngClass]="textDir ? 'card-en' : 'card-ar'">
 
+    <div *ngIf="biddingMethod == 'D'" class="d-flex p-4 mt-2">
+        <img src="../../../../assets/icons/LiveIcon.gif" style="width: 20px; height: 20px; border-radius: 50%;" alt="">
+        <p class="text-danger mx-2">{{'Live' | translate}}</p>
+    </div>
+
     <div class="noOffer" *ngIf="biddet.length == 0">
         <p style="opacity: 65%;">{{ "auctionCommittee.ac-detail.noBidMssg" | translate }}</p>
     </div>
 
     <div *ngIf="biddet.length > 0" class="card-body">
-        <p class="text-22">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
+        <p class="text-22" *ngIf="biddingMethod != 'D'">{{ "auctionCommittee.ac-detail.latestOffers" | translate }}</p>
 
         <ng-container *ngFor="let b of biddet;index as i">
             <ng-container>
-                <div class="list-card" style="height: 10%;">
+
+                <div *ngIf="biddingMethod != 'D'" class="list-card" style="height: 10%;">
                     <div class="text-body"
                         style="display: flex;justify-content: space-between; height: 100%; align-items: center;">
                         <p style="margin: 0;">{{ b.BidderName }}</p>&nbsp;&nbsp;
                         <p style="margin: 0;">#{{ b.SlNo }}</p>
                     </div>
+                </div>
+
+                <div *ngIf="biddingMethod == 'D'" class="list-card" style="height: 10%;">
+                    <div class="text-body"
+                        style="display: flex;justify-content: space-between; height: 50%; align-items: center;">
+                        <p style="margin: 0; font-weight: bold; font-size: 14px;">{{ b.BidderName }}</p>&nbsp;&nbsp;
+
+                        <p class="text-info text-14" style="margin: 0;">{{ b.BidderValue |
+                            number:'1.0-2'}} {{
+                            'LiveAuction.SAR_mod' | translate }}</p>
+                    </div>
+                    <p class="text-body text-12">{{b.BidSubmitOn}} <b> ∙ </b>
+                        {{b.BidSubmitAt}} {{b.AucDesc |
+                        translate}}</p>
                 </div>
             </ng-container>
         </ng-container>

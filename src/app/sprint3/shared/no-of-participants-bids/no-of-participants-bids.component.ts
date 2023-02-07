@@ -10,34 +10,32 @@ import { BidderService } from '../../services/bidder.service';
 })
 export class NoOfParticipantsBidsComponent implements OnInit {
 
-  @Input() auctionId:any;
-  @Input() auctionStatus:any;
-  @Input() participants:any;
+  @Input() auctionId: any;
+  @Input() auctionStatus: any;
+  @Input() participants: any;
   @Input() noBids: any;
 
   constructor(private http: HttpClient,
-  private api: BidderService) { }
+    private api: BidderService) { }
   // bids:number = 0;
   ngOnInit(): void {
-    console.log('Participants',this.participants);
-    console.log('No bids', this.noBids);
-    if(this.auctionStatus == "Published" || this.auctionStatus == "Ongoing"){
-      this.getParticipants();
-    }
+    // if (this.auctionStatus == "Published" || this.auctionStatus == "Ongoing") {
+    //   this.getParticipants();
+    // }
   }
-  getParticipants(){
-    this.api.getNoOfParticipants(this.auctionId, this.auctionStatus).subscribe((res:any)=>{
-      console.log(res.body.d);
-      if(this.auctionStatus == "Published"){
-        this.participants = res.body.d.NoParticipant =='' ? 0 : res.body.d.NoParticipant;
-      }else{
-        this.noBids = res.body.d.NoBids == '' ? 0 :res.body.d.NoBids;
-      }
-      setTimeout(() => {
-        // console.log(5);
-         this.getParticipants()
-      }, 5000);
-    })
-  }
- 
+  // getParticipants() {
+  //   this.api.getNoOfParticipants(this.auctionId, this.auctionStatus).subscribe((res: any) => {
+  //     console.log(res.body.d);
+  //     if (this.auctionStatus == "Published") {
+  //       this.participants = res.body.d.NoParticipant == '' ? 0 : res.body.d.NoParticipant;
+  //     } else {
+  //       this.noBids = res.body.d.NoBids == '' ? 0 : res.body.d.NoBids;
+  //     }
+  //     setTimeout(() => {
+  //       // console.log(5);
+  //       this.getParticipants()
+  //     }, 5000);
+  //   })
+  // }
+
 } 

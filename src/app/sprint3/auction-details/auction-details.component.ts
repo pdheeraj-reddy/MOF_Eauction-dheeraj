@@ -127,6 +127,8 @@ export class AuctionDetailsComponent implements OnInit {
   showFileError: boolean = false;
   showNoFile: boolean = false;
   pageRangeForAttach: any;
+  participants = 0;
+  noBids = 0;
 
   slidesStore: any = [];
   statusData: any = [];
@@ -164,7 +166,8 @@ export class AuctionDetailsComponent implements OnInit {
     public envService: EnvService,
     public router: Router,
     private mediaService: MediaService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private api: BidderService
   ) { }
 
   public get getHomeUrl() {
@@ -188,9 +191,22 @@ export class AuctionDetailsComponent implements OnInit {
     this.auctionId = atob(this.auctionId);
     this.refreshCalendarCntrl();
     this.getAuctionDetails();
+  }
 
+  getParticipants() {
+    this.api.getNoOfParticipants(this.auctionId, this.auctionStatus).subscribe((res: any) => {
 
-    // this.getupcomingAuctionList(1);
+      console.log(res.body.d);
+      if (this.auctionStatus == "Published") {
+        this.participants = res.body.d.NoParticipant == '' ? 0 : res.body.d.NoParticipant;
+      } else {
+        this.noBids = res.body.d.NoBids == '' ? 0 : res.body.d.NoBids;
+      }
+      setTimeout(() => {
+        // console.log(5);
+        this.getParticipants()
+      }, 5000);
+    })
   }
 
   ngDoCheck() {
@@ -498,7 +514,12 @@ export class AuctionDetailsComponent implements OnInit {
     }
 
 
+    this.noBids = Number(this.upcomingAuction.auctionSetting?.bitsNo);
+    this.participants = Number(this.upcomingAuction.auctionSetting?.participants);
     this.auctionStatus = this.upcomingAuction.auctionStatus;
+    if (this.auctionStatus == "Published" || this.auctionStatus == "Ongoing") {
+      this.getParticipants();
+    }
 
     if (this.upcomingAuction.auctionStatus == "Published") {
       this.status.published = true;

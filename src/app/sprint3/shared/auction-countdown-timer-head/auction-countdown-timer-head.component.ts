@@ -20,8 +20,6 @@ export class AuctionCountdownTimerComponentHead implements OnInit {
   label: string = ''
 
   ngOnInit(): void {
-    // console.log("🎯TC🎯 ~ file: auction-countdown-timer-head.component.ts ~ line 24 ~ this.auctionEndDate", this.auctionEndDate);
-    // console.log("🎯TC🎯 ~ file: auction-countdown-timer-head.component.ts ~ line 24 ~ this.auctionStartDate", this.auctionStartDate);
     this.auctionStartDate = this.convert(this.auctionStartDate);
     this.auctionEndDate = this.convert(this.auctionEndDate);
     let dateStr;

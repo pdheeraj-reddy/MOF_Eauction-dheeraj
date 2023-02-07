@@ -1,5 +1,6 @@
 import { Time } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import moment from 'moment';
 import { PaginationSortingService } from 'src/app/service/pagination.service';
 import { AucModeratorService } from '../../services/auc-moderator.service';
 
@@ -13,6 +14,8 @@ export class LatestOffersSentComponent implements OnInit {
   biddet: any[] = [];
   @Input() aucId: any;
   @Input() pageno: any;
+  @Input() noBids = 0;
+  @Input() biddingMethod: any;
   PageNo: string;
   textDir: any;
   pagelimit: number = 8;
@@ -34,10 +37,14 @@ export class LatestOffersSentComponent implements OnInit {
     } else {
       this.textDir = false;
     }
-
-    console.log(this.aucId);
-
   }
+
+  ngOnChanges(changes: any) {
+    if (changes.noBids) {
+      this.ngOnInit();
+    }
+  }
+
   ngDoCheck() {
     let newLang = localStorage.getItem('lang_pref')
     if (this.currentLang != newLang) {
@@ -63,12 +70,15 @@ export class LatestOffersSentComponent implements OnInit {
 
       }
       this.totalElement = res['body']['d']['results'][0].TotEle;
-      console.log("🚀🚀 ~~ this.totalElement", this.totalElement);
       this.biddet = res['body']['d']['results'][0]['pagetoaucbiddernav']['results'];
+      this.biddet.forEach((bid: any) => {
+        bid.BidSubmitOn = moment(bid.BidSubmitOn, 'DD.MM.YYYY').format('YYYY-MM-DD');
+        bid.BidSubmitAt = moment(bid.BidSubmitAt, 'HH:mm:ss').format('hh:mm');
+        bid.AucDesc = moment(bid.BidSubmitAt, 'HH:mm:ss').format('A'); // using AucDesc for suffix as it has not been used anywhere in the bid list
+      })
       this.PaginationServc.resetSorting();
       this.navigateToPage(pageno);
     });
-
   }
 
   navigateToPage(pageNoVal: number) {

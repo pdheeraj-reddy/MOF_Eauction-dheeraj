@@ -286,6 +286,11 @@
     // color: #f66f5b;
 }
 
+.btn:disabled {
+    color: #ffff !important;
+    background-color: #818181 !important;
+}
+
 
 
 //<--=========== End ===========-->
