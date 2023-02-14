@@ -52,6 +52,7 @@ export class AuctionDetailComponent implements OnInit {
   isValidEndTime: boolean = false;
   isValidStartTime: boolean = false;
   isValidOpeningTime: boolean = false;
+  vatMssg = false;
   // Dropdown Values
   // dropValBeneCategories: any = ['category 1', 'category 2', 'category 3', 'category 4'];
   dropValProducts: any = [

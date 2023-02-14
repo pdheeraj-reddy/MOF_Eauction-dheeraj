@@ -304,8 +304,10 @@
       <p class="text-12">{{'common.SAR' | translate }}</p>&nbsp;
     </div>
 
+
     <!-- Live Amount Quote Starts -->
-    <div class="d-flex" style="width: 98%; border: 1px solid #32AD71; border-radius: 5px; height: 50px;" role="group"
+    <div *ngIf="!isHighestOffer" class="d-flex"
+      style="width: 98%; border: 1px solid #32AD71; border-radius: 5px; height: 50px;" role="group"
       aria-label="Basic example">
 
       <div style="width: 15%;">
@@ -332,22 +334,52 @@
 
     </div>
     <!-- Live Amount Quote ends -->
-    <!-- <p *ngIf="isValueNotHighest" class="text-danger text-12 mt-2">{{ 'LiveAuction.amount_valid' | translate }}</p> -->
+
+    <!-- Disabled live offer quote -->
+    <div *ngIf="isHighestOffer" class="d-flex"
+      style="width: 98%; border: 1px solid #b1b1b1; border-radius: 5px; height: 50px;" role="group"
+      aria-label="Basic example">
+
+      <div style="width: 15%;">
+        <button type="button" [disabled]="isHighestOffer"
+          style="width: 100%;border-radius: 5px; height: 100%; border: none; outline: none; background-color: white;"
+          (click)="incLiveAmt()">
+          <span class="icon-plus text-success"></span>
+        </button>
+      </div>
+
+      <div class="" style="border-left: 1px solid #b1b1b1; border-right: 1px solid #b1b1b1; width: 70%;">
+        <input type="text" digitOnly class="amt-input" disabled
+          style="height: 100%; width: 100%; border:none; text-align: center; color: #b1b1b1; font-size: 25px; background-color: white;"
+          placeholder="Amount" aria-label="Amount" [(ngModel)]="totalLiveBookValue" appComma
+          aria-describedby="basic-addon2" />
+      </div>
+      <div style="width: 15%; align-items: center;">
+        <button type="button" [disabled]="isHighestOffer"
+          style="width: 100%; height: 100%;border-radius: 5px; color: #b1b1b1; border: none; outline: none; background-color: white;"
+          (click)="decLiveAmt()">
+          <img src="assets/icons/minus.svg" alt="">
+        </button>
+      </div>
+
+    </div>
+    <!-- Disabled live Auction Offer quotes -->
 
     <p class="text-muted text-10" style="text-align: center;">{{ 'bidderSendOffer.SAR' | translate }}</p>
 
     <div class="border-bottom mt-4">
       <div style="display: flex;justify-content: space-between;">
-        <p class="text-body text-12">{{ 'bidderSendOffer.AddedTaxValue' | translate }}:</p>
-        <p class="text-primary  font-weight-bold text-12">{{addedTaxValue | number : '1.0-2'}} {{ 'bidderSendOffer.SAR'
-          | translate }}</p>
+        <p class="text-body text-12">{{ 'bidderSendOffer.TotalOfferPrice' | translate }}:</p>
+        <p class="text-primary font-weight-bold text-12">{{totalLiveBookValue | number : '1.0-2'}} {{
+          'bidderSendOffer.SAR' | translate }}
+        </p>
       </div>
     </div>
     <div class="d-flex mt-2" style="justify-content: space-between;">
-      <p class="text-body text-12">{{ 'bidderSendOffer.TotalOfferPrice' | translate }}</p>
-      <p class="text-primary font-weight-bold text-12">{{totalLiveOfferPrice | number : '1.0-2'}} {{
-        'bidderSendOffer.SAR' | translate }}
-      </p>
+
+      <p class="text-body text-12">{{ 'bidderSendOffer.AddedTaxValue' | translate }}:</p>
+      <p class="text-primary  font-weight-bold text-12">{{addedTaxValue | number : '1.0-2'}} {{ 'bidderSendOffer.SAR'
+        | translate }}</p>
     </div>
     <button [disabled]="isHighestOffer" (click)="checkLiveOffer()" class="btn btn-primary-light btn-lg mt-4"
       style="width: 100%;">{{

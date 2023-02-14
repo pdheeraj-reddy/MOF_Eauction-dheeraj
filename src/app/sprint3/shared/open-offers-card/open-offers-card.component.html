@@ -34,7 +34,7 @@
 
     <div class="d-flex align-items-center">
       <button [disabled]="btnDisable"
-        [routerLink]="['../../auction-committee-head/open-offers', encryptData(auctionId)]"
+        [routerLink]="['../../auction-committee-head/open-offers', encryptData(auctionId), auctionSubType]"
         class="btn btn-primary-light btn-lg d-flex" style="min-width: 220px;">{{ 'open_offer.card.accept_btn' |
         translate }}</button>
     </div>

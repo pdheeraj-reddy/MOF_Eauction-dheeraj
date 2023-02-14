@@ -91,7 +91,8 @@
                                     [ngClass]="{ 'sort-none': isSorting(0), 'sort-asc': isSortAsc(0), 'sort-desc': isSorDesc(0) }"></span></span>
                         </div>
                     </th>
-                    <th class="btn-primary-light" scope="col" (click)="sortByTableHeaderId(1, 'string')">
+                    <th *ngIf="auctionSubType != 'D'" class="btn-primary-light" scope="col"
+                        (click)="sortByTableHeaderId(1, 'string')">
                         <div class="table-header-cell">
                             <span>{{ "auctionCommittee.ac-openOffers.th2" | translate }}</span>
                             <span class="sort"><span class="sort-none"
@@ -199,8 +200,9 @@
                     <tr *ngFor="let rowItem of openofferListData;index as i">
                         <ng-container *ngIf="i >= pageRangeForAttach.rangeStart && i <= pageRangeForAttach.rangeEnd">
                             <td>{{rowItem.serialNo}}</td>
-                            <td>{{rowItem.offerValue | number}} {{ 'bidderFinalInvoice.SAR' | translate}}</td>
-                            <td>
+                            <td> <span>{{rowItem.offerValue | number}}</span> {{ 'bidderFinalInvoice.SAR' | translate}}
+                            </td>
+                            <td *ngIf="auctionSubType != 'D'">
                                 <span class="d-inline-block text-truncate" style="max-width: 200px;"
                                     (click)="viewAttachment(rowItem)">
                                     <a *ngIf="rowItem.PdfContent && !rowItem.downloadingAttachmet"

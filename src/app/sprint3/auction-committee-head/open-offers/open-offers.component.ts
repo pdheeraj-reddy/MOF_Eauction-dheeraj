@@ -23,6 +23,7 @@ export class OpenOffersComponent implements OnInit {
   pagelimit: number = 4;
   showLoader: boolean = false;
   auctionId: string = '';
+  auctionSubType: string = '';
   offervalue: string;
   facilityname: string;
   commercialNo: string;
@@ -69,6 +70,7 @@ export class OpenOffersComponent implements OnInit {
 
   ngOnInit(): void {
     this.auctionId = this.route.snapshot.paramMap.get('auctionId') || '';
+    this.auctionSubType = this.route.snapshot.paramMap.get('auctionSubType') || '';
     this.auctionId = atob(this.auctionId);
     this.getOffersData();
     this.refreshCalendarCntrl()
@@ -76,11 +78,21 @@ export class OpenOffersComponent implements OnInit {
 
   getOffersData() {
     this.showLoader = true;
-    this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
-      this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
-      localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
-      this.mapping(res.body);
-    });
+    if (this.auctionSubType == 'D') {
+      this.committeeHeadService.getLiveOpenOfferList(this.auctionId).subscribe((res: any) => {
+        this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+        localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken);
+        this.mapping(res.body);
+
+      });
+    } else {
+      this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
+        this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+        localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
+        this.mapping(res.body);
+      });
+    }
+
   }
 
   public mapping(serverObj: any) {
@@ -89,6 +101,7 @@ export class OpenOffersComponent implements OnInit {
       let resultSet: any = [];
       if (results?.length) {
         results.forEach((result: any) => {
+
           if (result.BidderId) {
             let date = result['DtTime'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$2-$1-$3");
             const items = {
@@ -247,11 +260,14 @@ export class OpenOffersComponent implements OnInit {
       this.rejectReason = '';
       data.selected = false;
 
-      const foundIndex = this.openofferListData.findIndex((i: any) => i.serialNo == data.serialNo)
-      if (foundIndex > -1 && foundIndex < this.openofferListData.length) {
-        this.openofferListData[foundIndex + 1].selected = true;
-        this.copyOpenofferListData = this.openofferListData
+      if (this.auctionSubType != 'D') {
+        const foundIndex = this.openofferListData.findIndex((i: any) => i.serialNo == data.serialNo)
+        if (foundIndex > -1 && foundIndex < (this.openofferListData.length - 1)) {
+          this.openofferListData[foundIndex + 1].selected = true;
+          this.copyOpenofferListData = this.openofferListData
+        }
       }
+
       this.showModal.rejectOffer = false;
       this.showModal.rejectOfferSuccess = true;
     });

@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OpenOffersCardComponent implements OnInit {
   @Input() auctionId: any;
   @Input() importantInfo: any;
+  @Input() auctionSubType: any;
   btnDisable: boolean = false;
   currentDate = new Date();
   currentTime = this.currentDate.getTime();

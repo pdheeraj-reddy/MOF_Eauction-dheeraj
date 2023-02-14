@@ -396,9 +396,11 @@
                                     [attr.data-placement]="lang == 'en' ? 'left' : 'left'" title=""
                                     [attr.data-original-title]="'tooltip.start_price' | translate"></span>
                             </label>
-                            <input type="text" numeric formControlName="startPrice" min="1" step="any"
-                                class="form-control" placeholder="150,000" [required]="true" />
+                            <input (focus)="vatMssg=true;" (blur)="vatMssg=false;" type="text" numeric
+                                formControlName="startPrice" min="1" step="any" class="form-control"
+                                placeholder="150,000" [required]="true" />
                         </div>
+                        <p *ngIf="vatMssg" class="text-14 text-success">{{ 'validations.vatMssg' | translate}}</p>
                         <div *ngIf="submitted && form['startPrice'].errors" class="invalid-feedback">
                             <div *ngIf="form['startPrice'].errors['required']">
                                 {{'validations.auctionStartPrice' | translate }}</div>

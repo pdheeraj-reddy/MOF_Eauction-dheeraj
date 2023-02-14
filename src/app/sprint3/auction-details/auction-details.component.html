@@ -260,7 +260,8 @@
         <!-- End -->
 
         <!--============ Open offers card ============-->
-        <app-open-offers-card [auctionId]="auctionId" [importantInfo]="upcomingAuction.auction_detail"
+        <app-open-offers-card [auctionId]="auctionId" [auctionSubType]="response.ZzCloseInd"
+            [importantInfo]="upcomingAuction.auction_detail"
             *ngIf="role.auctionCommitteeHead && this.status.pendingSelecting"></app-open-offers-card>
         <!-- End -->
 

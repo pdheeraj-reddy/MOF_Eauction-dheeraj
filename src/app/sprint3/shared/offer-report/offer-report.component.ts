@@ -62,12 +62,19 @@ export class OfferReportComponent implements OnInit {
 
   getOffersData() {
     this.showLoader = true;
-    this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
-      this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
-      localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
-      this.mapping(res.body);
-    });
-
+    if (this.auctionSubtype == 'D') {
+      this.committeeHeadService.getLiveOpenOfferList(this.auctionId).subscribe((res: any) => {
+        this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+        localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
+        this.mapping(res.body);
+      });
+    } else {
+      this.committeeHeadService.getOpenOfferList(this.auctionId).subscribe((res: any) => {
+        this.committeeHeadService.XCSRFToken = res.headers.get('x-csrf-token');
+        localStorage.setItem('x-csrf-token', this.committeeHeadService.XCSRFToken)
+        this.mapping(res.body);
+      });
+    }
 
   }
 

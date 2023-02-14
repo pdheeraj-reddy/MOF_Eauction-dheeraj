@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'am-auction', pathMatch: 'full', },
   { path: '', component: AuctionCommitteeHeadComponent },
   { path: 'am-auction', component: AmAuctionComponent },
-  { path: 'open-offers/:auctionId', component: OpenOffersComponent },
+  { path: 'open-offers/:auctionId/:auctionSubType', component: OpenOffersComponent },
 ];
 
 @NgModule({

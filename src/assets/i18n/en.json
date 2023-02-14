@@ -339,6 +339,7 @@
         "back": "Cancel"
     },
     "validations": {
+        "vatMssg": "Please consider that your entered price will be VAT Inclusive",
         "addAtleastOne": "At least one of the Mandatory fields need to be filled",
         "auctionName": "Please enter the Auction name",
         "auctionProduct": "Please specify the auction products",
