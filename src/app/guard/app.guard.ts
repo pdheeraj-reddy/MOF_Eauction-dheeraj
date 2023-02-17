@@ -23,6 +23,7 @@ export class AppGuard implements CanActivate {
     const currentUserRole = this.auctionServc.getLoggedUserRole();
     if (currentUserRole.isBidder) return this.router.parseUrl('bidder');
     if (currentUserRole.isSalesHead) return this.router.parseUrl('auction-committee-head');
+    if (currentUserRole.isBusinessSupportUser) return this.router.parseUrl('business-support-user');
     return true
   }
 

@@ -57,6 +57,7 @@ export class AuctionService {
       isPricingMember: this.hasUserRole("EAuction_PricingCommitteeMember"),
       isPricingSecretary: this.hasUserRole("EAuction_PricingCommitteSecretary"),
       isPricingHead: this.hasUserRole("EAuction_PricingCommitteeChairman"),
+      isBusinessSupportUser: this.hasUserRole("EAuction_AuctionsInquier"),
       isBidder: false,
     }
     if (this.hasUserRole("EAuction_Bidder")) {
@@ -75,6 +76,7 @@ export class AuctionService {
       isPricingMember: false,
       isPricingSecretary: false,
       isPricingHead: false,
+      isBusinessSupportUser: false,
       isBidder: true,
     }
   }
@@ -107,6 +109,10 @@ export class AuctionService {
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
     } else if (this.loggedUserRole.isPricingHead) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
+    } else if (this.loggedUserRole.isBusinessSupportUser) {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
@@ -153,6 +159,10 @@ export class AuctionService {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
+    } else if (this.loggedUserRole.isBusinessSupportUser) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
     }
     let $filters = (ObjectId !== '' ? " and ObjectId eq '" + ObjectId + "'" : '') + (DraftId !== '' ? " and DraftId eq '" + DraftId + "'" : '');
     const httpOptions = {
@@ -185,6 +195,8 @@ export class AuctionService {
     } else if (this.loggedUserRole.isPricingMember) {
       role = "AuctionManager";
     } else if (this.loggedUserRole.isPricingHead) {
+      role = "AuctionManager";
+    } else if (this.loggedUserRole.isBusinessSupportUser) {
       role = "AuctionManager";
     }
 

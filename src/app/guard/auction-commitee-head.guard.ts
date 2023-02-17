@@ -22,7 +22,7 @@ export class AuctionCommiteeGuardGuard implements CanActivate {
 
         if (this._authService.loggedIn()) {
             const currentUserRole = this.auctionServc.getLoggedUserRole();
-            if (currentUserRole?.isSalesHead) {
+            if (currentUserRole?.isSalesHead || currentUserRole?.isBusinessSupportUser) {
                 return true;
             } else {
                 window.alert("Access Denied");

@@ -95,6 +95,11 @@ const routes: Routes = [
     loadChildren: () => import('./sprint3/auction-committee-head/auction-committee-head.module').then(m => m.AuctionCommitteeHeadModule)
   },
   {
+    path: 'business-support-user',
+    canActivate: [AuthGuard, AuctionCommiteeGuardGuard],
+    loadChildren: () => import('./sprint3/business-support-user/business-support-user-routing.module').then(m => m.BusinessSupportUserRoutingModule)
+  },
+  {
     path: 'auction-details/:auctionId',
     canActivate: [AuthGuard],
     loadChildren: () => import('./sprint3/auction-details/auction-details.module').then(m => m.AuctionDetailsModule)
