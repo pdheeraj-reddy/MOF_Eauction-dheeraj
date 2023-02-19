@@ -262,7 +262,7 @@
         <!--============ Open offers card ============-->
         <app-open-offers-card [auctionId]="auctionId" [auctionSubType]="response.ZzCloseInd"
             [importantInfo]="upcomingAuction.auction_detail"
-            *ngIf="role.auctionCommitteeHead && this.status.pendingSelecting"></app-open-offers-card>
+            *ngIf="(role.auctionCommitteeHead || role.isBusinessSupportUser) && this.status.pendingSelecting"></app-open-offers-card>
         <!-- End -->
 
         <!--============ Manual Auction card ============-->
@@ -320,7 +320,7 @@
                         <!-- End -->
 
                         <!--============== Card 3 ==============-->
-                        <div *ngIf="role.auctionMod" (click)="auctionSettings('pricingCommittee')"
+                        <div *ngIf="role.auctionMod || role.isBusinessSupportUser" (click)="auctionSettings('pricingCommittee')"
                             class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118px;height: 118px">
                             <input type="radio" id="checkbox3" name="sampleCheckbox">
                             <label class="input-target d-flex" for="checkbox3">
@@ -337,7 +337,7 @@
                         <!-- End -->
 
                         <!--============== Card 4 ==============-->
-                        <div *ngIf="role.auctionCommitteeHead || role.auctionMod"
+                        <div *ngIf="role.auctionCommitteeHead || role.isBusinessSupportUser || role.auctionMod"
                             (click)="auctionSettings('auctionCommittee')"
                             class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118.8px;height: 118.8px;">
                             <input type="radio" id="checkbox4" name="sampleCheckbox">
@@ -351,11 +351,11 @@
                                 </span>
                             </label>
                         </div>
-                        <div *ngIf="role.auctionCommitteeHead">&nbsp;&nbsp;</div>
+                        <div *ngIf="role.auctionCommitteeHead || role.isBusinessSupportUser">&nbsp;&nbsp;</div>
                         <!-- End -->
 
                         <!--============== Card 5 ==============-->
-                        <div *ngIf="(role.auctionCommitteeHead && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying))"
+                        <div *ngIf="((role.auctionCommitteeHead || role.isBusinessSupportUser) && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && (status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying))"
                             class="etimad-option etimad-option-xs mt-2 rounded" style="width: 118px;height: 118px;">
                             <input (click)="auctionSettings('offerreport')"
                                 [disabled]="!(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)"
@@ -372,7 +372,7 @@
 
                         <!-- disabled offer report -->
 
-                        <div *ngIf="(role.auctionCommitteeHead && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying))"
+                        <div *ngIf="((role.auctionCommitteeHead || role.isBusinessSupportUser) && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying)) || (role.auctionMod && !(status.awarded || status.terminated || status.pendingPrimaryAwarding || status.pendingFbga || status.pendingFbgaApproval || status.pendingPaying))"
                             class="etimad-option etimad-option-xs mt-2 rounded"
                             style="width: 118px;height: 118px; background-color: #F5F5F5 !important;">
                             <input (click)="auctionSettings('offerreport')" [disabled]="!status.awarded" type="radio"
@@ -511,7 +511,7 @@
                     <div class="mt-4" style="display: flex;">
 
                         <!--================ Latest offer send card ================-->
-                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" style="width: 42%;"
+                        <div *ngIf="(role.auctionMod || role.auctionCommitteeHead || role.isBusinessSupportUser)" style="width: 42%;"
                             [ngClass]="textDir ? 'latest-offer-en' : 'latest-offer-ar'">
                             <app-latest-offers-sent [aucId]="auctionId" [noBids]="noBids"
                                 [biddingMethod]="response.ZzCloseInd" pageno="1">
@@ -865,7 +865,7 @@
 
                             </div> -->
 
-                            <ul *ngIf="(role.auctionMod || role.auctionCommitteeHead)" class="nav et-tabs mt-4 mb-4"
+                            <ul *ngIf="(role.auctionMod || role.auctionCommitteeHead || role.isBusinessSupportUser)" class="nav et-tabs mt-4 mb-4"
                                 id="pills-tab" role="tablist">
                                 <li class="nav-item" style="width: 27%">
                                     <a class="nav-link active" id="pills-dates-tab" data-toggle="pill"
@@ -887,7 +887,7 @@
                                 </li>
                             </ul>
 
-                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead)" style="height: 200px;"
+                            <div *ngIf="(role.auctionMod || role.auctionCommitteeHead || role.isBusinessSupportUser)" style="height: 200px;"
                                 class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-dates" role="tabpanel"
                                     aria-labelledby="pills-dates-tab">
@@ -1175,7 +1175,7 @@
                     </div>
 
 
-                    <div *ngIf="!(role.auctionMod || role.auctionCommitteeHead)" class="et-accordion">
+                    <div *ngIf="!(role.auctionMod || role.auctionCommitteeHead || role.isBusinessSupportUser)" class="et-accordion">
                         <div class="card" style="border: none; margin: auto;">
                             <div class="card-header" style="border-bottom: 1px solid #e3e3e3; border-radius: 0;"
                                 data-toggle="collapse" data-target="#localContentFirst2" aria-expanded="false"

@@ -179,7 +179,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.currentUser = this.auctionSev.getLoggedUserRole();
     this.role.auctionMod = this.currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
-    this.role.isBusinessSupportUser = this.role.isBusinessSupportUser;
+    this.role.isBusinessSupportUser = this.currentUser.isBusinessSupportUser;
     this.role.bidder = this.currentUser.isBidder;
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = false;
