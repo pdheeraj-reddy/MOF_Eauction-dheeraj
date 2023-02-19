@@ -33,6 +33,10 @@ export class AuctionApprovalService {
       role = "AuctionManager";
       config1 = "?$expand=page1tolistnav";
       config2 = " and ScreenNav eq 'R'";
+    } else if (this.auctionServc.loggedUserRole.isBusinessSupportUser) {
+      role = "AuctionManager";
+      config1 = "?$expand=page1tolistnav";
+      config2 = " and ScreenNav eq 'R'";
     }
     let $filters = (ObjectId !== '' ? " and ObjectId eq '" + ObjectId + "'" : '');
     console.log('$filters ', $filters);

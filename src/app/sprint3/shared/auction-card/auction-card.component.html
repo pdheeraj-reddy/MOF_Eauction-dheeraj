@@ -93,9 +93,9 @@
                     [ngClass]="[role.bidder ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : '']">
                     {{ 'AuctionDetails' | translate }}
                 </button>
-                <button *ngIf="role.auctionCommitteeHead" (click)="redirectToDetail(auction.ObjectId)"
+                <button *ngIf="role.auctionCommitteeHead || role.isBusinessSupportUser" (click)="redirectToDetail(auction.ObjectId)"
                     style="width: 125px;"
-                    [ngClass]="[role.auctionCommitteeHead ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : 'font-weight-bold']">
+                    [ngClass]="[role.auctionCommitteeHead || role.isBusinessSupportUser ? (auctionStatus == 'Upcoming' || auctionStatus == 'Ongoing') ? 'btn btn-primary-light btn-md' :'btn btn-secondary-blue btn-md' : 'font-weight-bold']">
                     {{ 'AuctionDetails' | translate }}
                 </button>
                 <button *ngIf="role.auctionMod" (click)="redirectToDetail(auction.ObjectId)" style="width: 125px;"
