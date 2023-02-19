@@ -31,7 +31,8 @@ export class AuctionCardComponent implements OnInit {
   role = {
     bidder: false,
     auctionMod: false,
-    auctionCommitteeHead: false
+    auctionCommitteeHead: false,
+    isBusinessSupportUser: false
   }
   constructor(
     public translate: TranslateService,
@@ -47,6 +48,7 @@ export class AuctionCardComponent implements OnInit {
     let currentUser = this.auctionSev.getLoggedUserRole();
     this.role.auctionMod = currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = currentUser.isSalesHead;
+    this.role.isBusinessSupportUser = currentUser.isBusinessSupportUser;
     this.role.bidder = currentUser.isBidder;
     if (this.auction.statuscode == 'Published') {
       this.auctionStatus = 'Upcoming'

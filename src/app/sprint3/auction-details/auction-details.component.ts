@@ -85,7 +85,8 @@ export class AuctionDetailsComponent implements OnInit {
   role = {
     bidder: false,
     auctionMod: false,
-    auctionCommitteeHead: false
+    auctionCommitteeHead: false,
+    isBusinessSupportUser: false
   }
   currentUser: any;
   status = {
@@ -178,6 +179,7 @@ export class AuctionDetailsComponent implements OnInit {
     this.currentUser = this.auctionSev.getLoggedUserRole();
     this.role.auctionMod = this.currentUser.isAuctionModerator;
     this.role.auctionCommitteeHead = this.currentUser.isSalesHead;
+    this.role.isBusinessSupportUser = this.role.isBusinessSupportUser;
     this.role.bidder = this.currentUser.isBidder;
     if (localStorage.getItem('lang_pref') == 'ar') {
       this.textDir = false;
@@ -1043,6 +1045,8 @@ export class AuctionDetailsComponent implements OnInit {
       this.router.navigate(['/auctions'])
     } else if (this.role.auctionCommitteeHead) {
       this.router.navigate(['/auction-committee-head'])
+    } else if (this.role.isBusinessSupportUser) {
+      this.router.navigate(['/business-support-user'])
     } else if (this.role.bidder) {
       this.router.navigate(['/bidder'])
     }
