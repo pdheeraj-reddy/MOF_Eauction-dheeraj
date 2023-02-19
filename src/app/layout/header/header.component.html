@@ -43,6 +43,16 @@
                                     'menu.auction' | translate }}</a>
                             </li>
                         </ul>
+                        <ul *ngIf="loggedUserRole.isBusinessSupportUser">
+                            <li class="nav-item mx-2">
+                                <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link font-medium" [routerLink]="['/business-support-user/am-auction']"
+                                    routerLinkActive="router-link-active">{{
+                                    'menu.auction' | translate }}</a>
+                            </li>
+                        </ul>
                         <ul *ngIf="loggedUserRole.isAuctionModerator">
                             <li class="nav-item mx-2">
                                 <img src="../../../assets/icons/home-icon.jpg" alt="" srcset="">

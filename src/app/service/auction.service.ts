@@ -37,23 +37,23 @@ export class AuctionService {
     }
   }
 
-  hasUserRole(role: string) {
+  hasUserRole(...role: any) {
     let isvalidRole;
     if (typeof this.loggedUser?.roles === "string") {
-      isvalidRole = !!(this.loggedUser.roles == role);
+      isvalidRole = !!(role.includes(this.loggedUser.roles));
     } else {
-      isvalidRole = !!(this.loggedUser?.roles.find((r: any) => r == role));
+      isvalidRole = !!(this.loggedUser?.roles.find((r: any) => role.includes(r)));
     }
     return isvalidRole;
   }
 
   getLoggedUserRole() {
     this.loggedUserRole = {
-      isSalesHead: this.hasUserRole("EAuction_SalesCommitteeChairman"),
+      isSalesHead: this.hasUserRole("EAuction_SalesCommitteeChairman", "EAuction_SalesCommitteeMember"),
       isSalesSecretary: this.hasUserRole("EAuction_SalesCommitteSecretary"),
       isInteriorMarketer: this.hasUserRole("EAuction_InteriorMarketer"),
       isAuctionModerator: this.hasUserRole("EAuction_AuctionManager"),
-      isSalesMember: this.hasUserRole("EAuction_SalesCommitteeMember"),
+      // isSalesMember: this.hasUserRole("EAuction_SalesCommitteeMember"),
       isPricingMember: this.hasUserRole("EAuction_PricingCommitteeMember"),
       isPricingSecretary: this.hasUserRole("EAuction_PricingCommitteSecretary"),
       isPricingHead: this.hasUserRole("EAuction_PricingCommitteeChairman"),
